@@ -1,1 +1,27 @@
 /* below the fold CSS goes here */
+@font-face {
+    font-family: Spezia;
+    src: url('/fonts/SpeziaWeb-Regular.woff') format('woff'),
+         url('/fonts/SpeziaWeb-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: Spezia;
+    src: url('/fonts/SpeziaWeb-RegularItalic.woff') format('woff'),
+         url('/fonts/SpeziaWeb-RegularItalic.woff2') format('woff2');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Spezia_SemiMono";
+    src: url('/fonts/SpeziaWeb-SemiMonoRegular.woff') format('woff'),
+         url('/fonts/SpeziaWeb-SemiMonoRegular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
