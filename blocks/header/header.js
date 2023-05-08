@@ -86,6 +86,22 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
 }
 
 /**
+ * Builds the Logo Div.
+ * @returns {HTMLDivElement}
+ */
+function buildLogo() {
+  // Add the Logo.
+  const logo = document.createElement('div');
+  logo.classList.add('nav-logo');
+  logo.innerHTML = `
+      <a href="/" rel="noopener">
+        <img alt="Vonage" class="nav-logo" src="/styles/images/Vonage_NavLogo.svg" loading="lazy"/>
+      </a>
+    `;
+  return logo;
+}
+
+/**
  * decorates the header, mainly the nav
  * @param {Element} block The header block element
  */
@@ -103,11 +119,11 @@ export default async function decorate(block) {
     nav.id = 'nav';
     nav.innerHTML = html;
 
-    const classes = ['brand', 'sections', 'tools'];
+    const classes = ['sections', 'tools'];
     classes.forEach((c, i) => {
       const section = nav.children[i];
       if (section) section.classList.add(`nav-${c}`);
-    });
+    })
 
     const navSections = nav.querySelector('.nav-sections');
     if (navSections) {
@@ -139,6 +155,8 @@ export default async function decorate(block) {
     decorateIcons(nav);
     const navWrapper = document.createElement('div');
     navWrapper.className = 'nav-wrapper';
+    //Add the logo element before the nav elements which will stack vertically
+    navWrapper.append(buildLogo());
     navWrapper.append(nav);
     block.append(navWrapper);
   }
