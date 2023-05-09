@@ -95,7 +95,7 @@ function buildLogo() {
   logo.classList.add('nav-logo');
   logo.innerHTML = `
       <a href="/" rel="noopener">
-        <img alt="Vonage" class="nav-logo" src="/styles/images/Vonage_NavLogo.svg" loading="lazy"/>
+        <img alt="Vonage" class="nav-logo" src="/icons/vonage-nav-logo-black.svg" loading="lazy"/>
       </a>
     `;
   return logo;
