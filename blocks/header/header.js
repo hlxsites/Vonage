@@ -122,8 +122,10 @@ export default async function decorate(block) {
     const classes = ['sections', 'tools'];
     classes.forEach((c, i) => {
       const section = nav.children[i];
-      if (section) section.classList.add(`nav-${c}`);
-    })
+      if (section) {
+        section.classList.add(`nav-${c}`)
+      }
+    });
 
     const navSections = nav.querySelector('.nav-sections');
     if (navSections) {
@@ -155,7 +157,7 @@ export default async function decorate(block) {
     decorateIcons(nav);
     const navWrapper = document.createElement('div');
     navWrapper.className = 'nav-wrapper';
-    //Add the logo element before the nav elements which will stack vertically
+    // Add the logo element before the nav elements which will stack vertically
     navWrapper.append(buildLogo());
     navWrapper.append(nav);
     block.append(navWrapper);
