@@ -3,6 +3,30 @@ import { getMetadata, decorateIcons } from '../../scripts/lib-franklin.js';
 // media query match that indicates mobile/tablet width
 const isDesktop = window.matchMedia('(min-width: 900px)');
 
+/* Scroll event listener to handle transforming the nav bar from big to small
+   when scrolling down after a certain threshold (160 px) and on any scroll up event */
+let oldScrollY = window.scrollY;
+function scrollFunction() {
+  const scrollDistance = 160;
+  const newScrollY = window.scrollY;
+  const scrolledDown = (oldScrollY - newScrollY < 0);
+  if ((scrolledDown && document.body.scrollTop > scrollDistance)
+   || (scrolledDown && document.documentElement.scrollTop > scrollDistance)) {
+    document.getElementById('nav').querySelector('.nav-tools').style.display = 'none';
+    document.getElementById('nav').classList.replace('nav-big', 'nav-small');
+    document.getElementById('brand-logo-big').style.display = 'none';
+    document.getElementById('brand-logo-small').style.display = '';
+  } else {
+    document.getElementById('nav').querySelector('.nav-tools').style.display = 'flex';
+    document.getElementById('nav').classList.replace('nav-small', 'nav-big');
+    document.getElementById('brand-logo-small').style.display = 'none';
+    document.getElementById('brand-logo-big').style.display = '';
+  }
+  oldScrollY = newScrollY;
+}
+// Add a scroll listener in order to handle transforming the nav on scroll down
+window.onscroll = scrollFunction;
+
 function closeOnEscape(e) {
   if (e.code === 'Escape') {
     const nav = document.getElementById('nav');
@@ -95,7 +119,8 @@ function buildLogo() {
   logo.classList.add('nav-logo');
   logo.innerHTML = `
       <a href="/" rel="noopener">
-        <img alt="Vonage" class="nav-logo" src="/icons/vonage-nav-logo-black.svg" loading="lazy"/>
+        <img id="brand-logo-big" alt="Vonage" class="nav-logo-big" src="/icons/vonage-nav-logo-black.svg" loading="lazy"/>
+        <img id="brand-logo-small" alt="Vonage" class="nav-logo-small" src="/icons/vonage-v-logo-black.svg" loading="lazy" style="display:none;"/>
       </a>
     `;
   return logo;
@@ -117,6 +142,7 @@ export default async function decorate(block) {
     // decorate nav DOM
     const nav = document.createElement('nav');
     nav.id = 'nav';
+    nav.classList.add('nav-big');
     nav.innerHTML = html;
 
     const classes = ['sections', 'tools'];
@@ -130,7 +156,9 @@ export default async function decorate(block) {
     const navSections = nav.querySelector('.nav-sections');
     if (navSections) {
       navSections.querySelectorAll(':scope > ul > li').forEach((navSection) => {
-        if (navSection.querySelector('ul')) navSection.classList.add('nav-drop');
+        if (navSection.querySelector('ul')) {
+          navSection.classList.add('nav-drop');
+        }
         navSection.addEventListener('click', () => {
           if (isDesktop.matches) {
             const expanded = navSection.getAttribute('aria-expanded') === 'true';
