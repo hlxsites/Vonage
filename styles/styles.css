@@ -63,7 +63,6 @@ body {
   display: none;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
-  font-smoothing: antialiased;
 }
 
 body.appear {
