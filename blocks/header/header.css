@@ -1,6 +1,9 @@
 /* header and nav layout */
 header {
   height: 12.5rem;
+  position: fixed;
+  top: 0;
+  width: 100%;
 }
 
 .nav-wrapper {
@@ -11,11 +14,18 @@ header {
   margin: 0 auto;
 }
 
-.nav-logo {
-  left: 1.0rem;
+.nav-logo-big {
+  left: 1.85rem;
   position: absolute;
-  bottom: 1.0rem;
-  width: 17.6rem;
+  bottom: 1.85rem;
+  width: 17.4rem;
+}
+
+.nav-logo-small {
+  left: 1.8rem;
+  position: absolute;
+  bottom: 3.5rem;
+  width: 3.5rem;
 }
 
 header nav {
@@ -146,9 +156,14 @@ header nav[aria-expanded="true"] .nav-hamburger-icon::after {
   }
 }
 
-/* Nav menu container housing both the sections and tools menu rows */
-#nav {
+/* Nav menu container housing both the sections and tools menu rows when expanded */
+#nav.nav-big{
   padding: 1.2rem 2rem 0 25rem;
+}
+
+/* Nav menu container housing both the sections and tools menu rows when expanded */
+#nav.nav-small{
+  padding: 1.2rem 2rem 0 10.5rem;
 }
 
 /* Lower sections menu item container */
@@ -177,6 +192,8 @@ nav[aria-expanded="true"] .nav-sections {
   transform: rotate(135deg);
   width: 6px;
   height: 6px;
+  border-style: solid;
+  border-color: currentcolor;
   border-radius: 0 1px 0 0;
   border-width: 2px 2px 0 0;
 }
