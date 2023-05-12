@@ -1,7 +1,7 @@
 import { getMetadata, decorateIcons } from '../../scripts/lib-franklin.js';
 
 // media query match that indicates mobile/tablet width
-const isDesktop = window.matchMedia('(min-width: 900px)');
+const isDesktop = window.matchMedia('(min-width: 992px)');
 
 /* Scroll event listener to handle transforming the nav bar from big to small
    when scrolling down after a certain threshold (160 px) and on any scroll up event */
@@ -25,7 +25,9 @@ function scrollFunction() {
   oldScrollY = newScrollY;
 }
 // Add a scroll listener in order to handle transforming the nav on scroll down
-window.onscroll = scrollFunction;
+if (isDesktop.matches) {
+  window.onscroll = scrollFunction;
+}
 
 function closeOnEscape(e) {
   if (e.code === 'Escape') {
@@ -145,7 +147,7 @@ export default async function decorate(block) {
     nav.classList.add('nav-big');
     nav.innerHTML = html;
 
-    const classes = ['sections', 'tools'];
+    const classes = ['sections', 'tools', 'search'];
     classes.forEach((c, i) => {
       const section = nav.children[i];
       if (section) {
