@@ -1,15 +1,24 @@
 
 
 
-/* header and nav layout */
-header {
+:root {
+  --nav-color: #000;
+  --nav-tools-color: #5f6169;
   --nav-logo-color: #000;
   --nav-background-color: #FFF;
+  --nav-decoration-color: #000;
   --mobile-nav-extended-background: #000;
   --mobile-nav-extended-logo-color: #FFF;
   --mobile-nav-extended-color: #FFF;
-  --mobile-nav-extended-contact-button-color: #FFF;
+  --mobile-nav-extended-decoration-color: #FFF;
+  --mobile-nav-extended-contact-button-color: #000;
+  --mobile-nav-extended-contact-button-background-color: #FFF;
+   --nav-contact-button-color: #FFF;
+   --nav-contact-button-background-color: #000;
+}
 
+/* header and nav layout */
+header {
   height: 12.5rem;
   position: fixed;
   top: 0;
@@ -80,8 +89,8 @@ header nav {
 }
 
 header .nav-sections .nav-drop[aria-expanded="true"]::after {
-  border-right: 0.3rem solid #fff;
-  border-top: 0.3rem solid #fff;
+  border-right: 0.3rem solid var(--mobile-nav-extended-decoration-color);
+  border-top: 0.3rem solid var(--mobile-nav-extended-decoration-color);
   content: "";
   display: block;
   height: 1rem;
@@ -243,8 +252,8 @@ header .logo-white {
 header nav[aria-expanded="true"] .nav-sections > ul > li:last-child {
   border-radius: 1rem;
   width: fit-content;
-  color: black;
-  background-color: var(--mobile-nav-extended-contact-button-color);
+  color: var(--mobile-nav-extended-contact-button-color);
+  background-color: var(--mobile-nav-extended-contact-button-background-color);
   margin-right: 0;
   height: 7.0rem;
   line-height: 7.0rem;
@@ -274,7 +283,7 @@ header .nav-drop {
     display: flex;
     flex-flow: column-reverse nowrap;
     justify-content: space-between;
-    background-color: white;
+    background-color: var(--nav-background-color);
   }
 
   /* Upper tools nav menu items */
@@ -306,6 +315,19 @@ header .nav-drop {
     border-width: 2px 2px 0 0;
   }
 
+  header .nav-sections .nav-drop[aria-expanded="true"]::after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    right: 2px;
+    transform: rotate(-45deg);
+    width: 6px;
+    height: 6px;
+    border-style: solid;
+    border-color: currentcolor;
+    border-radius: 0 1px 0 0;
+    border-width: 2px 2px 0 0;
+  }
   /* Common attributes for both the sections and tool menu unordered lists */
   header .nav-sections ul, header .nav-tools ul {
     display: flex;
@@ -328,7 +350,7 @@ header .nav-drop {
   header .nav-tools > ul > li {
     position: relative;
     font-size: 1.4rem;
-    color: #5f6169;
+    color: var(--nav-tools-color);
     padding: 0 1.6rem;
     line-height: 3.285;
   }
@@ -346,15 +368,15 @@ header .nav-drop {
 
   /* Colorize the transparent bottom border under the section menu items on mouse over */
   header .nav-sections ul > li:hover {
-    border-bottom-color: black;
+    border-bottom-color: var(--nav-color);
   }
 
   /* Make the last item of the sections nav the 'Contact us' button in black and aligned to the right */
   header .nav-sections > ul > li:last-child {
     margin-left: auto;
     border-radius: 1rem;
-    color: #fff;
-    background-color: black;
+    color: var(--nav-contact-button-color);
+    background-color: var(--nav-contact-button-background-color);
     margin-right: 0;
     height: 4.5rem;
     line-height: 4.5rem;
@@ -366,16 +388,9 @@ header .nav-drop {
   header .nav-logo {
     top: 2.7rem;
     width: 17.6rem;
-
-    /* height: auto; */
-
-    /* left: 0.2rem; */
   }
 
   header .nav-logo-big {
-    /* left: 1.85rem; */
-
-    /* position: absolute; */
     top:3.9rem;
     height: 3.9rem;
   }
