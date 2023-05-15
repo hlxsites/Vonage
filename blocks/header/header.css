@@ -4,9 +4,11 @@
 /* header and nav layout */
 header {
   --nav-logo-color: #000;
-  --mobile-nav-background: #000;
-  --mobile-nav-logo-color: #FFF;
-  --mobile-nav-contact-button-color: #FFF;
+  --nav-background-color: #FFF;
+  --mobile-nav-extended-background: #000;
+  --mobile-nav-extended-logo-color: #FFF;
+  --mobile-nav-extended-color: #FFF;
+  --mobile-nav-extended-contact-button-color: #FFF;
 
   height: 12.5rem;
   position: fixed;
@@ -14,29 +16,39 @@ header {
   width: 100%;
 }
 
-main {
-  margin-top: 125px;
+/* Div element to use for the mobile menu animation and to cover the page content  */
+.header.block {
+  background-color: var(--nav-background-color);
+}
+/* Div element to use for the mobile menu animation and to cover the page content */
+.header-backdrop {
+  background-color: var(--mobile-nav-extended-background);
+  border-radius: 10rem;
+  bottom: 100%;
+  height: 5rem;
+  left: 100%;
+  position: absolute;
+  width: 5rem;
+  z-index: 5;
 }
 
-.nav-wrapper {
-  /* background-color: var(--background-color); */
+/* Div element to encapsulate the headers navigation menu */
+header .nav-wrapper {
   z-index: 6;
   position: relative;
   max-width: 132rem;
   margin: 0 auto;
 }
 
-.nav-logo {
-  /* bottom: 9.8rem; */
+header .nav-logo {
   position: absolute;
   top: 3.2rem;
   width: 14.6rem;
   height: auto;
-
-  /* left: 0.2rem; */
+  left: 0.2rem;
 }
 
-.nav-logo-big {
+header .nav-logo-big {
   color: var(--nav-logo-color);
   left: 1.8rem;
   position: absolute;
@@ -47,11 +59,11 @@ main {
 }
 
 /* For mobile mode don't render the menus directly */
-.nav-sections, .nav-tools {
+header .nav-sections, header .nav-tools {
   display: none
 }
 
-.nav-sections ul, .nav-tools ul, .nav-search ul {
+header .nav-sections ul, header .nav-tools ul, header .nav-search ul {
   list-style: none;
   margin-top: 0.8em;
   margin-bottom: 1em;
@@ -64,10 +76,10 @@ header nav {
   align-items: center;
   margin: auto;
   padding: 0 1rem;
-  background-color: white;
+  background-color: transparent;
 }
 
-.nav-sections .nav-drop[aria-expanded="true"]::after {
+header .nav-sections .nav-drop[aria-expanded="true"]::after {
   border-right: 0.3rem solid #fff;
   border-top: 0.3rem solid #fff;
   content: "";
@@ -81,15 +93,15 @@ header nav {
   width: 1rem;
 }
 
-nav[aria-expanded="true"] .nav-sections > ul > li {
+header nav[aria-expanded="true"] .nav-sections > ul > li {
 margin-bottom: 2.0rem;
 }
 
-.nav-sections > ul > li[aria-expanded="true"] > ul {
+header .nav-sections > ul > li[aria-expanded="true"] > ul {
   display: none;
 }
 
-nav[aria-expanded="true"] .nav-sections {
+header nav[aria-expanded="true"] .nav-sections {
   left: 0;
   overflow: scroll;
   padding: 0.3rem 2rem 14rem;
@@ -98,26 +110,14 @@ nav[aria-expanded="true"] .nav-sections {
   z-index: 6;
 }
 
-nav[aria-expanded="true"] {
-  color: white;
+header nav[aria-expanded="true"] {
+  color: var(--mobile-nav-extended-color);
 }
 
-.animate-open-backdrop {
+header .animate-open-backdrop {
   transform: scale(70);
   transition: -webkit-transform .5s ease;
   transition: transform .5s ease,-webkit-transform .5s ease;
-}
-
-
-.header-backdrop {
-  background-color: #000;
-  border-radius: 10rem;
-  bottom: 100%;
-  height: 5rem;
-  left: 100%;
-  position: absolute;
-  width: 5rem;
-  z-index: 5;
 }
 
 header nav p {
@@ -142,7 +142,7 @@ header nav .nav-hamburger button {
   border: 0;
   border-radius: 0;
   padding: 0;
-  background-color: var(--background-color);
+  background-color: var(--nav-background-color);
   color: inherit;
   overflow: initial;
   text-overflow: initial;
@@ -183,7 +183,7 @@ header nav[aria-expanded="false"] .nav-hamburger-icon::after {
 }
 
 header nav[aria-expanded="true"] .nav-hamburger-icon {
-  background-color: var(--mobile-nav-background);
+  background-color: var(--mobile-nav-extended-background);
 }
 
 header nav[aria-expanded="true"] .nav-hamburger-icon::before,
@@ -202,26 +202,26 @@ header nav[aria-expanded="true"] .nav-hamburger-icon::after {
 }
 
 /* Nav menu container housing both the sections and tools menu rows when expanded */
-#nav.nav-big{
+header #nav.nav-big{
   padding: 1.2rem 2rem 0 25rem;
 }
 
 /* Nav menu container housing both the sections and tools menu rows when expanded */
-#nav.nav-small{
+header #nav.nav-small{
   padding: 1.2rem 2rem 0 10.5rem;
 }
 
 /* Lower sections menu item container */
-.nav-sections {
+header .nav-sections {
   width: 100%;
 }
 
-nav[aria-expanded="true"] .nav-sections {
+header nav[aria-expanded="true"] .nav-sections {
   display: block;
   visibility: visible;
 }
 
-nav[aria-expanded="true"] .nav-sections > ul > li {
+header nav[aria-expanded="true"] .nav-sections > ul > li {
   font-family: Spezia,"Spezia_SemiMono",Arial,Helvetica,sans-serif;
   font-size: 2.3rem;
   font-weight: 600;
@@ -229,22 +229,22 @@ nav[aria-expanded="true"] .nav-sections > ul > li {
   line-height: 4.6rem;
 }
 
-nav[aria-expanded="true"] .nav-sections > ul  {
+header nav[aria-expanded="true"] .nav-sections > ul  {
   list-style: none;
   margin-top: 0;
   margin-bottom: 1em;
   padding-inline-start: 0;
 }
 
-.logo-white {
-  color: var(--mobile-nav-logo-color);
+header .logo-white {
+  color: var(--mobile-nav-extended-logo-color);
 }
 
-nav[aria-expanded="true"] .nav-sections > ul > li:last-child {
+header nav[aria-expanded="true"] .nav-sections > ul > li:last-child {
   border-radius: 1rem;
   width: fit-content;
   color: black;
-  background-color: --mobile-nav-contact-button-color;
+  background-color: var(--mobile-nav-extended-contact-button-color);
   margin-right: 0;
   height: 7.0rem;
   line-height: 7.0rem;
@@ -253,17 +253,17 @@ nav[aria-expanded="true"] .nav-sections > ul > li:last-child {
   padding-right: 2rem;
 }
 
-nav[aria-expanded="true"] .nav-search {
+header nav[aria-expanded="true"] .nav-search {
   display: none;
 }
 
 /* Adjust sections nav menu elements with a drop down to allow for the decoration element */
-.nav-sections .nav-drop {
+header .nav-sections .nav-drop {
   position: relative;
   padding-right: 16px;
 }
 
-.nav-drop {
+header .nav-drop {
   text-decoration: underline;
   width: fit-content;
 }
@@ -278,7 +278,7 @@ nav[aria-expanded="true"] .nav-search {
   }
 
   /* Upper tools nav menu items */
-  .nav-tools {
+  header .nav-tools {
     align-self: flex-end;
     display: flex;
     height: 4.5rem;
@@ -286,8 +286,12 @@ nav[aria-expanded="true"] .nav-search {
     margin-right: 4rem;
   }
 
+  header .nav-drop {
+    text-decoration: none;
+  }
+
   /* Add decoration to section menu elements which have a drop down */
-  .nav-sections .nav-drop::after {
+  header .nav-sections .nav-drop::after {
     content: '';
     display: inline-block;
     position: absolute;
@@ -303,7 +307,7 @@ nav[aria-expanded="true"] .nav-search {
   }
 
   /* Common attributes for both the sections and tool menu unordered lists */
-  .nav-sections ul, .nav-tools ul {
+  header .nav-sections ul, header .nav-tools ul {
     display: flex;
     padding-left: 0;
     margin: 0;
@@ -311,7 +315,7 @@ nav[aria-expanded="true"] .nav-search {
   }
 
   /* Styling for the list items in the sections unordered list */
-  .nav-sections ul > li {
+  header .nav-sections ul > li {
     font-weight: 600;
     margin: 1rem 2rem;
     border-bottom: .2rem solid transparent;
@@ -321,7 +325,7 @@ nav[aria-expanded="true"] .nav-search {
   }
 
   /* Styling for the list items in the tools unordered list */
-  .nav-tools > ul > li {
+  header .nav-tools > ul > li {
     position: relative;
     font-size: 1.4rem;
     color: #5f6169;
@@ -330,23 +334,23 @@ nav[aria-expanded="true"] .nav-search {
   }
 
   /* Sub menu items styling for the sections nav */
-  .nav-sections ul > li > ul {
+  header .nav-sections ul > li > ul {
     margin-top: 0;
     display: none;
     position: relative;
   }
 
-  .nav-sections > ul > li > ul > li {
+  header .nav-sections > ul > li > ul > li {
     padding: 8px 0;
   }
 
   /* Colorize the transparent bottom border under the section menu items on mouse over */
-  .nav-sections ul > li:hover {
+  header .nav-sections ul > li:hover {
     border-bottom-color: black;
   }
 
   /* Make the last item of the sections nav the 'Contact us' button in black and aligned to the right */
-  .nav-sections > ul > li:last-child {
+  header .nav-sections > ul > li:last-child {
     margin-left: auto;
     border-radius: 1rem;
     color: #fff;
@@ -359,21 +363,24 @@ nav[aria-expanded="true"] .nav-search {
     padding-right: 2rem;
   }
 
-  .nav-logo {
+  header .nav-logo {
     top: 2.7rem;
     width: 17.6rem;
-    height: auto;
-    left: 0.2rem;
+
+    /* height: auto; */
+
+    /* left: 0.2rem; */
   }
 
-  .nav-logo-big {
-    left: 1.85rem;
-    position: absolute;
+  header .nav-logo-big {
+    /* left: 1.85rem; */
+
+    /* position: absolute; */
     top:3.9rem;
     height: 3.9rem;
   }
 
-  .nav-logo-small {
+  header .nav-logo-small {
     color: var(--nav-logo-color);;
     left: 1.8rem;
     position: absolute;
@@ -387,17 +394,17 @@ nav[aria-expanded="true"] .nav-search {
     visibility: hidden;
   }
 
-  .nav-sections {
+  header .nav-sections {
     display: block;
     visibility: visible;
     white-space: nowrap;
   }
 
-  .nav-sections > ul > li > ul::before {
+  header .nav-sections > ul > li > ul::before {
     border-bottom: .2rem solid transparent;
   }
 
-  .nav-tools > ul > li:first-child::after {
+  header .nav-tools > ul > li:first-child::after {
     margin-left: 0.4rem;
     top: 0;
     content: "\e91d";
@@ -407,15 +414,15 @@ nav[aria-expanded="true"] .nav-search {
     position: absolute;
   }
 
-  .nav-tools > ul > li:last-child {
+  header .nav-tools > ul > li:last-child {
     padding-right: 0;
   }
 
-  .nav-search > ul {
+  header .nav-search > ul {
     list-style: none;
   }
 
-  .nav-search {
+  header .nav-search {
     -ms-flex-item-align: center;
     align-self: center;
     display: flex;
@@ -427,7 +434,7 @@ nav[aria-expanded="true"] .nav-search {
     position: absolute;
   }
 
-  .nav-search svg {
+  header .nav-search svg {
     display: block;
     margin-top: -2.8rem;
   }
