@@ -6,26 +6,48 @@ header {
   width: 100%;
 }
 
+main {
+  margin-top: 125px;
+}
+.nav-drop {
+  text-decoration: underline;
+  width: fit-content;
+}
+
 .nav-wrapper {
-  background-color: var(--background-color);
-  z-index: 2;
+  /* background-color: var(--background-color); */
+  z-index: 6;
   position: relative;
   max-width: 132rem;
   margin: 0 auto;
 }
 
-.nav-logo-big {
-  left: 1.85rem;
+.nav-logo {
+  /*bottom: 9.8rem;*/
   position: absolute;
-  bottom: 2.5rem;
-  width: 10.4rem;
+  top: 3.2rem;
+  width: 14.6rem;
+  height: auto;
+  /*left: 0.2rem;*/
+}
+
+.nav-logo-big {
+  color: black;
+  left: 1.8rem;
+  position: absolute;
+  top:0;
+  height: 3.2rem;
+  width:100%;
+  bottom: 1.85rem;
 }
 
 .nav-logo-small {
+  color: black;
   left: 1.8rem;
   position: absolute;
-  bottom: 3.5rem;
   width: 3.5rem;
+  height: 3.9rem;
+  bottom: -6.6rem
 }
 
 /* For mobile mode don't render the menus directly */
@@ -46,50 +68,81 @@ header nav {
   align-items: center;
   margin: auto;
   padding: 0 1rem;
+  background-color: white;
 }
 
-/* header nav[aria-expanded="true"] { */
-
-/*  grid-template: */
-
-/*    'hamburger brand' var(--nav-height) */
-
-/*    'sections sections' 1fr */
-
-/*    'tools tools' var(--nav-height) / auto 1fr; */
-
-/*  overflow-y: auto; */
-
-/*  min-height: 100vh; */
-
-/* } */
-
 .nav-sections .nav-drop[aria-expanded="true"]::after {
-  bottom: .5em;
-  transform: rotate(315deg);
+  border-right: 0.3rem solid #fff;
+  border-top: 0.3rem solid #fff;
+  content: "";
+  display: block;
+  height: 1rem;
+  margin-top: -0.4rem;
+  position: absolute;
+  right: -0.4rem;
+  top: 50%;
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+  width: 1rem;
+}
+
+nav[aria-expanded="true"] .nav-sections > ul > li {
+margin-bottom: 2.0rem;
 }
 
 .nav-sections > ul > li[aria-expanded="true"] > ul {
-  display: block;
-  position: absolute;
-  left: -1em;
-  width: 200px;
-  margin-top: 12px;
-  padding: 1em;
-  background-color: var(--highlight-background-color);
-  white-space: initial;
+  display: none;
 }
 
-/* header nav[aria-expanded="true"] { */
+/* .nav-sections > ul > li[aria-expanded="true"] > ul { */
 
-/*  min-height: 0; */
+/*  display: block; */
 
-/*  overflow: visible; */
+/*  position: absolute; */
+
+/*  left: -1em; */
+
+/*  width: 200px; */
+
+/*  margin-top: 12px; */
+
+/*  padding: 1em; */
+
+/*  background-color: var(--highlight-background-color); */
+
+/*  white-space: initial; */
 
 /* } */
 
 nav[aria-expanded="true"] .nav-sections {
-  align-self: unset;
+  left: 0;
+  overflow: scroll;
+  padding: 0.3rem 2rem 14rem;
+  position: absolute;
+  top: 12.5rem;
+  z-index: 6;
+}
+
+nav[aria-expanded="true"] {
+  color: white;
+}
+
+.animate-open-backdrop {
+  transform: scale(70);
+  transition: -webkit-transform .5s ease;
+  transition: transform .5s ease,-webkit-transform .5s ease;
+}
+
+
+.header-backdrop {
+  background-color: #000;
+  border-radius: 10rem;
+  bottom: 100%;
+  height: 5rem;
+  left: 100%;
+  position: absolute;
+  width: 5rem;
+  z-index: 5;
 }
 
 header nav p {
@@ -104,13 +157,12 @@ header nav a:any-link {
 /* hamburger */
 header nav .nav-hamburger {
   grid-area: hamburger;
-  height: 22px;
+  height: 5.4rem;
   display: flex;
   align-items: center;
 }
 
 header nav .nav-hamburger button {
-  height: 22px;
   margin: 0;
   border: 0;
   border-radius: 0;
@@ -120,6 +172,7 @@ header nav .nav-hamburger button {
   overflow: initial;
   text-overflow: initial;
   white-space: initial;
+  z-index: 7;
 }
 
 header nav .nav-hamburger-icon,
@@ -155,15 +208,14 @@ header nav[aria-expanded="false"] .nav-hamburger-icon::after {
 }
 
 header nav[aria-expanded="true"] .nav-hamburger-icon {
-  height: 22px;
+  background-color: #000;
 }
 
 header nav[aria-expanded="true"] .nav-hamburger-icon::before,
 header nav[aria-expanded="true"] .nav-hamburger-icon::after {
-  top: 3px;
-  left: 1px;
+  top: 10px;
+  left: 0;
   transform: rotate(45deg);
-  transform-origin: 2px 1px;
   width: 24px;
   height: 2px;
   border-radius: 2px;
@@ -194,6 +246,41 @@ nav[aria-expanded="true"] .nav-sections {
   visibility: visible;
 }
 
+nav[aria-expanded="true"] .nav-sections > ul > li {
+  font-family: Spezia,Spezia_SemiMono,Arial,Helvetica,sans-serif;
+  font-size: 2.3rem;
+  font-weight: 600;
+  letter-spacing: 0.15rem;
+  line-height: 4.6rem;
+}
+
+nav[aria-expanded="true"] .nav-sections > ul  {
+  list-style: none;
+  margin-top: 0;
+  margin-bottom: 1em;
+  padding-inline-start: 0;
+}
+
+.logo-white {
+  color: white;
+}
+
+nav[aria-expanded="true"] .nav-sections > ul > li:last-child {
+  border-radius: 1rem;
+  width: fit-content;
+  color: black;
+  background-color: white;
+  margin-right: 0;
+  height: 7.0rem;
+  line-height: 7.0rem;
+  font-size: 1.6rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+nav[aria-expanded="true"] .nav-search {
+  display: none;
+}
 /* Adjust sections nav menu elements with a drop down to allow for the decoration element */
 .nav-sections .nav-drop {
   position: relative;
@@ -206,6 +293,7 @@ nav[aria-expanded="true"] .nav-sections {
     display: flex;
     flex-flow: column-reverse nowrap;
     justify-content: space-between;
+    background-color: white;
   }
 
   /* Upper tools nav menu items */
@@ -260,6 +348,13 @@ nav[aria-expanded="true"] .nav-sections {
     line-height: 3.285;
   }
 
+  /* Sub menu items styling for the sections nav */
+  .nav-sections ul > li > ul {
+    margin-top: 0;
+    display: none;
+    position: relative;
+  }
+
   .nav-sections > ul > li > ul > li {
     padding: 8px 0;
   }
@@ -283,18 +378,31 @@ nav[aria-expanded="true"] .nav-sections {
     padding-right: 2rem;
   }
 
-  /* Sub menu items styling for the sections nav */
-  .nav-sections ul > li > ul {
-    margin-top: 0;
-    display: none;
-    position: relative;
+  .nav-logo {
+    bottom: 9.8rem;
+    position: absolute;
+    top: 3.2rem;
+    width: 14.6rem;
+    height: auto;
+    left: 0.2rem;
   }
 
   .nav-logo-big {
+    color: black;
     left: 1.85rem;
     position: absolute;
-    bottom: 1.85rem;
-    width: 17.4rem;
+    top:3.9rem;
+    height: 3.9rem;
+    width:100%;
+  }
+
+  .nav-logo-small {
+    color: black;
+    left: 1.8rem;
+    position: absolute;
+    width: 3.5rem;
+    height: 3.9rem;
+    bottom: -1.5rem
   }
 
   header nav .nav-hamburger {
