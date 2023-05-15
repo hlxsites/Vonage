@@ -1,5 +1,13 @@
+
+
+
 /* header and nav layout */
 header {
+  --nav-logo-color: #000;
+  --mobile-nav-background: #000;
+  --mobile-nav-logo-color: #FFF;
+  --mobile-nav-contact-button-color: #FFF;
+
   height: 12.5rem;
   position: fixed;
   top: 0;
@@ -8,10 +16,6 @@ header {
 
 main {
   margin-top: 125px;
-}
-.nav-drop {
-  text-decoration: underline;
-  width: fit-content;
 }
 
 .nav-wrapper {
@@ -23,31 +27,23 @@ main {
 }
 
 .nav-logo {
-  /*bottom: 9.8rem;*/
+  /* bottom: 9.8rem; */
   position: absolute;
   top: 3.2rem;
   width: 14.6rem;
   height: auto;
-  /*left: 0.2rem;*/
+
+  /* left: 0.2rem; */
 }
 
 .nav-logo-big {
-  color: black;
+  color: var(--nav-logo-color);
   left: 1.8rem;
   position: absolute;
   top:0;
   height: 3.2rem;
   width:100%;
   bottom: 1.85rem;
-}
-
-.nav-logo-small {
-  color: black;
-  left: 1.8rem;
-  position: absolute;
-  width: 3.5rem;
-  height: 3.9rem;
-  bottom: -6.6rem
 }
 
 /* For mobile mode don't render the menus directly */
@@ -81,7 +77,6 @@ header nav {
   position: absolute;
   right: -0.4rem;
   top: 50%;
-  -webkit-transform: rotate(45deg);
   transform: rotate(45deg);
   width: 1rem;
 }
@@ -93,26 +88,6 @@ margin-bottom: 2.0rem;
 .nav-sections > ul > li[aria-expanded="true"] > ul {
   display: none;
 }
-
-/* .nav-sections > ul > li[aria-expanded="true"] > ul { */
-
-/*  display: block; */
-
-/*  position: absolute; */
-
-/*  left: -1em; */
-
-/*  width: 200px; */
-
-/*  margin-top: 12px; */
-
-/*  padding: 1em; */
-
-/*  background-color: var(--highlight-background-color); */
-
-/*  white-space: initial; */
-
-/* } */
 
 nav[aria-expanded="true"] .nav-sections {
   left: 0;
@@ -208,7 +183,7 @@ header nav[aria-expanded="false"] .nav-hamburger-icon::after {
 }
 
 header nav[aria-expanded="true"] .nav-hamburger-icon {
-  background-color: #000;
+  background-color: var(--mobile-nav-background);
 }
 
 header nav[aria-expanded="true"] .nav-hamburger-icon::before,
@@ -247,7 +222,7 @@ nav[aria-expanded="true"] .nav-sections {
 }
 
 nav[aria-expanded="true"] .nav-sections > ul > li {
-  font-family: Spezia,Spezia_SemiMono,Arial,Helvetica,sans-serif;
+  font-family: Spezia,"Spezia_SemiMono",Arial,Helvetica,sans-serif;
   font-size: 2.3rem;
   font-weight: 600;
   letter-spacing: 0.15rem;
@@ -262,14 +237,14 @@ nav[aria-expanded="true"] .nav-sections > ul  {
 }
 
 .logo-white {
-  color: white;
+  color: var(--mobile-nav-logo-color);
 }
 
 nav[aria-expanded="true"] .nav-sections > ul > li:last-child {
   border-radius: 1rem;
   width: fit-content;
   color: black;
-  background-color: white;
+  background-color: --mobile-nav-contact-button-color;
   margin-right: 0;
   height: 7.0rem;
   line-height: 7.0rem;
@@ -281,10 +256,16 @@ nav[aria-expanded="true"] .nav-sections > ul > li:last-child {
 nav[aria-expanded="true"] .nav-search {
   display: none;
 }
+
 /* Adjust sections nav menu elements with a drop down to allow for the decoration element */
 .nav-sections .nav-drop {
   position: relative;
   padding-right: 16px;
+}
+
+.nav-drop {
+  text-decoration: underline;
+  width: fit-content;
 }
 
 /* Desktop behavior with full nav menu displayed */
@@ -379,30 +360,26 @@ nav[aria-expanded="true"] .nav-search {
   }
 
   .nav-logo {
-    bottom: 9.8rem;
-    position: absolute;
-    top: 3.2rem;
-    width: 14.6rem;
+    top: 2.7rem;
+    width: 17.6rem;
     height: auto;
     left: 0.2rem;
   }
 
   .nav-logo-big {
-    color: black;
     left: 1.85rem;
     position: absolute;
     top:3.9rem;
     height: 3.9rem;
-    width:100%;
   }
 
   .nav-logo-small {
-    color: black;
+    color: var(--nav-logo-color);;
     left: 1.8rem;
     position: absolute;
     width: 3.5rem;
     height: 3.9rem;
-    bottom: -1.5rem
+    bottom: -2rem
   }
 
   header nav .nav-hamburger {

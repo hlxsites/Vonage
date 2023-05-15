@@ -19,6 +19,7 @@
   --highlight-background-color: #ccc;
   --text-color: #000;
 
+
   /* fonts */
   --body-font-family: spezia, spezia_semimono, ubuntu, roboto, noto, sans-serif;
   --heading-font-family: var(--body-font-family);
