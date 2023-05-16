@@ -17,6 +17,8 @@
    --nav-contact-button-background-color: #000;
 }
 
+/***** Global header / nav menu styling *****/
+
 /* header and nav layout */
 header {
   height: 12.5rem;
@@ -29,6 +31,7 @@ header {
 .header.block {
   background-color: var(--nav-background-color);
 }
+
 /* Div element to use for the mobile menu animation and to cover the page content */
 .header-backdrop {
   background-color: var(--mobile-nav-extended-background);
@@ -49,6 +52,7 @@ header .nav-wrapper {
   margin: 0 auto;
 }
 
+/* Styling for the div container that holds the two versions of the logo image */
 header .nav-logo {
   position: absolute;
   top: 3.2rem;
@@ -57,6 +61,7 @@ header .nav-logo {
   left: 0.2rem;
 }
 
+/* Styling of the full logo image displayed in desktop mode before scrolling down as well as mobile */
 header .nav-logo-big {
   color: var(--nav-logo-color);
   left: 1.8rem;
@@ -67,18 +72,7 @@ header .nav-logo-big {
   bottom: 1.85rem;
 }
 
-/* For mobile mode don't render the menus directly */
-header .nav-sections, header .nav-tools {
-  display: none
-}
-
-header .nav-sections ul, header .nav-tools ul, header .nav-search ul {
-  list-style: none;
-  margin-top: 0.8em;
-  margin-bottom: 1em;
-  padding-inline-start: 1rem;
-}
-
+/* Define the layout of the main nav container which houses all the buttons */
 header nav {
   display: flex;
   flex-direction: row-reverse;
@@ -86,47 +80,6 @@ header nav {
   margin: auto;
   padding: 0 1rem;
   background-color: transparent;
-}
-
-header .nav-sections .nav-drop[aria-expanded="true"]::after {
-  border-right: 0.3rem solid var(--mobile-nav-extended-decoration-color);
-  border-top: 0.3rem solid var(--mobile-nav-extended-decoration-color);
-  content: "";
-  display: block;
-  height: 1rem;
-  margin-top: -0.4rem;
-  position: absolute;
-  right: -0.4rem;
-  top: 50%;
-  transform: rotate(45deg);
-  width: 1rem;
-}
-
-header nav[aria-expanded="true"] .nav-sections > ul > li {
-margin-bottom: 2.0rem;
-}
-
-header .nav-sections > ul > li[aria-expanded="true"] > ul {
-  display: none;
-}
-
-header nav[aria-expanded="true"] .nav-sections {
-  left: 0;
-  overflow: scroll;
-  padding: 0.3rem 2rem 14rem;
-  position: absolute;
-  top: 12.5rem;
-  z-index: 6;
-}
-
-header nav[aria-expanded="true"] {
-  color: var(--mobile-nav-extended-color);
-}
-
-header .animate-open-backdrop {
-  transform: scale(70);
-  transition: -webkit-transform .5s ease;
-  transition: transform .5s ease,-webkit-transform .5s ease;
 }
 
 header nav p {
@@ -138,76 +91,12 @@ header nav a:any-link {
   color: currentcolor;
 }
 
-/* hamburger */
-header nav .nav-hamburger {
-  grid-area: hamburger;
-  height: 5.4rem;
-  display: flex;
-  align-items: center;
-}
-
-header nav .nav-hamburger button {
-  margin: 0;
-  border: 0;
-  border-radius: 0;
-  padding: 0;
-  background-color: var(--nav-background-color);
-  color: inherit;
-  overflow: initial;
-  text-overflow: initial;
-  white-space: initial;
-  z-index: 7;
-}
-
-header nav .nav-hamburger-icon,
-header nav .nav-hamburger-icon::before,
-header nav .nav-hamburger-icon::after {
-  box-sizing: border-box;
-  display: block;
-  position: relative;
-  width: 20px;
-}
-
-header nav .nav-hamburger-icon::before,
-header nav .nav-hamburger-icon::after {
-  content: '';
-  position: absolute;
-  background: currentcolor;
-}
-
-header nav[aria-expanded="false"] .nav-hamburger-icon,
-header nav[aria-expanded="false"] .nav-hamburger-icon::before,
-header nav[aria-expanded="false"] .nav-hamburger-icon::after {
-  height: 2px;
-  border-radius: 2px;
-  background: currentcolor;
-}
-
-header nav[aria-expanded="false"] .nav-hamburger-icon::before {
-  top: -6px;
-}
-
-header nav[aria-expanded="false"] .nav-hamburger-icon::after {
-  top: 6px;
-}
-
-header nav[aria-expanded="true"] .nav-hamburger-icon {
-  background-color: var(--mobile-nav-extended-background);
-}
-
-header nav[aria-expanded="true"] .nav-hamburger-icon::before,
-header nav[aria-expanded="true"] .nav-hamburger-icon::after {
-  top: 10px;
-  left: 0;
-  transform: rotate(45deg);
-  width: 24px;
-  height: 2px;
-  border-radius: 2px;
-}
-
-header nav[aria-expanded="true"] .nav-hamburger-icon::after {
-  bottom: 3px;
-  transform: rotate(-45deg);
+/* Common styling for all the nav sections */
+header .nav-sections ul, header .nav-tools ul, header .nav-search ul {
+  list-style: none;
+  margin-top: 0.8em;
+  margin-bottom: 1em;
+  padding-inline-start: 1rem;
 }
 
 /* Nav menu container housing both the sections and tools menu rows when expanded */
@@ -225,59 +114,185 @@ header .nav-sections {
   width: 100%;
 }
 
-header nav[aria-expanded="true"] .nav-sections {
-  display: block;
-  visibility: visible;
-}
-
-header nav[aria-expanded="true"] .nav-sections > ul > li {
-  font-family: Spezia,"Spezia_SemiMono",Arial,Helvetica,sans-serif;
-  font-size: 2.3rem;
-  font-weight: 600;
-  letter-spacing: 0.15rem;
-  line-height: 4.6rem;
-}
-
-header nav[aria-expanded="true"] .nav-sections > ul  {
-  list-style: none;
-  margin-top: 0;
-  margin-bottom: 1em;
-  padding-inline-start: 0;
-}
-
-header .logo-white {
-  color: var(--mobile-nav-extended-logo-color);
-}
-
-header nav[aria-expanded="true"] .nav-sections > ul > li:last-child {
-  border-radius: 1rem;
-  width: fit-content;
-  color: var(--mobile-nav-extended-contact-button-color);
-  background-color: var(--mobile-nav-extended-contact-button-background-color);
-  margin-right: 0;
-  height: 7.0rem;
-  line-height: 7.0rem;
-  font-size: 1.6rem;
-  padding-left: 2rem;
-  padding-right: 2rem;
-}
-
-header nav[aria-expanded="true"] .nav-search {
-  display: none;
-}
-
 /* Adjust sections nav menu elements with a drop down to allow for the decoration element */
 header .nav-sections .nav-drop {
   position: relative;
   padding-right: 16px;
-}
-
-header .nav-drop {
   text-decoration: underline;
   width: fit-content;
 }
 
-/* Desktop behavior with full nav menu displayed */
+/***** Styling specific to the mobile mode nav menu when closed *****/
+
+  /* For mobile mode don't render the menus directly */
+  header .nav-sections, header .nav-tools {
+    display: none
+  }
+
+  /* Styles for the mobile nav hamburger icon to launch the menu */
+  header nav .nav-hamburger {
+    grid-area: hamburger;
+    height: 5.4rem;
+    display: flex;
+    align-items: center;
+  }
+
+  header nav .nav-hamburger button {
+    margin: 0;
+    border: 0;
+    border-radius: 0;
+    padding: 0;
+    background-color: var(--nav-background-color);
+    color: inherit;
+    overflow: initial;
+    text-overflow: initial;
+    white-space: initial;
+    z-index: 7;
+  }
+
+  header nav .nav-hamburger-icon,
+  header nav .nav-hamburger-icon::before,
+  header nav .nav-hamburger-icon::after {
+    box-sizing: border-box;
+    display: block;
+    position: relative;
+    width: 20px;
+  }
+
+  header nav .nav-hamburger-icon::before,
+  header nav .nav-hamburger-icon::after {
+    content: '';
+    position: absolute;
+    background: currentcolor;
+  }
+
+  /* Draw the hamburger icon through pseudo classes when nav is closed */
+  header nav[aria-expanded="false"] .nav-hamburger-icon,
+  header nav[aria-expanded="false"] .nav-hamburger-icon::before,
+  header nav[aria-expanded="false"] .nav-hamburger-icon::after {
+    height: 2px;
+    border-radius: 2px;
+    background: currentcolor;
+  }
+
+  header nav[aria-expanded="false"] .nav-hamburger-icon::before {
+    top: -6px;
+  }
+
+  header nav[aria-expanded="false"] .nav-hamburger-icon::after {
+    top: 6px;
+  }
+
+/***** Styling specific to the mobile mode nav menu when expanded *****/
+
+  /* Define the animation that occurs when the mobile nav menu is expanded */
+  header .animate-open-backdrop {
+    transform: scale(70);
+    transition: -webkit-transform .5s ease;
+    transition: transform .5s ease,-webkit-transform .5s ease;
+  }
+
+  /* Switch the color of all text elements down the nav to white when expanded */
+  header nav[aria-expanded="true"] {
+    color: var(--mobile-nav-extended-color);
+  }
+
+  /* Styling for nav section container */
+  header nav[aria-expanded="true"] .nav-sections {
+    display: block;
+    visibility: visible;
+    left: 0;
+    overflow: scroll;
+    padding: 0.3rem 2rem 14rem;
+    position: absolute;
+    top: 12.5rem;
+    z-index: 6;
+  }
+
+  /* Define the style for regular nav section items */
+  header nav[aria-expanded="true"] .nav-sections > ul  {
+    list-style: none;
+    margin-top: 0;
+    margin-bottom: 1em;
+    padding-inline-start: 0;
+  }
+
+  header nav[aria-expanded="true"] .nav-sections > ul > li {
+    font-family: Spezia,"Spezia_SemiMono",Arial,Helvetica,sans-serif;
+    font-size: 2.3rem;
+    font-weight: 600;
+    letter-spacing: 0.15rem;
+    line-height: 4.6rem;
+    margin-bottom: 2.0rem;
+  }
+
+  /* Define the style and decoration for nav section items with children */
+  header .nav-sections .nav-drop[aria-expanded="true"]::after {
+    border-right: 0.3rem solid var(--mobile-nav-extended-decoration-color);
+    border-top: 0.3rem solid var(--mobile-nav-extended-decoration-color);
+    content: "";
+    display: block;
+    height: 1rem;
+    margin-top: -0.4rem;
+    position: absolute;
+    right: -0.4rem;
+    top: 50%;
+    transform: rotate(45deg);
+    width: 1rem;
+  }
+
+  /* Class added to the logo when the menu expands to have it rendered white */
+  header .logo-white {
+    color: var(--mobile-nav-extended-logo-color);
+  }
+
+  /* Don't display the search icon when the nav menu is expanded */
+  header nav[aria-expanded="true"] .nav-search {
+    display: none;
+  }
+
+  /* Display style for nav section items with children when expanded */
+
+  /* TODO: Need to implement the rendering of the children on click of the parent */
+  header .nav-sections > ul > li[aria-expanded="true"] > ul {
+    display: none;
+  }
+
+  /* Switch the hamburger icon to a white close icon when the nav is expanded */
+  header nav[aria-expanded="true"] .nav-hamburger-icon {
+    background-color: var(--mobile-nav-extended-background);
+  }
+
+  header nav[aria-expanded="true"] .nav-hamburger-icon::before,
+  header nav[aria-expanded="true"] .nav-hamburger-icon::after {
+    top: 10px;
+    left: 0;
+    transform: rotate(45deg);
+    width: 24px;
+    height: 2px;
+    border-radius: 2px;
+  }
+
+  header nav[aria-expanded="true"] .nav-hamburger-icon::after {
+    bottom: 3px;
+    transform: rotate(-45deg);
+  }
+
+  /* Style the last sections menu element as the contact us button */
+  header nav[aria-expanded="true"] .nav-sections > ul > li:last-child {
+    border-radius: 1rem;
+    width: fit-content;
+    color: var(--mobile-nav-extended-contact-button-color);
+    background-color: var(--mobile-nav-extended-contact-button-background-color);
+    margin-right: 0;
+    height: 7.0rem;
+    line-height: 7.0rem;
+    font-size: 1.6rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+/***** Desktop behavior with full nav menu displayed *****/
 @media (min-width: 992px) {
   header nav {
     display: flex;
@@ -328,6 +343,7 @@ header .nav-drop {
     border-radius: 0 1px 0 0;
     border-width: 2px 2px 0 0;
   }
+
   /* Common attributes for both the sections and tool menu unordered lists */
   header .nav-sections ul, header .nav-tools ul {
     display: flex;
@@ -419,6 +435,10 @@ header .nav-drop {
     border-bottom: .2rem solid transparent;
   }
 
+  header .nav-sections .nav-drop {
+    text-decoration: none;
+  }
+
   header .nav-tools > ul > li:first-child::after {
     margin-left: 0.4rem;
     top: 0;
@@ -431,10 +451,6 @@ header .nav-drop {
 
   header .nav-tools > ul > li:last-child {
     padding-right: 0;
-  }
-
-  header .nav-search > ul {
-    list-style: none;
   }
 
   header .nav-search {
