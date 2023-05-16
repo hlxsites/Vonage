@@ -19,6 +19,7 @@
   --highlight-background-color: #ccc;
   --text-color: #000;
 
+
   /* fonts */
   --body-font-family: spezia, spezia_semimono, ubuntu, roboto, noto, sans-serif;
   --heading-font-family: var(--body-font-family);
@@ -60,7 +61,7 @@ html {
 
 body {
   font-size: var(--body-font-size-m);
-  margin: 0;
+  margin-top: 125px;
   font-family: var(--body-font-family);
   line-height: 1.6;
   color: var(--text-color);
