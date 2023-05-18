@@ -19,6 +19,7 @@
   --highlight-background-color: #ccc;
   --text-color: #000;
 
+
   /* fonts */
   --body-font-family: spezia, spezia_semimono, ubuntu, roboto, noto, sans-serif;
   --heading-font-family: var(--body-font-family);
@@ -53,14 +54,21 @@
   }
 }
 
+/* global layout */
+html {
+  font-size: 62.5%
+}
+
 body {
   font-size: var(--body-font-size-m);
-  margin: 0;
+  margin-top: 125px;
   font-family: var(--body-font-family);
   line-height: 1.6;
   color: var(--text-color);
   background-color: var(--background-color);
   display: none;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
 }
 
 body.appear {
@@ -218,6 +226,12 @@ main img {
 .icon svg {
   height: 100%;
   width: 100%;
+}
+
+.icon-search {
+  height: 3rem;
+  width: 3rem;
+  vertical-align: middle;
 }
 
 main .section {
