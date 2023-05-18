@@ -6,6 +6,8 @@ export default function decorate(block) {
   [...block.children].forEach((row) => {
     const li = document.createElement('li');
     const wDiv = document.createElement('div');
+    const xDiv = document.createElement('div');
+    xDiv.classList.add('card-extrusion');
 
     wDiv.classList.add('card-container');
     li.innerHTML = row.innerHTML;
@@ -15,11 +17,16 @@ export default function decorate(block) {
     });
     wDiv.innerHTML = li.innerHTML;
     if (block.classList.contains('gradient-shadow')) {
-      const xDiv = document.createElement('div');
-      xDiv.classList.add('card-extrusion');
-      wDiv.prepend(xDiv);
+      const title = document.createElement('div');
+      title.classList.add('card-title');
+      const titleImage = wDiv.querySelector('div.cards-card-image');
+      title.append(titleImage);
+      const h4title = wDiv.querySelector('h4');
+      title.append(h4title);
+      wDiv.prepend(title);
     }
     li.innerHTML = wDiv.outerHTML;
+    li.prepend(xDiv);
     ul.append(li);
   });
 
