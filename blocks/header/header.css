@@ -117,9 +117,9 @@ header .nav-sections {
 /* Adjust sections nav menu elements with a drop down to allow for the decoration element */
 header .nav-sections .nav-drop {
   position: relative;
-  padding-right: 16px;
   text-decoration: underline;
   width: fit-content;
+  padding: 0.78rem 3.8rem 0.78rem 2.1rem;
 }
 
 /***** Styling specific to the mobile mode nav menu when closed *****/
@@ -310,38 +310,39 @@ header .nav-sections .nav-drop {
     margin-right: 4rem;
   }
 
-  header .nav-drop {
-    text-decoration: none;
-  }
-
   /* Add decoration to section menu elements which have a drop down */
   header .nav-sections .nav-drop::after {
     content: '';
     display: inline-block;
     position: absolute;
-    top: 1.2em;
-    right: 2px;
+    top: 2.3rem;
+    right: 2.1rem;
     transform: rotate(135deg);
     width: 6px;
     height: 6px;
     border-style: solid;
     border-color: currentcolor;
     border-radius: 0 1px 0 0;
-    border-width: 2px 2px 0 0;
+    border-width: 3px 3px 0 0;
   }
 
   header .nav-sections .nav-drop[aria-expanded="true"]::after {
     content: '';
-    display: inline-block;
-    position: absolute;
-    right: 2px;
+    top: 3.2rem;
+    right: 2.1rem;
     transform: rotate(-45deg);
     width: 6px;
     height: 6px;
     border-style: solid;
     border-color: currentcolor;
-    border-radius: 0 1px 0 0;
-    border-width: 2px 2px 0 0;
+  }
+
+  /* Turn the section tab to purple when expanded */
+  header .nav-sections .nav-drop[aria-expanded="true"] {
+    background-color: #6f54a3;
+    border-radius: 15px 15px 0 0;
+    color: #fff;
+    text-decoration: none;
   }
 
   /* Common attributes for both the sections and tool menu unordered lists */
@@ -355,8 +356,9 @@ header .nav-sections .nav-drop {
   /* Styling for the list items in the sections unordered list */
   header .nav-sections ul > li {
     font-weight: 600;
-    margin: 1rem 2rem;
-    border-bottom: .2rem solid transparent;
+
+    /* margin: 1rem 2rem; */
+    padding: 0.78rem 3.7rem 0.78rem 2.2rem;
     font-size: 1.5rem;
     letter-spacing: .1rem;
     line-height: 4.5rem;
@@ -384,21 +386,23 @@ header .nav-sections .nav-drop {
 
   /* Colorize the transparent bottom border under the section menu items on mouse over */
   header .nav-sections ul > li:hover {
-    border-bottom-color: var(--nav-color);
+    text-decoration: underline;
+    text-decoration-color: var(--nav-color);
+    text-underline-offset: 1.5rem;
+    text-decoration-thickness: 0.2rem;
   }
 
   /* Make the last item of the sections nav the 'Contact us' button in black and aligned to the right */
   header .nav-sections > ul > li:last-child {
-    margin-left: auto;
     border-radius: 1rem;
     color: var(--nav-contact-button-color);
     background-color: var(--nav-contact-button-background-color);
-    margin-right: 0;
-    height: 4.5rem;
-    line-height: 4.5rem;
+    height: 2.9rem;
+    line-height: 2.9rem;
     font-size: 1.5rem;
     padding-left: 2rem;
     padding-right: 2rem;
+    margin: auto 0 auto auto;
   }
 
   header .nav-logo {
@@ -468,5 +472,61 @@ header .nav-sections .nav-drop {
   header .nav-search svg {
     display: block;
     margin-top: -2.8rem;
+  }
+
+/* Styles for the Sub Menu popup div container */
+  header .sub-menu {
+    display: none;
+    color: var(--nav-color);
+    position: absolute;
+    top: 6rem;
+    left: -23.8rem;
+    height: auto;
+    background-color: white;
+    box-shadow: 0 15px 30px rgb(0 0 0 / 15%);
+    border-radius: 25px;
+  }
+
+  header .sub-menu > ul > li {
+    padding: 0 20px;
+    margin: 20px 0;
+    max-width: 275px;
+    min-width: 275px;
+  }
+
+  header .nav-sections .nav-drop[aria-expanded="true"] .sub-menu {
+    display: flex;
+  }
+
+  header .nav-sections .nav-drop[aria-expanded="true"] .sub-menu > ul.sub-menu-section {
+    display: none;
+  }
+
+  /* Sub menu section headers*/
+  header .nav-sections .nav-drop[aria-expanded="true"] .sub-menu > ul.sub-menu-section > li {
+    display: inline;
+    /*font-weight: 100;*/
+    /*line-height: 0;*/
+  }
+
+  /* Sub menu section content holder*/
+  header .nav-sections .nav-drop[aria-expanded="true"] .sub-menu > ul.sub-menu-section > li > ul {
+    display: inline;
+    font-weight: 100;
+    line-height: normal;
+  }
+
+  /* Sub menu section content holder*/
+  header .nav-sections .nav-drop[aria-expanded="true"] .sub-menu > ul.sub-menu-section > li > ul li {
+    font-weight: 100;
+    line-height: normal;
+  }
+
+  header .nav-sections .nav-drop[aria-expanded="true"] .sub-menu > ul.sub-menu-section-active {
+    display: flex;
+  }
+
+  header .nav-sections .nav-drop[aria-expanded="true"] .sub-menu > ul {
+    flex-flow: column nowrap;
   }
 }
