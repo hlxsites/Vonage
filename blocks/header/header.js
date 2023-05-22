@@ -69,8 +69,9 @@ function focusNavSection() {
  * @param {string} expanded Whether the element should be expanded or collapsed
  */
 function toggleAllNavSections(sections, expanded = false) {
-  sections.querySelectorAll('.nav-sections > ul > li').forEach((section) => {
+  sections.querySelectorAll('.nav-sections > ul > div > li').forEach((section) => {
     section.setAttribute('aria-expanded', expanded);
+    section.parentElement.setAttribute('aria-expanded', expanded);
   });
 }
 /**
@@ -169,6 +170,11 @@ export async function getSubSections(sectionName, subSectionName) {
       navSubSections.push(navSubSection);
     });
   }
+
+  if (navSubSections.length > 1) {
+    navSubSections[navSubSections.length - 2].classList.add('sub-menu-section-no-border');
+    navSubSections[navSubSections.length - 1].classList.add('sub-menu-section-last');
+  }
   return navSubSections;
 }
 
@@ -208,7 +214,7 @@ export default async function decorate(block) {
     subMenuWrapper.classList.add('sub-menu');
     // Drop the nested ul element add the wrapper and then the nested ul again
     sectionIndex.remove();
-    navSection.appendChild(subMenuWrapper);
+    navSection.after(subMenuWrapper);
     sectionIndex.classList.add('sub-menu-index');
     sectionIndex.classList.add('sub-menu-section');
     // Ensure that the left hand subsection with categories is always displayed
@@ -221,7 +227,7 @@ export default async function decorate(block) {
       subNavSection.addEventListener('mouseover', toggleNavSubSection);
       // Fetch the html of the nav sections children to populate in the popout menu
       const subNav = getSubSections(safeSectionName, safeSubSectionName);
-      // Add the returned subnav  to the submenu container
+      // Add the returned subnav to the submenu container
       (await subNav).forEach((subSection) => {
         subMenuWrapper.appendChild(subSection);
       });
@@ -250,7 +256,15 @@ export default async function decorate(block) {
       navSections.querySelectorAll(':scope > ul > li').forEach((navSection) => {
         const sectionIndex = navSection.querySelector(':scope > ul');
         if (sectionIndex) {
+          navSection.remove();
+          const navItemWrapper = document.createElement('div');
+          navItemWrapper.classList.add('nav-item-wrapper');
+          navItemWrapper.appendChild(navSection);
+          navSections.querySelector('ul').appendChild(navItemWrapper);
           loadSubSections(navSection, sectionIndex);
+        } else {
+          navSection.remove();
+          navSections.querySelector('ul').appendChild(navSection);
         }
 
         navSection.addEventListener('click', () => {
@@ -258,6 +272,7 @@ export default async function decorate(block) {
             const expanded = navSection.getAttribute('aria-expanded') === 'true';
             toggleAllNavSections(navSections);
             navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+            navSection.parentElement.setAttribute('aria-expanded', expanded ? 'false' : 'true');
           }
         });
       });

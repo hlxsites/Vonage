@@ -92,7 +92,7 @@ header nav a:any-link {
 }
 
 /* Common styling for all the nav sections */
-header .nav-sections ul, header .nav-tools ul, header .nav-search ul {
+header .nav-sections > ul, header .nav-tools > ul, header .nav-search > ul {
   list-style: none;
   margin-top: 0.8em;
   margin-bottom: 1em;
@@ -346,7 +346,7 @@ header .nav-sections .nav-drop {
   }
 
   /* Common attributes for both the sections and tool menu unordered lists */
-  header .nav-sections ul, header .nav-tools ul {
+  header .nav-sections > ul, header .nav-tools ul {
     display: flex;
     padding-left: 0;
     margin: 0;
@@ -354,10 +354,8 @@ header .nav-sections .nav-drop {
   }
 
   /* Styling for the list items in the sections unordered list */
-  header .nav-sections ul > li {
+  header .nav-sections > ul li {
     font-weight: 600;
-
-    /* margin: 1rem 2rem; */
     padding: 0.78rem 3.7rem 0.78rem 2.2rem;
     font-size: 1.5rem;
     letter-spacing: .1rem;
@@ -374,7 +372,7 @@ header .nav-sections .nav-drop {
   }
 
   /* Sub menu items styling for the sections nav */
-  header .nav-sections ul > li > ul {
+  header .nav-sections > ul > li > ul {
     margin-top: 0;
     display: none;
     position: relative;
@@ -385,7 +383,7 @@ header .nav-sections .nav-drop {
   }
 
   /* Colorize the transparent bottom border under the section menu items on mouse over */
-  header .nav-sections ul > li:hover {
+  header .nav-sections > ul > li:hover {
     text-decoration: underline;
     text-decoration-color: var(--nav-color);
     text-underline-offset: 1.5rem;
@@ -479,8 +477,7 @@ header .nav-sections .nav-drop {
     display: none;
     color: var(--nav-color);
     position: absolute;
-    top: 6rem;
-    left: -23.8rem;
+    left: 1rem;
     height: auto;
     background-color: white;
     box-shadow: 0 15px 30px rgb(0 0 0 / 15%);
@@ -488,45 +485,89 @@ header .nav-sections .nav-drop {
   }
 
   header .sub-menu > ul > li {
-    padding: 0 20px;
+    font-size: 1.4rem;
+    padding: 0 10px;
+  }
+
+  header .sub-menu {
+    display: none;
+    width: 100%;
+    overflow: hidden;
+    justify-content: space-between;
+  }
+
+  header .sub-menu > ul.sub-menu-section {
+    flex: 1 1 auto;
+    display: none;
+    border-right: 1px solid #dadada;
     margin: 20px 0;
+    padding: 0 10px;
+  }
+
+  header .sub-menu > ul.sub-menu-index {
+    flex: 1 1 275px;
     max-width: 275px;
     min-width: 275px;
+    border-right: none;
   }
 
-  header .nav-sections .nav-drop[aria-expanded="true"] .sub-menu {
-    display: flex;
-  }
-
-  header .nav-sections .nav-drop[aria-expanded="true"] .sub-menu > ul.sub-menu-section {
-    display: none;
-  }
-
-  /* Sub menu section headers*/
-  header .nav-sections .nav-drop[aria-expanded="true"] .sub-menu > ul.sub-menu-section > li {
+  /* Sub menu section headers */
+  header .sub-menu > ul.sub-menu-section > li {
     display: inline;
-    /*font-weight: 100;*/
-    /*line-height: 0;*/
   }
 
-  /* Sub menu section content holder*/
-  header .nav-sections .nav-drop[aria-expanded="true"] .sub-menu > ul.sub-menu-section > li > ul {
+  /* Sub menu section content holder */
+  header .sub-menu > ul.sub-menu-section > li > ul {
     display: inline;
     font-weight: 100;
     line-height: normal;
   }
 
-  /* Sub menu section content holder*/
-  header .nav-sections .nav-drop[aria-expanded="true"] .sub-menu > ul.sub-menu-section > li > ul li {
+  /* Sub menu section content holder */
+  header .sub-menu > ul.sub-menu-section > li > ul li {
     font-weight: 100;
     line-height: normal;
+    list-style: none;
+    padding: 1rem 0 1rem 1rem;
   }
 
-  header .nav-sections .nav-drop[aria-expanded="true"] .sub-menu > ul.sub-menu-section-active {
+  header .sub-menu > ul.sub-menu-section-active {
     display: flex;
   }
 
-  header .nav-sections .nav-drop[aria-expanded="true"] .sub-menu > ul {
+  header .nav-item-wrapper[aria-expanded="true"] .sub-menu {
+    display: flex;
+  }
+
+  header .sub-menu > ul {
     flex-flow: column nowrap;
+  }
+
+  header .sub-menu ul.sub-menu-section-last {
+    -webkit-box-flex: 1;
+    flex: 1 1 270px;
+    min-width: 270px;
+    max-width: 270px;
+    background: #f3f3f3;
+    margin: 0;
+    border-right: none;
+    border-radius: 0 25px 25px 0;
+  }
+
+  header .sub-menu ul.sub-menu-section-no-border {
+    border-right: none;
+  }
+
+    header .sub-menu ul.sub-menu-section-last > li:first-child {
+      margin: 40px 10px 20px;
+      text-align: center;
+      line-height: 1.75rem;
+      padding: 2rem 0;
+      height: auto;
+      width: 200px;
+      background-color: #6f54a3;
+      color: #fff;
+      border-radius: 1rem;
+      display: inline-block;
   }
 }
