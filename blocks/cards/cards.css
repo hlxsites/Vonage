@@ -112,11 +112,6 @@
   margin-left: 16px;
 }
 
-.cards.gradient-shadow .cards-card-image img {
-  width: 150px;
-  height: 150px;
-}
-
 .cards.gradient-shadow .cards-card-body {
   font-family: var(--body-font-family);
   font-size: 16px;
@@ -151,4 +146,6 @@
 .cards.gradient-shadow > ul > li img {
   aspect-ratio: auto;
   object-fit: cover;
+  width: 150px;
+  height: 150px;
 }
