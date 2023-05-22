@@ -63,6 +63,18 @@
   top: 10px;
 }
 
+.cards.gradient-shadow li:nth-of-type(4) .card-extrusion {
+  background: linear-gradient(135deg,#80c7f5,#d6219c);
+}
+
+.cards.gradient-shadow li:nth-of-type(3) .card-extrusion {
+  background: linear-gradient(135deg,#871fff,#7ec9f4);
+}
+
+.cards.gradient-shadow li:nth-of-type(2) .card-extrusion {
+  background: linear-gradient(135deg,#80c7f5,#d6219c);
+}
+
 .cards.gradient-shadow .card-container {
   border-radius: 35px;
   position: relative;
