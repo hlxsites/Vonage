@@ -82,6 +82,7 @@
   display: flex;
   width: 100%;
   flex-flow: row wrap;
+  transition: transform 250ms ease-in-out;
 
   /* box-shadow: 10px 10px lightblue; */
   padding: 20px;
@@ -89,7 +90,6 @@
 
 .cards.gradient-shadow .card-container:hover {
   transform: translateY(-10px) translateX(-10px);
-  transition: transform 250ms;
 }
 
 .cards.gradient-shadow .card-title {
