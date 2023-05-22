@@ -31,8 +31,15 @@
 }
 
 .cards.gradient-shadow ul {
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-gap: 40px;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 992px) {
+  .cards.gradient-shadow ul {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 40px;
+    height: 100%;
+  }
 }
 
 .cards.gradient-shadow li {
@@ -43,6 +50,7 @@
   display: flex;
   position: relative;
   width: 100%;
+  min-height: 245px;
 }
 
 .cards.gradient-shadow .card-extrusion {
@@ -51,7 +59,8 @@
   border-radius: 35px;
   width: 100%;
   height: 100%;
-  background-clip: border-box;
+  left: 10px;
+  top: 10px;
 }
 
 .cards.gradient-shadow .card-container {
@@ -60,9 +69,23 @@
   background-color: #fff;
   display: flex;
   width: 100%;
+  flex-flow: row wrap;
 
   /* box-shadow: 10px 10px lightblue; */
   padding: 20px;
+}
+
+.cards.gradient-shadow .card-title {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.cards.gradient-shadow .card-title h4 {
+  font-size: 19px;
+  font-weight: 500;
+  align-items: center;
+  padding-left: 13px;
 }
 
 .cards.gradient-shadow .cards-card-image {
@@ -76,8 +99,9 @@
   font-family: var(--body-font-family);
   font-size: 16px;
   font-weight: 400;
+  letter-spacing: 0.5px;
   line-height: 20px;
-  letter-spacing: 1px;
+  display: block;
 }
 
 .cards.gradient-shadow .button-container > a {
@@ -88,6 +112,13 @@
   border-radius: 0;
 }
 
+.cards.gradient-shadow .button-container {
+  padding: 0;
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
 .cards.gradient-shadow .button-container > a::after {
   background-color: #000;
   display: block;
@@ -95,20 +126,7 @@
   height: 0.2rem;
 }
 
-.cards.gradient-shadow .card-title {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
 .cards.gradient-shadow > ul > li img {
   aspect-ratio: auto;
   object-fit: cover;
-}
-
-.cards.gradient-shadow h4 {
-  font-size: 18px;
-  font-weight: 500;
-  display: flex;
-  padding-left: 16px;
 }
