@@ -75,6 +75,11 @@
   padding: 20px;
 }
 
+.cards.gradient-shadow .card-container:hover {
+  transform: translateY(-10px) translateX(-10px);
+  transition: transform 250ms;
+}
+
 .cards.gradient-shadow .card-title {
   display: flex;
   align-items: center;
