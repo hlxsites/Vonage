@@ -146,5 +146,6 @@
 .cards.gradient-shadow > ul > li img {
   aspect-ratio: auto;
   object-fit: cover;
-  width: 150px;
+  width: 38px;
+  height:38px;
 }
