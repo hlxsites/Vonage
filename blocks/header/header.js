@@ -204,22 +204,46 @@ export default async function decorate(block) {
   const navPath = navMeta ? new URL(navMeta).pathname : '/nav';
   const resp = await fetch(`${navPath}.plain.html`);
 
+  function createDiv(id, classes) {
+    const div = document.createElement('div');
+    div.id = id;
+    classes.forEach((className) => {
+      div.classList.add(className);
+  });
+  return div;
+  }
+
+
   function loadSubSections(navSection, sectionIndex) {
+    // Get the top level text property from the nav html as the section menu name
+    // As well as the id and class name for the menu sections
     const section = navSection.childNodes[0].nodeValue;
-    navSection.classList.add('nav-drop');
-    // Create a div to wrap the items in the drop-down menu to handle displaying as a popout
-    const subMenuWrapper = document.createElement('div');
     const safeSectionName = toClassName(section);
-    subMenuWrapper.id = `sub-menu-${safeSectionName}`;
-    subMenuWrapper.classList.add('sub-menu');
+
+    // Flag the nav menu button as a drop down in CSS
+    navSection.classList.add('nav-drop');
+
+    // Create a div to wrap the items in the drop-down menu to handle displaying as a popout
+    const subMenuWrapper = createDiv(`sub-menu-${safeSectionName}`, ['sub-menu'])
+
+    // Add a span for the close button in the menu
+    const closeButton = document.createElement('span');
+    closeButton.classList.add('close-icon');
+    closeButton.addEventListener('click', () => {
+      const expanded = navSection.getAttribute('aria-expanded') === 'true';
+      navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+      navSection.parentElement.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+    });
+    subMenuWrapper.appendChild(closeButton);
+
     // Drop the nested ul element add the wrapper and then the nested ul again
     sectionIndex.remove();
     navSection.after(subMenuWrapper);
-    sectionIndex.classList.add('sub-menu-index');
-    sectionIndex.classList.add('sub-menu-section');
-    // Ensure that the left hand subsection with categories is always displayed
-    sectionIndex.classList.add('sub-menu-section-active');
+    // Flag this first subsection as the special index section and flag it to always be active and add it back
+    sectionIndex.classList.add('sub-menu-index', 'sub-menu-section','sub-menu-section-active');
     subMenuWrapper.appendChild(sectionIndex);
+
+    // Iterate through all the li in the index to fetch markdowns to populate the sub sections
     sectionIndex.querySelectorAll(':scope > li').forEach(async (subNavSection) => {
       const subSections = subNavSection.innerHTML;
       const safeSubSectionName = toClassName(subSections);
@@ -258,11 +282,14 @@ export default async function decorate(block) {
         if (sectionIndex) {
           navSection.remove();
           const navItemWrapper = document.createElement('div');
+          // If this nav element is associated with a drop down need a div to contain the drop down button and the popout menu
           navItemWrapper.classList.add('nav-item-wrapper');
           navItemWrapper.appendChild(navSection);
           navSections.querySelector('ul').appendChild(navItemWrapper);
+          // Fetch and populate the subsection data
           loadSubSections(navSection, sectionIndex);
         } else {
+          // Otherwise remove and append the section to keep the order consistent
           navSection.remove();
           navSections.querySelector('ul').appendChild(navSection);
         }
