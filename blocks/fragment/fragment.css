@@ -1,1 +1,79 @@
-/* nothing here */
+/* 2 column version of the fragment */
+.fragment-wrapper {
+    //background: linear-gradient(0deg, rgba(255,255,255,1) 80%, rgba(238,239,252,1) 100%);
+    //max-width: 990pt;
+    -webkit-box-orient: horizontal;
+        text-decoration: none;
+    box-sizing: inherit;
+        -webkit-box-orient: horizontal;
+        display:flex;
+        position: relative;
+            width: 100%;
+            padding-right: 20px;
+            padding-left: 20px;
+        }
+    .leftcolumn {
+        display: flex;
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 50%;
+        flex: 0 0 50%;
+        max-width: 50%;
+        margin-left: 8.33333%;
+    }
+    .rightcolumn {
+        display: flex;
+        margin-left: 0;
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 41.66667%;
+        flex: 0 0 41.66667%;
+        max-width: 41.66667%;
+    }
+    a:any-link {
+        color: #000;
+        transition: transform .2s;
+        text-decoration: none;
+        display:inline-block;
+    }
+    .fragment-link {
+
+            font-family: Spezia_SemiMono;
+            font-size: 1.4rem;
+            font-weight: 600;
+            letter-spacing: .075rem;
+            line-height: 2rem;
+    }
+    .fragment-link:after {
+        background-color: #000;
+        content: "";
+        display: block;
+        height: .2rem;
+        width: 100%
+    }
+    h2 {
+        font-family: Spezia,Spezia_SemiMono,Arial,Helvetica,sans-serif;
+        font-size: 2.9rem;
+        font-weight: 500;
+        letter-spacing: -.15rem;
+        line-height: 3.2rem;
+    }
+    p {
+        font-family: Spezia,Spezia_SemiMono,Arial,Helvetica,sans-serif;
+        font-size: 1.7rem;
+        font-weight: 400;
+        letter-spacing: -.02rem;
+        line-height: 2rem;
+    }
+    ul {
+        font-family: Spezia,Spezia_SemiMono,Arial,Helvetica,sans-serif;
+        font-size: 1.2rem;
+        font-weight: 400;
+        letter-spacing: .025rem;
+        line-height: 1.6rem;
+            -webkit-column-count: 2;
+            -moz-column-count: 2;
+            column-count: 2;
+            -webkit-column-gap: 4rem;
+            -moz-column-gap: 4rem;
+            column-gap: 4rem;
+    }
+}

@@ -24,6 +24,15 @@ async function loadFragment(path) {
       const main = document.createElement('main');
       main.innerHTML = await resp.text();
       decorateMain(main);
+      // Styling links properly, removing added classes
+      var elements = main.getElementsByTagName('a');
+      [].forEach.call(elements, function(el) {
+        if (el.parentElement.parentElement.tagName === 'P') {
+          el.classList.remove('button');
+          el.classList.remove('primary');
+          el.classList.add('fragment-link');
+        }
+      });
       await loadBlocks(main);
       return main;
     }
