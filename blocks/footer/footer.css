@@ -16,31 +16,28 @@ footer .footer p {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  padding: 9rem 20px;
+  padding: 8rem 0;
 }
 
 .footer-links-row {
   display: flex;
   flex-flow: row wrap;
-  margin-left: -20px;
-  margin-right: -40px;
 }
 
 .footer-links-pair {
   box-sizing: border-box;
   display: flex;
   flex-flow: row wrap;
-  flex: 1 1 300px;
+  flex: 1 1 280px;
   position: relative;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding: 1rem 0;
 }
 
 .footer-links-pair ul {
   box-sizing: border-box;
   letter-spacing: 0.025rem;
   line-height: 1.6rem;
-  flex: 1 0 200px;
+  flex: 1 0 130px;
   list-style-type: none;
   margin: 0;
   padding: .6rem 0;
@@ -121,7 +118,7 @@ footer .footer p {
   margin-top: 4rem;
   text-align: right;
   position: relative;
-  right: 10rem;
+  margin-right: 10rem;
 }
 
 .footer-trade-disclaimer .icon {
