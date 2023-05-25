@@ -1,7 +1,6 @@
 /* 2 column version of the fragment */
 .fragment-wrapper {
-    //background: linear-gradient(0deg, rgba(255,255,255,1) 80%, rgba(238,239,252,1) 100%);
-    //max-width: 990pt;
+    //font-family: Spezia,Spezia_SemiMono,Arial,Helvetica,sans-serif;
     -webkit-box-orient: horizontal;
         text-decoration: none;
     box-sizing: inherit;
@@ -18,7 +17,6 @@
         -ms-flex: 0 0 50%;
         flex: 0 0 50%;
         max-width: 50%;
-        margin-left: 8.33333%;
     }
     .rightcolumn {
         display: flex;
@@ -34,9 +32,10 @@
         text-decoration: none;
         display:inline-block;
     }
+    li > a:hover, li > strong > a:hover{
+        text-decoration: underline;
+        }
     .fragment-link {
-
-            font-family: Spezia_SemiMono;
             font-size: 1.4rem;
             font-weight: 600;
             letter-spacing: .075rem;
@@ -50,21 +49,18 @@
         width: 100%
     }
     h2 {
-        font-family: Spezia,Spezia_SemiMono,Arial,Helvetica,sans-serif;
         font-size: 2.9rem;
         font-weight: 500;
         letter-spacing: -.15rem;
         line-height: 3.2rem;
     }
     p {
-        font-family: Spezia,Spezia_SemiMono,Arial,Helvetica,sans-serif;
         font-size: 1.7rem;
         font-weight: 400;
         letter-spacing: -.02rem;
         line-height: 2rem;
     }
     ul {
-        font-family: Spezia,Spezia_SemiMono,Arial,Helvetica,sans-serif;
         font-size: 1.2rem;
         font-weight: 400;
         letter-spacing: .025rem;
