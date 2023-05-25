@@ -303,12 +303,14 @@ export default async function decorate(block) {
 
     const navSections = nav.querySelector('.nav-sections');
     if (navSections) {
-      navSections.querySelectorAll(':scope > ul > li').forEach((navSection, count) => {
+      const sectionDivider = document.createElement('hr');
+      sectionDivider.classList.add('nav-section-divider');
+      navSections.after(sectionDivider);
+      navSections.querySelectorAll(':scope > ul > li').forEach((navSection) => {
         const sectionIndex = navSection.querySelector(':scope > ul');
         navSection.remove();
         const navItemWrapper = document.createElement('div');
         navItemWrapper.classList.add('nav-item-wrapper');
-        //navSection.style.transitionDelay = `${0.4 + count * 0.1}s`;
         navItemWrapper.appendChild(navSection);
         navSections.querySelector('ul').appendChild(navItemWrapper);
         if (sectionIndex) {

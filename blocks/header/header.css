@@ -21,10 +21,11 @@
 
 /* header and nav layout */
 header {
-  height: 12.5rem;
+  height: 9.6rem;
   position: fixed;
   top: 0;
   width: 100%;
+  background-color: white;
 }
 
 /* Div element to use for the mobile menu animation and to cover the page content  */
@@ -74,8 +75,8 @@ header .nav-logo-big {
 
 /* Define the layout of the main nav container which houses all the buttons */
 header nav {
-  display: flex;
-  flex-direction: row-reverse;
+  /*display: flex;*/
+  /*flex-direction: row-reverse;*/
   align-items: center;
   margin: auto;
   padding: 0 1rem;
@@ -92,6 +93,7 @@ header nav a:any-link {
 }
 
 header .header-navigation {
+  width: 100%;
   display: flex;
   flex-flow: column-reverse nowrap;
   justify-content: space-between;
@@ -103,6 +105,21 @@ header .nav-sections > ul, header .nav-tools > ul, header .nav-search > ul {
   margin-top: 0.8em;
   margin-bottom: 1em;
   padding-inline-start: 1rem;
+}
+
+header .nav-search {
+  position: absolute;
+  height: 2.4rem;
+  top: 3.6rem;
+  width: 2.4rem;
+  right: 6rem;
+}
+
+header .nav-search > ul {
+  margin: 0;
+  width: 2.4rem;
+  height: 2.4rem;
+  padding-inline-start: 0;
 }
 
 /* Set mobile nav section elements to transparent when the nav isn't open to allow for the animation*/
@@ -132,6 +149,21 @@ header .nav-sections .nav-drop {
   width: fit-content;
 }
 
+header .nav-sections .nav-drop::after {
+  border-right: .3rem solid #fff;
+  border-top: .3rem solid #fff;
+  content: "";
+  display: block;
+  height: 1.0rem;
+  margin-top: -.2rem;
+  position: absolute;
+  right: -2rem;
+  top: 50%;
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+  width: 1.0rem;
+}
+
 /***** Styling specific to the mobile mode nav menu when closed *****/
 
   /* For mobile mode hide the menus so they can be animated when opened */
@@ -142,12 +174,20 @@ header .nav-sections .nav-drop {
   }
 
   /* Styles for the mobile nav hamburger icon to launch the menu */
-  header nav .nav-hamburger {
-    grid-area: hamburger;
-    height: 5.4rem;
-    display: flex;
-    align-items: center;
-  }
+  /*header nav .nav-hamburger {*/
+  /*  grid-area: hamburger;*/
+  /*  height: 5.4rem;*/
+  /*  display: flex;*/
+  /*  align-items: center;*/
+  /*}*/
+
+header nav .nav-hamburger {
+  position: absolute;
+  height: 2.4rem;
+  top: 3.6rem;
+  width: 2.4rem;
+  right: 2rem;
+}
 
   header nav .nav-hamburger button {
     margin: 0;
@@ -162,13 +202,17 @@ header .nav-sections .nav-drop {
     z-index: 7;
   }
 
-  header nav .nav-hamburger-icon,
+header nav .nav-hamburger-icon {
+  top: 50%;
+  position: absolute;
+}
+
+header nav .nav-hamburger-icon,
   header nav .nav-hamburger-icon::before,
   header nav .nav-hamburger-icon::after {
-    box-sizing: border-box;
     display: block;
-    position: relative;
-    width: 2.6rem;
+    width: 2.4rem;
+    height: 2.4rem;
   }
 
   header nav .nav-hamburger-icon::before,
@@ -186,12 +230,13 @@ header .nav-sections .nav-drop {
     background: currentcolor;
   }
 
+
   header nav[aria-expanded="false"] .nav-hamburger-icon::before {
-    top: -0.7rem;
+    top: -0.6rem;
   }
 
   header nav[aria-expanded="false"] .nav-hamburger-icon::after {
-    top: 0.7rem;
+    top: 0.6rem;
   }
 
 /***** Styling specific to the mobile mode nav menu when expanded *****/
@@ -208,6 +253,30 @@ header .nav-sections .nav-drop {
     color: var(--mobile-nav-extended-color);
   }
 
+header nav[aria-expanded="true"] .nav-tools {
+  display: block;
+  height: auto;
+  visibility: visible;
+}
+
+header nav[aria-expanded="true"] .header-navigation {
+  width: 100%;
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 12.5rem;
+  overflow: scroll;
+  padding: .3rem 2rem 14rem;
+  box-sizing: border-box;
+}
+
+header nav[aria-expanded="true"] .nav-tools {
+  font-size: 1.6rem;
+}
+
+header nav[aria-expanded="true"] .nav-tools li {
+  margin-top: 1.5rem;
+}
   /* Styling for nav section container */
   header nav[aria-expanded="true"] .nav-sections {
     height: auto;
@@ -215,10 +284,12 @@ header .nav-sections .nav-drop {
     visibility: visible;
     left: 0;
     overflow: hidden;
-    padding: 0.3rem 2rem 14rem;
-    position: absolute;
     top: 12.5rem;
     z-index: 6;
+  }
+
+  header nav .nav-search > ul > li {
+    line-height: 0;
   }
 
   header nav[aria-expanded="true"] .icon-search {
@@ -236,8 +307,8 @@ header .nav-sections .nav-drop {
   header nav[aria-expanded="true"] .nav-sections > ul li {
     font-family: Spezia,"Spezia_SemiMono",Arial,Helvetica,sans-serif;
     font-size: 2.3rem;
-    font-weight: 500;
-    letter-spacing: 0.15rem;
+    font-weight: 600;
+    letter-spacing: 0;
     line-height: 4.6rem;
     margin-bottom: 2.0rem;
     text-decoration: underline;
@@ -287,6 +358,7 @@ header nav .nav-sections > ul > div:nth-child(5) > li { transition-delay: 0.60s 
   /* Switch the hamburger icon to a white close icon when the nav is expanded */
   header nav[aria-expanded="true"] .nav-hamburger-icon {
     background-color: var(--mobile-nav-extended-background);
+    top:0;
   }
 
   header nav[aria-expanded="true"] .nav-hamburger-icon::before,
@@ -295,7 +367,7 @@ header nav .nav-sections > ul > div:nth-child(5) > li { transition-delay: 0.60s 
     left: 0;
     transform: rotate(45deg);
     width: 24px;
-    height: 2px;
+    height: 3px;
     border-radius: 2px;
   }
 
@@ -326,6 +398,11 @@ header .sub-menu-section li {
 
 /***** Desktop behavior with full nav menu displayed *****/
 @media (min-width: 992px) {
+
+  header {
+    height: auto;
+  }
+
   header nav {
     display: flex;
     flex-flow: column-reverse nowrap;
@@ -495,16 +572,12 @@ header nav .nav-sections ul div.nav-item-wrapper > li {
     align-self: center;
     display: flex;
     font-size: 1.5rem;
-    height: 1.5rem;
-    right: 2rem;
-    top: 3rem;
+    height: 2.4rem;
+    width: 2.4rem;
     z-index: 8;
     position: absolute;
-  }
-
-  header .nav-search svg {
-    display: block;
-    margin-top: -2.8rem;
+    right: 2.8rem;
+    top: 2.2rem;
   }
 
 /* Styles for the Sub Menu popup div container */
@@ -695,4 +768,7 @@ span.close-icon::before {
   font-family: VltIcons;
   font-size: 40px;
 }
+ header .nav-section-divider {
+    display: none;
+  }
 }
