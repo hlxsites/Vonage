@@ -91,12 +91,23 @@ header nav a:any-link {
   color: currentcolor;
 }
 
+header .header-navigation {
+  display: flex;
+  flex-flow: column-reverse nowrap;
+  justify-content: space-between;
+}
+
 /* Common styling for all the nav sections */
 header .nav-sections > ul, header .nav-tools > ul, header .nav-search > ul {
   list-style: none;
   margin-top: 0.8em;
   margin-bottom: 1em;
   padding-inline-start: 1rem;
+}
+
+/* Set mobile nav section elements to transparent when the nav isn't open to allow for the animation*/
+header .nav-sections > ul li {
+  opacity:0;
 }
 
 /* Nav menu container housing both the sections and tools menu rows when expanded */
@@ -119,14 +130,15 @@ header .nav-sections .nav-drop {
   position: relative;
   text-decoration: underline;
   width: fit-content;
-  padding: 0.78rem 3.8rem 0.78rem 2.1rem;
 }
 
 /***** Styling specific to the mobile mode nav menu when closed *****/
 
-  /* For mobile mode don't render the menus directly */
+  /* For mobile mode hide the menus so they can be animated when opened */
   header .nav-sections, header .nav-tools {
-    display: none
+    display: none;
+    height: 0;
+    visibility: hidden;
   }
 
   /* Styles for the mobile nav hamburger icon to launch the menu */
@@ -156,7 +168,7 @@ header .nav-sections .nav-drop {
     box-sizing: border-box;
     display: block;
     position: relative;
-    width: 20px;
+    width: 2.6rem;
   }
 
   header nav .nav-hamburger-icon::before,
@@ -170,17 +182,16 @@ header .nav-sections .nav-drop {
   header nav[aria-expanded="false"] .nav-hamburger-icon,
   header nav[aria-expanded="false"] .nav-hamburger-icon::before,
   header nav[aria-expanded="false"] .nav-hamburger-icon::after {
-    height: 2px;
-    border-radius: 2px;
+    height: 0.3rem;
     background: currentcolor;
   }
 
   header nav[aria-expanded="false"] .nav-hamburger-icon::before {
-    top: -6px;
+    top: -0.7rem;
   }
 
   header nav[aria-expanded="false"] .nav-hamburger-icon::after {
-    top: 6px;
+    top: 0.7rem;
   }
 
 /***** Styling specific to the mobile mode nav menu when expanded *****/
@@ -199,14 +210,19 @@ header .nav-sections .nav-drop {
 
   /* Styling for nav section container */
   header nav[aria-expanded="true"] .nav-sections {
+    height: auto;
     display: block;
     visibility: visible;
     left: 0;
-    overflow: scroll;
+    overflow: hidden;
     padding: 0.3rem 2rem 14rem;
     position: absolute;
     top: 12.5rem;
     z-index: 6;
+  }
+
+  header nav[aria-expanded="true"] .icon-search {
+    display: none;
   }
 
   /* Define the style for regular nav section items */
@@ -217,28 +233,38 @@ header .nav-sections .nav-drop {
     padding-inline-start: 0;
   }
 
-  header nav[aria-expanded="true"] .nav-sections > ul > li {
+  header nav[aria-expanded="true"] .nav-sections > ul li {
     font-family: Spezia,"Spezia_SemiMono",Arial,Helvetica,sans-serif;
     font-size: 2.3rem;
-    font-weight: 600;
+    font-weight: 500;
     letter-spacing: 0.15rem;
     line-height: 4.6rem;
     margin-bottom: 2.0rem;
+    text-decoration: underline;
+    -webkit-transition: opacity .6s ease-out .25s;
+    transition: opacity .6s ease-out .25s;
+  }
+
+header nav .nav-sections > ul > div:nth-child(1) > li { transition-delay: 0.40s }
+header nav .nav-sections > ul > div:nth-child(2) > li { transition-delay: 0.45s }
+header nav .nav-sections > ul > div:nth-child(3) > li { transition-delay: 0.50s }
+header nav .nav-sections > ul > div:nth-child(4) > li { transition-delay: 0.55s }
+header nav .nav-sections > ul > div:nth-child(5) > li { transition-delay: 0.60s }
+
+  header .nav-sections > ul > div > li.animate-fade-in {
+    opacity:1;
   }
 
   /* Define the style and decoration for nav section items with children */
   header .nav-sections .nav-drop[aria-expanded="true"]::after {
     border-right: 0.3rem solid var(--mobile-nav-extended-decoration-color);
     border-top: 0.3rem solid var(--mobile-nav-extended-decoration-color);
-    content: "";
-    display: block;
-    height: 1rem;
     margin-top: -0.4rem;
     position: absolute;
-    right: -0.4rem;
     top: 50%;
     transform: rotate(45deg);
-    width: 1rem;
+    text-decoration: none;
+    font-weight: 600;
   }
 
   /* Class added to the logo when the menu expands to have it rendered white */
@@ -279,7 +305,7 @@ header .nav-sections .nav-drop {
   }
 
   /* Style the last sections menu element as the contact us button */
-  header nav[aria-expanded="true"] .nav-sections > ul > li:last-child {
+  header nav[aria-expanded="true"] .nav-sections > ul > div:last-child > li {
     border-radius: 1rem;
     width: fit-content;
     color: var(--mobile-nav-extended-contact-button-color);
@@ -287,10 +313,16 @@ header .nav-sections .nav-drop {
     margin-right: 0;
     height: 7.0rem;
     line-height: 7.0rem;
-    font-size: 1.6rem;
+    font-size: 1.8rem;
     padding-left: 2rem;
     padding-right: 2rem;
+    text-decoration: none;
+
   }
+
+header .sub-menu-section li {
+    display: none;
+}
 
 /***** Desktop behavior with full nav menu displayed *****/
 @media (min-width: 992px) {
@@ -303,6 +335,8 @@ header .nav-sections .nav-drop {
 
   /* Upper tools nav menu items */
   header .nav-tools {
+    visibility: visible;
+    opacity: 1;
     align-self: flex-end;
     display: flex;
     height: 4.5rem;
@@ -327,14 +361,7 @@ header .nav-sections .nav-drop {
   }
 
   header .nav-sections .nav-drop[aria-expanded="true"]::after {
-    content: '';
-    top: 3.2rem;
-    right: 2.1rem;
     transform: rotate(-45deg);
-    width: 6px;
-    height: 6px;
-    border-style: solid;
-    border-color: currentcolor;
   }
 
   /* Turn the section tab to purple when expanded */
@@ -355,11 +382,16 @@ header .nav-sections .nav-drop {
 
   /* Styling for the list items in the sections unordered list */
   header .nav-sections > ul li {
+    opacity: 1;
     font-weight: 600;
     padding: 0.78rem 3.7rem 0.78rem 2.2rem;
     font-size: 1.5rem;
     letter-spacing: .1rem;
     line-height: 4.5rem;
+  }
+
+header nav .nav-sections ul div.nav-item-wrapper > li {
+    transition-delay: 0s;
   }
 
   /* Styling for the list items in the tools unordered list */
@@ -391,7 +423,7 @@ header .nav-sections .nav-drop {
   }
 
   /* Make the last item of the sections nav the 'Contact us' button in black and aligned to the right */
-  header .nav-sections > ul > li:last-child {
+  header .nav-sections > ul > div:last-child > li {
     border-radius: 1rem;
     color: var(--nav-contact-button-color);
     background-color: var(--nav-contact-button-background-color);
@@ -400,6 +432,8 @@ header .nav-sections .nav-drop {
     font-size: 1.5rem;
     padding-left: 2rem;
     padding-right: 2rem;
+  }
+  header .nav-sections > ul > div:last-child {
     margin: auto 0 auto auto;
   }
 
@@ -428,6 +462,7 @@ header .nav-sections .nav-drop {
   }
 
   header .nav-sections {
+    height: auto;
     display: block;
     visibility: visible;
     white-space: nowrap;
@@ -532,6 +567,7 @@ header .nav-sections .nav-drop {
 
   /* Sub menu section content holder */
   header .sub-menu > ul.sub-menu-section > li > ul li {
+    display: block;
     font-weight: 100;
     line-height: normal;
     list-style: none;
@@ -557,6 +593,7 @@ header .nav-sections .nav-drop {
     max-width: 270px;
     background: #f3f3f3;
     margin: 0;
+    padding: 20px 0;
     border-right: none;
     border-radius: 0 25px 25px 0;
     box-sizing: border-box;
@@ -567,7 +604,7 @@ header .nav-sections .nav-drop {
   }
 
   header .sub-menu ul.sub-menu-section-last > li:first-child {
-    margin: 40px 10px 20px;
+    margin: 20px 10px 20px;
     text-align: center;
     line-height: 1.75rem;
     padding: 2rem 0;
@@ -597,16 +634,20 @@ header .sub-menu-index > li:hover::after {
 
   header .sub-menu ul.sub-menu-index > li:hover {
    font-weight: 700;
+   text-decoration: underline;
   }
 
   header .sub-menu ul.sub-menu-section li {
     font-weight: 700;
    }
 
+  header .sub-menu ul.sub-menu-index > li {
+    font-weight: 500;
+  }
+
 header .sub-menu-index #communications-apis::before {
   content: "\e932";
-  font-family: 'VltIcons';
-  margin: 1.1rem;
+  font-family: VltIcons;
   margin: 1.1rem;
   left: -2.9rem;
   position: absolute;
@@ -615,8 +656,7 @@ header .sub-menu-index #communications-apis::before {
 
 header .sub-menu-index #unified-communications::before {
   content: "\e939";
-  font-family: 'VltIcons';
-  margin: 1.1rem;
+  font-family: VltIcons;
   margin: 1.1rem;
   left: -2.9rem;
   position: absolute;
@@ -625,8 +665,7 @@ header .sub-menu-index #unified-communications::before {
 
 header .sub-menu-index #contact-centers::before {
   content: "\e936";
-  font-family: 'VltIcons';
-  margin: 1.1rem;
+  font-family: VltIcons;
   margin: 1.1rem;
   left: -2.9rem;
   position: absolute;
@@ -635,8 +674,7 @@ header .sub-menu-index #contact-centers::before {
 
 header .sub-menu-index #conversational-commerce::before {
   content: "\e93a";
-  font-family: 'VltIcons';
-  margin: 1.1rem;
+  font-family: VltIcons;
   margin: 1.1rem;
   left: -2.9rem;
   position: absolute;
@@ -648,13 +686,13 @@ header .close-icon {
     left: 1265px;
     top: -1rem;
     content: "\e90e";
-    font-family: 'VltIcons';
+    font-family: VltIcons;
     color: black;
 }
 
-span.close-icon:before {
+span.close-icon::before {
   content: "\e90e";
-  font-family: 'VltIcons';
+  font-family: VltIcons;
   font-size: 40px;
 }
 }

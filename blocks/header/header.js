@@ -74,17 +74,39 @@ function toggleAllNavSections(sections, expanded = false) {
     section.parentElement.setAttribute('aria-expanded', expanded);
   });
 }
+
+function triggerMenuFadeIn(expanded) {
+  const navSections = document.querySelector('.nav-sections');
+  if (!isDesktop.matches) {
+    navSections.querySelectorAll(':scope > ul > div > li').forEach((element) => {
+      if (!expanded) {
+        element.classList.add('animate-fade-in');
+      } else {
+        element.classList.remove('animate-fade-in');
+      }
+    });
+
+    // } else {
+    //   navSections.classList.remove('animate-fade-in');
+    // }
+  }
+}
 /**
  * Toggles the flyout animation of the nav menu in mobile mode
  */
-function toggleNavBackground(expanded) {
+async function toggleNavBackground(expanded) {
   const headerBackdrop = document.querySelector('.header-backdrop');
   const logo = document.getElementById('brand-logo-big');
   if (headerBackdrop && headerBackdrop.classList.contains('animate-open-backdrop') === expanded) {
     headerBackdrop.classList.toggle('animate-open-backdrop');
     logo.classList.toggle('logo-white');
   }
+
+  //This seems like a total hack but is the only way I can get this animation to work
+  await new Promise(r => setTimeout(r, 10));
+  triggerMenuFadeIn(expanded);
 }
+
 /**
  * Toggles the entire nav
  * @param {Element} nav The container element
@@ -92,6 +114,7 @@ function toggleNavBackground(expanded) {
  * @param {*} forceExpanded Optional param to force nav expand behavior when not null
  */
 function toggleMenu(nav, navSections, forceExpanded = null) {
+  console.log(`Before: ${getComputedStyle(navSections).display}`);
   const expanded = forceExpanded !== null ? !forceExpanded : nav.getAttribute('aria-expanded') === 'true';
   const button = nav.querySelector('.nav-hamburger button');
   document.body.style.overflowY = (expanded || isDesktop.matches) ? '' : 'hidden';
@@ -124,7 +147,6 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
     window.removeEventListener('keydown', closeOnEscape);
   }
 }
-
 /**
  * Builds the Logo Div.
  * @returns {HTMLDivElement}
@@ -209,10 +231,9 @@ export default async function decorate(block) {
     div.id = id;
     classes.forEach((className) => {
       div.classList.add(className);
-  });
-  return div;
+    });
+    return div;
   }
-
 
   function loadSubSections(navSection, sectionIndex) {
     // Get the top level text property from the nav html as the section menu name
@@ -224,7 +245,7 @@ export default async function decorate(block) {
     navSection.classList.add('nav-drop');
 
     // Create a div to wrap the items in the drop-down menu to handle displaying as a popout
-    const subMenuWrapper = createDiv(`sub-menu-${safeSectionName}`, ['sub-menu'])
+    const subMenuWrapper = createDiv(`sub-menu-${safeSectionName}`, ['sub-menu']);
 
     // Add a span for the close button in the menu
     const closeButton = document.createElement('span');
@@ -240,7 +261,7 @@ export default async function decorate(block) {
     sectionIndex.remove();
     navSection.after(subMenuWrapper);
     // Flag this first subsection as the special index section and flag it to always be active and add it back
-    sectionIndex.classList.add('sub-menu-index', 'sub-menu-section','sub-menu-section-active');
+    sectionIndex.classList.add('sub-menu-index', 'sub-menu-section', 'sub-menu-section-active');
     subMenuWrapper.appendChild(sectionIndex);
 
     // Iterate through all the li in the index to fetch markdowns to populate the sub sections
@@ -265,11 +286,16 @@ export default async function decorate(block) {
     const nav = document.createElement('nav');
     nav.id = 'nav';
     nav.classList.add('nav-big');
-    nav.innerHTML = html;
+    //TODO: Need to uncomment this div creation to wrap the navigtation sections and address all the broken CSS and JS so that the nav works like it does now
 
+    // nav.appendChild(createDiv('header-navigation', ['header-navigation']));
+    //nav.innerHTML = html;
+
+    nav.appendChild(createDiv('header-navigation', ['header-navigation']));
+    nav.firstElementChild.innerHTML = html;
     const classes = ['sections', 'tools', 'search'];
     classes.forEach((c, i) => {
-      const section = nav.children[i];
+      const section = nav.firstElementChild.children[i];
       if (section) {
         section.classList.add(`nav-${c}`);
       }
@@ -277,23 +303,18 @@ export default async function decorate(block) {
 
     const navSections = nav.querySelector('.nav-sections');
     if (navSections) {
-      navSections.querySelectorAll(':scope > ul > li').forEach((navSection) => {
+      navSections.querySelectorAll(':scope > ul > li').forEach((navSection, count) => {
         const sectionIndex = navSection.querySelector(':scope > ul');
+        navSection.remove();
+        const navItemWrapper = document.createElement('div');
+        navItemWrapper.classList.add('nav-item-wrapper');
+        //navSection.style.transitionDelay = `${0.4 + count * 0.1}s`;
+        navItemWrapper.appendChild(navSection);
+        navSections.querySelector('ul').appendChild(navItemWrapper);
         if (sectionIndex) {
-          navSection.remove();
-          const navItemWrapper = document.createElement('div');
-          // If this nav element is associated with a drop down need a div to contain the drop down button and the popout menu
-          navItemWrapper.classList.add('nav-item-wrapper');
-          navItemWrapper.appendChild(navSection);
-          navSections.querySelector('ul').appendChild(navItemWrapper);
           // Fetch and populate the subsection data
           loadSubSections(navSection, sectionIndex);
-        } else {
-          // Otherwise remove and append the section to keep the order consistent
-          navSection.remove();
-          navSections.querySelector('ul').appendChild(navSection);
         }
-
         navSection.addEventListener('click', () => {
           if (isDesktop.matches) {
             const expanded = navSection.getAttribute('aria-expanded') === 'true';
