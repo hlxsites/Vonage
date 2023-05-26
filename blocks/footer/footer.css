@@ -50,7 +50,7 @@ footer .footer p {
 }
 
 .footer-links-pair li:not(:has(a)) {
-  font-family: "Spezia_SemiMono", Arial, Helvetica, sans-serif;
+  font-family: var(--fixed-font-family);
   letter-spacing: .2rem;
   line-height: 2rem;
   position: relative;
