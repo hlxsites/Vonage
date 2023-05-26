@@ -261,6 +261,7 @@ header nav[aria-expanded="true"] .nav-tools {
   display: block;
   height: auto;
   visibility: visible;
+  font-size: 1.6rem;
 }
 
 header nav[aria-expanded="true"] .header-navigation {
@@ -274,8 +275,8 @@ header nav[aria-expanded="true"] .header-navigation {
   box-sizing: border-box;
 }
 
-header nav[aria-expanded="true"] .nav-tools {
-  font-size: 1.6rem;
+header nav .nav-search > ul > li {
+  line-height: 0;
 }
 
 header nav[aria-expanded="true"] .nav-tools li {
@@ -293,16 +294,14 @@ header nav[aria-expanded="true"] .nav-tools li {
     z-index: 6;
   }
 
-  header nav .nav-search > ul > li {
-    line-height: 0;
-  }
-
-  header nav[aria-expanded="true"] .icon-search {
+header nav[aria-expanded="true"] .icon-search {
     display: none;
   }
 
   /* Define the style for regular nav section items */
   header nav[aria-expanded="true"] .nav-sections > ul  {
+    max-width: 225px;
+    min-width: 225px;
     list-style: none;
     margin-top: 0;
     margin-bottom: 1em;
@@ -335,8 +334,18 @@ header nav .nav-sections > ul > div:nth-child(5) > li { transition-delay: 0.60s 
   }
 
 header nav .sub-menu-section-active > ul.sub-menu-index > li {
+  font-weight: 600;
   display: block;
   opacity: 1;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  position: relative;
+  padding-right: 20px;
+  background-color: #000;
+  color: #fff;
+  font-size: 1.8rem;
+  margin: 30px 0;
 }
 
 .nav-back-button {
@@ -449,29 +458,8 @@ header nav .sub-menu-section-active > ul.sub-menu-index > li {
     transform: rotate(-45deg);
   }
 
- header nav[aria-expanded="true"] .nav-sections > ul {
-  max-width: 225px;
-  min-width: 225px;
-}
-
 header nav .sub-menu-section-active > ul.sub-menu-index {
   padding-left: 0;
-}
-
-header nav .sub-menu-section-active > ul.sub-menu-index > li {
-  font-weight: 600;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  position: relative;
-  padding-right: 20px;
-  background-color: #000;
-  color: #fff;
-  font-size: 1.8rem;
-  margin: 30px 0;
 }
 
   /* Style the last sections menu element as the contact us button */
@@ -704,6 +692,9 @@ header nav .nav-sections ul div.nav-item-wrapper > li {
 /* Styles for the Sub Menu popup div container */
   header .sub-menu {
     display: none;
+    width: 100%;
+    overflow: hidden;
+    justify-content: space-between;
     color: var(--nav-color);
     position: absolute;
     left: 1rem;
@@ -716,13 +707,6 @@ header nav .nav-sections ul div.nav-item-wrapper > li {
   header .sub-menu > ul > li {
     font-size: 1.4rem;
     padding: 0 10px;
-  }
-
-  header .sub-menu {
-    display: none;
-    width: 100%;
-    overflow: hidden;
-    justify-content: space-between;
   }
 
   header .sub-menu > ul.sub-menu-section {
