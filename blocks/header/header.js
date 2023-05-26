@@ -85,12 +85,9 @@ function triggerMenuFadeIn(expanded) {
         element.classList.remove('animate-fade-in');
       }
     });
-
-    // } else {
-    //   navSections.classList.remove('animate-fade-in');
-    // }
   }
 }
+
 /**
  * Toggles the flyout animation of the nav menu in mobile mode
  */
@@ -102,8 +99,9 @@ async function toggleNavBackground(expanded) {
     logo.classList.toggle('logo-white');
   }
 
-  //This seems like a total hack but is the only way I can get this animation to work
-  await new Promise(r => setTimeout(r, 10));
+  // This seems like a total hack but is the only way I can get this animation to work
+  // By triggering it after a brief delay to allow the display:none on the menu to change
+  await new Promise((r) => setTimeout(r, 10));
   triggerMenuFadeIn(expanded);
 }
 
@@ -114,7 +112,6 @@ async function toggleNavBackground(expanded) {
  * @param {*} forceExpanded Optional param to force nav expand behavior when not null
  */
 function toggleMenu(nav, navSections, forceExpanded = null) {
-  console.log(`Before: ${getComputedStyle(navSections).display}`);
   const expanded = forceExpanded !== null ? !forceExpanded : nav.getAttribute('aria-expanded') === 'true';
   const button = nav.querySelector('.nav-hamburger button');
   document.body.style.overflowY = (expanded || isDesktop.matches) ? '' : 'hidden';
@@ -201,18 +198,20 @@ export async function getSubSections(sectionName, subSectionName) {
 }
 
 function toggleNavSubSection(event) {
-  const subSectionName = event.target.id;
-  const subMenu = event.target.closest('.sub-menu');
-  // Query subMenu sections for <ul> that match the class of the event firer (to be turned on)
-  // Or which are currently displayed via the class sub-menu-section-active (to be turned off)
-  subMenu.querySelectorAll(`ul.${subSectionName},ul.${'sub-menu-section-active'}`).forEach((subSection) => {
-    // Catch the active menu being either the section index (which is always displayed
-    // Or the event firer already being active, where we don't want to toggle the section
-    if (!subSection.classList.contains('sub-menu-index') && !(subSection.classList.contains(subSectionName) && subSection.classList.contains('sub-menu-section-active'))) {
-      // Toggle the class that controls sub section display
-      subSection.classList.toggle('sub-menu-section-active');
-    }
-  });
+  if (isDesktop.matches) {
+    const subSectionName = event.target.id;
+    const subMenu = event.target.closest('.sub-menu');
+    // Query subMenu sections for <ul> that match the class of the event firer (to be turned on)
+    // Or which are currently displayed via the class sub-menu-section-active (to be turned off)
+    subMenu.querySelectorAll(`ul.${subSectionName},ul.${'sub-menu-section-active'}`).forEach((subSection) => {
+      // Catch the active menu being either the section index (which is always displayed
+      // Or the event firer already being active, where we don't want to toggle the section
+      if (!subSection.classList.contains('sub-menu-index') && !(subSection.classList.contains(subSectionName) && subSection.classList.contains('sub-menu-section-active'))) {
+        // Toggle the class that controls sub section display
+        subSection.classList.toggle('sub-menu-section-active');
+      }
+    });
+  }
 }
 
 /**
@@ -261,7 +260,7 @@ export default async function decorate(block) {
     sectionIndex.remove();
     navSection.after(subMenuWrapper);
     // Flag this first subsection as the special index section and flag it to always be active and add it back
-    sectionIndex.classList.add('sub-menu-index', 'sub-menu-section', 'sub-menu-section-active');
+    sectionIndex.classList.add('sub-menu-index', 'sub-menu-section');
     subMenuWrapper.appendChild(sectionIndex);
 
     // Iterate through all the li in the index to fetch markdowns to populate the sub sections
@@ -286,10 +285,6 @@ export default async function decorate(block) {
     const nav = document.createElement('nav');
     nav.id = 'nav';
     nav.classList.add('nav-big');
-    //TODO: Need to uncomment this div creation to wrap the navigtation sections and address all the broken CSS and JS so that the nav works like it does now
-
-    // nav.appendChild(createDiv('header-navigation', ['header-navigation']));
-    //nav.innerHTML = html;
 
     nav.appendChild(createDiv('header-navigation', ['header-navigation']));
     nav.firstElementChild.innerHTML = html;
@@ -311,18 +306,21 @@ export default async function decorate(block) {
         navSection.remove();
         const navItemWrapper = document.createElement('div');
         navItemWrapper.classList.add('nav-item-wrapper');
+        navSection.id = toClassName(navSection.childNodes[0].nodeValue);
         navItemWrapper.appendChild(navSection);
         navSections.querySelector('ul').appendChild(navItemWrapper);
         if (sectionIndex) {
           // Fetch and populate the subsection data
           loadSubSections(navSection, sectionIndex);
         }
-        navSection.addEventListener('click', () => {
+        navSection.addEventListener('click', (event) => {
           if (isDesktop.matches) {
             const expanded = navSection.getAttribute('aria-expanded') === 'true';
             toggleAllNavSections(navSections);
             navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
             navSection.parentElement.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+          } else {
+            document.getElementById(`sub-menu-${event.target.id}`).classList.toggle('sub-menu-section-active');
           }
         });
       });
