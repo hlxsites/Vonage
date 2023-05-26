@@ -45,6 +45,11 @@ header {
   z-index: 5;
 }
 
+header hr.nav-section-divider {
+  display: none;
+  transition: opacity .36s ease-in-out,transform .36s ease-in-out,-webkit-transform .36s ease-in-out;
+}
+
 /* Div element to encapsulate the headers navigation menu */
 header .nav-wrapper {
   z-index: 6;
@@ -60,6 +65,7 @@ header .nav-logo {
   width: 14.6rem;
   height: auto;
   left: 0.2rem;
+  transition: opacity .36s ease-in-out,transform .36s ease-in-out,-webkit-transform .36s ease-in-out;
 }
 
 /* Styling of the full logo image displayed in desktop mode before scrolling down as well as mobile */
@@ -71,12 +77,14 @@ header .nav-logo-big {
   height: 3.2rem;
   width:100%;
   bottom: 1.85rem;
+  transition: opacity .36s ease-in-out,transform .36s ease-in-out,-webkit-transform .36s ease-in-out;
 }
 
 /* Define the layout of the main nav container which houses all the buttons */
 header nav {
-  /*display: flex;*/
-  /*flex-direction: row-reverse;*/
+  /* display: flex; */
+
+  /* flex-direction: row-reverse; */
   align-items: center;
   margin: auto;
   padding: 0 1rem;
@@ -122,7 +130,7 @@ header .nav-search > ul {
   padding-inline-start: 0;
 }
 
-/* Set mobile nav section elements to transparent when the nav isn't open to allow for the animation*/
+/* Set mobile nav section elements to transparent when the nav isn't open to allow for the animation */
 header .nav-sections > ul li {
   opacity:0;
 }
@@ -159,7 +167,6 @@ header .nav-sections .nav-drop::after {
   position: absolute;
   right: -2rem;
   top: 50%;
-  -webkit-transform: rotate(45deg);
   transform: rotate(45deg);
   width: 1.0rem;
 }
@@ -171,15 +178,8 @@ header .nav-sections .nav-drop::after {
     display: none;
     height: 0;
     visibility: hidden;
+    transition: opacity .36s ease-in-out,transform .36s ease-in-out,-webkit-transform .36s ease-in-out;
   }
-
-  /* Styles for the mobile nav hamburger icon to launch the menu */
-  /*header nav .nav-hamburger {*/
-  /*  grid-area: hamburger;*/
-  /*  height: 5.4rem;*/
-  /*  display: flex;*/
-  /*  align-items: center;*/
-  /*}*/
 
 header nav .nav-hamburger {
   position: absolute;
@@ -248,7 +248,11 @@ header nav .nav-hamburger-icon,
     transition: transform .5s ease,-webkit-transform .5s ease;
   }
 
-  /* Switch the color of all text elements down the nav to white when expanded */
+header nav[aria-expanded="true"] hr.nav-section-divider {
+  display: block;
+}
+
+/* Switch the color of all text elements down the nav to white when expanded */
   header nav[aria-expanded="true"] {
     color: var(--mobile-nav-extended-color);
   }
@@ -277,6 +281,7 @@ header nav[aria-expanded="true"] .nav-tools {
 header nav[aria-expanded="true"] .nav-tools li {
   margin-top: 1.5rem;
 }
+
   /* Styling for nav section container */
   header nav[aria-expanded="true"] .nav-sections {
     height: auto;
@@ -304,7 +309,7 @@ header nav[aria-expanded="true"] .nav-tools li {
     padding-inline-start: 0;
   }
 
-  header nav[aria-expanded="true"] .nav-sections > ul li {
+  header nav[aria-expanded="true"] .nav-sections > ul > div.nav-item-wrapper > li {
     font-family: Spezia,"Spezia_SemiMono",Arial,Helvetica,sans-serif;
     font-size: 2.3rem;
     font-weight: 600;
@@ -312,7 +317,6 @@ header nav[aria-expanded="true"] .nav-tools li {
     line-height: 4.6rem;
     margin-bottom: 2.0rem;
     text-decoration: underline;
-    -webkit-transition: opacity .6s ease-out .25s;
     transition: opacity .6s ease-out .25s;
   }
 
@@ -333,6 +337,67 @@ header nav .nav-sections > ul > div:nth-child(5) > li { transition-delay: 0.60s 
 header nav .sub-menu-section-active > ul.sub-menu-index > li {
   display: block;
   opacity: 1;
+}
+
+.nav-back-button {
+  transition: opacity .36s ease-in-out .36s;
+  font-family: Spezia,"Spezia_SemiMono",Arial,Helvetica,sans-serif;
+  font-size: 1.4rem;
+  font-weight: 400;
+  letter-spacing: -.02rem;
+  line-height: 2rem;
+  background-color: #0000;
+  border: 0;
+  color: #fff;
+  cursor: pointer;
+  display: none;
+  left: 2rem;
+  opacity: 0;
+  padding: 0 0 0 2rem;
+  position: absolute;
+  top: 2.2rem;
+  z-index: 8;
+  width: auto;
+  height: auto;
+}
+
+.nav-back-button > button {
+  transition: opacity .36s ease-in-out .36s;
+  font-family: Spezia,"Spezia_SemiMono",Arial,Helvetica,sans-serif;
+  font-size: 1.4rem;
+  font-weight: 400;
+  letter-spacing: -.02rem;
+  line-height: 2rem;
+  background-color: #09090900;
+  border: 0;
+  color: #fff;
+  cursor: pointer;
+  left: 2rem;
+  padding: 0 0 0 2rem;
+  position: absolute;
+  top: 0;
+  z-index: 8;
+}
+
+.nav-back-button > button::before {
+  border-bottom: .2rem solid #fff;
+  border-left: .2rem solid #fff;
+  content: "";
+  height: 1rem;
+  left: .3rem;
+  margin-top: -.5rem;
+  position: absolute;
+  top: 50%;
+  transform: rotate(45deg);
+  width: 1rem;
+}
+
+.nav-back-button-active {
+  display:block;
+}
+
+.nav-back-button-animation-start {
+  opacity:1;
 }
 
   /* Define the style and decoration for nav section items with children */
@@ -359,7 +424,6 @@ header nav .sub-menu-section-active > ul.sub-menu-index > li {
 
   /* Display style for nav section items with children when expanded */
 
-  /* TODO: Need to implement the rendering of the children on click of the parent */
   header .nav-sections > ul > li[aria-expanded="true"] > ul {
     display: none;
   }
@@ -385,6 +449,31 @@ header nav .sub-menu-section-active > ul.sub-menu-index > li {
     transform: rotate(-45deg);
   }
 
+ header nav[aria-expanded="true"] .nav-sections > ul {
+  max-width: 225px;
+  min-width: 225px;
+}
+
+header nav .sub-menu-section-active > ul.sub-menu-index {
+  padding-left: 0;
+}
+
+header nav .sub-menu-section-active > ul.sub-menu-index > li {
+  font-weight: 600;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  position: relative;
+  padding-right: 20px;
+  background-color: #000;
+  color: #fff;
+  font-size: 1.8rem;
+  margin: 30px 0;
+}
+
   /* Style the last sections menu element as the contact us button */
   header nav[aria-expanded="true"] .nav-sections > ul > div:last-child > li {
     border-radius: 1rem;
@@ -405,9 +494,31 @@ header .sub-menu-section li {
     display: none;
 }
 
+/* When in a subsection yeet all the main menu elements off to the side as an animation */
+header.sub-menu-selected .nav-logo,
+header.sub-menu-selected .nav-tools,
+header.sub-menu-selected .nav-section-divider,
+header.sub-menu-selected .nav-sections > ul > div.nav-item-wrapper > li {
+  opacity: 0;
+  transform: translateX(-1000%);
+}
+
+header .sub-menu-label {
+display:none;
+  position: absolute;
+  font-family: Spezia,"Spezia_SemiMono",Arial,Helvetica,sans-serif;
+  font-size: 2.8rem;
+  font-weight: 500;
+  letter-spacing: -.15rem;
+  line-height: 3.2rem;
+}
+
+header .sub-menu-label-active {
+  display:block;
+}
+
 /***** Desktop behavior with full nav menu displayed *****/
 @media (min-width: 992px) {
-
   header {
     height: auto;
   }
@@ -519,6 +630,7 @@ header nav .nav-sections ul div.nav-item-wrapper > li {
     padding-left: 2rem;
     padding-right: 2rem;
   }
+
   header .nav-sections > ul > div:last-child {
     margin: auto 0 auto auto;
   }
@@ -687,7 +799,7 @@ header nav .nav-sections ul div.nav-item-wrapper > li {
   }
 
   header .sub-menu ul.sub-menu-section-last > li:first-child {
-    margin: 20px 10px 20px;
+    margin: 20px 10px;
     text-align: center;
     line-height: 1.75rem;
     padding: 2rem 0;
@@ -778,7 +890,4 @@ span.close-icon::before {
   font-family: VltIcons;
   font-size: 40px;
 }
- header .nav-section-divider {
-    display: none;
-  }
 }

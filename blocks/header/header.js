@@ -130,6 +130,7 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
       }
     });
   } else {
+    toggleSubMenu();
     navDrops.forEach((drop) => {
       drop.removeAttribute('role');
       drop.removeAttribute('tabindex');
@@ -211,6 +212,24 @@ function toggleNavSubSection(event) {
         subSection.classList.toggle('sub-menu-section-active');
       }
     });
+  }
+}
+
+function toggleSubMenu() {
+  // If the mobile menu is up and a submenu is open
+  if (document.querySelector('header.sub-menu-selected')) {
+    document.querySelectorAll('.nav-sections .sub-menu-section-active').forEach((section) => {
+      section.classList.toggle('sub-menu-section-active');
+    });
+    document.querySelector('header').classList.toggle('sub-menu-selected');
+    const activeSub = document.querySelector('span.sub-menu-label-active');
+    if (activeSub) {
+      activeSub.classList.remove('sub-menu-label-active');
+    }
+    const backButton = document.getElementById('back-button');
+    if (backButton) {
+      backButton.classList.remove('nav-back-button-active');
+    }
   }
 }
 
@@ -310,9 +329,17 @@ export default async function decorate(block) {
         navItemWrapper.appendChild(navSection);
         navSections.querySelector('ul').appendChild(navItemWrapper);
         if (sectionIndex) {
+          const subMenuLabel = document.createElement('span');
+          const labeltext = toClassName(navSection.childNodes[0].nodeValue);
+          subMenuLabel.id = `${labeltext}-label`;
+          subMenuLabel.classList.add('sub-menu-label');
+          subMenuLabel.innerHTML = labeltext.charAt(0).toUpperCase() + labeltext.slice(1);
+          navItemWrapper.prepend(subMenuLabel);
+
           // Fetch and populate the subsection data
           loadSubSections(navSection, sectionIndex);
         }
+        // TODO: Split these event listener functions off to two different non anonymous functions
         navSection.addEventListener('click', (event) => {
           if (isDesktop.matches) {
             const expanded = navSection.getAttribute('aria-expanded') === 'true';
@@ -320,7 +347,20 @@ export default async function decorate(block) {
             navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
             navSection.parentElement.setAttribute('aria-expanded', expanded ? 'false' : 'true');
           } else {
+            // For Mobile need to set the right subsection to active so it display
             document.getElementById(`sub-menu-${event.target.id}`).classList.toggle('sub-menu-section-active');
+
+            // Turn on the Back to Main menu button
+            const back = document.getElementById('back-button');
+            back.classList.add('nav-back-button-active');
+            // TODO: Need to implement a wait here in order to allow the animation to trigger after the display has changed
+            back.classList.add('nav-back-button-animation-start');
+
+            // Transition all of the other nav elements off to the left
+            document.querySelector('header.header-wrapper').classList.add('sub-menu-selected');
+
+            // Render a subsection text to let the user know what menu item they are currently on
+            document.getElementById(`${event.target.id}-label`).classList.add('sub-menu-label-active');
           }
         });
       });
@@ -332,9 +372,19 @@ export default async function decorate(block) {
     hamburger.innerHTML = `<button type="button" aria-controls="nav" aria-label="Open navigation">
         <span class="nav-hamburger-icon"></span>
       </button>`;
+
     hamburger.addEventListener('click', () => toggleMenu(nav, navSections));
     hamburger.addEventListener('click', () => toggleNavBackground(nav.attributes.getNamedItem('aria-expanded').value === 'false'));
     nav.prepend(hamburger);
+
+    // Back button for mobile
+    const backButton = createDiv('back-button', ['nav-back-button']);
+    backButton.innerHTML = `<button type="button" aria-controls="nav" aria-label="back to site navigation menu">
+        Main Menu
+      </button>`;
+    backButton.addEventListener('click', () => toggleSubMenu());
+    nav.prepend(backButton);
+
     // prevent mobile nav behavior on window resize
     toggleMenu(nav, navSections, isDesktop.matches);
     isDesktop.addEventListener('change', () => toggleMenu(nav, navSections, isDesktop.matches));
