@@ -92,7 +92,7 @@ function triggerMenuFadeIn(expanded) {
  * Toggles the flyout animation of the nav menu in mobile mode
  */
 async function toggleNavBackground(expanded) {
-  const headerBackdrop = document.querySelector('.header-backdrop');
+  const headerBackdrop = document.querySelector('.header.backdrop');
   const logo = document.getElementById('brand-logo-big');
   if (headerBackdrop && headerBackdrop.classList.contains('animate-open-backdrop') === expanded) {
     headerBackdrop.classList.toggle('animate-open-backdrop');
@@ -217,10 +217,13 @@ function toggleNavSubSection(event) {
 
 function toggleSubMenu() {
   // If the mobile menu is up and a submenu is open
+  // TODO: Switch from using an attribute on the header to one on the nav, don't need to go that high up in the DOM for this
+
   if (document.querySelector('header.sub-menu-selected')) {
     document.querySelectorAll('.nav-sections .sub-menu-section-active').forEach((section) => {
       section.classList.toggle('sub-menu-section-active');
     });
+    //TODO: Switch from using an attribute on the header to one on the nav, don't need to go that high up in the DOM for this
     document.querySelector('header').classList.toggle('sub-menu-selected');
     const activeSub = document.querySelector('span.sub-menu-label-active');
     if (activeSub) {
@@ -353,10 +356,12 @@ export default async function decorate(block) {
             // Turn on the Back to Main menu button
             const back = document.getElementById('back-button');
             back.classList.add('nav-back-button-active');
+            // eslint-disable-next-line max-len
             // TODO: Need to implement a wait here in order to allow the animation to trigger after the display has changed
             back.classList.add('nav-back-button-animation-start');
 
             // Transition all of the other nav elements off to the left
+            //TODO: Switch from using an attribute on the header to one on the nav, don't need to go that high up in the DOM for this
             document.querySelector('header.header-wrapper').classList.add('sub-menu-selected');
 
             // Render a subsection text to let the user know what menu item they are currently on
@@ -398,8 +403,7 @@ export default async function decorate(block) {
     navWrapper.append(nav);
 
     // div element to be used for the mobile pop over menu
-    const headerBackdrop = document.createElement('div');
-    headerBackdrop.className = 'header-backdrop';
+    const headerBackdrop = createDiv('backdrop', ['header', 'backdrop']);
 
     // Get rid of any existing div elements in the header block
     if (block.hasChildNodes()) {
