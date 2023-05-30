@@ -23,7 +23,7 @@
   /* fonts */
   --body-font-family: spezia, spezia_semimono, ubuntu, roboto, noto, sans-serif;
   --heading-font-family: var(--body-font-family);
-  --fixed-font-family: spezia mono, menlo, consolas, 'Liberation Mono', monospace;
+  --fixed-font-family: "Spezia_SemiMono", menlo, consolas, 'Liberation Mono', monospace;
 
   /* body sizes */
   --body-font-size-m: 22px;
