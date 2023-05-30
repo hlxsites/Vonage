@@ -498,390 +498,421 @@ header .sub-menu-label-active {
 
 /***** Desktop behavior with full nav menu displayed *****/
 @media (min-width: 992px) {
-  /* Header and nav layout */
-  header {
-    height: auto;
-  }
+  /***** Desktop nav layout *****/
 
-  header #nav {
-    display: flex;
-    flex-flow: column-reverse nowrap;
-    justify-content: space-between;
-    background-color: var(--nav-background-color);
-  }
+    /* Header and nav layout */
+    header {
+      height: auto;
+    }
 
-  /* Nav menu container housing both the sections and tools menu rows when expanded */
-  header #nav.nav-big{
-    padding: 1.2rem 2rem 0 25rem;
-  }
+    header #nav {
+      display: flex;
+      flex-flow: column-reverse nowrap;
+      justify-content: space-between;
+      background-color: var(--nav-background-color);
+    }
 
-  /* Nav menu container housing both the sections and tools menu rows when expanded */
-  header #nav.nav-small{
-    padding: 1.2rem 2rem 0 10.5rem;
-  }
+    /* Nav menu container housing both the sections and tools menu rows when expanded */
+    header #nav.nav-big{
+      padding: 1.2rem 2rem 0 25rem;
+    }
 
-  /* Style and layout of the section and tool menu containers */
-  header #nav .nav-sections, header #nav .nav-tools {
-    display: flex;
-    height: 100%;
-    visibility: visible;
-  }
+    /* Nav menu container housing both the sections and tools menu rows when expanded */
+    header #nav.nav-small{
+      padding: 1.2rem 2rem 0 10.5rem;
+    }
 
-  /* Styling specific to the upper tools menu */
-  header #nav .nav-tools {
-    align-self: flex-end;
-    margin-bottom: 0.1rem;
-    margin-right: 4rem;
-  }
+    header .nav-logo {
+      top: 2.7rem;
+      width: 17.6rem;
+    }
 
-  /* Add decoration to section menu elements which have a drop down */
-  header .nav-sections .nav-drop::after {
-    content: '';
-    display: inline-block;
-    position: absolute;
-    top: 2.0rem;
-    margin-top: -0.2rem;
-    right: 0.2rem;
-    transform: rotate(135deg);
-    width: 6px;
-    height: 6px;
-    border-style: solid;
-    border-color: currentcolor;
-    border-radius: 0 1px 0 0;
-    border-width: 2px 2px 0 0;
-  }
+    header .nav-logo-big {
+      top:3.9rem;
+      height: 3.9rem;
+    }
 
-  /* Define the style and decoration for nav section items with children */
-  header #nav .nav-sections .nav-drop[aria-expanded="true"]::after {
-    border-right: 0.2rem solid var(--mobile-nav-extended-decoration-color);
-    border-top: 0.2rem solid var(--mobile-nav-extended-decoration-color);
-    margin-top: -0.4rem;
-    position: absolute;
-    top: 2.4rem;
-    transform: rotate(-45deg);
-  }
+    header .nav-logo-small {
+      color: var(--nav-logo-color);;
+      left: 1.8rem;
+      position: absolute;
+      width: 3.5rem;
+      height: 3.9rem;
+      bottom: -2rem
+    }
 
-  /* Turn the section tab to purple when expanded */
-  header #nav .nav-sections div.nav-item-wrapper[aria-expanded="true"] {
-    background-color: var(--nav-section-tab-color);
-    border-radius: 15px 15px 0 0;
-    color: var(--nav-extended-color);
-  }
+  /***** Desktop section and tools menu styling  *****/
 
-  header #nav .nav-sections div.nav-item-wrapper .nav-drop[aria-expanded="true"] {
-    text-decoration: none;
-  }
+    /* Style and layout of the section and tool menu containers */
+    header #nav .nav-sections, header #nav .nav-tools {
+      display: flex;
+      height: 100%;
+      visibility: visible;
+    }
 
-  /* Common attributes for both the sections and tool menu unordered lists */
-  header .nav-sections > ul, header .nav-tools ul {
-    display: flex;
-    padding-left: 0;
-    margin: 0;
-    cursor: pointer;
-    width: 100%;
-  }
+    /* Styling specific to the nav-sections menu */
+    header #nav .nav-sections {
+      display: block;
+      white-space: nowrap;
+    }
 
-  /* Styling for the sections nav menu top level items */
-  header .nav-sections > ul li {
-    opacity: 1;
-    font-weight: 600;
-    margin: 10px 20px 0 20px;
-    font-size: 1.5rem;
-    letter-spacing: .1rem;
-    line-height: 4.5rem;
-  }
+    /* Styling specific to the upper tools menu */
+    header #nav .nav-tools {
+      align-self: flex-end;
+      margin-bottom: 0.1rem;
+      margin-right: 4rem;
+    }
 
-  /* Styling for the tools nav menu top level items */
-  header #nav .nav-tools > ul > li {
-    position: relative;
-    font-size: 1.4rem;
-    color: var(--nav-tools-color);
-    padding: 0 1.6rem;
-    line-height: 3.285;
-  }
+    /* Add decoration to section menu elements which have a drop down */
+    header .nav-sections .nav-drop::after {
+      content: '';
+      display: inline-block;
+      position: absolute;
+      top: 2.0rem;
+      margin-top: -0.2rem;
+      right: 0.2rem;
+      transform: rotate(135deg);
+      width: 6px;
+      height: 6px;
+      border-style: solid;
+      border-color: currentcolor;
+      border-radius: 0 1px 0 0;
+      border-width: 2px 2px 0 0;
+    }
 
-  /* Disable animations for section drop down menus in desktop mode */
-  header #nav .nav-sections ul div.nav-item-wrapper > li {
+    /* Common attributes for both the sections and tool menu unordered lists */
+    header .nav-sections > ul, header .nav-tools ul {
+      display: flex;
+      padding-left: 0;
+      margin: 0;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    /* Styling for the sections nav menu top level items */
+    header .nav-sections > ul > div > li {
+      opacity: 1;
+      font-weight: 600;
+      margin: 10px 20px 0;
+      font-size: 1.5rem;
+      letter-spacing: .1rem;
+      line-height: 4.5rem;
+    }
+
+    /* Styling for the tools nav menu top level items */
+    header #nav .nav-tools > ul > li {
+      position: relative;
+      font-size: 1.4rem;
+      color: var(--nav-tools-color);
+      padding: 0 1.6rem;
+      line-height: 3.285;
+    }
+
+    /* No padding on the right most tools menu item */
+    header #nav .nav-tools > ul > li:last-child {
+      padding-right: 0;
+    }
+
+    /* Disable animations for section drop down menus in desktop mode */
+    header #nav .nav-sections ul div.nav-item-wrapper > li {
       transition-delay: 0s;
     }
 
-  /* Colorize the transparent bottom border under the section menu items on mouse over */
-  header #nav .nav-sections > ul > div.nav-item-wrapper > li:hover {
-    text-decoration: underline;
-    text-decoration-color: var(--nav-color);
-    text-underline-offset: 1.5rem;
-    text-decoration-thickness: 0.2rem;
-  }
+    /* Make the last item of the sections nav the 'Contact us' button in black and aligned to the right */
+    header #nav .nav-sections > ul > div:last-child {
+      margin: auto 0 auto auto;
+      height:4.5rem;
+    }
 
-  /* Make the last item of the sections nav the 'Contact us' button in black and aligned to the right */
-  header #nav .nav-sections > ul > div:last-child > li {
-    border-radius: 1rem;
-    color: var(--nav-contact-button-color);
-    background-color: var(--nav-contact-button-background-color);
-    height: 4.5rem;
-    line-height: 4.5rem;
-    font-size: 1.5rem;
-    padding-left: 2rem;
-    padding-right: 2rem;
-    margin: 0;
-  }
+    header #nav .nav-sections > ul > div:last-child > li {
+      border-radius: 1rem;
+      color: var(--nav-contact-button-color);
+      background-color: var(--nav-contact-button-background-color);
+      height: 4.5rem;
+      line-height: 4.5rem;
+      font-size: 1.5rem;
+      padding-left: 2rem;
+      padding-right: 2rem;
+      margin: 0;
+    }
 
-  header #nav .nav-sections > ul > div:last-child {
-    margin: auto 0 auto auto;
-    height:4.5rem;
-  }
+    /* Colorize the transparent bottom border under the section menu items on mouse over */
+    header #nav .nav-sections > ul > div.nav-item-wrapper > li:hover {
+      text-decoration: underline;
+      text-decoration-color: var(--nav-color);
+      text-underline-offset: 1.5rem;
+      text-decoration-thickness: 0.2rem;
+    }
 
-  header .nav-logo {
-    top: 2.7rem;
-    width: 17.6rem;
-  }
+    /*  Don't show the hamburger icon in desktop mode */
+    header #nav .nav-hamburger {
+      display: none;
+      visibility: hidden;
+    }
 
-  header .nav-logo-big {
-    top:3.9rem;
-    height: 3.9rem;
-  }
+    /* Don't show an underline on sections with a drop down, and make room for the decoration chevron */
+    header #nav div.nav-sections li.nav-drop {
+      text-decoration: none;
+      padding-right: 1.8rem;
+    }
 
-  header .nav-logo-small {
-    color: var(--nav-logo-color);;
-    left: 1.8rem;
-    position: absolute;
-    width: 3.5rem;
-    height: 3.9rem;
-    bottom: -2rem
-  }
+    /* Add the up arrow on the For Home element of the tools menu */
+    header #nav div.nav-tools > ul > li:first-child::after {
+      margin-left: 0.4rem;
+      top: 0;
+      content: "\e91d";
+      bottom: 0;
+      font-family: VltIcons;
+      font-size: .8rem;
+      position: absolute;
+    }
 
-  header #nav .nav-hamburger {
-    display: none;
-    visibility: hidden;
-  }
+    /* Position and style the search icon displayed adjacent to the tools menu */
+    header #nav div.nav-search {
+      -ms-flex-item-align: center;
+      align-self: center;
+      display: flex;
+      font-size: 1.5rem;
+      height: 2.4rem;
+      width: 2.4rem;
+      z-index: 8;
+      position: absolute;
+      right: 2.8rem;
+      top: 2.2rem;
+    }
 
-  header .nav-sections {
-    height: auto;
-    display: block;
-    visibility: visible;
-    white-space: nowrap;
-  }
+  /***** Desktop section menu behavior when a section is selected *****/
 
-  header .nav-sections > ul > li > ul::before {
-    border-bottom: .2rem solid transparent;
-  }
+    /* Show all menu li items */
+    header .nav-item-wrapper[aria-expanded="true"] ul li {
+      opacity: 1;
+    }
 
-  header .nav-sections .nav-drop {
-    text-decoration: none;
-    padding-right: 1.8rem;
-  }
+    /* Turn the section tab to purple when expanded */
+    header #nav .nav-sections div.nav-item-wrapper[aria-expanded="true"] {
+      background-color: var(--nav-section-tab-color);
+      border-radius: 15px 15px 0 0;
+      color: var(--nav-extended-color);
+    }
 
-  header .nav-tools > ul > li:first-child::after {
-    margin-left: 0.4rem;
-    top: 0;
-    content: "\e91d";
-    bottom: 0;
-    font-family: VltIcons;
-    font-size: .8rem;
-    position: absolute;
-  }
+    /* Remove underline when the section menu is expanded */
+    header #nav .nav-sections div.nav-item-wrapper .nav-drop[aria-expanded="true"] {
+      text-decoration: none;
+    }
 
-  header .nav-tools > ul > li:last-child {
-    padding-right: 0;
-  }
+    /* Style the section chevron decoration to flip and become white when toggled */
+    header #nav .nav-sections .nav-drop[aria-expanded="true"]::after {
+      border-right: 0.2rem solid var(--mobile-nav-extended-decoration-color);
+      border-top: 0.2rem solid var(--mobile-nav-extended-decoration-color);
+      margin-top: -0.4rem;
+      position: absolute;
+      top: 2.4rem;
+      transform: rotate(-45deg);
+    }
 
-  header .nav-search {
-    -ms-flex-item-align: center;
-    align-self: center;
-    display: flex;
-    font-size: 1.5rem;
-    height: 2.4rem;
-    width: 2.4rem;
-    z-index: 8;
-    position: absolute;
-    right: 2.8rem;
-    top: 2.2rem;
-  }
+  /***** Styling of the sub menu popover element *****/
 
-/* Styles for the Sub Menu popup div container */
-  header .sub-menu {
-    display: none;
-    width: 100%;
-    overflow: hidden;
-    justify-content: space-between;
-    color: var(--nav-color);
-    position: absolute;
-    top: auto;
-    left: 1rem;
-    height: auto;
-    background-color: white;
-    box-shadow: 0 15px 30px rgb(0 0 0 / 15%);
-    border-radius: 25px;
-  }
+    /* Display the sub-menu container when a section is clicked */
+    header #nav .nav-item-wrapper[aria-expanded="true"] div.sub-menu {
+      display: flex;
+    }
 
-  header .sub-menu > ul > li {
-    font-size: 1.4rem;
-    padding: 0 10px;
-  }
+    /*Style the close icon in the sub menu*/
+    header #nav span.close-icon {
+      position: absolute;
+      left: 1265px;
+      top: -1rem;
+      content: "\e90e";
+      font-family: VltIcons;
+      color: black;
+    }
 
-  header .sub-menu > ul.sub-menu-section {
-    flex: 1 1 auto;
-    display: none;
-    border-right: 1px solid #dadada;
-    margin: 20px 0;
-    padding: 0 10px;
-  }
+    header #nav span.close-icon::before {
+      content: "\e90e";
+      font-family: VltIcons;
+      font-size: 40px;
+    }
 
-  header .sub-menu > ul.sub-menu-index {
-    display: flex;
-    flex: 1 1 275px;
-    max-width: 275px;
-    min-width: 275px;
-    border-right: none;
-    box-sizing: border-box;
-  }
+    /* Styles for the Sub Menu popup div container */
+    header #nav div.sub-menu {
+      display: none;
+      width: 100%;
+      overflow: hidden;
+      justify-content: space-between;
+      color: var(--nav-color);
+      position: absolute;
+      top: auto;
+      left: 1rem;
+      height: auto;
+      background-color: white;
+      box-shadow: 0 15px 30px rgb(0 0 0 / 15%);
+      border-radius: 25px;
+    }
+
+    /* Layout behavior for the sub sections */
+    header #nav div.sub-menu > ul {
+      flex-flow: column nowrap;
+    }
+
+    /* Margin and divider for the sub sections in the popout menu */
+    header #nav div.sub-menu > ul.sub-menu-section {
+      flex: 1 1 auto;
+      display: none;
+      border-right: 1px solid #dadada;
+      margin: 20px 0;
+      padding: 0 10px;
+    }
+
+    /* Display behavior for the sub section titles / links */
+    header #nav div.sub-menu > ul > li {
+      font-size: 1.4rem;
+      padding: 0 10px;
+    }
+
 
   /* Sub menu section headers */
-  header .sub-menu > ul.sub-menu-section > li {
+  header #nav div.sub-menu > ul.sub-menu-section > li {
     display: inline;
     position: relative;
     white-space: normal;
     word-break: normal;
-    line-height: 1.6rem;
+    line-height: 1.4rem;
     margin: 1rem 2rem;
     font-weight: 500;
   }
 
-  /* Sub menu section content holder */
-  header .sub-menu > ul.sub-menu-section > li > ul {
-    display: inline;
-    font-weight: 100;
-    line-height: normal;
-  }
+    /* Styling specific to the left most index sub section */
+    header #nav div.sub-menu > ul.sub-menu-index {
+      display: flex;
+      flex: 1 1 275px;
+      max-width: 275px;
+      min-width: 275px;
+      border-right: none;
+      box-sizing: border-box;
+    }
 
-  /* Sub menu section content holder */
-  header .sub-menu > ul.sub-menu-section > li > ul li {
-    display: block;
-    font-weight: 100;
-    line-height: normal;
-    list-style: none;
-    padding: 1rem 0 1rem 1rem;
-  }
+    /* Sub menu section content holder */
+    header #nav div.sub-menu > ul.sub-menu-section > li > ul {
+      display: inline;
+      font-weight: 100;
+      line-height: normal;
+    }
 
-  header .sub-menu > ul.sub-menu-section-active {
-    display: flex;
-  }
+    /* Make the subsection titles bolder */
+    header #nav div.sub-menu ul.sub-menu-section li {
+      font-weight: 700;
+    }
 
-  header .nav-item-wrapper[aria-expanded="true"] .sub-menu {
-    display: flex;
-  }
+    /*  Except in the index which has non bold elements that are bold on mouse over */
+    header #nav div.sub-menu ul.sub-menu-index > li {
+      font-weight: 500;
+    }
 
-  header .sub-menu > ul {
-    flex-flow: column nowrap;
-  }
+    /* Style the text of the sub section links */
+    header #nav div.sub-menu > ul.sub-menu-section > li > ul li {
+      display: block;
+      font-weight: 100;
+      line-height: normal;
+      list-style: none;
+      padding: 1rem 0 1rem 1rem;
+    }
 
-  header .sub-menu ul.sub-menu-section-last {
-    -webkit-box-flex: 1;
-    flex: 1 1 270px;
-    min-width: 270px;
-    max-width: 270px;
-    background: #f3f3f3;
-    margin: 0;
-    padding: 20px 0;
-    border-right: none;
-    border-radius: 0 25px 25px 0;
-    box-sizing: border-box;
-  }
+    /* Have the active sub section displayed */
+    header #nav div.sub-menu > ul.sub-menu-section-active {
+      display: flex;
+    }
 
-  header .sub-menu ul.sub-menu-section-no-border {
-    border-right: none;
-  }
+    /* Add special styling to the last subsection displayed */
+    header #nav div.sub-menu ul.sub-menu-section-last {
+      -webkit-box-flex: 1;
+      flex: 1 1 270px;
+      min-width: 270px;
+      max-width: 270px;
+      background: #f3f3f3;
+      margin: 0;
+      padding: 20px 0;
+      border-right: none;
+      border-radius: 0 25px 25px 0;
+      box-sizing: border-box;
+    }
 
-  header .sub-menu ul.sub-menu-section-last > li:first-child {
-    margin: 20px 10px;
-    text-align: center;
-    line-height: 1.75rem;
-    padding: 2rem 0;
-    height: auto;
-    width: 200px;
-    background-color: #6f54a3;
-    color: #fff;
-    border-radius: 1rem;
-    display: inline-block;
-}
+    /*  Toggling the right section divider */
+    header #nav div.sub-menu ul.sub-menu-section-no-border {
+      border-right: none;
+    }
 
-header .sub-menu-index > li::after {
-  content: "";
-  position: absolute;
-  top: 0.2rem;
-  right: -1rem;
-  width: 1.8rem;
-  height: 1.4rem;
-  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='14'%3E%3Cpath d='M11.83 13.1a1 1 0 01-.73-1.69L15.25 7 11.1 2.59a1 1 0 011.46-1.37L18 7l-5.44 5.79a1 1 0 01-.73.31z'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: 100%
-}
+    /*  Style the call to action button in the last sub section */
+    header #nav div.sub-menu ul.sub-menu-section-last > li:first-child {
+      margin: 20px 10px;
+      text-align: center;
+      line-height: 1.75rem;
+      padding: 2rem 0;
+      height: auto;
+      width: 200px;
+      background-color: #6f54a3;
+      color: #fff;
+      border-radius: 1rem;
+      display: inline-block;
+    }
 
-header .sub-menu-index > li:hover::after {
-    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='14'%3E%3Cpath d='M12.56 1.21a1 1 0 00-1.46 1.38L14.31 6H0v2h14.31l-3.21 3.41a1 1 0 001.46 1.37L18 7z'/%3E%3C/svg%3E");
-  }
+    /* Add the chevron decorations to the right of the index elements */
+    header #nav ul.sub-menu-index > li::after {
+      content: "";
+      position: absolute;
+      top: 0.2rem;
+      right: -1rem;
+      width: 1.8rem;
+      height: 1.4rem;
+      background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='14'%3E%3Cpath d='M11.83 13.1a1 1 0 01-.73-1.69L15.25 7 11.1 2.59a1 1 0 011.46-1.37L18 7l-5.44 5.79a1 1 0 01-.73.31z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: 100%
+    }
 
-  header .sub-menu ul.sub-menu-index > li:hover {
-   font-weight: 700;
-   text-decoration: underline;
-  }
+    /*  Make the index items bold and have an underline on mouse over */
+    header #nav div.sub-menu ul.sub-menu-index > li:hover {
+      font-weight: 700;
+      text-decoration: underline;
+    }
 
-  header .sub-menu ul.sub-menu-section li {
-    font-weight: 700;
-   }
+    /* Add an additional line to the chevron decoration (making an arrow) on mouseover */
+    header #nav ul.sub-menu-index > li:hover::after {
+        background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='14'%3E%3Cpath d='M12.56 1.21a1 1 0 00-1.46 1.38L14.31 6H0v2h14.31l-3.21 3.41a1 1 0 001.46 1.37L18 7z'/%3E%3C/svg%3E");
+      }
 
-  header .sub-menu ul.sub-menu-index > li {
-    font-weight: 500;
-  }
+    /* Add the icons to the index elements as peudo befores */
+    header #nav ul.sub-menu-index #communications-apis::before {
+      content: "\e932";
+      font-family: VltIcons;
+      margin: 1.1rem;
+      left: -2.9rem;
+      position: absolute;
+      top:-1.1rem;
+    }
 
-header .sub-menu-index #communications-apis::before {
-  content: "\e932";
-  font-family: VltIcons;
-  margin: 1.1rem;
-  left: -2.9rem;
-  position: absolute;
-  top:-1.1rem;
-}
+    header #nav ul.sub-menu-index #unified-communications::before {
+      content: "\e939";
+      font-family: VltIcons;
+      margin: 1.1rem;
+      left: -2.9rem;
+      position: absolute;
+      top:-1.1rem;
+    }
 
-header .sub-menu-index #unified-communications::before {
-  content: "\e939";
-  font-family: VltIcons;
-  margin: 1.1rem;
-  left: -2.9rem;
-  position: absolute;
-  top:-1.1rem;
-}
+    header #nav ul.sub-menu-index #contact-centers::before {
+      content: "\e936";
+      font-family: VltIcons;
+      margin: 1.1rem;
+      left: -2.9rem;
+      position: absolute;
+      top:-1.1rem;
+    }
 
-header .sub-menu-index #contact-centers::before {
-  content: "\e936";
-  font-family: VltIcons;
-  margin: 1.1rem;
-  left: -2.9rem;
-  position: absolute;
-  top:-1.1rem;
-}
-
-header .sub-menu-index #conversational-commerce::before {
-  content: "\e93a";
-  font-family: VltIcons;
-  margin: 1.1rem;
-  left: -2.9rem;
-  position: absolute;
-  top:-1.1rem;
-}
-
-header .close-icon {
-  position: absolute;
-    left: 1265px;
-    top: -1rem;
-    content: "\e90e";
-    font-family: VltIcons;
-    color: black;
-}
-
-span.close-icon::before {
-  content: "\e90e";
-  font-family: VltIcons;
-  font-size: 40px;
-}
+    header #nav ul.sub-menu-index #conversational-commerce::before {
+      content: "\e93a";
+      font-family: VltIcons;
+      margin: 1.1rem;
+      left: -2.9rem;
+      position: absolute;
+      top:-1.1rem;
+    }
 }
