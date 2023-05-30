@@ -1,10 +1,7 @@
 /* 2 column version of the fragment */
 .fragment-wrapper {
-    //font-family: Spezia,Spezia_SemiMono,Arial,Helvetica,sans-serif;
-    -webkit-box-orient: horizontal;
     text-decoration: none;
     box-sizing: inherit;
-    -webkit-box-orient: horizontal;
     position: relative;
     width: 100%;
     padding-right: 20px;
@@ -26,41 +23,41 @@
         padding-top: 0px;
         padding-bottom: 0px;
         @media (min-width: 768px) {
-            margin-left: 8.33333%;
-            -webkit-box-flex: 0;
-            -ms-flex: 0 0 83.33333%;
-            flex: 0 0 83.33333%;
-            max-width: 83.33333%;
+            margin-left: 8.3333%;
+            flex: 0 0 83.3333%;
+            max-width: 83.3333%;
         }
     }
+
     > .leftcolumn {
-        -webkit-box-flex: 0;
-        -ms-flex: 0 0 50%;
         flex: 0 0 50%;
-        max-width: 83.33333%;
+        max-width: 83.3333%;
     }
+
     > .rightcolumn {
         margin-left: 0;
-        -webkit-box-flex: 0;
-        -ms-flex: 0 0 41.66667%;
-        flex: 0 0 41.66667%;
-        max-width: 41.66667%;
+        flex: 0 0 41.6667%;
+        max-width: 41.6667%;
     }
+
     & a:any-link {
         color: #000;
         transition: transform .2s;
         text-decoration: none;
         display:inline-block;
     }
-    & li > a:hover, li > strong > a:hover{
+
+    & li > a:hover, li > strong > a:hover {
         text-decoration: underline;
-        }
+    }
+
     & .fragment-link {
         font-size: 1.4rem;
         font-weight: 600;
         letter-spacing: .075rem;
         line-height: 2rem;
     }
+
     & .fragment-link:after {
         background-color: #000;
         content: "";
@@ -68,18 +65,21 @@
         height: .2rem;
         width: 100%
     }
+
     & h2 {
         font-size: 2.9rem;
         font-weight: 500;
         letter-spacing: -.15rem;
         line-height: 3.2rem;
     }
+
     & p {
         font-size: 1.7rem;
         font-weight: 400;
         letter-spacing: -.02rem;
         line-height: 2rem;
     }
+
     & ul {
         font-size: 1.2rem;
         font-weight: 400;
@@ -89,8 +89,6 @@
         -moz-column-gap: 4rem;
         column-gap: 4rem;
         @media (min-width: 768px) {
-            -webkit-column-count: 2;
-            -moz-column-count: 2;
             column-count: 2;
         }
     }
