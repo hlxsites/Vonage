@@ -4,7 +4,7 @@
     box-sizing: inherit;
     position: relative;
     width: 100%;
-    padding: 64px 20px 64px 20px;
+    padding: 64px 20px;
     display: flex;
     flex-direction: column-reverse;
 
@@ -16,7 +16,7 @@
     > div {
         position: relative;
         width: 100%;
-        padding: 0px 20px 0px 20px;
+        padding: 0 20px;
 
         @media (min-width: 768px) {
             margin-left: 8.3333%;
@@ -54,7 +54,7 @@
         line-height: 2rem;
     }
 
-    & .fragment-link:after {
+    & .fragment-link::after {
         background-color: #000;
         content: "";
         display: block;
