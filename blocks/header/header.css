@@ -7,6 +7,8 @@
   --nav-logo-color: #000;
   --nav-background-color: #FFF;
   --nav-decoration-color: #000;
+  --nav-section-tab-color: #6f54a3;
+  --nav-extended-color: #FFF;
   --mobile-nav-extended-background: #000;
   --mobile-nav-extended-logo-color: #FFF;
   --mobile-nav-extended-color: #FFF;
@@ -496,6 +498,7 @@ header .sub-menu-label-active {
 
 /***** Desktop behavior with full nav menu displayed *****/
 @media (min-width: 992px) {
+  /* Header and nav layout */
   header {
     height: auto;
   }
@@ -517,18 +520,16 @@ header .sub-menu-label-active {
     padding: 1.2rem 2rem 0 10.5rem;
   }
 
-  /* For mobile mode hide the menus so they can be animated when opened */
+  /* Style and layout of the section and tool menu containers */
   header #nav .nav-sections, header #nav .nav-tools {
     display: flex;
     height: 100%;
     visibility: visible;
-    transition: opacity .36s ease-in-out,transform .36s ease-in-out,-webkit-transform .36s ease-in-out;
   }
 
-  /* Upper tools nav menu items */
+  /* Styling specific to the upper tools menu */
   header #nav .nav-tools {
     align-self: flex-end;
-    height: 4.5rem;
     margin-bottom: 0.1rem;
     margin-right: 4rem;
   }
@@ -538,37 +539,36 @@ header .sub-menu-label-active {
     content: '';
     display: inline-block;
     position: absolute;
-    top: 2.3rem;
-    right: 2.1rem;
+    top: 2.0rem;
+    margin-top: -0.2rem;
+    right: 0.2rem;
     transform: rotate(135deg);
     width: 6px;
     height: 6px;
     border-style: solid;
     border-color: currentcolor;
     border-radius: 0 1px 0 0;
-    border-width: 3px 3px 0 0;
+    border-width: 2px 2px 0 0;
   }
 
   /* Define the style and decoration for nav section items with children */
-  header .nav-sections .nav-drop[aria-expanded="true"]::after {
-    border-right: 0.3rem solid var(--mobile-nav-extended-decoration-color);
-    border-top: 0.3rem solid var(--mobile-nav-extended-decoration-color);
+  header #nav .nav-sections .nav-drop[aria-expanded="true"]::after {
+    border-right: 0.2rem solid var(--mobile-nav-extended-decoration-color);
+    border-top: 0.2rem solid var(--mobile-nav-extended-decoration-color);
     margin-top: -0.4rem;
     position: absolute;
-    top: 50%;
-    text-decoration: none;
-    font-weight: 600;
-  }
-
-  header .nav-sections .nav-drop[aria-expanded="true"]::after {
+    top: 2.4rem;
     transform: rotate(-45deg);
   }
 
   /* Turn the section tab to purple when expanded */
-  header .nav-sections .nav-drop[aria-expanded="true"] {
-    background-color: #6f54a3;
+  header #nav .nav-sections div.nav-item-wrapper[aria-expanded="true"] {
+    background-color: var(--nav-section-tab-color);
     border-radius: 15px 15px 0 0;
-    color: #fff;
+    color: var(--nav-extended-color);
+  }
+
+  header #nav .nav-sections div.nav-item-wrapper .nav-drop[aria-expanded="true"] {
     text-decoration: none;
   }
 
@@ -581,21 +581,17 @@ header .sub-menu-label-active {
     width: 100%;
   }
 
-  /* Styling for the list items in the sections unordered list */
+  /* Styling for the sections nav menu top level items */
   header .nav-sections > ul li {
     opacity: 1;
     font-weight: 600;
-    padding: 0.78rem 3.7rem 0.78rem 2.2rem;
+    margin: 10px 20px 0 20px;
     font-size: 1.5rem;
     letter-spacing: .1rem;
     line-height: 4.5rem;
   }
 
-header #nav .nav-sections ul div.nav-item-wrapper > li {
-    transition-delay: 0s;
-  }
-
-  /* Styling for the list items in the tools unordered list */
+  /* Styling for the tools nav menu top level items */
   header #nav .nav-tools > ul > li {
     position: relative;
     font-size: 1.4rem;
@@ -604,19 +600,13 @@ header #nav .nav-sections ul div.nav-item-wrapper > li {
     line-height: 3.285;
   }
 
-  /* Sub menu items styling for the sections nav */
-  header #nav .nav-sections > ul > li > ul {
-    margin-top: 0;
-    display: none;
-    position: relative;
-  }
-
-  header #nav .nav-sections > ul > li > ul > li {
-    padding: 8px 0;
-  }
+  /* Disable animations for section drop down menus in desktop mode */
+  header #nav .nav-sections ul div.nav-item-wrapper > li {
+      transition-delay: 0s;
+    }
 
   /* Colorize the transparent bottom border under the section menu items on mouse over */
-  header #nav .nav-sections > ul > li:hover {
+  header #nav .nav-sections > ul > div.nav-item-wrapper > li:hover {
     text-decoration: underline;
     text-decoration-color: var(--nav-color);
     text-underline-offset: 1.5rem;
@@ -628,15 +618,17 @@ header #nav .nav-sections ul div.nav-item-wrapper > li {
     border-radius: 1rem;
     color: var(--nav-contact-button-color);
     background-color: var(--nav-contact-button-background-color);
-    height: 2.9rem;
-    line-height: 2.9rem;
+    height: 4.5rem;
+    line-height: 4.5rem;
     font-size: 1.5rem;
     padding-left: 2rem;
     padding-right: 2rem;
+    margin: 0;
   }
 
   header #nav .nav-sections > ul > div:last-child {
     margin: auto 0 auto auto;
+    height:4.5rem;
   }
 
   header .nav-logo {
@@ -676,6 +668,7 @@ header #nav .nav-sections ul div.nav-item-wrapper > li {
 
   header .nav-sections .nav-drop {
     text-decoration: none;
+    padding-right: 1.8rem;
   }
 
   header .nav-tools > ul > li:first-child::after {
@@ -713,6 +706,7 @@ header #nav .nav-sections ul div.nav-item-wrapper > li {
     justify-content: space-between;
     color: var(--nav-color);
     position: absolute;
+    top: auto;
     left: 1rem;
     height: auto;
     background-color: white;
