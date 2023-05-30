@@ -4,12 +4,10 @@
     box-sizing: inherit;
     position: relative;
     width: 100%;
-    padding-right: 20px;
-    padding-left: 20px;
-    padding-top: 64px;
-    padding-bottom: 64px;
+    padding: 64px 20px 64px 20px;
     display: flex;
     flex-direction: column-reverse;
+
     @media (min-width: 992px) {
         display:flex;
         flex-direction: initial;
@@ -18,10 +16,8 @@
     > div {
         position: relative;
         width: 100%;
-        padding-right: 20px;
-        padding-left: 20px;
-        padding-top: 0px;
-        padding-bottom: 0px;
+        padding: 0px 20px 0px 20px;
+
         @media (min-width: 768px) {
             margin-left: 8.3333%;
             flex: 0 0 83.3333%;
@@ -85,9 +81,8 @@
         font-weight: 400;
         letter-spacing: .025rem;
         line-height: 1.6rem;
-        -webkit-column-gap: 4rem;
-        -moz-column-gap: 4rem;
         column-gap: 4rem;
+
         @media (min-width: 768px) {
             column-count: 2;
         }
