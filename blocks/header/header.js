@@ -1,17 +1,28 @@
 import { getMetadata, decorateIcons, toClassName } from '../../scripts/lib-franklin.js';
 
+/* ------------------------------ Global Variables ----------------------------------- */
 // media query match that indicates mobile/tablet width
 const isDesktop = window.matchMedia('(min-width: 992px)');
 
-/* Scroll event listener to handle transforming the nav bar from big to small
-   when scrolling down after a certain threshold (160 px) and on any scroll up event */
+/* Hacky timeout delay in order to separate display change
+  from chang eon prop[erties that can be animated */
+const animationDelay = 10;
+
+// Variable to track previous scroll direction for the scrollFunction event handler
 let oldScrollY = window.scrollY;
+
+/* ------------------------------ Event Listener Functions ----------------------------------- */
+
+/**
+ * Scroll event listener to handle transforming the nav bar from big to small
+ *  when scrolling down after a certain threshold (160 px) and on any scroll up event
+ */
 function scrollFunction() {
   const scrollDistance = 160;
   const newScrollY = window.scrollY;
   const scrolledDown = (oldScrollY - newScrollY < 0);
   if ((scrolledDown && document.body.scrollTop > scrollDistance)
-   || (scrolledDown && document.documentElement.scrollTop > scrollDistance)) {
+      || (scrolledDown && document.documentElement.scrollTop > scrollDistance)) {
     document.getElementById('nav').querySelector('.nav-tools').style.display = 'none';
     document.getElementById('nav').querySelector('.nav-search').style.display = 'none';
     document.getElementById('nav').classList.replace('nav-big', 'nav-small');
@@ -26,6 +37,7 @@ function scrollFunction() {
   }
   oldScrollY = newScrollY;
 }
+
 // Add a scroll listener in order to handle transforming the nav on scroll down
 if (isDesktop.matches) {
   window.onscroll = scrollFunction;
@@ -59,6 +71,45 @@ function openOnKeydown(e) {
   }
 }
 
+/**
+ * Event handler for mouse over events in the sub section index.
+ * Toggles the display of the current and new section to display
+ * @param event
+ */
+function toggleNavSubSection(event) {
+  if (isDesktop.matches) {
+    const subSectionName = event.target.id;
+    const subMenu = event.target.closest('.sub-menu');
+    // Query subMenu sections for <ul> that match the class of the event firer (to be turned on)
+    // Or which are currently displayed via the class sub-menu-section-active (to be turned off)
+    subMenu.querySelectorAll(`ul.${subSectionName},ul.sub-menu-section-active`).forEach((subSection) => {
+      // Catch the active menu being either the section index (which is always displayed
+      // Or the event firer already being active, where we don't want to toggle the section
+      if (!subSection.classList.contains('sub-menu-index') && !(subSection.classList.contains(subSectionName) && subSection.classList.contains('sub-menu-section-active'))) {
+        // Toggle the class that controls sub section display
+        subSection.classList.toggle('sub-menu-section-active');
+      }
+    });
+  }
+}
+
+/* ------------------------------ Global Functions ----------------------------------- */
+
+/**
+ * A utility function to create divs with specified ID and classes
+ * @param {string} id The id to associate with the created div element
+ * @param {[string]} classes an array of strings indicating the classes to add to the div element
+ * @returns {HTMLDivElement}
+ */
+function createDiv(id, classes) {
+  const div = document.createElement('div');
+  div.id = id;
+  classes.forEach((className) => {
+    div.classList.add(className);
+  });
+  return div;
+}
+
 function focusNavSection() {
   document.activeElement.addEventListener('keydown', openOnKeydown);
 }
@@ -66,7 +117,7 @@ function focusNavSection() {
 /**
  * Toggles all nav sections
  * @param {Element} sections The container element
- * @param {string} expanded Whether the element should be expanded or collapsed
+ * @param {boolean} expanded Whether the element should be expanded or collapsed
  */
 function toggleAllNavSections(sections, expanded = false) {
   sections.querySelectorAll('.nav-sections > ul > div > li').forEach((section) => {
@@ -75,7 +126,10 @@ function toggleAllNavSections(sections, expanded = false) {
   });
 }
 
-function triggerMenuFadeIn(expanded) {
+/**
+ * Toggles the fade in animation for the nav sections in mobile mode
+ * Necessary given that they start and end in a display:none state
+ */function triggerMenuFadeIn(expanded) {
   const navSections = document.querySelector('.nav-sections');
   if (!isDesktop.matches) {
     navSections.querySelectorAll(':scope > ul > div > li').forEach((element) => {
@@ -101,8 +155,30 @@ async function toggleNavBackground(expanded) {
 
   // This seems like a total hack but is the only way I can get this animation to work
   // By triggering it after a brief delay to allow the display:none on the menu to change
-  await new Promise((r) => setTimeout(r, 10));
+  // eslint-disable-next-line no-promise-executor-return
+  await new Promise((r) => setTimeout(r, animationDelay));
   triggerMenuFadeIn(expanded);
+}
+
+/**
+ * Toggles the div section containers on mouse-over of the elements in the index section
+ */
+function toggleSubMenu() {
+  // If the mobile menu is up and a submenu is open
+  if (document.querySelector('header.sub-menu-selected')) {
+    document.querySelectorAll('.nav-sections .sub-menu-section-active').forEach((section) => {
+      section.classList.toggle('sub-menu-section-active');
+    });
+    document.querySelector('header').classList.toggle('sub-menu-selected');
+    const activeSub = document.querySelector('span.sub-menu-label-active');
+    if (activeSub) {
+      activeSub.classList.remove('sub-menu-label-active');
+    }
+    const backButton = document.getElementById('back-button');
+    if (backButton) {
+      backButton.classList.remove('nav-back-button-active');
+    }
+  }
 }
 
 /**
@@ -145,9 +221,10 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
     window.removeEventListener('keydown', closeOnEscape);
   }
 }
+
 /**
- * Builds the Logo Div.
- * @returns {HTMLDivElement}
+ * Builds the Logo div injecting the two different SVGs so that they can be styled directly.
+ * @returns {HTMLDivElement} Div element containing the two different logo SVGs
  */
 function buildLogo() {
   // Add the Logo.
@@ -173,7 +250,14 @@ function buildLogo() {
   return logo;
 }
 
-export async function getSubSections(sectionName, subSectionName) {
+/**
+ * Fetches markdown for the specified subsection and returns an array of subsection div elements
+ * @param sectionName The name of the parent section which is being fetched (used as a classname)
+ * @param subSectionName The subsection (page name) that is having its navigation markdown fetched
+ * @returns [{HTMLDivElement}] An array of section elements for the submenu items
+ */
+
+export async function fetchSubSections(sectionName, subSectionName) {
   const navSubSections = [];
   const resp = await fetch(`/sub-nav/${sectionName}/${subSectionName}.plain.html`);
 
@@ -198,107 +282,155 @@ export async function getSubSections(sectionName, subSectionName) {
   return navSubSections;
 }
 
-function toggleNavSubSection(event) {
-  if (isDesktop.matches) {
-    const subSectionName = event.target.id;
-    const subMenu = event.target.closest('.sub-menu');
-    // Query subMenu sections for <ul> that match the class of the event firer (to be turned on)
-    // Or which are currently displayed via the class sub-menu-section-active (to be turned off)
-    subMenu.querySelectorAll(`ul.${subSectionName},ul.${'sub-menu-section-active'}`).forEach((subSection) => {
-      // Catch the active menu being either the section index (which is always displayed
-      // Or the event firer already being active, where we don't want to toggle the section
-      if (!subSection.classList.contains('sub-menu-index') && !(subSection.classList.contains(subSectionName) && subSection.classList.contains('sub-menu-section-active'))) {
-        // Toggle the class that controls sub section display
-        subSection.classList.toggle('sub-menu-section-active');
-      }
+/**
+ * Processes the section nav element to style drop down nav elements and fetch their subsection data
+ * @param {HTMLElement} navSection The parent section for which to load subsections
+ * @param sectionIndex The child section which is being processed
+ */
+function decorateSubSections(navSection, sectionIndex) {
+  // Get the top level text property from the nav html as the section menu name
+  // As well as the id and class name for the menu sections
+  const section = navSection.childNodes[0].nodeValue;
+  const safeSectionName = toClassName(section);
+
+  // Flag the nav menu button as a drop down in CSS
+  navSection.classList.add('nav-drop');
+
+  // Create a div to wrap the items in the drop-down menu to handle displaying as a popout
+  const subMenuWrapper = createDiv(`sub-menu-${safeSectionName}`, ['sub-menu']);
+
+  // Add a span for the close button in the menu
+  const closeButton = document.createElement('span');
+  closeButton.classList.add('close-icon');
+  closeButton.addEventListener('click', () => {
+    const expanded = navSection.getAttribute('aria-expanded') === 'true';
+    navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+    navSection.parentElement.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+  });
+  subMenuWrapper.appendChild(closeButton);
+
+  // Drop the nested ul element add the wrapper and then the nested ul again
+  sectionIndex.remove();
+  navSection.after(subMenuWrapper);
+
+  // Flag this first subsection as the special index section
+  sectionIndex.classList.add('sub-menu-index', 'sub-menu-section');
+  subMenuWrapper.appendChild(sectionIndex);
+
+  // Iterate through all the li in the index to fetch markdowns to populate the sub sections
+  sectionIndex.querySelectorAll(':scope > li').forEach(async (subNavSection) => {
+    const subSections = subNavSection.innerHTML;
+    const safeSubSectionName = toClassName(subSections);
+    subNavSection.id = safeSubSectionName;
+    subNavSection.addEventListener('mouseover', toggleNavSubSection);
+    // Fetch the html of the nav sections children to populate in the popout menu
+    const subNav = fetchSubSections(safeSectionName, safeSubSectionName);
+    // Add the returned subnav to the submenu container
+    (await subNav).forEach((subSection) => {
+      subMenuWrapper.appendChild(subSection);
     });
-  }
+  });
 }
 
-function toggleSubMenu() {
-  // If the mobile menu is up and a submenu is open
-  // TODO: Switch from using an attribute on the header to one on the nav, don't need to go that high up in the DOM for this
+/**
+ * Processes the section nav element adding necessary nodes and attributes for styling
+ * as well as adding section menu event listeners
+ * @param {HTMLElement} navSections The nodes of the section nav menu bar
+ */
+function decorateSections(navSections) {
+  const sectionDivider = document.createElement('hr');
+  sectionDivider.classList.add('nav-section-divider');
+  navSections.after(sectionDivider);
+  navSections.querySelectorAll(':scope > ul > li').forEach((navSection) => {
+    const sectionIndex = navSection.querySelector(':scope > ul');
+    navSection.remove();
+    const navItemWrapper = document.createElement('div');
+    navItemWrapper.classList.add('nav-item-wrapper');
+    navSection.id = toClassName(navSection.childNodes[0].nodeValue);
+    navItemWrapper.appendChild(navSection);
+    navSections.querySelector('ul').appendChild(navItemWrapper);
+    if (sectionIndex) {
+      const subMenuLabel = document.createElement('span');
+      const labeltext = toClassName(navSection.childNodes[0].nodeValue);
+      subMenuLabel.id = `${labeltext}-label`;
+      subMenuLabel.classList.add('sub-menu-label');
+      subMenuLabel.innerHTML = labeltext.charAt(0).toUpperCase() + labeltext.slice(1);
+      navItemWrapper.prepend(subMenuLabel);
 
-  if (document.querySelector('header.sub-menu-selected')) {
-    document.querySelectorAll('.nav-sections .sub-menu-section-active').forEach((section) => {
-      section.classList.toggle('sub-menu-section-active');
+      // Fetch and populate the subsection data
+      decorateSubSections(navSection, sectionIndex);
+    }
+    navSection.addEventListener('click', async (event) => {
+      if (isDesktop.matches) {
+        const expanded = navSection.getAttribute('aria-expanded') === 'true';
+        toggleAllNavSections(navSections);
+        navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+        navSection.parentElement.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+      } else {
+        // For Mobile need to set the right subsection to active so it display
+        document.getElementById(`sub-menu-${event.target.id}`).classList.toggle('sub-menu-section-active');
+
+        // Turn on the Back to Main menu button
+        const back = document.getElementById('back-button');
+        back.classList.add('nav-back-button-active');
+        // This seems like a total hack but is the only way I can get this animation to work
+        // By triggering it after a brief delay to allow the display:none on the menu to change
+        // eslint-disable-next-line no-promise-executor-return
+        await new Promise((r) => setTimeout(r, animationDelay));
+        back.classList.add('nav-back-button-animation-start');
+
+        // Transition all of the other nav elements off to the left
+        document.querySelector('header.header-wrapper').classList.add('sub-menu-selected');
+
+        // Render a subsection text to let the user know what menu item they are currently on
+        document.getElementById(`${event.target.id}-label`).classList.add('sub-menu-label-active');
+      }
     });
-    //TODO: Switch from using an attribute on the header to one on the nav, don't need to go that high up in the DOM for this
-    document.querySelector('header').classList.toggle('sub-menu-selected');
-    const activeSub = document.querySelector('span.sub-menu-label-active');
-    if (activeSub) {
-      activeSub.classList.remove('sub-menu-label-active');
-    }
-    const backButton = document.getElementById('back-button');
-    if (backButton) {
-      backButton.classList.remove('nav-back-button-active');
-    }
-  }
+  });
+}
+
+/**
+ * Build the hamburger icon element which will trigger the menu display in mobile mode
+ * @returns {HTMLDivElement} Div containing the close button with event listeners
+ * @param {Element} nav The container element
+ * @param {Element} navSections The nav sections within the container element
+ */
+function buildHamburger(nav, navSections) {
+  const hamburger = document.createElement('div');
+  hamburger.classList.add('nav-hamburger');
+  hamburger.innerHTML = `<button type="button" aria-controls="nav" aria-label="Open navigation">
+        <span class="nav-hamburger-icon"></span>
+      </button>`;
+
+  hamburger.addEventListener('click', () => toggleMenu(nav, navSections));
+  hamburger.addEventListener('click', () => toggleNavBackground(nav.attributes.getNamedItem('aria-expanded').value === 'false'));
+  return hamburger;
+}
+
+/* ------------------------------ Main function invoked at load ------------------------------- */
+
+/**
+ * Build the hamburger icon element which will trigger the menu display in mobile mode
+ * @returns {HTMLDivElement} Div containing the return to main menu button with event listeners
+ */function buildBackButton() {
+  // Back button for mobile
+  const backButton = createDiv('back-button', ['nav-back-button']);
+  backButton.innerHTML = `<button type="button" aria-controls="nav" aria-label="back to site navigation menu">
+        Main Menu
+      </button>`;
+  backButton.addEventListener('click', () => toggleSubMenu());
+  return backButton;
 }
 
 /**
  * decorates the header, mainly the nav
  * @param {Element} block The header block element
  */
-// TODO: Split this function up breaking out to additional functions for ease of reading
 export default async function decorate(block) {
   // fetch nav content
   const navMeta = getMetadata('nav');
   const navPath = navMeta ? new URL(navMeta).pathname : '/nav';
   const resp = await fetch(`${navPath}.plain.html`);
-
-  function createDiv(id, classes) {
-    const div = document.createElement('div');
-    div.id = id;
-    classes.forEach((className) => {
-      div.classList.add(className);
-    });
-    return div;
-  }
-
-  function loadSubSections(navSection, sectionIndex) {
-    // Get the top level text property from the nav html as the section menu name
-    // As well as the id and class name for the menu sections
-    const section = navSection.childNodes[0].nodeValue;
-    const safeSectionName = toClassName(section);
-
-    // Flag the nav menu button as a drop down in CSS
-    navSection.classList.add('nav-drop');
-
-    // Create a div to wrap the items in the drop-down menu to handle displaying as a popout
-    const subMenuWrapper = createDiv(`sub-menu-${safeSectionName}`, ['sub-menu']);
-
-    // Add a span for the close button in the menu
-    const closeButton = document.createElement('span');
-    closeButton.classList.add('close-icon');
-    closeButton.addEventListener('click', () => {
-      const expanded = navSection.getAttribute('aria-expanded') === 'true';
-      navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-      navSection.parentElement.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-    });
-    subMenuWrapper.appendChild(closeButton);
-
-    // Drop the nested ul element add the wrapper and then the nested ul again
-    sectionIndex.remove();
-    navSection.after(subMenuWrapper);
-    // Flag this first subsection as the special index section and flag it to always be active and add it back
-    sectionIndex.classList.add('sub-menu-index', 'sub-menu-section');
-    subMenuWrapper.appendChild(sectionIndex);
-
-    // Iterate through all the li in the index to fetch markdowns to populate the sub sections
-    sectionIndex.querySelectorAll(':scope > li').forEach(async (subNavSection) => {
-      const subSections = subNavSection.innerHTML;
-      const safeSubSectionName = toClassName(subSections);
-      subNavSection.id = safeSubSectionName;
-      subNavSection.addEventListener('mouseover', toggleNavSubSection);
-      // Fetch the html of the nav sections children to populate in the popout menu
-      const subNav = getSubSections(safeSectionName, safeSubSectionName);
-      // Add the returned subnav to the submenu container
-      (await subNav).forEach((subSection) => {
-        subMenuWrapper.appendChild(subSection);
-      });
-    });
-  }
 
   if (resp.ok) {
     const html = await resp.text();
@@ -308,8 +440,11 @@ export default async function decorate(block) {
     nav.id = 'nav';
     nav.classList.add('nav-big');
 
+    // Add a wrapper div to contain the full nav (logo and sections)
     nav.appendChild(createDiv('header-navigation', ['header-navigation']));
     nav.firstElementChild.innerHTML = html;
+
+    // Tag the sections from the returned markdown based on their order with class categorization
     const classes = ['sections', 'tools', 'search'];
     classes.forEach((c, i) => {
       const section = nav.firstElementChild.children[i];
@@ -318,92 +453,26 @@ export default async function decorate(block) {
       }
     });
 
+    /* If the nav markdown returned elements with children nav elements
+       Fetch the child markdowns and style them accordingly */
     const navSections = nav.querySelector('.nav-sections');
     if (navSections) {
-      const sectionDivider = document.createElement('hr');
-      sectionDivider.classList.add('nav-section-divider');
-      navSections.after(sectionDivider);
-      navSections.querySelectorAll(':scope > ul > li').forEach((navSection) => {
-        const sectionIndex = navSection.querySelector(':scope > ul');
-        navSection.remove();
-        const navItemWrapper = document.createElement('div');
-        navItemWrapper.classList.add('nav-item-wrapper');
-        navSection.id = toClassName(navSection.childNodes[0].nodeValue);
-        navItemWrapper.appendChild(navSection);
-        navSections.querySelector('ul').appendChild(navItemWrapper);
-        if (sectionIndex) {
-          const subMenuLabel = document.createElement('span');
-          const labeltext = toClassName(navSection.childNodes[0].nodeValue);
-          subMenuLabel.id = `${labeltext}-label`;
-          subMenuLabel.classList.add('sub-menu-label');
-          subMenuLabel.innerHTML = labeltext.charAt(0).toUpperCase() + labeltext.slice(1);
-          navItemWrapper.prepend(subMenuLabel);
-
-          // Fetch and populate the subsection data
-          loadSubSections(navSection, sectionIndex);
-        }
-        // TODO: Split these event listener functions off to two different non anonymous functions
-        navSection.addEventListener('click', (event) => {
-          if (isDesktop.matches) {
-            const expanded = navSection.getAttribute('aria-expanded') === 'true';
-            toggleAllNavSections(navSections);
-            navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-            navSection.parentElement.setAttribute('aria-expanded', expanded ? 'false' : 'true');
-          } else {
-            // For Mobile need to set the right subsection to active so it display
-            document.getElementById(`sub-menu-${event.target.id}`).classList.toggle('sub-menu-section-active');
-
-            // Turn on the Back to Main menu button
-            const back = document.getElementById('back-button');
-            back.classList.add('nav-back-button-active');
-            // eslint-disable-next-line max-len
-            // TODO: Need to implement a wait here in order to allow the animation to trigger after the display has changed
-            back.classList.add('nav-back-button-animation-start');
-
-            // Transition all of the other nav elements off to the left
-            //TODO: Switch from using an attribute on the header to one on the nav, don't need to go that high up in the DOM for this
-            document.querySelector('header.header-wrapper').classList.add('sub-menu-selected');
-
-            // Render a subsection text to let the user know what menu item they are currently on
-            document.getElementById(`${event.target.id}-label`).classList.add('sub-menu-label-active');
-          }
-        });
-      });
+      decorateSections(navSections);
     }
 
-    // hamburger for mobile
-    const hamburger = document.createElement('div');
-    hamburger.classList.add('nav-hamburger');
-    hamburger.innerHTML = `<button type="button" aria-controls="nav" aria-label="Open navigation">
-        <span class="nav-hamburger-icon"></span>
-      </button>`;
-
-    hamburger.addEventListener('click', () => toggleMenu(nav, navSections));
-    hamburger.addEventListener('click', () => toggleNavBackground(nav.attributes.getNamedItem('aria-expanded').value === 'false'));
+    // Create and append the mobile nav hamburger button
+    const hamburger = buildHamburger(nav, navSections);
     nav.prepend(hamburger);
 
-    // Back button for mobile
-    const backButton = createDiv('back-button', ['nav-back-button']);
-    backButton.innerHTML = `<button type="button" aria-controls="nav" aria-label="back to site navigation menu">
-        Main Menu
-      </button>`;
-    backButton.addEventListener('click', () => toggleSubMenu());
+    // Create and append the mobile back to main menu button
+    const backButton = buildBackButton();
     nav.prepend(backButton);
 
     // prevent mobile nav behavior on window resize
     toggleMenu(nav, navSections, isDesktop.matches);
     isDesktop.addEventListener('change', () => toggleMenu(nav, navSections, isDesktop.matches));
 
-    decorateIcons(nav);
-    const navWrapper = document.createElement('div');
-    navWrapper.className = 'nav-wrapper';
-
-    // Add the logo element before the nav elements which will stack vertically
-    navWrapper.append(buildLogo());
-    navWrapper.append(nav);
-
-    // div element to be used for the mobile pop over menu
-    const headerBackdrop = createDiv('backdrop', ['header', 'backdrop']);
+    await decorateIcons(nav);
 
     // Get rid of any existing div elements in the header block
     if (block.hasChildNodes()) {
@@ -414,6 +483,15 @@ export default async function decorate(block) {
 
     // Make sure that on initial display the nav is not flagged as open
     nav.setAttribute('aria-expanded', 'false');
+
+    const navWrapper = createDiv('nav-wrapper', ['nav-wrapper']);
+
+    // Add the logo element before the nav elements which will stack vertically
+    navWrapper.append(buildLogo());
+    navWrapper.append(nav);
+
+    // div element to be used for the mobile pop over menu
+    const headerBackdrop = createDiv('backdrop', ['header', 'backdrop']);
     block.append(headerBackdrop);
     block.append(navWrapper);
   }
