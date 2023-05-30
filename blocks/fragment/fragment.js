@@ -45,13 +45,8 @@ export default async function decorate(block) {
   const path = link ? link.getAttribute('href') : block.textContent.trim();
   const fragment = await loadFragment(path);
   block.classList.remove('block', 'fragment');
-  const fragClasses = block.classList;
   if (!fragment) {
     return;
   }
-  block.replaceWith(...fragment.childNodes);
-  if (document.querySelector('.fragment-wrapper')) {
-    document.querySelector('.fragment-wrapper').classList.add(fragClasses);
-  }
-  block.classList.add(fragClasses);
+  block.replaceChildren(...fragment.childNodes);
 }
