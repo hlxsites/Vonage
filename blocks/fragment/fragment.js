@@ -25,8 +25,8 @@ async function loadFragment(path) {
       main.innerHTML = await resp.text();
       decorateMain(main);
       // Styling links properly, removing added classes
-      var elements = main.getElementsByTagName('a');
-      [].forEach.call(elements, function(el) {
+      let elements = main.getElementsByTagName('a');
+      [].forEach.call(elements, function decorateLinks(el) {
         if (el.parentElement.parentElement.tagName === 'P') {
           el.classList.remove('button');
           el.classList.remove('primary');
