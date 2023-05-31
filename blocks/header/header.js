@@ -364,6 +364,29 @@ function decorateSections(navSections) {
       if (isDesktop.matches) {
         const expanded = navSection.getAttribute('aria-expanded') === 'true';
         toggleAllNavSections(navSections);
+
+        // Check if there's an active subsection tagged to display when the menu displays
+        // if not select either the suitable one based on the current page, or the first
+        const subSectionActive = event.target.nextSibling.querySelector('ul.sub-menu-section-active');
+        if (!subSectionActive) {
+          let path = window.location.pathname;
+          path = path.replaceAll('/', '');
+          const pagesSubSection = event.target.nextSibling.querySelectorAll(`ul.${path}`);
+          // If the current page has a matching subsection in the
+          // menu to be opened flag it as active
+          if (pagesSubSection.length > 0) {
+            pagesSubSection.forEach((sub) => {
+              sub.classList.add('sub-menu-section-active');
+            });
+          } else {
+            // Otherwise just take the first subsection of the section to display by default
+            const defaultSubSectionName = navItemWrapper.querySelector(':scope > div > :nth-child(3)').classList[0];
+            navItemWrapper.querySelectorAll(`:scope ul.${defaultSubSectionName}`).forEach((sub) => {
+              sub.classList.add('sub-menu-section-active');
+            });
+          }
+        }
+
         navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
         navSection.parentElement.setAttribute('aria-expanded', expanded ? 'false' : 'true');
       } else {

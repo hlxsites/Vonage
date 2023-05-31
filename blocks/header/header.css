@@ -502,7 +502,7 @@ header .sub-menu-label-active {
 
     /* Header and nav layout */
     header {
-      height: auto;
+      height: 9.6rem;
     }
 
     header #nav {
