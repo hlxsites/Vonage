@@ -18,12 +18,15 @@
   --overlay-background-color: #eee;
   --highlight-background-color: #ccc;
   --text-color: #000;
+   --primary-button-background-color: #000;
+    --primary-button-text-color: #fff;
 
 
   /* fonts */
   --body-font-family: spezia, spezia_semimono, ubuntu, roboto, noto, sans-serif;
   --heading-font-family: var(--body-font-family);
   --fixed-font-family: "Spezia_SemiMono", menlo, consolas, 'Liberation Mono', monospace;
+  --icons-font-family: vlticons;
 
   /* body sizes */
   --body-font-size-m: 22px;
@@ -37,6 +40,9 @@
   --heading-font-size-m: 24px;
   --heading-font-size-s: 20px;
   --heading-font-size-xs: 18px;
+
+   /* button sizes */
+   --button-font-size-m: 16px;
 
   /* nav height */
   --nav-height: 64px;
@@ -177,10 +183,24 @@ button:disabled, button:disabled:hover {
   cursor: unset;
 }
 
+a.button.primary, button.primary {
+  background-color: var(--primary-button-background-color);
+  color: var(--primary-button-text-color);
+  font-size: var(--button-font-size-m);
+  line-height: normal;
+  border-radius: 1rem;
+  border: 2px solid currentcolor;
+  padding: 1.6rem;
+}
+
 a.button.secondary, button.secondary {
   background-color: unset;
+  color: var(--text-color);
+  font-size: var(--button-font-size-m);
+  line-height: normal;
+  border-radius: 1rem;
   border: 2px solid currentcolor;
-  color: var(--text-color)
+  padding: 1.6rem;
 }
 
 main input {
