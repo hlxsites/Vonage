@@ -3,24 +3,14 @@
 }
 
 .pricing-matrix .quantity-selector .quantity-count {
-    font-family: Spezia,Spezia_SemiMono,Arial,Helvetica,sans-serif;
-    font-size: 1.7rem;
-    font-weight: 400;
-    letter-spacing: -.025rem;
-    line-height: 2.5rem;
     border: 0;
     border-radius: 0.8rem;
     display: block;
-    height: 4.9rem;
-    margin-left: 2rem;
     text-align: center;
-    width: 6.9rem;
-
     height: 5.2rem;
     margin-left: auto;
     margin-right: auto;
     width: 8.4rem;
-    font-family: Spezia,Spezia_SemiMono,Arial,Helvetica,sans-serif;
     font-size: 2.1rem;
     font-weight: 400;
     letter-spacing: -.025rem;
