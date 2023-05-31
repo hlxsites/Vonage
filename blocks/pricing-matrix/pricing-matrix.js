@@ -1,4 +1,23 @@
+/* eslint-disable radix */
 import { div } from '../../scripts/scripts.js';
+
+/**
+ *
+ * @param numberOfLines {integer}
+ */
+function updateConditionalElements(numberOfLines) {
+  const firstPriceWithinMaxLines = [...document.querySelectorAll('[data-maxlines]')]
+    .sort((a, b) => parseInt(a.dataset.maxlines) - parseInt(b.dataset.maxlines))
+    .find((element) => numberOfLines <= element.dataset.maxlines);
+
+  [...document.querySelectorAll('[data-maxlines]')].forEach((element) => {
+    if (element === firstPriceWithinMaxLines) {
+      element.classList.remove('hidden');
+    } else {
+      element.classList.add('hidden');
+    }
+  });
+}
 
 /**
  * creates a line range selector.
@@ -50,26 +69,68 @@ function lineRangeSelector() {
 
     slider.value = counter.value;
     updateRangeBackground(slider);
+    updateConditionalElements(parseInt(counter.value));
   });
   slider.addEventListener('input', (e) => {
     counter.value = e.target.value;
     updateRangeBackground(slider);
+    updateConditionalElements(parseInt(counter.value));
   });
   return lineSelector;
 }
 
-function parseAndFormatCondition(condition) {
-  return condition.replaceAll(/[^0-9=<>]/g, '').replaceAll(' ', '').trim();
-}
-
 function annotateConditions(card, conditions) {
+  function parseAndFormatCondition(condition) {
+    const cond = condition.replaceAll(/[^0-9=<>]/g, '').replaceAll(' ', '').trim();
+    if (cond.startsWith('<=')) {
+      return ['maxlines', parseInt(cond.replace('<=', ''))];
+    }
+    if (cond.startsWith('<')) {
+      return ['maxlines', parseInt(cond.replace('<', '')) - 1];
+    }
+    if (cond.startsWith('>=')) {
+      return ['minlines', parseInt(cond.replace('>=', ''))];
+    }
+    if (cond.startsWith('>')) {
+      return ['minlines', parseInt(cond.replace('>', '')) + 1];
+    }
+    return [null, null];
+  }
+
   [...card.children].forEach((divEl, i) => {
     const condition = conditions[i];
-    const parsedCondition = parseAndFormatCondition(condition);
-    if (parsedCondition) {
-      divEl.setAttribute('data-range-condition', parsedCondition);
+    const [attribute, value] = parseAndFormatCondition(condition);
+    if (attribute) {
+      divEl.dataset[attribute] = value;
     }
   });
+}
+
+function decorateCard(card) {
+  const childrenArray = [...card.children];
+  childrenArray[0].classList.add('plan-tag');
+
+  childrenArray[1].classList.add('plan-basic-info');
+
+  // last row has text. Anything in between are price variants.
+  // eslint-disable-next-line no-plusplus
+  for (let i = 2; i < childrenArray.length - 1; i++) {
+    childrenArray[i].classList.add('plan-price');
+    [...childrenArray[i].children].forEach((child, index) => {
+      if (index === 0) {
+        child.classList.add('plan-price-value');
+      } else if (child.classList.contains('button-container')) {
+        // unwrap from any <EM> tags
+        if (child.firstElementChild.tagName === 'EM') {
+          child.firstElementChild.replaceWith(child.firstElementChild.firstElementChild);
+        }
+      } else {
+        child.classList.add('plan-price-description');
+      }
+    });
+  }
+
+  childrenArray.at(-1).classList.add('plan-basic-features');
 }
 
 export default async function decorate(block) {
@@ -78,16 +139,23 @@ export default async function decorate(block) {
 
   const offerColumns = [];
   const colCount = block.querySelectorAll(':scope > div > div').length;
+  // eslint-disable-next-line no-plusplus
   for (let i = 1; i < colCount; i++) {
     offerColumns.push(block.querySelectorAll(`:scope > div > div:nth-child(${i + 1})`));
   }
 
-  block.prepend(lineRangeSelector());
   block.innerText = '';
+  block.prepend(lineRangeSelector());
 
+  const plans = div({ class: 'plans' });
   const card = div({ class: 'plans-card' });
   card.append(...offerColumns[0]);
+  decorateCard(card);
+
   annotateConditions(card, conditions);
 
-  block.append(card);
+  plans.append(card);
+  block.append(plans);
+
+  updateConditionalElements(parseInt(block.querySelector('#employee-counter').value));
 }
