@@ -140,19 +140,14 @@
     padding-top: 0;
     padding-bottom: 3.2rem;
     text-align: center;
+    font-size: var(--body-font-size-xxs);
 }
 
-/*.pricing-matrix .plans .plans-card * {*/
-/*    padding-right: 3.2rem;*/
-/*    padding-left: 3.2rem;*/
-/*}*/
-
-.plan-basic-info {
-    padding-top: 2rem;
+.plan-content {
+    padding: 60px;
 }
 
 .plan-basic-info h3 {
-    max-width: 90%;
     letter-spacing: -.06rem;
     line-height: 3.2rem;
     font-size: 3.2rem;
@@ -162,7 +157,6 @@
     max-width: 70%;
     margin: 0 auto;
     padding-top: 1rem;
-    font-size: 1.5rem;
     font-weight: 400;
     letter-spacing: -.02rem;
     line-height: 2rem;
@@ -199,7 +193,6 @@
 .plan-price-description {
     margin: 0;
     padding: 0;
-    font-size: 14.5px;
     line-height: 18px;
     font-weight: 500;
     letter-spacing: .025rem;
@@ -226,8 +219,7 @@
     color: white;
     border-top-left-radius: 2.2rem;
     border-top-right-radius: 2.2rem;
-    font-family: "Spezia_SemiMono";
-    font-size: 1.4rem;
+    font-family: var(--fixed-font-family);
     font-weight: 600;
     letter-spacing: .075rem;
     line-height: 2rem;
@@ -237,7 +229,6 @@
     text-align: left;
     max-width: 283px;
     margin: 1.4em auto 0;
-    padding: 0;
 }
 
 .plan-basic-features ul {
@@ -249,7 +240,6 @@
 .plan-basic-features ul li {
     margin-left: 2.2rem;
     position: relative;
-    font-size: 1.5rem;
     letter-spacing: -.02rem;
     line-height: 2rem;
 }

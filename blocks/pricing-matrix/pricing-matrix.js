@@ -131,6 +131,9 @@ function decorateCard(card) {
   }
 
   childrenArray.at(-1).classList.add('plan-basic-features');
+
+  // wrap everything except the tag in a div
+  card.append(div({ class: 'plan-content' }, ...childrenArray.slice(1)));
 }
 
 export default async function decorate(block) {
@@ -150,9 +153,9 @@ export default async function decorate(block) {
   const plans = div({ class: 'plans' });
   const card = div({ class: 'plans-card' });
   card.append(...offerColumns[0]);
+  annotateConditions(card, conditions);
   decorateCard(card);
 
-  annotateConditions(card, conditions);
 
   plans.append(card);
   block.append(plans);
