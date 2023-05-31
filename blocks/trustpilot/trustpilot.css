@@ -1,0 +1,8 @@
+.trustpilot-widget > iframe {
+    position: relative;
+    height: 28px;
+    width: 100%;
+    border-style: none;
+    display: block;
+    overflow: hidden;
+}
