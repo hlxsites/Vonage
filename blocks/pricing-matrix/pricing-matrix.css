@@ -1,0 +1,78 @@
+.pricing-matrix .quantity-selector input.quantity-range {
+    appearance: none;
+    background-color: transparent;
+    cursor: pointer;
+    display: block;
+    height: 3.6rem;
+    padding: 0;
+    width: 100%
+}
+
+.pricing-matrix .quantity-selector input.quantity-range::-webkit-slider-thumb {
+    appearance: none;
+    background-color: #881fff;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 0 8px 0 rgb(0 0 0 / 18%);
+    height: 3.4rem;
+    margin-top: -1.2rem;
+    width: 3.4rem
+}
+
+.pricing-matrix .quantity-selector input.quantity-range::-webkit-slider-runnable-track {
+    background-color: transparent;
+    border: 1.3rem solid #eeeffc;
+    border-right: none;
+    border-left: none;
+    box-sizing: content-box;
+    height: 1rem;
+    width: 100%
+}
+
+.pricing-matrix .quantity-selector input.quantity-range::-moz-range-track {
+    background-color: transparent;
+    border-bottom: 1.3rem solid #eeeffc;
+    border-top: 1.3rem solid #eeeffc;
+    height: 1rem
+}
+
+.pricing-matrix .quantity-selector input.quantity-range::-moz-range-progress {
+    background-color: #881fff;
+    height: 1rem
+}
+
+.pricing-matrix .quantity-selector input.quantity-range::-moz-range-thumb {
+    background-color: #881fff;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 0 8px 0 rgb(0 0 0 / 18%);
+    height: 3.4rem;
+    width: 3.4rem
+}
+
+.pricing-matrix .quantity-selector input.quantity-range::-ms-track {
+    border-color: #eeeffc;
+    border-width: 13px 0;
+    color: transparent;
+    height: 10px;
+    width: 100%
+}
+
+.pricing-matrix .quantity-selector input.quantity-range::-ms-fill-lower,
+.pricing-matrix .quantity-selector input.quantity-range::-ms-fill-upper {
+    background: #fff
+}
+
+.pricing-matrix .quantity-selector input.quantity-range::-ms-fill-lower {
+    background-color: #881fff
+}
+
+.pricing-matrix .quantity-selector input.quantity-range::-ms-thumb {
+    background-color: #881fff;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 0 8px 0 rgb(0 0 0 / 18%);
+    height: 35px;
+    margin-top: 0;
+    width: 35px
+}
