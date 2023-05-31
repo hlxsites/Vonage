@@ -24,6 +24,15 @@ async function loadFragment(path) {
       const main = document.createElement('main');
       main.innerHTML = await resp.text();
       decorateMain(main);
+      // Styling links properly, removing added classes
+      const elements = Array.from(main.getElementsByTagName('a'));
+      elements.forEach((el) => {
+        if (el.parentElement.parentElement.tagName === 'P') {
+          el.classList.remove('button');
+          el.classList.remove('primary');
+          el.classList.add('fragment-link');
+        }
+      });
       await loadBlocks(main);
       return main;
     }
@@ -35,7 +44,8 @@ export default async function decorate(block) {
   const link = block.querySelector('a');
   const path = link ? link.getAttribute('href') : block.textContent.trim();
   const fragment = await loadFragment(path);
-  if (fragment) {
-    block.replaceWith(...fragment.childNodes);
+  if (!fragment) {
+    return;
   }
+  block.replaceChildren(...fragment.childNodes);
 }
