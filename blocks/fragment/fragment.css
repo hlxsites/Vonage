@@ -12,79 +12,79 @@ div.fragment.two-col {
         display:flex;
         flex-direction: initial;
     }
+}
 
-    > div {
-        position: relative;
-        width: 100%;
-        padding: 0 20px;
+div.fragment.two-col > div {
+    position: relative;
+    width: 100%;
+    padding: 0 20px;
 
-        @media (min-width: 768px) {
-            margin-left: 8.3333%;
-            flex: 0 0 83.3333%;
-            max-width: 83.3333%;
-        }
-    }
-
-    > .leftcolumn {
-        flex: 0 0 50%;
+    @media (min-width: 768px) {
+        margin-left: 8.3333%;
+        flex: 0 0 83.3333%;
         max-width: 83.3333%;
     }
+}
 
-    > .rightcolumn {
-        margin-left: 0;
-        flex: 0 0 41.6667%;
-        max-width: 41.6667%;
-    }
+div.fragment.two-col > .leftcolumn {
+    flex: 0 0 50%;
+    max-width: 83.3333%;
+}
 
-    & a:any-link {
-        color: #000;
-        transition: transform .2s;
-        text-decoration: none;
-        display:inline-block;
-    }
+div.fragment.two-col > .rightcolumn {
+    margin-left: 0;
+    flex: 0 0 41.6667%;
+    max-width: 41.6667%;
+}
 
-    & li > a:hover, li > strong > a:hover {
-        text-decoration: underline;
-    }
+div.fragment.two-col a:any-link {
+    color: #000;
+    transition: transform .2s;
+    text-decoration: none;
+    display:inline-block;
+}
 
-    & .fragment-link {
-        font-size: 1.4rem;
-        font-weight: 600;
-        letter-spacing: .075rem;
-        line-height: 2rem;
-    }
+div.fragment.two-col li > a:hover, div.fragment.two-col li > strong > a:hover {
+    text-decoration: underline;
+}
 
-    & .fragment-link::after {
-        background-color: #000;
-        content: "";
-        display: block;
-        height: .2rem;
-        width: 100%
-    }
+div.fragment.two-col .fragment-link {
+    font-size: 1.4rem;
+    font-weight: 600;
+    letter-spacing: .075rem;
+    line-height: 2rem;
+}
 
-    & h2 {
-        font-size: 2.9rem;
-        font-weight: 500;
-        letter-spacing: -.15rem;
-        line-height: 3.2rem;
-    }
+div.fragment.two-col .fragment-link::after {
+    background-color: #000;
+    content: "";
+    display: block;
+    height: .2rem;
+    width: 100%
+}
 
-    & p {
-        font-size: 1.7rem;
-        font-weight: 400;
-        letter-spacing: -.02rem;
-        line-height: 2rem;
-    }
+div.fragment.two-col h2 {
+    font-size: 2.9rem;
+    font-weight: 500;
+    letter-spacing: -.15rem;
+    line-height: 3.2rem;
+}
 
-    & ul {
-        font-size: 1.2rem;
-        font-weight: 400;
-        letter-spacing: .025rem;
-        line-height: 1.6rem;
-        column-gap: 4rem;
+div.fragment.two-col p {
+    font-size: 1.7rem;
+    font-weight: 400;
+    letter-spacing: -.02rem;
+    line-height: 2rem;
+}
 
-        @media (min-width: 768px) {
-            column-count: 2;
-        }
+div.fragment.two-col ul {
+    font-size: 1.2rem;
+    font-weight: 400;
+    letter-spacing: .025rem;
+    line-height: 1.6rem;
+    column-gap: 4rem;
+
+    @media (min-width: 768px) {
+        column-count: 2;
     }
 }
