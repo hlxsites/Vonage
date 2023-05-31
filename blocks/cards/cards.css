@@ -45,7 +45,7 @@
 }
 
 .cards-container.icon-panel > .cards-wrapper {
-  margin: 0;
+  margin: auto;
   padding-left: 20px;
   padding-right: 20px;
 }
@@ -237,23 +237,18 @@
   
 .cards-container.icon-panel .cards > ul > li {
   border: none;
-  flex: 0 0 100%;
-  max-width: 100%;
+  flex: 0 0 25%;
 }
 
-@media (min-width: 600px) and (max-width: 900px) {
+@media (max-width: 900px) {
   .cards-container.icon-panel .cards > ul > li {
-    border: none;
     flex: 0 0 50%;
-    max-width: 50%;
   }
 }
 
-@media (min-width: 900px) {
+@media (max-width: 600px) {
   .cards-container.icon-panel .cards > ul > li {
-    border: none;
-    flex: 0 0 25%;
-    max-width: 25%;
+    flex: 0 0 100%;
   }
 }
 
