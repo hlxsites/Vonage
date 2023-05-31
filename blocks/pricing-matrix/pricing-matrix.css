@@ -1,3 +1,33 @@
+.section.pricing-matrix-container {
+    background-color: #eeeffc;
+}
+
+.pricing-matrix .quantity-selector .quantity-count {
+    font-family: Spezia,Spezia_SemiMono,Arial,Helvetica,sans-serif;
+    font-size: 1.7rem;
+    font-weight: 400;
+    letter-spacing: -.025rem;
+    line-height: 2.5rem;
+    border: 0;
+    border-radius: 0.8rem;
+    display: block;
+    height: 4.9rem;
+    margin-left: 2rem;
+    text-align: center;
+    width: 6.9rem;
+
+    height: 5.2rem;
+    margin-left: auto;
+    margin-right: auto;
+    width: 8.4rem;
+    font-family: Spezia,Spezia_SemiMono,Arial,Helvetica,sans-serif;
+    font-size: 2.1rem;
+    font-weight: 400;
+    letter-spacing: -.025rem;
+    line-height: 2.4rem;
+}
+
+
 .pricing-matrix .quantity-selector input.quantity-range {
     appearance: none;
     background-color: transparent;
@@ -5,7 +35,8 @@
     display: block;
     height: 3.6rem;
     padding: 0;
-    width: 100%
+    width: 100%;
+    max-width: unset;
 }
 
 .pricing-matrix .quantity-selector input.quantity-range::-webkit-slider-thumb {
@@ -75,4 +106,34 @@
     height: 35px;
     margin-top: 0;
     width: 35px
+}
+
+
+.pricing-matrix .quantity-selector {
+    max-width: 61.8rem;
+}
+
+.pricing-matrix .quantity-selector .range-length {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.2rem;
+    font-weight: 400;
+    line-height: 1.6rem;
+    color: #881fff;
+}
+
+.pricing-matrix .quantity-selector .ranges {
+    display: flex;
+    justify-content: space-evenly;
+    font-size: 1.2rem;
+    font-weight: 400;
+    letter-spacing: .025rem;
+    line-height: 1.6rem;
+    gap: 10px;
+}
+
+.pricing-matrix .quantity-selector .ranges .divider {
+    border-right: 1px solid #881fff;
+    height: 0.5rem;
+    width: 0.1rem;
 }

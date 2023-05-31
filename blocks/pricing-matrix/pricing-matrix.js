@@ -29,7 +29,9 @@ export default async function decorate(block) {
                style=";">
         <div class="ranges">
             <div>Small</div>
+            <div class="divider">&nbsp;</div>
             <div>Medium</div>
+            <div class="divider">&nbsp;</div>
             <div>Enterprise</div>
         </div>
     </div>
