@@ -1,5 +1,5 @@
 /* 2 column version of the fragment */
-.fragment-wrapper {
+div.fragment.two-col {
     text-decoration: none;
     box-sizing: inherit;
     position: relative;
