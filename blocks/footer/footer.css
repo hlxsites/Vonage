@@ -24,43 +24,43 @@ footer .footer p {
   flex-flow: row wrap;
 }
 
-.footer-links-pair {
-  box-sizing: border-box;
-  display: flex;
-  flex-flow: row wrap;
-  flex: 1 1 280px;
-  position: relative;
-  padding: 1rem 0;
-}
-
-.footer-links-pair ul {
+.footer-links-row > ul {
   box-sizing: border-box;
   letter-spacing: 0.025rem;
   line-height: 1.6rem;
-  flex: 1 0 130px;
+  flex: 0 0 25%;
   list-style-type: none;
   margin: 0;
   padding: .6rem 0;
 }
 
-.footer-links-pair li {
+/* @media (min-width: 600px) and (max-width: 900px) { */
+@media (max-width: 900px) {
+    .footer-links-row > ul {
+    flex: 0 0 50%;
+  }
+}
+
+@media (max-width: 600px) {
+  .footer-links-row > ul {
+    flex: 0 0 100%;
+  }
+}
+
+.footer-links-row li {
   font-size: 1.2rem;
   box-sizing: border-box;
   margin-bottom: 1.6rem;
 }
 
-.footer-links-pair li:not(:has(a)) {
+.footer-links-row li:not(:has(a)) {
   font-family: var(--fixed-font-family);
   letter-spacing: .2rem;
   line-height: 2rem;
   position: relative;
 }
 
-.footer-links-pair li:last-child {
-  margin-bottom: 0;
-}
-
-.footer-links-pair a {
+.footer-links-row a {
   box-sizing: border-box;
   color: inherit;
   position: relative;
