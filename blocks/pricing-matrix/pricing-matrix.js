@@ -141,7 +141,7 @@ export default async function decorate(block) {
     .map((cell) => cell.innerText.trim());
 
   const offerColumns = [];
-  const colCount = block.querySelectorAll(':scope > div > div').length;
+  const colCount = block.firstElementChild.childElementCount;
   // eslint-disable-next-line no-plusplus
   for (let i = 1; i < colCount; i++) {
     offerColumns.push(block.querySelectorAll(`:scope > div > div:nth-child(${i + 1})`));
@@ -151,13 +151,15 @@ export default async function decorate(block) {
   block.prepend(lineRangeSelector());
 
   const plans = div({ class: 'plans' });
-  const card = div({ class: 'plans-card' });
-  card.append(...offerColumns[0]);
-  annotateConditions(card, conditions);
-  decorateCard(card);
 
+  offerColumns.forEach((column) => {
+    const card = div({ class: 'plans-card' });
+    card.append(...column);
+    annotateConditions(card, conditions);
+    decorateCard(card);
+    plans.append(card);
+  });
 
-  plans.append(card);
   block.append(plans);
 
   updateConditionalElements(parseInt(block.querySelector('#employee-counter').value));
