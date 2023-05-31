@@ -1,5 +1,4 @@
-
-
+/* stylelint-disable no-descending-specificity */
 
 :root {
   --nav-color: #000;
@@ -717,7 +716,7 @@ header .sub-menu-label-active {
       display: flex;
     }
 
-    /*Style the close icon in the sub menu*/
+    /* Style the close icon in the sub menu */
     header #nav span.close-icon {
       position: absolute;
       left: 1265px;
