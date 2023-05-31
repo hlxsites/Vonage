@@ -64,8 +64,8 @@ export function domEl(tag, ...items) {
 
   items.forEach((item) => {
     item = item instanceof Element || item instanceof HTMLElement
-        ? item
-        : document.createTextNode(item);
+      ? item
+      : document.createTextNode(item);
     element.appendChild(item);
   });
 

@@ -1,3 +1,5 @@
+import { div } from '../../scripts/scripts.js';
+
 /**
  * creates a line range selector.
  * @return {HTMLDivElement}
@@ -56,6 +58,36 @@ function lineRangeSelector() {
   return lineSelector;
 }
 
+function parseAndFormatCondition(condition) {
+  return condition.replaceAll(/[^0-9=<>]/g, '').replaceAll(' ', '').trim();
+}
+
+function annotateConditions(card, conditions) {
+  [...card.children].forEach((divEl, i) => {
+    const condition = conditions[i];
+    const parsedCondition = parseAndFormatCondition(condition);
+    if (parsedCondition) {
+      divEl.setAttribute('data-range-condition', parsedCondition);
+    }
+  });
+}
+
 export default async function decorate(block) {
+  const conditions = [...block.querySelectorAll(':scope > div > div:nth-child(1)')]
+    .map((cell) => cell.innerText.trim());
+
+  const offerColumns = [];
+  const colCount = block.querySelectorAll(':scope > div > div').length;
+  for (let i = 1; i < colCount; i++) {
+    offerColumns.push(block.querySelectorAll(`:scope > div > div:nth-child(${i + 1})`));
+  }
+
   block.prepend(lineRangeSelector());
+  block.innerText = '';
+
+  const card = div({ class: 'plans-card' });
+  card.append(...offerColumns[0]);
+  annotateConditions(card, conditions);
+
+  block.append(card);
 }
