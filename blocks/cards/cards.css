@@ -1,3 +1,11 @@
+/* stylelint-disable no-descending-specificity */
+
+:root {
+  /* colors */
+  --info-card-background-color: #000;
+  --info-card-color: #FFF;
+}
+
 .cards > ul {
   list-style: none;
   margin: 0;
@@ -148,4 +156,111 @@
   object-fit: cover;
   width: 38px;
   height:38px;
+}
+
+/* Styling for the black-gradient-highlight card variation */
+
+.cards.info-card > ul {
+  display: flex;
+  flex-wrap: wrap;
+  padding-inline-start: 0;
+  grid-gap: 0;
+}
+
+.cards.info-card > ul > li {
+  border: 0;
+  flex: 0 0 50%;
+  max-width: 50%;
+  padding-right: 20px;
+  padding-left: 20px;
+  box-sizing: border-box;
+}
+
+.cards.info-card .card-container {
+  min-height: 48.5rem;
+  height: 100%;
+}
+
+.cards.info-card .cards-card-body {
+  display:block;
+  background-color: var(--info-card-background-color);
+  margin: 0;
+  position: relative;
+  height: 100%;
+  box-sizing: border-box;
+  text-decoration: none;
+}
+
+.cards.info-card .card-title {
+  font-size: 2.9rem;
+  font-weight: 600;
+  letter-spacing: -.15rem;
+  line-height: 3.2rem;
+  color: white;
+  text-decoration: none;
+}
+
+.cards.info-card .header-container {
+  margin-bottom: 2rem;
+  min-height: 19.1rem;
+  -webkit-box-align: end;
+  -ms-flex-align: end;
+  align-items: flex-end;
+  display: -webkit-box;
+  display: flex;
+}
+
+.cards.info-card .button.primary {
+  background-color: black;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  font-weight: 400;
+  white-space: normal;
+  text-align: left;
+}
+
+.cards.info-card .icon-arrow-link::before {
+  content: "\e90c";
+  color: white;
+  font-family: VltIcons!important;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 400;
+  line-height: inherit;
+  speak: none;
+  text-transform: none;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+}
+
+@media (min-width: 992px){
+  .cards.info-card .cards-card-body {
+    padding: 8rem 7rem;
+  }
+
+  .cards.info-card .header-container {
+    margin-bottom: 2rem;
+    min-height: 19.1rem;
+  }
+
+  .cards.info-card .button-container {
+    margin-bottom: 4rem;
+  }
+
+  .cards.info-card .icon-arrow-link {
+    position: absolute;
+    top: 38rem;
+  }
+}
+
+@media (min-width: 1200px){
+  .cards.info-card .button-container {
+    font-size: 1.7rem;
+    font-weight: 400;
+    letter-spacing: -.02rem;
+    line-height: 2rem;
+    color: white;
+    text-decoration: none;
+  }
 }
