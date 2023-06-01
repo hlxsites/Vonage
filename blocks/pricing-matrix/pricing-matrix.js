@@ -201,7 +201,6 @@ function decorateCard(card) {
   card.append(div({ class: 'plan-content' }, ...childrenArray.slice(1)));
 }
 
-
 export default async function decorate(block) {
   const conditions = [...block.querySelectorAll(':scope > div > div:nth-child(1)')]
     .map((cell) => cell.innerText.trim());

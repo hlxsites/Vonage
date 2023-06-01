@@ -99,8 +99,9 @@ export function button(...items) { return domEl('button', ...items); }
 function buildHeroBlock(main) {
   const heading = main.querySelector('h1');
   const picture = main.querySelector('picture');
-  // eslint-disable-next-line no-bitwise
-  if (heading && picture && (heading.compareDocumentPosition(picture) & Node.DOCUMENT_POSITION_PRECEDING)) {
+  if (heading && picture
+      // eslint-disable-next-line no-bitwise
+      && (heading.compareDocumentPosition(picture) & Node.DOCUMENT_POSITION_PRECEDING)) {
     const section = document.createElement('div');
     section.append(buildBlock('hero', { elems: [picture, heading] }));
     main.prepend(section);
