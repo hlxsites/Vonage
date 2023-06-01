@@ -84,7 +84,7 @@ function updateBuyNowButtons(userCount, block) {
  * creates a line range selector.
  * @return {HTMLDivElement}
  */
-function lineRangeSelector() {
+function lineRangeSelector(block) {
   /**
    * Update the background of the range slider to show the progress.
    * This is a workaround for Chrome, which does not support the -moz-range-progress pseudo-element.
@@ -100,18 +100,19 @@ function lineRangeSelector() {
     white 100%)`;
   }
 
+  const label = block.closest('.section').querySelector('h2');
+  console.log('label', label.id);
+
   const lineSelector = document.createElement('div');
   lineSelector.innerHTML = `<div class="quantity-selector">
-    <input id="employee-counter" autocomplete="off" class="quantity-count" type="text" name="counter" value="1">
+    <input autocomplete="off" class="quantity-count" type="text" name="counter" value="1"  aria-labelledby="${label?.id}">
     <div class="widget-range " aria-hidden="true">
         <div class="range-length">
             <div class="range-start">1</div>
             <div class="range-end">1000 +</div>
         </div>
         <input id="slider" autocomplete="off"  aria-hidden="true" class="quantity-range"
-               type="range" min="1" max="1000" value="1"  
-               
-               style=";">
+               type="range" min="1" max="1000" value="1" >
         <div class="ranges">
             <div>Small</div>
             <div class="divider">&nbsp;</div>
@@ -122,7 +123,7 @@ function lineRangeSelector() {
     </div>
 </div>
 `;
-  const counter = lineSelector.querySelector('#employee-counter');
+  const counter = lineSelector.querySelector('.quantity-count');
   const slider = lineSelector.querySelector('#slider');
 
   counter.addEventListener('input', (e) => {
@@ -130,16 +131,16 @@ function lineRangeSelector() {
 
     slider.value = mapCustomerSegmentToNativeScale(counter.value);
     updateRangeBackground(slider);
-    updateConditionalElements(parseInt(counter.value || 1), lineSelector.closest('.block'));
-    updateBuyNowButtons(counter.value, lineSelector.closest('.block'));
+    updateConditionalElements(parseInt(counter.value || 1), block);
+    updateBuyNowButtons(counter.value, block);
   });
 
   slider.addEventListener('input', (e) => {
     counter.value = mapValueToCustomerSegmentScale(e.target.value);
 
     updateRangeBackground(slider);
-    updateConditionalElements(parseInt(counter.value), lineSelector.closest('.block'));
-    updateBuyNowButtons(counter.value, lineSelector.closest('.block'));
+    updateConditionalElements(parseInt(counter.value), block);
+    updateBuyNowButtons(counter.value, block);
   });
   return lineSelector;
 }
@@ -214,7 +215,7 @@ export default async function decorate(block) {
   }
 
   block.innerText = '';
-  block.prepend(lineRangeSelector());
+  block.prepend(lineRangeSelector(block));
 
   const plans = div({ class: 'plans' });
 
@@ -228,6 +229,6 @@ export default async function decorate(block) {
 
   block.append(plans);
 
-  updateConditionalElements(parseInt(block.querySelector('#employee-counter').value), block);
-  updateBuyNowButtons(parseInt(block.querySelector('#employee-counter').value), block);
+  updateConditionalElements(parseInt(block.querySelector('.quantity-count').value), block);
+  updateBuyNowButtons(parseInt(block.querySelector('.quantity-count').value), block);
 }
