@@ -154,18 +154,6 @@
 
 }
 
-/*@media (min-width: 576px) {*/
-/*    .pricing-matrix .plans .plans-card {*/
-/*        width: 330px;*/
-/*    }*/
-/*}*/
-
-/*@media (min-width: 768px) {*/
-/*    .pricing-matrix .plans .plans-card {*/
-/*        width: 560px;*/
-/*    }*/
-/*}*/
-
 @media (min-width: 990px) {
     .pricing-matrix .plans .plans-card {
         width: clamp(300px, 100%, 400px);
