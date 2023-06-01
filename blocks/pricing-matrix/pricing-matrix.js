@@ -24,6 +24,38 @@ function updateConditionalElements(numberOfLines, block) {
   });
 }
 
+// map values to 3 scales, 1-49, 50-500, 501-1000
+const stops = [49, 500, 1000];
+const nativeStops = [333, 666, 1000];
+
+function mapValueToCustomerSegmentScale(inputRangeValue) {
+  if (inputRangeValue <= nativeStops[0]) {
+    // eslint-disable-next-line no-mixed-operators
+    return Math.round(inputRangeValue / nativeStops[0] * stops[0]);
+    // eslint-disable-next-line no-else-return
+  } else if (inputRangeValue <= nativeStops[1]) {
+    const ratio = (inputRangeValue - nativeStops[0]) / (nativeStops[1] - nativeStops[0]);
+    return Math.round(stops[0] + ratio * (stops[1] - stops[0]));
+  } else {
+    const ratio = (inputRangeValue - nativeStops[1]) / (nativeStops[2] - nativeStops[1]);
+    return Math.round(stops[1] + ratio * (stops[2] - stops[1]));
+  }
+}
+
+function mapCustomerSegmentToNativeScale(userCount) {
+  if (userCount <= stops[0]) {
+    // eslint-disable-next-line no-mixed-operators
+    return Math.round(userCount / stops[0] * nativeStops[0]);
+    // eslint-disable-next-line no-else-return
+  } else if (userCount <= stops[1]) {
+    const ratio = (userCount - stops[0]) / (stops[1] - stops[0]);
+    return Math.round(nativeStops[0] + ratio * (nativeStops[1] - nativeStops[0]));
+  } else {
+    const ratio = (userCount - stops[1]) / (stops[2] - stops[1]);
+    return Math.round(nativeStops[1] + ratio * (nativeStops[2] - nativeStops[1]));
+  }
+}
+
 /**
  * creates a line range selector.
  * @return {HTMLDivElement}
@@ -72,12 +104,14 @@ function lineRangeSelector() {
   counter.addEventListener('input', (e) => {
     counter.value = e.target.value.replace(/[^0-9]/g, '');
 
-    slider.value = counter.value;
+    slider.value = mapCustomerSegmentToNativeScale(counter.value);
     updateRangeBackground(slider);
     updateConditionalElements(parseInt(counter.value), lineSelector.closest('.block'));
   });
+
   slider.addEventListener('input', (e) => {
-    counter.value = e.target.value;
+    counter.value = mapValueToCustomerSegmentScale(e.target.value);
+
     updateRangeBackground(slider);
     updateConditionalElements(parseInt(counter.value), lineSelector.closest('.block'));
   });
