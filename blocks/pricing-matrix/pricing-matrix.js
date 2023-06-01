@@ -69,6 +69,17 @@ function mapCustomerSegmentToNativeScale(userCount) {
   }
 }
 
+function updateBuyNowButtons(userCount, block) {
+  // e.g. https://www.vonage.com/promo/buy/cart/?sku=SSU000&quantity=3&couponcode=SOMECODE
+  block.querySelectorAll('a[href]').forEach((link) => {
+    if (link.href.includes('quantity=')) {
+      const url = new URL(link.href);
+      url.searchParams.set('quantity', userCount);
+      link.href = url.toJSON();
+    }
+  });
+}
+
 /**
  * creates a line range selector.
  * @return {HTMLDivElement}
@@ -120,6 +131,7 @@ function lineRangeSelector() {
     slider.value = mapCustomerSegmentToNativeScale(counter.value);
     updateRangeBackground(slider);
     updateConditionalElements(parseInt(counter.value || 1), lineSelector.closest('.block'));
+    updateBuyNowButtons(counter.value, lineSelector.closest('.block'));
   });
 
   slider.addEventListener('input', (e) => {
@@ -127,6 +139,7 @@ function lineRangeSelector() {
 
     updateRangeBackground(slider);
     updateConditionalElements(parseInt(counter.value), lineSelector.closest('.block'));
+    updateBuyNowButtons(counter.value, lineSelector.closest('.block'));
   });
   return lineSelector;
 }
@@ -188,6 +201,7 @@ function decorateCard(card) {
   card.append(div({ class: 'plan-content' }, ...childrenArray.slice(1)));
 }
 
+
 export default async function decorate(block) {
   const conditions = [...block.querySelectorAll(':scope > div > div:nth-child(1)')]
     .map((cell) => cell.innerText.trim());
@@ -215,4 +229,5 @@ export default async function decorate(block) {
   block.append(plans);
 
   updateConditionalElements(parseInt(block.querySelector('#employee-counter').value), block);
+  updateBuyNowButtons(parseInt(block.querySelector('#employee-counter').value), block);
 }
