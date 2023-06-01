@@ -1,5 +1,4 @@
-
-
+/* stylelint-disable no-descending-specificity */
 
 :root {
   --nav-color: #000;
@@ -7,6 +6,8 @@
   --nav-logo-color: #000;
   --nav-background-color: #FFF;
   --nav-decoration-color: #000;
+  --nav-section-tab-color: #6f54a3;
+  --nav-extended-color: #FFF;
   --mobile-nav-extended-background: #000;
   --mobile-nav-extended-logo-color: #FFF;
   --mobile-nav-extended-color: #FFF;
@@ -17,23 +18,24 @@
    --nav-contact-button-background-color: #000;
 }
 
-/***** Global header / nav menu styling *****/
+/***** Global header / nav menu structure and styling *****/
 
 /* header and nav layout */
 header {
-  height: 12.5rem;
+  height: 9.6rem;
   position: fixed;
   top: 0;
   width: 100%;
+  background-color: white;
 }
 
-/* Div element to use for the mobile menu animation and to cover the page content  */
-.header.block {
+/* Div element to cover the page content  */
+header .header.block {
   background-color: var(--nav-background-color);
 }
 
-/* Div element to use for the mobile menu animation and to cover the page content */
-.header-backdrop {
+/* Div element to use for the mobile menu animation */
+header .header.backdrop {
   background-color: var(--mobile-nav-extended-background);
   border-radius: 10rem;
   bottom: 100%;
@@ -44,7 +46,7 @@ header {
   z-index: 5;
 }
 
-/* Div element to encapsulate the headers navigation menu */
+/* Div element to encapsulate the navigation menu */
 header .nav-wrapper {
   z-index: 6;
   position: relative;
@@ -59,6 +61,7 @@ header .nav-logo {
   width: 14.6rem;
   height: auto;
   left: 0.2rem;
+  transition: opacity .36s ease-in-out,transform .36s ease-in-out,-webkit-transform .36s ease-in-out;
 }
 
 /* Styling of the full logo image displayed in desktop mode before scrolling down as well as mobile */
@@ -70,43 +73,67 @@ header .nav-logo-big {
   height: 3.2rem;
   width:100%;
   bottom: 1.85rem;
+  transition: opacity .36s ease-in-out,transform .36s ease-in-out,-webkit-transform .36s ease-in-out;
 }
 
 /* Define the layout of the main nav container which houses all the buttons */
-header nav {
-  display: flex;
-  flex-direction: row-reverse;
+header #nav {
   align-items: center;
   margin: auto;
   padding: 0 1rem;
   background-color: transparent;
 }
 
-header nav p {
+/* Divider between section and tool menus in mobile mode */
+header hr.nav-section-divider {
+  display: none;
+
+  /* Need to fix the animation by splitting the display and animatable properties to two steps */
+  transition: opacity .36s ease-in-out,transform .36s ease-in-out,-webkit-transform .36s ease-in-out;
+}
+
+header #nav p {
   margin: 0;
   line-height: 1;
 }
 
-header nav a:any-link {
+header #nav a:any-link {
   color: currentcolor;
 }
 
+header .header-navigation {
+  width: 100%;
+  display: flex;
+  flex-flow: column-reverse nowrap;
+  justify-content: space-between;
+}
+
 /* Common styling for all the nav sections */
-header .nav-sections ul, header .nav-tools ul, header .nav-search ul {
+header .nav-sections > ul, header .nav-tools > ul, header .nav-search > ul {
   list-style: none;
   margin-top: 0.8em;
   margin-bottom: 1em;
   padding-inline-start: 1rem;
 }
 
-/* Nav menu container housing both the sections and tools menu rows when expanded */
-header #nav.nav-big{
-  padding: 1.2rem 2rem 0 25rem;
+header .nav-search {
+  position: absolute;
+  height: 2.4rem;
+  top: 3.6rem;
+  width: 2.4rem;
+  right: 6rem;
 }
 
-/* Nav menu container housing both the sections and tools menu rows when expanded */
-header #nav.nav-small{
-  padding: 1.2rem 2rem 0 10.5rem;
+header .nav-search > ul {
+  margin: 0;
+  width: 2.4rem;
+  height: 2.4rem;
+  padding-inline-start: 0;
+}
+
+/* Set mobile nav section elements to transparent when the nav isn't open to allow for the animation */
+header .nav-sections > ul li {
+  opacity:0;
 }
 
 /* Lower sections menu item container */
@@ -117,27 +144,49 @@ header .nav-sections {
 /* Adjust sections nav menu elements with a drop down to allow for the decoration element */
 header .nav-sections .nav-drop {
   position: relative;
-  padding-right: 16px;
   text-decoration: underline;
   width: fit-content;
 }
 
+header .nav-sections .nav-drop::after {
+  border-right: .3rem solid #fff;
+  border-top: .3rem solid #fff;
+  content: "";
+  display: block;
+  height: 1.0rem;
+  margin-top: -.2rem;
+  position: absolute;
+  right: -2rem;
+  top: 50%;
+  transform: rotate(45deg);
+  width: 1.0rem;
+}
+
 /***** Styling specific to the mobile mode nav menu when closed *****/
 
-  /* For mobile mode don't render the menus directly */
-  header .nav-sections, header .nav-tools {
-    display: none
+  /* For mobile mode hide the menus so they can be animated when opened */
+  header #nav .nav-sections, header #nav .nav-tools {
+    display: none;
+    height: 0;
+    visibility: hidden;
+    transition: opacity .36s ease-in-out,transform .36s ease-in-out,-webkit-transform .36s ease-in-out;
   }
 
-  /* Styles for the mobile nav hamburger icon to launch the menu */
-  header nav .nav-hamburger {
-    grid-area: hamburger;
-    height: 5.4rem;
-    display: flex;
-    align-items: center;
+  /* Styling for the search icon  */
+  header #nav .nav-search > ul > li {
+    line-height: 0;
   }
 
-  header nav .nav-hamburger button {
+  /*  Styles relating to the 'hamburger' menu button */
+  header #nav .nav-hamburger {
+    position: absolute;
+    height: 2.4rem;
+    top: 3.6rem;
+    width: 2.4rem;
+    right: 2rem;
+  }
+
+  header #nav .nav-hamburger button {
     margin: 0;
     border: 0;
     border-radius: 0;
@@ -150,38 +199,42 @@ header .nav-sections .nav-drop {
     z-index: 7;
   }
 
-  header nav .nav-hamburger-icon,
-  header nav .nav-hamburger-icon::before,
-  header nav .nav-hamburger-icon::after {
-    box-sizing: border-box;
-    display: block;
-    position: relative;
-    width: 20px;
+  header #nav .nav-hamburger-icon {
+    top: 50%;
+    position: absolute;
   }
 
-  header nav .nav-hamburger-icon::before,
-  header nav .nav-hamburger-icon::after {
+  header #nav .nav-hamburger-icon,
+  header #nav .nav-hamburger-icon::before,
+  header #nav .nav-hamburger-icon::after {
+    display: block;
+    width: 2.4rem;
+    height: 2.4rem;
+  }
+
+  header #nav .nav-hamburger-icon::before,
+  header #nav .nav-hamburger-icon::after {
     content: '';
     position: absolute;
     background: currentcolor;
   }
 
   /* Draw the hamburger icon through pseudo classes when nav is closed */
-  header nav[aria-expanded="false"] .nav-hamburger-icon,
-  header nav[aria-expanded="false"] .nav-hamburger-icon::before,
-  header nav[aria-expanded="false"] .nav-hamburger-icon::after {
-    height: 2px;
-    border-radius: 2px;
+  header #nav[aria-expanded="false"] .nav-hamburger-icon,
+  header #nav[aria-expanded="false"] .nav-hamburger-icon::before,
+  header #nav[aria-expanded="false"] .nav-hamburger-icon::after {
+    height: 0.3rem;
     background: currentcolor;
   }
 
-  header nav[aria-expanded="false"] .nav-hamburger-icon::before {
-    top: -6px;
+  header #nav[aria-expanded="false"] .nav-hamburger-icon::before {
+    top: -0.6rem;
   }
 
-  header nav[aria-expanded="false"] .nav-hamburger-icon::after {
-    top: 6px;
+  header #nav[aria-expanded="false"] .nav-hamburger-icon::after {
+    top: 0.6rem;
   }
+
 
 /***** Styling specific to the mobile mode nav menu when expanded *****/
 
@@ -193,52 +246,8 @@ header .nav-sections .nav-drop {
   }
 
   /* Switch the color of all text elements down the nav to white when expanded */
-  header nav[aria-expanded="true"] {
+  header #nav[aria-expanded="true"] {
     color: var(--mobile-nav-extended-color);
-  }
-
-  /* Styling for nav section container */
-  header nav[aria-expanded="true"] .nav-sections {
-    display: block;
-    visibility: visible;
-    left: 0;
-    overflow: scroll;
-    padding: 0.3rem 2rem 14rem;
-    position: absolute;
-    top: 12.5rem;
-    z-index: 6;
-  }
-
-  /* Define the style for regular nav section items */
-  header nav[aria-expanded="true"] .nav-sections > ul  {
-    list-style: none;
-    margin-top: 0;
-    margin-bottom: 1em;
-    padding-inline-start: 0;
-  }
-
-  header nav[aria-expanded="true"] .nav-sections > ul > li {
-    font-family: Spezia,"Spezia_SemiMono",Arial,Helvetica,sans-serif;
-    font-size: 2.3rem;
-    font-weight: 600;
-    letter-spacing: 0.15rem;
-    line-height: 4.6rem;
-    margin-bottom: 2.0rem;
-  }
-
-  /* Define the style and decoration for nav section items with children */
-  header .nav-sections .nav-drop[aria-expanded="true"]::after {
-    border-right: 0.3rem solid var(--mobile-nav-extended-decoration-color);
-    border-top: 0.3rem solid var(--mobile-nav-extended-decoration-color);
-    content: "";
-    display: block;
-    height: 1rem;
-    margin-top: -0.4rem;
-    position: absolute;
-    right: -0.4rem;
-    top: 50%;
-    transform: rotate(45deg);
-    width: 1rem;
   }
 
   /* Class added to the logo when the menu expands to have it rendered white */
@@ -246,40 +255,208 @@ header .nav-sections .nav-drop {
     color: var(--mobile-nav-extended-logo-color);
   }
 
-  /* Don't display the search icon when the nav menu is expanded */
-  header nav[aria-expanded="true"] .nav-search {
+/* Change layout of the main nav container to align all left in a simple block */
+  header #nav[aria-expanded="true"] .header-navigation {
+    width: 100%;
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 12.5rem;
+    overflow: scroll;
+    padding: .3rem 2rem 14rem;
+    box-sizing: border-box;
+  }
+
+
+  /* Styling for nav section container */
+  header #nav[aria-expanded="true"] .nav-sections {
+    height: auto;
+    display: block;
+    visibility: visible;
+    left: 0;
+    overflow: hidden;
+    top: 12.5rem;
+    z-index: 6;
+  }
+
+  /* Define the style for regular nav section items */
+  header #nav[aria-expanded="true"] .nav-sections > ul {
+    max-width: 225px;
+    min-width: 225px;
+    list-style: none;
+    margin-top: 0;
+    margin-bottom: 1em;
+    padding-inline-start: 0;
+  }
+
+/*  Bring the tools menu in as a block element below the sections and divider */
+header #nav[aria-expanded="true"] .nav-tools {
+  display: block;
+  height: auto;
+  visibility: visible;
+  font-size: 1.6rem;
+}
+
+  header #nav[aria-expanded="true"] .nav-tools li {
+    margin-top: 1.5rem;
+  }
+
+  /* Don't show sub-menu items by default */
+  header #nav[aria-expanded="true"] .sub-menu-section li {
     display: none;
   }
+
+  /* Stagger the opacity transition for each menu item to do the pretty cascade thing */
+  header #nav .nav-sections > ul > div:nth-child(1) > li { transition-delay: 0.40s }
+  header #nav .nav-sections > ul > div:nth-child(2) > li { transition-delay: 0.45s }
+  header #nav .nav-sections > ul > div:nth-child(3) > li { transition-delay: 0.50s }
+  header #nav .nav-sections > ul > div:nth-child(4) > li { transition-delay: 0.55s }
+  header #nav .nav-sections > ul > div:nth-child(5) > li { transition-delay: 0.60s }
+
+/*  Render the section divider */
+  header #nav[aria-expanded="true"] hr.nav-section-divider {
+    display: block;
+  }
+
+  /*  Don't render the search icon when the menu is expanded */
+  header #nav[aria-expanded="true"] .icon-search {
+    display: none;
+  }
+
+  /*  Make the menu elements act like links */
+  header #nav[aria-expanded="true"] .nav-sections > ul li:hover {
+    cursor: pointer;
+  }
+
+/***** Styling the mobile mode nav menu when a sub menu is selected *****/
 
   /* Display style for nav section items with children when expanded */
-
-  /* TODO: Need to implement the rendering of the children on click of the parent */
-  header .nav-sections > ul > li[aria-expanded="true"] > ul {
+  header #nav[aria-expanded="true"] .nav-sections > ul > li[aria-expanded="true"] > ul {
     display: none;
   }
 
-  /* Switch the hamburger icon to a white close icon when the nav is expanded */
-  header nav[aria-expanded="true"] .nav-hamburger-icon {
+  /*  Display the immediate children of the section as the nav index */
+  header #nav[aria-expanded="true"] .sub-menu-section-active > ul.sub-menu-index > li {
+    font-weight: 600;
+    display: block;
+    opacity: 1;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    position: relative;
+    padding-right: 20px;
     background-color: var(--mobile-nav-extended-background);
+    color: var(--mobile-nav-extended-color);
+    font-size: 1.8rem;
+    margin: 30px 0;
   }
 
-  header nav[aria-expanded="true"] .nav-hamburger-icon::before,
-  header nav[aria-expanded="true"] .nav-hamburger-icon::after {
+  /* Styling and transition for the sub menu elements */
+  header #nav[aria-expanded="true"] .nav-sections > ul > div.nav-item-wrapper > li {
+    font-size: 2.3rem;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 4.6rem;
+    margin-bottom: 2.0rem;
+    text-decoration: underline;
+    transition: opacity .6s ease-out .25s;
+  }
+
+  /* Property to change on the sub children once displayed to animate them fading in */
+  header .nav-sections > ul > div > li.animate-fade-in {
+    opacity:1;
+  }
+
+  /* Don't display the search icon when the nav menu is expanded */
+  header #nav[aria-expanded="true"] .nav-search {
+    display: none;
+  }
+
+/* Switch the hamburger icon to a white close icon when the nav is expanded */
+  header #nav[aria-expanded="true"] .nav-hamburger-icon {
+    background-color: var(--mobile-nav-extended-background);
+    top:0;
+  }
+
+  /* Morph the hamburger icon to a close button */
+  header #nav[aria-expanded="true"] .nav-hamburger-icon::before,
+  header #nav[aria-expanded="true"] .nav-hamburger-icon::after {
     top: 10px;
     left: 0;
     transform: rotate(45deg);
     width: 24px;
-    height: 2px;
+    height: 3px;
     border-radius: 2px;
   }
 
-  header nav[aria-expanded="true"] .nav-hamburger-icon::after {
+  header #nav[aria-expanded="true"] .nav-hamburger-icon::after {
     bottom: 3px;
     transform: rotate(-45deg);
   }
 
+
+/*  Styling for the back button that displays when in a sub menu in mobile */
+header #nav .nav-back-button {
+  transition: opacity .36s ease-in-out .36s;
+  font-size: 1.4rem;
+  font-weight: 400;
+  letter-spacing: -.02rem;
+  line-height: 2rem;
+  background-color: var(--mobile-nav-extended-background);
+  border: 0;
+  color: var(--mobile-nav-extended-color);
+  cursor: pointer;
+  display: none;
+  left: 2rem;
+  opacity: 0;
+  padding: 0 0 0 2rem;
+  position: absolute;
+  top: 2.2rem;
+  z-index: 8;
+  width: auto;
+  height: auto;
+}
+
+header #nav .nav-back-button > button {
+  transition: opacity .36s ease-in-out .36s;
+  font-size: 1.4rem;
+  font-weight: 400;
+  letter-spacing: -.02rem;
+  line-height: 2rem;
+  background-color: var(--mobile-nav-extended-background);
+  border: 0;
+  cursor: pointer;
+  padding: 0 0 0 2rem;
+  position: absolute;
+}
+
+header #nav .nav-back-button > button::before {
+  border-bottom: .2rem solid var(--mobile-nav-extended-decoration-color);
+  border-left: .2rem solid var(--mobile-nav-extended-decoration-color);
+  content: "";
+  height: 1rem;
+  left: .3rem;
+  margin-top: -.5rem;
+  position: absolute;
+  top: 50%;
+  transform: rotate(45deg);
+  width: 1rem;
+}
+
+header #nav .nav-back-button-active {
+  display:block;
+}
+
+header #nav .nav-back-button-animation-start {
+  opacity:1;
+}
+
+header #nav .sub-menu-section-active > ul.sub-menu-index {
+  padding-left: 0;
+}
+
   /* Style the last sections menu element as the contact us button */
-  header nav[aria-expanded="true"] .nav-sections > ul > li:last-child {
+  header #nav[aria-expanded="true"] .nav-sections > ul > div:last-child > li {
     border-radius: 1rem;
     width: fit-content;
     color: var(--mobile-nav-extended-contact-button-color);
@@ -287,186 +464,454 @@ header .nav-sections .nav-drop {
     margin-right: 0;
     height: 7.0rem;
     line-height: 7.0rem;
-    font-size: 1.6rem;
+    font-size: 1.8rem;
     padding-left: 2rem;
     padding-right: 2rem;
+    text-decoration: none;
+
   }
+
+/* When in a subsection yeet all the main menu elements off to the side as an animation */
+
+/* Think about moving the aria-expanded attribute up the dom so that it can be referenced to control the logo state */
+header.sub-menu-selected .nav-logo,
+header.sub-menu-selected #nav[aria-expanded="true"] .nav-tools,
+header.sub-menu-selected #nav[aria-expanded="true"] .nav-section-divider,
+header.sub-menu-selected #nav[aria-expanded="true"] .nav-sections > ul > div.nav-item-wrapper > li {
+  opacity: 0;
+  transform: translateX(-1000%);
+}
+
+header .sub-menu-label {
+display:none;
+  position: absolute;
+  font-size: 2.8rem;
+  font-weight: 500;
+  letter-spacing: -.15rem;
+  line-height: 3.2rem;
+}
+
+header .sub-menu-label-active {
+  display:block;
+}
 
 /***** Desktop behavior with full nav menu displayed *****/
 @media (min-width: 992px) {
-  header nav {
-    display: flex;
-    flex-flow: column-reverse nowrap;
-    justify-content: space-between;
-    background-color: var(--nav-background-color);
-  }
+  /***** Desktop nav layout *****/
 
-  /* Upper tools nav menu items */
-  header .nav-tools {
-    align-self: flex-end;
-    display: flex;
-    height: 4.5rem;
-    margin-bottom: 0.1rem;
-    margin-right: 4rem;
-  }
+    /* Header and nav layout */
+    header {
+      height: 9.6rem;
+    }
 
-  header .nav-drop {
-    text-decoration: none;
-  }
+    header #nav {
+      display: flex;
+      flex-flow: column-reverse nowrap;
+      justify-content: space-between;
+      background-color: var(--nav-background-color);
+    }
 
-  /* Add decoration to section menu elements which have a drop down */
-  header .nav-sections .nav-drop::after {
-    content: '';
-    display: inline-block;
-    position: absolute;
-    top: 1.2em;
-    right: 2px;
-    transform: rotate(135deg);
-    width: 6px;
-    height: 6px;
-    border-style: solid;
-    border-color: currentcolor;
-    border-radius: 0 1px 0 0;
-    border-width: 2px 2px 0 0;
-  }
+    /* Nav menu container housing both the sections and tools menu rows when expanded */
+    header #nav.nav-big{
+      padding: 1.2rem 2rem 0 25rem;
+    }
 
-  header .nav-sections .nav-drop[aria-expanded="true"]::after {
-    content: '';
-    display: inline-block;
-    position: absolute;
-    right: 2px;
-    transform: rotate(-45deg);
-    width: 6px;
-    height: 6px;
-    border-style: solid;
-    border-color: currentcolor;
-    border-radius: 0 1px 0 0;
-    border-width: 2px 2px 0 0;
-  }
+    /* Nav menu container housing both the sections and tools menu rows when expanded */
+    header #nav.nav-small{
+      padding: 1.2rem 2rem 0 10.5rem;
+    }
 
-  /* Common attributes for both the sections and tool menu unordered lists */
-  header .nav-sections ul, header .nav-tools ul {
-    display: flex;
-    padding-left: 0;
-    margin: 0;
-    cursor: pointer;
-  }
+    header .nav-logo {
+      top: 2.7rem;
+      width: 17.6rem;
+    }
 
-  /* Styling for the list items in the sections unordered list */
-  header .nav-sections ul > li {
-    font-weight: 600;
+    header .nav-logo-big {
+      top:3.9rem;
+      height: 3.9rem;
+    }
+
+    header .nav-logo-small {
+      color: var(--nav-logo-color);;
+      left: 1.8rem;
+      position: absolute;
+      width: 3.5rem;
+      height: 3.9rem;
+      bottom: -2rem
+    }
+
+  /***** Desktop section and tools menu styling  *****/
+
+    /* Style and layout of the section and tool menu containers */
+    header #nav .nav-sections, header #nav .nav-tools {
+      display: flex;
+      height: 100%;
+      visibility: visible;
+    }
+
+    /* Styling specific to the nav-sections menu */
+    header #nav .nav-sections {
+      display: block;
+      white-space: nowrap;
+    }
+
+    /* Styling specific to the upper tools menu */
+    header #nav .nav-tools {
+      align-self: flex-end;
+      margin-bottom: 0.1rem;
+      margin-right: 4rem;
+    }
+
+    /* Add decoration to section menu elements which have a drop down */
+    header .nav-sections .nav-drop::after {
+      content: '';
+      display: inline-block;
+      position: absolute;
+      top: 2.0rem;
+      margin-top: -0.2rem;
+      right: 0.2rem;
+      transform: rotate(135deg);
+      width: 6px;
+      height: 6px;
+      border-style: solid;
+      border-color: currentcolor;
+      border-radius: 0 1px 0 0;
+      border-width: 2px 2px 0 0;
+    }
+
+    /* Common attributes for both the sections and tool menu unordered lists */
+    header .nav-sections > ul, header .nav-tools ul {
+      display: flex;
+      padding-left: 0;
+      margin: 0;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    /* Styling for the sections nav menu top level items */
+    header .nav-sections > ul > div > li {
+      opacity: 1;
+      font-weight: 600;
+      margin: 10px 20px 0;
+      font-size: 1.5rem;
+      letter-spacing: .1rem;
+      line-height: 4.5rem;
+    }
+
+    /* Styling for the tools nav menu top level items */
+    header #nav .nav-tools > ul > li {
+      position: relative;
+      font-size: 1.4rem;
+      color: var(--nav-tools-color);
+      padding: 0 1.6rem;
+      line-height: 3.285;
+    }
+
+    /* No padding on the right most tools menu item */
+    header #nav .nav-tools > ul > li:last-child {
+      padding-right: 0;
+    }
+
+    /* Disable animations for section drop down menus in desktop mode */
+    header #nav .nav-sections ul div.nav-item-wrapper > li {
+      transition-delay: 0s;
+    }
+
+    /* Make the last item of the sections nav the 'Contact us' button in black and aligned to the right */
+    header #nav .nav-sections > ul > div:last-child {
+      margin: auto 0 auto auto;
+      height:4.5rem;
+    }
+
+    header #nav .nav-sections > ul > div:last-child > li {
+      border-radius: 1rem;
+      color: var(--nav-contact-button-color);
+      background-color: var(--nav-contact-button-background-color);
+      height: 4.5rem;
+      line-height: 4.5rem;
+      font-size: 1.5rem;
+      padding-left: 2rem;
+      padding-right: 2rem;
+      margin: 0;
+    }
+
+    /* Colorize the transparent bottom border under the section menu items on mouse over */
+    header #nav .nav-sections > ul > div.nav-item-wrapper > li:hover {
+      text-decoration: underline;
+      text-decoration-color: var(--nav-color);
+      text-underline-offset: 1.5rem;
+      text-decoration-thickness: 0.2rem;
+    }
+
+    /*  Don't show the hamburger icon in desktop mode */
+    header #nav .nav-hamburger {
+      display: none;
+      visibility: hidden;
+    }
+
+    /* Don't show an underline on sections with a drop down, and make room for the decoration chevron */
+    header #nav div.nav-sections li.nav-drop {
+      text-decoration: none;
+      padding-right: 1.8rem;
+    }
+
+    /* Add the up arrow on the For Home element of the tools menu */
+    header #nav div.nav-tools > ul > li:first-child::after {
+      margin-left: 0.4rem;
+      top: 0;
+      content: "\e91d";
+      bottom: 0;
+      font-family: VltIcons;
+      font-size: .8rem;
+      position: absolute;
+    }
+
+    /* Position and style the search icon displayed adjacent to the tools menu */
+    header #nav div.nav-search {
+      -ms-flex-item-align: center;
+      align-self: center;
+      display: flex;
+      font-size: 1.5rem;
+      height: 2.4rem;
+      width: 2.4rem;
+      z-index: 8;
+      position: absolute;
+      right: 2.8rem;
+      top: 2.2rem;
+    }
+
+  /***** Desktop section menu behavior when a section is selected *****/
+
+    /* Show all menu li items */
+    header .nav-item-wrapper[aria-expanded="true"] ul li {
+      opacity: 1;
+    }
+
+    /* Turn the section tab to purple when expanded */
+    header #nav .nav-sections div.nav-item-wrapper[aria-expanded="true"] {
+      background-color: var(--nav-section-tab-color);
+      border-radius: 15px 15px 0 0;
+      color: var(--nav-extended-color);
+    }
+
+    /* Remove underline when the section menu is expanded */
+    header #nav .nav-sections div.nav-item-wrapper .nav-drop[aria-expanded="true"] {
+      text-decoration: none;
+    }
+
+    /* Style the section chevron decoration to flip and become white when toggled */
+    header #nav .nav-sections .nav-drop[aria-expanded="true"]::after {
+      border-right: 0.2rem solid var(--mobile-nav-extended-decoration-color);
+      border-top: 0.2rem solid var(--mobile-nav-extended-decoration-color);
+      margin-top: -0.4rem;
+      position: absolute;
+      top: 2.4rem;
+      transform: rotate(-45deg);
+    }
+
+  /***** Styling of the sub menu popover element *****/
+
+    /* Display the sub-menu container when a section is clicked */
+    header #nav .nav-item-wrapper[aria-expanded="true"] div.sub-menu {
+      display: flex;
+    }
+
+    /* Style the close icon in the sub menu */
+    header #nav span.close-icon {
+      position: absolute;
+      left: 1265px;
+      top: -1rem;
+      content: "\e90e";
+      font-family: VltIcons;
+      color: black;
+    }
+
+    header #nav span.close-icon::before {
+      content: "\e90e";
+      font-family: VltIcons;
+      font-size: 40px;
+    }
+
+    /* Styles for the Sub Menu popup div container */
+    header #nav div.sub-menu {
+      display: none;
+      width: 100%;
+      overflow: hidden;
+      justify-content: space-between;
+      color: var(--nav-color);
+      position: absolute;
+      top: auto;
+      left: 1rem;
+      height: auto;
+      background-color: white;
+      box-shadow: 0 15px 30px rgb(0 0 0 / 15%);
+      border-radius: 25px;
+    }
+
+    /* Layout behavior for the sub sections */
+    header #nav div.sub-menu > ul {
+      flex-flow: column nowrap;
+    }
+
+    /* Margin and divider for the sub sections in the popout menu */
+    header #nav div.sub-menu > ul.sub-menu-section {
+      flex: 1 1 auto;
+      display: none;
+      border-right: 1px solid #dadada;
+      margin: 20px 0;
+      padding: 0 10px;
+    }
+
+    /* Display behavior for the sub section titles / links */
+    header #nav div.sub-menu > ul > li {
+      font-size: 1.4rem;
+      padding: 0 10px;
+    }
+
+
+  /* Sub menu section headers */
+  header #nav div.sub-menu > ul.sub-menu-section > li {
+    display: inline;
+    position: relative;
+    white-space: normal;
+    word-break: normal;
+    line-height: 1.4rem;
     margin: 1rem 2rem;
-    border-bottom: .2rem solid transparent;
-    font-size: 1.5rem;
-    letter-spacing: .1rem;
-    line-height: 4.5rem;
+    font-weight: 500;
   }
 
-  /* Styling for the list items in the tools unordered list */
-  header .nav-tools > ul > li {
-    position: relative;
-    font-size: 1.4rem;
-    color: var(--nav-tools-color);
-    padding: 0 1.6rem;
-    line-height: 3.285;
-  }
+    /* Styling specific to the left most index sub section */
+    header #nav div.sub-menu > ul.sub-menu-index {
+      display: flex;
+      flex: 1 1 275px;
+      max-width: 275px;
+      min-width: 275px;
+      border-right: none;
+      box-sizing: border-box;
+    }
 
-  /* Sub menu items styling for the sections nav */
-  header .nav-sections ul > li > ul {
-    margin-top: 0;
-    display: none;
-    position: relative;
-  }
+    /* Sub menu section content holder */
+    header #nav div.sub-menu > ul.sub-menu-section > li > ul {
+      display: inline;
+      font-weight: 100;
+      line-height: normal;
+    }
 
-  header .nav-sections > ul > li > ul > li {
-    padding: 8px 0;
-  }
+    /* Make the subsection titles bolder */
+    header #nav div.sub-menu ul.sub-menu-section li {
+      font-weight: 700;
+    }
 
-  /* Colorize the transparent bottom border under the section menu items on mouse over */
-  header .nav-sections ul > li:hover {
-    border-bottom-color: var(--nav-color);
-  }
+    /*  Except in the index which has non bold elements that are bold on mouse over */
+    header #nav div.sub-menu ul.sub-menu-index > li {
+      font-weight: 500;
+    }
 
-  /* Make the last item of the sections nav the 'Contact us' button in black and aligned to the right */
-  header .nav-sections > ul > li:last-child {
-    margin-left: auto;
-    border-radius: 1rem;
-    color: var(--nav-contact-button-color);
-    background-color: var(--nav-contact-button-background-color);
-    margin-right: 0;
-    height: 4.5rem;
-    line-height: 4.5rem;
-    font-size: 1.5rem;
-    padding-left: 2rem;
-    padding-right: 2rem;
-  }
+    /* Style the text of the sub section links */
+    header #nav div.sub-menu > ul.sub-menu-section > li > ul li {
+      display: block;
+      font-weight: 100;
+      line-height: normal;
+      list-style: none;
+      padding: 1rem 0 1rem 1rem;
+    }
 
-  header .nav-logo {
-    top: 2.7rem;
-    width: 17.6rem;
-  }
+    /* Have the active sub section displayed */
+    header #nav div.sub-menu > ul.sub-menu-section-active {
+      display: flex;
+    }
 
-  header .nav-logo-big {
-    top:3.9rem;
-    height: 3.9rem;
-  }
+    /* Add special styling to the last subsection displayed */
+    header #nav div.sub-menu ul.sub-menu-section-last {
+      -webkit-box-flex: 1;
+      flex: 1 1 270px;
+      min-width: 270px;
+      max-width: 270px;
+      background: #f3f3f3;
+      margin: 0;
+      padding: 20px 0;
+      border-right: none;
+      border-radius: 0 25px 25px 0;
+      box-sizing: border-box;
+    }
 
-  header .nav-logo-small {
-    color: var(--nav-logo-color);;
-    left: 1.8rem;
-    position: absolute;
-    width: 3.5rem;
-    height: 3.9rem;
-    bottom: -2rem
-  }
+    /*  Toggling the right section divider */
+    header #nav div.sub-menu ul.sub-menu-section-no-border {
+      border-right: none;
+    }
 
-  header nav .nav-hamburger {
-    display: none;
-    visibility: hidden;
-  }
+    /*  Style the call to action button in the last sub section */
+    header #nav div.sub-menu ul.sub-menu-section-last > li:first-child {
+      margin: 20px 10px;
+      text-align: center;
+      line-height: 1.75rem;
+      padding: 2rem 0;
+      height: auto;
+      width: 200px;
+      background-color: #6f54a3;
+      color: #fff;
+      border-radius: 1rem;
+      display: inline-block;
+    }
 
-  header .nav-sections {
-    display: block;
-    visibility: visible;
-    white-space: nowrap;
-  }
+    /* Add the chevron decorations to the right of the index elements */
+    header #nav ul.sub-menu-index > li::after {
+      content: "";
+      position: absolute;
+      top: 0.2rem;
+      right: -1rem;
+      width: 1.8rem;
+      height: 1.4rem;
+      background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='14'%3E%3Cpath d='M11.83 13.1a1 1 0 01-.73-1.69L15.25 7 11.1 2.59a1 1 0 011.46-1.37L18 7l-5.44 5.79a1 1 0 01-.73.31z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: 100%
+    }
 
-  header .nav-sections > ul > li > ul::before {
-    border-bottom: .2rem solid transparent;
-  }
+    /*  Make the index items bold and have an underline on mouse over */
+    header #nav div.sub-menu ul.sub-menu-index > li:hover {
+      font-weight: 700;
+      text-decoration: underline;
+    }
 
-  header .nav-sections .nav-drop {
-    text-decoration: none;
-  }
+    /* Add an additional line to the chevron decoration (making an arrow) on mouseover */
+    header #nav ul.sub-menu-index > li:hover::after {
+        background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='14'%3E%3Cpath d='M12.56 1.21a1 1 0 00-1.46 1.38L14.31 6H0v2h14.31l-3.21 3.41a1 1 0 001.46 1.37L18 7z'/%3E%3C/svg%3E");
+      }
 
-  header .nav-tools > ul > li:first-child::after {
-    margin-left: 0.4rem;
-    top: 0;
-    content: "\e91d";
-    bottom: 0;
-    font-family: VltIcons;
-    font-size: .8rem;
-    position: absolute;
-  }
+    /* Add the icons to the index elements as peudo befores */
+    header #nav ul.sub-menu-index #communications-apis::before {
+      content: "\e932";
+      font-family: VltIcons;
+      margin: 1.1rem;
+      left: -2.9rem;
+      position: absolute;
+      top:-1.1rem;
+    }
 
-  header .nav-tools > ul > li:last-child {
-    padding-right: 0;
-  }
+    header #nav ul.sub-menu-index #unified-communications::before {
+      content: "\e939";
+      font-family: VltIcons;
+      margin: 1.1rem;
+      left: -2.9rem;
+      position: absolute;
+      top:-1.1rem;
+    }
 
-  header .nav-search {
-    -ms-flex-item-align: center;
-    align-self: center;
-    display: flex;
-    font-size: 1.5rem;
-    height: 1.5rem;
-    right: 2rem;
-    top: 3rem;
-    z-index: 8;
-    position: absolute;
-  }
+    header #nav ul.sub-menu-index #contact-centers::before {
+      content: "\e936";
+      font-family: VltIcons;
+      margin: 1.1rem;
+      left: -2.9rem;
+      position: absolute;
+      top:-1.1rem;
+    }
 
-  header .nav-search svg {
-    display: block;
-    margin-top: -2.8rem;
-  }
+    header #nav ul.sub-menu-index #conversational-commerce::before {
+      content: "\e93a";
+      font-family: VltIcons;
+      margin: 1.1rem;
+      left: -2.9rem;
+      position: absolute;
+      top:-1.1rem;
+    }
 }
