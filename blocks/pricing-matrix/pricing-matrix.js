@@ -28,10 +28,17 @@ function updateConditionalElements(numberOfLines, block) {
 const stops = [49, 500, 1000];
 const nativeStops = [333, 666, 1000];
 
+/**
+ * maps the input range value to the customer segment scale.
+ * e.g. 333 becomes 49, 666 becomes 500, 1000 becomes 1000.
+ *
+ * @param inputRangeValue {number} native range value, 0-1000
+ * @return {number} customer segment scale value, 1-1000
+ */
 function mapValueToCustomerSegmentScale(inputRangeValue) {
   if (inputRangeValue <= nativeStops[0]) {
     // eslint-disable-next-line no-mixed-operators
-    return Math.round(inputRangeValue / nativeStops[0] * stops[0]);
+    return Math.round(inputRangeValue / nativeStops[0] * stops[0]) || 1;
     // eslint-disable-next-line no-else-return
   } else if (inputRangeValue <= nativeStops[1]) {
     const ratio = (inputRangeValue - nativeStops[0]) / (nativeStops[1] - nativeStops[0]);
@@ -42,6 +49,12 @@ function mapValueToCustomerSegmentScale(inputRangeValue) {
   }
 }
 
+/**
+ * maps the customer segment scale to the native range scale.
+ * e.g. 49 becomes 333, 500 becomes 666, 1000 becomes 1000.
+ * @param userCount
+ * @return {number}
+ */
 function mapCustomerSegmentToNativeScale(userCount) {
   if (userCount <= stops[0]) {
     // eslint-disable-next-line no-mixed-operators
@@ -84,7 +97,7 @@ function lineRangeSelector() {
             <div class="range-start">1</div>
             <div class="range-end">1000 +</div>
         </div>
-        <input id="slider" autocomplete="off" tabindex="-1" aria-hidden="true" class="quantity-range"
+        <input id="slider" autocomplete="off"  aria-hidden="true" class="quantity-range"
                type="range" min="1" max="1000" value="1"  
                
                style=";">

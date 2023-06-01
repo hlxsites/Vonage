@@ -131,6 +131,27 @@
     width: 0.1rem;
 }
 
+@media (max-width: 767px) {
+    .pricing-matrix .quantity-selector {
+        display: flex;
+        flex-direction: row-reverse;
+        gap: 20px;
+    }
+
+    .pricing-matrix .quantity-selector .ranges {
+        display: none;
+    }
+
+    .pricing-matrix .quantity-selector .range-length {
+        display: none;
+    }
+
+    .pricing-matrix .quantity-selector .widget-range  {
+        flex: 1;
+    }
+}
+
+
 .pricing-matrix .plans {
     margin-top: 8rem;
 }
@@ -200,7 +221,8 @@
 
 .pricing-matrix .plans .plans-card .plan-price-value {
     /* TODO: not enough weight */
-    /*animate */
+
+    /* animate */
     font-weight: 500;
     letter-spacing: -.15rem;
     line-height: 3.2rem;
