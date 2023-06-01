@@ -219,16 +219,17 @@
 }
 
 
+
 .pricing-matrix .plans .plans-card .plan-price-value {
     /* TODO: not enough weight */
 
-    /* animate */
+
+    animation-name: priceChangeAnimateIn;
     font-weight: 500;
     letter-spacing: -.15rem;
     line-height: 3.2rem;
     text-align: center;
     padding-bottom: 1rem;
-    animation-name: priceChangeAnimateIn;
     animation-duration: .5s;
     animation-fill-mode: forwards;
     animation-iteration-count: 1;
@@ -239,6 +240,20 @@
     margin-top: 20px;
     margin-bottom: 10px;
 }
+
+
+@keyframes priceChangeAnimateIn {
+    0% {
+        opacity: 0;
+        transform: scale(2)
+    }
+    to {
+        opacity: 1;
+        transform: scale(1)
+    }
+}
+
+
 
 .pricing-matrix .plans .plans-card .plan-price-description {
     margin: 0;
