@@ -103,6 +103,7 @@
 
 .pricing-matrix .quantity-selector {
     max-width: 61.8rem;
+    margin: 0 auto;
 }
 
 .pricing-matrix .quantity-selector .range-length {

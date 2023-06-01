@@ -106,7 +106,7 @@ function lineRangeSelector() {
 
     slider.value = mapCustomerSegmentToNativeScale(counter.value);
     updateRangeBackground(slider);
-    updateConditionalElements(parseInt(counter.value), lineSelector.closest('.block'));
+    updateConditionalElements(parseInt(counter.value || 1), lineSelector.closest('.block'));
   });
 
   slider.addEventListener('input', (e) => {
