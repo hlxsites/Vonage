@@ -19,9 +19,8 @@
 
 
 .pricing-matrix .quantity-selector input.quantity-range {
-    background: linear-gradient(to right, rgb(136 31 255) 0%, rgb(136 31 255) 1.0101%, rgb(255 255 255) 1.0101%, white 100%);
+    /* use non-native slider: */
     appearance: none;
-    background-color: transparent;
     cursor: pointer;
     display: block;
     height: 3.6rem;
@@ -29,11 +28,19 @@
     width: 100%;
     max-width: unset;
     border: none;
+
+    /* updated in JS: updateRangeBackground() */
+    background: transparent linear-gradient(
+            to right,
+            var(--accent-color) 0%,
+            var(--accent-color) 1.0101%,
+            white 1.0101%,
+            white 100%);
 }
 
 .pricing-matrix .quantity-selector input.quantity-range::-webkit-slider-thumb {
     appearance: none;
-    background-color: #881fff;
+    background-color: var(--accent-color);
     border: none;
     border-radius: 50%;
     box-shadow: 0 0 8px 0 rgb(0 0 0 / 18%);
@@ -60,12 +67,12 @@
 }
 
 .pricing-matrix .quantity-selector input.quantity-range::-moz-range-progress {
-    background-color: #881fff;
+    background-color: var(--accent-color);
     height: 1rem
 }
 
 .pricing-matrix .quantity-selector input.quantity-range::-moz-range-thumb {
-    background-color: #881fff;
+    background-color: var(--accent-color);
     border: none;
     border-radius: 50%;
     box-shadow: 0 0 8px 0 rgb(0 0 0 / 18%);
@@ -87,11 +94,11 @@
 }
 
 .pricing-matrix .quantity-selector input.quantity-range::-ms-fill-lower {
-    background-color: #881fff
+    background-color: var(--accent-color)
 }
 
 .pricing-matrix .quantity-selector input.quantity-range::-ms-thumb {
-    background-color: #881fff;
+    background-color: var(--accent-color);
     border: none;
     border-radius: 50%;
     box-shadow: 0 0 8px 0 rgb(0 0 0 / 18%);
@@ -112,7 +119,7 @@
     font-size: 1.2rem;
     font-weight: 400;
     line-height: 1.6rem;
-    color: #881fff;
+    color: var(--accent-color);
 }
 
 .pricing-matrix .quantity-selector .ranges {
@@ -126,7 +133,7 @@
 }
 
 .pricing-matrix .quantity-selector .ranges .divider {
-    border-right: 1px solid #881fff;
+    border-right: 1px solid var(--accent-color);
     height: 0.5rem;
     width: 0.1rem;
 }
@@ -218,13 +225,8 @@
     width: 100%;
 }
 
-
-
 .pricing-matrix .plans .plans-card .plan-price-value {
-    /* TODO: not enough weight */
-
-
-    animation-name: priceChangeAnimateIn;
+    animation-name: price-change-animate-in;
     font-weight: 500;
     letter-spacing: -.15rem;
     line-height: 3.2rem;
@@ -235,19 +237,20 @@
     animation-iteration-count: 1;
     display: inline-block;
     transform-origin: center;
-    color: #881fff;
+    color: var(--accent-color);
     font-size: 4.2rem;
     margin-top: 20px;
     margin-bottom: 10px;
 }
 
 
-@keyframes priceChangeAnimateIn {
+@keyframes price-change-animate-in {
     0% {
         opacity: 0;
         transform: scale(2)
     }
-    to {
+
+    100% {
         opacity: 1;
         transform: scale(1)
     }
@@ -263,9 +266,8 @@
     letter-spacing: .025rem;
     display: block;
     text-align: center;
-    color: #881fff;
+    color: var(--accent-color);
 }
-
 
 
 .pricing-matrix .plans .plans-card .hidden {
@@ -289,7 +291,7 @@
 }
 
 .pricing-matrix .plans .plans-card .plan-tag:has(strong) {
-    background-color: #881fff;
+    background-color: var(--accent-color);
 }
 
 .pricing-matrix .plans .plans-card .plan-basic-features {
@@ -314,7 +316,7 @@
 
 .pricing-matrix .plans .plans-card .plan-basic-features ul li::before {
     content: "\e916";
-    color: #881fff;
+    color: var(--accent-color);
     font-family: var(--icons-font-family);
     font-size: 1rem;
     speak: none;

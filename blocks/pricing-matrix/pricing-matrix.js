@@ -83,9 +83,9 @@ function lineRangeSelector() {
     // eslint-disable-next-line no-mixed-operators
     const progress = 100.0 * rangeEl.value / rangeEl.max;
     rangeEl.style.background = `linear-gradient(to right, 
-    rgb(136, 31, 255) 0%, 
-    rgb(136, 31, 255) ${progress}%, 
-    rgb(255, 255, 255) ${progress}%, 
+    var(--accent-color) 0%, 
+    var(--accent-color) ${progress}%, 
+    white ${progress}%, 
     white 100%)`;
   }
 
