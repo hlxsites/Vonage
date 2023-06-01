@@ -54,7 +54,7 @@ div.columns-container:has(.slim-promo) {
     flex-direction: initial;
     column-gap: 20px;
   }
-  
+
   div.slim-promo.columns-2-cols > div > div.columns-img-col {
     max-width: 16%;
   }
