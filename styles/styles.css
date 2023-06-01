@@ -41,7 +41,7 @@
   --heading-font-size-xxs: 16px;
 
   /* nav height */
-  --nav-height: 64px;
+  --nav-height: 12.5rem;
 
 }
 
@@ -239,8 +239,6 @@ main img {
 }
 
 .icon-search {
-  height: 3rem;
-  width: 3rem;
   vertical-align: middle;
 }
 
