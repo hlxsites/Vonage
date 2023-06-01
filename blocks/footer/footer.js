@@ -21,36 +21,21 @@ export default async function decorate(block) {
     // each contain a <ul> list of links and a fifth <div> element that
     // contains a <p> that contains a trademark disclaimer.
     // Some lists of links start with a non-link list item.
-    // To achieve the proper wrapping effect, each pair of lists are
-    // placed into another <div> element.
 
-    // Build footer DOM
-    const footer = document.createElement('div');
-    footer.classList.add('footer-container');
-    footer.innerHTML = html;
+    // Put HTML response in a temporary element
+    const source = document.createElement('div');
+    source.innerHTML = html;
 
     // Row inside container
     const rowElement = document.createElement('div');
     rowElement.classList.add('footer-links-row');
 
-    // Insert lists within child div elements into pairs within row
-    let linksListPair = null;
-    let child = footer.firstElementChild;
-    let nextChild = null;
-    for (let i = 0; i < 4; i += 1) {
-      if (i % 2 === 0) {
-        linksListPair = document.createElement('div');
-        linksListPair.classList.add('footer-links-pair');
-        rowElement.appendChild(linksListPair);
+    // For all but last div element, move child ul elements into footer-links-row
+    while (source.children.length > 1) {
+      if (source.children[0] instanceof HTMLDivElement) {
+        rowElement.appendChild(source.children[0].firstElementChild);
       }
-      nextChild = child.nextElementSibling;
-      linksListPair.appendChild(child.firstElementChild);
-      const previousNode = child.previousSibling;
-      if (previousNode.nodeType === Node.TEXT_NODE) {
-        previousNode.remove();
-      }
-      child.remove(); // Remove the now empty div element
-      child = nextChild;
+      source.children[0].remove();
     }
 
     // Add classes to links for external reference and social links
@@ -68,11 +53,16 @@ export default async function decorate(block) {
       }
     });
 
-    // Add row as first footer child
-    footer.insertBefore(rowElement, footer.firstElementChild);
+    // Build footer DOM
+    const footer = document.createElement('div');
+    footer.classList.add('footer-container');
+    footer.appendChild(rowElement);
+    footer.appendChild(source.firstElementChild);
 
     // Add class to disclaimer div element
     footer.lastElementChild.classList.add('footer-trade-disclaimer');
+
+    source.remove();
 
     await decorateIcons(footer);
     block.append(footer);
