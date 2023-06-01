@@ -101,7 +101,6 @@ function lineRangeSelector(block) {
   }
 
   const label = block.closest('.section').querySelector('h2');
-  console.log('label', label.id);
 
   const lineSelector = document.createElement('div');
   lineSelector.innerHTML = `<div class="quantity-selector">
