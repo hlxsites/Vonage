@@ -211,7 +211,7 @@
 }
 
 .cards.info-card .button.primary {
-  background-color: black;
+  background-color: transparent;
   border: 0;
   border-radius: 0;
   padding: 0;
@@ -232,6 +232,15 @@
   text-transform: none;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
+  transition: padding .3s ease;
+}
+
+.cards.info-card .card-container:hover .icon-arrow-link::before {
+  padding-left: 1.5rem;
+}
+
+.cards.info-card .card-container:hover .cards-card-body {
+  background: linear-gradient(140deg,#881fff 24%,#7fc8f5);
 }
 
 @media (min-width: 992px){
