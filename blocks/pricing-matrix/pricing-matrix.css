@@ -132,6 +132,8 @@
 
 .pricing-matrix .plans {
     margin-top: 8rem;
+    display: flex;
+    gap: 40px;
 }
 
 .pricing-matrix .plans .plans-card {
@@ -143,17 +145,17 @@
     font-size: var(--body-font-size-xxs);
 }
 
-.plan-content {
+.pricing-matrix .plans .plans-card .plan-content {
     padding: 60px;
 }
 
-.plan-basic-info h3 {
+.pricing-matrix .plans .plans-card .plan-basic-info h3 {
     letter-spacing: -.06rem;
     line-height: 3.2rem;
     font-size: 3.2rem;
 }
 
-.plan-basic-info p {
+.pricing-matrix .plans .plans-card .plan-basic-info p {
     max-width: 70%;
     margin: 0 auto;
     padding-top: 1rem;
@@ -162,17 +164,18 @@
     line-height: 2rem;
 }
 
-.plan-price .button-container {
+.pricing-matrix .plans .plans-card .plan-price .button-container {
     margin: 0;
 }
 
-.plan-price .button-container .button {
+.pricing-matrix .plans .plans-card .plan-price .button-container .button {
     margin-top: 10px;
     margin-bottom: 0;
 }
 
-.plan-price-value {
+.pricing-matrix .plans .plans-card .plan-price-value {
     /* TODO: not enough weight */
+    /*animate */
     font-weight: 500;
     letter-spacing: -.15rem;
     line-height: 3.2rem;
@@ -190,7 +193,7 @@
     margin-bottom: 10px;
 }
 
-.plan-price-description {
+.pricing-matrix .plans .plans-card .plan-price-description {
     margin: 0;
     padding: 0;
     line-height: 18px;
@@ -201,7 +204,7 @@
     color: #881fff;
 }
 
-.plan-price .button {
+.pricing-matrix .plans .plans-card .plan-price .button {
     width: 100%;
 }
 
@@ -225,13 +228,13 @@
     line-height: 2rem;
 }
 
-.plan-basic-features {
+.pricing-matrix .plans .plans-card .plan-basic-features {
     text-align: left;
     max-width: 283px;
     margin: 1.4em auto 0;
 }
 
-.plan-basic-features ul {
+.pricing-matrix .plans .plans-card .plan-basic-features ul {
     list-style-type: none;
     padding: 0;
     margin: 0;
@@ -244,7 +247,7 @@
     line-height: 2rem;
 }
 
-.plan-basic-features ul li::before {
+.pricing-matrix .plans .plans-card .plan-basic-features ul li::before {
     content: "\e916";
     color: #881fff;
     font-family: var(--icons-font-family);
