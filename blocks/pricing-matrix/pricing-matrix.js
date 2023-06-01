@@ -4,18 +4,23 @@ import { div } from '../../scripts/scripts.js';
 /**
  *
  * @param numberOfLines {integer}
+ * @param block {HTMLDivElement}
  */
-function updateConditionalElements(numberOfLines) {
-  const firstPriceWithinMaxLines = [...document.querySelectorAll('[data-maxlines]')]
-    .sort((a, b) => parseInt(a.dataset.maxlines) - parseInt(b.dataset.maxlines))
-    .find((element) => numberOfLines <= element.dataset.maxlines);
+function updateConditionalElements(numberOfLines, block) {
+  // activate one price variant in each card
+  block.querySelectorAll('.plans-card').forEach((card) => {
+    // find the first price variant that is within the range of lines
+    const firstPriceWithinMaxLines = [...card.querySelectorAll('[data-maxlines]')]
+      .sort((a, b) => parseInt(a.dataset.maxlines) - parseInt(b.dataset.maxlines))
+      .find((element) => numberOfLines <= element.dataset.maxlines);
 
-  [...document.querySelectorAll('[data-maxlines]')].forEach((element) => {
-    if (element === firstPriceWithinMaxLines) {
-      element.classList.remove('hidden');
-    } else {
-      element.classList.add('hidden');
-    }
+    [...card.querySelectorAll('[data-maxlines]')].forEach((element) => {
+      if (element === firstPriceWithinMaxLines) {
+        element.classList.remove('hidden');
+      } else {
+        element.classList.add('hidden');
+      }
+    });
   });
 }
 
@@ -69,12 +74,12 @@ function lineRangeSelector() {
 
     slider.value = counter.value;
     updateRangeBackground(slider);
-    updateConditionalElements(parseInt(counter.value));
+    updateConditionalElements(parseInt(counter.value), lineSelector.closest('.block'));
   });
   slider.addEventListener('input', (e) => {
     counter.value = e.target.value;
     updateRangeBackground(slider);
-    updateConditionalElements(parseInt(counter.value));
+    updateConditionalElements(parseInt(counter.value), lineSelector.closest('.block'));
   });
   return lineSelector;
 }
@@ -162,5 +167,5 @@ export default async function decorate(block) {
 
   block.append(plans);
 
-  updateConditionalElements(parseInt(block.querySelector('#employee-counter').value));
+  updateConditionalElements(parseInt(block.querySelector('#employee-counter').value), block);
 }
