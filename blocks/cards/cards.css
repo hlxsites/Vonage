@@ -4,6 +4,25 @@
   /* colors */
   --info-card-background-color: #000;
   --info-card-color: #FFF;
+  --info-card-gradient-background-color-start: #881fff;
+  --info-card-gradient-background-color-end: #7fc8f5;
+}
+
+.section.cards-container {
+  padding: 0;
+  margin-bottom: 7rem;
+}
+
+.section .cards-wrapper {
+  padding: 0 20px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@media (min-width: 576px){
+  .section .cards-wrapper {
+    max-width: 540px;
+  }
 }
 
 .cards > ul {
@@ -38,11 +57,21 @@
   object-fit: cover;
 }
 
+@media (min-width: 768px) {
+  .section .cards-wrapper {
+    max-width: 45pc;
+  }
+}
+
 .cards.gradient-shadow ul {
   grid-template-columns: 1fr;
 }
 
 @media (min-width: 992px) {
+  .section .cards-wrapper {
+    max-width: 990pt;
+  }
+
   .cards.gradient-shadow ul {
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-gap: 40px;
@@ -158,105 +187,227 @@
   height:38px;
 }
 
-/* Styling for the black-gradient-highlight card variation */
+/* Styling for the 2up info card variant */
 
-.cards.info-card > ul {
-  display: flex;
-  flex-wrap: wrap;
-  padding-inline-start: 0;
-  grid-gap: 0;
-}
+  /* Styling for top level container for the 2up style of card (Flex container) */
+  .cards.info-card > ul {
+    display: flex;
+    flex-wrap: wrap;
+    padding-inline-start: 0;
+    grid-gap: 0;
+    margin-left: -20px;
+    margin-right: -20px;
+  }
 
-.cards.info-card > ul > li {
-  border: 0;
-  flex: 0 0 50%;
-  max-width: 50%;
-  padding-right: 20px;
-  padding-left: 20px;
-  box-sizing: border-box;
-}
+  /* Styling for top level container for each card (flex item) */
+  .cards.info-card > ul > li {
+    border: 0;
+    -webkit-box-flex: 0;
+    flex: 0 0 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
 
-.cards.info-card .card-container {
-  min-height: 48.5rem;
-  height: 100%;
-}
+  /* Add a margin to the first child since in narrow mode this is a single column */
+  .cards.info-card > ul > li:first-child {
+    margin-bottom: 5rem;
+  }
 
-.cards.info-card .cards-card-body {
-  display:block;
-  background-color: var(--info-card-background-color);
-  margin: 0;
-  position: relative;
-  height: 100%;
-  box-sizing: border-box;
-  text-decoration: none;
-}
+  /* Div to contain the card elements */
+  .cards.info-card .card-container {
+    padding-left: 20px;
+    padding-right: 20px;
+    cursor: pointer;
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    height: 100%;
+    -webkit-box-pack: end;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+    min-height: 31.9rem;
+    position: relative;
+  }
 
+  /* <a> tag body of the card to take the background and make the full card clickable
+    Went with that over a clickable div element to match the client structure since it seemed pretty clean */
+  .cards.info-card .cards-card-body {
+    background-color: var(--info-card-background-color);
+    margin: 0;
+    position: relative;
+    box-sizing: border-box;
+    text-decoration: none;
+    color: var(--info-card-color);
+    cursor: pointer;
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    -webkit-box-pack: end;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+    min-height: 31.9rem;
+    padding: 4rem;
+  }
+
+  /* Display the pretty gradient on hover on the card */
+  .cards.info-card .card-container:hover .cards-card-body {
+    background: linear-gradient(140deg, var(--info-card-gradient-background-color-start) 24%, var(--info-card-gradient-background-color-end));
+  }
+
+  /* Layout and sizing for the title of the card */
+  .cards.info-card .header-container {
+    margin-bottom: 2rem;
+    -webkit-box-align: end;
+    -ms-flex-align: end;
+    align-items: flex-end;
+    display: -webkit-box;
+    display: flex;
+  }
+
+/* Font styling for the title of the card */
 .cards.info-card .card-title {
-  font-size: 2.9rem;
-  font-weight: 600;
-  letter-spacing: -.15rem;
+  font-size: 2.3rem;
+  font-weight: 500;
+  letter-spacing: -.12rem;
   line-height: 3.2rem;
-  color: white;
+  margin-bottom: 2rem;
+  color: var(--info-card-color);
   text-decoration: none;
 }
 
-.cards.info-card .header-container {
-  margin-bottom: 2rem;
-  min-height: 19.1rem;
-  -webkit-box-align: end;
-  -ms-flex-align: end;
-  align-items: flex-end;
-  display: -webkit-box;
-  display: flex;
-}
+  /* Layout and styling of the button in the card */
+  .cards.info-card .button.primary {
+    background-color: transparent;
+    border: 0;
+    border-radius: 0;
+    padding: 0;
+    white-space: normal;
+    margin-top:0;
+    margin-bottom: 3rem;
+    color: var(--info-card-color);
+  }
 
-.cards.info-card .button.primary {
-  background-color: transparent;
-  border: 0;
-  border-radius: 0;
-  padding: 0;
-  font-weight: 400;
-  white-space: normal;
-  text-align: left;
-}
+  /* Text styling of the button in the card */
+  .cards.info-card .button-container {
+    font-size: 1.4rem;
+    font-weight: 400;
+    letter-spacing: -.02rem;
+    line-height: 2rem;
+    text-decoration: none;
+    text-align: left;
+  }
 
-.cards.info-card .icon-arrow-link::before {
-  content: "\e90c";
-  color: white;
-  font-family: VltIcons!important;
-  font-style: normal;
-  font-variant: normal;
-  font-weight: 400;
-  line-height: inherit;
-  speak: none;
-  text-transform: none;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  transition: padding .3s ease;
-}
+  /* Styling of the arrow icon on the card */
+  .cards.info-card .icon-arrow-link {
+    font-size: 1.7rem;
+    letter-spacing: -.025rem;
+    line-height: 2.5rem;
+    font-weight: 400;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+  }
 
+  /* Styling of the arrow icon and it's animation */
+  .cards.info-card .icon-arrow-link::before {
+    content: var(--vlt-right-arrow);
+    color: var(--info-card-color);
+    font-family: VltIcons!important;
+    font-style: normal;
+    font-variant: normal;
+    line-height: inherit;
+    speak: none;
+    text-transform: none;
+    transition: padding .3s ease;
+  }
+
+/* Animated property change on hover of the arrow icon */
 .cards.info-card .card-container:hover .icon-arrow-link::before {
   padding-left: 1.5rem;
 }
 
-.cards.info-card .card-container:hover .cards-card-body {
-  background: linear-gradient(140deg,#881fff 24%,#7fc8f5);
+/* icon-card layout adjustments at higher resolutions */
+@media (min-width: 768px){
+  /* Styling of the clickable container in the info card */
+  .cards.info-card .cards-card-body {
+    display: block;
+    min-height: 30.6rem;
+    padding-left: 3.2rem;
+    padding-right: 3.2rem;
+  }
+
+  /* Layout and sizing for the title of the card */
+  .cards.info-card .header-container {
+    -webkit-box-align: end;
+    -ms-flex-align: end;
+    align-items: flex-end;
+    display: -webkit-box;
+    display: flex;
+    margin-bottom: 1.5rem;
+    min-height: 9.4rem;
+  }
+
+  /* Font styling for the title of the card */
+  .cards.info-card .card-title {
+    font-size: 2.3rem;
+    font-weight: 500;
+    letter-spacing: -.05rem;
+    line-height: 2.4rem;
+  }
+
+  /* Font sizing adjustment of the info card button */
+  .cards.info-card .button-container {
+    font-size: 1.4rem;
+    font-weight: 400;
+    letter-spacing: -.02rem;
+    line-height: 2rem;
+    text-decoration: none;
+  }
+
+  /* Positioning adjustment of the arrow icon */
+  .cards.info-card .icon-arrow-link {
+    bottom: 4rem;
+    left: 4rem;
+    position: absolute;
+  }
 }
 
 @media (min-width: 992px){
+  /* Dual card layout for larger screens */
+  .cards.info-card > ul > li {
+    border: 0;
+    flex: 0 0 50%;
+    max-width: 50%;
+    box-sizing: border-box;
+    margin-bottom: 0;
+  }
+
+  /* Scrap the first child margin since we are laying out in a row not a column */
+  .cards.info-card > ul > li:first-child {
+    margin-bottom: 0;
+  }
+
+  /* Layout tweaks for the clickable container area in the info card */
   .cards.info-card .cards-card-body {
+    min-height: 48.5rem;
     padding: 8rem 7rem;
   }
 
+  /* Layout tweaks for the title of the info card */
   .cards.info-card .header-container {
     margin-bottom: 2rem;
     min-height: 19.1rem;
   }
 
+  /* Layout tweaks for the description text of the info card */
   .cards.info-card .button-container {
     margin-bottom: 4rem;
   }
 
+  /* Layout tweaks for the arrow icon */
   .cards.info-card .icon-arrow-link {
     position: absolute;
     top: 38rem;
@@ -266,10 +417,14 @@
 @media (min-width: 1200px){
   .cards.info-card .button-container {
     font-size: 1.7rem;
-    font-weight: 400;
-    letter-spacing: -.02rem;
-    line-height: 2rem;
-    color: white;
+  }
+
+  /* Font styling tweaks for the title of the card */
+  .cards.info-card .card-title {
+    font-size: 2.9rem;
+    font-weight: 600;
+    letter-spacing: -.15rem;
+    line-height: 3.2rem;
     text-decoration: none;
   }
 }
