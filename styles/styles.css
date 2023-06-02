@@ -24,6 +24,7 @@
   --body-font-family: spezia, spezia_semimono, ubuntu, roboto, noto, sans-serif;
   --heading-font-family: var(--body-font-family);
   --fixed-font-family: "Spezia_SemiMono", menlo, consolas, 'Liberation Mono', monospace;
+  --icon-font-family: vlticons!important;
 
    /* font icon aliases */
    --vlt-right-arrow: "\e90c";

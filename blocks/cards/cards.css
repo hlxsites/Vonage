@@ -403,7 +403,7 @@
   .cards.info-card .icon-arrow-link::before {
     content: var(--vlt-right-arrow);
     color: var(--info-card-color);
-    font-family: VltIcons!important;
+    font-family: var(--icon-font-family);
     font-style: normal;
     font-variant: normal;
     line-height: inherit;
