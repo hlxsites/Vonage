@@ -16,7 +16,7 @@ function addSlimPromoClick(block, mq) {
       }
     });
   } else {
-    block.querySelector('div.slim-promo.columns-2-cols > div > div:nth-child(2)').removeEventListener('click');
+    block.querySelector('div.slim-promo.columns-2-cols > div > div:nth-child(2) > h2').removeEventListener('click');
   }
 }
 
