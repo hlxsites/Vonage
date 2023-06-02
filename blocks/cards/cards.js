@@ -51,7 +51,7 @@ export default function decorate(block) {
 
       // Copy the div HTML contents as the a contents and
       // replace them in the parent container (the li)
-      cardLinkWrapper.innerHTML = cardDivWrapper.innerHTML;
+      cardLinkWrapper.append(...cardDivWrapper.children);
       cardDivWrapper.parentNode.replaceChild(cardLinkWrapper, cardDivWrapper);
 
       // Add a span to contain the arrow decoration on the card
