@@ -1,6 +1,6 @@
 function addSlimPromoClick(block, mq) {
   if (mq.matches) {
-    block.querySelector('div.slim-promo.columns-2-cols > div > div:nth-child(2)').addEventListener('click', () => {
+    block.querySelector('div.slim-promo.columns-2-cols > div > div:nth-child(2) > h2').addEventListener('click', () => {
       const pBlock = block.querySelector('div.slim-promo.columns-2-cols p');
       const pButton = block.querySelector('.slim-promo a.button.secondary');
       const pH2 = block.querySelector('div.slim-promo.columns-2-cols h2');
