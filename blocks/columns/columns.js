@@ -15,7 +15,7 @@ function areaClick(block) {
 }
 
 function addSlimPromoClick(block, mq) {
-  block.querySelector('div.slim-promo.columns-2-cols > div > div:nth-child(2) > a.button.secondary').addEventListener('click', () => {
+  block.querySelector('div.slim-promo.columns-2-cols > div > div:nth-child(2) > div > a.button.secondary').addEventListener('click', () => {
     areaClick(block);
   });
   if (mq.matches) {
