@@ -106,12 +106,12 @@ h4, h5, h6 {
   scroll-margin: calc(var(--nav-height) + 1em);
 }
 
-h1 {font-size: var(--heading-font-size-xxl)}
-h2 {font-size: var(--heading-font-size-xl)}
-h3 {font-size: var(--heading-font-size-l)}
-h4 {font-size: var(--heading-font-size-m)}
-h5 {font-size: var(--heading-font-size-s)}
-h6 {font-size: var(--heading-font-size-xs)}
+h1 { font-size: var(--heading-font-size-xxl) }
+h2 { font-size: var(--heading-font-size-xl) }
+h3 { font-size: var(--heading-font-size-l) }
+h4 { font-size: var(--heading-font-size-m) }
+h5 { font-size: var(--heading-font-size-s) }
+h6 { font-size: var(--heading-font-size-xs) }
 
 p, dl, ol, ul, pre, blockquote {
   margin-top: 1em;
