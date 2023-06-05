@@ -27,7 +27,10 @@
   --body-font-family: spezia, spezia_semimono, ubuntu, roboto, noto, sans-serif;
   --heading-font-family: var(--body-font-family);
   --fixed-font-family: "Spezia_SemiMono", menlo, consolas, 'Liberation Mono', monospace;
-  --icon-font-family: vlticons;
+  --icon-font-family: vlticons!important;
+
+   /* font icon aliases */
+   --vlt-right-arrow: "\e90c";
 
   /* body sizes */
   --body-font-size-m: 22px;
@@ -163,18 +166,22 @@ a.button:any-link, button {
   box-sizing: border-box;
   text-decoration: none;
   border: 2px solid transparent;
-  padding: 5px 30px;
   text-align: center;
   font-style: normal;
-  font-weight: 600;
+  font-weight: 500;
+  font-size: 1.6rem;
   cursor: pointer;
   color: var(--background-color);
-  background-color: var(--link-color);
+  background-color: #000;
   margin: 16px 0;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  border-radius: 30px;
+  border-radius: 1rem;
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+  line-height: 70px;
+  height: 7rem;
 }
 
 a.button:hover, a.button:focus, button:hover, button:focus {
@@ -204,6 +211,7 @@ a.button.secondary, button.secondary {
   line-height: normal;
   border-radius: 1rem;
   border: 2px solid currentcolor;
+  transition: transform .2s;
   padding: 1.6rem;
 }
 
@@ -277,7 +285,7 @@ main .section {
 
 @media (min-width: 900px) {
   .section > div {
-    max-width: 1200px;
+    max-width: 990pt;
     margin: auto;
   }
 }
