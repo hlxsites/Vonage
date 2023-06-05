@@ -198,21 +198,25 @@ a.button.primary, button.primary {
   background-color: var(--primary-button-background-color);
   color: var(--primary-button-text-color);
   font-size: var(--button-font-size-m);
-  line-height: normal;
+  line-height: 7rem;
   border-radius: 1rem;
   border: 2px solid currentcolor;
-  padding: 1.6rem;
+  padding-left: 1.6rem;
+  padding-right: 1.6rem;
+  height: 7rem;
 }
 
 a.button.secondary, button.secondary {
   background-color: unset;
   color: var(--text-color);
   font-size: var(--button-font-size-m);
-  line-height: normal;
+  line-height: 7rem;
   border-radius: 1rem;
   border: 2px solid currentcolor;
   transition: transform .2s;
-  padding: 1.6rem;
+  padding-left: 1.6rem;
+  padding-right: 1.6rem;
+  height: 7rem;
 }
 
 main input {
