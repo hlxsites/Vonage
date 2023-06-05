@@ -36,6 +36,13 @@ div.columns-container:has(.slim-promo) {
   margin-left: auto;
 }
 
+/** for FireFox (lack of) support for :has selector **/
+.black-bg {
+  background-color: #000;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
 div.slim-promo.columns-2-cols p {
   font-family: var(--body-font-family);
   font-weight: 400;
