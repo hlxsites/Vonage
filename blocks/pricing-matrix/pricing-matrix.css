@@ -219,6 +219,10 @@
     margin: 0;
 }
 
+.pricing-matrix .plans .plans-card .plan-price .button-container:hover {
+  transform: scale(1.02);
+}
+
 .pricing-matrix .plans .plans-card .plan-price .button-container .button {
     margin-top: 10px;
     margin-bottom: 0;
