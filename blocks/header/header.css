@@ -659,7 +659,7 @@ header .sub-menu-label-active {
     header #nav div.nav-tools > ul > li:first-child::after {
       margin-left: 0.4rem;
       top: 0;
-      content: "\e91d";
+      content: var(--vlt-up-right-arrow-icon);
       bottom: 0;
       font-family: VltIcons;
       font-size: .8rem;
@@ -721,13 +721,13 @@ header .sub-menu-label-active {
       position: absolute;
       left: 1265px;
       top: -1rem;
-      content: "\e90e";
+      content: var(--vlt-close-icon);
       font-family: VltIcons;
       color: black;
     }
 
     header #nav span.close-icon::before {
-      content: "\e90e";
+      content: var(--vlt-close-icon);
       font-family: VltIcons;
       font-size: 40px;
     }
@@ -880,7 +880,7 @@ header .sub-menu-label-active {
 
     /* Add the icons to the index elements as peudo befores */
     header #nav ul.sub-menu-index #communications-apis::before {
-      content: "\e932";
+      content: var(--vlt-cloud-inverse-icon);
       font-family: VltIcons;
       margin: 1.1rem;
       left: -2.9rem;
@@ -889,7 +889,7 @@ header .sub-menu-label-active {
     }
 
     header #nav ul.sub-menu-index #unified-communications::before {
-      content: "\e939";
+      content: var(--vlt-phone-2-icon);
       font-family: VltIcons;
       margin: 1.1rem;
       left: -2.9rem;
@@ -898,7 +898,7 @@ header .sub-menu-label-active {
     }
 
     header #nav ul.sub-menu-index #contact-centers::before {
-      content: "\e936";
+      content: var(--vlt-head-phone-icon);
       font-family: VltIcons;
       margin: 1.1rem;
       left: -2.9rem;
@@ -907,7 +907,7 @@ header .sub-menu-label-active {
     }
 
     header #nav ul.sub-menu-index #conversational-commerce::before {
-      content: "\e93a";
+      content: var(--vlt-mobile-text-bubble-icon);
       font-family: VltIcons;
       margin: 1.1rem;
       left: -2.9rem;
