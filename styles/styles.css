@@ -31,6 +31,76 @@
 
    /* font icon aliases */
    --vlt-right-arrow: "\e90c";
+   --vlt-play-icon: "\e900";
+   --vlt-gear-inverse-icon: "\e90a";
+   --vlt-youtube-in-circle-icon: "\e90b";
+   --vlt-right-arrow-2-icon: "\e90c";
+   --vlt-down-chevron-icon: "\e90d";
+   --vlt-close-icon: "\e90e";
+   --vlt-circle-icon: "\e90f";
+   --vlt-play-in-circle: "\e901";
+   --vlt-close-in-circle: "\e902";
+   --vlt-facebook-logo: "\e903";
+   --vlt-twitter-logo: "\e904";
+   --vlt-linkedin-logo: "\e905";
+   --vlt-youtube-logo: "\e906";
+   --vlt-vonage-big-logo: "\e907";
+   --vlt-cloud-icon: "\e908";
+   --vlt-headset-icon: "\e909";
+   --vlt-circuit-icon: "\e910";
+   --vlt-hamburger-icon: "\e911";
+   --vlt-small-play-icon: "\e912";
+   --vlt-small-play-button-in-circle: "\e913";
+   --vlt-small-pause-button-in-circle: "\e914";
+   --vlt-down-arrow-icon: "\e915";
+   --vlt-checkmark-icon: "\e916";
+   --vlt-warning-icon: "\e918";
+   --vlt-mail-icon: "\e919";
+  --vlt-dialog-bubble-icon: "\e91a";
+  --vlt-search-icon: "\e91b";
+  --vlt-world-2-icon: "\e91c";
+  --vlt-up-right-arrow-icon: "\e91d";
+  --vlt-facebook-in-circle-icon: "\e91e";
+  --vlt-linkedin-in-circle-icon: "\e91f";
+   --vlt-twitter-logo-inverse: "\e920";
+   --vlt-phone-icon: "\e921";
+   --vlt-left-arrow-icon: "\e922";
+   --vlt-share-icon: "\e923";
+   --vlt-star-icon: "\e924";
+   --vlt-star-outline-icon: "\e925";
+   --vlt-question-in-circle-icon: "\e926";
+   --vlt-shopping-cart-icon: "\e927";
+   --vlt-calendar-icon: "\e928";
+   --vlt-upload-icon: "\e929";
+  --vlt-instagram-logo: "\e92a";
+  --vlt-power-icon: "\e92b";
+  --vlt-deskphone-icon: "\e92c";
+  --vlt-puzzle-piece-icon: "\e92d";
+  --vlt-chip-icon: "\e92e";
+  --vlt-lightbulb-icon: "\e92f";
+   --vlt-shopping-cart-inverse-icon: "\e930";
+   --vlt-key-icon: "\e931";
+   --vlt-cloud-inverse-icon: "\e932";
+   --vlt-code-icon: "\e933";
+   --vlt-gear-icon: "\e934";
+   --vlt-people-icon: "\e935";
+   --vlt-head-phone-icon: "\e936";
+   --vlt-laptop-icon: "\e937";
+   --vlt-mail-2-icon: "\e938";
+   --vlt-phone-2-icon: "\e939";
+  --vlt-mobile-text-bubble-icon: "\e93a";
+  --vlt-person-icon: "\e93b";
+  --vlt-close-2-icon: "\e93c";
+  --vlt-check-in-circle-icon: "\e93d";
+  --vlt-layers-icon: "\e93e";
+  --vlt-voicemail-icon: "\e93f";
+   --vlt-people-2-icon: "\e940";
+   --vlt-world-icon: "\e941";
+   --vlt-money-per-line-icon: "\e942";
+   --vlt-forward-icon: "\e943";
+   --vlt-download-icon: "\e945";
+
+
 
   /* body sizes */
   --body-font-size-m: 22px;
