@@ -23,7 +23,9 @@ function addSlimPromoClick(block, mq) {
       areaClick(block);
     });
   } else {
-    block.querySelector('div.slim-promo.columns-2-cols > div > div:nth-child(2) > h2').removeEventListener('click');
+    block.querySelector('div.slim-promo.columns-2-cols > div > div:nth-child(2) > h2').removeEventListener('click', () => {
+      // do nothing
+    });
   }
 }
 
