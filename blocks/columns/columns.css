@@ -62,9 +62,10 @@ div.slim-promo.columns-2-cols > div > div:nth-child(2) {
 div.slim-promo.columns-2-cols h2 {
   font-family: var(--body-font-family);
   font-weight: 700;
-  line-height: 4.7rem;
+  line-height: 6.7rem;
   font-size: 1.6rem;
   margin-top: 0;
+  margin-bottom: 0;
   width: auto;
   text-align: center;
   margin-right: 1.5rem;

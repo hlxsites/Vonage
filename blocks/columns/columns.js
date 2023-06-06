@@ -5,7 +5,7 @@ function areaClick(block) {
   // toggle the paragraph and the button display
   if (pBlock.style.display === 'block') {
     pBlock.style.display = 'none';
-    pButton.style.display = 'block';
+    pButton.style.display = 'initial';
     pH2.style.fontSize = 'initial';
   } else {
     pBlock.style.display = 'block';
