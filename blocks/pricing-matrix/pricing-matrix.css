@@ -320,7 +320,7 @@
 }
 
 .pricing-matrix .plans .plans-card .plan-basic-features ul li::before {
-    content: "\e916";
+    content: var(--vlt-checkmark-icon);
     color: var(--accent-color);
     font-family: var(--icon-font-family);
     font-size: 1rem;
