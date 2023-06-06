@@ -28,14 +28,6 @@
   text-decoration: none;
 }
 
-div.columns-container:has(.slim-promo) {
-  background-color: #000;
-  padding-top: 2rem;
-  padding-bottom: 2rem;
-  margin-right: auto;
-  margin-left: auto;
-}
-
 /** for FireFox (lack of) support for :has selector **/
 .black-bg {
   background-color: #000;
