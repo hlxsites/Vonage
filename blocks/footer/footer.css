@@ -79,27 +79,27 @@ footer .footer p {
 }
 
 .footer-social-link-facebook::before {
-  content: "\e903";
+  content: var(--vlt-facebook-logo);
 }
 
 .footer-social-link-linkedin::before {
-  content: "\e905";
+  content: var(--vlt-linkedin-logo);
 }
 
 .footer-social-link-twitter::before {
-  content: "\e904";
+  content: var(--vlt-twitter-logo);
 }
 
 .footer-social-link-youtube::before {
-  content: "\e906";
+  content: var(--vlt-youtube-logo);
 }
 
 .footer-social-link-instagram::before {
-  content: "\e92a";
+  content: var(--vlt-instagram-logo);
 }
 
 .footer-external-link::after {
-  content: "\e91d";
+  content: var(--vlt-up-right-arrow-icon);
   font-family: VltIcons;
   font-weight: 400;
   font-size: 1.0rem;
