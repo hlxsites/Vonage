@@ -47,5 +47,6 @@ export default async function decorate(block) {
   if (!fragment) {
     return;
   }
+  block.classList.add(path.split('/').pop());
   block.replaceChildren(...fragment.childNodes);
 }

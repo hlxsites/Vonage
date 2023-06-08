@@ -114,6 +114,7 @@
 
 .cards-container.icon-panel .cards-card-body a {
   background-color: unset;
+  border: none;
   color: var(--text-color);
   font-family: var(--fixed-font-family);
   font-size: var(--body-font-size-xxs);
@@ -121,7 +122,8 @@
   letter-spacing: 0.075rem;
   line-height: 2rem;
   margin-top: 0;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0;
+  padding: 0;
   text-decoration: underline;
   white-space: unset;
 }
@@ -268,18 +270,20 @@
 
 .cards-container.icon-panel .cards > ul > li {
   border: none;
-  flex: 0 0 25%;
+  max-width: 450px;
+  margin: auto;
+  flex: 0 0 100%;
 }
 
-@media (max-width: 900px) {
+@media (min-width: 600px) {
   .cards-container.icon-panel .cards > ul > li {
     flex: 0 0 50%;
   }
 }
 
-@media (max-width: 600px) {
+@media (min-width: 900px) {
   .cards-container.icon-panel .cards > ul > li {
-    flex: 0 0 100%;
+  flex: 1 1 0;
   }
 }
 

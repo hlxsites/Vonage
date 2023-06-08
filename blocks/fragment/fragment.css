@@ -88,3 +88,22 @@ div.fragment.two-col ul {
         column-count: 2;
     }
 }
+
+div.fragment-container.lead-gen {
+  background-color: #000;
+  color:#fff;
+  padding: 2rem;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+div.fragment.lead-gen > div.section {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+@media (min-width: 900px) {
+  div.fragment.lead-gen > div.section {
+    padding: 64px 32px;
+  }
+}  

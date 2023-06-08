@@ -45,6 +45,15 @@ div.slim-promo.columns-2-cols p {
   text-align: center;
 }
 
+div.columns.lead-gen > div {
+  gap: 10px;
+}
+
+div.columns.lead-gen > div > div {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  margin: auto;
+}
 
 div.slim-promo.columns-2-cols > div > div.columns-img-col {
   max-width: 16%;
@@ -116,6 +125,99 @@ div.slim-promo a {
   }
 }
 
+div.columns.lead-gen > div > div.columns-img-col {
+  flex: 0 0 0;
+  width: 75px;
+  min-width: 75px;
+  height: 75px;
+}
+
+div.columns.lead-gen > div >  div:nth-child(2) {
+  flex: 1 0 0;
+}
+
+div.columns.lead-gen > div >  div:nth-child(2) > h2 {
+  font-size: var(--body-font-size-l);
+  font-weight: 600;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+div.columns.lead-gen > div >  div:last-child {
+  flex: 0 0 0;
+  box-sizing: border-box;
+  min-width: 300px;
+  text-decoration: none;
+  color: inherit;
+}
+
+div.columns.lead-gen > div >  div:last-child > p {
+  font-size: var(--body-font-size-xs);
+  margin-top: 0;
+  margin-bottom: .8rem;
+  text-align: center;
+}
+
+@media (min-width: 600px) {
+  div.columns.lead-gen > div > div.columns-img-col {
+    width: 93px;
+    min-width: 93px;
+    height: 93px;
+  }
+}
+
+@media (min-width: 900px) {
+  div.columns.lead-gen > div > div {
+    margin: 0;
+  }
+
+  div.columns.lead-gen > div >  div:last-child > p {
+    text-align: left;
+  }
+
+  div.columns.lead-gen > div > div.columns-img-col {
+    width: 130px;
+    min-width: 130px;
+    height: 130px;
+    margin-right: 10px;
+  }
+}
+
+div.columns.lead-gen > div >  div:last-child > p > a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+div.columns.lead-gen > div >  div:last-child > p:last-child {
+  padding-top: 1.6rem;
+  margin-bottom: 0;
+}
+
+div.columns.lead-gen > div >  div:last-child > p:last-child > a {
+  width: 100px;
+}
+
+div.columns.lead-gen > div >  div:last-child > p:last-child > a::before {
+  font-family: VltIcons;
+  font-weight: 600;
+  font-size: 1.6rem;
+  display: inline-block;
+  letter-spacing: 0;
+  margin-right: 0.5rem;
+  position: relative;
+  top: 0.2rem;
+}
+
+div.columns.lead-gen > div >  div:last-child > p:last-child > a:first-child::before {
+  content: var(--vlt-mail-icon);
+}
+
+div.columns.lead-gen > div >  div:last-child > p:last-child > a:last-child::before {
+  content: var(--vlt-dialog-bubble-icon);
+  margin-left: 30px;
+}
+
+
 @media (min-width: 900px) {
   .columns > div {
     align-items: center;
@@ -141,5 +243,3 @@ div.slim-promo a {
     text-align: left;
   }
 }
-
-

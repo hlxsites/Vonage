@@ -1,16 +1,16 @@
 import {
-  sampleRUM,
   buildBlock,
-  loadHeader,
-  loadFooter,
+  decorateBlocks,
   decorateButtons,
   decorateIcons,
   decorateSections,
-  decorateBlocks,
   decorateTemplateAndTheme,
-  waitForLCP,
   loadBlocks,
   loadCSS,
+  loadFooter,
+  loadHeader,
+  sampleRUM,
+  waitForLCP,
 } from './lib-franklin.js';
 
 const LCP_BLOCKS = []; // add your LCP blocks to the list
@@ -199,10 +199,31 @@ function loadDelayed() {
   // load anything that can be postponed to the latest here
 }
 
+/**
+ * Copies any non-standard classes at a fragment up to its enclosing
+ * fragment-container.
+ */
+function copyFragmentClass() {
+  const fragmentContainers = document.querySelectorAll('.fragment-container');
+  fragmentContainers.forEach((fragmentContainer) => {
+    const fragment = fragmentContainer.querySelector(':scope .fragment');
+    if (fragment) {
+      const classes = fragment.classList;
+      const expectedClasses = ['fragment', 'block'];
+      classes.forEach((c) => {
+        if (!expectedClasses.includes(c)) {
+          fragmentContainer.classList.add(c);
+        }
+      });
+    }
+  });
+}
+
 async function loadPage() {
   await loadEager(document);
   await loadLazy(document);
   loadDelayed();
+  copyFragmentClass();
 }
 
 loadPage();
