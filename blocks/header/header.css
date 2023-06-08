@@ -27,6 +27,7 @@ header {
   top: 0;
   width: 100%;
   background-color: white;
+  z-index: 1000;
 }
 
 /* Div element to cover the page content  */

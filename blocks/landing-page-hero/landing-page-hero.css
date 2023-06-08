@@ -12,7 +12,7 @@ main .landing-page-hero-column {
 }
 
 
-.landing-page-hero-category-content h1 {
+.landing-page-hero-category-content .title {
   font-size: 5.1rem;
   letter-spacing: -.2rem;
   line-height: 5.6rem;
