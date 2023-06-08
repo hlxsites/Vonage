@@ -44,16 +44,4 @@ export default function decorate(block) {
       }
     });
   });
-
-  if (block.classList.contains('slim-promo')) {
-    const bc = document.createElement('div');
-    bc.classList.add('button-container');
-    const vo = document.createElement('a');
-    vo.innerText = 'View Offer';
-    vo.classList.add('view-offer', 'button', 'secondary');
-    bc.append(vo);
-    block.querySelector('h2').insertAdjacentElement('afterend', bc);
-    const mq = window.matchMedia('(max-width: 767px)');
-    addSlimPromoClick(block, mq);
-  }
 }
