@@ -1,0 +1,56 @@
+.block.callout-promo {
+  background: linear-gradient(275deg,#d41f9c,#ffa78c);
+  padding: 0 1rem 1rem 0;
+  border-radius: 2.2rem 3.6rem 2.6rem;
+}
+
+.block.callout-promo > div {
+  background: white;
+  border-radius: 2rem 2.2rem 2.6rem 2.3rem;
+  padding: 3rem 2rem;
+}
+
+.block.callout-promo h3 {
+  font-weight: 600;
+  font-size: 1.872rem;
+  font-family: var(--heading-font-family);
+}
+
+.block.callout-promo .button-container {
+  line-height: initial;
+}
+
+.block.callout-promo .button-container a {
+  color: var(--text-color);
+  background: none;
+  border-radius: 0;
+  padding: 0;
+  border: none;
+  height: initial;
+  line-height: initial;
+  font-weight: 600;
+  font-family: "Spezia_SemiMono", monospace;
+  letter-spacing: 0.075rem;
+  font-size: 1.4rem;
+  margin: 1rem 0 0;
+}
+
+.block.callout-promo .button-container a::after {
+  background-color: black;
+  content: '';
+  display: block;
+  height: .2rem;
+  width: 100%;
+}
+
+@media (min-width: 900px) {
+  .block.callout-promo > div {
+    display: flex;
+    gap: 50px;
+    align-items: center;
+  }
+
+  .block.callout-promo > div > div:first-child {
+    flex: 2;
+  }
+}
