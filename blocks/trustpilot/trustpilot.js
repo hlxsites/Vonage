@@ -1,33 +1,41 @@
 import { readBlockConfig, decorateIcons } from '../../scripts/lib-franklin.js';
 
+/**
+ * This block relies on the TrustPilot script loading iframes
+ * into this DIV.
+ * @param [String] template The template ID that tells TP which widget to load.
+ */
 export default function decorate(block) {
   const cfg = readBlockConfig(block);
   block.textContent = '';
   const tp = document.createElement('div');
   tp.classList.add('trustpilot-widget');
-  tp.dataset.locale = 'en-US';
-  tp.dataset.templateId = '5406e65db0d04a09e042d5fc';
+  // Required TrustPilot account ID
   tp.dataset.businessunitId = '481735560000640005026e18';
-  tp.dataset.styleHeight = '30px';
-  tp.dataset.styleWidth = '100%';
-  tp.dataset.theme = 'light';
-  tp.dataset.stars = '4,5';
-  tp.dataset.reviewLanguage = 'en';
-  tp.style = 'position: relative;';
-  if (cfg.type === 'narrow') {
-    const tpiframe = document.createElement('iframe');
-    tpiframe.title = 'Customer reviews powered by Trustpilot';
-    if (cfg.src) {
-      tpiframe.src = cfg.src;
-      tp.append(tpiframe);
-    }
-  }
-  if (cfg.popup) {
-    const tpPopupiframe = document.createElement('iframe');
-    tpPopupiframe.title = 'Customer reviews powered by Trustpilot';
-    tpPopupiframe.src = cfg.popup;
-    tp.append(tpPopupiframe);
-  }
+
+  // Required block argument
+  if (cfg.template) { tp.dataset.templateId = cfg.template; }
+  else { console.warn('Missing the required TrustPilot templateId'); }
+
+  // Optional block arguments
+  if (cfg.height) { tp.dataset.styleHeight = cfg.height; }
+  else { tp.dataset.styleHeight = '30px'; }
+
+  if (cfg.width) { tp.dataset.styleWidth = cfg.width; }
+  else { tp.dataset.styleWidth = '100%'; }
+
+  if (cfg.theme) { tp.dataset.theme = cfg.theme; }
+  { tp.dataset.theme = 'light'; }
+
+  if (cfg.stars) { tp.dataset.stars = cfg.stars; }
+  else { tp.dataset.stars = '4,5'; }
+
+  if (cfg.language) { tp.dataset.language = cfg.language; }
+  { tp.dataset.language = 'en'; }
+
+  if (cfg.locale) { tp.dataset.locale = cfg.locale; }
+  else { tp.dataset.locale = 'en-US'; }
+
   block.append(tp);
   decorateIcons(block);
 }
