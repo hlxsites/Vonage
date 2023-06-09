@@ -10,7 +10,7 @@
  * governing permissions and limitations under the License.
  */
 
- :root {
+:root {
   /* colors */
   --link-color: #035fe6;
   --link-hover-color: #136ff6;
@@ -18,12 +18,89 @@
   --overlay-background-color: #eee;
   --highlight-background-color: #ccc;
   --text-color: #000;
+  --primary-button-background-color: #000;
+  --primary-button-text-color: #fff;
+  --accent-color: #881fff;
 
 
   /* fonts */
   --body-font-family: spezia, spezia_semimono, ubuntu, roboto, noto, sans-serif;
   --heading-font-family: var(--body-font-family);
   --fixed-font-family: "Spezia_SemiMono", menlo, consolas, 'Liberation Mono', monospace;
+  --icon-font-family: vlticons!important;
+
+   /* font icon aliases */
+   --vlt-right-arrow: "\e90c";
+   --vlt-play-icon: "\e900";
+   --vlt-gear-inverse-icon: "\e90a";
+   --vlt-youtube-in-circle-icon: "\e90b";
+   --vlt-right-arrow-2-icon: "\e90c";
+   --vlt-down-chevron-icon: "\e90d";
+   --vlt-close-icon: "\e90e";
+   --vlt-circle-icon: "\e90f";
+   --vlt-play-in-circle: "\e901";
+   --vlt-close-in-circle: "\e902";
+   --vlt-facebook-logo: "\e903";
+   --vlt-twitter-logo: "\e904";
+   --vlt-linkedin-logo: "\e905";
+   --vlt-youtube-logo: "\e906";
+   --vlt-vonage-big-logo: "\e907";
+   --vlt-cloud-icon: "\e908";
+   --vlt-headset-icon: "\e909";
+   --vlt-circuit-icon: "\e910";
+   --vlt-hamburger-icon: "\e911";
+   --vlt-small-play-icon: "\e912";
+   --vlt-small-play-button-in-circle: "\e913";
+   --vlt-small-pause-button-in-circle: "\e914";
+   --vlt-down-arrow-icon: "\e915";
+   --vlt-checkmark-icon: "\e916";
+   --vlt-warning-icon: "\e918";
+   --vlt-mail-icon: "\e919";
+  --vlt-dialog-bubble-icon: "\e91a";
+  --vlt-search-icon: "\e91b";
+  --vlt-world-2-icon: "\e91c";
+  --vlt-up-right-arrow-icon: "\e91d";
+  --vlt-facebook-in-circle-icon: "\e91e";
+  --vlt-linkedin-in-circle-icon: "\e91f";
+   --vlt-twitter-logo-inverse: "\e920";
+   --vlt-phone-icon: "\e921";
+   --vlt-left-arrow-icon: "\e922";
+   --vlt-share-icon: "\e923";
+   --vlt-star-icon: "\e924";
+   --vlt-star-outline-icon: "\e925";
+   --vlt-question-in-circle-icon: "\e926";
+   --vlt-shopping-cart-icon: "\e927";
+   --vlt-calendar-icon: "\e928";
+   --vlt-upload-icon: "\e929";
+  --vlt-instagram-logo: "\e92a";
+  --vlt-power-icon: "\e92b";
+  --vlt-deskphone-icon: "\e92c";
+  --vlt-puzzle-piece-icon: "\e92d";
+  --vlt-chip-icon: "\e92e";
+  --vlt-lightbulb-icon: "\e92f";
+   --vlt-shopping-cart-inverse-icon: "\e930";
+   --vlt-key-icon: "\e931";
+   --vlt-cloud-inverse-icon: "\e932";
+   --vlt-code-icon: "\e933";
+   --vlt-gear-icon: "\e934";
+   --vlt-people-icon: "\e935";
+   --vlt-head-phone-icon: "\e936";
+   --vlt-laptop-icon: "\e937";
+   --vlt-mail-2-icon: "\e938";
+   --vlt-phone-2-icon: "\e939";
+  --vlt-mobile-text-bubble-icon: "\e93a";
+  --vlt-person-icon: "\e93b";
+  --vlt-close-2-icon: "\e93c";
+  --vlt-check-in-circle-icon: "\e93d";
+  --vlt-layers-icon: "\e93e";
+  --vlt-voicemail-icon: "\e93f";
+   --vlt-people-2-icon: "\e940";
+   --vlt-world-icon: "\e941";
+   --vlt-money-per-line-icon: "\e942";
+   --vlt-forward-icon: "\e943";
+   --vlt-download-icon: "\e945";
+
+
 
   /* body sizes */
   --body-font-size-m: 22px;
@@ -39,6 +116,9 @@
   --heading-font-size-s: 20px;
   --heading-font-size-xs: 18px;
   --heading-font-size-xxs: 16px;
+
+  /* button sizes */
+  --button-font-size-m: 16px;
 
   /* nav height */
   --nav-height: 12.5rem;
@@ -156,21 +236,25 @@ a.button:any-link, button {
   box-sizing: border-box;
   text-decoration: none;
   border: 2px solid transparent;
-  padding: 5px 30px;
   text-align: center;
   font-style: normal;
-  font-weight: 600;
+  font-weight: 500;
+  font-size: 1.6rem;
   cursor: pointer;
   color: var(--background-color);
-  background-color: var(--link-color);
+  background-color: #000;
   margin: 16px 0;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  border-radius: 30px;
+  border-radius: 1rem;
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+  line-height: 70px;
+  height: 7rem;
 }
 
-a.button:hover, a.button:focus, button:hover, button:focus  {
+a.button:hover, a.button:focus, button:hover, button:focus {
   background-color: var(--link-hover-color);
   cursor: pointer;
 }
@@ -180,10 +264,29 @@ button:disabled, button:disabled:hover {
   cursor: unset;
 }
 
+a.button.primary, button.primary {
+  background-color: var(--primary-button-background-color);
+  color: var(--primary-button-text-color);
+  font-size: var(--button-font-size-m);
+  line-height: 7rem;
+  border-radius: 1rem;
+  border: 2px solid currentcolor;
+  padding-left: 1.6rem;
+  padding-right: 1.6rem;
+  height: 7rem;
+}
+
 a.button.secondary, button.secondary {
   background-color: unset;
+  color: var(--text-color);
+  font-size: var(--button-font-size-m);
+  line-height: 7rem;
+  border-radius: 1rem;
   border: 2px solid currentcolor;
-  color: var(--text-color)
+  transition: transform .2s;
+  padding-left: 1.6rem;
+  padding-right: 1.6rem;
+  height: 7rem;
 }
 
 main input {
@@ -239,6 +342,8 @@ main img {
 }
 
 .icon-search {
+  height: 3rem;
+  width: 3rem;
   vertical-align: middle;
 }
 
@@ -254,7 +359,7 @@ main .section {
 
 @media (min-width: 900px) {
   .section > div {
-    max-width: 1200px;
+    max-width: 990pt;
     margin: auto;
   }
 }

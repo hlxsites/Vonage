@@ -1,0 +1,332 @@
+.section.pricing-matrix-container {
+    background-color: #eeeffc;
+}
+
+.pricing-matrix .quantity-selector .quantity-count {
+    border: 0;
+    border-radius: 0.8rem;
+    display: block;
+    text-align: center;
+    height: 5.2rem;
+    margin-left: auto;
+    margin-right: auto;
+    width: 8.4rem;
+    font-size: 2.1rem;
+    font-weight: 400;
+    letter-spacing: -.025rem;
+    line-height: 2.4rem;
+}
+
+
+.pricing-matrix .quantity-selector input.quantity-range {
+    /* use non-native slider: */
+    appearance: none;
+    cursor: pointer;
+    display: block;
+    height: 3.6rem;
+    padding: 0;
+    width: 100%;
+    max-width: unset;
+    border: none;
+
+    /* updated in JS: updateRangeBackground() */
+    background: transparent linear-gradient(
+            to right,
+            var(--accent-color) 0%,
+            var(--accent-color) 1.0101%,
+            white 1.0101%,
+            white 100%);
+}
+
+.pricing-matrix .quantity-selector input.quantity-range::-webkit-slider-thumb {
+    appearance: none;
+    background-color: var(--accent-color);
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 0 8px 0 rgb(0 0 0 / 18%);
+    height: 3.4rem;
+    margin-top: -1.2rem;
+    width: 3.4rem
+}
+
+.pricing-matrix .quantity-selector input.quantity-range::-webkit-slider-runnable-track {
+    background-color: transparent;
+    border: 1.3rem solid #eeeffc;
+    border-right: none;
+    border-left: none;
+    box-sizing: content-box;
+    height: 1rem;
+    width: 100%
+}
+
+.pricing-matrix .quantity-selector input.quantity-range::-moz-range-track {
+    background-color: transparent;
+    border-bottom: 1.3rem solid #eeeffc;
+    border-top: 1.3rem solid #eeeffc;
+    height: 1rem
+}
+
+.pricing-matrix .quantity-selector input.quantity-range::-moz-range-progress {
+    background-color: var(--accent-color);
+    height: 1rem
+}
+
+.pricing-matrix .quantity-selector input.quantity-range::-moz-range-thumb {
+    background-color: var(--accent-color);
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 0 8px 0 rgb(0 0 0 / 18%);
+    height: 3.4rem;
+    width: 3.4rem
+}
+
+.pricing-matrix .quantity-selector input.quantity-range::-ms-track {
+    border-color: #eeeffc;
+    border-width: 13px 0;
+    color: transparent;
+    height: 10px;
+    width: 100%
+}
+
+.pricing-matrix .quantity-selector input.quantity-range::-ms-fill-lower,
+.pricing-matrix .quantity-selector input.quantity-range::-ms-fill-upper {
+    background: #fff
+}
+
+.pricing-matrix .quantity-selector input.quantity-range::-ms-fill-lower {
+    background-color: var(--accent-color)
+}
+
+.pricing-matrix .quantity-selector input.quantity-range::-ms-thumb {
+    background-color: var(--accent-color);
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 0 8px 0 rgb(0 0 0 / 18%);
+    height: 35px;
+    margin-top: 0;
+    width: 35px
+}
+
+
+.pricing-matrix .quantity-selector {
+    max-width: 61.8rem;
+    margin: 0 auto;
+}
+
+.pricing-matrix .quantity-selector .range-length {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.2rem;
+    font-weight: 400;
+    line-height: 1.6rem;
+    color: var(--accent-color);
+}
+
+.pricing-matrix .quantity-selector .ranges {
+    display: flex;
+    justify-content: space-evenly;
+    font-size: 1.2rem;
+    font-weight: 400;
+    letter-spacing: .025rem;
+    line-height: 1.6rem;
+    gap: 10px;
+}
+
+.pricing-matrix .quantity-selector .ranges .divider {
+    border-right: 1px solid var(--accent-color);
+    height: 0.5rem;
+    width: 0.1rem;
+}
+
+@media (max-width: 767px) {
+    .pricing-matrix .quantity-selector {
+        display: flex;
+        flex-direction: row-reverse;
+        gap: 20px;
+    }
+
+    .pricing-matrix .quantity-selector .ranges {
+        display: none;
+    }
+
+    .pricing-matrix .quantity-selector .range-length {
+        display: none;
+    }
+
+    .pricing-matrix .quantity-selector .widget-range  {
+        flex: 1;
+    }
+}
+
+
+.pricing-matrix .plans {
+    margin-top: 8rem;
+}
+
+@media (min-width: 990px) {
+    .pricing-matrix .plans {
+        gap: 40px;
+        display: flex;
+    }
+}
+
+.pricing-matrix .plans .plans-card {
+    background-color: white;
+    border-radius: 2.2rem;
+    margin-top: 35px;
+    padding-bottom: 3.2rem;
+    text-align: center;
+    font-size: var(--body-font-size-xxs);
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 560px;
+
+}
+
+@media (min-width: 990px) {
+    .pricing-matrix .plans .plans-card {
+        width: clamp(300px, 100%, 400px);
+    }
+}
+
+.pricing-matrix .plans .plans-card .plan-content {
+    padding: 60px;
+}
+
+@media (min-width: 990px) {
+    .pricing-matrix .plans .plans-card .plan-content {
+        padding: 32px;
+    }
+}
+
+.pricing-matrix .plans .plans-card .plan-basic-info h3 {
+    letter-spacing: -.06rem;
+    line-height: 3.2rem;
+    font-size: 3.2rem;
+    margin: 0;
+}
+
+.pricing-matrix .plans .plans-card .plan-basic-info p {
+    max-width: 70%;
+    margin: 0 auto;
+    padding-top: 1rem;
+    font-weight: 400;
+    letter-spacing: -.02rem;
+    line-height: 2rem;
+}
+
+.pricing-matrix .plans .plans-card .plan-price .button-container {
+    margin: 0;
+    transition: transform 0.2s ease 0s;
+}
+
+.pricing-matrix .plans .plans-card .plan-price .button-container:hover {
+  transform: scale(1.02);
+}
+
+.pricing-matrix .plans .plans-card .plan-price .button-container .button {
+    margin-top: 10px;
+    margin-bottom: 0;
+    width: 100%;
+}
+
+.pricing-matrix .plans .plans-card .plan-price-value {
+    animation-name: price-change-animate-in;
+    font-weight: 500;
+    letter-spacing: -.15rem;
+    line-height: 3.2rem;
+    text-align: center;
+    padding-bottom: 1rem;
+    animation-duration: .5s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: 1;
+    display: inline-block;
+    transform-origin: center;
+    color: var(--accent-color);
+    font-size: 4.2rem;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+
+@keyframes price-change-animate-in {
+    0% {
+        opacity: 0;
+        transform: scale(2)
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1)
+    }
+}
+
+
+
+.pricing-matrix .plans .plans-card .plan-price-description {
+    margin: 0;
+    padding: 0;
+    line-height: 18px;
+    font-weight: 700;
+    letter-spacing: .025rem;
+    display: block;
+    text-align: center;
+    color: var(--accent-color);
+}
+
+
+.pricing-matrix .plans .plans-card .hidden {
+    display: none;
+}
+
+.pricing-matrix .plans .plans-card .plan-tag {
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    left: 0;
+    padding: 0.8rem 0;
+    width: 100%;
+    color: white;
+    border-top-left-radius: 2.2rem;
+    border-top-right-radius: 2.2rem;
+    font-family: var(--fixed-font-family);
+    font-weight: 600;
+    letter-spacing: .075rem;
+    line-height: 2rem;
+}
+
+.pricing-matrix .plans .plans-card .plan-tag:has(strong) {
+    background-color: var(--accent-color);
+}
+
+.pricing-matrix .plans .plans-card .plan-basic-features {
+    text-align: left;
+    max-width: 283px;
+    margin: 1.4em auto 0;
+}
+
+.pricing-matrix .plans .plans-card .plan-basic-features ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.plan-basic-features ul li {
+    margin-left: 2.2rem;
+    position: relative;
+    letter-spacing: -.02rem;
+    line-height: 2rem;
+    margin-bottom: 10px;
+}
+
+.pricing-matrix .plans .plans-card .plan-basic-features ul li::before {
+    content: var(--vlt-checkmark-icon);
+    color: var(--accent-color);
+    font-family: var(--icon-font-family);
+    font-size: 1rem;
+    speak: none;
+    text-transform: none;
+    position: absolute;
+    left: -2.2rem;
+    top: 0;
+}
