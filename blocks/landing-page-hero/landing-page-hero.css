@@ -4,6 +4,7 @@ main .landing-page-hero {
   display: flex;
   padding-right: 20px;
   padding-left: 20px;
+  padding-top: 6rem;
 }
 
 main .landing-page-hero-column {
@@ -41,6 +42,38 @@ main .landing-page-hero-column {
 .landing-page-hero-category-content .divider {
   padding-left: 1rem;
   padding-right: 1rem;
+}
+
+.landing-page-hero-category-content .inline-bulleted-list ul {
+  display: block;
+  margin-top: 1rem;
+  list-style-type: disc;
+  padding-left: 2rem;
+}
+
+.landing-page-hero-category-content .inline-bulleted-list ul > li {
+  font-family: var(--body-font-family);
+  font-weight: 400;
+  margin: 0 0 1rem;
+  font-size: 1.4rem;
+  letter-spacing: -.02rem;
+  line-height: 2rem;
+  list-style: disc;
+}
+
+.section.landing-page-hero-container.purple-gradient-background  {
+  background: linear-gradient(90deg,#881fff 40%,#827ef9);
+  color: #fff;
+  padding-bottom: 0;
+  padding-top: 0;
+}
+
+.landing-page-hero .ctas a {
+  transition: transform .2s;
+}
+
+.landing-page-hero .ctas a:hover {
+  transform: scale(1.02);
 }
 
 .landing-page-hero .ctas li:first-child {
@@ -83,6 +116,29 @@ main .landing-page-hero-column {
   padding-left: 1.6rem;
   padding-right: 1.6rem;
   height: 7rem;
+}
+
+.landing-page-hero .ctas.secondary-button-light em > a {
+  background-color: transparent;
+  border-color: #fff;
+  color: #fff;
+}
+
+.landing-page-hero .ctas.secondary-button-electric-purple em > a {
+  background-color: #881fff;
+  color: #fff;
+}
+
+/* Never used in the vonage site, but implemented for parity */
+.landing-page-hero .ctas.primary-button-light strong > a {
+  background-color: transparent;
+  border-color: #fff;
+  color: #fff;
+}
+
+.landing-page-hero .ctas.primary-button-electric-purple strong > a {
+  background-color: #881fff;
+  color: #fff;
 }
 
 .landing-page-hero-media-content {
@@ -218,6 +274,34 @@ background-color: var(--text-color);
   width: 100%;
 }
 
+.landing-page-hero .description p {
+  font-family: var(--body-font-family);
+  font-size: 1.4rem;
+  letter-spacing: -.02rem;
+  line-height: 2rem;
+  display: inline-block;
+  width: 57rem;
+  max-width: 100%;
+}
+
+.landing-page-hero .description a {
+  color: var(--text-color);
+  text-decoration: underline;
+}
+
+.landing-page-hero-media-content .caption {
+  font-family: var(--body-font-family);
+  font-size: 1.2rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.6rem;
+  margin-top: 2rem;
+  text-align: center;
+  color: #777;
+  position: relative;
+  top: -2rem;
+}
+
 @media (min-width: 768px) {
   .slim-video__cta {
     left: calc(50% - 7rem);
@@ -227,6 +311,22 @@ background-color: var(--text-color);
   .video-overlay__close {
     right: 5rem;
     top: 5rem;
+  }
+
+  .landing-page-hero .description p {
+    font-family: var(--body-font-family);
+    font-size: 1.4rem;
+    font-weight: 400;
+    letter-spacing: -.02rem;
+    line-height: 2rem;
+  }
+
+  .landing-page-hero-media-content .caption {
+    font-family: var(--body-font-family);
+    font-size: 1.2rem;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 1.6rem;
   }
 }
 
@@ -244,5 +344,21 @@ background-color: var(--text-color);
 @media (min-width: 1200px) {
   .video-overlay__close {
     right: 8rem;
+  }
+
+  .landing-page-hero .description p {
+    font-family: var(--body-font-family);
+    font-size: 1.7rem;
+    font-weight: 400;
+    letter-spacing: -.02rem;
+    line-height: 2rem;
+  }
+
+  .landing-page-hero-media-content .caption {
+    font-family: var(--body-font-family);
+    font-size: 1.2rem;
+    font-weight: 400;
+    letter-spacing: .025rem;
+    line-height: 1.6rem;
   }
 }
