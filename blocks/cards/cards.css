@@ -242,6 +242,7 @@
   border-radius: 0;
   border: unset;
   margin-bottom: 0;
+  height: auto;
 }
 
 .cards.gradient-shadow .button-container {
