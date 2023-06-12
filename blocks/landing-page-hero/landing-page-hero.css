@@ -36,7 +36,7 @@ main .landing-page-hero-column {
 
 .landing-page-hero-category-content ul > li > a:hover {
   text-decoration: underline;
-  color: #881fff;
+  color: var(--accent-color);
 }
 
 .landing-page-hero-category-content .divider {
@@ -125,7 +125,7 @@ main .landing-page-hero-column {
 }
 
 .landing-page-hero .ctas.secondary-button-electric-purple em > a {
-  background-color: #881fff;
+  background-color: var(--accent-color);
   color: #fff;
 }
 
@@ -135,7 +135,7 @@ main .landing-page-hero-column {
 }
 
 .landing-page-hero .ctas.primary-button-electric-purple strong > a {
-  background-color: #881fff;
+  background-color: var(--accent-color);
   color: #fff;
 }
 

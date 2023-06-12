@@ -72,26 +72,19 @@ function createVideoOverlay() {
   return videoOverlay;
 }
 
-function assembleMediaContent(imageContent, videoContent, overlayContent, captionContent) {
+function assembleMediaContent(elements) {
   const mediaContent = div({ class: 'landing-page-hero-media-content' });
-  // TODO: Should be able to refactor this so that instead of doing the spread operator on the passed in elements we just take the full block of elements and append that to the mediaContent
-  if (imageContent) {
-    mediaContent.appendChild(imageContent);
-  }
 
-  if (captionContent) {
-    mediaContent.appendChild(captionContent);
-  }
-
-  if (overlayContent) {
-    mediaContent.appendChild(overlayContent);
-  }
-
-  if (videoContent) {
-    mediaContent.appendChild(createVideoPlayButton(videoContent));
-  }
-
-  mediaContent.appendChild(createVideoOverlay());
+  // Iterate through the passed elements and append them to the media column
+  elements.forEach((element) => {
+    // If the element is a video reference set up the play icon and iframe video container
+    if (element.classList.contains('video')) {
+      mediaContent.appendChild(createVideoPlayButton(element));
+      mediaContent.appendChild(createVideoOverlay());
+    } else {
+      mediaContent.appendChild(element);
+    }
+  });
   return mediaContent;
 }
 
@@ -119,6 +112,7 @@ function decorateCtasContent(ctasContent, stylesList) {
 
 export default function decorate(block) {
   // If the markdown specifies a background property, need to bubble that up to the section wrapper
+  // So that the background spans the width of hte page
   if (block.classList.contains('purple-gradient-background')) {
     block.parentElement.parentElement.classList.add('purple-gradient-background');
     block.classList.remove('purple-gradient-background');
@@ -139,6 +133,7 @@ export default function decorate(block) {
     rawDivElems[i].remove();
   }
 
+  // Collect and decorate the elements from the markdown rows
   const titleContent = block.querySelector(':scope div.title');
   const descriptionContent = block.querySelector(':scope div.description');
   decorateDescription(descriptionContent);
@@ -189,7 +184,11 @@ export default function decorate(block) {
     mediaElements.push(captionContent);
   }
 
+  // Feed the appropriate elements to the appropriate column
+  // Using a special method for the media column in order to allow for generating the video play button and iframe
   heroContainer.querySelector('.category').appendChild(div({ class: 'landing-page-hero-category-content' }, ...categoryElements));
-  heroContainer.querySelector('.media').appendChild(assembleMediaContent(...mediaElements));
+  heroContainer.querySelector('.media').appendChild(assembleMediaContent(mediaElements));
+
+  // Replace the raw markdown content with the stylized one
   block.parentElement.replaceChild(heroContainer, block);
 }
