@@ -74,6 +74,7 @@ function createVideoOverlay() {
 
 function assembleMediaContent(imageContent, videoContent, overlayContent, captionContent) {
   const mediaContent = div({ class: 'landing-page-hero-media-content' });
+  // TODO: Should be able to refactor this so that instead of doing the spread operator on the passed in elements we just take the full block of elements and append that to the mediaContent
   if (imageContent) {
     mediaContent.appendChild(imageContent);
   }
@@ -145,6 +146,8 @@ export default function decorate(block) {
   const ctasContent = block.querySelector(':scope div.ctas');
   decorateCtasContent(ctasContent, block.classList);
 
+  const disclaimerContent = block.querySelector(':scope div.disclaimer');
+
   const imageContent = block.querySelector(':scope div.image');
   const videoContent = block.querySelector(':scope div.video');
 
@@ -156,7 +159,37 @@ export default function decorate(block) {
 
   const captionContent = block.querySelector(':scope div.caption');
 
-  heroContainer.querySelector('.category').appendChild(div({ class: 'landing-page-hero-category-content' }, titleContent, descriptionContent, ctasContent));
-  heroContainer.querySelector('.media').appendChild(assembleMediaContent(imageContent, videoContent, overlayContent, captionContent));
+  // Build out the list of elements to include in the textual side of the hero
+  const categoryElements = [];
+  if (titleContent) {
+    categoryElements.push(titleContent);
+  }
+  if (descriptionContent) {
+    categoryElements.push(descriptionContent);
+  }
+  if (ctasContent) {
+    categoryElements.push(ctasContent);
+  }
+  if (disclaimerContent) {
+    categoryElements.push(disclaimerContent);
+  }
+
+  // Build out the list of elements to include in the media side of the hero
+  const mediaElements = [];
+  if (imageContent) {
+    mediaElements.push(imageContent);
+  }
+  if (videoContent) {
+    mediaElements.push(videoContent);
+  }
+  if (overlayContent) {
+    mediaElements.push(overlayContent);
+  }
+  if (captionContent) {
+    mediaElements.push(captionContent);
+  }
+
+  heroContainer.querySelector('.category').appendChild(div({ class: 'landing-page-hero-category-content' }, ...categoryElements));
+  heroContainer.querySelector('.media').appendChild(assembleMediaContent(...mediaElements));
   block.parentElement.replaceChild(heroContainer, block);
 }

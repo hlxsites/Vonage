@@ -129,11 +129,9 @@ main .landing-page-hero-column {
   color: #fff;
 }
 
-/* Never used in the vonage site, but implemented for parity */
 .landing-page-hero .ctas.primary-button-light strong > a {
-  background-color: transparent;
-  border-color: #fff;
-  color: #fff;
+  background-color: #fff;
+  color: #000;
 }
 
 .landing-page-hero .ctas.primary-button-electric-purple strong > a {
@@ -300,6 +298,16 @@ background-color: var(--text-color);
   color: #777;
   position: relative;
   top: -2rem;
+}
+
+.landing-page-hero .disclaimer {
+  font-family: var(--body-font-family);
+  font-size: 1.2rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.6rem;
+  text-align: left;
+  margin-top: -2rem;
 }
 
 @media (min-width: 768px) {
