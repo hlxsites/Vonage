@@ -3,7 +3,7 @@ function expand(event) {
   const answer = label.nextElementSibling;
   if (label.ariaExpanded === 'true') {
     answer.style.height = 0;
-    answer.style.padding = 0;
+    answer.style.padding = '0 2rem 0';
     answer.ariaHidden = true;
     label.ariaExpanded = false;
   } else {
@@ -28,7 +28,7 @@ export default function decorate(block) {
         answerdiv.innerHTML = '<span>A. </span>' + answer;
         questionlabel.addEventListener('click', expand);
         answerdiv.style.height = 0;
-        answerdiv.style.padding = 0;
+        answerdiv.style.padding = '0 2rem 0';
         answerdiv.ariaHidden = true;
         questionlabel.ariaExpanded = false;
         itemdiv.append(questionlabel);

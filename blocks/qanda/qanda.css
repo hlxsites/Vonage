@@ -42,7 +42,6 @@
     -webkit-box-pack: start;
     -ms-flex-pack: start;
     justify-content: start;
-    //padding: 2rem;
     padding: 4rem 3.5rem 4rem 2rem;
     font-weight: 700;
     cursor: pointer;
@@ -66,6 +65,10 @@
     right: 1.5rem;
     top: 4rem;
     color: #5f6169;
+}
+
+.qanda-content > div > label[aria-expanded="true"]:after {
+    transform: rotate(90deg);
 }
 
 .qanda-content > div > label > span, .qanda-content > div > div > span {
