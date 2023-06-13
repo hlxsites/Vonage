@@ -50,7 +50,7 @@
     font-size: 1.6rem;
 }
 
-.qanda-content > div > label:hover {
+.qanda-content > div > label:hover, .qanda-content > div > label[aria-expanded="true"] {
     background: #f7f7fe
 }
 
@@ -91,4 +91,8 @@
     letter-spacing: -.02rem;
     line-height: 2rem;
     transition: all .35s ease;
+}
+
+.qanda-content > div > div > p{
+    display: inline;
 }
