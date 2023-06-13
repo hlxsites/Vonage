@@ -2,14 +2,15 @@
 
 .qanda > div {
     @media (min-width: 992px) {
-        margin-left: 16.66667%;
+        margin-left: 16.6667%;
     }
+
     @media (min-width: 992px) {
         -webkit-box-flex: 0;
-        -ms-flex: 0 0 66.66667%;
-        flex: 0 0 66.66667%;
-        max-width: 66.66667%;
+        flex: 0 0 66.6667%;
+        max-width: 66.6667%;
     }
+
     position: relative;
     width: 100%;
     padding-right: 20px;
@@ -26,7 +27,7 @@
     border-bottom: 1px solid #e5e7fa;
 }
 
-.qanda-content > div:after {
+.qanda-content > div::after {
     background-color: #dcdde6;
     border: 0;
     height: .1rem;
@@ -35,12 +36,9 @@
 }
 
 .qanda-content > div > label {
-    padding: 4rem 3.5rem 4rem 2rem;
     display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
     -webkit-box-pack: start;
-    -ms-flex-pack: start;
     justify-content: start;
     padding: 4rem 3.5rem 4rem 2rem;
     font-weight: 700;
@@ -54,12 +52,11 @@
     background: #f7f7fe
 }
 
-.qanda-content > div > label:after {
+.qanda-content > div > label::after {
     content: "\276F";
     width: 1em;
     height: 1em;
     text-align: center;
-    -webkit-transition: all .35s;
     transition: all .35s;
     position: absolute;
     right: 1.5rem;
@@ -67,13 +64,12 @@
     color: #5f6169;
 }
 
-.qanda-content > div > label[aria-expanded="true"]:after {
+.qanda-content > div > label[aria-expanded="true"]::after {
     transform: rotate(90deg);
 }
 
 .qanda-content > div > label > span, .qanda-content > div > div > span {
     font-size: 1.2rem;
-    font-weight: 400;
     letter-spacing: 0;
     line-height: 1.6rem;
     color: #881fff;
@@ -95,4 +91,14 @@
 
 .qanda-content > div > div > p{
     display: inline;
+}
+
+.qanda-content a {
+    color: #000;
+    text-decoration: underline;
+}
+
+.qanda-content li {
+    font-size: inherit;
+    margin: 0 0 1rem!important;
 }
