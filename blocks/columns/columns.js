@@ -14,6 +14,7 @@ function handleTitleClick(block) {
   }
 }
 
+// eslint-disable-next-line no-unused-vars
 function addSlimPromoClick(block, mq) {
   block.querySelector('div.slim-promo.columns-2-cols > div > div:nth-child(2) > div > a.button.secondary').addEventListener('click', () => {
     handleTitleClick(block);
