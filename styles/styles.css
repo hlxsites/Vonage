@@ -123,7 +123,7 @@
   --button-font-size-m: 16px;
 
   /* nav height */
-  --nav-height: 12.5rem;
+  --nav-height: 11.4rem;
 
 }
 
@@ -148,7 +148,7 @@ html {
 
 body {
   font-size: var(--body-font-size-m);
-  margin-top: 125px;
+  margin: 0;
   font-family: var(--body-font-family);
   line-height: 1.6;
   color: var(--text-color);
@@ -170,7 +170,12 @@ body.appear {
 }
 
 header {
+  position: fixed;
   height: var(--nav-height);
+}
+
+main {
+  margin-top: var(--nav-height);
 }
 
 h1, h2, h3,
