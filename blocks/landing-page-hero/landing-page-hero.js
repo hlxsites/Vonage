@@ -32,19 +32,19 @@ function decorateDescription(descriptionContent) {
 function createVideoPlayButton(videoContent) {
   const videoUrl = videoContent.innerText;
   const videoPlayButton = document.createElement('div');
-  videoPlayButton.innerHTML = `<button class="slim-video__cta" aria-label="Watch the Vonage Business Solutions overview view in a lightbox">
+  videoPlayButton.innerHTML = `<button class="slim-video-cta" aria-label="Watch the Vonage Business Solutions overview view in a lightbox">
                                   <span class="play-video">
-                                    <span class="play-video--background"></span>
+                                    <span class="play-video-background"></span>
                                   </span>
                                   <span class="play-video">
-                                    <span class="play-video--arrow"></span>
+                                    <span class="play-video-arrow"></span>
                                   </span>
                                </button>`;
 
   videoPlayButton.addEventListener('click', () => {
     const videoOverlay = (document.querySelector('.video-overlay'));
     const videoPlayer = videoOverlay.querySelector('iframe');
-    videoOverlay.classList.add('video-overlay--open');
+    videoOverlay.classList.add('video-overlay-open');
     videoPlayer.setAttribute('src', videoUrl);
   });
   return videoPlayButton;
@@ -52,20 +52,20 @@ function createVideoPlayButton(videoContent) {
 function createVideoOverlay() {
   const videoOverlay = div({ class: 'video-wrapper' });
   videoOverlay.innerHTML = `<section class="video-overlay">
-                              <div class="video-overlay__background"></div>
-                              <button class="video-overlay__close" aria-label="Close Button">
-                                <span class="Vlt-icon-close-circle"></span>
+                              <div class="video-overlay-background"></div>
+                              <button class="video-overlay-close" aria-label="Close Button">
+                                <span class="vlt-icon-close-circle"></span>
                               </button>
-                              <div class="video-overlay__video">
-                               <iframe allow="accelerometer; autoplay; encrypted-media; gyroscope;picture-in-picture" allowfullscreen="" class="video-overlay__iframe" title="Activate conversations everywhere with Vonage Business Communications" tabindex="0" id="video-iframe"></iframe>
+                              <div class="video-overlay-video">
+                               <iframe allow="accelerometer; autoplay; encrypted-media; gyroscope;picture-in-picture" allowfullscreen="" class="video-overlay-iframe" title="Activate conversations everywhere with Vonage Business Communications" tabindex="0" id="video-iframe"></iframe>
                               </div>
                             </section>`;
 
-  const videoCloseButton = videoOverlay.querySelector('.video-overlay__close');
+  const videoCloseButton = videoOverlay.querySelector('.video-overlay-close');
   videoCloseButton.addEventListener('click', () => {
     const videoContainer = (document.querySelector('.video-overlay'));
     const videoPlayer = videoContainer.querySelector('iframe');
-    videoContainer.classList.remove('video-overlay--open');
+    videoContainer.classList.remove('video-overlay-open');
     videoPlayer.setAttribute('src', '');
   });
 

@@ -1,22 +1,26 @@
 /* block specific CSS goes here */
+/* stylelint-disable no-descending-specificity */
 
 main .landing-page-hero {
   display: flex;
+  flex-wrap: wrap;
   padding-right: 20px;
   padding-left: 20px;
   padding-top: 6rem;
 }
 
-main .landing-page-hero-column {
-  flex: 0 0 50%;
-  max-width: 50%;
+main .landing-page-hero-column.media, main .landing-page-hero-column.category {
+  flex: 0 0 100%;
+  max-width: 100%;
 }
 
-
 .landing-page-hero-category-content .title {
-  font-size: 5.1rem;
-  letter-spacing: -.2rem;
-  line-height: 5.6rem;
+  font-family: var(--body-font-family);
+  font-weight: 500;
+  letter-spacing: -.125rem;
+  line-height: 4rem;
+  margin-bottom: 3rem;
+  font-size: 3.6rem;
 }
 
 .landing-page-hero-category-content ul {
@@ -61,24 +65,11 @@ main .landing-page-hero-column {
   list-style: disc;
 }
 
-.section.landing-page-hero-container.purple-gradient-background  {
-  background: linear-gradient(90deg,#881fff 40%,#827ef9);
+.section.landing-page-hero-container.purple-gradient-background {
+  background: linear-gradient(90deg, #881fff 40%, #827ef9);
   color: #fff;
   padding-bottom: 0;
   padding-top: 0;
-}
-
-.landing-page-hero .ctas a {
-  transition: transform .2s;
-}
-
-.landing-page-hero .ctas a:hover {
-  transform: scale(1.02);
-}
-
-.landing-page-hero .ctas li:first-child {
-  margin-bottom: 2rem;
-  margin-right: 2rem;
 }
 
 .landing-page-hero .ctas a {
@@ -94,7 +85,6 @@ main .landing-page-hero-column {
   cursor: pointer;
   color: var(--background-color);
   background-color: #000;
-  margin: 16px 0;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -103,6 +93,27 @@ main .landing-page-hero-column {
   padding-right: 2.5rem;
   line-height: 70px;
   height: 7rem;
+  transition: transform .2s;
+}
+
+.landing-page-hero .ctas a:hover {
+  transform: scale(1.02);
+}
+
+.landing-page-hero-category-content .ctas ul {
+  display: flex;
+  flex-flow: row wrap;
+  padding-inline-start: 0;
+}
+
+.landing-page-hero-category-content .ctas li {
+  line-height: 0;
+}
+
+
+.landing-page-hero .ctas ul li:first-child a {
+  margin-bottom: 2rem;
+  margin-right: 2rem;
 }
 
 .landing-page-hero .ctas em > a {
@@ -140,11 +151,11 @@ main .landing-page-hero-column {
 }
 
 .landing-page-hero-media-content {
-  align-items: center!important;
-  position:relative;
+  align-items: center !important;
+  position: relative;
 }
 
-.slim-video__cta {
+.slim-video-cta {
   display: block;
   cursor: pointer;
   left: calc(50% - 5rem);
@@ -161,36 +172,38 @@ main .landing-page-hero-column {
   border: none;
 }
 
-.slim-video__cta:focus .play-video--background, .slim-video__cta:hover .play-video--background{
+.slim-video-cta:focus .play-video-background, .slim-video-cta:hover .play-video-background {
   transform: scale(1.19);
 }
 
-.slim-video__cta:hover  {
-background-color: transparent;
+.slim-video-cta:hover {
+  background-color: transparent;
 }
 
-.play-video--arrow::before {
+
+.play-video-arrow::before {
   content: var(--vlt-small-play-icon);
   margin-left: -1em;
   color: #000;
-  font-size: 16rem;
+  font-size: 10rem;
 }
-.play-video--arrow {
+
+.play-video-arrow {
   display: block;
   position: absolute;
   right: 0;
   top: 0;
 }
 
-.play-video--background::before {
+.play-video-background::before {
   content: var(--vlt-circle-icon);
   color: #fff;
-  font-size: 16rem;
+  font-size: 10rem;
 }
 
-.play-video--background {
+.play-video-background {
   display: block;
-  transition: transform .3s ease-in-out,-webkit-transform .3s ease-in-out;
+  transition: transform .3s ease-in-out, -webkit-transform .3s ease-in-out;
 }
 
 .video-overlay {
@@ -203,7 +216,7 @@ background-color: transparent;
   z-index: 1000;
 }
 
-.video-overlay__video {
+.video-overlay-video {
   background-color: #000;
   height: 0;
   margin: auto;
@@ -213,7 +226,7 @@ background-color: transparent;
   width: 100%;
 }
 
-.video-overlay__background {
+.video-overlay-background {
   background: #000;
   cursor: pointer;
   height: 100%;
@@ -222,7 +235,7 @@ background-color: transparent;
   width: 100%;
 }
 
-.video-overlay__close {
+.video-overlay-close {
   background-color: #000;
   border-radius: 50%;
   cursor: pointer;
@@ -240,11 +253,11 @@ background-color: transparent;
   border: none;
 }
 
-.video-overlay__close:hover {
-background-color: var(--text-color);
+.video-overlay-close:hover {
+  background-color: var(--text-color);
 }
 
-.video-overlay__close .Vlt-icon-close-circle::before {
+.video-overlay-close .vlt-icon-close-circle::before {
   color: #fff;
   font-size: 4.4rem;
   left: calc(50% - 2.2rem);
@@ -253,17 +266,15 @@ background-color: var(--text-color);
   font-family: var(--icon-font-family);
 }
 
-.Vlt-icon-close-circle:before {
+.vlt-icon-close-circle::before {
   content: var(--vlt-close-in-circle);
 }
 
-.video-overlay--open {
-  display: -webkit-box;
-  display: -ms-flexbox;
+.video-overlay-open {
   display: flex;
 }
 
-.video-overlay__iframe {
+.video-overlay-iframe {
   border: none;
   height: 100%;
   left: 0;
@@ -274,9 +285,9 @@ background-color: var(--text-color);
 
 .landing-page-hero .description p {
   font-family: var(--body-font-family);
-  font-size: 1.4rem;
-  letter-spacing: -.02rem;
-  line-height: 2rem;
+  font-size: 1.7rem;
+  letter-spacing: -.025rem;
+  line-height: 2.5rem;
   display: inline-block;
   width: 57rem;
   max-width: 100%;
@@ -284,6 +295,10 @@ background-color: var(--text-color);
 
 .landing-page-hero .description a {
   color: var(--text-color);
+  text-decoration: none;
+}
+
+.landing-page-hero .description p a {
   text-decoration: underline;
 }
 
@@ -311,22 +326,45 @@ background-color: var(--text-color);
 }
 
 @media (min-width: 768px) {
-  .slim-video__cta {
+  .landing-page-hero-category-content .title {
+    font-size: 2.8rem;
+    font-weight: 500;
+    letter-spacing: -.15rem;
+    line-height: 3.2rem;
+  }
+
+  main .landing-page-hero-column.category {
+    flex: 0 0 58.3333%;
+    max-width: 58.3333%;
+  }
+
+  main .landing-page-hero-column.media {
+    flex: 0 0 41.6667%;
+    max-width: 41.6667%;
+  }
+
+  .slim-video-cta {
     left: calc(50% - 7rem);
     top: calc(50% - 7rem);
   }
 
-  .video-overlay__close {
+  .video-overlay-close {
     right: 5rem;
     top: 5rem;
   }
 
   .landing-page-hero .description p {
-    font-family: var(--body-font-family);
     font-size: 1.4rem;
     font-weight: 400;
     letter-spacing: -.02rem;
-    line-height: 2rem;
+    line-height: 2rem
+  }
+
+  .landing-page-hero .description li a {
+    font-size: 1.7rem;
+    font-weight: 400;
+    letter-spacing: -.025rem;
+    line-height: 2.5rem;
   }
 
   .landing-page-hero-media-content .caption {
@@ -336,30 +374,51 @@ background-color: var(--text-color);
     letter-spacing: 0;
     line-height: 1.6rem;
   }
+
+  .play-video-background::before, .play-video-arrow::before {
+    font-size: 13rem;
+  }
 }
 
 @media (min-width: 992px) {
-  .slim-video__cta {
+  main .landing-page-hero-column.media, main .landing-page-hero-column.category {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+
+  .slim-video-cta {
     left: calc(50% - 8rem);
     top: calc(50% - 8rem);
   }
 
-  .video-overlay__video {
+  .video-overlay-video {
     padding-bottom: 55.8rem;
   }
 }
 
 @media (min-width: 1200px) {
-  .video-overlay__close {
-    right: 8rem;
+  .landing-page-hero-category-content .title {
+    font-weight: 500;
+    letter-spacing: -.12rem;
+    font-size: 5.35rem !important;
+    line-height: 5.5rem !important
   }
 
   .landing-page-hero .description p {
-    font-family: var(--body-font-family);
     font-size: 1.7rem;
     font-weight: 400;
     letter-spacing: -.02rem;
     line-height: 2rem;
+  }
+
+  .video-overlay-close {
+    right: 8rem;
+  }
+
+  .landing-page-hero .description li a, .landing-page-hero .description li span {
+    font-size: 2.1rem;
+    letter-spacing: -.025rem;
+    line-height: 2.4rem;
   }
 
   .landing-page-hero-media-content .caption {
@@ -368,5 +427,9 @@ background-color: var(--text-color);
     font-weight: 400;
     letter-spacing: .025rem;
     line-height: 1.6rem;
+  }
+
+  .play-video-background::before, .play-video-arrow::before {
+    font-size: 16rem;
   }
 }
