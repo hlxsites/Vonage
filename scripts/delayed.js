@@ -20,4 +20,5 @@ const loadScript = (url, attrs) => {
 
 loadScript('https://widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js', {
   type: 'text/javascript',
+  async: true,
 });
