@@ -73,7 +73,7 @@ function createVideoOverlay() {
 }
 
 function assembleMediaContent(elements) {
-  const mediaContent = div({ class: 'landing-page-hero-media-content' });
+  const mediaContent = div({ class: 'media-content' });
 
   // Iterate through the passed elements and append them to the media column
   elements.forEach((element) => {
@@ -121,8 +121,8 @@ export default function decorate(block) {
   const heroContainer = div({ class: block.classList });
   // TODO: Potentially add logic so that you can control which side is the descriptor and which is the media via the order
   //  of the class passed to the block? As well as to allow building a header with only one column
-  heroContainer.appendChild(div({ class: 'landing-page-hero-column category' }));
-  heroContainer.appendChild(div({ class: 'landing-page-hero-column media' }));
+  heroContainer.appendChild(div({ class: 'column category' }));
+  heroContainer.appendChild(div({ class: 'column media' }));
 
   // Iterate through all the divs of the raw block rows and apply the innerText of the first row as a class to the next since that's how we identify the styling of and nature of the content
   const rawDivElems = block.querySelectorAll(':scope div > div');
@@ -186,7 +186,7 @@ export default function decorate(block) {
 
   // Feed the appropriate elements to the appropriate column
   // Using a special method for the media column in order to allow for generating the video play button and iframe
-  heroContainer.querySelector('.category').appendChild(div({ class: 'landing-page-hero-category-content' }, ...categoryElements));
+  heroContainer.querySelector('.category').appendChild(div({ class: 'category-content' }, ...categoryElements));
   heroContainer.querySelector('.media').appendChild(assembleMediaContent(mediaElements));
 
   // Replace the raw markdown content with the stylized one
