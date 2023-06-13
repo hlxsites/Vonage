@@ -1,6 +1,6 @@
 footer {
   font-size: var(--body-font-size-s);
-  padding: 9rem 2rem;
+  padding: 2rem;
 }
 
 footer .footer {
@@ -16,7 +16,8 @@ footer .footer p {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  padding: 8rem 0;
+  padding-top: 6rem;
+  padding-bottom: 1rem;
 }
 
 .footer-links-row {
@@ -28,32 +29,31 @@ footer .footer p {
   box-sizing: border-box;
   letter-spacing: 0.025rem;
   line-height: 1.6rem;
-  flex: 0 0 25%;
+  flex: 0 0 100%;
   list-style-type: none;
   margin: 0;
   padding: .6rem 0;
 }
 
-/* @media (min-width: 600px) and (max-width: 900px) { */
-@media (max-width: 900px) {
-    .footer-links-row > ul {
+@media (min-width: 600px) {
+  .footer-links-row > ul {
     flex: 0 0 50%;
   }
 }
 
-@media (max-width: 600px) {
+@media (min-width: 900px) {
   .footer-links-row > ul {
-    flex: 0 0 100%;
+    flex: 0 0 25%;
   }
 }
 
-.footer-links-row li {
+.footer-links-row > ul > li {
   font-size: 1.2rem;
   box-sizing: border-box;
   margin-bottom: 1.6rem;
 }
 
-.footer-links-row li:not(:has(a)) {
+.footer-links-row > ul > li.footer-links-category {
   font-family: var(--fixed-font-family);
   letter-spacing: .2rem;
   line-height: 2rem;

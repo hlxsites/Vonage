@@ -1,11 +1,11 @@
-function areaClick(block) {
+function handleTitleClick(block) {
   const pBlock = block.querySelector('div.slim-promo.columns-2-cols p');
   const pButton = block.querySelector('.slim-promo a.button.secondary');
   const pH2 = block.querySelector('div.slim-promo.columns-2-cols h2');
   // toggle the paragraph and the button display
   if (pBlock.style.display === 'block') {
     pBlock.style.display = 'none';
-    pButton.style.display = 'block';
+    pButton.style.display = 'initial';
     pH2.style.fontSize = 'initial';
   } else {
     pBlock.style.display = 'block';
@@ -16,14 +16,16 @@ function areaClick(block) {
 
 function addSlimPromoClick(block, mq) {
   block.querySelector('div.slim-promo.columns-2-cols > div > div:nth-child(2) > div > a.button.secondary').addEventListener('click', () => {
-    areaClick(block);
+    handleTitleClick(block);
   });
   if (mq.matches) {
     block.querySelector('div.slim-promo.columns-2-cols > div > div:nth-child(2) > h2').addEventListener('click', () => {
-      areaClick(block);
+      handleTitleClick(block);
     });
   } else {
-    block.querySelector('div.slim-promo.columns-2-cols > div > div:nth-child(2) > h2').removeEventListener('click');
+    block.querySelector('div.slim-promo.columns-2-cols > div > div:nth-child(2) > h2').removeEventListener('click', () => {
+      // do nothing
+    });
   }
 }
 

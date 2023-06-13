@@ -22,7 +22,6 @@
 
 /* header and nav layout */
 header {
-  height: 9.6rem;
   position: fixed;
   top: 0;
   width: 100%;
@@ -499,12 +498,6 @@ header .sub-menu-label-active {
 /***** Desktop behavior with full nav menu displayed *****/
 @media (min-width: 992px) {
   /***** Desktop nav layout *****/
-
-    /* Header and nav layout */
-    header {
-      height: 9.6rem;
-    }
-
     header #nav {
       display: flex;
       flex-flow: column-reverse nowrap;
