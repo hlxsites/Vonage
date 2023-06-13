@@ -38,6 +38,14 @@ export default async function decorate(block) {
       source.children[0].remove();
     }
 
+    // Add class to list catories labels, those list items without a link element child
+    const listItems = rowElement.querySelectorAll('li');
+    listItems.forEach((listItem) => {
+      if (listItem.firstElementChild === null) {
+        listItem.classList.add('footer-links-category');
+      }
+    });
+
     // Add classes to links for external reference and social links
     const links = rowElement.querySelectorAll('a');
     links.forEach((link) => {
