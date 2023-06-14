@@ -1,12 +1,9 @@
-/* nothing yet */
-
 .qanda > div {
     @media (min-width: 992px) {
         margin-left: 16.6667%;
     }
 
     @media (min-width: 992px) {
-        -webkit-box-flex: 0;
         flex: 0 0 66.6667%;
         max-width: 66.6667%;
     }
@@ -36,9 +33,7 @@
 }
 
 .qanda-content > div > label {
-    display: -webkit-box;
     display: flex;
-    -webkit-box-pack: start;
     justify-content: start;
     padding: 4rem 3.5rem 4rem 2rem;
     font-weight: 700;
