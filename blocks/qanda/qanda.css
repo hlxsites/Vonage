@@ -1,0 +1,99 @@
+.qanda > div {
+    @media (min-width: 992px) {
+        margin-left: 16.6667%;
+    }
+
+    @media (min-width: 992px) {
+        flex: 0 0 66.6667%;
+        max-width: 66.6667%;
+    }
+
+    position: relative;
+    width: 100%;
+    padding-right: 20px;
+    padding-left: 20px;
+    background-color: transparent;
+    margin: 3rem auto 5rem;
+}
+
+.qanda-content > div {
+    width: 100%;
+    overflow: hidden;
+    padding: 0;
+    display: block;
+    border-bottom: 1px solid #e5e7fa;
+}
+
+.qanda-content > div::after {
+    background-color: #dcdde6;
+    border: 0;
+    height: .1rem;
+    margin-bottom: 3rem;
+    margin-top: 3rem
+}
+
+.qanda-content > div > label {
+    display: flex;
+    justify-content: start;
+    padding: 4rem 3.5rem 4rem 2rem;
+    font-weight: 700;
+    cursor: pointer;
+    position: relative;
+    line-height: 1.6rem;
+    font-size: 1.6rem;
+}
+
+.qanda-content > div > label:hover, .qanda-content > div > label[aria-expanded="true"] {
+    background: #f7f7fe
+}
+
+.qanda-content > div > label::after {
+    content: "\276F";
+    width: 1em;
+    height: 1em;
+    text-align: center;
+    transition: all .35s;
+    position: absolute;
+    right: 1.5rem;
+    top: 4rem;
+    color: #5f6169;
+}
+
+.qanda-content > div > label[aria-expanded="true"]::after {
+    transform: rotate(90deg);
+}
+
+.qanda-content > div > label > span, .qanda-content > div > div > span {
+    font-size: 1.2rem;
+    letter-spacing: 0;
+    line-height: 1.6rem;
+    color: #881fff;
+    font-weight: 600!important;
+    padding: 0 2.5rem 0 0;
+}
+
+.qanda-content > div > div {
+    max-height: 100vh;
+    padding: 0 2rem 4rem;
+    background: #f7f7fe;
+    text-align: left;
+    font-size: 1.7rem;
+    font-weight: 400;
+    letter-spacing: -.02rem;
+    line-height: 2rem;
+    transition: all .35s ease;
+}
+
+.qanda-content > div > div > p {
+    display: inline;
+}
+
+.qanda-content a {
+    color: #000;
+    text-decoration: underline;
+}
+
+.qanda-content li {
+    font-size: inherit;
+    margin: 0 0 1rem!important;
+}
