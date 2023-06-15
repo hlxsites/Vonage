@@ -152,7 +152,7 @@ export default function decorate(block) {
     overlayContent = buildOverlay(rawOverlayContent);
   }
 
-  const captionContent = block.querySelector(':scope div.caption');
+  const captionContent = block.querySelector('div.caption');
 
   // Build out the list of elements to include in the textual side of the hero
   const categoryElements = [];
