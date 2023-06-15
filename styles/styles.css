@@ -123,7 +123,7 @@
   --button-font-size-m: 16px;
 
   /* nav height */
-  --nav-height: 11.4rem;
+  --nav-height: 12.5rem;
 
 }
 
@@ -174,8 +174,9 @@ header {
   height: var(--nav-height);
 }
 
+/* Offset main site content by the height of the nav plus the breadcrumb */
 main {
-  margin-top: var(--nav-height);
+  margin-top: calc(var(--nav-height) + 68px);
 }
 
 h1, h2, h3,

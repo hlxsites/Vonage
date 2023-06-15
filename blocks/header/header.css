@@ -52,6 +52,7 @@ header .nav-wrapper {
   position: relative;
   max-width: 132rem;
   margin: 0 auto;
+  height: var(--nav-height);
 }
 
 /* Styling for the div container that holds the two versions of the logo image */
@@ -915,6 +916,7 @@ header .nav-breadcrumb-wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  box-sizing: border-box;
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
   justify-content: space-between;
@@ -937,6 +939,7 @@ header .nav-breadcrumb-wrapper {
 
 .container.section-container {
   display: flex;
+  line-height: normal;
   box-sizing: border-box;
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
@@ -1033,7 +1036,7 @@ span.Vlt-icon-chevron.arrow-icn::before {
   content: "\e90d";
 }
 
-a.title-option {
+a.title-option__l3nav.active:hover {
   text-decoration: none;
   color: #000;
 }
@@ -1072,6 +1075,7 @@ a.title-option {
   width: 100%;
   padding-right: 20px;
   padding-left: 20px;
+  box-sizing: border-box;
 }
 
 .list.l3-nav__menu-options--list.first {
@@ -1093,12 +1097,27 @@ a.title-option {
   cursor: pointer;
   min-height: 1rem;
   margin-bottom: 1rem;
+  line-height: normal;
 }
 
 .l3-nav__menu-options--list ul li a{
   color: #717171;
   font-size: 1.25rem;
   font-weight: 400;
+}
+
+a.l3-nav__submenu:hover {
+  text-decoration: none;
+  color: #000;
+  border-bottom: 2px solid #881fff;
+}
+
+.right-sec__menu-option a {
+  color: #000;
+}
+
+.right-sec__menu-option a:hover {
+  text-decoration: none;
 }
 
 @media (min-width: 576px) {

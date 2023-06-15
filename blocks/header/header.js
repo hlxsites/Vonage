@@ -477,7 +477,7 @@ function buildBreadCrumb() {
           </span>
           <span class="Vlt-icon-chevron arrow-icn"></span>
         </div>
-        <div class="menu-option-sublist l3-nav__menu-options">
+        <div class="menu-option-sublist l3-nav__menu-options active">
           <div class="container sublist-container"></div>
         </div>
       </div>
@@ -514,76 +514,6 @@ function populateBreadCrumb(container, links) {
   container.appendChild(parentBreadCrumb);
 
   // TODO: Need to add logic here that determines whether we are in one of the sections and if so create a secondary div and append it
-  //
-  // <div className="list l3-nav__menu-options--list first" style="width: 225px;">
-  //   <ul>
-  //     <li>
-  //       <a className="l3-nav__submenu active"
-  //          href="/unified-communications/?icmp=l3breadrumb|l3nav_unifiedcommunications_overview"
-  //          data-static-label="Overview" data-di-id="l3breadrumb|l3nav_unifiedcommunications_overview"
-  //          data-external="false">
-  //         Overview
-  //       </a>
-  //     </li>
-  //     <li>
-  //       <a className="l3-nav__submenu "
-  //          href="/unified-communications/platform/?icmp=l3breadrumb|l3nav_unifiedcommunications_platform"
-  //          data-static-label="Platform" data-di-id="l3breadrumb|l3nav_unifiedcommunications_platform"
-  //          data-external="false">
-  //         Platform
-  //       </a>
-  //     </li>
-  //     <li>
-  //       <a className="l3-nav__submenu "
-  //          href="/unified-communications/features/?icmp=l3breadrumb|l3nav_unifiedcommunications_features"
-  //          data-static-label="Features" data-di-id="l3breadrumb|l3nav_unifiedcommunications_features"
-  //          data-external="false">
-  //         Features
-  //       </a>
-  //     </li>
-  //     <li>
-  //       <a className="l3-nav__submenu "
-  //          href="/unified-communications/call-center/?icmp=l3breadrumb|l3nav_unifiedcommunications_callcenter"
-  //          data-static-label="Call Center" data-di-id="l3breadrumb|l3nav_unifiedcommunications_callcenter"
-  //          data-external="false">
-  //         Call Center
-  //       </a>
-  //     </li>
-  //     <li>
-  //       <a className="l3-nav__submenu "
-  //          href="/unified-communications/use-cases/?icmp=l3breadrumb|l3nav_unifiedcommunications_usecases"
-  //          data-static-label="Use Cases" data-di-id="l3breadrumb|l3nav_unifiedcommunications_usecases"
-  //          data-external="false">
-  //         Use Cases
-  //       </a>
-  //     </li>
-  //     <li>
-  //       <a className="l3-nav__submenu "
-  //          href="/unified-communications/integrations/?icmp=l3breadrumb|l3nav_unifiedcommunications_integrations"
-  //          data-static-label="Integrations" data-di-id="l3breadrumb|l3nav_unifiedcommunications_integrations"
-  //          data-external="false">
-  //         Integrations
-  //       </a>
-  //     </li>
-  //     <li>
-  //
-  //       <a className="l3-nav__submenu "
-  //          href="/unified-communications/global/?icmp=l3breadrumb|l3nav_unifiedcommunications_international"
-  //          data-static-label="International" data-di-id="l3breadrumb|l3nav_unifiedcommunications_international"
-  //          data-external="false">
-  //         International
-  //       </a>
-  //     </li>
-  //     <li>
-  //       <a className="l3-nav__submenu "
-  //          href="/unified-communications/pricing/?icmp=l3breadrumb|l3nav_unifiedcommunications_pricing"
-  //          data-static-label="Pricing" data-di-id="l3breadrumb|l3nav_unifiedcommunications_pricing"
-  //          data-external="false">
-  //         Pricing
-  //       </a>
-  //     </li>
-  //   </ul>
-  // </div>
 }
 /* ------------------------------ Main function invoked at load ------------------------------- */
 
