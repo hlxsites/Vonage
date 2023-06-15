@@ -91,10 +91,10 @@ function assembleMediaContent(elements) {
 function buildOverlay(overlayRawContent) {
   const overlayContent = div({ class: 'overlay' });
 
-  const overlayImage = overlayRawContent.querySelector(':scope picture');
-  const overlayLink = overlayRawContent.querySelector(':scope li > a');
+  const overlayImage = overlayRawContent.querySelector('picture');
+  const overlayLink = overlayRawContent.querySelector('li > a');
 
-  overlayRawContent.querySelectorAll(':scope li > ul > li > code').forEach((styleRule) => {
+  overlayRawContent.querySelectorAll('li > ul > li > code').forEach((styleRule) => {
     overlayContent.style.cssText += styleRule.innerHTML;
   });
 
@@ -119,8 +119,6 @@ export default function decorate(block) {
   }
 
   const heroContainer = div({ class: block.classList });
-  // TODO: Potentially add logic so that you can control which side is the descriptor and which is the media via the order
-  //  of the class passed to the block? As well as to allow building a header with only one column
   heroContainer.appendChild(div({ class: 'column category' }));
   heroContainer.appendChild(div({ class: 'column media' }));
 
@@ -134,25 +132,25 @@ export default function decorate(block) {
   }
 
   // Collect and decorate the elements from the markdown rows
-  const titleContent = block.querySelector(':scope div.title');
-  const descriptionContent = block.querySelector(':scope div.description');
+  const titleContent = block.querySelector('div.title');
+  const descriptionContent = block.querySelector('div.description');
   decorateDescription(descriptionContent);
 
-  const ctasContent = block.querySelector(':scope div.ctas');
+  const ctasContent = block.querySelector('div.ctas');
   decorateCtasContent(ctasContent, block.classList);
 
-  const disclaimerContent = block.querySelector(':scope div.disclaimer');
+  const disclaimerContent = block.querySelector('div.disclaimer');
 
-  const imageContent = block.querySelector(':scope div.image');
-  const videoContent = block.querySelector(':scope div.video');
+  const imageContent = block.querySelector('div.image');
+  const videoContent = block.querySelector('div.video');
 
-  const rawOverlayContent = block.querySelector(':scope div.overlay');
+  const rawOverlayContent = block.querySelector('div.overlay');
   let overlayContent;
   if (rawOverlayContent) {
     overlayContent = buildOverlay(rawOverlayContent);
   }
 
-  const captionContent = block.querySelector(':scope div.caption');
+  const captionContent = block.querySelector('div.caption');
 
   // Build out the list of elements to include in the textual side of the hero
   const categoryElements = [];

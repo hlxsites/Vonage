@@ -79,6 +79,7 @@
 /* Enable underlines for inline links in general text in the description */
 .landing-page-hero .category-content .description p a {
   text-decoration: underline;
+  color: #000;
 }
 
 /* Layout for a legit bulleted list in the description */
