@@ -1,0 +1,495 @@
+/* block specific CSS goes here */
+/* stylelint-disable no-descending-specificity */
+
+/* Gradient background for the full section */
+.section.landing-page-hero-container.purple-gradient-background {
+  background: linear-gradient(90deg, #881fff 40%, #827ef9);
+  color: #fff;
+  padding-bottom: 0;
+  padding-top: 0;
+}
+
+/* Primary flex container for the block */
+ .landing-page-hero {
+  display: flex;
+  flex-wrap: wrap;
+  padding-right: 20px;
+  padding-left: 20px;
+  padding-top: 6rem;
+}
+
+/* Default to 1 column flex child */
+ .landing-page-hero .column {
+  flex: 0 0 100%;
+  max-width: 100%;
+}
+
+/* Styling for title in category column */
+.landing-page-hero .category-content .title {
+  font-family: var(--body-font-family);
+  font-weight: 500;
+  letter-spacing: -.125rem;
+  line-height: 4rem;
+  margin-bottom: 3rem;
+  font-size: 3.6rem;
+}
+
+/* Make a UL in the category content description a flex container */
+.landing-page-hero .category-content .description ul {
+  display: flex;
+  flex-flow: row nowrap;
+  padding-inline-start: 0;
+}
+
+/* Styling for the link menu in the description */
+.landing-page-hero .category-content .description ul > li {
+  list-style: none;
+}
+
+/* Styling for the links in a link menu in the description */
+.landing-page-hero .category-content .description ul > li > a {
+  color: var(--text-color);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* Rollover for the links in a link menu in the description */
+.landing-page-hero .category-content ul > li > a:hover {
+  text-decoration: underline;
+  color: var(--accent-color);
+}
+
+/* Layout for the ljnk dividers in the description link menu */
+.landing-page-hero .category-content .description .divider {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* Styling for general text in the description */
+.landing-page-hero .description p {
+  font-family: var(--body-font-family);
+  font-size: 1.7rem;
+  letter-spacing: -.025rem;
+  line-height: 2.5rem;
+  display: inline-block;
+  width: 57rem;
+  max-width: 100%;
+}
+
+/* Enable underlines for inline links in general text in the description */
+.landing-page-hero .category-content .description p a {
+  text-decoration: underline;
+  color: #000;
+}
+
+/* Layout for a legit bulleted list in the description */
+.landing-page-hero .category-content .description.inline-bulleted-list ul {
+  display: block;
+  margin-top: 1rem;
+  list-style-type: disc;
+  padding-left: 2rem;
+}
+
+/* Styling for a legit bulleted list in the description */
+.landing-page-hero .category-content .description.inline-bulleted-list ul > li {
+  font-family: var(--body-font-family);
+  font-weight: 400;
+  margin: 0 0 1rem;
+  font-size: 1.4rem;
+  letter-spacing: -.02rem;
+  line-height: 2rem;
+  list-style: disc;
+}
+
+/* Layout for the call to actions button container in the category column */
+.landing-page-hero .category-content .ctas ul {
+  display: flex;
+  flex-flow: row wrap;
+  padding-inline-start: 0;
+  list-style: none;
+}
+
+/* Styling for the call to action buttons in the category column */
+.landing-page-hero .category-content .ctas a {
+  font-family: var(--body-font-family);
+  display: inline-block;
+  box-sizing: border-box;
+  text-decoration: none;
+  border: 2px solid transparent;
+  text-align: center;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 1.6rem;
+  cursor: pointer;
+  color: var(--background-color);
+  background-color: #000;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border-radius: 1rem;
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+  line-height: 70px;
+  height: 7rem;
+  transition: transform .2s;
+}
+
+/* Rollover effect for the call to action buttons in the category column */
+.landing-page-hero .category-content .ctas a:hover {
+  transform: scale(1.02);
+}
+
+/* Prevent default line height from bumping down the CTA buttons */
+.landing-page-hero .category-content .ctas li {
+  line-height: 0;
+}
+
+
+/* Add a margin on the first call to action button (so that in one column mode they are spaced) */
+.landing-page-hero .category-content .ctas ul li:first-child a {
+  margin-bottom: 2rem;
+  margin-right: 2rem;
+}
+
+/* Styling for a secondary call to action button (designated with italic in the doc) */
+.landing-page-hero .category-content .ctas em > a {
+  background-color: unset;
+  color: var(--text-color);
+  font-size: var(--button-font-size-m);
+  line-height: 7rem;
+  border-radius: 1rem;
+  border: 2px solid currentcolor;
+  transition: transform .2s;
+  padding-left: 1.6rem;
+  padding-right: 1.6rem;
+  height: 7rem;
+}
+
+/* Light variant for the secondary call to action button */
+.landing-page-hero .category-content .ctas.secondary-button-light em > a {
+  background-color: transparent;
+  border-color: #fff;
+  color: #fff;
+}
+
+/* Purple variant for the secondary call to action button */
+.landing-page-hero .category-content .ctas.secondary-button-electric-purple em > a {
+  background-color: var(--accent-color);
+  color: #fff;
+}
+
+/* Styling for a primary call to action button (designated with bold in the doc) */
+.landing-page-hero .category-content .ctas.primary-button-light strong > a {
+  background-color: #fff;
+  color: #000;
+}
+
+/* Purple variant for the primary call to action button */
+.landing-page-hero .category-content .ctas.primary-button-electric-purple strong > a {
+  background-color: var(--accent-color);
+  color: #fff;
+}
+
+/* Layout and styling for the disclaimer at the bottom of the category content */
+.landing-page-hero .category-content .disclaimer {
+  font-family: var(--body-font-family);
+  font-size: 1.2rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.6rem;
+  text-align: left;
+  margin-top: -2rem;
+}
+
+/* Layout for the media columns content */
+.landing-page-hero .media-content {
+  align-items: center !important;
+  position: relative;
+}
+
+/* Layout and styling for the play button for video enabled media content column */
+.landing-page-hero .media-content .slim-video-cta {
+  display: block;
+  cursor: pointer;
+  left: calc(50% - 5rem);
+  outline: none;
+  position: absolute;
+  top: calc(50% - 5rem);
+  background-color: transparent;
+  font-family: var(--icon-font-family);
+  color: var(--text-color);
+  overflow-x: visible;
+  overflow-y: visible;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+/* Animation behavior for the video play button */
+.landing-page-hero .media-content .slim-video-cta:focus .play-video-background,
+.landing-page-hero .media-content .slim-video-cta:hover .play-video-background {
+  transform: scale(1.19);
+}
+
+/* Prevent video play button background color from showing up on hover */
+.landing-page-hero .media-content .slim-video-cta:hover {
+  background-color: transparent;
+}
+
+/* Layout for the video play buttons icon */
+.landing-page-hero .media-content .play-video-arrow {
+  display: block;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+/* Play button icon and styling */
+.landing-page-hero .media-content .play-video-arrow::before {
+  content: var(--vlt-small-play-icon);
+  margin-left: -1em;
+  color: #000;
+  font-size: 10rem;
+}
+
+/* Play button background icon and styling */
+.landing-page-hero .media-content .play-video-background::before {
+  content: var(--vlt-circle-icon);
+  color: #fff;
+  font-size: 10rem;
+}
+
+/* Layout and animation for the video play button background */
+.landing-page-hero .media-content .play-video-background {
+  display: block;
+  transition: transform .3s ease-in-out
+}
+
+/* Layout for the video section container  */
+.landing-page-hero .media-content .video-overlay {
+  display: none;
+  height: 100vh;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  z-index: 1000;
+}
+
+/* Layout and styling for the video iFrame container when video closed */
+.landing-page-hero .media-content .video-overlay-video {
+  background-color: #000;
+  height: 0;
+  margin: auto;
+  max-width: 99.2rem;
+  padding-bottom: 56.25%;
+  position: relative;
+  width: 100%;
+}
+
+/* Display the video iFrame container when video open */
+.landing-page-hero .media-content .video-overlay-open {
+  display: flex;
+}
+
+/* Styling for the gray out everything behind the video when open */
+.landing-page-hero .media-content .video-overlay-background {
+  background: #000;
+  cursor: pointer;
+  height: 100%;
+  opacity: .95;
+  position: absolute;
+  width: 100%;
+}
+
+/* Layout and styling for the close button container of the video modal window */
+.landing-page-hero .media-content .video-overlay-close {
+  background-color: #000;
+  border-radius: 50%;
+  cursor: pointer;
+  height: 4.4rem;
+  position: absolute;
+  right: 2rem;
+  top: 2rem;
+  width: 4.4rem;
+  z-index: 1;
+  margin: 0;
+  overflow: visible;
+  padding-right: 0;
+  padding-left: 0;
+  line-height: normal;
+  border: none;
+}
+
+/* Prevent the close button from having a blue hover */
+.landing-page-hero .media-content .video-overlay-close:hover {
+  background-color: var(--text-color);
+}
+
+/* Styling for the video close button */
+.landing-page-hero .media-content .video-overlay-close .vlt-icon-close-circle::before {
+  color: #fff;
+  font-size: 4.4rem;
+  left: calc(50% - 2.2rem);
+  position: absolute;
+  top: calc(50% - 2.2rem);
+  font-family: var(--icon-font-family);
+}
+
+/* Icon for the video close button */
+.landing-page-hero .media-content .vlt-icon-close-circle::before {
+  content: var(--vlt-close-in-circle);
+}
+
+/* Layout and Styling for the video iFrame */
+.landing-page-hero .media-content .video-overlay-iframe {
+  border: none;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+/* Styling and layout for the caption underneath the video in the media column */
+.landing-page-hero .media-content .caption {
+  font-family: var(--body-font-family);
+  font-size: 1.2rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.6rem;
+  margin-top: 2rem;
+  text-align: center;
+  color: #777;
+  position: relative;
+  top: -2rem;
+}
+
+@media (min-width: 768px) {
+  /* 2 columns for larger screens with a slight bias to the category column */
+  .landing-page-hero .column.category {
+    flex: 0 0 58.3333%;
+    max-width: 58.3333%;
+  }
+
+  .landing-page-hero .column.media {
+    flex: 0 0 41.6667%;
+    max-width: 41.6667%;
+  }
+
+  /* Tweak title text attributes for larger screens */
+  .landing-page-hero .category-content .title {
+    font-size: 2.8rem;
+    font-weight: 500;
+    letter-spacing: -.15rem;
+    line-height: 3.2rem;
+  }
+
+  /* Adjust size of the video play icon */
+  .landing-page-hero .media-content .slim-video-cta {
+    left: calc(50% - 7rem);
+    top: calc(50% - 7rem);
+  }
+
+  /* Adjust position of the video close button */
+  .landing-page-hero .media-content .video-overlay-close {
+    right: 5rem;
+    top: 5rem;
+  }
+
+  /* Tweak description text attributes for larger screens */
+  .landing-page-hero .category-content .description p  {
+    font-size: 1.4rem;
+    font-weight: 400;
+    letter-spacing: -.02rem;
+    line-height: 2rem
+  }
+
+  /* Tweak link menu text attributes for larger screens */
+  .landing-page-hero .category-content .description li a {
+    font-size: 1.7rem;
+    font-weight: 400;
+    letter-spacing: -.025rem;
+    line-height: 2.5rem;
+  }
+
+  /* Tweak caption text attributes for larger screens. */
+  .landing-page-hero .media-content .caption {
+    font-family: var(--body-font-family);
+    font-size: 1.2rem;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 1.6rem;
+  }
+
+  /* Tweak video play icon (and background) size for larger screens */
+  .landing-page-hero .media-content .play-video-background::before,
+  .landing-page-hero .media-content .play-video-arrow::before {
+    font-size: 13rem;
+  }
+}
+
+@media (min-width: 992px) {
+  /* Evenly split column flex children */
+  .landing-page-hero .column {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+
+  /* Adjust size of the video play icon */
+  .landing-page-hero .media-content .slim-video-cta {
+    left: calc(50% - 8rem);
+    top: calc(50% - 8rem);
+  }
+
+  /* Adjust the layout of the video overlay */
+  .landing-page-hero .media-content .video-overlay-video {
+    padding-bottom: 55.8rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  /* Tweak title text attributes for largest screens */
+  .landing-page-hero .category-content .title {
+    font-weight: 500;
+    letter-spacing: -.12rem;
+    font-size: 5.35rem !important;
+    line-height: 5.5rem !important
+  }
+
+  /* Tweak description text attributes for largest screens */
+  .landing-page-hero .category-content .description p {
+    font-size: 1.7rem;
+    font-weight: 400;
+    letter-spacing: -.02rem;
+    line-height: 2rem;
+  }
+
+  /* Adjust position of the video close button */
+  .landing-page-hero .media-content .video-overlay-close {
+    right: 8rem;
+  }
+
+  /* Tweak link menu text attributes for largest screens */
+  .landing-page-hero .category-content .description li a,
+  .landing-page-hero .category-content .description li span {
+    font-size: 2.1rem;
+    letter-spacing: -.025rem;
+    line-height: 2.4rem;
+  }
+
+  /* Tweak caption text attributes for largest screens */
+  .landing-page-hero .media-content .caption {
+    font-family: var(--body-font-family);
+    font-size: 1.2rem;
+    font-weight: 400;
+    letter-spacing: .025rem;
+    line-height: 1.6rem;
+  }
+
+  /* Tweak video play icon (and background) size for larger screens */
+  .landing-page-hero .media-content .play-video-background::before,
+  .landing-page-hero .media-content .play-video-arrow::before {
+    font-size: 16rem;
+  }
+}
