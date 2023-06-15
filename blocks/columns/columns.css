@@ -137,7 +137,7 @@ div.columns.lead-gen > div >  div:nth-child(2) {
 }
 
 div.columns.lead-gen > div >  div:nth-child(2) > h2 {
-  font-size: var(--body-font-size-l);
+  font-size: var(--body-font-size-xl);
   font-weight: 600;
   margin-top: 0;
   margin-bottom: 0;

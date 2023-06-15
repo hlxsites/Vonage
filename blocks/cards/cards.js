@@ -63,6 +63,23 @@ export default function decorate(block) {
     li.innerHTML = wDiv.outerHTML;
     li.prepend(xDiv);
     ul.append(li);
+
+    // For the card-link class of cards, move the first anchor element such
+    // that it is a child of the card's li element. This will make the whole
+    // card clickable and reactive to hovering anywhere in the card.
+    if (block.classList.contains('card-link')) {
+      const a = li.querySelector('a');
+      const parent = a.parentElement;
+      parent.innerHTML = a.innerHTML;
+      a.innerHTML = '';
+      a.removeAttribute('title');
+      a.removeAttribute('class');
+      parent.removeAttribute('class');
+      while (li.childNodes.length > 0) {
+        a.appendChild(li.childNodes[0]);
+      }
+      li.prepend(a);
+    }
   });
 
   ul.querySelectorAll('img').forEach((img) => img.closest('picture').replaceWith(createOptimizedPicture(img.src, img.alt, false, [{ width: '750' }])));
