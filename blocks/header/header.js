@@ -1,4 +1,7 @@
 import { getMetadata, decorateIcons, toClassName } from '../../scripts/lib-franklin.js';
+import {
+  a, div, li, ul,
+} from '../../scripts/scripts.js';
 
 /* ------------------------------ Global Variables ----------------------------------- */
 // media query match that indicates mobile/tablet width
@@ -94,6 +97,29 @@ function toggleNavSubSection(event) {
 }
 
 /* ------------------------------ Global Functions ----------------------------------- */
+
+function buildHierarchy(flat) {
+  // Array to build out with parent->child hierarchy for links
+  const structuredLinks = [];
+
+  // Iterate through the flat array of links
+  flat.forEach((item) => {
+    // If the link has no parent it's a top level node so append it to the top level array
+    if (item.parent === null || item.parent === '') {
+      structuredLinks.push(item);
+      // Add a children array property to the parent object
+      structuredLinks[structuredLinks.length - 1].children = [];
+    }
+    // Otherwise if the link has a listed parent find it in the array
+    // and append it to the child array element of that parent
+    else {
+      const index = structuredLinks.indexOf(structuredLinks.find((o) => o.url === item.parent));
+      structuredLinks[index].children.push(item);
+    }
+  });
+
+  return structuredLinks;
+}
 
 /**
  * A utility function to create divs with specified ID and classes
@@ -430,6 +456,135 @@ function buildHamburger(nav, navSections) {
   return hamburger;
 }
 
+/**
+ * Build the hamburger icon element which will trigger the menu display in mobile mode
+ * @returns {HTMLDivElement} Breadcrumb header element
+ // * @param {String} title The content of the root breadcrumb element that should be displayed (page section)
+ // * @param {[Object]} links An array of link objects sorted in a parent -> child structure
+ */
+function buildBreadCrumb() {
+  const breadCrumb = div({ class: 'nav-breadcrumb-wrapper' });
+  breadCrumb.innerHTML = `
+    <div class="container section-container">
+      <div class="left-sec" tabindex="0">
+        <div class="l3-nav__menu-title">
+          <span class="title-option">
+          <!-- This a link needs to have it's name and url dynamically populated            -->
+            <a class="title-option__l3nav active" data-static-label="Unified Communications">
+              <span class="nav-icon Vlt-icon-phone"></span>
+              <span>Unified Communications</span>
+            </a>
+          </span>
+          <span class="Vlt-icon-chevron arrow-icn"></span>
+        </div>
+        <div class="menu-option-sublist l3-nav__menu-options">
+          <div class="container sublist-container"></div>
+        </div>
+      </div>
+      <div class="right-sec">
+        <div class="right-sec__menu-option">
+          <a href="/unified-communications/pricing/" class="title-option" target="_self">
+          See plans &amp; pricing
+          </a>
+        </div>
+      <div class="right-sec__menu-option">
+        <a href="tel:+1-855-430-6401" class="title-option" target="_self">
+        1-855-430-6401
+        </a>
+      </div>
+      </div>
+    </div>`;
+  return breadCrumb;
+}
+
+/**
+ *
+ * @param {HTMLDivElement} container The div element in the breadcrumb which will receive the links
+ * @param {[Object]} links An array of link objects sorted in a parent -> child structure
+ */
+function populateBreadCrumb(container, links) {
+  const parentBreadCrumb = div({ class: 'list l3-nav__menu-options--list first' }, ul());
+  parentBreadCrumb.style.width = '225px';
+  for (const root of links) {
+    const breadCrumbLink = a({ class: 'l3-nav__submenu', href: root.url });
+    breadCrumbLink.innerHTML = root.label;
+    parentBreadCrumb.querySelector('ul').appendChild(li(breadCrumbLink));
+  }
+
+  container.appendChild(parentBreadCrumb);
+
+  // TODO: Need to add logic here that determines whether we are in one of the sections and if so create a secondary div and append it
+  //
+  // <div className="list l3-nav__menu-options--list first" style="width: 225px;">
+  //   <ul>
+  //     <li>
+  //       <a className="l3-nav__submenu active"
+  //          href="/unified-communications/?icmp=l3breadrumb|l3nav_unifiedcommunications_overview"
+  //          data-static-label="Overview" data-di-id="l3breadrumb|l3nav_unifiedcommunications_overview"
+  //          data-external="false">
+  //         Overview
+  //       </a>
+  //     </li>
+  //     <li>
+  //       <a className="l3-nav__submenu "
+  //          href="/unified-communications/platform/?icmp=l3breadrumb|l3nav_unifiedcommunications_platform"
+  //          data-static-label="Platform" data-di-id="l3breadrumb|l3nav_unifiedcommunications_platform"
+  //          data-external="false">
+  //         Platform
+  //       </a>
+  //     </li>
+  //     <li>
+  //       <a className="l3-nav__submenu "
+  //          href="/unified-communications/features/?icmp=l3breadrumb|l3nav_unifiedcommunications_features"
+  //          data-static-label="Features" data-di-id="l3breadrumb|l3nav_unifiedcommunications_features"
+  //          data-external="false">
+  //         Features
+  //       </a>
+  //     </li>
+  //     <li>
+  //       <a className="l3-nav__submenu "
+  //          href="/unified-communications/call-center/?icmp=l3breadrumb|l3nav_unifiedcommunications_callcenter"
+  //          data-static-label="Call Center" data-di-id="l3breadrumb|l3nav_unifiedcommunications_callcenter"
+  //          data-external="false">
+  //         Call Center
+  //       </a>
+  //     </li>
+  //     <li>
+  //       <a className="l3-nav__submenu "
+  //          href="/unified-communications/use-cases/?icmp=l3breadrumb|l3nav_unifiedcommunications_usecases"
+  //          data-static-label="Use Cases" data-di-id="l3breadrumb|l3nav_unifiedcommunications_usecases"
+  //          data-external="false">
+  //         Use Cases
+  //       </a>
+  //     </li>
+  //     <li>
+  //       <a className="l3-nav__submenu "
+  //          href="/unified-communications/integrations/?icmp=l3breadrumb|l3nav_unifiedcommunications_integrations"
+  //          data-static-label="Integrations" data-di-id="l3breadrumb|l3nav_unifiedcommunications_integrations"
+  //          data-external="false">
+  //         Integrations
+  //       </a>
+  //     </li>
+  //     <li>
+  //
+  //       <a className="l3-nav__submenu "
+  //          href="/unified-communications/global/?icmp=l3breadrumb|l3nav_unifiedcommunications_international"
+  //          data-static-label="International" data-di-id="l3breadrumb|l3nav_unifiedcommunications_international"
+  //          data-external="false">
+  //         International
+  //       </a>
+  //     </li>
+  //     <li>
+  //       <a className="l3-nav__submenu "
+  //          href="/unified-communications/pricing/?icmp=l3breadrumb|l3nav_unifiedcommunications_pricing"
+  //          data-static-label="Pricing" data-di-id="l3breadrumb|l3nav_unifiedcommunications_pricing"
+  //          data-external="false">
+  //         Pricing
+  //       </a>
+  //     </li>
+  //   </ul>
+  // </div>
+}
 /* ------------------------------ Main function invoked at load ------------------------------- */
 
 /**
@@ -517,5 +672,18 @@ export default async function decorate(block) {
     const headerBackdrop = createDiv('backdrop', ['header', 'backdrop']);
     block.append(headerBackdrop);
     block.append(navWrapper);
+    block.append(buildBreadCrumb());
+  }
+
+  const navSectionPath = getMetadata('navsection');
+  const subNavResp = await fetch(`/sub-nav/${navSectionPath}.json`);
+  if (subNavResp.ok) {
+    const json = await subNavResp.text();
+    const subNavs = JSON.parse(json);
+
+    const subNavsContainer = document.querySelector('.nav-breadcrumb-wrapper .sublist-container');
+
+    const breadCrumbLinks = buildHierarchy(subNavs.data);
+    populateBreadCrumb(subNavsContainer, breadCrumbLinks);
   }
 }

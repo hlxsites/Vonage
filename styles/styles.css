@@ -356,6 +356,18 @@ main img {
   vertical-align: middle;
 }
 
+[class*=" Vlt-icon-"], [class^="Vlt-icon-"] {
+  font-family: var(--icon-font-family);
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 400;
+  line-height: inherit;
+  speak: none;
+  text-transform: none;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+}
+
 main .section {
   padding: 64px 16px;
 }
