@@ -1,5 +1,7 @@
-import {decorateIcons} from '../../scripts/lib-franklin.js';
-import {div, domEl, li, span, ul,} from '../../scripts/scripts.js';
+import { decorateIcons } from '../../scripts/lib-franklin.js';
+import {
+  div, domEl, li, span, ul,
+} from '../../scripts/scripts.js';
 
 /**
  *
@@ -13,8 +15,8 @@ async function getSearchResults(engineKey, pageNo, filters) {
     engine_key: engineKey,
     page: pageNo,
     per_page: 9,
-    sort_field: {page: 'sortTitle'},
-    sort_direction: {page: 'asc'},
+    sort_field: { page: 'sortTitle' },
+    sort_direction: { page: 'asc' },
     highlight_fields: {},
     spelling: 'retry',
     q: '',
@@ -24,11 +26,11 @@ async function getSearchResults(engineKey, pageNo, filters) {
         language: ['en'],
         country: ['us'],
         content_section: ['apps', 'products'],
-        ff_product: {type: 'and', values: ['product/unified-communications/feature']},
+        ff_product: { type: 'and', values: ['product/unified-communications/feature'] },
         ...filters,
       },
     },
-    facets: {page: ['type', 'topic', 'region']},
+    facets: { page: ['type', 'topic', 'region'] },
   };
 
   const response = await fetch('https://api.swiftype.com/api/v1/public/engines/search.json', {
@@ -528,30 +530,29 @@ function updateFilters(block, resultInfo, activeFilters) {
   filters.innerHTML = '';
 
   Object.entries(resultInfo.info.page.facets).forEach(([groupId, facetValues]) => {
-
-    const group = domEl('details', {open: 'open', class: 'accordion-bar'},
-      domEl('summary',
+    const group = domEl(
+      'details',
+      { open: 'open', class: 'accordion-bar' },
+      domEl(
+        'summary',
         getLabelForFacet(groupId),
-        div({class: 'summary-chevron'}, span({class: ''}))
+        div({ class: 'summary-chevron' }, span({ class: '' })),
       ),
-      ul({class: 'filter-options-wrap'},
-        ...Object.entries(facetValues).map(([name, count]) => li({class: 'option-filter'},
-            div({class: 'checkbox-wrapper'},
-              domEl('label', {class: 'filter-container'},
-                domEl('input', {
-                  type: 'checkbox', value: name,
-                  'data-label': getLabelForFacet(name),
-                  'data-group': groupId,
-                  onChange: (e) => handleFilterChange(e, block)
-                }),
-                span({class: 'checkmark'}),
-                span({class: 'option-txt'}, getLabelForFacet(name),
-                  span({class: 'option-num'}, `(${count})`),
-                ),
-              ),
-            ),
+      ul(
+        { class: 'filter-options-wrap' },
+        ...Object.entries(facetValues).map(([name, count]) => li(
+          { class: 'option-filter' },
+          div(
+            { class: 'checkbox-wrapper' },
+            domEl('label', { class: 'filter-container' }, domEl('input', {
+              type: 'checkbox',
+              value: name,
+              'data-label': getLabelForFacet(name),
+              'data-group': groupId,
+              onChange: (e) => handleFilterChange(e, block),
+            }), span({ class: 'checkmark' }), span({ class: 'option-txt' }, getLabelForFacet(name), span({ class: 'option-num' }, `(${count})`))),
           ),
-        ),
+        )),
       ),
     );
 
@@ -563,36 +564,8 @@ function updateFilters(block, resultInfo, activeFilters) {
       }
     });
 
-
     filters.append(group);
   });
-
-  // <details open="open" class="accordion-bar">
-  //   <summary><span className="summary-title">Type</span>
-  //     <div className="summary-chevron-down"><i className="Vlt-icon-chevron"></i></div>
-  //   </summary>
-  //   <div className="summary-content">
-  //     <ul className="filter-options-wrap">
-  //       <li className="option-filter">
-  //         <div className="checkbox-wrapper"><label className="filter-container">
-  //           <input type="checkbox"
-  //                  value="{&quot;name&quot;:&quot;type/core-feature&quot;,&quot;label&quot;:&quot;Included feature&quot;}">
-  //             <span className="checkmark"></span> <span className="option-txt">
-  //                   Included feature
-  //                   <span className="option-num">(43)</span></span></label></div>
-  //       </li>
-  //       <li className="option-filter">
-  //         <div className="checkbox-wrapper"><label className="filter-container">
-  //           <input type="checkbox"
-  //                  value="{&quot;name&quot;:&quot;type/paid-add-on&quot;,&quot;label&quot;:&quot;Paid add-on&quot;}">
-  //             <span className="checkmark"></span> <span className="option-txt">
-  //                   Paid add-on
-  //                   <span className="option-num">(18)</span></span></label></div>
-  //       </li>
-  //     </ul>
-  //   </div>
-  //   <div className="summary-chevron-up"><i className="Vlt-icon-chevron"></i></div>
-  // </details>
 }
 
 function handleFilterChange(e, block) {
