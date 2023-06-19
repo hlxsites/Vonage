@@ -259,12 +259,12 @@ export default async function decorate(block) {
         <div class="filter-btn-options-wrapper-desktop">
             <ul class="btn-options-list">
                 <li class="filter-btn">
-                    <span aria-hidden="true" class="icon icon-filter"></span> <span>Filters</span>
+                    <span aria-hidden="true" class="font-icon-filter"></span> <span>Filters</span>
                 </li>
                 <li class="filter-option">
-                    <span aria-hidden="true" class="icon icon-close"></span> <span>Omnichannel (21)</span>
+                    <span aria-hidden="true" class="font-icon-close"></span> <span>Omnichannel (21)</span>
                 </li>
-                <li class="filter-option"><i aria-hidden="true" class="Vlt-icon-close"></i>
+                <li class="filter-option"><i aria-hidden="true" class="font-icon-close"></i>
                     <span>Mobility (22)</span></li>
                 <span class="filter-option clear-filter-section">
 					Clear All Filters
@@ -489,15 +489,32 @@ export default async function decorate(block) {
   decorateIcons(block);
 }
 
-async function refreshResults(block) {
-  const resultInfo = await getSearchResults('F2vatbs1LRkyNzs-Hv9D', 1, {});
-  console.log(resultInfo);
-
-  updateFilters(block, resultInfo);
+function getActiveFilters(block) {
+  const checkedBoxes = [...block.querySelectorAll('.filter-container input[type="checkbox"]:checked')];
+  const activeFilters = checkedBoxes
+    .map((checkbox) => [checkbox.dataset.group, checkbox.value])
+    .reduce((acc, [group, filterId]) => {
+      if (!acc[group]) {
+        acc[group] = [];
+      }
+      acc[group].push(filterId);
+      return acc;
+    }, {});
+  return activeFilters;
 }
 
-function getLabelForFacet(facetName) {
-  return facetName
+async function refreshResults(block) {
+  const activeFilters = getActiveFilters(block);
+
+  console.log('activeFilters', activeFilters);
+  const resultInfo = await getSearchResults('F2vatbs1LRkyNzs-Hv9D', 1, activeFilters);
+  console.log(resultInfo);
+
+  updateFilters(block, resultInfo, activeFilters);
+}
+
+function getLabelForFacet(facetId) {
+  return facetId
     // remove dashes
     .replaceAll('-', ' ')
     // remove slashes
@@ -506,24 +523,27 @@ function getLabelForFacet(facetName) {
     .replace(/\b[a-z]/, (str) => str.toUpperCase());
 }
 
-function updateFilters(block, resultInfo) {
+function updateFilters(block, resultInfo, activeFilters) {
   const filters = block.querySelector('.filter-options-wrapper');
   filters.innerHTML = '';
 
-  console.log(Object.entries(resultInfo.info.page.facets));
-  Object.entries(resultInfo.info.page.facets).forEach(([facetName, facetValues]) => {
-    console.log({facetName, facetValues});
+  Object.entries(resultInfo.info.page.facets).forEach(([groupId, facetValues]) => {
 
     const group = domEl('details', {open: 'open', class: 'accordion-bar'},
       domEl('summary',
-        getLabelForFacet(facetName),
-        div({class: 'summary-chevron'}, span({class: 'icon'}))
+        getLabelForFacet(groupId),
+        div({class: 'summary-chevron'}, span({class: ''}))
       ),
       ul({class: 'filter-options-wrap'},
         ...Object.entries(facetValues).map(([name, count]) => li({class: 'option-filter'},
             div({class: 'checkbox-wrapper'},
               domEl('label', {class: 'filter-container'},
-                domEl('input', {type: 'checkbox', value: name, 'data-label': getLabelForFacet(name)}),
+                domEl('input', {
+                  type: 'checkbox', value: name,
+                  'data-label': getLabelForFacet(name),
+                  'data-group': groupId,
+                  onChange: (e) => handleFilterChange(e, block)
+                }),
                 span({class: 'checkmark'}),
                 span({class: 'option-txt'}, getLabelForFacet(name),
                   span({class: 'option-num'}, `(${count})`),
@@ -534,6 +554,15 @@ function updateFilters(block, resultInfo) {
         ),
       ),
     );
+
+    // try to activate all previously active checkboxes
+    activeFilters[groupId]?.forEach((filter) => {
+      const checkbox = group.querySelector(`input[value="${filter}"]`);
+      if (checkbox) {
+        checkbox.checked = true;
+      }
+    });
+
 
     filters.append(group);
   });
@@ -564,4 +593,9 @@ function updateFilters(block, resultInfo) {
   //   </div>
   //   <div className="summary-chevron-up"><i className="Vlt-icon-chevron"></i></div>
   // </details>
+}
+
+function handleFilterChange(e, block) {
+  console.log(e.target.value);
+  refreshResults(block);
 }
