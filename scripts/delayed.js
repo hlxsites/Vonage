@@ -29,7 +29,7 @@ function LoadDriftWidget() {
 };
 /* eslint-enable */
 
-if (!document.location.hostname.match('www.vonage.com') && !document.location.hostname.match('.hlx.page')) {
+if (!document.location.hostname.match('.hlx.page')) {
   LoadDriftWidget();
 }
 
