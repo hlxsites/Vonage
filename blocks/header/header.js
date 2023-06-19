@@ -1,6 +1,6 @@
-import { getMetadata, decorateIcons, toClassName } from '../../scripts/lib-franklin.js';
+import { decorateIcons, getMetadata, toClassName } from '../../scripts/lib-franklin.js';
 import {
-  a, div, li, ul,
+  a, div, li, span, ul,
 } from '../../scripts/scripts.js';
 
 /* ------------------------------ Global Variables ----------------------------------- */
@@ -96,6 +96,10 @@ function toggleNavSubSection(event) {
   }
 }
 
+function toggleBreadCrumb() {
+  document.querySelector('.menu-option-sublist.l3-nav__menu-options').classList.toggle('active');
+}
+
 /* ------------------------------ Global Functions ----------------------------------- */
 
 function buildHierarchy(flat) {
@@ -127,6 +131,7 @@ function buildHierarchy(flat) {
  * @param {[string]} classes an array of strings indicating the classes to add to the div element
  * @returns {HTMLDivElement}
  */
+// ToDo: Deprecate this infavor of the new div implementation from Wegmuir
 function createDiv(id, classes) {
   const div = document.createElement('div');
   div.id = id;
@@ -467,19 +472,6 @@ function buildBreadCrumb() {
   breadCrumb.innerHTML = `
     <div class="container section-container">
       <div class="left-sec" tabindex="0">
-        <div class="l3-nav__menu-title">
-          <span class="title-option">
-          <!-- This a link needs to have it's name and url dynamically populated            -->
-            <a class="title-option__l3nav active" data-static-label="Unified Communications">
-              <span class="nav-icon Vlt-icon-phone"></span>
-              <span>Unified Communications</span>
-            </a>
-          </span>
-          <span class="Vlt-icon-chevron arrow-icn"></span>
-        </div>
-        <div class="menu-option-sublist l3-nav__menu-options active">
-          <div class="container sublist-container"></div>
-        </div>
       </div>
       <div class="right-sec">
         <div class="right-sec__menu-option">
@@ -499,21 +491,83 @@ function buildBreadCrumb() {
 
 /**
  *
- * @param {HTMLDivElement} container The div element in the breadcrumb which will receive the links
- * @param {[Object]} links An array of link objects sorted in a parent -> child structure
+ * @param {HTMLDivElement} breadCrumb The div element in the breadcrumb which will receive the linksData
+ * @param {Object} linksData An array of link objects sorted in a parent -> child structure
+ * @param {[String]} sectionArray The current pages Section metadata element split to a 0 indexed array of strings on '/' to provide page hierarchy
  */
-function populateBreadCrumb(container, links) {
-  const parentBreadCrumb = div({ class: 'list l3-nav__menu-options--list first' }, ul());
-  parentBreadCrumb.style.width = '225px';
-  for (const root of links) {
-    const breadCrumbLink = a({ class: 'l3-nav__submenu', href: root.url });
-    breadCrumbLink.innerHTML = root.label;
-    parentBreadCrumb.querySelector('ul').appendChild(li(breadCrumbLink));
+function populateBreadCrumb(breadCrumb, linksData, sectionArray) {
+  const inSubPage = (sectionArray.length > 1) && (linksData.subTitle !== '');
+
+  const title = div({ class: 'l3-nav__menu-title' });
+  title.innerHTML = `<span class="title-option">
+    <a class="title-option__l3nav" data-static-label="${linksData.title}">
+              <span class="nav-icon Vlt-icon-phone"></span>
+              <span>${linksData.title}</span>
+            </a>
+          </span>`;
+
+  title.addEventListener('click', toggleBreadCrumb);
+  breadCrumb.querySelector('.left-sec').appendChild(title);
+
+  // If we are in a subpage need to add the sub page to the title of the bread crumb
+  if (inSubPage) {
+    const separator = span({ class: 'separator' });
+    separator.innerHTML = '/';
+    breadCrumb.querySelector('.left-sec :first-child').appendChild(separator);
+
+    const subTitle = div({ class: 'l3-nav__menu-title bold' });
+    subTitle.innerHTML = `<span class="title-option">
+    <a class="title-option__l3nav" data-static-label="${linksData.subTitle}">
+              <span>${linksData.subTitle}</span>
+            </a>
+          </span>`;
+    const chevron = span({ class: 'Vlt-icon-chevron arrow-icn' });
+    subTitle.addEventListener('click', toggleBreadCrumb);
+    breadCrumb.querySelector('.left-sec').appendChild(subTitle);
+    breadCrumb.querySelector('.l3-nav__menu-title:last-child').appendChild(chevron);
+  } else {
+    breadCrumb.querySelector('.l3-nav__menu-title').classList.add('bold');
+    const chevron = span({ class: 'Vlt-icon-chevron arrow-icn' });
+    breadCrumb.querySelector('.l3-nav__menu-title').appendChild(chevron);
   }
 
-  container.appendChild(parentBreadCrumb);
+  const sectionBreadCrumb = div({ class: 'menu-option-sublist l3-nav__menu-options active' },
+    div({ class: 'container sublist-container' },
+      div({ class: 'list l3-nav__menu-options--list first' },
+        ul())));
 
-  // TODO: Need to add logic here that determines whether we are in one of the sections and if so create a secondary div and append it
+  // const sectionBreadCrumb = div({ class: 'list l3-nav__menu-options--list first' }, ul());
+  // ToDo: This width needs to be based on a calculation of the width of of the title
+  sectionBreadCrumb.querySelector('.list.l3-nav__menu-options--list.first').style.width = '197px';
+  for (const root of linksData.links) {
+    const breadCrumbLink = a({ class: 'l3-nav__submenu', href: root.url });
+    breadCrumbLink.innerHTML = root.label;
+    if (root.url === `/${sectionArray.join('/')}`) {
+      breadCrumbLink.classList.add('bold');
+    }
+    sectionBreadCrumb.querySelector('ul').appendChild(li(breadCrumbLink));
+  }
+  breadCrumb.querySelector('.left-sec').appendChild(sectionBreadCrumb);
+
+  // If the page is a subsection based on its section metadata
+  // need to load the relevant subsection breadcrumb data
+  if (inSubPage) {
+    const subSectionBreadCrumb = div({ class: 'list l3-nav__menu-options--list' }, ul());
+    const subSection = `/${sectionArray[0]}/${sectionArray[1]}/`;
+
+    // Find the index in the linksData data of the root page we are currently on given the section metadata
+    const index = linksData.links.indexOf(linksData.links.find((o) => o.url === subSection));
+
+    for (const child of linksData.links[index].children) {
+      const breadCrumbLink = a({ class: 'l3-nav__submenu', href: child.url });
+      breadCrumbLink.innerHTML = child.label;
+      if (child.url === `/${sectionArray.join('/')}`) {
+        breadCrumbLink.classList.add('bold');
+      }
+      subSectionBreadCrumb.querySelector('ul').appendChild(li(breadCrumbLink));
+    }
+    breadCrumb.querySelector('.sublist-container').appendChild(subSectionBreadCrumb);
+  }
 }
 /* ------------------------------ Main function invoked at load ------------------------------- */
 
@@ -605,15 +659,22 @@ export default async function decorate(block) {
     block.append(buildBreadCrumb());
   }
 
-  const navSectionPath = getMetadata('navsection');
-  const subNavResp = await fetch(`/sub-nav/${navSectionPath}.json`);
+  let sectionPathFull = getMetadata('section');
+
+  // Pop off the first character of the section path if it's a /
+  if (sectionPathFull[0] === '/') {
+    sectionPathFull = sectionPathFull.slice(1);
+  }
+  const pathArray = sectionPathFull.split('/');
+  // TODO: Implement a guard on a null array
+  const subNavResp = await fetch(`/sub-nav/${pathArray[0]}.json`);
   if (subNavResp.ok) {
     const json = await subNavResp.text();
     const subNavs = JSON.parse(json);
 
-    const subNavsContainer = document.querySelector('.nav-breadcrumb-wrapper .sublist-container');
+    const breadCrumbWrapper = document.querySelector('.nav-breadcrumb-wrapper');
 
-    const breadCrumbLinks = buildHierarchy(subNavs.data);
-    populateBreadCrumb(subNavsContainer, breadCrumbLinks);
+    const breadCrumbLinks = { title: getMetadata('sectiontitle'), subTitle: getMetadata('subsectiontitle'), links: buildHierarchy(subNavs.data) };
+    populateBreadCrumb(breadCrumbWrapper, breadCrumbLinks, pathArray);
   }
 }

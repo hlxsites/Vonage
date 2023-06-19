@@ -990,6 +990,12 @@ span.title-option {
   color: #000;
 }
 
+span.separator {
+  color: #881fff;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
 a.title-option__l3nav {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1041,6 +1047,20 @@ a.title-option__l3nav.active:hover {
   color: #000;
 }
 
+a.title-option__l3nav:hover {
+  text-decoration: none;
+}
+
+.l3-nav__menu-options--list ul li a.bold {
+  font-weight: 600;
+  color: #000;
+}
+
+.bold {
+  font-weight: 600;
+  color: #000;
+}
+
 .menu-option-sublist.l3-nav__menu-options {
   opacity: 0;
   visibility: hidden;
@@ -1080,6 +1100,12 @@ a.title-option__l3nav.active:hover {
 
 .list.l3-nav__menu-options--list.first {
   padding-left: 25px;
+  box-sizing: border-box;
+}
+
+.l3-nav__menu-title:last-child .title-option__l3nav {
+  font-weight: 600;
+  color: #000;
 }
 
 .list.l3-nav__menu-options--list {
