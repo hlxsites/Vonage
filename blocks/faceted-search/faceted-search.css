@@ -244,6 +244,11 @@
   font-family: var(--icon-font-family);
   font-style: normal;
   font-variant: normal;
+  width: 2rem;
+  height: 2rem;
+  bottom: .9rem;
+  font-size: 2.6rem;
+  left: -.3rem;
 }
 
 .filter-options-wrapper details.accordion-bar  .filter-options-wrap .option-filter .checkbox-wrapper .filter-container .option-num {
@@ -263,13 +268,6 @@
   display: block;
 }
 
-.filter-options-wrapper details.accordion-bar  .filter-options-wrap .option-filter .checkbox-wrapper .filter-container .checkmark::after {
-  width: 2rem;
-  height: 2rem;
-  bottom: .8rem;
-  font-size: 2.6rem;
-  left: -.3rem;
-}
 
 
 .filter-btn-options-wrapper {
