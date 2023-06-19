@@ -17,7 +17,7 @@ module.exports = {
     'import/extensions': ['error', {
       js: 'always',
     }],
-    'function-paren-newline': 'off',
+    'function-paren-newline': 'consistent',
     'max-len': 'off',
   },
 };

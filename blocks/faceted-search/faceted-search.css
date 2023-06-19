@@ -40,7 +40,6 @@
   max-width: 100%;
   overflow-x: auto;
   list-style-type: none;
-  display: -webkit-box;
   display: flex;
   flex-wrap: wrap;
   padding: 0;
@@ -50,7 +49,6 @@
 .filter-btn-options-wrapper-desktop .btn-options-list .filter-btn {
   border-radius: 2.5rem;
   height: 4rem;
-  display: -webkit-box;
   display: flex;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -71,7 +69,6 @@
 .filter-btn-options-wrapper-desktop .btn-options-list .filter-option {
   border-radius: 2.5rem;
   height: 4rem;
-  display: -webkit-box;
   display: flex;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -143,20 +140,11 @@
   margin-top: 0;
 }
 
-.filter-options-wrapper details.accordion-bar summary::-webkit-details-marker {
-  display: none;
-}
 
 .filter-options-wrapper details.accordion-bar summary {
   list-style: none;
-  display: -webkit-box;
   display: flex;
-  -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
   justify-content: space-between;
-}
-
-.filter-options-wrapper details.accordion-bar summary .summary-title {
   font-weight: 600;
   font-size: 1.6rem;
   font-family: var(--body-font-family);
@@ -164,11 +152,7 @@
   margin-bottom: 2rem;
 }
 
-.filter-options-wrapper details.accordion-bar .summary-chevron-up i {
-  transform: rotate(180deg);
-}
-
-.filter-options-wrapper details.accordion-bar .summary-chevron-down,.filter-options-wrapper details.accordion-bar .summary-chevron-up {
+.filter-options-wrapper details.accordion-bar .summary-chevron {
   pointer-events: none;
   position: absolute;
   top: -.2rem;
@@ -177,20 +161,29 @@
   background: #fafafa;
 }
 
-.filter-options-wrapper details.accordion-bar .summary-chevron-down i,.filter-options-wrapper details.accordion-bar .summary-chevron-up i {
+.filter-options-wrapper details.accordion-bar .summary-chevron span::before {
   display: block;
+  content: var(--vlt-down-chevron-icon);
+  font-family: var(--icon-font-family);
+  font-size: 1.8rem;
 }
 
-.filter-options-wrapper details.accordion-bar .summary-content .filter-options-wrap {
+.filter-options-wrapper details.accordion-bar[open] .summary-chevron span {
+  transform: rotate(180deg);
+}
+
+
+.filter-options-wrapper details.accordion-bar  .filter-options-wrap {
   list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
 
-.filter-options-wrapper details.accordion-bar .summary-content .filter-options-wrap .option-filter {
+.filter-options-wrapper details.accordion-bar  .filter-options-wrap .option-filter {
   height: 3.8rem;
 }
 
-.filter-options-wrapper details.accordion-bar .summary-content .filter-options-wrap .option-filter .checkbox-wrapper .filter-container {
-  display: -webkit-box;
+.filter-options-wrapper details.accordion-bar  .filter-options-wrap .option-filter .checkbox-wrapper .filter-container {
   display: flex;
   position: relative;
   padding-left: 3.5rem;
@@ -206,25 +199,25 @@
   align-items: center;
 }
 
-.filter-options-wrapper details.accordion-bar .summary-content .filter-options-wrap .option-filter .checkbox-wrapper .filter-container.check-hide {
+.filter-options-wrapper details.accordion-bar  .filter-options-wrap .option-filter .checkbox-wrapper .filter-container.check-hide {
   display: none;
 }
 
-.filter-options-wrapper details.accordion-bar .summary-content .filter-options-wrap .option-filter .checkbox-wrapper .filter-container.check-disabled {
+.filter-options-wrapper details.accordion-bar  .filter-options-wrap .option-filter .checkbox-wrapper .filter-container.check-disabled {
   font-weight: 200;
   color: #c1c3cd;
   cursor: default;
 }
 
-.filter-options-wrapper details.accordion-bar .summary-content .filter-options-wrap .option-filter .checkbox-wrapper .filter-container.check-disabled .checkmark {
+.filter-options-wrapper details.accordion-bar  .filter-options-wrap .option-filter .checkbox-wrapper .filter-container.check-disabled .checkmark {
   border-color: #c1c3cd;
 }
 
-.filter-options-wrapper details.accordion-bar .summary-content .filter-options-wrap .option-filter .checkbox-wrapper .filter-container.check-disabled .option-num {
+.filter-options-wrapper details.accordion-bar  .filter-options-wrap .option-filter .checkbox-wrapper .filter-container.check-disabled .option-num {
   color: #c1c3cd;
 }
 
-.filter-options-wrapper details.accordion-bar .summary-content .filter-options-wrap .option-filter .checkbox-wrapper .filter-container input {
+.filter-options-wrapper details.accordion-bar  .filter-options-wrap .option-filter .checkbox-wrapper .filter-container input {
   position: absolute;
   opacity: 0;
   cursor: pointer;
@@ -232,7 +225,7 @@
   width: 0;
 }
 
-.filter-options-wrapper details.accordion-bar .summary-content .filter-options-wrap .option-filter .checkbox-wrapper .filter-container .checkmark {
+.filter-options-wrapper details.accordion-bar  .filter-options-wrap .option-filter .checkbox-wrapper .filter-container .checkmark {
   position: absolute;
   top: 0;
   left: 0;
@@ -243,37 +236,37 @@
   font-size: 2rem;
 }
 
-.filter-options-wrapper details.accordion-bar .summary-content .filter-options-wrap .option-filter .checkbox-wrapper .filter-container .checkmark::after {
+.filter-options-wrapper details.accordion-bar  .filter-options-wrap .option-filter .checkbox-wrapper .filter-container .checkmark::after {
   content: "\e90e";
   position: absolute;
   display: none;
   color: #fff;
-  font-family: VltIcons;
+  font-family: var(--icon-font-family);
   font-style: normal;
   font-variant: normal;
 }
 
-.filter-options-wrapper details.accordion-bar .summary-content .filter-options-wrap .option-filter .checkbox-wrapper .filter-container .option-num {
+.filter-options-wrapper details.accordion-bar  .filter-options-wrap .option-filter .checkbox-wrapper .filter-container .option-num {
   color: #717171;
   margin-left: .5rem;
 }
 
-.filter-options-wrapper details.accordion-bar .summary-content .filter-options-wrap .option-filter .checkbox-wrapper .filter-container .option-txt {
+.filter-options-wrapper details.accordion-bar  .filter-options-wrap .option-filter .checkbox-wrapper .filter-container .option-txt {
   text-transform: capitalize;
 }
 
-.filter-options-wrapper details.accordion-bar .summary-content .filter-options-wrap .option-filter .checkbox-wrapper .filter-container input:checked~.checkmark {
+.filter-options-wrapper details.accordion-bar  .filter-options-wrap .option-filter .checkbox-wrapper .filter-container input:checked~.checkmark {
   background-color: #881fff;
 }
 
-.filter-options-wrapper details.accordion-bar .summary-content .filter-options-wrap .option-filter .checkbox-wrapper .filter-container input:checked~.checkmark::after {
+.filter-options-wrapper details.accordion-bar  .filter-options-wrap .option-filter .checkbox-wrapper .filter-container input:checked~.checkmark::after {
   display: block;
 }
 
-.filter-options-wrapper details.accordion-bar .summary-content .filter-options-wrap .option-filter .checkbox-wrapper .filter-container .checkmark::after {
+.filter-options-wrapper details.accordion-bar  .filter-options-wrap .option-filter .checkbox-wrapper .filter-container .checkmark::after {
   width: 2rem;
   height: 2rem;
-  bottom: .2rem;
+  bottom: .8rem;
   font-size: 2.6rem;
   left: -.3rem;
 }
@@ -295,7 +288,6 @@
 
   .results-section-wrapper {
     padding: 1rem;
-    display: -webkit-box;
     display: flex;
     grid-template-columns: none;
     -webkit-box-orient: vertical;
@@ -334,7 +326,6 @@
     max-width: 100%;
     overflow-x: auto;
     list-style-type: none;
-    display: -webkit-box;
     display: flex;
     flex-wrap: nowrap;
     padding: 0;
@@ -343,7 +334,6 @@
   .filter-btn-options-wrapper .btn-options-list .filter-btn {
     border-radius: 2.5rem;
     min-height: 4rem;
-    display: -webkit-box;
     display: flex;
     -webkit-box-align: center;
     -ms-flex-align: center;
@@ -409,7 +399,6 @@
 
   .filter-options-container .filters {
     height: 100%;
-    display: -webkit-box;
     display: flex;
     -webkit-box-align: center;
     -ms-flex-align: center;
@@ -455,7 +444,6 @@
   }
 
   .filter-body .list-items .title span.accordion {
-    display: -webkit-box;
     display: flex;
     width: 100%;
     -webkit-box-align: center;
@@ -480,7 +468,6 @@
   }
 
   .filter-body .list-items .title .panel .list-desc .check-lbl {
-    display: -webkit-box;
     display: flex;
     position: relative;
     cursor: pointer;
@@ -552,7 +539,7 @@
     content: "\e90e";
     position: absolute;
     display: none;
-    font-family: VltIcons;
+    font-family: var(--icon-font-family);
     font-style: normal;
     font-variant: normal;
   }
@@ -566,7 +553,6 @@
   }
 
   .filter-body .list-items .title .panel .list-desc li label {
-    display: -webkit-box;
     display: flex;
     width: 100%;
     -webkit-box-pack: justify;
@@ -609,7 +595,6 @@
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  display: -webkit-box;
   display: flex;
   -webkit-box-pack: end;
   -ms-flex-pack: end;

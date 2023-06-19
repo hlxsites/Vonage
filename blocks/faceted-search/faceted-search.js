@@ -1,8 +1,7 @@
-import {decorateIcons} from "../../scripts/lib-franklin.js";
+import { decorateIcons } from '../../scripts/lib-franklin.js';
+import {div, domEl, li, span, ul} from '../../scripts/scripts.js';
 
-
-export default function decorate(block) {
-
+export default async function decorate(block) {
   block.innerHTML = `<div class="search-filters-root">
     <div class="filter-btn-options-wrapper">
         <ul class="btn-options-list">
@@ -444,5 +443,111 @@ export default function decorate(block) {
 </div>
 `;
 
-  decorateIcons(block)
+  const query = {
+    engine_key: 'F2vatbs1LRkyNzs-Hv9D',
+    page: 1,
+    per_page: 9,
+    sort_field: { page: 'sortTitle' },
+    sort_direction: { page: 'asc' },
+    highlight_fields: {},
+    spelling: 'retry',
+    q: '',
+    filters: {
+      page: {
+        site: ['vonage-business-marketing'],
+        language: ['en'],
+        country: ['us'],
+        content_section: ['apps', 'products'],
+        ff_product: { type: 'and', values: ['product/unified-communications/feature'] },
+      },
+    },
+    facets: { page: ['type', 'topic', 'region'] },
+  };
+  const response = await fetch('https://api.swiftype.com/api/v1/public/engines/search.json', {
+    body: JSON.stringify(query),
+    headers: {
+      'content-type': 'application/json',
+    },
+    method: 'POST',
+    credentials: 'omit',
+  });
+  const resultInfo = await response.json();
+  console.log(resultInfo);
+
+  updateFilters(block, resultInfo);
+
+  decorateIcons(block);
+}
+
+function getLabelForFacet(facetName) {
+  return facetName
+    // remove dashes
+    .replaceAll('-', ' ')
+    // remove slashes
+    .replaceAll(/^[^/]+[/]/g, '')
+    // titleCase
+    .replace(/\b[a-z]/, (str) => str.toUpperCase());
+}
+
+function updateFilters(block, resultInfo) {
+  const filters = block.querySelector('.filter-options-wrapper');
+  filters.innerHTML = '';
+
+  console.log(Object.entries(resultInfo.info.page.facets));
+  Object.entries(resultInfo.info.page.facets).forEach(([facetName, facetValues]) => {
+    console.log({ facetName, facetValues });
+
+    const group = domEl('details', {open: 'open', class: 'accordion-bar'},
+      domEl('summary',
+        getLabelForFacet(facetName),
+        div({class: 'summary-chevron'}, span({class: 'icon'})),
+      ),
+      ul({class: 'filter-options-wrap'},
+        ...Object.entries(facetValues).map(([name, count]) => {
+          return li({class: 'option-filter'},
+            div({class: 'checkbox-wrapper'},
+              domEl('label', {class: 'filter-container'},
+                domEl('input', {type: 'checkbox', value: name, "data-label": getLabelForFacet(name)}),
+                  span({class: 'checkmark'}),
+                  span({
+                    class: 'option-txt'},
+                    getLabelForFacet(name),
+                    span({class: 'option-num'},`(${count})`),
+                ),
+              ),
+          )
+        );
+        })
+        ),
+        );
+
+          filters.append(group);
+        });
+
+  // <details open="open" class="accordion-bar">
+  //   <summary><span className="summary-title">Type</span>
+  //     <div className="summary-chevron-down"><i className="Vlt-icon-chevron"></i></div>
+  //   </summary>
+  //   <div className="summary-content">
+  //     <ul className="filter-options-wrap">
+  //       <li className="option-filter">
+  //         <div className="checkbox-wrapper"><label className="filter-container">
+  //           <input type="checkbox"
+  //                  value="{&quot;name&quot;:&quot;type/core-feature&quot;,&quot;label&quot;:&quot;Included feature&quot;}">
+  //             <span className="checkmark"></span> <span className="option-txt">
+  //                   Included feature
+  //                   <span className="option-num">(43)</span></span></label></div>
+  //       </li>
+  //       <li className="option-filter">
+  //         <div className="checkbox-wrapper"><label className="filter-container">
+  //           <input type="checkbox"
+  //                  value="{&quot;name&quot;:&quot;type/paid-add-on&quot;,&quot;label&quot;:&quot;Paid add-on&quot;}">
+  //             <span className="checkmark"></span> <span className="option-txt">
+  //                   Paid add-on
+  //                   <span className="option-num">(18)</span></span></label></div>
+  //       </li>
+  //     </ul>
+  //   </div>
+  //   <div className="summary-chevron-up"><i className="Vlt-icon-chevron"></i></div>
+  // </details>
 }
