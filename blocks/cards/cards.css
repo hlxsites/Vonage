@@ -316,10 +316,8 @@
     padding-right: 20px;
     cursor: pointer;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     height: 100%;
-    -ms-flex-pack: end;
-    justify-content: flex-end;
     min-height: 31.9rem;
     position: relative;
   }
@@ -336,8 +334,6 @@
     cursor: pointer;
     display: flex;
     flex-direction: column;
-    -ms-flex-pack: end;
-    justify-content: flex-end;
     min-height: 31.9rem;
     padding: 4rem;
   }
