@@ -18,5 +18,6 @@ module.exports = {
       js: 'always',
     }],
     'function-paren-newline': 'off',
+    'max-len': 'off',
   },
 };

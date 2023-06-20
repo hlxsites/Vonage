@@ -8,20 +8,10 @@
   --info-card-gradient-background-color-end: #7fc8f5;
 }
 
-.section.cards-container {
-  padding: 0;
-}
-
 .section .cards-wrapper {
   padding: 0 20px;
   margin-right: auto;
   margin-left: auto;
-}
-
-@media (min-width: 576px){
-  .section .cards-wrapper {
-    max-width: 540px;
-  }
 }
 
 .cards > ul {
@@ -35,7 +25,7 @@
 
 .cards > ul > li {
   border: 1px solid var(--highlight-background-color);
-  background-color: var(--background-color)
+  background-color: var(--background-color);
 }
 
 .cards .cards-card-body {
@@ -141,10 +131,6 @@
 }
 
 @media (min-width: 992px) {
-  .section .cards-wrapper {
-    max-width: 990pt;
-  }
-
   .cards.gradient-shadow ul {
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-gap: 40px;
@@ -272,7 +258,7 @@
   list-style: none;
   display: flex;
   flex-flow: row wrap;
-  grid-gap: 0;
+  gap: 0;
 }
 
 .cards-container.icon-panel .cards > ul > li {
@@ -523,4 +509,113 @@
     line-height: 3.2rem;
     text-decoration: none;
   }
+}
+
+.cards.card-link > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.cards.card-link > ul > li {
+  box-shadow: 0 0 20px 0 rgba(0 0 0 / 10%);
+  border: 1px solid #eee;
+  width: 100%;
+}
+
+.cards.card-link > ul > li:hover {
+  border: 1px solid #bbb;
+}
+
+@media (min-width: 600px) {
+  .cards.card-link > ul > li {
+    flex: 0 1 30%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .cards.card-link > ul {
+    gap: 40px;
+  }
+}
+
+.cards.card-link > ul > li > a {
+  color: #000;
+}
+
+.cards.card-link > ul > li > a:hover {
+  text-decoration: none;
+}
+
+.cards.card-link .cards-card-image {
+  box-sizing: border-box;
+  background-color: #000;
+  position: relative;
+  padding-bottom: 33%;
+  overflow: hidden;
+}
+
+.cards.card-link > ul > li > a > div > div img {
+  position: absolute;
+  aspect-ratio: 1;
+  width: 100%;
+  height: 100%;
+  transition: transform .3s ease;
+}
+
+.cards.card-link > ul > li > a:hover img {
+  transform: scale(1.1);
+}
+
+.cards.card-link > ul > li > a > div > div.cards-card-body {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  margin-right: 2.8rem;
+}
+
+@media (min-width: 900px) {
+  .cards.card-link > ul > li > a > div > div.cards-card-body {
+    margin-top: 2.8rem;
+    margin-bottom: 2.8rem;
+    margin-right: 5rem;
+  }
+}
+
+.cards.card-link > ul > li > a > div > div.cards-card-body > p:nth-child(1) {
+  text-transform: uppercase;
+  font-size: var(--body-font-size-xxxs);
+  font-weight: 400;
+  letter-spacing: 2px;
+  line-height: 2rem;
+  margin: 0;
+}
+
+.cards.card-link > ul > li > a > div > div.cards-card-body > p:nth-child(2) {
+  font-size: var(--body-font-size-s);
+  font-weight: 600;
+  letter-spacing: -0.25px;
+  margin-top: 0.7rem;
+  margin-bottom: 1rem;
+}
+
+.cards.card-link > ul > li > a > div > div.cards-card-body > p:nth-child(3) {
+  font-size: var(--body-font-size-xs);
+  font-weight: 400;
+  letter-spacing: -0.25px;
+}
+
+.cards.card-link > ul > li > a > div > div.cards-card-body > p:nth-child(3)::after {
+  font-family: VltIcons;
+  content: var(--vlt-right-arrow);
+  margin-left: 1rem;
+  position: absolute;
+  transition: padding .3s ease;
+}
+
+.cards.card-link > ul > li > a:hover div.cards-card-body > p:nth-child(3)::after {
+  padding-left: 1.5rem;
 }

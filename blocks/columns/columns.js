@@ -14,6 +14,7 @@ function handleTitleClick(block) {
   }
 }
 
+// eslint-disable-next-line no-unused-vars
 function addSlimPromoClick(block, mq) {
   block.querySelector('div.slim-promo.columns-2-cols > div > div:nth-child(2) > div > a.button.secondary').addEventListener('click', () => {
     handleTitleClick(block);
@@ -46,16 +47,4 @@ export default function decorate(block) {
       }
     });
   });
-
-  if (block.classList.contains('slim-promo')) {
-    const bc = document.createElement('div');
-    bc.classList.add('button-container');
-    const vo = document.createElement('a');
-    vo.innerText = 'View Offer';
-    vo.classList.add('view-offer', 'button', 'secondary');
-    bc.append(vo);
-    block.querySelector('h2').insertAdjacentElement('afterend', bc);
-    const mq = window.matchMedia('(max-width: 767px)');
-    addSlimPromoClick(block, mq);
-  }
 }

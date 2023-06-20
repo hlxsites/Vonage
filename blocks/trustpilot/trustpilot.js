@@ -17,6 +17,7 @@ export default function decorate(block) {
   try {
     tp.dataset.templateId = cfg.template;
   } catch {
+    // eslint-disable-next-line no-console
     console.warn('Missing the required TrustPilot templateId');
   }
 
