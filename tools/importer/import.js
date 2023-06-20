@@ -153,6 +153,10 @@ function importCategoryGrid(main, document) {
     const cgCells = [['Columns']];
     const gi = grid.querySelectorAll('section.category-grid__item');
     gi.forEach((item) => {
+      const textNode = item.querySelector('p.text-link');
+      const boldNode = document.createElement('h4');
+      boldNode.append(textNode.innerHTML);
+      textNode.replaceWith(boldNode);
       cgCells.push([item]);
     });
     const columnsBlock = WebImporter.DOMUtils.createTable(cgCells, document);
