@@ -45,6 +45,18 @@ const createMetadata = (main, document) => {
     meta.Image = el;
   }
 
+  meta['nav-section'] = 'Unified Communications'; // this is static for now
+
+  const navs = main.querySelectorAll('div.left-sec span.title-option > a > span:not(.nav-icon)');
+  console.log(navs);
+  console.log(`navs: ${navs.length}`);
+  if (navs[1]) {
+    meta['nav-subsection'] = navs[1].innerHTML;
+  }
+  if (navs[2]) {
+    meta['nav-breadcrumb'] = navs[2].innerHTML;
+  }
+
   const block = WebImporter.Blocks.getMetadataBlock(document, meta);
   main.append(block);
 
@@ -163,7 +175,7 @@ function importLandingPageHero(main, document) {
     lphCells.push(['title', title.innerHTML]);
     lphCells.push(['description', description.innerHTML]);
 
-    const media = hero.querySelector('div.landing-page-hero__media-container > div > div > div > img');
+    const media = hero.querySelector('div.landing-page-hero__media-container > div > div > div > img, div.landing-page-hero__media-container > img');
     if (media) {
       lphCells.push(['image', media]);
     }
@@ -191,6 +203,10 @@ function importLandingPageHero(main, document) {
     });
     lphCells.push(['ctas', ctaList]);
     const lphBlock = WebImporter.DOMUtils.createTable(lphCells, document);
+    const metadata = [['Section Metadata'], ['Style', 'purple-gradient-background']];
+    const metaBlock = WebImporter.DOMUtils.createTable(metadata, document);
+    lphBlock.append(metaBlock);
+    lphBlock.append(hr(document));
     hero.replaceWith(lphBlock);
   });
 }
@@ -312,6 +328,7 @@ function injectLeadGenFragment(main, document) {
     fragDiv.append(fraglink);
     frCells.push([fragDiv]);
     const fragment = WebImporter.DOMUtils.createTable(frCells, document);
+    fragment.prepend(hr(document));
     lga.replaceWith(fragment);
   }
 }
@@ -333,6 +350,8 @@ export default {
     // define the main element: the one that will be transformed to Markdown
     const main = document.body;
 
+    createMetadata(main, document);
+
     // use helper method to remove header, footer, etc.
     WebImporter.DOMUtils.remove(main, [
       'header.Vlt-header',
@@ -352,7 +371,7 @@ export default {
 
     // create the metadata block and append it to the main element
     cleanAnchors(main);
-    createMetadata(main, document);
+    // createMetadata(main, document);
     importSlimPromo(main, document);
     importPricingMatrix(main, document);
     import2upCards(main, document);
