@@ -156,13 +156,15 @@ function importCategoryGrid(main, document) {
   cg.forEach((grid) => {
     const cgCells = [['Columns']];
     const gi = grid.querySelectorAll('section.category-grid__item');
+    const cols = [];
     gi.forEach((item) => {
       const textNode = item.querySelector('p.text-link');
       const boldNode = document.createElement('h4');
       boldNode.append(textNode.innerHTML);
       textNode.replaceWith(boldNode);
-      cgCells.push([item]);
+      cols.push(item);
     });
+    cgCells.push(cols);
     const columnsBlock = WebImporter.DOMUtils.createTable(cgCells, document);
     grid.replaceWith(columnsBlock);
   });
@@ -233,7 +235,6 @@ function importMarketplaceSummary(main, document) {
 
 function importCalloutPromo(main, document) {
   const callPromoX = main.querySelectorAll('div.callout-promo-extrusion, div.gs-promo-extrusion');
-  console.log(`cpx: ${callPromoX.length}`);
   callPromoX.forEach((promo) => {
     const cpxCells = [['callout-promo']];
     if (promo.classList.contains('gs-promo-extrusion')) {
