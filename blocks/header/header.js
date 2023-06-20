@@ -1,6 +1,6 @@
 import { decorateIcons, getMetadata, toClassName } from '../../scripts/lib-franklin.js';
 import {
-  a, div, li, span, ul,
+  a, div, hr, li, span, ul,
 } from '../../scripts/scripts.js';
 
 /* ------------------------------ Global Variables ----------------------------------- */
@@ -24,6 +24,17 @@ function scrollFunction() {
   const scrollDistance = 160;
   const newScrollY = window.scrollY;
   const scrolledDown = (oldScrollY - newScrollY < 0);
+  if (window.location.pathname.search('unified-communications/')) {
+    if ((scrolledDown && document.body.scrollTop > scrollDistance)
+      || (scrolledDown && document.documentElement.scrollTop > scrollDistance)) {
+      document.querySelector('.nav-wrapper').style.display = 'none';
+      document.querySelector('.header-wrapper').classList.add('collapsed');
+    } else {
+      document.querySelector('.nav-wrapper').style.display = '';
+      document.querySelector('.header-wrapper').classList.remove('collapsed');
+    }
+  }
+
   if ((scrolledDown && document.body.scrollTop > scrollDistance)
       || (scrolledDown && document.documentElement.scrollTop > scrollDistance)) {
     document.getElementById('nav').querySelector('.nav-tools').style.display = 'none';
@@ -113,10 +124,9 @@ function buildHierarchy(flat) {
       structuredLinks.push(item);
       // Add a children array property to the parent object
       structuredLinks[structuredLinks.length - 1].children = [];
-    }
-    // Otherwise if the link has a listed parent find it in the array
-    // and append it to the child array element of that parent
-    else {
+    } else {
+      // Otherwise if the link has a listed parent find it in the array
+      // and append it to the child array element of that parent
       const index = structuredLinks.indexOf(structuredLinks.find((o) => o.url === item.parent));
       structuredLinks[index].children.push(item);
     }
@@ -369,19 +379,20 @@ function decorateSubSections(navSection, sectionIndex) {
  * @param {HTMLElement} navSections The nodes of the section nav menu bar
  */
 function decorateSections(navSections) {
-  const sectionDivider = document.createElement('hr');
-  sectionDivider.classList.add('nav-section-divider');
+  const sectionDivider = hr({ class: 'nav-section-divider' });
   navSections.after(sectionDivider);
   navSections.querySelectorAll(':scope > ul > li').forEach((navSection) => {
     const sectionIndex = navSection.querySelector(':scope > ul');
     navSection.remove();
-    const navItemWrapper = document.createElement('div');
-    navItemWrapper.classList.add('nav-item-wrapper');
+    const navItemWrapper = div({ class: 'nav-item-wrapper' });
     navSection.id = toClassName(navSection.childNodes[0].nodeValue);
+    if (navSection.querySelectorAll('em, strong').length > 0) {
+      navItemWrapper.classList.add('cta');
+    }
     navItemWrapper.appendChild(navSection);
     navSections.querySelector('ul').appendChild(navItemWrapper);
     if (sectionIndex) {
-      const subMenuLabel = document.createElement('span');
+      const subMenuLabel = span();
       const labeltext = toClassName(navSection.childNodes[0].nodeValue);
       subMenuLabel.id = `${labeltext}-label`;
       subMenuLabel.classList.add('sub-menu-label');
@@ -421,7 +432,7 @@ function decorateSections(navSections) {
         navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
         navSection.parentElement.setAttribute('aria-expanded', expanded ? 'false' : 'true');
       } else {
-        // For Mobile need to set the right subsection to active so it display
+        // For Mobile need to set the right subsection to active so it displayed
         document.getElementById(`sub-menu-${event.target.id}`).classList.toggle('sub-menu-section-active');
 
         // Turn on the Back to Main menu button
@@ -441,6 +452,7 @@ function decorateSections(navSections) {
       }
     });
   });
+  navSections.querySelector('.cta').classList.add('first');
 }
 
 /**
@@ -499,7 +511,7 @@ function parseBreadCrumbJSON(json) {
   const subNavs = JSON.parse(json);
 
   const breadCrumbTitles = [];
-  const breadCrumbMetaTags = ['sectiontitle', 'subsectiontitle', 'breadcrumbtitle'];
+  const breadCrumbMetaTags = ['nav-section', 'nav-subsection', 'nav-breadcrumb'];
 
   breadCrumbMetaTags.forEach((tag) => {
     const title = getMetadata(tag);
@@ -541,7 +553,7 @@ function populateBreadCrumb(data, pathArray) {
     } else {
       const separator = span({ class: 'separator' });
       separator.innerHTML = '/';
-      breadCrumb.querySelector('.left-sec :first-child').appendChild(separator);
+      breadCrumb.querySelector('.left-sec .l3-nav__menu-title:last-child').appendChild(separator);
       breadCrumbTitleElem.innerHTML = `<span class="title-option">
                                 <a class="title-option__l3nav" data-static-label="${title}">
                                     <span>${title}</span>
@@ -565,7 +577,7 @@ function populateBreadCrumb(data, pathArray) {
 
   // const sectionBreadCrumb = div({ class: 'list l3-nav__menu-options--list first' }, ul());
   // ToDo: This width needs to be based on a calculation of the width of of the title
-  sectionBreadCrumb.querySelector('.list.l3-nav__menu-options--list.first').style.width = '197px';
+  sectionBreadCrumb.querySelector('.list.l3-nav__menu-options--list.first').style.width = data.links[0].width;
   for (const root of data.links) {
     const breadCrumbLink = a({ class: 'l3-nav__submenu', href: root.url });
     breadCrumbLink.innerHTML = root.label;
@@ -588,9 +600,10 @@ function populateBreadCrumb(data, pathArray) {
     for (const child of data.links[index].children) {
       const breadCrumbLink = a({ class: 'l3-nav__submenu', href: child.url });
       breadCrumbLink.innerHTML = child.label;
-      if (child.url === `/${pathArray.join('/')}`) {
+      if (child.url === `/${pathArray.join('/')}/`) {
         breadCrumbLink.classList.add('bold');
       }
+      subSectionBreadCrumb.style.width = data.links[index].width;
       subSectionBreadCrumb.querySelector('ul').appendChild(li(breadCrumbLink));
     }
     breadCrumb.querySelector('.sublist-container').appendChild(subSectionBreadCrumb);
