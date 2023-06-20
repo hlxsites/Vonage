@@ -1,6 +1,6 @@
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 import {
-  div, domEl, li, span, ul,
+  a, div, domEl, img, li, span, ul,
 } from '../../scripts/scripts.js';
 
 /**
@@ -52,7 +52,7 @@ export default async function decorate(block) {
             <li class="filter-btn"><span>Filters</span> <i class="Vlt-icon-filter"></i></li>
         </ul>
     </div>
-    
+
     <dialog class="filter-options-container">
         <div class="filter-head">
             <div class="close-wrap Vlt-icon-close"></div>
@@ -264,190 +264,6 @@ export default async function decorate(block) {
 
 
         <div class="results-section-wrapper">
-            <a href="https://www.vonage.com/unified-communications/features/admin-portal/"
-               target="_blank" class="card">
-                <div class="card-left-wrapper">
-                    <div class="card-left-wrapper--logo">
-                        <img src="https://www.vonage.com/content/dam/vonage/us-en/unified-communications/pictograms/Pictograms_2019_Admin%20Portal.svg"
-                             class="card-left-wrapper--logo-image"></div>
-                </div>
-                <div class="card-right-wrapper"><span class="card-right-wrapper--first-liner">
-						
-					</span> <span class="card-right-wrapper--second-liner">
-						Admin Portal
-						<i aria-hidden="true" class="Vlt-icon-arrow-link arrow-icon desktop-only"></i></span> <span
-                        class="card-right-wrapper--third-liner">
-						Admin Portal from Vonage helps phone administrators manage their phone system anywhere. 
-					</span></div>
-                <p class="button-container">
-
-                    <a href="https://www.vonage.com/unified-communications/features/admin-portal/"
-                       target="_blank" class="card-action-btn mobile-only button">
-                        Get started
-                    </a>
-                </p>
-
-            </a>
-            <a href="https://www.vonage.com/unified-communications/features/app-center/"
-               target="_blank" class="card">
-                <div class="card-left-wrapper">
-                    <div class="card-left-wrapper--logo"><img
-                            src="https://www.vonage.com/content/dam/vonage/us-en/brand/vonage-does-that-site/App-Center.png"
-                            class="card-left-wrapper--logo-image"></div>
-                </div>
-                <div class="card-right-wrapper"><span class="card-right-wrapper--first-liner">
-						
-					</span> <span class="card-right-wrapper--second-liner">
-						App Center 
-						<i aria-hidden="true" class="Vlt-icon-arrow-link arrow-icon desktop-only"></i></span> <span
-                        class="card-right-wrapper--third-liner">
-						Vonage App Center integrates high-value apps within Vonage Business Communications for improved productivity and better employee and customer experiences. Learn more now.
-
-					</span></div>
-                <a href="https://www.vonage.com/unified-communications/features/app-center/" target="_blank"
-                   class="card-action-btn mobile-only">
-                    Get started
-                </a></a>
-            <a
-                    href="https://www.vonage.com/unified-communications/features/virtual-receptionist/"
-                    target="_blank" class="card">
-                <div class="card-left-wrapper">
-                    <div class="card-left-wrapper--logo"><img
-                            src="https://www.vonage.com/content/dam/vonage/us-en/brand/iconography/Receptionist.svg"
-                            class="card-left-wrapper--logo-image"></div>
-                </div>
-                <div class="card-right-wrapper"><span class="card-right-wrapper--first-liner">
-						
-					</span> <span class="card-right-wrapper--second-liner">
-						Auto Attendant
-						<i aria-hidden="true" class="Vlt-icon-arrow-link arrow-icon desktop-only"></i></span> <span
-                        class="card-right-wrapper--third-liner">
-						Fully automate your ability to route calls to specific people of departments with a virtual phone receptionist from Vonage. Learn more. 
-					</span></div>
-                <a href="https://www.vonage.com/unified-communications/features/virtual-receptionist/"
-                   target="_blank" class="card-action-btn mobile-only">
-                    Get started
-                </a></a>
-            <a href="https://www.vonage.com/unified-communications/features/block-caller-id/"
-               target="_blank" class="card">
-                <div class="card-left-wrapper">
-                    <div class="card-left-wrapper--logo"><img
-                            src="https://www.vonage.com/content/dam/vonage/us-en/brand/iconography/vonage/Volta-product-icons/Calling/call-block/outline.svg"
-                            class="card-left-wrapper--logo-image"></div>
-                </div>
-                <div class="card-right-wrapper"><span class="card-right-wrapper--first-liner">
-						
-					</span> <span class="card-right-wrapper--second-liner">
-						Block Caller ID
-						<i aria-hidden="true" class="Vlt-icon-arrow-link arrow-icon desktop-only"></i></span> <span
-                        class="card-right-wrapper--third-liner">
-						Block outbound calls with caller ID blocking from Vonage to help you bypass individuals who screen calls for your business. Learn more
-					</span></div>
-                <a href="https://www.vonage.com/unified-communications/features/block-caller-id/"
-                   target="_blank" class="card-action-btn mobile-only">
-                    Get started
-                </a></a>
-            <a
-                    href="https://www.vonage.com/marketplace/unified-communications/vbc-company-call-recording/"
-                    target="_blank" class="card">
-                <div class="card-left-wrapper">
-                    <div class="card-left-wrapper--logo"><img
-                            src="https://www.vonage.com/content/dam/vonage/us-en/brand/pictograms/with-margin/Pictograms_2019_Call%20Recording.svg"
-                            alt="illustration-of-a-audio-tape-recording-of-a-phone-call"
-                            class="card-left-wrapper--logo-image"></div>
-                </div>
-                <div class="card-right-wrapper"><span class="card-right-wrapper--first-liner">
-						
-					</span> <span class="card-right-wrapper--second-liner">
-						Business Call Recording Service
-						<i aria-hidden="true" class="Vlt-icon-arrow-link arrow-icon desktop-only"></i></span> <span
-                        class="card-right-wrapper--third-liner">
-						Easily enable the recording of all important business conversations so you can make the most of every customer interaction Learn more.
-					</span> <span class="card-right-wrapper--fourth-liner"><span class="text-bold">
-							$49.99/month
-						</span></span></div>
-                <a href="https://www.vonage.com/marketplace/unified-communications/vbc-company-call-recording/"
-                   target="_blank" class="card-action-btn mobile-only">
-                    Get started
-                </a></a>
-            <a href="https://www.vonage.com/marketplace/unified-communications/business-inbox/"
-               target="_blank" class="card">
-                <div class="card-left-wrapper">
-                    <div class="card-left-wrapper--logo"><img
-                            src="https://www.vonage.com/content/dam/vonage/us-en/unified-communications/pictograms/business-inbox.png"
-                            alt="business-inbox-pictogram" class="card-left-wrapper--logo-image"></div>
-                </div>
-                <div class="card-right-wrapper"><span class="card-right-wrapper--first-liner">
-						
-					</span> <span class="card-right-wrapper--second-liner">
-						Business Inbox
-						<i aria-hidden="true" class="Vlt-icon-arrow-link arrow-icon desktop-only"></i></span> <span
-                        class="card-right-wrapper--third-liner">
-						Cross-channel texting with customers. 
-					</span> <span class="card-right-wrapper--fourth-liner"><span class="text-bold">
-							$9.99/month
-						</span></span></div>
-                <a href="https://www.vonage.com/marketplace/unified-communications/business-inbox/"
-                   target="_blank" class="card-action-btn mobile-only">
-                    Get started
-                </a></a>
-            <a href="https://www.vonage.com/unified-communications/features/mobile-app/"
-               target="_blank" class="card">
-                <div class="card-left-wrapper">
-                    <div class="card-left-wrapper--logo"><img
-                            src="https://www.vonage.com/content/dam/vonage/us-en/unified-communications/imagery/mobile-app-screens.png"
-                            class="card-left-wrapper--logo-image"></div>
-                </div>
-                <div class="card-right-wrapper"><span class="card-right-wrapper--first-liner">
-						
-					</span> <span class="card-right-wrapper--second-liner">
-						Business Phone App
-						<i aria-hidden="true" class="Vlt-icon-arrow-link arrow-icon desktop-only"></i></span> <span
-                        class="card-right-wrapper--third-liner">
-						Never miss a work call and take your business phone system everywhere you go with just a simple app. Learn more.
-					</span></div>
-                <a href="https://www.vonage.com/unified-communications/features/mobile-app/" target="_blank"
-                   class="card-action-btn mobile-only">
-                    Get started
-                </a></a>
-            <a href="https://www.vonage.com/unified-communications/features/business-sms/"
-               target="_blank" class="card">
-                <div class="card-left-wrapper">
-                    <div class="card-left-wrapper--logo"><img
-                            src="https://www.vonage.com/content/dam/vonage/us-en/api/illustrations/MMS.svg"
-                            class="card-left-wrapper--logo-image"></div>
-                </div>
-                <div class="card-right-wrapper"><span class="card-right-wrapper--first-liner">
-						
-					</span> <span class="card-right-wrapper--second-liner">
-						Business SMS and MMS
-						<i aria-hidden="true" class="Vlt-icon-arrow-link arrow-icon desktop-only"></i></span> <span
-                        class="card-right-wrapper--third-liner">
-						Easily reach customers and coworkers with reliable sms &amp; mms messaging solutions on mobile and desktop applications. Learn more.
-					</span></div>
-                <a href="https://www.vonage.com/unified-communications/features/business-sms/"
-                   target="_blank" class="card-action-btn mobile-only">
-                    Get started
-                </a></a>
-            <a href="https://www.vonage.com/unified-communications/features/busy-lamp-field/"
-               target="_blank" class="card">
-                <div class="card-left-wrapper">
-                    <div class="card-left-wrapper--logo"><img
-                            src="https://www.vonage.com/content/dam/vonage/us-en/unified-communications/pictograms/Pictograms_2019_Handset.svg"
-                            class="card-left-wrapper--logo-image"></div>
-                </div>
-                <div class="card-right-wrapper"><span class="card-right-wrapper--first-liner">
-						
-					</span> <span class="card-right-wrapper--second-liner">
-						Busy Lamp Field
-						<i aria-hidden="true" class="Vlt-icon-arrow-link arrow-icon desktop-only"></i></span> <span
-                        class="card-right-wrapper--third-liner">
-						Enable your business to know which phones in your system are in use with Busy Lamp Field feature from Vonage. Learn more.
-					</span></div>
-                <a href="https://www.vonage.com/unified-communications/features/busy-lamp-field/"
-                   target="_blank" class="card-action-btn mobile-only">
-                    Get started
-                </a></a></div>
     </div>
     <div class="pagination">
         <button aria-label="Go to previous page" class="pagination__arrow pagination__arrow--show"><span
@@ -494,6 +310,39 @@ function getActiveFilters(block) {
   return activeFilters;
 }
 
+function updateResults(block, swiftypeResult) {
+  const results = block.querySelector('.results-section-wrapper');
+  results.innerHTML = '';
+
+  swiftypeResult.records.page.forEach((entry) => {
+    results.append(
+      a(
+        { href: entry.url, target: '_blank', class: 'card' },
+        div(
+          { class: 'card-left-wrapper' },
+          div(
+            { class: 'card-left-wrapper--logo' },
+            img({ src: entry.image, class: 'card-left-wrapper--logo-image' }),
+          ),
+        ),
+        div(
+          { class: 'card-right-wrapper' },
+          span({ class: 'card-right-wrapper--first-liner' }),
+          span(
+            { class: 'card-right-wrapper--second-liner' },
+            entry.title,
+            span({ 'aria-hidden': 'true', class: 'Vlt-icon-arrow-link arrow-icon desktop-only' }),
+          ),
+          span(
+            { class: 'card-right-wrapper--third-liner' },
+            entry.meta_description,
+          ),
+        ),
+      ),
+    );
+  });
+}
+
 async function refreshResults(block) {
   const activeFilters = getActiveFilters(block);
 
@@ -503,6 +352,7 @@ async function refreshResults(block) {
 
   updateFilters(block, swiftypeResult, activeFilters);
   updateFilterPills(block, swiftypeResult, activeFilters);
+  updateResults(block, swiftypeResult);
 }
 
 function updateFilterPills(block, swiftypeResult, activeFilters) {
