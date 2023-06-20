@@ -260,17 +260,6 @@ export default async function decorate(block) {
 
         <div class="filter-btn-options-wrapper-desktop">
             <ul class="btn-options-list">
-                <li class="filter-btn">
-                    <span aria-hidden="true" class="font-icon-filter"></span> <span>Filters</span>
-                </li>
-                <li class="filter-option">
-                    <span aria-hidden="true" class="font-icon-close"></span> <span>Omnichannel (21)</span>
-                </li>
-                <li class="filter-option"><i aria-hidden="true" class="font-icon-close"></i>
-                    <span>Mobility (22)</span></li>
-                <span class="filter-option clear-filter-section">
-					Clear All Filters
-				</span></ul>
         </div>
 
 
@@ -509,10 +498,48 @@ async function refreshResults(block) {
   const activeFilters = getActiveFilters(block);
 
   console.log('activeFilters', activeFilters);
-  const resultInfo = await getSearchResults('F2vatbs1LRkyNzs-Hv9D', 1, activeFilters);
-  console.log(resultInfo);
+  const swiftypeResult = await getSearchResults('F2vatbs1LRkyNzs-Hv9D', 1, activeFilters);
+  console.log(swiftypeResult);
 
-  updateFilters(block, resultInfo, activeFilters);
+  updateFilters(block, swiftypeResult, activeFilters);
+  updateFilterPills(block, swiftypeResult, activeFilters);
+}
+
+function updateFilterPills(block, swiftypeResult, activeFilters) {
+  const list = block.querySelector('.filter-btn-options-wrapper-desktop .btn-options-list');
+  list.innerHTML = '';
+  if (Object.values(activeFilters).length === 0) {
+    return;
+  }
+
+  list.append(li(
+    { class: 'filter-btn' },
+    span({ class: 'font-icon-filter', 'aria-hidden': true }),
+    span('Filters'),
+  ));
+
+  Object.entries(activeFilters).forEach(([group, filters]) => {
+    filters.forEach((filterId) => {
+      const pill = li(
+        { class: 'filter-option' },
+        span({ class: 'font-icon-close', 'aria-hidden': true }),
+        span(`${getLabelForFacet(filterId)} (${swiftypeResult.info.page.facets[group][filterId]})`),
+      );
+      pill.addEventListener('click', () => {
+        clearFilter(block, group, filterId);
+      });
+      list.append(pill);
+    });
+  });
+
+  const clearAll = li(
+    { class: 'filter-option clear-filter-section' },
+    span('Clear All Filters'),
+  );
+  clearAll.addEventListener('click', () => {
+    clearFilters(block);
+  });
+  list.append(clearAll);
 }
 
 function getLabelForFacet(facetId) {
@@ -525,11 +552,11 @@ function getLabelForFacet(facetId) {
     .replace(/\b[a-z]/, (str) => str.toUpperCase());
 }
 
-function updateFilters(block, resultInfo, activeFilters) {
+function updateFilters(block, swiftypeResult, activeFilters) {
   const filters = block.querySelector('.filter-options-wrapper');
   filters.innerHTML = '';
 
-  Object.entries(resultInfo.info.page.facets).forEach(([groupId, facetValues]) => {
+  Object.entries(swiftypeResult.info.page.facets).forEach(([groupId, facetValues]) => {
     const group = domEl(
       'details',
       { open: 'open', class: 'accordion-bar' },
@@ -569,6 +596,19 @@ function updateFilters(block, resultInfo, activeFilters) {
 }
 
 function handleFilterChange(e, block) {
-  console.log(e.target.value);
+  refreshResults(block);
+}
+
+function clearFilter(block, group, filterId) {
+  const checkbox = block.querySelector(`input[data-group="${group}"][value="${filterId}"]`);
+  checkbox.checked = false;
+  refreshResults(block);
+}
+
+function clearFilters(block) {
+  const checkboxes = [...block.querySelectorAll('.filter-container input[type="checkbox"]')];
+  checkboxes.forEach((checkbox) => {
+    checkbox.checked = false;
+  });
   refreshResults(block);
 }

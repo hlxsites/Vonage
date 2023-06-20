@@ -2,6 +2,13 @@
   display: flex;
 }
 
+.font-icon-close::before {
+  font-family: var(--icon-font-family);
+  content: var(--vlt-close-icon);
+  font-size: 2rem;
+  cursor: pointer;
+}
+
 .results-section-wrapper {
   display: grid;
   grid-template-columns: auto auto auto;
@@ -81,18 +88,10 @@
   background-color: #881fff;
   color: #fff;
   line-height: 3.2rem;
-}
-
-.filter-btn-options-wrapper-desktop .btn-options-list .filter-option i {
-  margin-right: .8rem;
-  font-size: 2rem;
-  font-weight: 500;
   cursor: pointer;
 }
 
-.filter-btn-options-wrapper-desktop .btn-options-list .filter-option:last-child {
-  margin-right: 0;
-}
+
 
 
 .search-filters-root .no-results {
