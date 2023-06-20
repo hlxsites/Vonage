@@ -491,47 +491,74 @@ function buildBreadCrumb() {
 
 /**
  *
- * @param {HTMLDivElement} breadCrumb The div element in the breadcrumb which will receive the linksData
- * @param {Object} linksData An array of link objects sorted in a parent -> child structure
- * @param {[String]} sectionArray The current pages Section metadata element split to a 0 indexed array of strings on '/' to provide page hierarchy
+ * @param {String} json The json response returned for the nav hierarchy data to use when building the breadcrumb of the header
  */
-function populateBreadCrumb(breadCrumb, linksData, sectionArray) {
-  const inSubPage = (sectionArray.length > 1) && (linksData.subTitle !== '');
+function parseBreadCrumbJSON(json) {
+  const breadCrumbData = { };
 
-  const title = div({ class: 'l3-nav__menu-title' });
-  title.innerHTML = `<span class="title-option">
-    <a class="title-option__l3nav" data-static-label="${linksData.title}">
+  const subNavs = JSON.parse(json);
+
+  const breadCrumbTitles = [];
+  const breadCrumbMetaTags = ['sectiontitle', 'subsectiontitle', 'breadcrumbtitle'];
+
+  breadCrumbMetaTags.forEach((tag) => {
+    const title = getMetadata(tag);
+    if (title !== '') {
+      breadCrumbTitles.push(title);
+    }
+  });
+
+  breadCrumbData.titles = breadCrumbTitles;
+  breadCrumbData.links = buildHierarchy(subNavs.data);
+
+  return breadCrumbData;
+}
+/**
+ *
+ * @param {Object} data An object containing the breadcrumb titles as well as
+ * a hierarchical map of links organized with root urls and nested children
+ * @param {[String]} pathArray An array representing the path elements of the current page in hierarchical order
+
+ */
+function populateBreadCrumb(data, pathArray) {
+  const breadCrumb = document.querySelector('.nav-breadcrumb-wrapper');
+  const inSubSection = (data.titles.length > 1);
+
+  // Build out the breadcrumb titles based on the nav-titles in the pages metadata
+  data.titles.forEach((title, index) => {
+    // If this is the first breadcrumb element, need to start with the icon span
+    const breadCrumbTitleElem = div({ class: 'l3-nav__menu-title' });
+    if (index === 0) {
+      breadCrumbTitleElem.innerHTML = `<span class="title-option">
+    <a class="title-option__l3nav" data-static-label="${title}">
               <span class="nav-icon Vlt-icon-phone"></span>
-              <span>${linksData.title}</span>
+              <span>${title}</span>
             </a>
           </span>`;
 
-  title.addEventListener('click', toggleBreadCrumb);
-  breadCrumb.querySelector('.left-sec').appendChild(title);
+      breadCrumbTitleElem.addEventListener('click', toggleBreadCrumb);
+      breadCrumb.querySelector('.left-sec').appendChild(breadCrumbTitleElem);
+    } else {
+      const separator = span({ class: 'separator' });
+      separator.innerHTML = '/';
+      breadCrumb.querySelector('.left-sec :first-child').appendChild(separator);
+      breadCrumbTitleElem.innerHTML = `<span class="title-option">
+                                <a class="title-option__l3nav" data-static-label="${title}">
+                                    <span>${title}</span>
+                                </a>
+                            </span>`;
 
-  // If we are in a subpage need to add the sub page to the title of the bread crumb
-  if (inSubPage) {
-    const separator = span({ class: 'separator' });
-    separator.innerHTML = '/';
-    breadCrumb.querySelector('.left-sec :first-child').appendChild(separator);
+      breadCrumbTitleElem.addEventListener('click', toggleBreadCrumb);
+      breadCrumb.querySelector('.left-sec').appendChild(breadCrumbTitleElem);
+    }
+    if (index === data.titles.length - 1) {
+      const chevron = span({ class: 'Vlt-icon-chevron arrow-icn' });
+      breadCrumb.querySelector('.l3-nav__menu-title:last-child .title-option__l3nav').classList.add('boldbreadCrumbTitle');
+      breadCrumb.querySelector('.l3-nav__menu-title:last-child').appendChild(chevron);
+    }
+  });
 
-    const subTitle = div({ class: 'l3-nav__menu-title bold' });
-    subTitle.innerHTML = `<span class="title-option">
-    <a class="title-option__l3nav" data-static-label="${linksData.subTitle}">
-              <span>${linksData.subTitle}</span>
-            </a>
-          </span>`;
-    const chevron = span({ class: 'Vlt-icon-chevron arrow-icn' });
-    subTitle.addEventListener('click', toggleBreadCrumb);
-    breadCrumb.querySelector('.left-sec').appendChild(subTitle);
-    breadCrumb.querySelector('.l3-nav__menu-title:last-child').appendChild(chevron);
-  } else {
-    breadCrumb.querySelector('.l3-nav__menu-title').classList.add('bold');
-    const chevron = span({ class: 'Vlt-icon-chevron arrow-icn' });
-    breadCrumb.querySelector('.l3-nav__menu-title').appendChild(chevron);
-  }
-
-  const sectionBreadCrumb = div({ class: 'menu-option-sublist l3-nav__menu-options active' },
+  const sectionBreadCrumb = div({ class: 'menu-option-sublist l3-nav__menu-options' },
     div({ class: 'container sublist-container' },
       div({ class: 'list l3-nav__menu-options--list first' },
         ul())));
@@ -539,10 +566,10 @@ function populateBreadCrumb(breadCrumb, linksData, sectionArray) {
   // const sectionBreadCrumb = div({ class: 'list l3-nav__menu-options--list first' }, ul());
   // ToDo: This width needs to be based on a calculation of the width of of the title
   sectionBreadCrumb.querySelector('.list.l3-nav__menu-options--list.first').style.width = '197px';
-  for (const root of linksData.links) {
+  for (const root of data.links) {
     const breadCrumbLink = a({ class: 'l3-nav__submenu', href: root.url });
     breadCrumbLink.innerHTML = root.label;
-    if (root.url === `/${sectionArray.join('/')}`) {
+    if (root.url === `/${pathArray.join('/')}`) {
       breadCrumbLink.classList.add('bold');
     }
     sectionBreadCrumb.querySelector('ul').appendChild(li(breadCrumbLink));
@@ -551,17 +578,17 @@ function populateBreadCrumb(breadCrumb, linksData, sectionArray) {
 
   // If the page is a subsection based on its section metadata
   // need to load the relevant subsection breadcrumb data
-  if (inSubPage) {
+  if (inSubSection) {
     const subSectionBreadCrumb = div({ class: 'list l3-nav__menu-options--list' }, ul());
-    const subSection = `/${sectionArray[0]}/${sectionArray[1]}/`;
+    const subSection = `/${pathArray[0]}/${pathArray[1]}/`;
 
     // Find the index in the linksData data of the root page we are currently on given the section metadata
-    const index = linksData.links.indexOf(linksData.links.find((o) => o.url === subSection));
+    const index = data.links.indexOf(data.links.find((o) => o.url === subSection));
 
-    for (const child of linksData.links[index].children) {
+    for (const child of data.links[index].children) {
       const breadCrumbLink = a({ class: 'l3-nav__submenu', href: child.url });
       breadCrumbLink.innerHTML = child.label;
-      if (child.url === `/${sectionArray.join('/')}`) {
+      if (child.url === `/${pathArray.join('/')}`) {
         breadCrumbLink.classList.add('bold');
       }
       subSectionBreadCrumb.querySelector('ul').appendChild(li(breadCrumbLink));
@@ -659,22 +686,18 @@ export default async function decorate(block) {
     block.append(buildBreadCrumb());
   }
 
-  let sectionPathFull = getMetadata('section');
+  let sectionPathFull = window.location.pathname;
 
-  // Pop off the first character of the section path if it's a /
+  // Pop off the first character of the path if it's a / (which it should be)
   if (sectionPathFull[0] === '/') {
     sectionPathFull = sectionPathFull.slice(1);
   }
+
   const pathArray = sectionPathFull.split('/');
   // TODO: Implement a guard on a null array
   const subNavResp = await fetch(`/sub-nav/${pathArray[0]}.json`);
   if (subNavResp.ok) {
     const json = await subNavResp.text();
-    const subNavs = JSON.parse(json);
-
-    const breadCrumbWrapper = document.querySelector('.nav-breadcrumb-wrapper');
-
-    const breadCrumbLinks = { title: getMetadata('sectiontitle'), subTitle: getMetadata('subsectiontitle'), links: buildHierarchy(subNavs.data) };
-    populateBreadCrumb(breadCrumbWrapper, breadCrumbLinks, pathArray);
+    populateBreadCrumb(parseBreadCrumbJSON(json), pathArray);
   }
 }

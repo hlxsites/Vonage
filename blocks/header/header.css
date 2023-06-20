@@ -1103,7 +1103,7 @@ a.title-option__l3nav:hover {
   box-sizing: border-box;
 }
 
-.l3-nav__menu-title:last-child .title-option__l3nav {
+.l3-nav__menu-title .title-option__l3nav.boldbreadCrumbTitle {
   font-weight: 600;
   color: #000;
 }
