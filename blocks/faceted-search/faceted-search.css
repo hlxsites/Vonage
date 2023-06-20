@@ -9,6 +9,38 @@
   cursor: pointer;
 }
 
+.font-icon-chevron::before {
+  font-family: var(--icon-font-family);
+  content: var(--vlt-down-chevron-icon);
+  font-size: 2rem;
+  cursor: pointer;
+  line-height: 1rem;
+}
+
+.font-icon-chevron.left {
+  transform: rotate(90deg);
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: clip;
+}
+
+.font-icon-chevron.right {
+  transform: rotate(-90deg);
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: clip;
+}
+
+.pagination button {
+  line-height: 1rem;
+}
+
+.pagination button:hover,
+.pagination button:focus {
+  background-color: unset;
+  cursor: pointer;
+}
+
 .results-section-wrapper {
   display: grid;
   grid-template-columns: auto auto auto;

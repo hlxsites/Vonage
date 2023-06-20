@@ -1,6 +1,6 @@
 import { decorateIcons } from '../../scripts/lib-franklin.js';
 import {
-  a, div, domEl, img, li, span, ul,
+  a, button, div, domEl, img, li, span, ul,
 } from '../../scripts/scripts.js';
 
 /**
@@ -46,6 +46,7 @@ async function getSearchResults(engineKey, pageNo, filters) {
 }
 
 export default async function decorate(block) {
+  block.dataset.page = 1;
   block.innerHTML = `<div class="search-filters-root">
     <div class="filter-btn-options-wrapper">
         <ul class="btn-options-list">
@@ -266,28 +267,6 @@ export default async function decorate(block) {
         <div class="results-section-wrapper">
     </div>
     <div class="pagination">
-        <button aria-label="Go to previous page" class="pagination__arrow pagination__arrow--show"><span
-                class="Vlt-icon Vlt-icon-chevron"></span></button>
-        <button aria-label="Go to page1" data-number="1"
-                class="pagination__page pagination__page--current">
-            1
-        </button>
-        <button aria-label="Go to page2" data-number="2" class="pagination__page">
-            2
-        </button>
-        <button aria-label="Go to page3" data-number="3" class="pagination__page">
-            3
-        </button>
-        <button aria-label="Go to page4" data-number="4" class="pagination__page">
-            4
-        </button>
-        <button aria-label="Go to page5" data-number="5" class="pagination__page">
-            5
-        </button>
-        <button aria-label="Go to next page"
-                class="pagination__arrow pagination__arrow--next pagination__arrow--show">
-            <span class="Vlt-icon Vlt-icon-chevron"></span>
-        </button>
     </div>
 </div>
 `;
@@ -331,6 +310,7 @@ function updateResults(block, swiftypeResult) {
           span(
             { class: 'card-right-wrapper--second-liner' },
             entry.title,
+            // TODO: icons
             span({ 'aria-hidden': 'true', class: 'Vlt-icon-arrow-link arrow-icon desktop-only' }),
           ),
           span(
@@ -343,16 +323,71 @@ function updateResults(block, swiftypeResult) {
   });
 }
 
+function updatePagination(block, swiftypeResult) {
+  const pagination = block.querySelector('.pagination');
+  pagination.innerHTML = '';
+
+  if (swiftypeResult.info.page.current_page > 1) {
+    pagination.append(button(
+      {
+        'aria-label': 'Go to previous page',
+        class: 'pagination__arrow pagination__arrow--show',
+        onClick: () => {
+          block.dataset.page = swiftypeResult.info.page.current_page - 1;
+          refreshResults(block);
+        },
+      },
+      span({ class: 'font-icon-chevron left' }),
+    ));
+  }
+
+  const firstPage = Math.max(1, swiftypeResult.info.page.current_page - 4);
+  const lastPage = Math.max(5, swiftypeResult.info.page.current_page);
+  for (let i = firstPage; i <= lastPage; i++) {
+    const classList = ['pagination__page'];
+    if (i === swiftypeResult.info.page.current_page) {
+      classList.push('pagination__page--current');
+    }
+    pagination.append(button(
+      {
+        'aria-label': `Go to page ${i}`,
+        'data-page-number': i,
+        class: classList,
+        onClick: () => {
+          block.dataset.page = i;
+          refreshResults(block);
+        },
+      },
+      i,
+    ));
+  }
+
+  if (swiftypeResult.info.page.num_pages > swiftypeResult.info.page.current_page) {
+    pagination.append(button(
+      {
+        'aria-label': 'Go to next page',
+        class: 'pagination__page',
+        onClick: () => {
+          block.dataset.page = swiftypeResult.info.page.current_page + 1;
+          refreshResults(block);
+        },
+      },
+      span({ class: 'font-icon-chevron right' }),
+    ));
+  }
+}
+
 async function refreshResults(block) {
   const activeFilters = getActiveFilters(block);
 
   console.log('activeFilters', activeFilters);
-  const swiftypeResult = await getSearchResults('F2vatbs1LRkyNzs-Hv9D', 1, activeFilters);
+  const swiftypeResult = await getSearchResults('F2vatbs1LRkyNzs-Hv9D', block.dataset.page, activeFilters);
   console.log(swiftypeResult);
 
   updateFilters(block, swiftypeResult, activeFilters);
   updateFilterPills(block, swiftypeResult, activeFilters);
   updateResults(block, swiftypeResult);
+  updatePagination(block, swiftypeResult);
 }
 
 function updateFilterPills(block, swiftypeResult, activeFilters) {
