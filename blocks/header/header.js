@@ -135,22 +135,6 @@ function buildHierarchy(flat) {
   return structuredLinks;
 }
 
-/**
- * A utility function to create divs with specified ID and classes
- * @param {string} id The id to associate with the created div element
- * @param {[string]} classes an array of strings indicating the classes to add to the div element
- * @returns {HTMLDivElement}
- */
-// ToDo: Deprecate this infavor of the new div implementation from Wegmuir
-function createDiv(id, classes) {
-  const div = document.createElement('div');
-  div.id = id;
-  classes.forEach((className) => {
-    div.classList.add(className);
-  });
-  return div;
-}
-
 function focusNavSection() {
   document.activeElement.addEventListener('keydown', openOnKeydown);
 }
@@ -338,7 +322,7 @@ function decorateSubSections(navSection, sectionIndex) {
   navSection.classList.add('nav-drop');
 
   // Create a div to wrap the items in the drop-down menu to handle displaying as a popout
-  const subMenuWrapper = createDiv(`sub-menu-${safeSectionName}`, ['sub-menu']);
+  const subMenuWrapper = div({ id: `sub-menu-${safeSectionName}`, class: 'sub-menu' });
 
   // Add a span for the close button in the menu
   const closeButton = document.createElement('span');
@@ -616,7 +600,7 @@ function populateBreadCrumb(data, pathArray) {
  * @returns {HTMLDivElement} Div containing the return to main menu button with event listeners
  */function buildBackButton() {
   // Back button for mobile
-  const backButton = createDiv('back-button', ['nav-back-button']);
+  const backButton = div({ id: 'back-button', class: 'nav-back-button' });
   backButton.innerHTML = `<button type="button" aria-controls="nav" aria-label="back to site navigation menu">
         Main Menu
       </button>`;
@@ -643,7 +627,7 @@ export default async function decorate(block) {
     nav.classList.add('nav-big');
 
     // Add a wrapper div to contain the full nav (logo and sections)
-    nav.appendChild(createDiv('header-navigation', ['header-navigation']));
+    nav.appendChild(div({ id: 'header-navigation', class: ['header-navigation'] }));
     nav.firstElementChild.innerHTML = html;
 
     // Tag the sections from the returned markdown based on their order with class categorization
@@ -686,14 +670,14 @@ export default async function decorate(block) {
     // Make sure that on initial display the nav is not flagged as open
     nav.setAttribute('aria-expanded', 'false');
 
-    const navWrapper = createDiv('nav-wrapper', ['nav-wrapper']);
+    const navWrapper = div({ id: 'nav-wrapper', class: 'nav-wrapper' });
 
     // Add the logo element before the nav elements which will stack vertically
     navWrapper.append(buildLogo());
     navWrapper.append(nav);
 
     // div element to be used for the mobile pop over menu
-    const headerBackdrop = createDiv('backdrop', ['header', 'backdrop']);
+    const headerBackdrop = div({ id: 'backdrop', class: 'header backdrop' });
     block.append(headerBackdrop);
     block.append(navWrapper);
     block.append(buildBreadCrumb());
