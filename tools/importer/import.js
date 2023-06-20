@@ -142,7 +142,11 @@ function importIconPanel(main, document) {
       txt.append(h2, desc);
       panCells.push([img, txt]);
     });
+    const panelMetadata = [['Section Metadata'], ['Style', 'icon-panel']];
     const panBlock = WebImporter.DOMUtils.createTable(panCells, document);
+    const panMeta = WebImporter.DOMUtils.createTable(panelMetadata, document);
+    panBlock.append(panMeta);
+    panBlock.append(hr(document));
     panel.replaceWith(panBlock);
   });
 }
