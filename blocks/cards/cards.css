@@ -47,15 +47,16 @@
 }
 
 .cards-container.icon-panel > .default-content-wrapper {
-  max-width: 45pc;
+  max-width: 66.6667%;
   margin: auto;
   padding-left: 20px;
   padding-right: 20px;
 }
 
 .cards-container.icon-panel > div > h3 {
-  font-size: var(--heading-font-size-s);
+  font-size: var(--heading-font-size-m);
   font-weight: 500;
+  letter-spacing: -0.15rem;
   text-align: center;
   margin: 0 auto;
 }
@@ -93,7 +94,7 @@
 }
 
 .cards-container.icon-panel .cards-card-body > p {
-  font-size: var(--body-font-size-xxs);
+  font-size: var(--body-font-size-xs);
   font-weight: 400;
   letter-spacing: -0.02rem;
   line-height: 2rem;
@@ -119,8 +120,9 @@
 
 .cards-container.icon-panel > .default-content-wrapper > p {
   color: #5f6169;
-  font-size: var(--body-font-size-xxs);
+  font-size: var(--body-font-size-xxxs);
   font-weight: 400;
+  letter-spacing: 0.025rem;
   padding-left: 20px;
   padding-right: 20px;
   text-align: center;
@@ -264,7 +266,6 @@
 .cards-container.icon-panel .cards > ul > li {
   border: none;
   max-width: 450px;
-  margin: auto;
   flex: 0 0 100%;
 }
 

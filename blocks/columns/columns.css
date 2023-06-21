@@ -35,6 +35,10 @@
   padding-bottom: 2rem;
 }
 
+div.columns.border-bottom-gray {
+  border-bottom: .1rem solid lightgray;
+}
+
 div.slim-promo.columns-2-cols p {
   font-family: var(--body-font-family);
   font-weight: 400;
@@ -47,6 +51,17 @@ div.slim-promo.columns-2-cols p {
 
 div.columns.lead-gen > div {
   gap: 10px;
+}
+
+div.columns.basic-columns > div {
+  flex-flow: row wrap;
+  gap: 0;
+  align-items: flex-start;
+}
+
+div.columns.basic-columns > div > div {
+  flex: 1 1 100%;
+  padding-right: 2.7777%;
 }
 
 div.columns.lead-gen > div > div {
@@ -66,7 +81,6 @@ div.slim-promo.columns-2-cols > div > div:nth-child(2) {
   flex-wrap: wrap;
   justify-content: center;
 }
-
 
 div.slim-promo.columns-2-cols h2 {
   font-family: var(--body-font-family);
@@ -139,6 +153,29 @@ div.market-place-summary > div > div:first-child {
     border-radius: 3rem;
     padding: 4rem;
     margin-bottom: 5rem;
+  }
+}
+
+div.columns.basic-columns > div > div > h2 {
+  font-family: var(--fixed-font-family);
+  font-size: var(--body-font-size-xxs);
+  text-transform: uppercase;
+  line-height: 2rem;
+  letter-spacing: 0.075rem;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+}
+
+div.columns.basic-columns > div > div > p {
+  font-size: var(--body-font-size-xxs);
+  letter-spacing: -0.02rem;
+  margin-top: 0;
+  margin-bottom: 3rem;
+}
+
+@media (min-width: 600px) {
+  div.columns.basic-columns > div > div {
+    flex: 1 1 45%;
   }
 }
 
