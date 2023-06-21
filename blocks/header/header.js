@@ -489,115 +489,23 @@ function buildBreadCrumbMobile() {
   const breadCrumb = div({ class: 'l3-nav__mobile' });
   breadCrumb.innerHTML = `
         <div class="l3-nav__mobile--menu-head l3-nav__mobile--closed not-active">
-            <div class="left-sec">
-<!--            <a class="title-item" data-static-label="Unified Communications" aria-expanded="false" data-analytics-icmp="l3breadrumb|l3nav__Unified Communications" data-di-id="l3breadrumb|l3nav__Unified Communications" data-analytics-link-icmp="l3breadrumb|l3nav__Unified Communications">-->
-<!--            Unified Communications-->
-<!--            </a>-->
-<!--            <span class="separator">-->
-<!--            /-->
-<!--            </span>-->
-<!--            <a class="title-item" data-static-label="Features" aria-expanded="false" data-analytics-icmp="l3breadrumb|l3nav__Unified Communications_Features" data-di-id="l3breadrumb|l3nav__Unified Communications_Features" data-analytics-link-icmp="l3breadrumb|l3nav__Unified Communications_Features">-->
-<!--            Features-->
-<!--            </a>-->
-<!--            <span class="separator">-->
-<!--            /-->
-<!--            </span>-->
-<!--            <a class="title-item" data-static-label="Admin Portal" aria-expanded="false" data-analytics-icmp="l3breadrumb|l3nav__Unified Communications_Features_Admin Portal" data-di-id="l3breadrumb|l3nav__Unified Communications_Features_Admin Portal" data-analytics-link-icmp="l3breadrumb|l3nav__Unified Communications_Features_Admin Portal">-->
-<!--            Admin Portal-->
-<!--            </a>-->
-        </div>
+            <div class="left-sec"></div>
             <div class="right-sec">
-        <span class="Vlt-icon-chevron right-sec__dropdown-icn"></span>
-        </div>
+                <span class="Vlt-icon-chevron right-sec__dropdown-icn"></span>
+            </div>
         </div>
         <div class="l3-nav__mobile--menu-head l3-nav__mobile--open">
-            <div class="left-sec">
-        </div>
+            <div class="left-sec"></div>
             <div class="right-sec">
-        <span class="Vlt-icon-close right-sec__close-icn" style="left: -55px;"></span>
+                <span class="Vlt-icon-close right-sec__close-icn" style="left: -55px;"></span>
+            </div>
         </div>
-        </div>
-        
         <div class="l3-nav__mobile--menu-body active">
-        <div class="menu-sub-list">
-        
-<!--
-            </div>
-            <a class="title-item" data-analytics-icmp="l3nav2022|l3nav_Unified Communications_Features" aria-expanded="false" data-di-id="l3nav2022|l3nav_Unified Communications_Features" data-analytics-link-icmp="l3nav2022|l3nav_Unified Communications_Features">
-            Features
-            </a>
-            <div class="menu-sub-list">
-            <ul>
-            <li>
-            <span>
-            <a href="/unified-communications/features/desktop/" data-static-label="Desktop" data-di-id="l3nav2022|l3nav_Unified Communications_Features_Desktop" data-analytics-link-icmp="l3nav2022|l3nav_Unified Communications_Features_Desktop" data-external="false">
-            Desktop
-            </a>
-            </span>
-            </li>
-            <li>
-            <span>
-            <a href="/unified-communications/features/vonage-meetings/" data-static-label="Vonage Meetings" data-di-id="l3nav2022|l3nav_Unified Communications_Features_Vonage Meetings" data-analytics-link-icmp="l3nav2022|l3nav_Unified Communications_Features_Vonage Meetings" data-external="false">
-            Vonage Meetings
-            </a>
-            </span>
-            </li>
-            <li>
-            <span>
-            <a class="active" href="/unified-communications/features/admin-portal/" data-static-label="Admin portal" data-di-id="l3nav2022|l3nav_Unified Communications_Features_Admin portal" data-analytics-link-icmp="l3nav2022|l3nav_Unified Communications_Features_Admin portal" data-external="false">
-             Admin portal
-            </a>
-            </span>
-            </li>
-            <li>
-            <span>
-            <a href="/unified-communications/features/business-sms/" data-static-label="Business SMS" data-di-id="l3nav2022|l3nav_Unified Communications_Features_Business SMS" data-analytics-link-icmp="l3nav2022|l3nav_Unified Communications_Features_Business SMS" data-external="false">
-            Business SMS
-            </a>
-            </span>
-            </li>
-            <li>
-            <span>
-            <a href="/unified-communications/features/paperless-fax/" data-static-label="Paperless fax" data-di-id="l3nav2022|l3nav_Unified Communications_Features_Paperless fax" data-analytics-link-icmp="l3nav2022|l3nav_Unified Communications_Features_Paperless fax" data-external="false">
-            Paperless fax
-            </a>
-            </span>
-            </li>
-            <li>
-            <span>
-            <a href="/unified-communications/features/mobile-app/" data-static-label="Mobile app" data-di-id="l3nav2022|l3nav_Unified Communications_Features_Mobile app" data-analytics-link-icmp="l3nav2022|l3nav_Unified Communications_Features_Mobile app" data-external="false">
-            Mobile app
-            </a>
-            </span>
-            </li>
-            <li>
-            <span>
-            <a href="/unified-communications/features/virtual-receptionist/" data-static-label="Virtual receptionist" data-di-id="l3nav2022|l3nav_Unified Communications_Features_Virtual receptionist" data-analytics-link-icmp="l3nav2022|l3nav_Unified Communications_Features_Virtual receptionist" data-external="false">
-            Virtual receptionist
-            </a>
-            </span>
-            </li>
-            <li>
-            <span>
-            <a href="/unified-communications/features/" data-static-label="View all features" data-di-id="l3nav2022|l3nav_Unified Communications_Features_View all features" data-analytics-link-icmp="l3nav2022|l3nav_Unified Communications_Features_View all features" data-external="false">
-            View all features
-            </a>
-            </span>
-            </li>
-            </ul>
-            </div>
-            <a class="title-item" data-analytics-icmp="l3nav2022|l3nav_Unified Communications_Features_Admin Portal" aria-expanded="false" data-di-id="l3nav2022|l3nav_Unified Communications_Features_Admin Portal" data-analytics-link-icmp="l3nav2022|l3nav_Unified Communications_Features_Admin Portal">
-            Admin Portal
-            </a>
--->
-        <a href="/unified-communications/pricing/" class="title-item" data-di-id="l3breadrumb|l3nav_ctalinks_seeplans&amp;pricing" data-analytics-link-icmp="l3breadrumb|l3nav_ctalinks_seeplans&amp;pricing" target="_self" data-external="false">
-        See plans &amp; pricing
-        </a>
-        <a href="tel:+1-855-430-6401" class="title-item" data-di-id="l3breadrumb|l3nav_ctalinks_1-855-430-6401" data-analytics-link-icmp="l3breadrumb|l3nav_ctalinks_1-855-430-6401" target="_self" data-external="false">
-        1-855-430-6401
-        </a>
-        </div>
-`;
+          <div class="menu-sub-list">
+            <a href="/unified-communications/pricing/" class="title-item" data-di-id="l3breadrumb|l3nav_ctalinks_seeplans&amp;pricing" data-analytics-link-icmp="l3breadrumb|l3nav_ctalinks_seeplans&amp;pricing" target="_self" data-external="false">See plans &amp; pricing</a>
+            <a href="tel:+1-855-430-6401" class="title-item" data-di-id="l3breadrumb|l3nav_ctalinks_1-855-430-6401" data-analytics-link-icmp="l3breadrumb|l3nav_ctalinks_1-855-430-6401" target="_self" data-external="false">1-855-430-6401</a>
+          </div>
+        </div>`;
   return breadCrumb;
 }
 /**
@@ -720,7 +628,7 @@ function populateBreadCrumb(data, pathArray) {
     breadCrumbDesktop.querySelector('.sublist-container').appendChild(subSectionBreadCrumbDesktop);
     breadCrumbMobile.querySelector('.menu-sub-list').appendChild(subSectionBreadCrumbMobile);
   }
-  if (data.titles[2] != '') {
+  if (data.titles[2] !== '') {
     breadCrumbMobile.querySelector('.menu-sub-list').appendChild(a({ class: 'title-item', innerHTML: data.titles[2] }));
   }
 }
