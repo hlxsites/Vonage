@@ -47,4 +47,8 @@ export default function decorate(block) {
       }
     });
   });
+
+  if (block.classList.contains('market-place-summary')) {
+    
+  }
 }

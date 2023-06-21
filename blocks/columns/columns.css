@@ -85,6 +85,16 @@ div.slim-promo a {
   text-decoration: underline;
 }
 
+div.section.callout-promo-container {
+  padding: 0 16px 64px 16px;
+}
+
+div.market-place-summary > div > div:first-child {
+  background-color: var(--overview-background-color);
+  padding: 4rem;
+  margin-bottom: 5rem;
+}
+
 @media (min-width: 768px) {
   div.slim-promo.columns-2-cols > div > div.columns-img-col {
     max-width: 16%;
@@ -122,6 +132,13 @@ div.slim-promo a {
 
   div.slim-promo.columns-2-cols > div > div:nth-child(2) {
     justify-content: left;
+  }
+
+  div.market-place-summary > div > div:first-child {
+    background-color: var(--overview-background-color);
+    border-radius: 3rem;
+    padding: 4rem;
+    margin-bottom: 5rem;
   }
 }
 
