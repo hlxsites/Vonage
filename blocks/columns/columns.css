@@ -113,6 +113,7 @@ div.slim-promo a {
 
 .category-grid {
   border-bottom: 0.1rem solid #dcdde6;
+  padding-bottom: 60px;
 }
 
 .category-grid h4 {
