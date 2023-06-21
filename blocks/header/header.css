@@ -56,17 +56,16 @@ header .nav-wrapper {
   position: relative;
   max-width: 132rem;
   margin: 0 auto;
-  height: var(--nav-height);
 }
 
 /* Styling for the div container that holds the two versions of the logo image */
 header .nav-logo {
   position: absolute;
-  top: 3.2rem;
-  width: 14.6rem;
-  height: auto;
-  left: 0.2rem;
-  transition: opacity .36s ease-in-out,transform .36s ease-in-out,-webkit-transform .36s ease-in-out;
+  color: #000;
+  left: 2rem;
+  top: 2.2rem;
+  width: 10.2rem;
+  z-index: 7;
 }
 
 /* Styling of the full logo image displayed in desktop mode before scrolling down as well as mobile */
@@ -124,7 +123,7 @@ header .nav-sections > ul, header .nav-tools > ul, header .nav-search > ul {
 header .nav-search {
   position: absolute;
   height: 2.4rem;
-  top: 3.6rem;
+  top: 2.4rem;
   width: 2.4rem;
   right: 6rem;
 }
@@ -183,13 +182,18 @@ header .nav-sections .nav-drop::after {
   }
 
   /*  Styles relating to the 'hamburger' menu button */
-  header #nav .nav-hamburger {
-    position: absolute;
-    height: 2.4rem;
-    top: 3.6rem;
-    width: 2.4rem;
-    right: 2rem;
-  }
+header #nav .nav-hamburger {
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+  height: 1.8rem;
+  padding: 0;
+  position: absolute;
+  right: 2rem;
+  top: 2.8rem;
+  width: 1.8rem;
+  z-index: 7;
+}
 
   header #nav .nav-hamburger button {
     margin: 0;
@@ -213,7 +217,7 @@ header .nav-sections .nav-drop::after {
   header #nav .nav-hamburger-icon::before,
   header #nav .nav-hamburger-icon::after {
     display: block;
-    width: 2.4rem;
+    width: 100%;
     height: 2.4rem;
   }
 
@@ -472,6 +476,8 @@ header #nav .nav-sections > ul > div > li > strong > a {
   margin: 0;
   font-size: 1.5rem;
   display: inline-block;
+  color: #000;
+  background-color: #FFF;
 }
 
 header #nav .nav-sections > ul > div > li > strong > a:hover {
@@ -488,6 +494,8 @@ header #nav .nav-sections > ul > div > li > em > a {
   border: 1px solid black;
   border-radius: 1rem;
   margin-left: auto;
+  color: #000;
+  background-color: #FFF;
 }
 
 header #nav .nav-sections > ul > div > li > em > a:hover {
@@ -549,7 +557,7 @@ header .sub-menu-label-active {
     }
 
     header .nav-logo-small {
-      color: var(--nav-logo-color);;
+      color: var(--nav-logo-color);
       left: 1.8rem;
       position: absolute;
       width: 3.5rem;
@@ -634,33 +642,31 @@ header .sub-menu-label-active {
       cursor: pointer;
     }
 
-    /* Make the last item of the sections nav the 'Contact us' button in black and aligned to the right */
+  header #nav .nav-sections > ul > div > li > em > a {
+    display: inline-block;
+    font-size: 1.5rem;
+    height: 4.5rem;
+    line-height: 4.5rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    border: 1px solid black;
+    border-radius: 1rem;
+    margin-left: auto;
+  }
 
-    /* header #nav .nav-sections > ul > div:last-child { */
-
-    /*  margin: auto 0 auto auto; */
-
-    /*  height:4.5rem; */
-
-    /* } */
-
-    /* header #nav .nav-sections > ul > div:last-child > li { */
-
-    /*  border-radius: 1rem; */
-
-    /*  color: var(--nav-contact-button-color); */
-
-    /*  background-color: var(--nav-contact-button-background-color); */
-
-    /*  height: 4.5rem; */
-
-    /*  line-height: 4.5rem; */
-
-    /*  font-size: 1.5rem; */
-
-    /*  margin: 0; */
-
-    /* } */
+  /* Primary CTA button styling in the header */
+  header #nav .nav-sections > ul > div > li > strong > a {
+    border-radius: 1rem;
+    color: var(--nav-contact-button-color);
+    background-color: var(--nav-contact-button-background-color);
+    height: 4.5rem;
+    line-height: 4.5rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    margin: 0;
+    font-size: 1.5rem;
+    display: inline-block;
+  }
 
   .nav-item-wrapper.cta li {
     margin-left: 0;
@@ -959,7 +965,6 @@ header .sub-menu-label-active {
 
 header .l3-nav__desktop {
   display: -webkit-box;
-  display: flexbox;
   display: flex;
   box-sizing: border-box;
   -webkit-box-pack: justify;
@@ -1147,9 +1152,33 @@ a.title-option__l3nav:hover {
   box-sizing: border-box;
 }
 
+.l3-nav__mobile--closed.not-active, .l3-nav__mobile--open.not-active {
+  display: none;
+}
+
 .l3-nav__menu-title .title-option__l3nav.boldbreadCrumbTitle {
   font-weight: 600;
   color: #000;
+}
+
+.l3-nav__mobile--menu-body .menu-sub-list ul li a.bold {
+  font-weight: 500;
+  color: #000;
+}
+
+.l3-nav__mobile--menu-body .title-item:hover {
+  text-decoration: none;
+}
+
+.Vlt-icon-close.right-sec__close-icn {
+  cursor: pointer;
+  display: block;
+  font-size: 2.8rem;
+  color: #881fff;
+}
+
+.Vlt-icon-close:before {
+  content: "\e90e";
 }
 
 .list.l3-nav__menu-options--list {
@@ -1194,6 +1223,112 @@ a.l3-nav__submenu:hover {
   text-decoration: none;
 }
 
+.l3-nav__mobile {
+  margin-top: 6rem;
+  background: #fbfbfb;
+  background: -webkit-gradient(linear,left bottom,left top,color-stop(85%,#fbfbfb),to(#efefef));
+  background: linear-gradient(0deg,#fbfbfb 85%,#efefef);
+}
+
+.l3-nav__mobile--menu-head span.separator {
+  margin: 0 8px;
+}
+
+span.Vlt-icon-chevron.right-sec__dropdown-icn {
+  cursor: pointer;
+  display: block;
+  font-size: 2.8rem;
+  color: #881fff;
+  font-family: 'VltIcons';
+}
+
+span.Vlt-icon-chevron.right-sec__dropdown-icn:before {
+  content: "\e90d";
+}
+
+.l3-nav__mobile--menu-head {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background: #fbfbfb 0 0 no-repeat padding-box;
+  height: 5rem;
+  padding: 0 1.5rem;
+  font-size: 1.4rem;
+  font-weight: 500;
+  font-family: Spezia;
+}
+
+.l3-nav__mobile--menu-head.l3-nav__mobile--closed {
+  height: 5.1rem;
+  border-bottom: 1px solid #ddd;
+}
+
+.l3-nav__mobile--menu-head.l3-nav__mobile--closed.not-active {
+  display: none;
+}
+
+.l3-nav__mobile--menu-body .menu-sub-list ul {
+  list-style-type: none;
+  padding: 0 1rem;
+  margin-top: 0;
+}
+
+.l3-nav__mobile--menu-body .menu-sub-list ul li {
+  cursor: pointer;
+  font-size: 1.4rem;
+  margin-bottom: 1.25rem;
+}
+
+.l3-nav__mobile--menu-body .menu-sub-list ul li a {
+  padding: 0.5rem;
+  color: #717171;
+}
+
+.l3-nav__mobile--menu-body {
+  right: 0;
+  z-index: 4;
+  display: none;
+  height: auto;
+  font-size: 1.4rem;
+  font-weight: 400;
+  font-family: Spezia;
+  left: 0;
+  background: #fbfbfb 0 0 no-repeat padding-box;
+  border-bottom: 1px solid #ddd;
+  position: fixed;
+  color: #717171;
+  padding: 1rem 1.5rem 0;
+  max-height: 50rem;
+  overflow-y: auto;
+  -ms-scroll-chaining: none;
+  overscroll-behavior: contain;
+}
+.l3-nav__mobile--menu-body .title-item {
+  display: block;
+  margin-bottom: 1.5rem;
+  margin-top: 1.5rem;
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: #000;
+}
+
+.l3-nav__mobile--menu-body.active {
+  display: block;
+  -webkit-animation: fadein .75s forwards;
+  animation: fadein .75s forwards;
+}
+
+.l3-nav__mobile--menu-head a:hover {
+  color: #000;
+  text-decoration: none;
+}
+
 @media (min-width: 576px) {
   .container.section-container, .container.sublist-container {
     max-width: 540px;
@@ -1212,4 +1347,14 @@ a.l3-nav__submenu:hover {
   }
 }
 
+@media only screen and (max-width: 1023px) {
+  header .l3-nav__desktop {
+    display:none;
+  }
+}
 
+@media only screen and (min-width: 1024px) {
+ header .l3-nav__mobile {
+    display:none;
+  }
+}

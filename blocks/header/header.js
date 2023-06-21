@@ -109,6 +109,9 @@ function toggleNavSubSection(event) {
 
 function toggleBreadCrumb() {
   document.querySelector('.menu-option-sublist.l3-nav__menu-options').classList.toggle('active');
+  document.querySelector('.l3-nav__mobile--menu-body').classList.toggle('active');
+  document.querySelector('.l3-nav__mobile--menu-head.l3-nav__mobile--closed').classList.toggle('not-active');
+  document.querySelector('.l3-nav__mobile--menu-head.l3-nav__mobile--open').classList.toggle('not-active');
 }
 
 /* ------------------------------ Global Functions ----------------------------------- */
@@ -220,6 +223,10 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
   toggleAllNavSections(navSections, expanded || isDesktop.matches ? 'false' : 'true');
   button.setAttribute('aria-label', expanded ? 'Open navigation' : 'Close navigation');
 
+  const mobileBreadCrumb = document.querySelector('.l3-nav__mobile');
+  if (mobileBreadCrumb) {
+    mobileBreadCrumb.style.display = expanded ? 'block' : 'none';
+  }
   // enable nav dropdown keyboard accessibility
   const navDrops = navSections.querySelectorAll('.nav-drop');
   if (isDesktop.matches) {
@@ -488,24 +495,19 @@ function buildBreadCrumbDesktop() {
 function buildBreadCrumbMobile() {
   const breadCrumb = div({ class: 'l3-nav__mobile' });
   breadCrumb.innerHTML = `
-        <div class="l3-nav__mobile--menu-head l3-nav__mobile--closed not-active">
+        <div class="l3-nav__mobile--menu-head l3-nav__mobile--closed">
             <div class="left-sec"></div>
             <div class="right-sec">
                 <span class="Vlt-icon-chevron right-sec__dropdown-icn"></span>
             </div>
         </div>
-        <div class="l3-nav__mobile--menu-head l3-nav__mobile--open">
+        <div class="l3-nav__mobile--menu-head l3-nav__mobile--open not-active">
             <div class="left-sec"></div>
             <div class="right-sec">
                 <span class="Vlt-icon-close right-sec__close-icn" style="left: -55px;"></span>
             </div>
         </div>
-        <div class="l3-nav__mobile--menu-body active">
-          <div class="menu-sub-list">
-            <a href="/unified-communications/pricing/" class="title-item" data-di-id="l3breadrumb|l3nav_ctalinks_seeplans&amp;pricing" data-analytics-link-icmp="l3breadrumb|l3nav_ctalinks_seeplans&amp;pricing" target="_self" data-external="false">See plans &amp; pricing</a>
-            <a href="tel:+1-855-430-6401" class="title-item" data-di-id="l3breadrumb|l3nav_ctalinks_1-855-430-6401" data-analytics-link-icmp="l3breadrumb|l3nav_ctalinks_1-855-430-6401" target="_self" data-external="false">1-855-430-6401</a>
-          </div>
-        </div>`;
+        <div class="l3-nav__mobile--menu-body"></div>`;
   return breadCrumb;
 }
 /**
@@ -556,7 +558,8 @@ function populateBreadCrumb(data, pathArray) {
     breadCrumbTitleElemDesktop.addEventListener('click', toggleBreadCrumb);
     breadCrumbDesktop.querySelector('.left-sec').appendChild(breadCrumbTitleElemDesktop);
     breadCrumbMobile.querySelector('.l3-nav__mobile--closed .left-sec').appendChild(a({ class: 'title-item', innerHTML: title }));
-
+    breadCrumbMobile.querySelector('.Vlt-icon-close.right-sec__close-icn').addEventListener('click', toggleBreadCrumb);
+    breadCrumbMobile.querySelector('.Vlt-icon-chevron.right-sec__dropdown-icn').addEventListener('click', toggleBreadCrumb);
     if (index === 0) {
       // Add an icon for decoration in the desktop title
       const iconSpan = span({ class: 'nav-icon Vlt-icon-phone' });
@@ -590,7 +593,7 @@ function populateBreadCrumb(data, pathArray) {
 
   sectionBreadCrumbDesktop.querySelector('.list.l3-nav__menu-options--list.first').style.width = data.links[0].width;
 
-  const sectionBreadCrumbMobile = ul();
+  const sectionBreadCrumbMobile = div({ class: 'menu-sub-list' }, ul());
 
   data.links.forEach((root) => {
     const breadCrumbLink = a({ class: 'l3-nav__submenu', href: root.url, innerHTML: root.label });
@@ -598,19 +601,19 @@ function populateBreadCrumb(data, pathArray) {
       breadCrumbLink.classList.add('bold');
     }
     sectionBreadCrumbDesktop.querySelector('ul').appendChild(li(breadCrumbLink));
-    sectionBreadCrumbMobile.appendChild(li(span(breadCrumbLink)));
+    sectionBreadCrumbMobile.querySelector('ul').appendChild(li(span(breadCrumbLink.cloneNode(true))));
   });
 
   breadCrumbDesktop.querySelector('.left-sec').appendChild(sectionBreadCrumbDesktop);
-  breadCrumbMobile.querySelector('.menu-sub-list').appendChild(sectionBreadCrumbMobile);
+  breadCrumbMobile.querySelector('.l3-nav__mobile--menu-body').appendChild(sectionBreadCrumbMobile.cloneNode(true));
 
   // If the page is a subsection based on its section metadata
   // need to load the relevant subsection breadcrumb data
   if (inSubSection) {
-    breadCrumbMobile.querySelector('.menu-sub-list').appendChild(a({ class: 'title-item', innerHTML: data.titles[1] }));
+    breadCrumbMobile.querySelector('.l3-nav__mobile--menu-body').appendChild(a({ class: 'title-item', innerHTML: data.titles[1] }));
     const subSection = `/${pathArray[0]}/${pathArray[1]}/`;
     const subSectionBreadCrumbDesktop = div({ class: 'list l3-nav__menu-options--list' }, ul());
-    const subSectionBreadCrumbMobile = ul();
+    const subSectionBreadCrumbMobile = div({ class: 'menu-sub-list' }, ul());
 
     // Find the index in the linksData data of the root page we are currently on given the section metadata
     const index = data.links.indexOf(data.links.find((o) => o.url === subSection));
@@ -622,15 +625,22 @@ function populateBreadCrumb(data, pathArray) {
       }
       subSectionBreadCrumbDesktop.style.width = data.links[index].width;
       subSectionBreadCrumbDesktop.querySelector('ul').appendChild(li(breadCrumbLink));
-      subSectionBreadCrumbMobile.appendChild(li(span(breadCrumbLink)));
+      subSectionBreadCrumbMobile.querySelector('ul').appendChild(li(span(breadCrumbLink.cloneNode(true))));
     });
 
     breadCrumbDesktop.querySelector('.sublist-container').appendChild(subSectionBreadCrumbDesktop);
-    breadCrumbMobile.querySelector('.menu-sub-list').appendChild(subSectionBreadCrumbMobile);
+    breadCrumbMobile.querySelector('.l3-nav__mobile--menu-body').appendChild(subSectionBreadCrumbMobile);
   }
-  if (data.titles[2] !== '') {
-    breadCrumbMobile.querySelector('.menu-sub-list').appendChild(a({ class: 'title-item', innerHTML: data.titles[2] }));
+  if (data.titles.length > 2) {
+    breadCrumbMobile.querySelector('.l3-nav__mobile--menu-body').appendChild(a({ class: 'title-item', innerHTML: data.titles[2] }));
   }
+
+  const contactSection = div({ class: 'menu-sub-list' });
+  contactSection.innerHTML = `
+        <a href="/unified-communications/pricing/" class="title-item" target="_self" data-external="false">See plans &amp; pricing</a>
+        <a href="tel:+1-855-430-6401" class="title-item" target="_self" data-external="false">1-855-430-6401</a>`;
+
+  breadCrumbMobile.querySelector('.l3-nav__mobile--menu-body').append(contactSection);
 }
 
 /* ------------------------------ Main function invoked at load ------------------------------- */

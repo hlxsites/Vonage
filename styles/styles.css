@@ -126,6 +126,7 @@
 
   /* nav height */
   --nav-height: 12.5rem;
+  --mobile-nav-height: 11.1rem;
 
 }
 
@@ -179,7 +180,7 @@ body.appear {
 
 header {
   position: fixed;
-  height: var(--nav-height);
+  height: var(--mobile-nav-height);
 }
 
 /* Offset main site content by the height of the nav plus the breadcrumb */
