@@ -1,49 +1,6 @@
-import { decorateIcons } from '../../scripts/lib-franklin.js';
 import {
   a, button, div, domEl, img, li, span, ul,
 } from '../../scripts/scripts.js';
-
-/**
- *
- * @param engineKey {string}
- * @param pageNo {number}
- * @param filters {Object<string, string[]>}
- * @return {Promise<any>}
- */
-async function getSearchResults(engineKey, pageNo, filters) {
-  const query = {
-    engine_key: engineKey,
-    page: pageNo,
-    per_page: 9,
-    sort_field: { page: 'sortTitle' },
-    sort_direction: { page: 'asc' },
-    highlight_fields: {},
-    spelling: 'retry',
-    q: '',
-    filters: {
-      page: {
-        site: ['vonage-business-marketing'],
-        language: ['en'],
-        country: ['us'],
-        content_section: ['apps', 'products'],
-        ff_product: { type: 'and', values: ['product/unified-communications/feature'] },
-        ...filters,
-      },
-    },
-    facets: { page: ['type', 'topic', 'region'] },
-  };
-
-  const response = await fetch('https://api.swiftype.com/api/v1/public/engines/search.json', {
-    body: JSON.stringify(query),
-    headers: {
-      'content-type': 'application/json',
-    },
-    method: 'POST',
-    credentials: 'omit',
-  });
-  const resultInfo = await response.json();
-  return resultInfo;
-}
 
 export default async function decorate(block) {
   block.dataset.page = 1;
@@ -98,11 +55,51 @@ export default async function decorate(block) {
 `;
 
   await refreshResults(block);
-  decorateIcons(block);
+}
+
+/**
+ *
+ * @param engineKey {string}
+ * @param pageNo {number}
+ * @param filters {Object<string, string[]>}
+ * @return {Promise<any>}
+ */
+async function getSearchResults(engineKey, pageNo, filters) {
+  const query = {
+    engine_key: engineKey,
+    page: pageNo,
+    per_page: 9,
+    sort_field: { page: 'sortTitle' },
+    sort_direction: { page: 'asc' },
+    highlight_fields: {},
+    spelling: 'retry',
+    q: '',
+    filters: {
+      page: {
+        site: ['vonage-business-marketing'],
+        language: ['en'],
+        country: ['us'],
+        content_section: ['apps', 'products'],
+        ff_product: { type: 'and', values: ['product/unified-communications/feature'] },
+        ...filters,
+      },
+    },
+    facets: { page: ['type', 'topic', 'region'] },
+  };
+
+  const response = await fetch('https://api.swiftype.com/api/v1/public/engines/search.json', {
+    body: JSON.stringify(query),
+    headers: {
+      'content-type': 'application/json',
+    },
+    method: 'POST',
+    credentials: 'omit',
+  });
+  return response.json();
 }
 
 function getActiveFilters(block) {
-  const checkedBoxes = [...block.querySelectorAll('.filter-container input[type="checkbox"]:checked')];
+  const checkedBoxes = [...block.querySelectorAll('.search-filters input[type="checkbox"]:checked')];
   const activeFilters = checkedBoxes
     .map((checkbox) => [checkbox.dataset.group, checkbox.value])
     .reduce((acc, [group, filterId]) => {
@@ -282,7 +279,6 @@ function updateFilters(block, swiftypeResult, activeFilters) {
             { class: 'checkbox-wrapper' },
             domEl(
               'label',
-              { class: 'filter-container' },
               domEl('input', {
                 type: 'checkbox',
                 value: name,
@@ -310,20 +306,20 @@ function updateFilters(block, swiftypeResult, activeFilters) {
   });
 }
 
-function handleFilterChange(e, block) {
-  refreshResults(block);
+async function handleFilterChange(e, block) {
+  await refreshResults(block);
 }
 
-function clearFilter(block, group, filterId) {
+async function clearFilter(block, group, filterId) {
   const checkbox = block.querySelector(`input[data-group="${group}"][value="${filterId}"]`);
   checkbox.checked = false;
-  refreshResults(block);
+  await refreshResults(block);
 }
 
-function clearFilters(block) {
-  const checkboxes = [...block.querySelectorAll('.filter-container input[type="checkbox"]')];
+async function clearFilters(block) {
+  const checkboxes = [...block.querySelectorAll('.search-filters input[type="checkbox"]')];
   checkboxes.forEach((checkbox) => {
     checkbox.checked = false;
   });
-  refreshResults(block);
+  await refreshResults(block);
 }
