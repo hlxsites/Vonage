@@ -35,6 +35,10 @@
   padding-bottom: 2rem;
 }
 
+.columns.category-grid > div {
+  align-items: flex-start;
+}
+
 div.columns.border-bottom-gray {
   border-bottom: .1rem solid lightgray;
 }
