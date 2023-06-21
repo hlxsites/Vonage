@@ -85,14 +85,86 @@ div.slim-promo a {
   text-decoration: underline;
 }
 
-div.section.callout-promo-container {
+div.callout-promo-wrapper {
   padding: 0 16px 64px 16px;
+}
+
+div.callout-promo-container {
+  padding: 0;
 }
 
 div.market-place-summary > div > div:first-child {
   background-color: var(--overview-background-color);
   padding: 4rem;
   margin-bottom: 5rem;
+}
+
+.market-place-summary .recs {
+  margin-right: 20px;
+  margin-left: 20px;
+}
+
+.market-place-summary .recs h2 {
+  margin-right: 20px;
+  margin-left: 20px;
+  font-size: 2.9rem;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: .86;
+  letter-spacing: -1.5px;
+  color: #000;
+  margin-bottom: 4rem;
+  text-align: left;
+}
+
+.market-place-summary .recs .row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.market-place-summary .recs .col {
+  flex: 100%;
+  margin: 0 0 3rem;
+  min-height: 10rem;
+  padding: 1rem 1rem 0 2rem;
+  border-radius: 1.6rem;
+  box-shadow: 0 0 9px 0 rgba(81,133,236,.15);
+  background-color: #fff;
+}
+
+.market-place-summary .recs .col > a {
+  align-items: center;
+  min-height: 8rem;
+  display: flex;
+  height: 100%;
+}
+.market-place-summary .recs .col > a > picture > img {
+  max-width: 10rem;
+  padding-right: 0.5rem;
+  margin: auto 0;
+  max-height: 8rem;
+  position: relative;
+  width: 100%;
+}
+
+.market-place-summary .recs .col > a > div {
+  flex: 0 0 66.66667%;
+  max-width: 66.66667%;
+  font-size: 2rem;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.2;
+  letter-spacing: normal;
+  color: #000;
+  display: flex;
+  margin: auto 0;
+  flex-wrap: wrap;
+  position: relative;
+  width: 100%;
+  padding-right: 20px;
+  padding-left: 20px;
 }
 
 @media (min-width: 768px) {
