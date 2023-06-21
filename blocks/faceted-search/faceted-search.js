@@ -47,14 +47,15 @@ async function getSearchResults(engineKey, pageNo, filters) {
 
 export default async function decorate(block) {
   block.dataset.page = 1;
-  block.innerHTML = `<div class="search-filters-root">
+  block.innerHTML = `<div class="search-filters">
     <div class="filter-btn-options-wrapper">
         <ul class="btn-options-list">
             <li class="filter-btn"><span>Filters</span> <i class="Vlt-icon-filter"></i></li>
         </ul>
     </div>
 
-    <dialog class="filter-options-container">
+    <!-- TODO: mobile-->
+    <dialog class="mobile-filter-options">
         <div class="filter-head">
             <div class="close-wrap Vlt-icon-close"></div>
             <div class="filters"><span>Filters</span> <i class="Vlt-icon-filter"></i></div>
@@ -78,182 +79,7 @@ export default async function decorate(block) {
         </div>
     </dialog>
 
-    <div class="filter-options-wrapper">
-        <details open="open" class="accordion-bar">
-            <summary><span class="summary-title">Type</span>
-                <div class="summary-chevron-down"><i class="Vlt-icon-chevron"></i></div>
-            </summary>
-            <div class="summary-content">
-                <ul class="filter-options-wrap">
-                    <li class="option-filter">
-                        <div class="checkbox-wrapper"><label class="filter-container">
-                            <input type="checkbox"
-                                   value="{&quot;name&quot;:&quot;type/core-feature&quot;,&quot;label&quot;:&quot;Included feature&quot;}">
-                            <span class="checkmark"></span> <span class="option-txt">
-                    Included feature 
-                    <span class="option-num">(43)</span></span></label></div>
-                    </li>
-                    <li class="option-filter">
-                        <div class="checkbox-wrapper"><label class="filter-container">
-                            <input type="checkbox"
-                                   value="{&quot;name&quot;:&quot;type/paid-add-on&quot;,&quot;label&quot;:&quot;Paid add-on&quot;}">
-                            <span class="checkmark"></span> <span class="option-txt">
-                    Paid add-on 
-                    <span class="option-num">(18)</span></span></label></div>
-                    </li>
-                </ul>
-            </div>
-            <div class="summary-chevron-up"><i class="Vlt-icon-chevron"></i></div>
-        </details>
-        <details open="open" class="accordion-bar">
-            <summary><span class="summary-title">Topic</span>
-                <div class="summary-chevron-down"><i class="Vlt-icon-chevron"></i></div>
-            </summary>
-            <div class="summary-content">
-                <ul class="filter-options-wrap">
-                    <li class="option-filter">
-                        <div class="checkbox-wrapper"><label class="filter-container">
-                            <input type="checkbox"
-                                   value="{&quot;name&quot;:&quot;topic/ai&quot;,&quot;label&quot;:&quot;AI&quot;}">
-                            <span class="checkmark"></span> <span class="option-txt">
-                    AI 
-                    <span class="option-num">(1)</span></span></label></div>
-                    </li>
-                    <li class="option-filter">
-                        <div class="checkbox-wrapper"><label class="filter-container">
-                            <input type="checkbox"
-                                   value="{&quot;name&quot;:&quot;topic/call-center&quot;,&quot;label&quot;:&quot;Call center&quot;}">
-                            <span class="checkmark"></span> <span class="option-txt">
-                    Call center 
-                    <span class="option-num">(14)</span></span></label></div>
-                    </li>
-                    <li class="option-filter">
-                        <div class="checkbox-wrapper"><label class="filter-container">
-                            <input type="checkbox"
-                                   value="{&quot;name&quot;:&quot;topic/collaboration&quot;,&quot;label&quot;:&quot;Collaboration&quot;}">
-                            <span class="checkmark"></span> <span class="option-txt">
-                    Collaboration 
-                    <span class="option-num">(19)</span></span></label></div>
-                    </li>
-                    <li class="option-filter">
-                        <div class="checkbox-wrapper"><label class="filter-container">
-                            <input type="checkbox"
-                                   value="{&quot;name&quot;:&quot;topic/customer-engagement&quot;,&quot;label&quot;:&quot;Customer engagement&quot;}">
-                            <span class="checkmark"></span> <span class="option-txt">
-                    Customer engagement 
-                    <span class="option-num">(25)</span></span></label></div>
-                    </li>
-                    <li class="option-filter">
-                        <div class="checkbox-wrapper"><label class="filter-container">
-                            <input type="checkbox"
-                                   value="{&quot;name&quot;:&quot;topic/employee-experience&quot;,&quot;label&quot;:&quot;Employee experience&quot;}">
-                            <span class="checkmark"></span> <span class="option-txt">
-                    Employee experience 
-                    <span class="option-num">(25)</span></span></label></div>
-                    </li>
-                    <li class="option-filter">
-                        <div class="checkbox-wrapper"><label class="filter-container">
-                            <input type="checkbox"
-                                   value="{&quot;name&quot;:&quot;topic/flexibility&quot;,&quot;label&quot;:&quot;Flexibility&quot;}">
-                            <span class="checkmark"></span> <span class="option-txt">
-                    Flexibility 
-                    <span class="option-num">(20)</span></span></label></div>
-                    </li>
-                    <li class="option-filter">
-                        <div class="checkbox-wrapper"><label class="filter-container">
-                            <input type="checkbox"
-                                   value="{&quot;name&quot;:&quot;topic/infrastructure&quot;,&quot;label&quot;:&quot;Infrastructure&quot;}">
-                            <span class="checkmark"></span> <span class="option-txt">
-                    Infrastructure 
-                    <span class="option-num">(2)</span></span></label></div>
-                    </li>
-                    <li class="option-filter">
-                        <div class="checkbox-wrapper"><label class="filter-container">
-                            <input type="checkbox"
-                                   value="{&quot;name&quot;:&quot;topic/marketing&quot;,&quot;label&quot;:&quot;Marketing&quot;}">
-                            <span class="checkmark"></span> <span class="option-txt">
-                    Marketing 
-                    <span class="option-num">(12)</span></span></label></div>
-                    </li>
-                    <li class="option-filter">
-                        <div class="checkbox-wrapper"><label class="filter-container">
-                            <input type="checkbox"
-                                   value="{&quot;name&quot;:&quot;topic/mobility&quot;,&quot;label&quot;:&quot;Mobility&quot;}">
-                            <span class="checkmark"></span> <span class="option-txt">
-                    Mobility 
-                    <span class="option-num">(22)</span></span></label></div>
-                    </li>
-                    <li class="option-filter">
-                        <div class="checkbox-wrapper"><label class="filter-container">
-                            <input type="checkbox"
-                                   value="{&quot;name&quot;:&quot;topic/omnichannel&quot;,&quot;label&quot;:&quot;Omnichannel&quot;}">
-                            <span class="checkmark"></span> <span class="option-txt">
-                    Omnichannel 
-                    <span class="option-num">(21)</span></span></label></div>
-                    </li>
-                    <li class="option-filter">
-                        <div class="checkbox-wrapper"><label class="filter-container">
-                            <input type="checkbox"
-                                   value="{&quot;name&quot;:&quot;topic/productivity&quot;,&quot;label&quot;:&quot;Productivity&quot;}">
-                            <span class="checkmark"></span> <span class="option-txt">
-                    Productivity 
-                    <span class="option-num">(35)</span></span></label></div>
-                    </li>
-                    <li class="option-filter">
-                        <div class="checkbox-wrapper"><label class="filter-container">
-                            <input type="checkbox"
-                                   value="{&quot;name&quot;:&quot;topic/remote-work&quot;,&quot;label&quot;:&quot;Remote work&quot;}">
-                            <span class="checkmark"></span> <span class="option-txt">
-                    Remote work 
-                    <span class="option-num">(6)</span></span></label></div>
-                    </li>
-                    <li class="option-filter">
-                        <div class="checkbox-wrapper"><label class="filter-container">
-                            <input type="checkbox"
-                                   value="{&quot;name&quot;:&quot;topic/support&quot;,&quot;label&quot;:&quot;Support&quot;}">
-                            <span class="checkmark"></span> <span class="option-txt">
-                    Support 
-                    <span class="option-num">(13)</span></span></label></div>
-                    </li>
-                </ul>
-            </div>
-            <div class="summary-chevron-up"><i class="Vlt-icon-chevron"></i></div>
-        </details>
-        <details class="accordion-bar">
-            <summary><span class="summary-title">Region</span>
-                <div class="summary-chevron-down"><i class="Vlt-icon-chevron"></i></div>
-            </summary>
-            <div class="summary-content">
-                <ul class="filter-options-wrap">
-                    <li class="option-filter">
-                        <div class="checkbox-wrapper"><label class="filter-container">
-                            <input type="checkbox"
-                                   value="{&quot;name&quot;:&quot;region/apac&quot;,&quot;label&quot;:&quot;APAC&quot;}">
-                            <span class="checkmark"></span> <span class="option-txt">
-                    APAC 
-                    <span class="option-num">(51)</span></span></label></div>
-                    </li>
-                    <li class="option-filter">
-                        <div class="checkbox-wrapper"><label class="filter-container">
-                            <input type="checkbox"
-                                   value="{&quot;name&quot;:&quot;region/emea&quot;,&quot;label&quot;:&quot;EMEA&quot;}">
-                            <span class="checkmark"></span> <span class="option-txt">
-                    EMEA 
-                    <span class="option-num">(53)</span></span></label></div>
-                    </li>
-                    <li class="option-filter">
-                        <div class="checkbox-wrapper"><label class="filter-container">
-                            <input type="checkbox"
-                                   value="{&quot;name&quot;:&quot;region/north-america&quot;,&quot;label&quot;:&quot;North America&quot;}">
-                            <span class="checkmark"></span> <span class="option-txt">
-                    North America 
-                    <span class="option-num">(60)</span></span></label></div>
-                    </li>
-                </ul>
-            </div>
-            <div class="summary-chevron-up"><i class="Vlt-icon-chevron"></i></div>
-        </details>
-    </div>
+    <div class="desktop-filter-options"></div>
 </div>
 
 <div class="results">
@@ -438,7 +264,7 @@ function getLabelForFacet(facetId) {
 }
 
 function updateFilters(block, swiftypeResult, activeFilters) {
-  const filters = block.querySelector('.filter-options-wrapper');
+  const filters = block.querySelector('.desktop-filter-options');
   filters.innerHTML = '';
 
   Object.entries(swiftypeResult.info.page.facets).forEach(([groupId, facetValues]) => {
@@ -448,21 +274,25 @@ function updateFilters(block, swiftypeResult, activeFilters) {
       domEl(
         'summary',
         getLabelForFacet(groupId),
-        div({ class: 'summary-chevron' }, span({ class: '' })),
+        div({ class: 'summary-chevron' }, span({ class: 'font-icon-chevron' })),
       ),
       ul(
-        { class: 'filter-options-wrap' },
         ...Object.entries(facetValues).map(([name, count]) => li(
-          { class: 'option-filter' },
           div(
             { class: 'checkbox-wrapper' },
-            domEl('label', { class: 'filter-container' }, domEl('input', {
-              type: 'checkbox',
-              value: name,
-              'data-label': getLabelForFacet(name),
-              'data-group': groupId,
-              onChange: (e) => handleFilterChange(e, block),
-            }), span({ class: 'checkmark' }), span({ class: 'option-txt' }, getLabelForFacet(name), span({ class: 'option-num' }, `(${count})`))),
+            domEl(
+              'label',
+              { class: 'filter-container' },
+              domEl('input', {
+                type: 'checkbox',
+                value: name,
+                'data-label': getLabelForFacet(name),
+                'data-group': groupId,
+                onChange: (e) => handleFilterChange(e, block),
+              }),
+              span({ class: 'checkmark' }),
+              span({ class: 'option-txt' }, getLabelForFacet(name), span({ class: 'option-num' }, `(${count})`)),
+            ),
           ),
         )),
       ),

@@ -1,42 +1,179 @@
-.block.faceted-search {
+.faceted-search {
   display: flex;
 }
 
-.font-icon-close::before {
+/* --- icons --- */
+.faceted-search .font-icon-close::before {
   font-family: var(--icon-font-family);
   content: var(--vlt-close-icon);
   font-size: 2rem;
   cursor: pointer;
 }
 
-.font-icon-chevron::before {
+.faceted-search .font-icon-chevron::before {
   font-family: var(--icon-font-family);
   content: var(--vlt-down-chevron-icon);
   font-size: 2rem;
   cursor: pointer;
   line-height: 1rem;
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: clip;
 }
 
-.font-icon-chevron.left {
+.faceted-search .font-icon-chevron.left {
   transform: rotate(90deg);
-  display: inline-block;
-  overflow: hidden;
-  text-overflow: clip;
 }
 
-.font-icon-chevron.right {
+.faceted-search .font-icon-chevron.right {
   transform: rotate(-90deg);
-  display: inline-block;
-  overflow: hidden;
-  text-overflow: clip;
 }
 
-.pagination button {
+.faceted-search .font-icon-chevron.up {
+  transform: rotate(180deg);
+}
+
+/* desktop filters */
+.faceted-search .desktop-filter-options {
+  border-radius: 1rem;
+  min-width: 24.1rem;
+  background-color: var(--panel-background-color);
+  padding: 2.4rem;
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 2.4rem;
+}
+
+.faceted-search .desktop-filter-options details.accordion-bar {
+  cursor: pointer;
+}
+
+.faceted-search .desktop-filter-options details.accordion-bar summary {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  font-weight: 600;
+  font-size: 1.6rem;
+  font-family: var(--body-font-family);
+  user-select: none;
+  margin-bottom: 2rem;
+  margin-right: 1rem;
+}
+
+.faceted-search .desktop-filter-options details.accordion-bar[open] .font-icon-chevron::before {
+  transform: rotate(180deg);
+}
+
+.faceted-search .desktop-filter-options details.accordion-bar  ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.faceted-search .desktop-filter-options details.accordion-bar  ul li {
+  height: 3.8rem;
+}
+
+.faceted-search .desktop-filter-options details.accordion-bar  ul li .checkbox-wrapper .filter-container {
+  display: flex;
+  position: relative;
+  padding-left: 3.5rem;
+  margin-bottom: 1.2rem;
+  font-family: var(--body-font-family);
+  font-weight: 500;
+  cursor: pointer;
+  font-size: 1.4rem;
+  min-height: 2rem;
+  user-select: none;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+
+.faceted-search .desktop-filter-options details.accordion-bar  ul li .checkbox-wrapper .filter-container.check-hide {
+  display: none;
+}
+
+.faceted-search .desktop-filter-options details.accordion-bar  ul li .checkbox-wrapper .filter-container.check-disabled {
+  font-weight: 200;
+  color: #c1c3cd;
+  cursor: default;
+}
+
+.faceted-search .desktop-filter-options details.accordion-bar  ul li .checkbox-wrapper .filter-container.check-disabled .checkmark {
+  border-color: #c1c3cd;
+}
+
+.faceted-search .desktop-filter-options details.accordion-bar  ul li .checkbox-wrapper .filter-container.check-disabled .option-num {
+  color: #c1c3cd;
+}
+
+.faceted-search .desktop-filter-options details.accordion-bar  ul li .checkbox-wrapper .filter-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.faceted-search .desktop-filter-options details.accordion-bar  ul li .checkbox-wrapper .filter-container .checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 2rem;
+  width: 2rem;
+  border: .1rem solid #9b9b9b;
+  background-color: #fff;
+  font-size: 2rem;
+}
+
+.faceted-search .desktop-filter-options details.accordion-bar  ul li .checkbox-wrapper .filter-container .checkmark::after {
+  content: "\e90e";
+  position: absolute;
+  display: none;
+  color: #fff;
+  font-family: var(--icon-font-family);
+  font-style: normal;
+  font-variant: normal;
+  width: 2rem;
+  height: 2rem;
+  bottom: .9rem;
+  font-size: 2.6rem;
+  left: -.3rem;
+}
+
+.faceted-search .desktop-filter-options details.accordion-bar  ul li .checkbox-wrapper .filter-container .option-num {
+  color: #717171;
+  margin-left: .5rem;
+}
+
+.faceted-search .desktop-filter-options details.accordion-bar  ul li .checkbox-wrapper .filter-container .option-txt {
+  text-transform: capitalize;
+}
+
+.faceted-search .desktop-filter-options details.accordion-bar  ul li .checkbox-wrapper .filter-container input:checked~.checkmark {
+  background-color: #881fff;
+}
+
+.faceted-search .desktop-filter-options details.accordion-bar  ul li .checkbox-wrapper .filter-container input:checked~.checkmark::after {
+  display: block;
+}
+
+
+
+
+
+
+
+
+
+.faceted-search .pagination button {
   line-height: 1rem;
 }
 
-.pagination button:hover,
-.pagination button:focus {
+.faceted-search .pagination button:hover,
+.faceted-search .pagination button:focus {
   background-color: unset;
   cursor: pointer;
 }
@@ -123,15 +260,6 @@
   cursor: pointer;
 }
 
-
-
-
-.search-filters-root .no-results {
-  margin-top: 2rem;
-  display: none;
-}
-
-
 .results-section .filter-btn-options-wrapper-desktop .btn-options-list .filter-btn {
   font-weight: 500;
   font-size: 1.5rem;
@@ -152,152 +280,6 @@
   font-weight: 400;
 }
 
-
-
-.filter-options-wrapper {
-  border-radius: 1rem;
-  min-width: 24.1rem;
-  background-color: #fafafa;
-  padding: 2.4rem;
-}
-
-.filter-options-wrapper details.accordion-bar {
-  cursor: pointer;
-  position: relative;
-  margin-top: 2.4rem;
-}
-
-.filter-options-wrapper details.accordion-bar:first-child {
-  margin-top: 0;
-}
-
-
-.filter-options-wrapper details.accordion-bar summary {
-  list-style: none;
-  display: flex;
-  justify-content: space-between;
-  font-weight: 600;
-  font-size: 1.6rem;
-  font-family: var(--body-font-family);
-  user-select: none;
-  margin-bottom: 2rem;
-}
-
-.filter-options-wrapper details.accordion-bar .summary-chevron {
-  pointer-events: none;
-  position: absolute;
-  top: -.2rem;
-  font-size: 2.4rem;
-  right: 1rem;
-  background: #fafafa;
-}
-
-.filter-options-wrapper details.accordion-bar .summary-chevron span::before {
-  display: block;
-  content: var(--vlt-down-chevron-icon);
-  font-family: var(--icon-font-family);
-  font-size: 1.8rem;
-}
-
-.filter-options-wrapper details.accordion-bar[open] .summary-chevron span {
-  transform: rotate(180deg);
-}
-
-
-.filter-options-wrapper details.accordion-bar  .filter-options-wrap {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-
-.filter-options-wrapper details.accordion-bar  .filter-options-wrap .option-filter {
-  height: 3.8rem;
-}
-
-.filter-options-wrapper details.accordion-bar  .filter-options-wrap .option-filter .checkbox-wrapper .filter-container {
-  display: flex;
-  position: relative;
-  padding-left: 3.5rem;
-  margin-bottom: 1.2rem;
-  font-family: var(--body-font-family);
-  font-weight: 500;
-  cursor: pointer;
-  font-size: 1.4rem;
-  min-height: 2rem;
-  user-select: none;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-.filter-options-wrapper details.accordion-bar  .filter-options-wrap .option-filter .checkbox-wrapper .filter-container.check-hide {
-  display: none;
-}
-
-.filter-options-wrapper details.accordion-bar  .filter-options-wrap .option-filter .checkbox-wrapper .filter-container.check-disabled {
-  font-weight: 200;
-  color: #c1c3cd;
-  cursor: default;
-}
-
-.filter-options-wrapper details.accordion-bar  .filter-options-wrap .option-filter .checkbox-wrapper .filter-container.check-disabled .checkmark {
-  border-color: #c1c3cd;
-}
-
-.filter-options-wrapper details.accordion-bar  .filter-options-wrap .option-filter .checkbox-wrapper .filter-container.check-disabled .option-num {
-  color: #c1c3cd;
-}
-
-.filter-options-wrapper details.accordion-bar  .filter-options-wrap .option-filter .checkbox-wrapper .filter-container input {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-  height: 0;
-  width: 0;
-}
-
-.filter-options-wrapper details.accordion-bar  .filter-options-wrap .option-filter .checkbox-wrapper .filter-container .checkmark {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 2rem;
-  width: 2rem;
-  border: .1rem solid #9b9b9b;
-  background-color: #fff;
-  font-size: 2rem;
-}
-
-.filter-options-wrapper details.accordion-bar  .filter-options-wrap .option-filter .checkbox-wrapper .filter-container .checkmark::after {
-  content: "\e90e";
-  position: absolute;
-  display: none;
-  color: #fff;
-  font-family: var(--icon-font-family);
-  font-style: normal;
-  font-variant: normal;
-  width: 2rem;
-  height: 2rem;
-  bottom: .9rem;
-  font-size: 2.6rem;
-  left: -.3rem;
-}
-
-.filter-options-wrapper details.accordion-bar  .filter-options-wrap .option-filter .checkbox-wrapper .filter-container .option-num {
-  color: #717171;
-  margin-left: .5rem;
-}
-
-.filter-options-wrapper details.accordion-bar  .filter-options-wrap .option-filter .checkbox-wrapper .filter-container .option-txt {
-  text-transform: capitalize;
-}
-
-.filter-options-wrapper details.accordion-bar  .filter-options-wrap .option-filter .checkbox-wrapper .filter-container input:checked~.checkmark {
-  background-color: #881fff;
-}
-
-.filter-options-wrapper details.accordion-bar  .filter-options-wrap .option-filter .checkbox-wrapper .filter-container input:checked~.checkmark::after {
-  display: block;
-}
 
 
 
@@ -333,7 +315,7 @@
     display:none!important;
   }
 
-  .filter-options-wrapper {
+  .faceted-search .desktop-filter-options {
     display: none;
   }
 
@@ -387,7 +369,7 @@
     border: .1rem solid #881fff;
   }
 
-  .filter-options-container {
+  .mobile-filter-options {
     overflow-y: auto;
 
     /* display: block; TODO */
@@ -403,11 +385,11 @@
     right: 0;
   }
 
-  .filter-options-container.show {
+  .mobile-filter-options.show {
     display: block;
   }
 
-  .filter-options-container .filter-head {
+  .mobile-filter-options .filter-head {
     height: 6rem;
     display: flex;
     -webkit-box-pack: justify;
@@ -420,13 +402,13 @@
     padding: 0 1.2rem;
   }
 
-  .filter-options-container .filter-head .close-wrap {
+  .mobile-filter-options .filter-head .close-wrap {
     font-weight: 500;
     font-size: 2.8rem;
     cursor: pointer;
   }
 
-  .filter-options-container .filters {
+  .mobile-filter-options .filters {
     height: 100%;
     display: flex;
     -webkit-box-align: center;
@@ -434,17 +416,17 @@
     align-items: center;
   }
 
-  .filter-options-container .filters span {
+  .mobile-filter-options .filters span {
     font-weight: 500;
     text-transform: capitalize;
   }
 
-  .filter-options-container .filters i.Vlt-icon-filter {
+  .mobile-filter-options .filters i.Vlt-icon-filter {
     margin-left: .8rem;
     font-size: 2.2rem;
   }
 
-  .filter-options-container .clear-wrap span {
+  .mobile-filter-options .clear-wrap span {
     color: #000;
     opacity: .3;
     font-size: 1.5rem;
