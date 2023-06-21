@@ -342,6 +342,19 @@ function injectLeadGenFragment(main, document) {
   }
 }
 
+function importLogoStrip(main, document) {
+  const logoStrips = main.querySelectorAll('div.logoStrip');
+  logoStrips.forEach((strip) => {
+    const lsCells = [['cards (logo-strip)']];
+    const logoItems = strip.querySelectorAll('div.logo-strip__logo');
+    logoItems.forEach((logo) => {
+      lsCells.push([logo]);
+    });
+    const logoStrip = WebImporter.DOMUtils.createTable(lsCells, document);
+    strip.replaceWith(logoStrip);
+  });
+}
+
 export default {
   /**
    * Apply DOM operations to the provided document and return
@@ -395,6 +408,7 @@ export default {
     importQnA(main, document);
     importHeroForm(main, document);
     injectLeadGenFragment(main, document);
+    importLogoStrip(main, document);
 
     return main;
   },
