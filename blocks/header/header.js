@@ -463,8 +463,8 @@ function buildHamburger(nav, navSections) {
  // * @param {String} title The content of the root breadcrumb element that should be displayed (page section)
  // * @param {[Object]} links An array of link objects sorted in a parent -> child structure
  */
-function buildBreadCrumb() {
-  const breadCrumb = div({ class: 'nav-breadcrumb-wrapper' });
+function buildBreadCrumbDesktop() {
+  const breadCrumb = div({ class: 'l3-nav__desktop' }, div({ class: 'l3-nav__desktop--menu-head' }));
   breadCrumb.innerHTML = `
     <div class="container section-container">
       <div class="left-sec" tabindex="0">
@@ -485,6 +485,121 @@ function buildBreadCrumb() {
   return breadCrumb;
 }
 
+function buildBreadCrumbMobile() {
+  const breadCrumb = div({ class: 'l3-nav__mobile' });
+  breadCrumb.innerHTML = `
+        <div class="l3-nav__mobile--menu-head l3-nav__mobile--closed not-active">
+            <div class="left-sec">
+<!--            <a class="title-item" data-static-label="Unified Communications" aria-expanded="false" data-analytics-icmp="l3breadrumb|l3nav__Unified Communications" data-di-id="l3breadrumb|l3nav__Unified Communications" data-analytics-link-icmp="l3breadrumb|l3nav__Unified Communications">-->
+<!--            Unified Communications-->
+<!--            </a>-->
+<!--            <span class="separator">-->
+<!--            /-->
+<!--            </span>-->
+<!--            <a class="title-item" data-static-label="Features" aria-expanded="false" data-analytics-icmp="l3breadrumb|l3nav__Unified Communications_Features" data-di-id="l3breadrumb|l3nav__Unified Communications_Features" data-analytics-link-icmp="l3breadrumb|l3nav__Unified Communications_Features">-->
+<!--            Features-->
+<!--            </a>-->
+<!--            <span class="separator">-->
+<!--            /-->
+<!--            </span>-->
+<!--            <a class="title-item" data-static-label="Admin Portal" aria-expanded="false" data-analytics-icmp="l3breadrumb|l3nav__Unified Communications_Features_Admin Portal" data-di-id="l3breadrumb|l3nav__Unified Communications_Features_Admin Portal" data-analytics-link-icmp="l3breadrumb|l3nav__Unified Communications_Features_Admin Portal">-->
+<!--            Admin Portal-->
+<!--            </a>-->
+        </div>
+            <div class="right-sec">
+        <span class="Vlt-icon-chevron right-sec__dropdown-icn"></span>
+        </div>
+        </div>
+        <div class="l3-nav__mobile--menu-head l3-nav__mobile--open">
+            <div class="left-sec">
+        </div>
+            <div class="right-sec">
+        <span class="Vlt-icon-close right-sec__close-icn" style="left: -55px;"></span>
+        </div>
+        </div>
+        
+        <div class="l3-nav__mobile--menu-body active">
+        <div class="menu-sub-list">
+        
+<!--
+            </div>
+            <a class="title-item" data-analytics-icmp="l3nav2022|l3nav_Unified Communications_Features" aria-expanded="false" data-di-id="l3nav2022|l3nav_Unified Communications_Features" data-analytics-link-icmp="l3nav2022|l3nav_Unified Communications_Features">
+            Features
+            </a>
+            <div class="menu-sub-list">
+            <ul>
+            <li>
+            <span>
+            <a href="/unified-communications/features/desktop/" data-static-label="Desktop" data-di-id="l3nav2022|l3nav_Unified Communications_Features_Desktop" data-analytics-link-icmp="l3nav2022|l3nav_Unified Communications_Features_Desktop" data-external="false">
+            Desktop
+            </a>
+            </span>
+            </li>
+            <li>
+            <span>
+            <a href="/unified-communications/features/vonage-meetings/" data-static-label="Vonage Meetings" data-di-id="l3nav2022|l3nav_Unified Communications_Features_Vonage Meetings" data-analytics-link-icmp="l3nav2022|l3nav_Unified Communications_Features_Vonage Meetings" data-external="false">
+            Vonage Meetings
+            </a>
+            </span>
+            </li>
+            <li>
+            <span>
+            <a class="active" href="/unified-communications/features/admin-portal/" data-static-label="Admin portal" data-di-id="l3nav2022|l3nav_Unified Communications_Features_Admin portal" data-analytics-link-icmp="l3nav2022|l3nav_Unified Communications_Features_Admin portal" data-external="false">
+             Admin portal
+            </a>
+            </span>
+            </li>
+            <li>
+            <span>
+            <a href="/unified-communications/features/business-sms/" data-static-label="Business SMS" data-di-id="l3nav2022|l3nav_Unified Communications_Features_Business SMS" data-analytics-link-icmp="l3nav2022|l3nav_Unified Communications_Features_Business SMS" data-external="false">
+            Business SMS
+            </a>
+            </span>
+            </li>
+            <li>
+            <span>
+            <a href="/unified-communications/features/paperless-fax/" data-static-label="Paperless fax" data-di-id="l3nav2022|l3nav_Unified Communications_Features_Paperless fax" data-analytics-link-icmp="l3nav2022|l3nav_Unified Communications_Features_Paperless fax" data-external="false">
+            Paperless fax
+            </a>
+            </span>
+            </li>
+            <li>
+            <span>
+            <a href="/unified-communications/features/mobile-app/" data-static-label="Mobile app" data-di-id="l3nav2022|l3nav_Unified Communications_Features_Mobile app" data-analytics-link-icmp="l3nav2022|l3nav_Unified Communications_Features_Mobile app" data-external="false">
+            Mobile app
+            </a>
+            </span>
+            </li>
+            <li>
+            <span>
+            <a href="/unified-communications/features/virtual-receptionist/" data-static-label="Virtual receptionist" data-di-id="l3nav2022|l3nav_Unified Communications_Features_Virtual receptionist" data-analytics-link-icmp="l3nav2022|l3nav_Unified Communications_Features_Virtual receptionist" data-external="false">
+            Virtual receptionist
+            </a>
+            </span>
+            </li>
+            <li>
+            <span>
+            <a href="/unified-communications/features/" data-static-label="View all features" data-di-id="l3nav2022|l3nav_Unified Communications_Features_View all features" data-analytics-link-icmp="l3nav2022|l3nav_Unified Communications_Features_View all features" data-external="false">
+            View all features
+            </a>
+            </span>
+            </li>
+            </ul>
+            </div>
+            <a class="title-item" data-analytics-icmp="l3nav2022|l3nav_Unified Communications_Features_Admin Portal" aria-expanded="false" data-di-id="l3nav2022|l3nav_Unified Communications_Features_Admin Portal" data-analytics-link-icmp="l3nav2022|l3nav_Unified Communications_Features_Admin Portal">
+            Admin Portal
+            </a>
+-->
+        <a href="/unified-communications/pricing/" class="title-item" data-di-id="l3breadrumb|l3nav_ctalinks_seeplans&amp;pricing" data-analytics-link-icmp="l3breadrumb|l3nav_ctalinks_seeplans&amp;pricing" target="_self" data-external="false">
+        See plans &amp; pricing
+        </a>
+        <a href="tel:+1-855-430-6401" class="title-item" data-di-id="l3breadrumb|l3nav_ctalinks_1-855-430-6401" data-analytics-link-icmp="l3breadrumb|l3nav_ctalinks_1-855-430-6401" target="_self" data-external="false">
+        1-855-430-6401
+        </a>
+        </div>
+`;
+  return breadCrumb;
+}
 /**
  *
  * @param {String} json The json response returned for the nav hierarchy data to use when building the breadcrumb of the header
@@ -517,82 +632,99 @@ function parseBreadCrumbJSON(json) {
 
  */
 function populateBreadCrumb(data, pathArray) {
-  const breadCrumb = document.querySelector('.nav-breadcrumb-wrapper');
+  const breadCrumbDesktop = document.querySelector('.l3-nav__desktop');
+  const breadCrumbMobile = document.querySelector('.l3-nav__mobile');
   const inSubSection = (data.titles.length > 1);
 
   // Build out the breadcrumb titles based on the nav-titles in the pages metadata
+  // ToDo: Split this off into a separate function to build the title element
   data.titles.forEach((title, index) => {
-    // If this is the first breadcrumb element, need to start with the icon span
-    const breadCrumbTitleElem = div({ class: 'l3-nav__menu-title' });
-    if (index === 0) {
-      breadCrumbTitleElem.innerHTML = `<span class="title-option">
+    const breadCrumbTitleElemDesktop = div({ class: 'l3-nav__menu-title' });
+    breadCrumbTitleElemDesktop.innerHTML = `<span class="title-option">
     <a class="title-option__l3nav" data-static-label="${title}">
-              <span class="nav-icon Vlt-icon-phone"></span>
               <span>${title}</span>
             </a>
           </span>`;
+    breadCrumbTitleElemDesktop.addEventListener('click', toggleBreadCrumb);
+    breadCrumbDesktop.querySelector('.left-sec').appendChild(breadCrumbTitleElemDesktop);
+    breadCrumbMobile.querySelector('.l3-nav__mobile--closed .left-sec').appendChild(a({ class: 'title-item', innerHTML: title }));
 
-      breadCrumbTitleElem.addEventListener('click', toggleBreadCrumb);
-      breadCrumb.querySelector('.left-sec').appendChild(breadCrumbTitleElem);
-    } else {
-      const separator = span({ class: 'separator' });
-      separator.innerHTML = '/';
-      breadCrumb.querySelector('.left-sec .l3-nav__menu-title:last-child').appendChild(separator);
-      breadCrumbTitleElem.innerHTML = `<span class="title-option">
-                                <a class="title-option__l3nav" data-static-label="${title}">
-                                    <span>${title}</span>
-                                </a>
-                            </span>`;
+    if (index === 0) {
+      // Add an icon for decoration in the desktop title
+      const iconSpan = span({ class: 'nav-icon Vlt-icon-phone' });
+      breadCrumbTitleElemDesktop.querySelector('a').prepend(iconSpan);
 
-      breadCrumbTitleElem.addEventListener('click', toggleBreadCrumb);
-      breadCrumb.querySelector('.left-sec').appendChild(breadCrumbTitleElem);
+      // Add the first link for the open mobile breadcrumb
+      breadCrumbMobile.querySelector('.l3-nav__mobile--open .left-sec').appendChild(a({ class: 'title-item', innerHTML: title }));
     }
+
+    // If there is more than one breadcrumb title, and we aren't on the last
+    if (index !== data.titles.length - 1 && data.titles.length > 1) {
+      // Add a separator for the desktop breadcrumb
+      breadCrumbDesktop.querySelector('.left-sec .l3-nav__menu-title:last-child').appendChild(span({ class: 'separator', innerHTML: '/' }));
+      breadCrumbMobile.querySelector('.l3-nav__mobile--closed .left-sec').appendChild(span({ class: 'separator', innerHTML: '/' }));
+    }
+
+    // If this is the last title in the breadcrumb
     if (index === data.titles.length - 1) {
+      // Add a trailing chevron decoration
       const chevron = span({ class: 'Vlt-icon-chevron arrow-icn' });
-      breadCrumb.querySelector('.l3-nav__menu-title:last-child .title-option__l3nav').classList.add('boldbreadCrumbTitle');
-      breadCrumb.querySelector('.l3-nav__menu-title:last-child').appendChild(chevron);
+      breadCrumbDesktop.querySelector('.l3-nav__menu-title:last-child .title-option__l3nav').classList.add('boldbreadCrumbTitle');
+      breadCrumbDesktop.querySelector('.l3-nav__menu-title:last-child').appendChild(chevron);
     }
   });
 
-  const sectionBreadCrumb = div({ class: 'menu-option-sublist l3-nav__menu-options' },
+  // ToDo: Split this off into a separate function to build the section element
+  const sectionBreadCrumbDesktop = div({ class: 'menu-option-sublist l3-nav__menu-options' },
     div({ class: 'container sublist-container' },
       div({ class: 'list l3-nav__menu-options--list first' },
         ul())));
 
-  // const sectionBreadCrumb = div({ class: 'list l3-nav__menu-options--list first' }, ul());
-  // ToDo: This width needs to be based on a calculation of the width of of the title
-  sectionBreadCrumb.querySelector('.list.l3-nav__menu-options--list.first').style.width = data.links[0].width;
-  for (const root of data.links) {
-    const breadCrumbLink = a({ class: 'l3-nav__submenu', href: root.url });
-    breadCrumbLink.innerHTML = root.label;
+  sectionBreadCrumbDesktop.querySelector('.list.l3-nav__menu-options--list.first').style.width = data.links[0].width;
+
+  const sectionBreadCrumbMobile = ul();
+
+  data.links.forEach((root) => {
+    const breadCrumbLink = a({ class: 'l3-nav__submenu', href: root.url, innerHTML: root.label });
     if (root.url === `/${pathArray.join('/')}`) {
       breadCrumbLink.classList.add('bold');
     }
-    sectionBreadCrumb.querySelector('ul').appendChild(li(breadCrumbLink));
-  }
-  breadCrumb.querySelector('.left-sec').appendChild(sectionBreadCrumb);
+    sectionBreadCrumbDesktop.querySelector('ul').appendChild(li(breadCrumbLink));
+    sectionBreadCrumbMobile.appendChild(li(span(breadCrumbLink)));
+  });
+
+  breadCrumbDesktop.querySelector('.left-sec').appendChild(sectionBreadCrumbDesktop);
+  breadCrumbMobile.querySelector('.menu-sub-list').appendChild(sectionBreadCrumbMobile);
 
   // If the page is a subsection based on its section metadata
   // need to load the relevant subsection breadcrumb data
   if (inSubSection) {
-    const subSectionBreadCrumb = div({ class: 'list l3-nav__menu-options--list' }, ul());
+    breadCrumbMobile.querySelector('.menu-sub-list').appendChild(a({ class: 'title-item', innerHTML: data.titles[1] }));
     const subSection = `/${pathArray[0]}/${pathArray[1]}/`;
+    const subSectionBreadCrumbDesktop = div({ class: 'list l3-nav__menu-options--list' }, ul());
+    const subSectionBreadCrumbMobile = ul();
 
     // Find the index in the linksData data of the root page we are currently on given the section metadata
     const index = data.links.indexOf(data.links.find((o) => o.url === subSection));
 
-    for (const child of data.links[index].children) {
-      const breadCrumbLink = a({ class: 'l3-nav__submenu', href: child.url });
-      breadCrumbLink.innerHTML = child.label;
+    data.links[index].children.forEach((child) => {
+      const breadCrumbLink = a({ class: 'l3-nav__submenu', href: child.url, innerHTML: child.label });
       if (child.url === `/${pathArray.join('/')}/`) {
         breadCrumbLink.classList.add('bold');
       }
-      subSectionBreadCrumb.style.width = data.links[index].width;
-      subSectionBreadCrumb.querySelector('ul').appendChild(li(breadCrumbLink));
-    }
-    breadCrumb.querySelector('.sublist-container').appendChild(subSectionBreadCrumb);
+      subSectionBreadCrumbDesktop.style.width = data.links[index].width;
+      subSectionBreadCrumbDesktop.querySelector('ul').appendChild(li(breadCrumbLink));
+      subSectionBreadCrumbMobile.appendChild(li(span(breadCrumbLink)));
+    });
+
+    breadCrumbDesktop.querySelector('.sublist-container').appendChild(subSectionBreadCrumbDesktop);
+    breadCrumbMobile.querySelector('.menu-sub-list').appendChild(subSectionBreadCrumbMobile);
+  }
+  if (data.titles[2] != '') {
+    breadCrumbMobile.querySelector('.menu-sub-list').appendChild(a({ class: 'title-item', innerHTML: data.titles[2] }));
   }
 }
+
 /* ------------------------------ Main function invoked at load ------------------------------- */
 
 /**
@@ -680,7 +812,8 @@ export default async function decorate(block) {
     const headerBackdrop = div({ id: 'backdrop', class: 'header backdrop' });
     block.append(headerBackdrop);
     block.append(navWrapper);
-    block.append(buildBreadCrumb());
+    block.append(buildBreadCrumbMobile());
+    block.append(buildBreadCrumbDesktop());
   }
 
   let sectionPathFull = window.location.pathname;

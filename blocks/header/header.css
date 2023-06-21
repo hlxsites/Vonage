@@ -493,6 +493,7 @@ header #nav .nav-sections > ul > div > li > em > a {
 header #nav .nav-sections > ul > div > li > em > a:hover {
   text-decoration: none;
 }
+
 /* When in a subsection yeet all the main menu elements off to the side as an animation */
 
 /* Think about moving the aria-expanded attribute up the dom so that it can be referenced to control the logo state */
@@ -634,20 +635,32 @@ header .sub-menu-label-active {
     }
 
     /* Make the last item of the sections nav the 'Contact us' button in black and aligned to the right */
-    /*header #nav .nav-sections > ul > div:last-child {*/
-    /*  margin: auto 0 auto auto;*/
-    /*  height:4.5rem;*/
-    /*}*/
 
-    /*header #nav .nav-sections > ul > div:last-child > li {*/
-    /*  border-radius: 1rem;*/
-    /*  color: var(--nav-contact-button-color);*/
-    /*  background-color: var(--nav-contact-button-background-color);*/
-    /*  height: 4.5rem;*/
-    /*  line-height: 4.5rem;*/
-    /*  font-size: 1.5rem;*/
-    /*  margin: 0;*/
-    /*}*/
+    /* header #nav .nav-sections > ul > div:last-child { */
+
+    /*  margin: auto 0 auto auto; */
+
+    /*  height:4.5rem; */
+
+    /* } */
+
+    /* header #nav .nav-sections > ul > div:last-child > li { */
+
+    /*  border-radius: 1rem; */
+
+    /*  color: var(--nav-contact-button-color); */
+
+    /*  background-color: var(--nav-contact-button-background-color); */
+
+    /*  height: 4.5rem; */
+
+    /*  line-height: 4.5rem; */
+
+    /*  font-size: 1.5rem; */
+
+    /*  margin: 0; */
+
+    /* } */
 
   .nav-item-wrapper.cta li {
     margin-left: 0;
@@ -661,6 +674,7 @@ header .sub-menu-label-active {
   .nav-item-wrapper.cta.first {
     margin-left: auto;
   }
+
     /* Colorize the transparent bottom border under the section menu items on mouse over */
     header #nav .nav-sections > ul > div.nav-item-wrapper > li:hover {
       text-decoration: underline;
@@ -943,9 +957,9 @@ header .sub-menu-label-active {
 }
 
 
-header .nav-breadcrumb-wrapper {
+header .l3-nav__desktop {
   display: -webkit-box;
-  display: -ms-flexbox;
+  display: flexbox;
   display: flex;
   box-sizing: border-box;
   -webkit-box-pack: justify;
@@ -957,7 +971,6 @@ header .nav-breadcrumb-wrapper {
   height: 6.3rem;
   padding: 0 34px 5px;
   position: relative;
-  background: #fbfbfb 0 0 no-repeat padding-box;
   font-size: 1.3rem;
   font-weight: 500;
   font-family: Spezia;
@@ -987,14 +1000,14 @@ header .nav-breadcrumb-wrapper {
 
 .left-sec {
   display: -webkit-box;
-  display: -ms-flexbox;
+  display: flexbox;
   display: flex;
   align-items: center;
 }
 
 .right-sec {
   display: -webkit-box;
-  display: -ms-flexbox;
+  display: flexbox;
   display: flex;
   align-items: center;
 }
@@ -1006,7 +1019,7 @@ header .nav-breadcrumb-wrapper {
 
 .l3-nav__menu-title {
   display: -webkit-box;
-  display: -ms-flexbox;
+  display: flexbox;
   display: flex;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -1029,7 +1042,7 @@ span.separator {
 
 a.title-option__l3nav {
   display: -webkit-box;
-  display: -ms-flexbox;
+  display: flexbox;
   display: flex;
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -1064,7 +1077,7 @@ span.Vlt-icon-chevron.arrow-icn {
   display: inline-block;
   font-size: 2rem;
   position: relative;
-  -webkit-transform: rotate(0deg);
+  transform: rotate(0deg);
   transform: rotate(0deg);
   color: #881fff;
 }
@@ -1111,11 +1124,11 @@ a.title-option__l3nav:hover {
 .menu-option-sublist.l3-nav__menu-options.active {
   opacity:100;
   display: -webkit-box;
-  display: -ms-flexbox;
+  display: flexbox;
   display: flex;
   visibility: visible;
   z-index: 4;
-  -webkit-animation: fadein .75s forwards;
+  animation: fadein .75s forwards;
   animation: fadein .75s forwards;
 }
 
