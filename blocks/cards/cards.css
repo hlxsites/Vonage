@@ -316,10 +316,8 @@
     padding-right: 20px;
     cursor: pointer;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     height: 100%;
-    -ms-flex-pack: end;
-    justify-content: flex-end;
     min-height: 31.9rem;
     position: relative;
   }
@@ -336,8 +334,6 @@
     cursor: pointer;
     display: flex;
     flex-direction: column;
-    -ms-flex-pack: end;
-    justify-content: flex-end;
     min-height: 31.9rem;
     padding: 4rem;
   }
@@ -374,7 +370,7 @@
     padding: 0;
     white-space: normal;
     margin-top:0;
-    margin-bottom: 3rem;
+    margin-bottom: 4rem;
     color: var(--info-card-color);
   }
 
@@ -493,13 +489,21 @@
   /* Layout tweaks for the arrow icon */
   .cards.info-card .icon-arrow-link {
     position: absolute;
-    top: 38rem;
+    bottom: 8rem;
+    left: 7rem;
   }
 }
 
 @media (min-width: 1200px){
   .cards.info-card .button-container {
     font-size: 1.7rem;
+  }
+
+  .cards.info-card .icon-arrow-link {
+    font-size: 2.1rem;
+    font-weight: 400;
+    letter-spacing: -.025rem;
+    line-height: 2.4rem;
   }
 
   /* Font styling tweaks for the title of the card */
