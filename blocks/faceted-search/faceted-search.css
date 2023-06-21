@@ -128,8 +128,13 @@
   font-size: 2rem;
 }
 
+/* Add focus styles on the outer-box of the fake checkbox to make it accessible */
+.faceted-search .desktop-filter-options details.accordion-bar  ul li .checkbox-wrapper .filter-container input[type="checkbox"]:focus + .checkmark {
+  outline: #3b99fc auto 5px;
+}
+
 .faceted-search .desktop-filter-options details.accordion-bar  ul li .checkbox-wrapper .filter-container .checkmark::after {
-  content: "\e90e";
+  content: var(--vlt-close-icon);
   position: absolute;
   display: none;
   color: #fff;
