@@ -27,7 +27,7 @@ header {
   width: 100%;
   background-color: white;
   z-index: 1000;
-  height: calc(var(--mobile-nav-height));
+  height:var(--mobile-nav-height);
 }
 
 header.header-wrapper.collapsed {
