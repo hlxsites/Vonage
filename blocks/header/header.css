@@ -352,7 +352,7 @@ header #nav[aria-expanded="true"] .nav-tools {
 
   /*  Display the immediate children of the section as the nav index */
   header #nav[aria-expanded="true"] .sub-menu-section-active > ul.sub-menu-index > li {
-    font-weight: 600;
+    font-weight: 500;
     display: block;
     opacity: 1;
     -webkit-box-align: center;
@@ -369,7 +369,7 @@ header #nav[aria-expanded="true"] .nav-tools {
   /* Styling and transition for the sub menu elements */
   header #nav[aria-expanded="true"] .nav-sections > ul > div.nav-item-wrapper > li {
     font-size: 2.3rem;
-    font-weight: 600;
+    font-weight: 500;
     letter-spacing: 0;
     line-height: 4.6rem;
     margin-bottom: 2.0rem;
@@ -474,6 +474,8 @@ header #nav .sub-menu-section-active > ul.sub-menu-index {
 header #nav .nav-sections > ul > div > li > strong > a {
   border-radius: 1rem;
   height: 4.5rem;
+  font-weight: 500;
+  font-style:normal;
   line-height: 4.5rem;
   padding-left: 2rem;
   padding-right: 2rem;
@@ -491,6 +493,8 @@ text-decoration: none;
 header #nav .nav-sections > ul > div > li > em > a {
   display: inline-block;
   font-size: 1.5rem;
+  font-weight: 500;
+  font-style:normal;
   height: 4.5rem;
   line-height: 4.5rem;
   padding-left: 2rem;
@@ -625,10 +629,10 @@ header .sub-menu-label-active {
     /* Styling for the sections nav menu top level items */
     header .nav-sections > ul > div > li {
       opacity: 1;
-      font-weight: 600;
+      font-weight: 500;
       margin: 10px 20px 0;
       font-size: 1.5rem;
-      letter-spacing: .1rem;
+      letter-spacing: .027rem;
       line-height: 4.5rem;
     }
 
@@ -1034,7 +1038,11 @@ header .sub-menu-label-active {
       cursor: pointer;
     }
 
-  /***** Desktop breadcrumb header bar styling *****/
+header .l3-nav-desktop .right-sec-menu-option:last-child {
+  margin-right: 0;
+}
+
+/***** Desktop breadcrumb header bar styling *****/
 
     /* Styling for the breadcrumb section title elements parent container */
     header .l3-nav-desktop .l3-nav-menu-title {
@@ -1057,7 +1065,7 @@ header .sub-menu-label-active {
     header .l3-nav-desktop span.separator {
       color: var(--accent-color);
       font-size: 1.3rem;
-      font-weight: 600;
+      font-weight: 500;
     }
 
     /* Styling for the title link in the breadcrumb */
@@ -1107,7 +1115,7 @@ header .sub-menu-label-active {
 
     /* Make the active (page user is on) link in the title bold and black */
     header .l3-nav-desktop .l3-nav-menu-title .title-option-l3nav.bold {
-      font-weight: 600;
+      font-weight: 500;
       color: var(--text-color);
     }
 
@@ -1195,7 +1203,7 @@ header .sub-menu-label-active {
 
     /* Make the active (page user is on) link in the breadcrumb bold and black */
     header .l3-nav-desktop .l3-nav-menu-options-list ul li a.bold {
-      font-weight: 600;
+      font-weight: 500;
       color: var(--text-color);
     }
 
