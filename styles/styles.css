@@ -127,7 +127,8 @@
   /* nav height */
   --nav-height: 12.5rem;
   --mobile-nav-height: 11.1rem;
-
+  --bread-crumb-height: 6.3rem;
+  --mobile-bread-crumb-height: 5.2rem;
 }
 
 @media (min-width: 900px) {
@@ -183,9 +184,9 @@ header {
   height: var(--mobile-nav-height);
 }
 
-/* Offset main site content by the height of the nav plus the breadcrumb */
+/* Offset main site content by the height of the header */
 main {
-  margin-top: calc(var(--nav-height) + 68px);
+  margin-top: calc(var(--mobile-nav-height));
 }
 
 h1, h2, h3,
@@ -392,6 +393,13 @@ main .section {
   .section > div {
     max-width: 990pt;
     margin: auto;
+  }
+}
+
+@media (min-width: 992px) {
+  /* Offset main site content by the height of the nav plus the breadcrumb */
+  main {
+    margin-top: calc(var(--nav-height) + var(--bread-crumb-height));
   }
 }
 
