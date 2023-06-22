@@ -143,17 +143,13 @@ div.market-place-summary > div > div:first-child {
   margin-left: 20px;
 }
 
-.market-place-summary .recs h2 {
-  margin-right: 20px;
-  margin-left: 20px;
-  font-size: 2.9rem;
-  font-weight: 500;
-  font-stretch: normal;
-  font-style: normal;
+.market-place-summary h2 {
+  font-size: 2.8rem;
+  font-weight: 600;
   line-height: .86;
   letter-spacing: -1.5px;
   color: #000;
-  margin-bottom: 4rem;
+  margin-bottom: 2rem;
   text-align: left;
 }
 
@@ -205,6 +201,18 @@ div.market-place-summary > div > div:first-child {
   padding-right: 20px;
   padding-left: 20px;
 }
+div.block {
+  padding-right: 20px;
+  padding-left: 20px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@media (min-width: 576px) {
+  div.block {
+    max-width: 540px;
+  }
+}
 
 @media (min-width: 768px) {
   div.slim-promo.columns-2-cols > div > div.columns-img-col {
@@ -250,6 +258,14 @@ div.market-place-summary > div > div:first-child {
     border-radius: 3rem;
     padding: 4rem;
     margin-bottom: 5rem;
+  }
+
+  div.block {
+    max-width: 45pc;
+  }
+
+  div.callout-promo-container {
+    padding-top: 4rem;
   }
 }
 
@@ -332,6 +348,10 @@ div.columns.lead-gen > div >  div:last-child > p {
     height: 130px;
     margin-right: 10px;
   }
+
+  div.market-place-summary > div {
+    flex-direction: column;
+  }
 }
 
 div.columns.lead-gen > div >  div:last-child > p > a {
@@ -379,6 +399,27 @@ div.columns.lead-gen > div >  div:last-child > p:last-child > a:last-child::befo
   .columns > div > div {
     flex: 1;
     order: unset;
+  }
+}
+
+@media (min-width: 992px) {
+  div.block {
+    max-width: 990pt;
+  }
+  div.market-place-summary > div {
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: start;
+  }
+
+  div.market-place-summary > div > div {
+    flex: 0 0 55%;
+    max-width: 55%;
+  }
+
+  div.market-place-summary .recs {
+    flex: 0 0 28%;
+    max-width: 28%;
   }
 }
 
