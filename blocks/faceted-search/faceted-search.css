@@ -10,6 +10,7 @@
   font-size: 2rem;
   cursor: pointer;
 }
+
 .faceted-search .font-icon-filter::before {
   font-family: var(--icon-font-family);
   content: var(--vlt-circuit-icon);
@@ -45,11 +46,14 @@
   display: inline-block;
 }
 
+.faceted-search .search-filters {
+  width: clamp(235px, 30%, 305px);
+}
 
-/* desktop filters */
+
+  /* desktop filters */
 .faceted-search .desktop-filter-options {
   border-radius: 1rem;
-  min-width: 24.1rem;
   background-color: var(--panel-background-color);
   padding: 2.4rem;
   display: flex;
@@ -164,6 +168,10 @@
 
 
 /* result cards */
+.faceted-search .results {
+  width: clamp(386px, 75%, 75%);
+}
+
 .faceted-search .results-section-wrapper {
   display: grid;
   grid-template-columns: auto auto auto;
