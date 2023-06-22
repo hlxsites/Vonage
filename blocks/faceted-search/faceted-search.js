@@ -3,6 +3,11 @@ import {
   a, button, div, domEl, img, li, p, span, ul,
 } from '../../scripts/scripts.js';
 
+async function applyMobileFilters(block) {
+  const filters = getActiveFilters(block.querySelector('.mobile-filter-dialog .mobile-filters'));
+  await refreshResults(block, filters);
+}
+
 export default async function decorate(block) {
   block.dataset.page = 1;
   block.innerHTML = `<div class="search-filters">
@@ -45,11 +50,11 @@ export default async function decorate(block) {
     block.querySelector('.mobile-filter-dialog').showModal();
   });
   block.querySelector('.mobile-filter-dialog .close-button').addEventListener('click', async () => {
-    await refreshResults(block);
+    await applyMobileFilters(block);
     block.querySelector('.mobile-filter-dialog').close();
   });
   block.querySelector('.mobile-filter-dialog .dialog-foot button').addEventListener('click', async () => {
-    await refreshResults(block);
+    await applyMobileFilters(block);
     block.querySelector('.mobile-filter-dialog').close();
   });
 
@@ -97,8 +102,8 @@ async function getSearchResults(engineKey, pageNo, filters) {
   return response.json();
 }
 
-function getActiveFilters(block) {
-  const checkedBoxes = [...block.querySelectorAll('.search-filters input[type="checkbox"]:checked')];
+function getActiveFilters(blockOrElement) {
+  const checkedBoxes = [...blockOrElement.querySelectorAll('input[type="checkbox"]:checked')];
   const activeFilters = checkedBoxes
     .map((checkbox) => [checkbox.dataset.group, checkbox.value])
     .reduce((acc, [group, filterId]) => {
@@ -207,13 +212,11 @@ function updatePagination(block, swiftypeResult) {
   }
 }
 
-async function refreshResults(block) {
-  const activeFilters = getActiveFilters(block);
+async function refreshResults(block, newFilters) {
+  const activeFilters = newFilters ?? getActiveFilters(block.querySelector('.search-filters .desktop-filter-options'));
 
-  console.log('activeFilters', activeFilters);
   // TODO: extract bucket id
   const swiftypeResult = await getSearchResults('F2vatbs1LRkyNzs-Hv9D', block.dataset.page, activeFilters);
-  console.log(swiftypeResult);
 
   updateFilters(block, swiftypeResult, activeFilters);
   updateMobileFilters(block, swiftypeResult, activeFilters);
