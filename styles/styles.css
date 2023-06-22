@@ -163,8 +163,6 @@ body {
   line-height: 1.6;
   color: var(--text-color);
   display: none;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
 }
 
 .white-gradient-down {
@@ -186,7 +184,7 @@ header {
 
 /* Offset main site content by the height of the header */
 main {
-  margin-top: calc(var(--mobile-nav-height));
+  margin-top: var(--mobile-nav-height);
 }
 
 h1, h2, h3,
@@ -375,8 +373,6 @@ main img {
   line-height: inherit;
   speak: none;
   text-transform: none;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
 }
 
 main .section {
