@@ -8,27 +8,19 @@ export default async function decorate(block) {
   block.innerHTML = `<div class="search-filters">
     <div class="filter-btn-options-wrapper">
         <ul class="btn-options-list">
-            <li class="filter-btn"><span>Filters</span> <i class="font-icon-filter"></i></li>
+            <li class="filter-btn active"><span>Filters</span> <span class="font-icon-filter"></span></li>
         </ul>
     </div>
 
     <!-- TODO: mobile-->
     <dialog class="mobile-filter-options">
         <div class="filter-head">
-            <div class="close-wrap Vlt-icon-close"></div>
+            <div class="close-wrap font-icon-close"></div>
             <div class="filters"><span>Filters</span> <i class="font-icon-filter"></i></div>
             <div class="clear-wrap"></div>
         </div>
         <div class="filter-body">
-            <ul class="list-items">
-                <li class="title"><span class="accordion">Type<i class="Vlt-icon-chevron"></i></span></li>
-                <li class="title"><span class="accordion">
-              Topic
-              <i class="Vlt-icon-chevron"></i></span></li>
-                <li class="title"><span class="accordion">
-              Region
-              <i class="Vlt-icon-chevron"></i></span></li>
-            </ul>
+            <ul class="list-items"></ul>
         </div>
         <div class="filter-foot">
             <button type="button" class="prime-cta">
@@ -54,6 +46,17 @@ export default async function decorate(block) {
     </div>
 </div>
 `;
+
+  block.querySelector('.filter-btn').addEventListener('click', () => {
+    block.querySelector('.mobile-filter-options').showModal();
+  });
+  block.querySelector('.mobile-filter-options .font-icon-close').addEventListener('click', () => {
+    block.querySelector('.mobile-filter-options').close();
+  });
+  block.querySelector('.mobile-filter-options .filter-foot button').addEventListener('click', async () => {
+    await refreshResults(block);
+    block.querySelector('.mobile-filter-options').close();
+  });
 
   await refreshResults(block);
 }
@@ -218,6 +221,7 @@ async function refreshResults(block) {
   console.log(swiftypeResult);
 
   updateFilters(block, swiftypeResult, activeFilters);
+  updateMobileFilters(block, swiftypeResult, activeFilters);
   updateFilterPills(block, swiftypeResult, activeFilters);
   updateResults(block, swiftypeResult);
   updatePagination(block, swiftypeResult);
@@ -311,6 +315,55 @@ function updateFilters(block, swiftypeResult, activeFilters) {
         checkbox.checked = true;
       }
     });
+
+    filters.append(group);
+  });
+}
+
+function updateMobileFilters(block, swiftypeResult, activeFilters) {
+  const filters = block.querySelector('.mobile-filter-options .list-items');
+  filters.innerHTML = '';
+
+  Object.entries(swiftypeResult.info.page.facets).forEach(([groupId, facetValues]) => {
+    const group = domEl(
+      'details',
+      { class: 'accordion-bar' },
+      domEl(
+        'summary',
+        getLabelForFacet(groupId),
+        div({ class: 'summary-chevron' }, span({ class: 'font-icon-chevron' })),
+      ),
+      ul(
+        ...Object.entries(facetValues).map(([name, count]) => li(
+          div(
+            { class: 'checkbox-wrapper' },
+            domEl(
+              'label',
+              domEl('input', {
+                type: 'checkbox',
+                value: name,
+                'data-label': getLabelForFacet(name),
+                'data-group': groupId,
+              }),
+              span({ class: 'checkmark' }),
+              span({ class: 'option-txt' }, getLabelForFacet(name), span({ class: 'option-num' }, `(${count})`)),
+            ),
+          ),
+        )),
+      ),
+    );
+
+    // try to activate all previously active checkboxes
+    activeFilters[groupId]?.forEach((filter) => {
+      const checkbox = group.querySelector(`input[value="${filter}"]`);
+      if (checkbox) {
+        checkbox.checked = true;
+      }
+    });
+
+    if (activeFilters[groupId]) {
+      group.open = true;
+    }
 
     filters.append(group);
   });
