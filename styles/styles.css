@@ -366,7 +366,7 @@ main img {
   vertical-align: middle;
 }
 
-[class*=" Vlt-icon-"], [class^="Vlt-icon-"] {
+[class*=" vlt-icon-"], [class^="vlt-icon-"] {
   font-family: var(--icon-font-family);
   font-style: normal;
   font-variant: normal;

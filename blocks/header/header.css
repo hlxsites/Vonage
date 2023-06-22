@@ -1,21 +1,21 @@
 /* stylelint-disable no-descending-specificity */
 
 :root {
-  --nav-color: #000;
+  --nav-color: var(--text-color);
   --nav-tools-color: #5f6169;
-  --nav-logo-color: #000;
+  --nav-logo-color: var(--text-color);
   --nav-background-color: #FFF;
-  --nav-decoration-color: #000;
+  --nav-decoration-color: var(--text-color);
   --nav-section-tab-color: #6f54a3;
   --nav-extended-color: #FFF;
-  --mobile-nav-extended-background: #000;
+  --mobile-nav-extended-background: var(--text-color);
   --mobile-nav-extended-logo-color: #FFF;
   --mobile-nav-extended-color: #FFF;
   --mobile-nav-extended-decoration-color: #FFF;
-  --mobile-nav-extended-contact-button-color: #000;
+  --mobile-nav-extended-contact-button-color: var(--text-color);
   --mobile-nav-extended-contact-button-background-color: #FFF;
    --nav-contact-button-color: #FFF;
-   --nav-contact-button-background-color: #000;
+   --nav-contact-button-background-color: var(--text-color);
 }
 
 /***** Global header / nav menu structure and styling *****/
@@ -61,7 +61,7 @@ header .nav-wrapper {
 /* Styling for the div container that holds the two versions of the logo image */
 header .nav-logo {
   position: absolute;
-  color: #000;
+  color: var(--text-color);
   left: 2rem;
   top: 2.2rem;
   width: 10.2rem;
@@ -467,8 +467,6 @@ header #nav .sub-menu-section-active > ul.sub-menu-index {
   /* Primary CTA button styling in the header */
 header #nav .nav-sections > ul > div > li > strong > a {
   border-radius: 1rem;
-  color: var(--nav-contact-button-color);
-  background-color: var(--nav-contact-button-background-color);
   height: 4.5rem;
   line-height: 4.5rem;
   padding-left: 2rem;
@@ -476,7 +474,7 @@ header #nav .nav-sections > ul > div > li > strong > a {
   margin: 0;
   font-size: 1.5rem;
   display: inline-block;
-  color: #000;
+  color: var(--text-color);
   background-color: #FFF;
 }
 
@@ -494,7 +492,7 @@ header #nav .nav-sections > ul > div > li > em > a {
   border: 1px solid black;
   border-radius: 1rem;
   margin-left: auto;
-  color: #000;
+  color: var(--text-color);
   background-color: #FFF;
 }
 
@@ -707,14 +705,13 @@ header .sub-menu-label-active {
       top: 0;
       content: var(--vlt-up-right-arrow-icon);
       bottom: 0;
-      font-family: VltIcons;
+      font-family: var(--icon-font-family);
       font-size: .8rem;
       position: absolute;
     }
 
     /* Position and style the search icon displayed adjacent to the tools menu */
     header #nav div.nav-search {
-      -ms-flex-item-align: center;
       align-self: center;
       display: flex;
       font-size: 1.5rem;
@@ -768,13 +765,13 @@ header .sub-menu-label-active {
       left: 1265px;
       top: -1rem;
       content: var(--vlt-close-icon);
-      font-family: VltIcons;
+      font-family: var(--icon-font-family);
       color: black;
     }
 
     header #nav span.close-icon::before {
       content: var(--vlt-close-icon);
-      font-family: VltIcons;
+      font-family: var(--icon-font-family);
       font-size: 40px;
     }
 
@@ -924,10 +921,10 @@ header .sub-menu-label-active {
         background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='14'%3E%3Cpath d='M12.56 1.21a1 1 0 00-1.46 1.38L14.31 6H0v2h14.31l-3.21 3.41a1 1 0 001.46 1.37L18 7z'/%3E%3C/svg%3E");
       }
 
-    /* Add the icons to the index elements as peudo befores */
+    /* Add the icons to the index elements as pseudo before */
     header #nav ul.sub-menu-index #communications-apis::before {
       content: var(--vlt-cloud-inverse-icon);
-      font-family: VltIcons;
+      font-family: var(--icon-font-family);
       margin: 1.1rem;
       left: -2.9rem;
       position: absolute;
@@ -936,7 +933,7 @@ header .sub-menu-label-active {
 
     header #nav ul.sub-menu-index #unified-communications::before {
       content: var(--vlt-phone-2-icon);
-      font-family: VltIcons;
+      font-family: var(--icon-font-family);
       margin: 1.1rem;
       left: -2.9rem;
       position: absolute;
@@ -945,7 +942,7 @@ header .sub-menu-label-active {
 
     header #nav ul.sub-menu-index #contact-centers::before {
       content: var(--vlt-head-phone-icon);
-      font-family: VltIcons;
+      font-family: var(--icon-font-family);
       margin: 1.1rem;
       left: -2.9rem;
       position: absolute;
@@ -954,7 +951,7 @@ header .sub-menu-label-active {
 
     header #nav ul.sub-menu-index #conversational-commerce::before {
       content: var(--vlt-mobile-text-bubble-icon);
-      font-family: VltIcons;
+      font-family: var(--icon-font-family);
       margin: 1.1rem;
       left: -2.9rem;
       position: absolute;
@@ -962,372 +959,390 @@ header .sub-menu-label-active {
     }
 }
 
+/***** Desktop breadcrumb element  *****/
 
-header .l3-nav__desktop {
-  display: -webkit-box;
-  display: flex;
-  box-sizing: border-box;
-  -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  height: 6.3rem;
-  padding: 0 34px 5px;
-  position: relative;
-  font-size: 1.3rem;
-  font-weight: 500;
-  font-family: Spezia;
-  padding-top: 10px;
-  background: #fbfbfb;
-  background: -webkit-gradient(linear,left bottom,left top,color-stop(85%,#fbfbfb),to(#efefef));
-  background: linear-gradient(0deg,#fbfbfb 85%,#efefef);
-  border-bottom: 1px solid #ddd;
-}
+  /***** Desktop breadcrumb structure layout and styling *****/
 
-.container.section-container {
-  display: flex;
-  line-height: normal;
-  box-sizing: border-box;
-  -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  width: 100%;
-  padding-right: 20px;
-  padding-left: 20px;
-  margin-right: auto;
-  margin-left: auto;
-}
+    /* Layout and styling for the desktop breadcrumb header element parent element */
+    header .l3-nav-desktop {
+      display: -webkit-box;
+      display: flex;
+      box-sizing: border-box;
+      -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+      justify-content: space-between;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      align-items: center;
+      height: 6.3rem;
+      position: relative;
+      font-size: 1.3rem;
+      font-weight: 500;
+      font-family: var(--body-font-family);
+      padding: 10px 34px 5px;
+      background: #fbfbfb;
+      background: -webkit-gradient(linear,left bottom,left top,color-stop(85%,#fbfbfb),to(#efefef));
+      background: linear-gradient(0deg,#fbfbfb 85%,#efefef);
+      border-bottom: 1px solid #ddd;
+    }
 
-.left-sec {
-  display: -webkit-box;
-  display: flexbox;
-  display: flex;
-  align-items: center;
-}
+    /* Layout and styling for the div flex box for the two sections of the desktop breadcrumb */
+    header .l3-nav-desktop .container.section-container {
+      display: flex;
+      line-height: normal;
+      box-sizing: border-box;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      padding-right: 20px;
+      padding-left: 20px;
+      margin-right: auto;
+      margin-left: auto;
+    }
 
-.right-sec {
-  display: -webkit-box;
-  display: flexbox;
-  display: flex;
-  align-items: center;
-}
+    /* Layout for the left column of the desktop breadcrumb */
+    header .l3-nav-desktop .left-sec {
+      display: -webkit-box;
+      display: flex;
+      align-items: center;
+    }
 
-.right-sec__menu-option {
-  margin-right: 4rem;
-  cursor: pointer;
-}
+    /* Layout for the left column of the desktop breadcrumb */
+    header .l3-nav-desktop .right-sec {
+      display: -webkit-box;
+      display: flex;
+      align-items: center;
+    }
 
-.l3-nav__menu-title {
-  display: -webkit-box;
-  display: flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  margin-right: 1.5rem;
-  min-width: 8rem;
-  cursor: pointer;
-}
+    /* Layout and pointer behavior for the links in the desktop right breadcrumb */
+    header .l3-nav-desktop .right-sec-menu-option {
+      margin-right: 4rem;
+      cursor: pointer;
+    }
 
-span.title-option {
-  margin-right: 1.5rem;
-  color: #000;
-}
+  /***** Desktop breadcrumb header bar styling *****/
 
-span.separator {
-  color: #881fff;
-  font-size: 1.3rem;
-  font-weight: 600;
-}
+    /* Styling for the breadcrumb section title elements parent container */
+    header .l3-nav-desktop .l3-nav-menu-title {
+      display: -webkit-box;
+      display: flex;
+      align-items: center;
+      margin-right: 1.5rem;
+      min-width: 8rem;
+      cursor: pointer;
+    }
 
-a.title-option__l3nav {
-  display: -webkit-box;
-  display: flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  color: #717171;
-}
 
-a.title-option__l3nav.active {
-  color: #000;
-}
+    /* Styling for the breadcrumb section title elements */
+    header .l3-nav-desktop span.title-option {
+      margin-right: 1.5rem;
+      color: var(--text-color);
+    }
 
-span.nav-icon.Vlt-icon-phone {
-  color: #000;
-  padding-right: 10px;
-  font-size: 1.5rem;
-  font-family: VltIcons!important;
-  font-style: normal;
-  font-variant: normal;
-  font-weight: 400;
-  line-height: inherit;
-  speak: none;
-  text-transform: none;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-}
+    /* Styling for the breadcrumb section title separator '/' elements */
+    header .l3-nav-desktop span.separator {
+      color: var(--accent-color);
+      font-size: 1.3rem;
+      font-weight: 600;
+    }
 
-span.nav-icon.Vlt-icon-phone::before {
-  content: "\e939";
-}
+    /* Styling for the title link in the breadcrumb */
+    header .l3-nav-desktop a.title-option-l3nav {
+      display: flex;
+      align-items: center;
+      color: #717171;
+    }
 
-span.Vlt-icon-chevron.arrow-icn {
-  display: inline-block;
-  font-size: 2rem;
-  position: relative;
-  transform: rotate(0deg);
-  transform: rotate(0deg);
-  color: #881fff;
-}
+    /* Styling for the prepended icon decoration span in the desktop breadcrumb title */
+    header .l3-nav-desktop span.nav-icon.vlt-icon-phone {
+      color: var(--text-color);
+      padding-right: 10px;
+      font-size: 1.5rem;
+      font-family: var(--icon-font-family);
+      font-style: normal;
+      font-variant: normal;
+      font-weight: 400;
+      line-height: inherit;
+      speak: none;
+      text-transform: none;
+    }
 
-span.Vlt-icon-chevron.arrow-icn::before {
-  content: "\e90d";
-}
+    /* Icon for the prepended decoration span in the desktop breadcrumb title */
+    header .l3-nav-desktop span.nav-icon.vlt-icon-phone::before {
+      content: var(--vlt-phone-2-icon);
+    }
 
-a.title-option__l3nav.active:hover {
-  text-decoration: none;
-  color: #000;
-}
+    /* Styling for the appended icon decoration in the desktop breadcrumb title */
+    header .l3-nav-desktop span.vlt-icon-chevron.arrow-icn {
+      display: inline-block;
+      font-size: 2rem;
+      position: relative;
+      transform: rotate(0deg);
+      color: var(--accent-color);
+    }
 
-a.title-option__l3nav:hover {
-  text-decoration: none;
-}
+    /* Icon for the appended decoration span in the desktop breadcrumb title */
+    header .l3-nav-desktop span.vlt-icon-chevron.arrow-icn::before {
+      content: var(--vlt-down-chevron-icon);
+    }
 
-.l3-nav__menu-options--list ul li a.bold {
-  font-weight: 600;
-  color: #000;
-}
+    /* Don't underline desktop breadcrumb title links on hover */
+    header .l3-nav-desktop a.title-option-l3nav:hover {
+      text-decoration: none;
+    }
 
-.bold {
-  font-weight: 600;
-  color: #000;
-}
+    /* Make the active (page user is on) link in the title bold and black */
+    header .l3-nav-desktop .l3-nav-menu-title .title-option-l3nav.bold {
+      font-weight: 600;
+      color: var(--text-color);
+    }
 
-.menu-option-sublist.l3-nav__menu-options {
-  opacity: 0;
-  visibility: hidden;
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 5rem;
-  padding: 0 34px 17px;
-  max-height: 40rem;
-  overflow-y: auto;
-  -ms-scroll-chaining: none;
-  overscroll-behavior: contain;
-  background: #fbfbfb 0 0 no-repeat padding-box;
-  border-bottom: 1px solid #ddd;
-}
+    /*  Styling for the right section of the desktop breadcrumb header bar */
+    header .l3-nav-desktop .right-sec-menu-option a {
+      color: var(--text-color);
+    }
 
-.menu-option-sublist.l3-nav__menu-options.active {
-  opacity:100;
-  display: -webkit-box;
-  display: flexbox;
-  display: flex;
-  visibility: visible;
-  z-index: 4;
-  animation: fadein .75s forwards;
-  animation: fadein .75s forwards;
-}
+    /*  Disable underline for the right section of the desktop breadcrumb header bar */
+    header .l3-nav-desktop .right-sec-menu-option a:hover {
+      text-decoration: none;
+    }
 
-.container.sublist-container {
-  display: flex;
-  margin-left: auto;
-  margin-right: auto;
-  width: 100%;
-  padding-right: 20px;
-  padding-left: 20px;
-  box-sizing: border-box;
-}
+  /***** Desktop breadcrumb body styling *****/
 
-.list.l3-nav__menu-options--list.first {
-  padding-left: 25px;
-  box-sizing: border-box;
-}
+    /* Layout and position for top level parent of the breadcrumb container before activated */
+    header .l3-nav-desktop .menu-option-sublist.l3-nav-menu-options {
+      opacity: 0;
+      visibility: hidden;
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 5rem;
+      padding: 0 34px 17px;
+      max-height: 40rem;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      background: #fbfbfb 0 0 no-repeat padding-box;
+      border-bottom: 1px solid #ddd;
+    }
 
-.l3-nav__mobile--closed.not-active, .l3-nav__mobile--open.not-active {
-  display: none;
-}
+    /* Style to apply to the breadcrumb container to render it visible */
+    header .l3-nav-desktop .menu-option-sublist.l3-nav-menu-options.active {
+      opacity:100;
+      display: flex;
+      visibility: visible;
+      z-index: 4;
+      animation: fadein .75s forwards;
+    }
 
-.l3-nav__menu-title .title-option__l3nav.boldbreadCrumbTitle {
-  font-weight: 600;
-  color: #000;
-}
+    /* Sub container for the link data in the breadcrumb */
+    header .l3-nav-desktop .container.sublist-container {
+      display: flex;
+      margin-left: auto;
+      margin-right: auto;
+      width: 100%;
+      padding-right: 20px;
+      padding-left: 20px;
+      box-sizing: border-box;
+    }
 
-.l3-nav__mobile--menu-body .menu-sub-list ul li a.bold {
-  font-weight: 500;
-  color: #000;
-}
+    /* Styling for the breadcrumb body columns */
+    header .l3-nav-desktop .list.l3-nav-menu-options-list {
+      min-width: 8rem;
+      margin-right: 1.5rem;
+    }
 
-.l3-nav__mobile--menu-body .title-item:hover {
-  text-decoration: none;
-}
+    /* Styling for the first link column in the expanded breadcrumb */
+    header .l3-nav-desktop .list.l3-nav-menu-options-list.first {
+      padding-left: 25px;
+      box-sizing: border-box;
+    }
 
-.Vlt-icon-close.right-sec__close-icn {
-  cursor: pointer;
-  display: block;
-  font-size: 2.8rem;
-  color: #881fff;
-}
+    /* Styling for the ul container of the desktop breadcrumb body */
+    header .l3-nav-desktop .l3-nav-menu-options-list ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
 
-.Vlt-icon-close:before {
-  content: "\e90e";
-}
+    /* Styling for the li container of the desktop breadcrumb body */
+    header .l3-nav-desktop .l3-nav-menu-options-list li {
+      cursor: pointer;
+      min-height: 1rem;
+      margin-bottom: 1rem;
+      line-height: normal;
+    }
 
-.list.l3-nav__menu-options--list {
-  min-width: 8rem;
-  margin-right: 1.5rem;
-}
+    /* Styling for the breadcrumb body link text */
+    header .l3-nav-desktop .l3-nav-menu-options-list ul li a{
+      color: #717171;
+      font-size: 1.25rem;
+      font-weight: 400;
+    }
 
-.l3-nav__menu-options--list ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
+    /* Make the active (page user is on) link in the breadcrumb bold and black */
+    header .l3-nav-desktop .l3-nav-menu-options-list ul li a.bold {
+      font-weight: 600;
+      color: var(--text-color);
+    }
 
-.l3-nav__menu-options--list li {
-  cursor: pointer;
-  min-height: 1rem;
-  margin-bottom: 1rem;
-  line-height: normal;
-}
+    /* Add some padding to the last list element in the desktop breadcrumb body */
+    header .l3-nav-desktop .l3-nav-menu-options-list li:last-of-type {
+      padding-bottom: 2rem;
+    }
 
-.l3-nav__menu-options--list ul li a{
-  color: #717171;
-  font-size: 1.25rem;
-  font-weight: 400;
-}
+   /* Make black and add an accentu underline to desktop breadcrumb body links on hover */
+   header .l3-nav-desktop a.l3-nav-submenu:hover {
+    text-decoration: none;
+    color: var(--text-color);
+    border-bottom: 2px solid var(--accent-color);
+  }
 
-.l3-nav__menu-options--list li:last-of-type {
-  padding-bottom: 2rem;
-}
+/***** Mobile breadcrumb element *****/
 
-a.l3-nav__submenu:hover {
-  text-decoration: none;
-  color: #000;
-  border-bottom: 2px solid #881fff;
-}
+  /***** Mobile breadcrumb layout and structure *****/
 
-.right-sec__menu-option a {
-  color: #000;
-}
+  /* Styling and layout of parent container for mobile breadcrumb title element */
+  header .l3-nav-mobile {
+    margin-top: 6rem;
+    background: #fbfbfb;
+    background: -webkit-gradient(linear,left bottom,left top,color-stop(85%,#fbfbfb),to(#efefef));
+    background: linear-gradient(0deg,#fbfbfb 85%,#efefef);
+  }
 
-.right-sec__menu-option a:hover {
-  text-decoration: none;
-}
+  /***** Mobile breadcrumb element header styling *****/
 
-.l3-nav__mobile {
-  margin-top: 6rem;
-  background: #fbfbfb;
-  background: -webkit-gradient(linear,left bottom,left top,color-stop(85%,#fbfbfb),to(#efefef));
-  background: linear-gradient(0deg,#fbfbfb 85%,#efefef);
-}
+    /* Styling for the breadcrumb headers open button */
+    header .l3-nav-mobile .vlt-icon-chevron.right-sec-dropdown-icn {
+      cursor: pointer;
+      display: block;
+      font-size: 2.8rem;
+      color: var(--accent-color);
+      font-family: var(--icon-font-family);
+    }
 
-.l3-nav__mobile--menu-head span.separator {
-  margin: 0 8px;
-}
+    /* Content for the breadcrumb headers open button */
+    header .l3-nav-mobile .vlt-icon-chevron.right-sec-dropdown-icn::before {
+      content: var(--vlt-down-chevron-icon);
+    }
 
-span.Vlt-icon-chevron.right-sec__dropdown-icn {
-  cursor: pointer;
-  display: block;
-  font-size: 2.8rem;
-  color: #881fff;
-  font-family: 'VltIcons';
-}
+    /* Styling for the breadcrumb headers close button */
+    header .l3-nav-mobile .vlt-icon-close.right-sec-close-icn {
+      cursor: pointer;
+      display: block;
+      font-size: 2.8rem;
+      color: var(--accent-color);
+    }
 
-span.Vlt-icon-chevron.right-sec__dropdown-icn:before {
-  content: "\e90d";
-}
+    /* Content for the breadcrumb headers close button */
+    header .l3-nav-mobile .vlt-icon-close::before {
+      content: var(--vlt-close-icon);
+    }
 
-.l3-nav__mobile--menu-head {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  background: #fbfbfb 0 0 no-repeat padding-box;
-  height: 5rem;
-  padding: 0 1.5rem;
-  font-size: 1.4rem;
-  font-weight: 500;
-  font-family: Spezia;
-}
+    /* Styling for the breadcrumbb headers title separators */
+    header .l3-nav-mobile .l3-nav-mobile-menu-head .left-sec .separator {
+      margin: 0 8px;
+      color: var(--accent-color);
+    }
 
-.l3-nav__mobile--menu-head.l3-nav__mobile--closed {
-  height: 5.1rem;
-  border-bottom: 1px solid #ddd;
-}
+    /* Styling for either of the mobile nav title containers (open and closed) */
+    header .l3-nav-mobile .l3-nav-mobile-menu-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #fbfbfb 0 0 no-repeat padding-box;
+      height: 5rem;
+      padding: 0 1.5rem;
+      font-size: 1.4rem;
+      font-weight: 500;
+      font-family: var(--body-font-family);
+    }
 
-.l3-nav__mobile--menu-head.l3-nav__mobile--closed.not-active {
-  display: none;
-}
+    /* Don't underline the mobile breadcrumb header links on hover */
+    header .l3-nav-mobile .l3-nav-mobile-menu-head a:hover {
+      color: var(--text-color);
+      text-decoration: none;
+    }
 
-.l3-nav__mobile--menu-body .menu-sub-list ul {
-  list-style-type: none;
-  padding: 0 1rem;
-  margin-top: 0;
-}
+    /* Specific styles for the closed mobile breadcrumb title element */
+    header .l3-nav-mobile .l3-nav-mobile-menu-head.l3-nav-mobile-closed {
+      height: 5.1rem;
+      border-bottom: 1px solid #ddd;
+    }
 
-.l3-nav__mobile--menu-body .menu-sub-list ul li {
-  cursor: pointer;
-  font-size: 1.4rem;
-  margin-bottom: 1.25rem;
-}
+    /* Style to toggle the open and closed breadcrumb title variants as visible or not */
+    header .l3-nav-mobile .l3-nav-mobile-closed.not-active,
+    header .l3-nav-mobile .l3-nav-mobile-open.not-active {
+      display: none;
+    }
 
-.l3-nav__mobile--menu-body .menu-sub-list ul li a {
-  padding: 0.5rem;
-  color: #717171;
-}
+/***** Mobile breadcrumb element body styling *****/
 
-.l3-nav__mobile--menu-body {
-  right: 0;
-  z-index: 4;
-  display: none;
-  height: auto;
-  font-size: 1.4rem;
-  font-weight: 400;
-  font-family: Spezia;
-  left: 0;
-  background: #fbfbfb 0 0 no-repeat padding-box;
-  border-bottom: 1px solid #ddd;
-  position: fixed;
-  color: #717171;
-  padding: 1rem 1.5rem 0;
-  max-height: 50rem;
-  overflow-y: auto;
-  -ms-scroll-chaining: none;
-  overscroll-behavior: contain;
-}
-.l3-nav__mobile--menu-body .title-item {
-  display: block;
-  margin-bottom: 1.5rem;
-  margin-top: 1.5rem;
-  font-size: 1.4rem;
-  font-weight: 500;
-  color: #000;
-}
+    /* Layout and styling for the top level mobile breadcrumb body container */
+    header .l3-nav-mobile-menu-body {
+      right: 0;
+      z-index: 4;
+      display: none;
+      height: auto;
+      font-size: 1.4rem;
+      font-weight: 400;
+      font-family: var(--body-font-family);
+      left: 0;
+      background: #fbfbfb 0 0 no-repeat padding-box;
+      border-bottom: 1px solid #ddd;
+      position: fixed;
+      color: #717171;
+      padding: 1rem 1.5rem 0;
+      max-height: 50rem;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+    }
 
-.l3-nav__mobile--menu-body.active {
-  display: block;
-  -webkit-animation: fadein .75s forwards;
-  animation: fadein .75s forwards;
-}
+    /* Style to apply to the mobile breadcrumb body in order to render it active in the page */
+    header .l3-nav-mobile-menu-body.active {
+      display: block;
+      animation: fadein .75s forwards;
+    }
 
-.l3-nav__mobile--menu-head a:hover {
-  color: #000;
-  text-decoration: none;
-}
+    /* Don't underline mobile breadcrumb title elements on hover (they aren't actually links) */
+    header .l3-nav-mobile .l3-nav-mobile-menu-body .title-item:hover {
+      text-decoration: none;
+    }
+
+    /* Bold styling for the displayed page in the breadcrumb body */
+    header .l3-nav-mobile .l3-nav-mobile-menu-body .menu-sub-list ul li a.bold {
+      font-weight: 500;
+      color: var(--text-color);
+    }
+
+    /* Styling for the ul container in the mobile breadcrumb body */
+    header .l3-nav-mobile-menu-body .menu-sub-list ul {
+      list-style-type: none;
+      padding: 0 1rem;
+      margin-top: 0;
+    }
+
+    /* Styling for the li container in the mobile breadcrumb body */
+    header .l3-nav-mobile-menu-body .menu-sub-list ul li {
+      cursor: pointer;
+      font-size: 1.4rem;
+      margin-bottom: 1.25rem;
+    }
+
+    /* Styling for the links in the mobile breadcrumb body */
+    header .l3-nav-mobile-menu-body .menu-sub-list ul li a {
+      padding: 0.5rem;
+      color: #717171;
+    }
+
+    /* Specific styling for title items in the mobile breadcrumb body (without links) */
+    header .l3-nav-mobile-menu-body .title-item {
+      display: block;
+      margin-bottom: 1.5rem;
+      margin-top: 1.5rem;
+      font-size: 1.4rem;
+      font-weight: 500;
+      color: var(--text-color);
+    }
 
 @media (min-width: 576px) {
   .container.section-container, .container.sublist-container {
@@ -1348,13 +1363,15 @@ span.Vlt-icon-chevron.right-sec__dropdown-icn:before {
 }
 
 @media only screen and (max-width: 1023px) {
-  header .l3-nav__desktop {
+  /* Don't show the desktop breadcrumb at less than 1024 display width */
+  header .l3-nav-desktop {
     display:none;
   }
 }
 
 @media only screen and (min-width: 1024px) {
- header .l3-nav__mobile {
+ /*  Don't show the mobile breadcrumb at greater than 1024 display width */
+ header .l3-nav-mobile {
     display:none;
   }
 }

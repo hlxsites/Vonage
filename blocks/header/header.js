@@ -108,10 +108,10 @@ function toggleNavSubSection(event) {
 }
 
 function toggleBreadCrumb() {
-  document.querySelector('.menu-option-sublist.l3-nav__menu-options').classList.toggle('active');
-  document.querySelector('.l3-nav__mobile--menu-body').classList.toggle('active');
-  document.querySelector('.l3-nav__mobile--menu-head.l3-nav__mobile--closed').classList.toggle('not-active');
-  document.querySelector('.l3-nav__mobile--menu-head.l3-nav__mobile--open').classList.toggle('not-active');
+  document.querySelector('.menu-option-sublist.l3-nav-menu-options').classList.toggle('active');
+  document.querySelector('.l3-nav-mobile-menu-body').classList.toggle('active');
+  document.querySelector('.l3-nav-mobile-menu-head.l3-nav-mobile-closed').classList.toggle('not-active');
+  document.querySelector('.l3-nav-mobile-menu-head.l3-nav-mobile-open').classList.toggle('not-active');
 }
 
 /* ------------------------------ Global Functions ----------------------------------- */
@@ -223,7 +223,7 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
   toggleAllNavSections(navSections, expanded || isDesktop.matches ? 'false' : 'true');
   button.setAttribute('aria-label', expanded ? 'Open navigation' : 'Close navigation');
 
-  const mobileBreadCrumb = document.querySelector('.l3-nav__mobile');
+  const mobileBreadCrumb = document.querySelector('.l3-nav-mobile');
   if (mobileBreadCrumb) {
     mobileBreadCrumb.style.display = expanded ? 'block' : 'none';
   }
@@ -471,18 +471,18 @@ function buildHamburger(nav, navSections) {
  // * @param {[Object]} links An array of link objects sorted in a parent -> child structure
  */
 function buildBreadCrumbDesktop() {
-  const breadCrumb = div({ class: 'l3-nav__desktop' }, div({ class: 'l3-nav__desktop--menu-head' }));
+  const breadCrumb = div({ class: 'l3-nav-desktop' }, div({ class: 'l3-nav-desktop-menu-head' }));
   breadCrumb.innerHTML = `
     <div class="container section-container">
       <div class="left-sec" tabindex="0">
       </div>
       <div class="right-sec">
-        <div class="right-sec__menu-option">
+        <div class="right-sec-menu-option">
           <a href="/unified-communications/pricing/" class="title-option" target="_self">
           See plans &amp; pricing
           </a>
         </div>
-      <div class="right-sec__menu-option">
+      <div class="right-sec-menu-option">
         <a href="tel:+1-855-430-6401" class="title-option" target="_self">
         1-855-430-6401
         </a>
@@ -493,21 +493,21 @@ function buildBreadCrumbDesktop() {
 }
 
 function buildBreadCrumbMobile() {
-  const breadCrumb = div({ class: 'l3-nav__mobile' });
+  const breadCrumb = div({ class: 'l3-nav-mobile' });
   breadCrumb.innerHTML = `
-        <div class="l3-nav__mobile--menu-head l3-nav__mobile--closed">
+        <div class="l3-nav-mobile-menu-head l3-nav-mobile-closed">
             <div class="left-sec"></div>
             <div class="right-sec">
-                <span class="Vlt-icon-chevron right-sec__dropdown-icn"></span>
+                <span class="vlt-icon-chevron right-sec-dropdown-icn"></span>
             </div>
         </div>
-        <div class="l3-nav__mobile--menu-head l3-nav__mobile--open not-active">
+        <div class="l3-nav-mobile-menu-head l3-nav-mobile-open not-active">
             <div class="left-sec"></div>
             <div class="right-sec">
-                <span class="Vlt-icon-close right-sec__close-icn" style="left: -55px;"></span>
+                <span class="vlt-icon-close right-sec-close-icn" style="left: -55px;"></span>
             </div>
         </div>
-        <div class="l3-nav__mobile--menu-body"></div>`;
+        <div class="l3-nav-mobile-menu-body"></div>`;
   return breadCrumb;
 }
 /**
@@ -542,61 +542,61 @@ function parseBreadCrumbJSON(json) {
 
  */
 function populateBreadCrumb(data, pathArray) {
-  const breadCrumbDesktop = document.querySelector('.l3-nav__desktop');
-  const breadCrumbMobile = document.querySelector('.l3-nav__mobile');
+  const breadCrumbDesktop = document.querySelector('.l3-nav-desktop');
+  const breadCrumbMobile = document.querySelector('.l3-nav-mobile');
   const inSubSection = (data.titles.length > 1);
 
   // Build out the breadcrumb titles based on the nav-titles in the pages metadata
-  // ToDo: Split this off into a separate function to build the title element
   data.titles.forEach((title, index) => {
-    const breadCrumbTitleElemDesktop = div({ class: 'l3-nav__menu-title' });
-    breadCrumbTitleElemDesktop.innerHTML = `<span class="title-option">
-    <a class="title-option__l3nav" data-static-label="${title}">
+    const breadCrumbTitleElemDesktop = div({ class: 'l3-nav-menu-title' });
+    breadCrumbTitleElemDesktop.innerHTML = `
+        <span class="title-option">
+            <a class="title-option-l3nav" data-static-label="${title}">
               <span>${title}</span>
             </a>
           </span>`;
     breadCrumbTitleElemDesktop.addEventListener('click', toggleBreadCrumb);
     breadCrumbDesktop.querySelector('.left-sec').appendChild(breadCrumbTitleElemDesktop);
-    breadCrumbMobile.querySelector('.l3-nav__mobile--closed .left-sec').appendChild(a({ class: 'title-item', innerHTML: title }));
-    breadCrumbMobile.querySelector('.Vlt-icon-close.right-sec__close-icn').addEventListener('click', toggleBreadCrumb);
-    breadCrumbMobile.querySelector('.Vlt-icon-chevron.right-sec__dropdown-icn').addEventListener('click', toggleBreadCrumb);
+    breadCrumbMobile.querySelector('.l3-nav-mobile-closed .left-sec').appendChild(a({ class: 'title-item', innerHTML: title }));
+    breadCrumbMobile.querySelector('.vlt-icon-close.right-sec-close-icn').addEventListener('click', toggleBreadCrumb);
+    breadCrumbMobile.querySelector('.vlt-icon-chevron.right-sec-dropdown-icn').addEventListener('click', toggleBreadCrumb);
+
     if (index === 0) {
       // Add an icon for decoration in the desktop title
-      const iconSpan = span({ class: 'nav-icon Vlt-icon-phone' });
+      const iconSpan = span({ class: 'nav-icon vlt-icon-phone' });
       breadCrumbTitleElemDesktop.querySelector('a').prepend(iconSpan);
 
-      // Add the first link for the open mobile breadcrumb
-      breadCrumbMobile.querySelector('.l3-nav__mobile--open .left-sec').appendChild(a({ class: 'title-item', innerHTML: title }));
+      // Add only the first link for the open mobile breadcrumb
+      breadCrumbMobile.querySelector('.l3-nav-mobile-open .left-sec').appendChild(a({ class: 'title-item', innerHTML: title }));
     }
 
     // If there is more than one breadcrumb title, and we aren't on the last
     if (index !== data.titles.length - 1 && data.titles.length > 1) {
-      // Add a separator for the desktop breadcrumb
-      breadCrumbDesktop.querySelector('.left-sec .l3-nav__menu-title:last-child').appendChild(span({ class: 'separator', innerHTML: '/' }));
-      breadCrumbMobile.querySelector('.l3-nav__mobile--closed .left-sec').appendChild(span({ class: 'separator', innerHTML: '/' }));
+      // Add a separator for the breadcrumb titles
+      breadCrumbDesktop.querySelector('.left-sec .l3-nav-menu-title:last-child').appendChild(span({ class: 'separator', innerHTML: '/' }));
+      breadCrumbMobile.querySelector('.l3-nav-mobile-closed .left-sec').appendChild(span({ class: 'separator', innerHTML: '/' }));
     }
 
     // If this is the last title in the breadcrumb
     if (index === data.titles.length - 1) {
       // Add a trailing chevron decoration
-      const chevron = span({ class: 'Vlt-icon-chevron arrow-icn' });
-      breadCrumbDesktop.querySelector('.l3-nav__menu-title:last-child .title-option__l3nav').classList.add('boldbreadCrumbTitle');
-      breadCrumbDesktop.querySelector('.l3-nav__menu-title:last-child').appendChild(chevron);
+      const chevron = span({ class: 'vlt-icon-chevron arrow-icn' });
+      breadCrumbDesktop.querySelector('.l3-nav-menu-title:last-child .title-option-l3nav').classList.add('bold');
+      breadCrumbDesktop.querySelector('.l3-nav-menu-title:last-child').appendChild(chevron);
     }
   });
 
-  // ToDo: Split this off into a separate function to build the section element
-  const sectionBreadCrumbDesktop = div({ class: 'menu-option-sublist l3-nav__menu-options' },
+  const sectionBreadCrumbDesktop = div({ class: 'menu-option-sublist l3-nav-menu-options' },
     div({ class: 'container sublist-container' },
-      div({ class: 'list l3-nav__menu-options--list first' },
+      div({ class: 'list l3-nav-menu-options-list first' },
         ul())));
 
-  sectionBreadCrumbDesktop.querySelector('.list.l3-nav__menu-options--list.first').style.width = data.links[0].width;
+  sectionBreadCrumbDesktop.querySelector('.list.l3-nav-menu-options-list.first').style.width = data.links[0].width;
 
   const sectionBreadCrumbMobile = div({ class: 'menu-sub-list' }, ul());
 
   data.links.forEach((root) => {
-    const breadCrumbLink = a({ class: 'l3-nav__submenu', href: root.url, innerHTML: root.label });
+    const breadCrumbLink = a({ class: 'l3-nav-submenu', href: root.url, innerHTML: root.label });
     if (root.url === `/${pathArray.join('/')}`) {
       breadCrumbLink.classList.add('bold');
     }
@@ -605,21 +605,21 @@ function populateBreadCrumb(data, pathArray) {
   });
 
   breadCrumbDesktop.querySelector('.left-sec').appendChild(sectionBreadCrumbDesktop);
-  breadCrumbMobile.querySelector('.l3-nav__mobile--menu-body').appendChild(sectionBreadCrumbMobile.cloneNode(true));
+  breadCrumbMobile.querySelector('.l3-nav-mobile-menu-body').appendChild(sectionBreadCrumbMobile.cloneNode(true));
 
   // If the page is a subsection based on its section metadata
   // need to load the relevant subsection breadcrumb data
   if (inSubSection) {
-    breadCrumbMobile.querySelector('.l3-nav__mobile--menu-body').appendChild(a({ class: 'title-item', innerHTML: data.titles[1] }));
+    breadCrumbMobile.querySelector('.l3-nav-mobile-menu-body').appendChild(a({ class: 'title-item', innerHTML: data.titles[1] }));
     const subSection = `/${pathArray[0]}/${pathArray[1]}/`;
-    const subSectionBreadCrumbDesktop = div({ class: 'list l3-nav__menu-options--list' }, ul());
+    const subSectionBreadCrumbDesktop = div({ class: 'list l3-nav-menu-options-list' }, ul());
     const subSectionBreadCrumbMobile = div({ class: 'menu-sub-list' }, ul());
 
     // Find the index in the linksData data of the root page we are currently on given the section metadata
     const index = data.links.indexOf(data.links.find((o) => o.url === subSection));
 
     data.links[index].children.forEach((child) => {
-      const breadCrumbLink = a({ class: 'l3-nav__submenu', href: child.url, innerHTML: child.label });
+      const breadCrumbLink = a({ class: 'l3-nav-submenu', href: child.url, innerHTML: child.label });
       if (child.url === `/${pathArray.join('/')}/`) {
         breadCrumbLink.classList.add('bold');
       }
@@ -629,18 +629,21 @@ function populateBreadCrumb(data, pathArray) {
     });
 
     breadCrumbDesktop.querySelector('.sublist-container').appendChild(subSectionBreadCrumbDesktop);
-    breadCrumbMobile.querySelector('.l3-nav__mobile--menu-body').appendChild(subSectionBreadCrumbMobile);
-  }
-  if (data.titles.length > 2) {
-    breadCrumbMobile.querySelector('.l3-nav__mobile--menu-body').appendChild(a({ class: 'title-item', innerHTML: data.titles[2] }));
+    breadCrumbMobile.querySelector('.l3-nav-mobile-menu-body').appendChild(subSectionBreadCrumbMobile);
   }
 
+  // If we are on a page of a subsection (three levels down) append the page title to the bottom of the mobile breadcrumb menu
+  if (data.titles.length > 2) {
+    breadCrumbMobile.querySelector('.l3-nav-mobile-menu-body').appendChild(a({ class: 'title-item', innerHTML: data.titles[2] }));
+  }
+
+  // Finally append the contact info to the mobile breadcrumb body
   const contactSection = div({ class: 'menu-sub-list' });
   contactSection.innerHTML = `
         <a href="/unified-communications/pricing/" class="title-item" target="_self" data-external="false">See plans &amp; pricing</a>
         <a href="tel:+1-855-430-6401" class="title-item" target="_self" data-external="false">1-855-430-6401</a>`;
 
-  breadCrumbMobile.querySelector('.l3-nav__mobile--menu-body').append(contactSection);
+  breadCrumbMobile.querySelector('.l3-nav-mobile-menu-body').append(contactSection);
 }
 
 /* ------------------------------ Main function invoked at load ------------------------------- */
@@ -742,10 +745,15 @@ export default async function decorate(block) {
   }
 
   const pathArray = sectionPathFull.split('/');
-  // TODO: Implement a guard on a null array
-  const subNavResp = await fetch(`/sub-nav/${pathArray[0]}.json`);
-  if (subNavResp.ok) {
-    const json = await subNavResp.text();
-    populateBreadCrumb(parseBreadCrumbJSON(json), pathArray);
+  if (pathArray.length > 0) {
+    const subNavResp = await fetch(`/sub-nav/${pathArray[0]}.json`);
+    if (subNavResp.ok) {
+      const json = await subNavResp.text();
+      populateBreadCrumb(parseBreadCrumbJSON(json), pathArray);
+    } else {
+      // If not on a subpath (main vonage.com site) don't show a breadcrumb (won't need it for VIP Project)
+      document.querySelector('.l3-nav-desktop').remove();
+      document.querySelector('.l3-nav-mobile').remove();
+    }
   }
 }
