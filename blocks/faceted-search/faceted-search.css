@@ -10,6 +10,12 @@
   font-size: 2rem;
   cursor: pointer;
 }
+.faceted-search .font-icon-filter::before {
+  font-family: var(--icon-font-family);
+  content: var(--vlt-circuit-icon);
+  font-size: 2rem;
+  cursor: pointer;
+}
 
 .faceted-search .font-icon-arrow-right::before {
   font-family: var(--icon-font-family);
@@ -355,7 +361,7 @@
     margin-top: 2rem;
   }
 
-  .filter-btn-options-wrapper .btn-options-list .filter-btn i.Vlt-icon-filter {
+  .filter-btn-options-wrapper .btn-options-list .filter-btn i.font-icon-filter {
     margin-left: .8rem;
   }
 
@@ -411,7 +417,7 @@
     text-transform: capitalize;
   }
 
-  .mobile-filter-options .filters i.Vlt-icon-filter {
+  .mobile-filter-options .filters i.font-icon-filter {
     margin-left: .8rem;
     font-size: 2.2rem;
   }

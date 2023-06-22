@@ -8,7 +8,7 @@ export default async function decorate(block) {
   block.innerHTML = `<div class="search-filters">
     <div class="filter-btn-options-wrapper">
         <ul class="btn-options-list">
-            <li class="filter-btn"><span>Filters</span> <i class="Vlt-icon-filter"></i></li>
+            <li class="filter-btn"><span>Filters</span> <i class="font-icon-filter"></i></li>
         </ul>
     </div>
 
@@ -16,7 +16,7 @@ export default async function decorate(block) {
     <dialog class="mobile-filter-options">
         <div class="filter-head">
             <div class="close-wrap Vlt-icon-close"></div>
-            <div class="filters"><span>Filters</span> <i class="Vlt-icon-filter"></i></div>
+            <div class="filters"><span>Filters</span> <i class="font-icon-filter"></i></div>
             <div class="clear-wrap"></div>
         </div>
         <div class="filter-body">
