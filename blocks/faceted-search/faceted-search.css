@@ -190,7 +190,7 @@
   color: unset;
 }
 
-.faceted-search .results-section-wrapper .mobile-only {
+.faceted-search .mobile-and-tablet-only {
   display: none;
 }
 
@@ -299,12 +299,25 @@
 
 /* mobile and tablet */
 @media (max-width: 1024px) {
+  .faceted-search .mobile-and-tablet-only {
+    display: block;
+  }
+
   .faceted-search .results-section-wrapper a.card {
     width: 100%;
     box-sizing: border-box;
     grid-template-columns: 6rem auto;
     box-shadow: none;
     border-radius: 0;
+  }
+
+  .faceted-search .results-section-wrapper a.card .button-container {
+   margin: 0;
+    grid-column: 1/span 2;
+  }
+
+  .faceted-search .results-section-wrapper a.card .button-container .button{
+    display: block;
   }
 }
 
@@ -331,16 +344,6 @@
     grid-template-columns: none;
     flex-direction: column;
     box-sizing: border-box;
-  }
-
-  .faceted-search .results-section-wrapper .mobile-only {
-    display: block;
-  }
-
-
-
-  .sub-header {
-    display:none!important;
   }
 
   .faceted-search .desktop-filter-options {
