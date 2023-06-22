@@ -968,11 +968,7 @@ header .sub-menu-label-active {
       display: -webkit-box;
       display: flex;
       box-sizing: border-box;
-      -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
       justify-content: space-between;
-      -webkit-box-align: center;
-      -ms-flex-align: center;
       align-items: center;
       height: 6.3rem;
       position: relative;
@@ -980,6 +976,7 @@ header .sub-menu-label-active {
       font-weight: 500;
       font-family: var(--body-font-family);
       padding: 10px 34px 5px;
+      margin-top: 1rem;
       background: #fbfbfb;
       background: -webkit-gradient(linear,left bottom,left top,color-stop(85%,#fbfbfb),to(#efefef));
       background: linear-gradient(0deg,#fbfbfb 85%,#efefef);
