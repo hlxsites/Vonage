@@ -55,8 +55,7 @@ export function domEl(tag, ...items) {
 
     Object.entries(attributes).forEach(([key, value]) => {
       // Add additional properties here for things that fail to reflect through setAttributes
-      const directAttributes = ['innerHTML'];
-      if (directAttributes.includes(key)) {
+      if (['innerHTML'].includes(key)) {
         element[key] = value;
       } else if (!key.startsWith('on')) {
         element.setAttribute(key, Array.isArray(value) ? value.join(' ') : value);
