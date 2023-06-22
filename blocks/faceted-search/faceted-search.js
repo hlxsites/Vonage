@@ -1,6 +1,6 @@
 /* eslint-disable no-plusplus */
 import {
-  a, button, div, domEl, img, li, span, ul,
+  a, button, div, domEl, img, li, p, span, ul,
 } from '../../scripts/scripts.js';
 
 export default async function decorate(block) {
@@ -139,6 +139,13 @@ function updateResults(block, swiftypeResult) {
           span(
             { class: 'card-body' },
             entry.meta_description,
+          ),
+        ),
+        p(
+          { class: 'button-container mobile-and-tablet-only' },
+          a(
+            { href: entry.url, target: '_blank', class: 'button primary ' },
+            'Get started',
           ),
         ),
       ),
