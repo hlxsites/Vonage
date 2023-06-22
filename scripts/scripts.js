@@ -54,7 +54,10 @@ export function domEl(tag, ...items) {
     items = rest;
 
     Object.entries(attributes).forEach(([key, value]) => {
-      if (!key.startsWith('on')) {
+      // Add additional properties here for things that fail to reflect through setAttributes
+      if (['innerHTML'].includes(key)) {
+        element[key] = value;
+      } else if (!key.startsWith('on')) {
         element.setAttribute(key, Array.isArray(value) ? value.join(' ') : value);
       } else {
         element.addEventListener(key.substring(2).toLowerCase(), value);
@@ -91,6 +94,7 @@ export function i(...items) { return domEl('i', ...items); }
 export function img(...items) { return domEl('img', ...items); }
 export function span(...items) { return domEl('span', ...items); }
 export function button(...items) { return domEl('button', ...items); }
+export function hr(...items) { return domEl('hr', ...items); }
 
 /**
  * Builds hero block and prepends to main in a new section.
