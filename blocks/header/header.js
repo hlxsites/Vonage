@@ -589,7 +589,7 @@ function populateBreadCrumb(data, pathArray) {
       div({ class: 'list l3-nav-menu-options-list first' },
         ul())));
 
-  sectionBreadCrumbDesktop.querySelector('.list.l3-nav-menu-options-list.first').style.width = data.links[0].width;
+  sectionBreadCrumbDesktop.querySelector('.list.l3-nav-menu-options-list.first').style.width = data.links[0].width ? data.links[0].width : '100px';
 
   const sectionBreadCrumbMobile = div({ class: 'menu-sub-list' }, ul());
 
@@ -621,7 +621,7 @@ function populateBreadCrumb(data, pathArray) {
       if (child.url === `/${pathArray.join('/')}/`) {
         breadCrumbLink.classList.add('bold');
       }
-      subSectionBreadCrumbDesktop.style.width = data.links[index].width;
+      subSectionBreadCrumbDesktop.style.width = data.links[index].width ? data.links[index].width : '100px';
       subSectionBreadCrumbDesktop.querySelector('ul').appendChild(li(breadCrumbLink));
       subSectionBreadCrumbMobile.querySelector('ul').appendChild(li(span(breadCrumbLink.cloneNode(true))));
     });
