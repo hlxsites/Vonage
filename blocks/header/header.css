@@ -59,6 +59,11 @@ header .nav-wrapper {
   margin: 0 auto;
 }
 
+/* Style to toggle the display of the main nav element */
+header.collapsed .nav-wrapper {
+  display: none;
+}
+
 /* Styling for the div container that holds the two versions of the logo image */
 header .nav-logo {
   position: absolute;
@@ -987,6 +992,11 @@ header .sub-menu-label-active {
       background: -webkit-gradient(linear,left bottom,left top,color-stop(85%,#fbfbfb),to(#efefef));
       background: linear-gradient(0deg,#fbfbfb 85%,#efefef);
       border-bottom: 1px solid #ddd;
+    }
+
+    /* Drop the top margin on the desktop breadcrumb when the main nav is collapsed  */
+    header.collapsed .l3-nav-desktop {
+      margin-top: 0;
     }
 
     /* Layout and styling for the div flex box for the two sections of the desktop breadcrumb */

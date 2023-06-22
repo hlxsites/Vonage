@@ -27,10 +27,8 @@ function scrollFunction() {
   if (window.location.pathname.search('unified-communications/')) {
     if ((scrolledDown && document.body.scrollTop > scrollDistance)
       || (scrolledDown && document.documentElement.scrollTop > scrollDistance)) {
-      document.querySelector('.nav-wrapper').style.display = 'none';
       document.querySelector('.header-wrapper').classList.add('collapsed');
     } else {
-      document.querySelector('.nav-wrapper').style.display = '';
       document.querySelector('.header-wrapper').classList.remove('collapsed');
     }
   }
