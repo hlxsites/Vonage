@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 import {
   a, button, div, domEl, img, li, span, ul,
 } from '../../scripts/scripts.js';
@@ -123,21 +124,20 @@ function updateResults(block, swiftypeResult) {
         div(
           { class: 'card-left-wrapper' },
           div(
-            { class: 'card-left-wrapper--logo' },
-            img({ src: entry.image, class: 'card-left-wrapper--logo-image' }),
+            { class: 'card-logo' },
+            img({ src: entry.image, class: 'card-logo-image' }),
           ),
         ),
         div(
-          { class: 'card-right-wrapper' },
-          span({ class: 'card-right-wrapper--first-liner' }),
+          { class: 'card-right' },
           span(
-            { class: 'card-right-wrapper--second-liner' },
+            { class: 'card-title' },
             entry.title,
             // TODO: icons
-            span({ 'aria-hidden': 'true', class: 'Vlt-icon-arrow-link arrow-icon desktop-only' }),
+            span({ 'aria-hidden': 'true', class: 'font-icon-arrow-right desktop-only' }),
           ),
           span(
-            { class: 'card-right-wrapper--third-liner' },
+            { class: 'card-body' },
             entry.meta_description,
           ),
         ),
@@ -154,9 +154,9 @@ function updatePagination(block, swiftypeResult) {
     pagination.append(button(
       {
         'aria-label': 'Go to previous page',
-        class: 'pagination__arrow pagination__arrow--show',
         onClick: () => {
           block.dataset.page = swiftypeResult.info.page.current_page - 1;
+          // noinspection JSIgnoredPromiseFromCall
           refreshResults(block);
         },
       },
@@ -167,9 +167,9 @@ function updatePagination(block, swiftypeResult) {
   const firstPage = Math.max(1, swiftypeResult.info.page.current_page - 4);
   const lastPage = Math.max(5, swiftypeResult.info.page.current_page);
   for (let i = firstPage; i <= lastPage; i++) {
-    const classList = ['pagination__page'];
+    const classList = [];
     if (i === swiftypeResult.info.page.current_page) {
-      classList.push('pagination__page--current');
+      classList.push('current');
     }
     pagination.append(button(
       {
@@ -178,6 +178,7 @@ function updatePagination(block, swiftypeResult) {
         class: classList,
         onClick: () => {
           block.dataset.page = i;
+          // noinspection JSIgnoredPromiseFromCall
           refreshResults(block);
         },
       },
@@ -189,9 +190,10 @@ function updatePagination(block, swiftypeResult) {
     pagination.append(button(
       {
         'aria-label': 'Go to next page',
-        class: 'pagination__page',
+        class: 'page',
         onClick: () => {
           block.dataset.page = swiftypeResult.info.page.current_page + 1;
+          // noinspection JSIgnoredPromiseFromCall
           refreshResults(block);
         },
       },
@@ -204,6 +206,7 @@ async function refreshResults(block) {
   const activeFilters = getActiveFilters(block);
 
   console.log('activeFilters', activeFilters);
+  // TODO: extract bucket id
   const swiftypeResult = await getSearchResults('F2vatbs1LRkyNzs-Hv9D', block.dataset.page, activeFilters);
   console.log(swiftypeResult);
 

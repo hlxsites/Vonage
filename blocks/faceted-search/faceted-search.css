@@ -1,11 +1,19 @@
 .faceted-search {
   display: flex;
+  gap: 60px;
 }
 
 /* --- icons --- */
 .faceted-search .font-icon-close::before {
   font-family: var(--icon-font-family);
   content: var(--vlt-close-icon);
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.faceted-search .font-icon-arrow-right::before {
+  font-family: var(--icon-font-family);
+  content: var(--vlt-right-arrow);
   font-size: 2rem;
   cursor: pointer;
 }
@@ -23,15 +31,14 @@
 
 .faceted-search .font-icon-chevron.left {
   transform: rotate(90deg);
+  display: inline-block;
 }
 
 .faceted-search .font-icon-chevron.right {
   transform: rotate(-90deg);
+  display: inline-block;
 }
 
-.faceted-search .font-icon-chevron.up {
-  transform: rotate(180deg);
-}
 
 /* desktop filters */
 .faceted-search .desktop-filter-options {
@@ -106,11 +113,6 @@
   font-size: 2rem;
 }
 
-/* Add focus styles on the outer-box of the fake checkbox to make it accessible by keyboard */
-.faceted-search .desktop-filter-options details.accordion-bar  ul li .checkbox-wrapper label input[type="checkbox"]:focus + .checkmark {
-  outline: #3b99fc auto 5px;
-}
-
 .faceted-search .desktop-filter-options details.accordion-bar  ul li .checkbox-wrapper label .checkmark::after {
   content: var(--vlt-close-icon);
   position: absolute;
@@ -139,6 +141,11 @@
   background-color: #881fff;
 }
 
+/* Add focus styles on the outer-box of the fake checkbox to make it accessible by keyboard */
+.faceted-search .desktop-filter-options details.accordion-bar  ul li .checkbox-wrapper label input[type="checkbox"]:focus + .checkmark {
+  outline: #3b99fc auto 5px;
+}
+
 .faceted-search .desktop-filter-options details.accordion-bar  ul li .checkbox-wrapper label input:checked~.checkmark::after {
   display: block;
 }
@@ -150,23 +157,13 @@
 
 
 
-
-.faceted-search .pagination button {
-  line-height: 1rem;
-}
-
-.faceted-search .pagination button:hover,
-.faceted-search .pagination button:focus {
-  background-color: unset;
-  cursor: pointer;
-}
-
-.results-section-wrapper {
+/* result cards */
+.faceted-search .results-section-wrapper {
   display: grid;
   grid-template-columns: auto auto auto;
 }
 
-.results-section-wrapper .card {
+.faceted-search .results-section-wrapper a.card {
   display: grid;
   grid-template-columns: 6rem auto 0;
   border-radius: 1rem;
@@ -175,25 +172,54 @@
   padding: 1.6rem;
   margin-right: 1.6rem;
   margin-bottom: 1.6rem;
+  text-decoration: none;
+  color: unset;
 }
 
-.results-section-wrapper .mobile-only {
+.faceted-search .results-section-wrapper .mobile-only {
   display: none;
 }
 
-.results-section-wrapper .card-left-wrapper--logo {
+.faceted-search .results-section-wrapper a.card .card-logo {
   width: 6rem;
   height: 6rem;
+  text-decoration: none;
 }
 
+.faceted-search .results-section-wrapper a.card .card-right {
+  display: grid;
+  grid-template-rows: minmax(0,auto) minmax(0,auto) minmax(0,auto) minmax(0,1fr);
+  margin-left: 2rem;
+  text-decoration: none;
+}
 
-.filter-btn-options-wrapper-desktop {
+.faceted-search .results-section-wrapper a.card .card-right .card-title {
+  word-break: break-word;
+  font-weight: 600;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  display: block;
+}
+
+.faceted-search .results-section-wrapper a.card .card-right .font-icon-arrow-right {
+  padding-left: 10px;
+}
+
+.faceted-search .results-section-wrapper a.card .card-right .card-body {
+  margin-bottom: 1.6rem;
+  font-size: 1.4rem;
+  font-weight: 400;
+  display: block;
+}
+
+/* Active filters on desktop */
+.faceted-search .filter-btn-options-wrapper-desktop {
   width: 100%;
   height: auto;
   margin-top: 1rem;
 }
 
-.filter-btn-options-wrapper-desktop .btn-options-list {
+.faceted-search .filter-btn-options-wrapper-desktop .btn-options-list {
   gap: 1.2rem;
   width: 100%;
   max-width: 100%;
@@ -205,12 +231,10 @@
   margin: 0;
 }
 
-.filter-btn-options-wrapper-desktop .btn-options-list .filter-btn {
+.faceted-search .filter-btn-options-wrapper-desktop .btn-options-list .filter-btn {
   border-radius: 2.5rem;
   height: 4rem;
   display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
   font-family: var(--fixed-font-family);
   font-size: 1.6rem;
@@ -219,18 +243,16 @@
   padding-left: 1rem;
 }
 
-.filter-btn-options-wrapper-desktop .btn-options-list .filter-btn i {
+.faceted-search .filter-btn-options-wrapper-desktop .btn-options-list .filter-btn i {
   margin-right: .8rem;
   font-size: 2rem;
   font-weight: 500;
 }
 
-.filter-btn-options-wrapper-desktop .btn-options-list .filter-option {
+.faceted-search .filter-btn-options-wrapper-desktop .btn-options-list .filter-option {
   border-radius: 2.5rem;
   height: 4rem;
   display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
   font-family: var(--fixed-font-family);
   font-size: 1.6rem;
@@ -243,28 +265,25 @@
   cursor: pointer;
 }
 
-.results-section .filter-btn-options-wrapper-desktop .btn-options-list .filter-btn {
+.faceted-search .filter-btn-options-wrapper-desktop .btn-options-list .filter-btn {
   font-weight: 500;
   font-size: 1.5rem;
   font-family: var(--body-font-family);
 }
 
-.results-section .filter-btn-options-wrapper-desktop .btn-options-list .filter-option {
+.faceted-search .filter-btn-options-wrapper-desktop .btn-options-list .filter-option {
   font-weight: 500;
   font-size: 1.3rem;
   font-family: var(--body-font-family);
 }
 
-.results-section .filter-btn-options-wrapper-desktop .btn-options-list .filter-option.clear-filter-section {
+.faceted-search .filter-btn-options-wrapper-desktop .btn-options-list .filter-option.clear-filter-section {
   background-color: #fff;
   color: #000;
   cursor: pointer;
   text-decoration: underline;
   font-weight: 400;
 }
-
-
-
 
 .filter-btn-options-wrapper {
   display: none;
@@ -275,22 +294,18 @@
   .main-container {
     margin-top: 3rem;
     margin-bottom: 3rem;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
     flex-direction: column;
   }
 
-  .results-section-wrapper {
+  .faceted-search .results-section-wrapper {
     padding: 1rem;
     display: flex;
     grid-template-columns: none;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
     flex-direction: column;
     width: 100%;
   }
 
-  .results-section-wrapper .mobile-only {
+  .faceted-search .results-section-wrapper .mobile-only {
     display: block;
   }
 
@@ -329,8 +344,6 @@
     border-radius: 2.5rem;
     min-height: 4rem;
     display: flex;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
     align-items: center;
     padding-right: 1.8rem;
     padding-left: 1.8rem;
@@ -375,11 +388,7 @@
   .mobile-filter-options .filter-head {
     height: 6rem;
     display: flex;
-    -webkit-box-pack: justify;
-    -ms-flex-pack: justify;
     justify-content: space-between;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
     align-items: center;
     border-bottom: .1rem solid hsl(0deg 0% 59.2% / 20%);
     padding: 0 1.2rem;
@@ -394,8 +403,6 @@
   .mobile-filter-options .filters {
     height: 100%;
     display: flex;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
     align-items: center;
   }
 
@@ -440,11 +447,7 @@
   .filter-body .list-items .title span.accordion {
     display: flex;
     width: 100%;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
     align-items: center;
-    -webkit-box-pack: justify;
-    -ms-flex-pack: justify;
     justify-content: space-between;
   }
 
@@ -549,11 +552,7 @@
   .filter-body .list-items .title .panel .list-desc li label {
     display: flex;
     width: 100%;
-    -webkit-box-pack: justify;
-    -ms-flex-pack: justify;
     justify-content: space-between;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
     align-items: center;
   }
 
@@ -585,121 +584,46 @@
 
 
 
-.pagination {
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+/* pagination */
+.faceted-search .pagination {
   display: flex;
-  -webkit-box-pack: end;
-  -ms-flex-pack: end;
   justify-content: flex-end;
   margin-bottom: 4rem;
 }
 
-.pagination__page {
-  font-size: 1.2rem;
+.pagination button {
+  background-color: transparent;
+  color: black;
+  font-size: var(--body-font-size-xxs);
   font-weight: 400;
   cursor: pointer;
   letter-spacing: 0;
-  margin: 0 .2rem;
-  color: black;
-  background-color: transparent;
-}
-
-.pagination__page,.pagination__page--current {
+  margin: 0 5px;
   font-family: var(--fixed-font-family);
   line-height: 2rem;
   text-transform: uppercase;
   height: 3.7rem;
   width: 3.7rem;
+  padding: 0;
 }
 
-.pagination__page--current {
-  font-size: 1.4rem;
+.pagination button.current {
+  font-size: var(--body-font-size-xs);
   font-weight: 600;
   background-color: #000;
   border-radius: 50%;
   color: #fff;
   display: inline-block;
-  transition: background-color .8s ease-in-out;
-  text-align: center;
-  letter-spacing: 0;
 }
 
-.pagination__arrow {
+/* no hover for these buttons */
+.faceted-search .pagination button:hover,
+.faceted-search .pagination button:focus {
+  background-color: unset;
   cursor: pointer;
-  font-size: 2.4rem;
-  height: 3.7rem;
-  opacity: 0;
-  padding-left: .5rem;
-  visibility: hidden;
-  width: 3.7rem;
-  background-color: transparent;
-  color: black;
 }
 
-.pagination__arrow .Vlt-icon-chevron {
-  transform: rotate(90deg);
-  display: block;
-  width: 2.4rem;
-  height: 2.4rem;
+.pagination button.current:hover {
+  background-color: var(--text-color);
 }
 
-.pagination__arrow--next .Vlt-icon-chevron {
-  transform: rotate(-90deg);
-}
-
-.pagination__arrow--show {
-  display: inline-block;
-  opacity: 1;
-  transition: opacity .8s ease-in-out;
-  visibility: visible;
-}
-
-
-
-@media (min-width: 768px) {
-  .pagination__page {
-    font-family:var(--fixed-font-family);
-    font-size: 1.2rem;
-    font-weight: 400;
-    letter-spacing: .2rem;
-    line-height: 2rem;
-  }
-}
-
-@media (min-width: 1200px) {
-  .pagination__page {
-    font-family:var(--fixed-font-family);
-    font-size: 1.2rem;
-    font-weight: 400;
-    letter-spacing: .2rem;
-    line-height: 2rem;
-  }
-}
-
-@media (min-width: 768px) {
-  .pagination__page--current {
-    font-family:var(--fixed-font-family);
-    font-size: 1.4rem;
-    font-weight: 600;
-    letter-spacing: .075rem;
-    line-height: 2rem;
-  }
-}
-
-@media (min-width: 1200px) {
-  .pagination__page--current {
-    font-family:var(--fixed-font-family);
-    font-size: 1.4rem;
-    font-weight: 600;
-    letter-spacing: .075rem;
-    line-height: 2rem;
-  }
-}
-
-@media (min-width: 768px) {
-  .pagination__page {
-    margin:0 .5rem;
-  }
-}
