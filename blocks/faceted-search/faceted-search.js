@@ -12,18 +12,15 @@ export default async function decorate(block) {
         </ul>
     </div>
 
-    <!-- TODO: mobile-->
-    <dialog class="mobile-filter-options">
-        <div class="filter-head">
-            <div class="close-wrap font-icon-close"></div>
-            <div class="filters"><span>Filters</span> <i class="font-icon-filter"></i></div>
+    <dialog class="mobile-filter-dialog">
+        <div class="dialog-head">
+            <div class="close-button font-icon-close"></div>
+            <div class="title"><span>Filters</span> <span class="font-icon-filter"></span></div>
             <div class="clear-wrap"></div>
         </div>
-        <div class="filter-body">
-            <ul class="list-items"></ul>
-        </div>
-        <div class="filter-foot">
-            <button type="button" class="prime-cta">
+        <ul class="mobile-filters"></ul>
+        <div class="dialog-foot button-container">
+            <button type="button" class="">
                 Show results
             </button>
         </div>
@@ -34,28 +31,26 @@ export default async function decorate(block) {
 
 <div class="results">
     <div class="results-section">
-
         <div class="filter-btn-options-wrapper-desktop">
             <ul class="btn-options-list">
         </div>
 
-
-        <div class="results-section-wrapper">
-    </div>
+        <div class="results-section-wrapper"></div>
     <div class="pagination">
     </div>
 </div>
 `;
 
   block.querySelector('.filter-btn').addEventListener('click', () => {
-    block.querySelector('.mobile-filter-options').showModal();
+    block.querySelector('.mobile-filter-dialog').showModal();
   });
-  block.querySelector('.mobile-filter-options .font-icon-close').addEventListener('click', () => {
-    block.querySelector('.mobile-filter-options').close();
-  });
-  block.querySelector('.mobile-filter-options .filter-foot button').addEventListener('click', async () => {
+  block.querySelector('.mobile-filter-dialog .close-button').addEventListener('click', async () => {
     await refreshResults(block);
-    block.querySelector('.mobile-filter-options').close();
+    block.querySelector('.mobile-filter-dialog').close();
+  });
+  block.querySelector('.mobile-filter-dialog .dialog-foot button').addEventListener('click', async () => {
+    await refreshResults(block);
+    block.querySelector('.mobile-filter-dialog').close();
   });
 
   await refreshResults(block);
@@ -321,7 +316,7 @@ function updateFilters(block, swiftypeResult, activeFilters) {
 }
 
 function updateMobileFilters(block, swiftypeResult, activeFilters) {
-  const filters = block.querySelector('.mobile-filter-options .list-items');
+  const filters = block.querySelector('.mobile-filter-dialog .mobile-filters');
   filters.innerHTML = '';
 
   Object.entries(swiftypeResult.info.page.facets).forEach(([groupId, facetValues]) => {

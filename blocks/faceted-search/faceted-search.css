@@ -327,6 +327,11 @@
     margin: 3rem auto;
     flex-direction: column;
     width: 540px;
+    gap: 0;
+  }
+
+  .faceted-search .filter-btn-options-wrapper-desktop {
+    display: none;
   }
 
   .faceted-search .results {
@@ -404,7 +409,7 @@
     border: .1rem solid #881fff;
   }
 
-  .faceted-search .mobile-filter-options {
+  .faceted-search .mobile-filter-dialog {
     overflow-y: auto;
     width: 100%;
     max-width: 100%;
@@ -419,11 +424,11 @@
     border: none;
   }
 
-  .faceted-search .mobile-filter-options.show {
+  .faceted-search .mobile-filter-dialog.show {
     display: block;
   }
 
-  .faceted-search .mobile-filter-options .filter-head {
+  .faceted-search .mobile-filter-dialog .dialog-head {
     height: 6rem;
     display: flex;
     justify-content: space-between;
@@ -432,29 +437,29 @@
     padding: 0 1.2rem;
   }
 
-  .faceted-search .mobile-filter-options .filter-head .close-wrap {
+  .faceted-search .mobile-filter-dialog .dialog-head .close-button {
     font-weight: 500;
     font-size: 2.8rem;
     cursor: pointer;
   }
 
-  .faceted-search .mobile-filter-options .filters {
+  .faceted-search .mobile-filter-dialog .title {
     height: 100%;
     display: flex;
     align-items: center;
   }
 
-  .faceted-search .mobile-filter-options .filters span {
+  .faceted-search .mobile-filter-dialog .title span {
     font-weight: 500;
     text-transform: capitalize;
   }
 
-  .faceted-search .mobile-filter-options .filters i.font-icon-filter {
+  .faceted-search .mobile-filter-dialog .title span.font-icon-filter {
     margin-left: .8rem;
     font-size: 2.2rem;
   }
 
-  .faceted-search .mobile-filter-options .clear-wrap span {
+  .faceted-search .mobile-filter-dialog .clear-wrap span {
     color: #000;
     opacity: .3;
     font-size: 1.5rem;
@@ -465,17 +470,17 @@
     cursor: pointer;
   }
 
-  .faceted-search .mobile-filter-options .filter-body .list-items {
-    padding-left: 0;
+  .faceted-search .mobile-filter-dialog  .mobile-filters {
     margin: 0;
+    padding-left: 12px;
   }
 
-  .faceted-search .mobile-filter-options .filter-body .list-items details.accordion-bar {
+  .faceted-search .mobile-filter-dialog  .mobile-filters details.accordion-bar {
     cursor: pointer;
     border-bottom: 0.1rem solid hsl(0deg 0% 59.2% / 20%);
   }
 
-  .faceted-search .mobile-filter-options .filter-body .list-items details.accordion-bar summary {
+  .faceted-search .mobile-filter-dialog  .mobile-filters details.accordion-bar summary {
     list-style: none;
     display: flex;
     justify-content: space-between;
@@ -487,21 +492,21 @@
     line-height: 2.9em;
   }
 
-  .faceted-search .mobile-filter-options .filter-body .list-items details.accordion-bar[open] .font-icon-chevron::before {
+  .faceted-search .mobile-filter-dialog  .mobile-filters details.accordion-bar[open] .font-icon-chevron::before {
     transform: rotate(180deg);
   }
 
-  .faceted-search .mobile-filter-options .filter-body .list-items details.accordion-bar  ul {
+  .faceted-search .mobile-filter-dialog  .mobile-filters details.accordion-bar  ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
   }
 
-  .faceted-search .mobile-filter-options .filter-body .list-items details.accordion-bar  ul li {
+  .faceted-search .mobile-filter-dialog  .mobile-filters details.accordion-bar  ul li {
     height: 3.8rem;
   }
 
-  .faceted-search .mobile-filter-options .filter-body .list-items details.accordion-bar  ul li .checkbox-wrapper label {
+  .faceted-search .mobile-filter-dialog  .mobile-filters details.accordion-bar  ul li .checkbox-wrapper label {
     display: block;
     position: relative;
 
@@ -515,7 +520,7 @@
     font-size: var(--body-font-size-m);
   }
 
-  .faceted-search .mobile-filter-options .filter-body .list-items details.accordion-bar  ul li .checkbox-wrapper label input {
+  .faceted-search .mobile-filter-dialog  .mobile-filters details.accordion-bar  ul li .checkbox-wrapper label input {
     position: absolute;
     opacity: 0;
     cursor: pointer;
@@ -523,7 +528,7 @@
     width: 0;
   }
 
-  .faceted-search .mobile-filter-options .filter-body .list-items details.accordion-bar  ul li .checkbox-wrapper label .checkmark {
+  .faceted-search .mobile-filter-dialog  .mobile-filters details.accordion-bar  ul li .checkbox-wrapper label .checkmark {
     position: absolute;
     top: 0;
     right: 1rem;
@@ -534,7 +539,7 @@
     font-size: 2rem;
   }
 
-  .faceted-search .mobile-filter-options .filter-body .list-items details.accordion-bar  ul li .checkbox-wrapper label .checkmark::after {
+  .faceted-search .mobile-filter-dialog  .mobile-filters details.accordion-bar  ul li .checkbox-wrapper label .checkmark::after {
     content: var(--vlt-close-icon);
     position: absolute;
     display: none;
@@ -549,217 +554,29 @@
     left: -.3rem;
   }
 
-  .faceted-search .mobile-filter-options .filter-body .list-items details.accordion-bar  ul li .checkbox-wrapper label .option-num {
+  .faceted-search .mobile-filter-dialog  .mobile-filters details.accordion-bar  ul li .checkbox-wrapper label .option-num {
     color: #717171;
     margin-left: .5rem;
   }
 
-  .faceted-search .mobile-filter-options .filter-body .list-items details.accordion-bar  ul li .checkbox-wrapper label .option-txt {
+  .faceted-search .mobile-filter-dialog  .mobile-filters details.accordion-bar  ul li .checkbox-wrapper label .option-txt {
     text-transform: capitalize;
   }
 
   /* Add focus styles on the outer-box of the fake checkbox to make it accessible by keyboard */
-  .faceted-search .mobile-filter-options .filter-body .list-items details.accordion-bar  ul li .checkbox-wrapper label input[type="checkbox"]:focus + .checkmark {
+  .faceted-search .mobile-filter-dialog  .mobile-filters details.accordion-bar  ul li .checkbox-wrapper label input[type="checkbox"]:focus + .checkmark {
     outline: #3b99fc auto 5px;
   }
 
-  .faceted-search .mobile-filter-options .filter-body .list-items details.accordion-bar  ul li .checkbox-wrapper label input:checked~.checkmark::after {
+  .faceted-search .mobile-filter-dialog  .mobile-filters details.accordion-bar  ul li .checkbox-wrapper label input:checked~.checkmark::after {
     display: block;
   }
 
 
 
 
-  /* .faceted-search .filter-body .list-items { */
 
-  /*  list-style-type: none; */
-
-  /*  padding: 0 2.4rem; */
-
-  /*  position: relative; */
-
-  /*  z-index: 999; */
-
-  /* } */
-
-  /* .faceted-search .filter-body .list-items .title { */
-
-  /*  min-height: 5.8rem; */
-
-  /*  line-height: 5.8rem; */
-
-  /*  border-bottom: .1rem solid hsl(0deg 0% 59.2% / 20%); */
-
-  /*  font-weight: 500; */
-
-  /*  text-transform: capitalize; */
-
-  /*  font-size: 1.8rem; */
-
-  /*  cursor: pointer; */
-
-  /* } */
-
-  /* .faceted-search .filter-body .list-items .title span.accordion { */
-
-  /*  display: flex; */
-
-  /*  width: 100%; */
-
-  /*  align-items: center; */
-
-  /*  justify-content: space-between; */
-
-  /* } */
-
-  /* .faceted-search .filter-body .list-items .title .panel { */
-
-  /*  width: 100%; */
-
-  /* } */
-
-  /* .faceted-search .filter-body .list-items .title .panel .list-desc { */
-
-  /*  list-style-type: none; */
-
-  /*  padding: 0; */
-
-  /* } */
-
-  /* .faceted-search .filter-body .list-items .title .panel .list-desc .check-lbl { */
-
-  /*  display: flex; */
-
-  /*  position: relative; */
-
-  /*  cursor: pointer; */
-
-  /*  user-select: none; */
-
-  /*  font-weight: 400; */
-
-  /* } */
-
-
-  /* .faceted-search .filter-body .list-items .title .panel .list-desc .check-lbl input { */
-
-  /*  position: absolute; */
-
-  /*  opacity: 0; */
-
-  /*  cursor: pointer; */
-
-  /*  height: 0; */
-
-  /*  width: 0; */
-
-  /*  bottom: 0; */
-
-  /* } */
-
-  /* .faceted-search .filter-body .list-items .title .panel .list-desc .check-lbl input:checked~.checkmark { */
-
-  /*  background-color: #fff; */
-
-  /* } */
-
-  /* .faceted-search .filter-body .list-items .title .panel .list-desc .check-lbl .checkmark { */
-
-  /*  position: absolute; */
-
-  /*  bottom: 0; */
-
-  /*  right: 0; */
-
-  /*  height: 2rem; */
-
-  /*  width: 2rem; */
-
-  /*  background-color: #fff; */
-
-  /*  border: .1rem solid #9b9b9b; */
-
-  /* } */
-
-  /* .faceted-search .filter-body .list-items .title .panel .list-desc .check-lbl .checkmark::after { */
-
-  /*  left: -.4rem; */
-
-  /*  top: -2rem; */
-
-  /*  width: 1rem; */
-
-  /*  height: 1rem; */
-
-  /*  color: #881fff; */
-
-  /*  font-size: 2.6rem; */
-
-  /*  font-weight: 500; */
-
-  /* } */
-
-  /* .faceted-search .filter-body .list-items .title .panel .list-desc .check-lbl .title { */
-
-  /*  text-transform: capitalize; */
-
-  /* } */
-
-  /* .faceted-search .filter-body .list-items .title .panel .list-desc .check-lbl .count { */
-
-  /*  color: #5f6169; */
-
-  /*  font-size: 1.4rem; */
-
-  /* } */
-
-  /* .faceted-search .filter-body .list-items .title .panel .list-desc .checkmark::after { */
-
-  /*  content: "\e90e"; */
-
-  /*  position: absolute; */
-
-  /*  display: none; */
-
-  /*  font-family: var(--icon-font-family); */
-
-  /*  font-style: normal; */
-
-  /*  font-variant: normal; */
-
-  /* } */
-
-  /* .faceted-search .filter-body .list-items .title .panel .list-desc .check-lbl input:checked~.checkmark::after { */
-
-  /*  display: block; */
-
-  /* } */
-
-  /* .faceted-search .filter-body .list-items .title .panel .list-desc li { */
-
-  /*  width: 100%; */
-
-  /* } */
-
-  /* .faceted-search .filter-body .list-items .title .panel .list-desc li label { */
-
-  /*  display: flex; */
-
-  /*  width: 100%; */
-
-  /*  justify-content: space-between; */
-
-  /*  align-items: center; */
-
-  /* } */
-
-  /* .faceted-search .filter-body .list-items .title .panel .list-desc .wrapper-checkbox,.filter-foot { */
-
-  /*  position: relative; */
-
-  /* } */
-
-  .filter-foot {
+  .dialog-foot {
     z-index: 600;
     left: 0;
     bottom: 0;
@@ -767,7 +584,7 @@
     padding: 1.4rem;
   }
 
-  .filter-foot button {
+  .dialog-foot button {
     width: 100%;
     border: none;
     background-color: #000;
