@@ -171,6 +171,7 @@
 /* result cards */
 .faceted-search .results {
   width: clamp(386px, 75%, 75%);
+  box-sizing: border-box;
 }
 
 .faceted-search .results-section-wrapper {
@@ -233,6 +234,7 @@
   width: 100%;
   height: auto;
   margin-top: 1rem;
+  margin-bottom: 2rem;
 }
 
 .faceted-search .filter-btn-options-wrapper-desktop .btn-options-list {
@@ -351,11 +353,6 @@
 
   .faceted-search .results {
     width: 100%;
-  }
-
-  .faceted-search .results-section {
-    padding: 15px;
-    box-sizing: border-box;
   }
 
   .faceted-search .filter-btn-options-wrapper .btn-options-list .filter-btn.active {

@@ -8,6 +8,7 @@ async function applyMobileFilters(block) {
   await refreshResults(block, filters);
 }
 
+// noinspection JSUnusedGlobalSymbols
 export default async function decorate(block) {
   block.dataset.page = 1;
   block.innerHTML = `<div class="search-filters">
@@ -35,14 +36,12 @@ export default async function decorate(block) {
 </div>
 
 <div class="results">
-    <div class="results-section">
-        <div class="filter-btn-options-wrapper-desktop">
-            <ul class="btn-options-list">
-        </div>
+      <div class="filter-btn-options-wrapper-desktop">
+          <ul class="btn-options-list">
+      </div>
 
-        <div class="results-section-wrapper"></div>
+      <div class="results-section-wrapper"></div>
     <div class="pagination">
-    </div>
 </div>
 `;
 
@@ -62,11 +61,30 @@ export default async function decorate(block) {
 }
 
 /**
+ * @typedef {Object} SwiftypeResponse
+ * @property {number} record_count
+ * @property {Object} records - Holds page data
+ * @property {Object[]} records.page
+ * @property {string} records.page.title
+ * @property {string} records.page.meta_description
+ * @property {string} records.page.url
+ * @property {string} records.page.image
+ * @property {Object} info - Holds page information
+ * @property {Object} info.page
+ * @property {string} info.page.query
+ * @property {number} info.page.current_page
+ * @property {number} info.page.num_pages
+ * @property {number} info.page.per_page
+ * @property {number} info.page.total_result_count
+ * @property {Object.<string, Object<string,number>>} info.page.facets
+ * @property {Object.<string, any>} errors */
+
+/**
  *
  * @param engineKey {string}
  * @param pageNo {number}
  * @param filters {Object<string, string[]>}
- * @return {Promise<any>}
+ * @return {Promise<SwiftypeResponse>}
  */
 async function getSearchResults(engineKey, pageNo, filters) {
   const query = {
@@ -102,9 +120,12 @@ async function getSearchResults(engineKey, pageNo, filters) {
   return response.json();
 }
 
+/**
+ * @return {Object.<string, string[]>}
+ */
 function getActiveFilters(blockOrElement) {
   const checkedBoxes = [...blockOrElement.querySelectorAll('input[type="checkbox"]:checked')];
-  const activeFilters = checkedBoxes
+  return checkedBoxes
     .map((checkbox) => [checkbox.dataset.group, checkbox.value])
     .reduce((acc, [group, filterId]) => {
       if (!acc[group]) {
@@ -113,9 +134,12 @@ function getActiveFilters(blockOrElement) {
       acc[group].push(filterId);
       return acc;
     }, {});
-  return activeFilters;
 }
 
+/**
+ * @param block
+ * @param swiftypeResult {SwiftypeResponse}
+ */
 function updateResults(block, swiftypeResult) {
   const results = block.querySelector('.results-section-wrapper');
   results.innerHTML = '';
@@ -136,7 +160,6 @@ function updateResults(block, swiftypeResult) {
           span(
             { class: 'card-title' },
             entry.title,
-            // TODO: icons
             span({ 'aria-hidden': 'true', class: 'font-icon-arrow-right desktop-only' }),
           ),
           span(
@@ -156,6 +179,10 @@ function updateResults(block, swiftypeResult) {
   });
 }
 
+/**
+ * @param block
+ * @param swiftypeResult {SwiftypeResponse}
+ */
 function updatePagination(block, swiftypeResult) {
   const pagination = block.querySelector('.pagination');
   pagination.innerHTML = '';
@@ -225,6 +252,11 @@ async function refreshResults(block, newFilters) {
   updatePagination(block, swiftypeResult);
 }
 
+/**
+ * @param block
+ * @param swiftypeResult {SwiftypeResponse}
+ * @param activeFilters {Object.<string, string[]>}
+ */
 function updateFilterPills(block, swiftypeResult, activeFilters) {
   const list = block.querySelector('.filter-btn-options-wrapper-desktop .btn-options-list');
   list.innerHTML = '';
@@ -245,9 +277,7 @@ function updateFilterPills(block, swiftypeResult, activeFilters) {
         span({ class: 'font-icon-close', 'aria-hidden': true }),
         span(`${getLabelForFacet(filterId)} (${swiftypeResult.info.page.facets[group][filterId]})`),
       );
-      pill.addEventListener('click', () => {
-        clearFilter(block, group, filterId);
-      });
+      pill.addEventListener('click', () => clearFilter(block, group, filterId));
       list.append(pill);
     });
   });
@@ -256,9 +286,7 @@ function updateFilterPills(block, swiftypeResult, activeFilters) {
     { class: 'filter-option clear-filter-section' },
     span('Clear All Filters'),
   );
-  clearAll.addEventListener('click', () => {
-    clearFilters(block);
-  });
+  clearAll.addEventListener('click', () => clearFilters(block));
   list.append(clearAll);
 }
 
@@ -272,11 +300,17 @@ function getLabelForFacet(facetId) {
     .replace(/\b[a-z]/, (str) => str.toUpperCase());
 }
 
+/**
+ * @param block
+ * @param swiftypeResult {SwiftypeResponse}
+ * @param activeFilters {Object.<string, string[]>}
+ */
 function updateFilters(block, swiftypeResult, activeFilters) {
   const filters = block.querySelector('.desktop-filter-options');
   filters.innerHTML = '';
 
   Object.entries(swiftypeResult.info.page.facets).forEach(([groupId, facetValues]) => {
+    // noinspection JSUnusedGlobalSymbols
     const group = domEl(
       'details',
       { open: 'open', class: 'accordion-bar' },
@@ -318,6 +352,12 @@ function updateFilters(block, swiftypeResult, activeFilters) {
   });
 }
 
+/**
+ *
+ * @param block
+ * @param swiftypeResult {SwiftypeResponse}
+ * @param activeFilters {Object.<string, string[]>}
+ */
 function updateMobileFilters(block, swiftypeResult, activeFilters) {
   const filters = block.querySelector('.mobile-filter-dialog .mobile-filters');
   filters.innerHTML = '';
