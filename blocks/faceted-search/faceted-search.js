@@ -11,6 +11,9 @@ export default async function decorate(block) {
   block.dataset.engineKey = config['swiftype-engine-key'];
   block.dataset.siteKey = config['swiftype-site-key'];
   block.dataset.productTag = config['swiftype-product-tag'];
+  block.dataset.typeTag = config['swiftype-type-tag'];
+  block.dataset.facets = JSON.stringify(config.facets.split(',').map((f) => f.trim().toLowerCase()));
+  block.dataset.contentSections = JSON.stringify(config['content-sections'].split(',').map((f) => f.trim().toLowerCase()));
 
   block.innerHTML = `<div class="search-filters">
     <div class="filter-btn-options-wrapper">
@@ -93,7 +96,7 @@ async function applyMobileFilters(block) {
  * @param filters {Object<string, string[]>}
  * @return {Promise<SwiftypeResponse>}
  */
-async function getSearchResults(engineKey, siteKey, productTag, pageNo, filters) {
+async function getSearchResults(engineKey, siteKey, productTag, typeTag, facets, contentSections, pageNo, filters) {
   const query = {
     engine_key: engineKey,
     page: pageNo,
@@ -108,13 +111,22 @@ async function getSearchResults(engineKey, siteKey, productTag, pageNo, filters)
         site: [siteKey],
         language: ['en'],
         country: ['us'],
-        content_section: ['apps', 'products'],
-        ff_product: { type: 'and', values: [productTag] },
         ...filters,
       },
     },
-    facets: { page: ['type', 'topic', 'region'] },
+    facets: { page: facets },
   };
+
+  // apply filters depending on the page
+  if (productTag && productTag !== 'undefined') {
+    query.filters.page.ff_product = { type: 'and', values: [productTag] };
+  }
+  if (typeTag && typeTag !== 'undefined') {
+    query.filters.page.type = { type: 'and', values: [typeTag] };
+  }
+  if (contentSections) {
+    query.filters.page.content_section = contentSections;
+  }
 
   const response = await fetch('https://api.swiftype.com/api/v1/public/engines/search.json', {
     body: JSON.stringify(query),
@@ -253,6 +265,9 @@ async function refreshResults(block, newFilters) {
     block.dataset.engineKey,
     block.dataset.siteKey,
     block.dataset.productTag,
+    block.dataset.typeTag,
+    JSON.parse(block.dataset.facets),
+    JSON.parse(block.dataset.contentSections),
     block.dataset.page,
     activeFilters,
   );
@@ -323,7 +338,9 @@ function updateFilters(block, swiftypeResult, activeFilters) {
   const filters = block.querySelector('.desktop-filter-options');
   filters.innerHTML = '';
 
-  Object.entries(swiftypeResult.info.page.facets).forEach(([groupId, facetValues]) => {
+  JSON.parse(block.dataset.facets).forEach((groupId) => {
+    const facetValues = swiftypeResult.info.page.facets[groupId];
+
     // noinspection JSUnusedGlobalSymbols
     const group = domEl(
       'details',
@@ -334,23 +351,25 @@ function updateFilters(block, swiftypeResult, activeFilters) {
         div({ class: 'summary-chevron' }, span({ class: 'font-icon-chevron' })),
       ),
       ul(
-        ...Object.entries(facetValues).map(([name, count]) => li(
-          div(
-            { class: 'checkbox-wrapper' },
-            domEl(
-              'label',
-              domEl('input', {
-                type: 'checkbox',
-                value: name,
-                'data-label': getLabelForFacet(name),
-                'data-group': groupId,
-                onChange: (e) => handleFilterChange(e, block),
-              }),
-              span({ class: 'checkmark' }),
-              span({ class: 'option-txt' }, getLabelForFacet(name), span({ class: 'option-num' }, `(${count})`)),
+        ...Object.entries(facetValues)
+          .filter((pair) => pair[0].length > 0)
+          .map(([name, count]) => li(
+            div(
+              { class: 'checkbox-wrapper' },
+              domEl(
+                'label',
+                domEl('input', {
+                  type: 'checkbox',
+                  value: name,
+                  'data-label': getLabelForFacet(name),
+                  'data-group': groupId,
+                  onChange: (e) => handleFilterChange(e, block),
+                }),
+                span({ class: 'checkmark' }),
+                span({ class: 'option-txt' }, getLabelForFacet(name), span({ class: 'option-num' }, `(${count})`)),
+              ),
             ),
-          ),
-        )),
+          )),
       ),
     );
 
