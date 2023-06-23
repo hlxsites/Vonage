@@ -340,6 +340,26 @@ function updateFilters(block, swiftypeResult, activeFilters) {
 
   JSON.parse(block.dataset.facets).forEach((groupId) => {
     const facetValues = swiftypeResult.info.page.facets[groupId];
+    const facetListSorted = Object.entries(facetValues)
+      .filter((pair) => pair[0].length > 0)
+      .map(([name, count]) => ({
+        name,
+        count,
+        label: getLabelForFacet(name),
+      }));
+    facetListSorted.sort((left, right) => {
+      const nameA = left.label.toUpperCase(); // ignore upper and lowercase
+      const nameB = right.label.toUpperCase(); // ignore upper and lowercase
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+
+      // names must be equal
+      return 0;
+    });
 
     // noinspection JSUnusedGlobalSymbols
     const group = domEl(
@@ -351,25 +371,23 @@ function updateFilters(block, swiftypeResult, activeFilters) {
         div({ class: 'summary-chevron' }, span({ class: 'font-icon-chevron' })),
       ),
       ul(
-        ...Object.entries(facetValues)
-          .filter((pair) => pair[0].length > 0)
-          .map(([name, count]) => li(
-            div(
-              { class: 'checkbox-wrapper' },
-              domEl(
-                'label',
-                domEl('input', {
-                  type: 'checkbox',
-                  value: name,
-                  'data-label': getLabelForFacet(name),
-                  'data-group': groupId,
-                  onChange: (e) => handleFilterChange(e, block),
-                }),
-                span({ class: 'checkmark' }),
-                span({ class: 'option-txt' }, getLabelForFacet(name), span({ class: 'option-num' }, `(${count})`)),
-              ),
+        ...facetListSorted.map((facet) => li(
+          div(
+            { class: 'checkbox-wrapper' },
+            domEl(
+              'label',
+              domEl('input', {
+                type: 'checkbox',
+                value: facet.name,
+                'data-label': getLabelForFacet(facet.name),
+                'data-group': groupId,
+                onChange: (e) => handleFilterChange(e, block),
+              }),
+              span({ class: 'checkmark' }),
+              span({ class: 'option-txt' }, facet.label, span({ class: 'option-num' }, `(${facet.count})`)),
             ),
-          )),
+          ),
+        )),
       ),
     );
 
