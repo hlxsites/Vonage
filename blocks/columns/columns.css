@@ -132,31 +132,31 @@ div.callout-promo-container {
   padding: 0;
 }
 
-div.market-place-summary > div > div:first-child {
+div.market-place-summary.columns-2-cols > div > div:first-child {
   background-color: var(--overview-background-color);
   padding: 4rem;
   margin-bottom: 5rem;
 }
 
-div.market-place-summary > div > div > p,
-div.market-place-summary > div > div > ul > li {
+div.market-place-summary.columns-2-cols > div > div > p,
+div.market-place-summary.columns-2-cols > div > div > ul > li {
   font-size: 17.5px;
 }
 
-div.market-place-summary div.recs a:hover {
+div.market-place-summary.columns-2-cols div.recs a:hover {
   text-decoration: none;
 }
 
-div.market-place-summary .recs {
+div.market-place-summary.columns-2-cols .recs {
   margin-right: 20px;
 }
 
-div.market-place-summary .recs h2 {
+div.market-place-summary.columns-2-cols .recs h2 {
   margin-top: 0;
   padding: 10px 20px;
 }
 
-div.market-place-summary h2 {
+div.market-place-summary.columns-2-cols h2 {
   font-size: 2.8rem;
   font-weight: 600;
   line-height: .86;
@@ -177,18 +177,18 @@ div.market-place-summary .recs .col {
   min-height: 10rem;
   padding: 1rem 1rem 0 2rem;
   border-radius: 1.6rem;
-  box-shadow: 0 0 9px 0 rgb(81 133 236 / 0.15);
+  box-shadow: 0 0 9px 0 rgb(81 133 236 / 15%);
   background-color: #fff;
 }
 
-div.market-place-summary .recs .col>a {
+div.market-place-summary.columns-2-cols .recs .col>a {
   align-items: center;
   min-height: 8rem;
   display: flex;
   height: 100%;
 }
 
-div.market-place-summary .recs .col>a>picture>img {
+div.market-place-summary.columns-2-cols .recs .col>a>picture>img {
   max-width: 10rem;
   padding-right: 0.5rem;
   margin: auto 0;
@@ -197,7 +197,7 @@ div.market-place-summary .recs .col>a>picture>img {
   width: 100%;
 }
 
-div.market-place-summary .recs .col>a>div {
+div.market-place-summary.columns-2-cols .recs .col>a>div {
   flex: 0 0 66.6667%;
   max-width: 66.6667%;
   font-size: 2rem;
@@ -381,6 +381,16 @@ div.columns.lead-gen>div>div:last-child>p:last-child>a:last-child::before {
 }
 
 @media (min-width: 900px) {
+  div.columns>div {
+    align-items: center;
+    gap: 32px;
+  }
+
+  div.columns>div>div {
+    flex: 1;
+    order: unset;
+  }
+
   div.columns.lead-gen>div>div {
     margin: 0;
   }
@@ -398,16 +408,6 @@ div.columns.lead-gen>div>div:last-child>p:last-child>a:last-child::before {
 
   div.market-place-summary>div {
     flex-direction: column;
-  }
-
-  div.columns>div {
-    align-items: center;
-    gap: 32px;
-  }
-
-  div.columns>div>div {
-    flex: 1;
-    order: unset;
   }
 }
 
