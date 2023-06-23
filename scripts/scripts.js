@@ -125,6 +125,24 @@ function buildAutoBlocks(main) {
   }
 }
 
+function decorateHyperlinkImages(container) {
+  // picture + br + a in the same paragraph
+  [...container.querySelectorAll('picture + br + a, picture + a')]
+    // link text is an unformatted URL paste
+    .filter((link) => link.textContent.trim().startsWith('http'))
+    .forEach((link) => {
+      const br = link.previousElementSibling;
+      let picture = br.previousElementSibling;
+      if (br.tagName === 'PICTURE') picture = br;
+      picture.remove();
+      br.remove();
+      link.innerHTML = picture.outerHTML;
+      // make sure the link is not decorated as a button
+      link.parentNode.classList.remove('button-container');
+      link.className = '';
+    });
+}
+
 /**
  * Decorates the main element.
  * @param {Element} main The main element
@@ -137,6 +155,7 @@ export function decorateMain(main) {
   buildAutoBlocks(main);
   decorateSections(main);
   decorateBlocks(main);
+  decorateHyperlinkImages(main);
 }
 
 /**
