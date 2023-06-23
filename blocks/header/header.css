@@ -322,11 +322,11 @@ header #nav[aria-expanded="true"] .nav-tools {
   }
 
   /* Stagger the opacity transition for each menu item to do the pretty cascade thing */
-  header #nav .nav-sections > ul > div:nth-child(1) > li { transition-delay: 0.40s }
-  header #nav .nav-sections > ul > div:nth-child(2) > li { transition-delay: 0.45s }
-  header #nav .nav-sections > ul > div:nth-child(3) > li { transition-delay: 0.50s }
-  header #nav .nav-sections > ul > div:nth-child(4) > li { transition-delay: 0.55s }
-  header #nav .nav-sections > ul > div:nth-child(5) > li { transition-delay: 0.60s }
+  header #nav .nav-sections > ul > div:nth-child(1) > li { transition-delay: 0.40s; }
+  header #nav .nav-sections > ul > div:nth-child(2) > li { transition-delay: 0.45s; }
+  header #nav .nav-sections > ul > div:nth-child(3) > li { transition-delay: 0.50s; }
+  header #nav .nav-sections > ul > div:nth-child(4) > li { transition-delay: 0.55s; }
+  header #nav .nav-sections > ul > div:nth-child(5) > li { transition-delay: 0.60s; }
 
 /*  Render the section divider */
   header #nav[aria-expanded="true"] hr.nav-section-divider {
@@ -576,7 +576,7 @@ header .sub-menu-label-active {
       position: absolute;
       width: 3.5rem;
       height: 3.9rem;
-      bottom: -2rem
+      bottom: -2rem;
     }
 
   /***** Desktop section and tools menu styling  *****/
@@ -923,7 +923,7 @@ header .sub-menu-label-active {
       height: 1.4rem;
       background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='14'%3E%3Cpath d='M11.83 13.1a1 1 0 01-.73-1.69L15.25 7 11.1 2.59a1 1 0 011.46-1.37L18 7l-5.44 5.79a1 1 0 01-.73.31z'/%3E%3C/svg%3E");
       background-repeat: no-repeat;
-      background-position: 100%
+      background-position: 100%;
     }
 
     /*  Make the index items bold and have an underline on mouse over */
