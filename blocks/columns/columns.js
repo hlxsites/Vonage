@@ -1,3 +1,5 @@
+import { createOptimizedPicture } from '../../scripts/lib-franklin.js';
+
 function handleTitleClick(block) {
   const pBlock = block.querySelector('div.slim-promo.columns-2-cols p');
   const pButton = block.querySelector('.slim-promo a.button.secondary');
@@ -47,4 +49,39 @@ export default function decorate(block) {
       }
     });
   });
+
+  if (block.classList.contains('market-place-summary')) {
+    // with link and image in separate paragraphs
+    [...block.querySelectorAll('p > a[href]')]
+      // link (in a <p>) has no siblings
+      .filter((link) => link.parentNode.childElementCount === 1)
+      // is preceded by an image (in a <p>) and image has no other siblings
+      .filter((link) => link.parentNode.previousElementSibling?.firstElementChild?.tagName === 'A')
+      .filter((link) => link.parentNode.previousElementSibling?.childElementCount === 1)
+      // link text is an unformatted URL paste
+      .filter((link) => link.parentNode.classList.contains('button-container'))
+      .forEach((link) => {
+        const a = link.parentNode.previousElementSibling.firstElementChild;
+        const label = document.createElement('div');
+        label.textContent = link.textContent;
+        a.append(label);
+        link.parentNode.remove();
+      });
+
+    const recdiv = block.querySelector('div > div:nth-child(2)');
+    recdiv.className = 'recs';
+    const row = document.createElement('div');
+    row.className = 'row';
+    [...recdiv.querySelectorAll('img')].forEach((img) => img.closest('picture').replaceWith(createOptimizedPicture(img.src, img.alt, false, [{ width: '80' }])));
+
+    [...recdiv.querySelectorAll('p')]
+      .forEach((p) => {
+        const col = document.createElement('div');
+        col.className = 'col';
+        col.innerHTML = p.innerHTML;
+        row.append(col);
+        p.remove();
+      });
+    recdiv.append(row);
+  }
 }

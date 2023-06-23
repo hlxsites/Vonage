@@ -1,29 +1,63 @@
 /* below the fold CSS goes here */
+
 @font-face {
-    font-family: Spezia;
-    src: url('/fonts/SpeziaWeb-Regular.woff') format('woff'),
-         url('/fonts/SpeziaWeb-Regular.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
+  font-family:Spezia;
+  src:url('/fonts/SpeziaWeb-Regular.eot');
+  src:url('/fonts/SpeziaWeb-Regular.eot?#iefix') format("embedded-opentype"),
+  url('/fonts/Spezia-Regular.otf') format("otf"),
+  url('/fonts/SpeziaWeb-Regular.woff2') format("woff2"),
+  url('/fonts/SpeziaWeb-Regular.woff') format("woff"),
+  url('/fonts/SpeziaWeb-RegularItalic.eot?#iefix') format("embedded-opentype"),
+  url('/fonts/Spezia-RegularItalic.otf') format("otf"),
+  url('/fonts/SpeziaWeb-RegularItalic.woff2') format("woff2"),
+  url('/fonts/SpeziaWeb-RegularItalic.woff') format("woff");
+  font-weight:400;
+  font-style:normal;
+  font-stretch:normal;
+  unicode-range:U+000d-fb04
 }
 
 @font-face {
-    font-family: Spezia;
-    src: url('/fonts/SpeziaWeb-RegularItalic.woff') format('woff'),
-         url('/fonts/SpeziaWeb-RegularItalic.woff2') format('woff2');
-    font-weight: normal;
-    font-style: italic;
-    font-display: swap;
+  font-family:Spezia;
+  src:url('/fonts/SpeziaWeb-WideMedium.eot');
+  src:url('/fonts/SpeziaWeb-WideMedium.eot?#iefix') format("embedded-opentype"),
+  url('/fonts/Spezia-WideMedium.otf') format("otf"),
+  url('/fonts/SpeziaWeb-WideMedium.woff2') format("woff2"),
+  url('/fonts/SpeziaWeb-WideMedium.woff') format("woff"),
+  url('/fonts/SpeziaWeb-WideMediumItalic.eot?#iefix') format("embedded-opentype"),
+  url('/fonts/Spezia-WideMediumItalic.otf') format("otf"),
+  url('/fonts/SpeziaWeb-WideMediumItalic.woff2') format("woff2"),
+  url('/fonts/SpeziaWeb-WideMediumItalic.woff') format("woff");
+  font-weight:500;
+  font-style:normal;
+  font-stretch:normal;
+  unicode-range:U+000d-fb04
 }
 
 @font-face {
-    font-family: "Spezia_SemiMono";
-    src: url('/fonts/SpeziaWeb-SemiMonoRegular.woff') format('woff'),
-         url('/fonts/SpeziaWeb-SemiMonoRegular.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
+  font-family:"Spezia_SemiMono";
+  src:url('/fonts/SpeziaWeb-SemiMonoRegular.eot');
+  src:url('/fonts/SpeziaWeb-SemiMonoRegular.eot?#iefix') format("embedded-opentype"),
+  url('/fonts/Spezia-SemiMonoRegular.otf') format("otf"),
+  url('/fonts/SpeziaWeb-SemiMonoRegular.woff2') format("woff2"),
+  url('/fonts/SpeziaWeb-SemiMonoRegular.woff') format("woff");
+  font-weight:400;
+  font-style:normal;
+  font-stretch:normal;
+  unicode-range:U+000d-fb04
+}
+
+@font-face {
+  font-family:"Spezia_SemiMono";
+  src:url('/fonts/SpeziaWeb-SemiMonoSemiBold.eot');
+  src:url('/fonts/SpeziaWeb-SemiMonoSemiBold.eot?#iefix') format("embedded-opentype"),
+  url('/fonts/Spezia-SemiMonoSemiBold.otf') format("otf"),
+  url('/fonts/SpeziaWeb-SemiMonoSemiBold.woff2') format("woff2"),
+  url('/fonts/SpeziaWeb-SemiMonoSemiBold.woff') format("woff");
+  font-weight:600;
+  font-style:normal;
+  font-stretch:normal;
+  unicode-range:U+000d-fb04
 }
 
 @font-face {
