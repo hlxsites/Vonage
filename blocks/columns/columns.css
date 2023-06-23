@@ -143,11 +143,20 @@ div.market-place-summary.columns-2-cols > div > div > ul > li {
   font-size: 17.5px;
 }
 
+div.columns.lead-gen>div>div:last-child>p>a {
+  color: inherit;
+  text-decoration: underline;
+}
+
 div.market-place-summary.columns-2-cols div.recs .col>a {
   align-items: center;
   min-height: 8rem;
   display: flex;
   height: 100%;
+}
+
+div.columns.lead-gen>div>div:last-child>p:last-child>a {
+  width: 100px;
 }
 
 div.market-place-summary.columns-2-cols div.recs .col>a:hover {
@@ -166,6 +175,16 @@ div.market-place-summary.columns-2-cols h2 {
   color: #000;
   margin-bottom: 2rem;
   text-align: left;
+}
+
+div.columns.basic-columns>div>div>h2 {
+  font-family: var(--fixed-font-family);
+  font-size: var(--body-font-size-xxs);
+  text-transform: uppercase;
+  line-height: 2rem;
+  letter-spacing: 0.075rem;
+  margin-top: 0;
+  margin-bottom: 1.5rem;
 }
 
 div.market-place-summary.columns-2-cols .recs h2 {
@@ -197,7 +216,7 @@ div.market-place-summary.columns-2-cols .recs .col>a>picture>img {
   width: 100%;
 }
 
-div.market-place-summary.columns-2-cols .recs .col>a>div {
+div.market-place-summary .recs .col>a>div {
   flex: 0 0 66.6667%;
   max-width: 66.6667%;
   font-size: 2rem;
@@ -221,16 +240,6 @@ div.block {
   padding-left: 20px;
   margin-right: auto;
   margin-left: auto;
-}
-
-div.columns.basic-columns>div>div>h2 {
-  font-family: var(--fixed-font-family);
-  font-size: var(--body-font-size-xxs);
-  text-transform: uppercase;
-  line-height: 2rem;
-  letter-spacing: 0.075rem;
-  margin-top: 0;
-  margin-bottom: 1.5rem;
 }
 
 div.columns.basic-columns>div>div>p {
@@ -273,18 +282,9 @@ div.columns.lead-gen>div>div:last-child>p {
   text-align: center;
 }
 
-div.columns.lead-gen>div>div:last-child>p>a {
-  color: inherit;
-  text-decoration: underline;
-}
-
 div.columns.lead-gen>div>div:last-child>p:last-child {
   padding-top: 1.6rem;
   margin-bottom: 0;
-}
-
-div.columns.lead-gen>div>div:last-child>p:last-child>a {
-  width: 100px;
 }
 
 div.columns.lead-gen>div>div:last-child>p:last-child>a::before {
