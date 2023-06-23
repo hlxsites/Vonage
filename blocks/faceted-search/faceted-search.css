@@ -235,25 +235,20 @@
   height: auto;
   margin-top: 1rem;
   margin-bottom: 2rem;
-}
-
-.faceted-search .filter-btn-options-wrapper-desktop.hidden {
-  display: none;
-}
-
-.faceted-search .filter-btn-options-wrapper-desktop .btn-options-list {
   gap: 1.2rem;
-  width: 100%;
   max-width: 100%;
   overflow-x: auto;
   list-style-type: none;
   display: flex;
   flex-wrap: wrap;
   padding: 0;
-  margin: 0;
 }
 
-.faceted-search .filter-btn-options-wrapper-desktop .btn-options-list .filter-btn {
+.faceted-search .filter-btn-options-wrapper-desktop.hidden {
+  display: none;
+}
+
+.faceted-search .filter-btn-options-wrapper-desktop .filter-btn {
   border-radius: 2.5rem;
   height: 4rem;
   display: flex;
@@ -265,13 +260,13 @@
   padding-left: 1rem;
 }
 
-.faceted-search .filter-btn-options-wrapper-desktop .btn-options-list .filter-btn span {
+.faceted-search .filter-btn-options-wrapper-desktop .filter-btn span {
   margin-right: .8rem;
   font-size: 2rem;
   font-weight: 500;
 }
 
-.faceted-search .filter-btn-options-wrapper-desktop .btn-options-list .filter-option {
+.faceted-search .filter-btn-options-wrapper-desktop .filter-option {
   border-radius: 2.5rem;
   height: 4rem;
   display: flex;
@@ -288,7 +283,7 @@
 
 }
 
-.faceted-search .filter-btn-options-wrapper-desktop .btn-options-list .filter-option.clear-filter-section {
+.faceted-search .filter-btn-options-wrapper-desktop .filter-option.clear-filter-section {
   background-color: #fff;
   color: #000;
   cursor: pointer;
