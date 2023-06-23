@@ -19,6 +19,15 @@
   display: block;
 }
 
+.columns > div > div:not(.columns-img-col) > h3 {
+  font-weight: 400;
+  letter-spacing: 2px;
+  line-height: 2rem;
+  font-family: var(--fixed-font-family);
+  font-size: var(--body-font-size-xxxs);
+  text-transform: uppercase;
+}
+
 .slim-promo a.button.secondary {
   background-color: #fff;
   border-radius: 1.5rem;

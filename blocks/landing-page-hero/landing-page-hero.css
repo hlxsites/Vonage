@@ -49,7 +49,7 @@
 /* Styling for the links in a link menu in the description */
 .landing-page-hero .category-content .description ul > li > a {
   color: var(--text-color);
-  font-weight: 600;
+  font-weight: 500;
   text-decoration: none;
 }
 
@@ -118,7 +118,7 @@
   border: 2px solid transparent;
   text-align: center;
   font-style: normal;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 1.6rem;
   cursor: pointer;
   color: var(--background-color);

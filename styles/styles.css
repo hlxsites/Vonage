@@ -126,8 +126,10 @@
   --button-font-size-m: 16px;
 
   /* nav height */
-  --nav-height: 11.4rem;
-
+  --nav-height: 12.5rem;
+  --mobile-nav-height: 11.1rem;
+  --bread-crumb-height: 6.3rem;
+  --mobile-bread-crumb-height: 5.2rem;
 }
 
 @media (min-width: 900px) {
@@ -162,8 +164,10 @@ body {
   line-height: 1.6;
   color: var(--text-color);
   display: none;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
+}
+
+.magnolia-white {
+  background-color: #eeeffc;
 }
 
 .white-gradient-down {
@@ -180,11 +184,12 @@ body.appear {
 
 header {
   position: fixed;
-  height: var(--nav-height);
+  height: var(--mobile-nav-height);
 }
 
+/* Offset main site content by the height of the header */
 main {
-  margin-top: var(--nav-height);
+  margin-top: var(--mobile-nav-height);
 }
 
 h1, h2, h3,
@@ -365,6 +370,16 @@ main img {
   vertical-align: middle;
 }
 
+[class*=" vlt-icon-"], [class^="vlt-icon-"] {
+  font-family: var(--icon-font-family);
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 400;
+  line-height: inherit;
+  speak: none;
+  text-transform: none;
+}
+
 main .section {
   padding: 64px 16px;
 }
@@ -379,6 +394,13 @@ main .section {
   .section > div {
     max-width: 990pt;
     margin: auto;
+  }
+}
+
+@media (min-width: 992px) {
+  /* Offset main site content by the height of the nav plus the breadcrumb */
+  main {
+    margin-top: calc(var(--nav-height) + var(--bread-crumb-height));
   }
 }
 
