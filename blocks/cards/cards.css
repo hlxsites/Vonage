@@ -46,10 +46,6 @@
   object-fit: cover;
 }
 
-.cards.logo-strip.block ul {
-  grid-template-columns: repeat(auto-fill, minmax(767px, 1fr));
-}
-
 .cards.logo-strip.block li {
   border: unset;
 }
