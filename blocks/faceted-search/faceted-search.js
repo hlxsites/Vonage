@@ -36,7 +36,7 @@ export default async function decorate(block) {
 </div>
 
 <div class="results">
-      <div class="filter-btn-options-wrapper-desktop">
+      <div class="filter-btn-options-wrapper-desktop hidden">
           <ul class="btn-options-list">
       </div>
 
@@ -258,11 +258,14 @@ async function refreshResults(block, newFilters) {
  * @param activeFilters {Object.<string, string[]>}
  */
 function updateFilterPills(block, swiftypeResult, activeFilters) {
+  const container = block.querySelector('.filter-btn-options-wrapper-desktop');
   const list = block.querySelector('.filter-btn-options-wrapper-desktop .btn-options-list');
   list.innerHTML = '';
   if (Object.values(activeFilters).length === 0) {
+    container.classList.add('hidden');
     return;
   }
+  container.classList.remove('hidden');
 
   list.append(li(
     { class: 'filter-btn' },

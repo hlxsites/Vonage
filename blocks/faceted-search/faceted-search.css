@@ -237,6 +237,10 @@
   margin-bottom: 2rem;
 }
 
+.faceted-search .filter-btn-options-wrapper-desktop.hidden {
+  display: none;
+}
+
 .faceted-search .filter-btn-options-wrapper-desktop .btn-options-list {
   gap: 1.2rem;
   width: 100%;
