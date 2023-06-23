@@ -2,15 +2,16 @@
 import {
   a, button, div, domEl, img, li, p, span, ul,
 } from '../../scripts/scripts.js';
-
-async function applyMobileFilters(block) {
-  const filters = getActiveFilters(block.querySelector('.mobile-filter-dialog .mobile-filters'));
-  await refreshResults(block, filters);
-}
+import { readBlockConfig } from '../../scripts/lib-franklin.js';
 
 // noinspection JSUnusedGlobalSymbols
 export default async function decorate(block) {
+  const config = readBlockConfig(block);
   block.dataset.page = 1;
+  block.dataset.engineKey = config['swiftype-engine-key'];
+  block.dataset.siteKey = config['swiftype-site-key'];
+  block.dataset.productTag = config['swiftype-product-tag'];
+
   block.innerHTML = `<div class="search-filters">
     <div class="filter-btn-options-wrapper">
         <ul class="btn-options-list">
@@ -59,6 +60,11 @@ export default async function decorate(block) {
   await refreshResults(block);
 }
 
+async function applyMobileFilters(block) {
+  const filters = getActiveFilters(block.querySelector('.mobile-filter-dialog .mobile-filters'));
+  await refreshResults(block, filters);
+}
+
 /**
  * @typedef {Object} SwiftypeResponse
  * @property {number} record_count
@@ -81,11 +87,13 @@ export default async function decorate(block) {
 /**
  *
  * @param engineKey {string}
+ * @param siteKey {string}
+ * @param productTag {string}
  * @param pageNo {number}
  * @param filters {Object<string, string[]>}
  * @return {Promise<SwiftypeResponse>}
  */
-async function getSearchResults(engineKey, pageNo, filters) {
+async function getSearchResults(engineKey, siteKey, productTag, pageNo, filters) {
   const query = {
     engine_key: engineKey,
     page: pageNo,
@@ -97,11 +105,11 @@ async function getSearchResults(engineKey, pageNo, filters) {
     q: '',
     filters: {
       page: {
-        site: ['vonage-business-marketing'],
+        site: [siteKey],
         language: ['en'],
         country: ['us'],
         content_section: ['apps', 'products'],
-        ff_product: { type: 'and', values: ['product/unified-communications/feature'] },
+        ff_product: { type: 'and', values: [productTag] },
         ...filters,
       },
     },
@@ -241,8 +249,13 @@ function updatePagination(block, swiftypeResult) {
 async function refreshResults(block, newFilters) {
   const activeFilters = newFilters ?? getActiveFilters(block.querySelector('.search-filters .desktop-filter-options'));
 
-  // TODO: extract bucket id
-  const swiftypeResult = await getSearchResults('F2vatbs1LRkyNzs-Hv9D', block.dataset.page, activeFilters);
+  const swiftypeResult = await getSearchResults(
+    block.dataset.engineKey,
+    block.dataset.siteKey,
+    block.dataset.productTag,
+    block.dataset.page,
+    activeFilters,
+  );
 
   updateFilters(block, swiftypeResult, activeFilters);
   updateMobileFilters(block, swiftypeResult, activeFilters);
