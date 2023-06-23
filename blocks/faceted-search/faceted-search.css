@@ -1,3 +1,4 @@
+ /* stylelint-disable no-descending-specificity */
 .faceted-search {
   display: flex;
   gap: 60px;
@@ -69,7 +70,7 @@
   list-style: none;
   display: flex;
   justify-content: space-between;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 1.6rem;
   font-family: var(--body-font-family);
   user-select: none;
@@ -97,7 +98,7 @@
   padding-left: 3.5rem;
   margin-bottom: 1.2rem;
   font-family: var(--body-font-family);
-  font-weight: 600;
+  font-weight: 500;
   cursor: pointer;
   font-size: 1.4rem;
   min-height: 2rem;
@@ -210,7 +211,7 @@
 
 .faceted-search .results-section-wrapper a.card .card-right .card-title {
   word-break: break-word;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 2rem;
   margin-bottom: 2rem;
   display: block;
@@ -252,8 +253,8 @@
   display: flex;
   align-items: center;
   font-family: var(--fixed-font-family);
-  font-size: 1.6rem;
-  font-weight: 600;
+  font-size: 1.5rem;
+  font-weight: 500;
   padding-right: 1.8rem;
   padding-left: 1rem;
 }
@@ -281,12 +282,6 @@
 
 }
 
-.faceted-search .filter-btn-options-wrapper-desktop .btn-options-list .filter-btn {
-  font-weight: 500;
-  font-size: 1.5rem;
-  font-family: var(--body-font-family);
-}
-
 .faceted-search .filter-btn-options-wrapper-desktop .btn-options-list .filter-option.clear-filter-section {
   background-color: #fff;
   color: #000;
@@ -301,7 +296,6 @@
 
 /* mobile and tablet */
 @media (max-width: 1024px) {
-
   .faceted-search {
     gap: 35px;
     width: 680px;
@@ -313,21 +307,16 @@
     flex-shrink: 0;
   }
 
-  .faceted-search .results {
-    /*width: 416px;*/
-  }
-
   .faceted-search .mobile-and-tablet-only {
     display: block;
   }
 
   .faceted-search .results-section-wrapper {
-    padding: 1rem;
     display: flex;
     grid-template-columns: none;
     flex-direction: column;
     box-sizing: border-box;
-    padding-right: 0;
+    padding: 1rem 0 1rem 1rem;
   }
 
   .faceted-search .results-section-wrapper a.card {
@@ -411,7 +400,7 @@
     padding-left: 1.8rem;
     font-family: var(--fixed-font-family);
     font-size: 1.6rem;
-    font-weight: 600;
+    font-weight: 500;
     border: .1rem solid #9b9b9b;
     height: 4rem;
     margin-top: 2rem;
@@ -421,11 +410,6 @@
     margin-left: .8rem;
   }
 
-  .faceted-search .filter-btn-options-wrapper .btn-options-list .filter-btn.active {
-    background-color: #881fff;
-    color: #fff;
-    border: .1rem solid #881fff;
-  }
 
   .faceted-search .results-section-wrapper a.card {
     width: 100%;
@@ -626,7 +610,7 @@
   margin-bottom: 4rem;
 }
 
-.pagination button {
+.faceted-search .pagination button {
   background-color: transparent;
   color: black;
   font-size: var(--body-font-size-xxs);
@@ -642,9 +626,9 @@
   padding: 0;
 }
 
-.pagination button.current {
+.faceted-search .pagination button.current {
   font-size: var(--body-font-size-xs);
-  font-weight: 600;
+  font-weight: 500;
   background-color: #000;
   border-radius: 50%;
   color: #fff;
@@ -658,7 +642,7 @@
   cursor: pointer;
 }
 
-.pagination button.current:hover {
+.faceted-search .pagination button.current:hover {
   background-color: var(--text-color);
 }
 
