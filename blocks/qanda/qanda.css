@@ -1,13 +1,4 @@
 .qanda > div {
-    @media (min-width: 992px) {
-        margin-left: 16.6667%;
-    }
-
-    @media (min-width: 992px) {
-        flex: 0 0 66.6667%;
-        max-width: 66.6667%;
-    }
-
     position: relative;
     width: 100%;
     padding-right: 20px;
@@ -29,7 +20,7 @@
     border: 0;
     height: .1rem;
     margin-bottom: 3rem;
-    margin-top: 3rem
+    margin-top: 3rem;
 }
 
 .qanda-content > div > label {
@@ -44,7 +35,7 @@
 }
 
 .qanda-content > div > label:hover, .qanda-content > div > label[aria-expanded="true"] {
-    background: #f7f7fe
+    background: #f7f7fe;
 }
 
 .qanda-content > div > label::after {
@@ -96,4 +87,12 @@
 .qanda-content li {
     font-size: inherit;
     margin: 0 0 1rem!important;
+}
+
+@media (min-width: 992px) {
+  .qanda > div {
+    margin-left: 16.6667%;
+    flex: 0 0 66.6667%;
+    max-width: 66.6667%;
+  }
 }
