@@ -18,14 +18,14 @@ export default async function decorate(block) {
   block.innerHTML = `<div class="search-filters">
     <div class="filter-btn-options-wrapper">
         <ul class="btn-options-list">
-            <li class="filter-btn active"><span>Filters</span> <span class="font-icon-filter"></span></li>
+            <li class="filter-btn active"><span>Filters</span> <span class="vlt-icon-filter"></span></li>
         </ul>
     </div>
 
     <dialog class="mobile-filter-dialog">
         <div class="dialog-head">
-            <div class="close-button font-icon-close"></div>
-            <div class="title"><span>Filters</span> <span class="font-icon-filter"></span></div>
+            <div class="close-button vlt-icon-close"></div>
+            <div class="title"><span>Filters</span> <span class="vlt-icon-filter"></span></div>
             <div class="clear-wrap"></div>
         </div>
         <ul class="mobile-filters"></ul>
@@ -179,7 +179,7 @@ function updateResults(block, swiftypeResult) {
           span(
             { class: 'card-title' },
             entry.title,
-            span({ 'aria-hidden': 'true', class: 'font-icon-arrow-right desktop-only' }),
+            span({ 'aria-hidden': 'true', class: 'vlt-icon-arrow-right desktop-only' }),
           ),
           span(
             { class: 'card-body' },
@@ -216,7 +216,7 @@ function updatePagination(block, swiftypeResult) {
           refreshResults(block);
         },
       },
-      span({ class: 'font-icon-chevron left' }),
+      span({ class: 'vlt-icon-chevron left' }),
     ));
   }
 
@@ -253,7 +253,7 @@ function updatePagination(block, swiftypeResult) {
           refreshResults(block);
         },
       },
-      span({ class: 'font-icon-chevron right' }),
+      span({ class: 'vlt-icon-chevron right' }),
     ));
   }
 }
@@ -295,7 +295,7 @@ function updateFilterPills(block, swiftypeResult, activeFilters) {
 
   list.append(li(
     { class: 'filter-btn' },
-    span({ class: 'font-icon-filter', 'aria-hidden': true }),
+    span({ class: 'vlt-icon-filter', 'aria-hidden': true }),
     span('Filters'),
   ));
 
@@ -303,7 +303,7 @@ function updateFilterPills(block, swiftypeResult, activeFilters) {
     filters.forEach((filterId) => {
       const pill = li(
         { class: 'filter-option' },
-        span({ class: 'font-icon-close', 'aria-hidden': true }),
+        span({ class: 'vlt-icon-close', 'aria-hidden': true }),
         span(`${getLabelForFacet(filterId)} (${swiftypeResult.info.page.facets[group][filterId]})`),
       );
       pill.addEventListener('click', () => clearFilter(block, group, filterId));
@@ -368,7 +368,7 @@ function updateFilters(block, swiftypeResult, activeFilters) {
       domEl(
         'summary',
         getLabelForFacet(groupId),
-        div({ class: 'summary-chevron' }, span({ class: 'font-icon-chevron' })),
+        div({ class: 'summary-chevron' }, span({ class: 'vlt-icon-chevron' })),
       ),
       ul(
         ...facetListSorted.map((facet) => li(
@@ -420,7 +420,7 @@ function updateMobileFilters(block, swiftypeResult, activeFilters) {
       domEl(
         'summary',
         getLabelForFacet(groupId),
-        div({ class: 'summary-chevron' }, span({ class: 'font-icon-chevron' })),
+        div({ class: 'summary-chevron' }, span({ class: 'vlt-icon-chevron' })),
       ),
       ul(
         ...Object.entries(facetValues).map(([name, count]) => li(

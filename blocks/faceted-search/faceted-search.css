@@ -5,28 +5,28 @@
 }
 
 /* --- icons --- */
-.faceted-search .font-icon-close::before {
+.faceted-search .vlt-icon-close::before {
   font-family: var(--icon-font-family);
   content: var(--vlt-close-icon);
   font-size: 2rem;
   cursor: pointer;
 }
 
-.faceted-search .font-icon-filter::before {
+.faceted-search .vlt-icon-filter::before {
   font-family: var(--icon-font-family);
   content: var(--vlt-circuit-icon);
   font-size: 2rem;
   cursor: pointer;
 }
 
-.faceted-search .font-icon-arrow-right::before {
+.faceted-search .vlt-icon-arrow-right::before {
   font-family: var(--icon-font-family);
   content: var(--vlt-right-arrow);
   font-size: 2rem;
   cursor: pointer;
 }
 
-.faceted-search .font-icon-chevron::before {
+.faceted-search .vlt-icon-chevron::before {
   font-family: var(--icon-font-family);
   content: var(--vlt-down-chevron-icon);
   font-size: 2rem;
@@ -37,12 +37,12 @@
   text-overflow: clip;
 }
 
-.faceted-search .font-icon-chevron.left {
+.faceted-search .vlt-icon-chevron.left {
   transform: rotate(90deg);
   display: inline-block;
 }
 
-.faceted-search .font-icon-chevron.right {
+.faceted-search .vlt-icon-chevron.right {
   transform: rotate(-90deg);
   display: inline-block;
 }
@@ -78,7 +78,7 @@
   margin-right: 1rem;
 }
 
-.faceted-search .desktop-filter-options details.accordion-bar[open] .font-icon-chevron::before {
+.faceted-search .desktop-filter-options details.accordion-bar[open] .vlt-icon-chevron::before {
   transform: rotate(180deg);
 }
 
@@ -218,7 +218,7 @@
   display: block;
 }
 
-.faceted-search .results-section-wrapper a.card .card-right .font-icon-arrow-right {
+.faceted-search .results-section-wrapper a.card .card-right .vlt-icon-arrow-right {
   padding-left: 10px;
 }
 
@@ -402,7 +402,7 @@
     margin-top: 2rem;
   }
 
-  .faceted-search .filter-btn-options-wrapper .btn-options-list .filter-btn span.font-icon-filter {
+  .faceted-search .filter-btn-options-wrapper .btn-options-list .filter-btn span.vlt-icon-filter {
     margin-left: .8rem;
   }
 
@@ -456,7 +456,7 @@
   text-transform: capitalize;
 }
 
-.faceted-search .mobile-filter-dialog .title span.font-icon-filter {
+.faceted-search .mobile-filter-dialog .title span.vlt-icon-filter {
   margin-left: .8rem;
   font-size: 2.2rem;
 }
@@ -494,7 +494,7 @@
   line-height: 2.9em;
 }
 
-.faceted-search .mobile-filter-dialog  .mobile-filters details.accordion-bar[open] .font-icon-chevron::before {
+.faceted-search .mobile-filter-dialog  .mobile-filters details.accordion-bar[open] .vlt-icon-chevron::before {
   transform: rotate(180deg);
 }
 
