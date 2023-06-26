@@ -651,7 +651,7 @@
 }
 
 .cards.card-link > ul > li > a > div > div.cards-card-body > p:nth-child(3)::after {
-  font-family: VltIcons;
+  font-family: var(--icon-font-family);
   content: var(--vlt-right-arrow);
   margin-left: 1rem;
   position: absolute;

@@ -297,7 +297,7 @@ div.columns.lead-gen>div>div:last-child>p:last-child {
 }
 
 div.columns.lead-gen>div>div:last-child>p:last-child>a::before {
-  font-family: VltIcons;
+  font-family: var(--icon-font-family);
   font-weight: 600;
   font-size: 1.6rem;
   display: inline-block;
@@ -398,7 +398,7 @@ div.columns.lead-gen>div>div:last-child>p:last-child>a:last-child::before {
   div.market-place-summary>div {
     flex-direction: column;
   }
-  
+
   div.columns>div>div {
     flex: 1;
     order: unset;

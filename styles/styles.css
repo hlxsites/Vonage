@@ -22,13 +22,14 @@
   --primary-button-background-color: #000;
   --primary-button-text-color: #fff;
   --accent-color: #881fff;
+  --panel-background-color: #fafafa;
 
 
   /* fonts */
   --body-font-family: spezia, spezia_semimono, ubuntu, roboto, noto, sans-serif;
   --heading-font-family: var(--body-font-family);
   --fixed-font-family: "Spezia_SemiMono", menlo, consolas, 'Liberation Mono', monospace;
-  --icon-font-family: vlticons!important;
+  --icon-font-family: "VltIcons"!important;
 
   /* font icon aliases */
   --vlt-right-arrow: "\e90c";
@@ -154,7 +155,7 @@
 
 /* global layout */
 html {
-  font-size: 62.5%
+  font-size: 62.5%;
 }
 
 body {
@@ -202,12 +203,12 @@ h4, h5, h6 {
   scroll-margin: calc(var(--nav-height) + 1em);
 }
 
-h1 { font-size: var(--heading-font-size-xxl) }
-h2 { font-size: var(--heading-font-size-xl) }
-h3 { font-size: var(--heading-font-size-l) }
-h4 { font-size: var(--heading-font-size-m) }
-h5 { font-size: var(--heading-font-size-s) }
-h6 { font-size: var(--heading-font-size-xs) }
+h1 { font-size: var(--heading-font-size-xxl); }
+h2 { font-size: var(--heading-font-size-xl); }
+h3 { font-size: var(--heading-font-size-l); }
+h4 { font-size: var(--heading-font-size-m); }
+h5 { font-size: var(--heading-font-size-s); }
+h6 { font-size: var(--heading-font-size-xs); }
 
 p, dl, ol, ul, pre, blockquote {
   margin-top: 1em;
