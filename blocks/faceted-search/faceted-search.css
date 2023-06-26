@@ -107,6 +107,7 @@
   font-size: 1.4rem;
   min-height: 2rem;
   user-select: none;
+  line-height: 1em;
 }
 
 .faceted-search .desktop-filter-options details.accordion-bar  ul li .checkbox-wrapper label input {
