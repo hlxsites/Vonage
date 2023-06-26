@@ -1,4 +1,4 @@
- /* stylelint-disable no-descending-specificity */
+/* stylelint-disable no-descending-specificity */
 .faceted-search {
   display: flex;
   gap: 60px;
@@ -52,7 +52,7 @@
 }
 
 
-  /* desktop filters */
+/* desktop filters */
 .faceted-search .desktop-filter-options {
   border-radius: 1rem;
   background-color: var(--panel-background-color);
