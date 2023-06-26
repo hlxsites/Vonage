@@ -16,9 +16,9 @@ export default async function decorate(block) {
   block.dataset.contentSections = JSON.stringify(config['content-sections'].split(',').map((f) => f.trim().toLowerCase()));
 
   block.innerHTML = `<div class="search-filters">
-    <div class="filter-btn-options-wrapper">
+    <div class="filter-btn-options-wrapper-mobile">
         <ul class="btn-options-list">
-            <li class="filter-btn active"><span>Filters</span> <span class="vlt-icon-filter"></span></li>
+            <li class="filter-btn"><span>Filters</span> <span class="vlt-icon-filter"></span></li>
         </ul>
     </div>
 
@@ -26,7 +26,7 @@ export default async function decorate(block) {
         <div class="dialog-head">
             <div class="close-button vlt-icon-close"></div>
             <div class="title"><span>Filters</span> <span class="vlt-icon-filter"></span></div>
-            <div class="clear-wrap"></div>
+            <div class="clear-wrap"><span class="hidden">Clear All</span></div>
         </div>
         <ul class="mobile-filters"></ul>
         <div class="dialog-foot button-container">
@@ -58,6 +58,9 @@ export default async function decorate(block) {
   block.querySelector('.mobile-filter-dialog .dialog-foot button').addEventListener('click', async () => {
     await applyMobileFilters(block);
     block.querySelector('.mobile-filter-dialog').close();
+  });
+  block.querySelector('.mobile-filter-dialog .dialog-head .clear-wrap').addEventListener('click', async () => {
+    await clearFilters(block);
   });
 
   await refreshResults(block);
@@ -456,6 +459,16 @@ function updateMobileFilters(block, swiftypeResult, activeFilters) {
 
     filters.append(group);
   });
+
+  const clearButton = block.querySelector('.mobile-filter-dialog .dialog-head .clear-wrap span');
+  const filterButton = block.querySelector('.filter-btn-options-wrapper-mobile .filter-btn');
+  if (Object.keys(activeFilters).length) {
+    clearButton.classList.remove('hidden');
+    filterButton.classList.add('active');
+  } else {
+    clearButton.classList.add('hidden');
+    filterButton.classList.remove('active');
+  }
 }
 
 async function handleFilterChange(e, block) {
