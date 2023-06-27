@@ -410,7 +410,8 @@ function updateFilters(block, swiftypeResult, activeFilters, tagPlaceholders) {
                 'data-group': groupId,
                 onChange: (e) => handleFilterChange(e, block),
               }),
-              span({ class: 'checkmark' }),
+              // &#xe90e; is the close icon, see --vlt-close-icon in styles.css
+              span({ class: 'fake-checkbox' }, span({ class: 'checkmark', innerHTML: '&#xe90e;' })),
               span({ class: 'option-txt' }, facet.label, span({ class: 'option-num' }, `(${facet.count})`)),
             ),
           ),
