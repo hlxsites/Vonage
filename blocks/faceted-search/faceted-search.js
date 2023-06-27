@@ -101,12 +101,6 @@ async function applyMobileFilters(block) {
  * @param typeTag
  * @param facets
  * @param contentSections
- * @param typeTag
- * @param facets
- * @param contentSections
- * @param typeTag
- * @param facets
- * @param contentSections
  * @param pageNo {number}
  * @param filters {Object<string, string[]>}
  * @return {Promise<SwiftypeResponse>}
