@@ -244,7 +244,7 @@ div.market-place-summary .recs .col>a>div {
   padding-left: 20px;
 }
 
-div.block {
+div.columns.block {
   padding-right: 20px;
   padding-left: 20px;
   margin-right: auto;
@@ -317,7 +317,7 @@ div.columns.lead-gen>div>div:last-child>p:last-child>a:last-child::before {
 }
 
 @media (min-width: 576px) {
-  div.block {
+  div.columns.block {
     max-width: 540px;
   }
 }
@@ -380,7 +380,7 @@ div.columns.lead-gen>div>div:last-child>p:last-child>a:last-child::before {
     margin-bottom: 5rem;
   }
 
-  div.block {
+  div.columns.block {
     max-width: 45pc;
   }
 
@@ -421,7 +421,7 @@ div.columns.lead-gen>div>div:last-child>p:last-child>a:last-child::before {
 }
 
 @media (min-width: 992px) {
-  div.block {
+  div.columns.block {
     max-width: 990pt;
   }
 
