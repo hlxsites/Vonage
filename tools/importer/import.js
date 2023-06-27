@@ -48,7 +48,6 @@ const createMetadata = (main, document) => {
   meta['nav-section'] = 'Unified Communications'; // this is static for now
 
   const navs = main.querySelectorAll('div.left-sec span.title-option > a > span:not(.nav-icon)');
-  console.log(navs);
   console.log(`navs: ${navs.length}`);
   if (navs[1]) {
     meta['nav-subsection'] = navs[1].innerHTML;
