@@ -152,7 +152,8 @@ function importIconPanel(main, document) {
 }
 
 function importCategoryGrid(main, document) {
-  const cg = main.querySelectorAll('section.category-grid');
+  const cg = main.querySelectorAll('section.category-grid:not(#tiers, #pricing)');
+  console.log(`category-grid: ${cg.length}`);
   cg.forEach((grid) => {
     const cgCells = [['Columns']];
     const gi = grid.querySelectorAll('section.category-grid__item');
@@ -164,7 +165,9 @@ function importCategoryGrid(main, document) {
       textNode.replaceWith(boldNode);
       cols.push(item);
     });
-    cgCells.push(cols);
+    if (cols.length > 0) {
+      cgCells.push(cols);
+    }
     const columnsBlock = WebImporter.DOMUtils.createTable(cgCells, document);
     grid.replaceWith(columnsBlock);
   });
@@ -255,6 +258,7 @@ function importDetailsGrid(main, document) {
   detailsGrid.forEach((grid) => {
     const dgCells = [['columns']];
     const items = grid.querySelectorAll('div.detail__content');
+    console.log(`items: ${items.innerHTML}`);
     const dpItems = [];
     items.forEach((item) => {
       dpItems.push(item);
@@ -355,6 +359,57 @@ function importLogoStrip(main, document) {
   });
 }
 
+function importCardImage3up(main, document) {
+  const cards = main.querySelectorAll('div.card-image-3-up > div.container > div.row');
+  cards.forEach((card) => {
+    const ciCells = [['cards (card-link)']];
+    card.querySelectorAll('div.col-12').forEach((item) => {
+      const typeDiv = document.createElement('div');
+      const anchor = item.querySelector('a');
+      const linkedDiv = document.createElement('div');
+      const headDiv = document.createElement('div');
+      const cat = item.querySelector('span.Vlt-card-image__category').innerHTML;
+      const type = (item.querySelector('span.Vlt-card-image__type')) ? item.querySelector('span.Vlt-card-image__type').innerHTML : '';
+      const head = item.querySelector('span.Vlt-card-image__headline').innerHTML;
+      const image = item.querySelector('div.Vlt-card-image__image-wrapper img');
+      anchor.innerHTML = cat;
+      typeDiv.innerHTML = type;
+      headDiv.innerHTML = head;
+      linkedDiv.append(anchor);
+      linkedDiv.append(typeDiv);
+      linkedDiv.append(headDiv);
+      ciCells.push([image, linkedDiv]);
+    });
+    const ciCard = WebImporter.DOMUtils.createTable(ciCells, document);
+    card.replaceWith(ciCard);
+  });
+}
+
+function importSpeedBump(main, document) {
+  const bumps = main.querySelectorAll('section.speed-bump');
+  console.log(`Speed Bump(s): ${bumps.length}`);
+  bumps.forEach((bump) => {
+    const sbCells = [['speed-bump']];
+    sbCells.push(['hero', bump.querySelector('div.speed-bump__container > img')]);
+    const contentDiv = document.createElement('div');
+    const heading = document.createElement('h3');
+    const subHeading = document.createElement('p');
+    const description = document.createElement('p');
+    subHeading.append(bump.querySelector('div.speed-bump__headline').innerHTML);
+    heading.append(bump.querySelector('span.speed-bump__eyebrow').innerHTML);
+    description.append(bump.querySelector('div.speed-bump__description').innerHTML);
+    contentDiv.append(heading);
+    contentDiv.append(subHeading);
+    contentDiv.append(description);
+    bump.querySelectorAll('div.speed-bump__link-container').forEach((link) => {
+      contentDiv.append(link);
+    });
+    sbCells.push(['copy', contentDiv]);
+    const speedBump = WebImporter.DOMUtils.createTable(sbCells, document);
+    bump.replaceWith(speedBump);
+  });
+}
+
 export default {
   /**
    * Apply DOM operations to the provided document and return
@@ -409,6 +464,8 @@ export default {
     importHeroForm(main, document);
     injectLeadGenFragment(main, document);
     importLogoStrip(main, document);
+    importCardImage3up(main, document);
+    importSpeedBump(main, document);
 
     return main;
   },
