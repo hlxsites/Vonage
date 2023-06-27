@@ -2,10 +2,13 @@
 import {
   a, button, div, domEl, img, li, p, span, ul,
 } from '../../scripts/scripts.js';
-import { readBlockConfig } from '../../scripts/lib-franklin.js';
+import { fetchPlaceholders, readBlockConfig, toCamelCase } from '../../scripts/lib-franklin.js';
 
 // noinspection JSUnusedGlobalSymbols
 export default async function decorate(block) {
+  // noinspection ES6MissingAwait no need to await here. We will wait when the strings are actually used.
+  fetchPlaceholders();
+
   const config = readBlockConfig(block);
   block.dataset.page = 1;
   block.dataset.engineKey = config['swiftype-engine-key'];
@@ -95,6 +98,15 @@ async function applyMobileFilters(block) {
  * @param engineKey {string}
  * @param siteKey {string}
  * @param productTag {string}
+ * @param typeTag
+ * @param facets
+ * @param contentSections
+ * @param typeTag
+ * @param facets
+ * @param contentSections
+ * @param typeTag
+ * @param facets
+ * @param contentSections
  * @param pageNo {number}
  * @param filters {Object<string, string[]>}
  * @return {Promise<SwiftypeResponse>}
@@ -275,9 +287,10 @@ async function refreshResults(block, newFilters) {
     activeFilters,
   );
 
-  updateFilters(block, swiftypeResult, activeFilters);
-  updateMobileFilters(block, swiftypeResult, activeFilters);
-  updateFilterPills(block, swiftypeResult, activeFilters);
+  const tagPlaceholders = await fetchPlaceholders();
+  updateFilters(block, swiftypeResult, activeFilters, tagPlaceholders);
+  updateMobileFilters(block, swiftypeResult, activeFilters, tagPlaceholders);
+  updateFilterPills(block, swiftypeResult, activeFilters, tagPlaceholders);
   updateResults(block, swiftypeResult);
   updatePagination(block, swiftypeResult);
 }
@@ -286,8 +299,9 @@ async function refreshResults(block, newFilters) {
  * @param block
  * @param swiftypeResult {SwiftypeResponse}
  * @param activeFilters {Object.<string, string[]>}
+ * @param tagPlaceholders
  */
-function updateFilterPills(block, swiftypeResult, activeFilters) {
+function updateFilterPills(block, swiftypeResult, activeFilters, tagPlaceholders) {
   const list = block.querySelector('.filter-btn-options-wrapper-desktop');
   list.innerHTML = '';
   if (Object.values(activeFilters).length === 0) {
@@ -307,7 +321,7 @@ function updateFilterPills(block, swiftypeResult, activeFilters) {
       const pill = li(
         { class: 'filter-option' },
         span({ class: 'vlt-icon-close', 'aria-hidden': true }),
-        span(`${getLabelForFacet(filterId)} (${swiftypeResult.info.page.facets[group][filterId]})`),
+        span(`${getLabelForFacet(filterId, tagPlaceholders)} (${swiftypeResult.info.page.facets[group][filterId]})`),
       );
       pill.addEventListener('click', () => clearFilter(block, group, filterId));
       list.append(pill);
@@ -322,22 +336,32 @@ function updateFilterPills(block, swiftypeResult, activeFilters) {
   list.append(clearAll);
 }
 
-function getLabelForFacet(facetId) {
-  return facetId
-    // remove dashes
-    .replaceAll('-', ' ')
-    // remove slashes
-    .replaceAll(/^[^/]+[/]/g, '')
-    // titleCase
-    .replace(/\b[a-z]/, (str) => str.toUpperCase());
+function getLabelForFacet(facetId, tagPlaceholders) {
+  // placeholder keys are imported as camelCase, so we also need to query them like this.
+  const camelCaseId = toCamelCase(facetId);
+  if (tagPlaceholders[camelCaseId]) {
+    return tagPlaceholders[camelCaseId];
+  }
+
+  // from https://www.freecodecamp.org/news/three-ways-to-title-case-a-sentence-in-javascript-676a9175eb27/
+  function titleCase(str) {
+    return str.toLowerCase().split(' ').map((word) => (word.charAt(0).toUpperCase() + word.slice(1))).join(' ');
+  }
+
+  const label = facetId
+    // use string after last slash
+    .split('/').at(-1)
+    .replaceAll('-', ' ');
+  return titleCase(label);
 }
 
 /**
  * @param block
  * @param swiftypeResult {SwiftypeResponse}
  * @param activeFilters {Object.<string, string[]>}
+ * @param tagPlaceholders
  */
-function updateFilters(block, swiftypeResult, activeFilters) {
+function updateFilters(block, swiftypeResult, activeFilters, tagPlaceholders) {
   const filters = block.querySelector('.desktop-filter-options');
   filters.innerHTML = '';
 
@@ -348,7 +372,7 @@ function updateFilters(block, swiftypeResult, activeFilters) {
       .map(([name, count]) => ({
         name,
         count,
-        label: getLabelForFacet(name),
+        label: getLabelForFacet(name, tagPlaceholders),
       }));
     facetListSorted.sort((left, right) => {
       const nameA = left.label.toUpperCase(); // ignore upper and lowercase
@@ -370,7 +394,7 @@ function updateFilters(block, swiftypeResult, activeFilters) {
       { open: 'open', class: 'accordion-bar' },
       domEl(
         'summary',
-        getLabelForFacet(groupId),
+        getLabelForFacet(groupId, tagPlaceholders),
         div({ class: 'summary-chevron' }, span({ class: 'vlt-icon-chevron' })),
       ),
       ul(
@@ -382,7 +406,7 @@ function updateFilters(block, swiftypeResult, activeFilters) {
               domEl('input', {
                 type: 'checkbox',
                 value: facet.name,
-                'data-label': getLabelForFacet(facet.name),
+                'data-label': getLabelForFacet(facet.name, tagPlaceholders),
                 'data-group': groupId,
                 onChange: (e) => handleFilterChange(e, block),
               }),
@@ -411,8 +435,9 @@ function updateFilters(block, swiftypeResult, activeFilters) {
  * @param block
  * @param swiftypeResult {SwiftypeResponse}
  * @param activeFilters {Object.<string, string[]>}
+ * @param tagPlaceholders
  */
-function updateMobileFilters(block, swiftypeResult, activeFilters) {
+function updateMobileFilters(block, swiftypeResult, activeFilters, tagPlaceholders) {
   const filters = block.querySelector('.mobile-filter-dialog .mobile-filters');
   filters.innerHTML = '';
 
@@ -422,7 +447,7 @@ function updateMobileFilters(block, swiftypeResult, activeFilters) {
       { class: 'accordion-bar' },
       domEl(
         'summary',
-        getLabelForFacet(groupId),
+        getLabelForFacet(groupId, tagPlaceholders),
         div({ class: 'summary-chevron' }, span({ class: 'vlt-icon-chevron' })),
       ),
       ul(
@@ -434,11 +459,11 @@ function updateMobileFilters(block, swiftypeResult, activeFilters) {
               domEl('input', {
                 type: 'checkbox',
                 value: name,
-                'data-label': getLabelForFacet(name),
+                'data-label': getLabelForFacet(name, tagPlaceholders),
                 'data-group': groupId,
               }),
               span({ class: 'checkmark' }),
-              span({ class: 'option-txt' }, getLabelForFacet(name), span({ class: 'option-num' }, `(${count})`)),
+              span({ class: 'option-txt' }, getLabelForFacet(name, tagPlaceholders), span({ class: 'option-num' }, `(${count})`)),
             ),
           ),
         )),
