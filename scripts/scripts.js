@@ -1,10 +1,10 @@
 import {
-  buildBlock,
+  buildBlock, decorateBlock,
   decorateBlocks,
   decorateButtons,
   decorateIcons,
   decorateSections,
-  decorateTemplateAndTheme,
+  decorateTemplateAndTheme, loadBlock,
   loadBlocks,
   loadCSS,
   loadFooter,
@@ -143,6 +143,34 @@ function decorateHyperlinkImages(container) {
     });
 }
 
+function decorateModalDialogLinks(block) {
+  [...block.querySelectorAll('a')]
+    .filter(({ href }) => href?.includes('#modal-dialog'))
+    .forEach((link) => {
+      link.addEventListener('click', async (event) => {
+        event.preventDefault();
+
+        const dialog = domEl('dialog', { id: 'modal-dialog', class: 'modal-dialog' });
+        block.append(dialog);
+
+        // load fragment
+        const wrapper = div();
+        const fragmentBlock = buildBlock('fragment', [
+          [a({ href: new URL(link.href).pathname }, 'Open Fragment')],
+        ]);
+        wrapper.append(fragmentBlock);
+        dialog.append(wrapper);
+        decorateBlock(fragmentBlock);
+        await loadBlock(fragmentBlock);
+
+        dialog.showModal();
+        dialog.addEventListener('close', () => {
+          dialog.remove();
+        });
+      });
+    });
+}
+
 /**
  * Decorates the main element.
  * @param {Element} main The main element
@@ -156,6 +184,7 @@ export function decorateMain(main) {
   decorateSections(main);
   decorateBlocks(main);
   decorateHyperlinkImages(main);
+  decorateModalDialogLinks(main);
 }
 
 /**
