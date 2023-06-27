@@ -93,18 +93,29 @@ function importPricingMatrix(main, document) {
     slider.remove();
   }
   pms.forEach((matrix) => {
-    const matrixConfig = [['Pricing-Matrix'], ['Show Condition', 'a', 'b', 'c']];
-    const pmBlock = WebImporter.DOMUtils.createTable(matrixConfig, document);
+    if (matrix.querySelector('div.plans-card.plans-card--extended:not(.plans-card--tagged)')) {
+      console.log('Found Alt Extended Pricing Matrix');
+      const matrixConfig = [['columns (plans)']];
+      matrix.querySelectorAll('div.plans-card__info').forEach((info) => {
+        info.querySelector('section.form-overlay > div.form-overlay__overlay').remove();
+        matrixConfig.push([info]);
+      });
+      const pmBlock = WebImporter.DOMUtils.createTable(matrixConfig, document);
+      matrix.replaceWith(pmBlock);
+    } else {
+      const matrixConfig = [['Pricing-Matrix'], ['Show Condition', 'a', 'b', 'c']];
+      const pmBlock = WebImporter.DOMUtils.createTable(matrixConfig, document);
 
-    const fragConfig = [['Fragment'], ['FRAGMENT PATH']];
-    const fragBlock = WebImporter.DOMUtils.createTable(fragConfig, document);
-    pmBlock.append(fragBlock);
+      const fragConfig = [['Fragment'], ['FRAGMENT PATH']];
+      const fragBlock = WebImporter.DOMUtils.createTable(fragConfig, document);
+      pmBlock.append(fragBlock);
 
-    const smCells = [['Section Metadata'], ['Style', 'background-pricing']];
-    const smBlock = WebImporter.DOMUtils.createTable(smCells, document);
-    pmBlock.append(smBlock);
-    pmBlock.append(hr(document));
-    matrix.replaceWith(pmBlock);
+      const smCells = [['Section Metadata'], ['Style', 'background-pricing']];
+      const smBlock = WebImporter.DOMUtils.createTable(smCells, document);
+      pmBlock.append(smBlock);
+      pmBlock.append(hr(document));
+      matrix.replaceWith(pmBlock);
+    }
   });
 }
 
