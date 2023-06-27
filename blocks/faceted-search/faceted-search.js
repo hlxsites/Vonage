@@ -463,7 +463,8 @@ function updateMobileFilters(block, swiftypeResult, activeFilters, tagPlaceholde
                 'data-label': getLabelForFacet(name, tagPlaceholders),
                 'data-group': groupId,
               }),
-              span({ class: 'checkmark' }),
+              // &#xe90e; is the close icon, see --vlt-close-icon in styles.css
+              span({ class: 'fake-checkbox' }, span({ class: 'checkmark', innerHTML: '&#xe90e;' })),
               span({ class: 'option-txt' }, getLabelForFacet(name, tagPlaceholders), span({ class: 'option-num' }, `(${count})`)),
             ),
           ),
