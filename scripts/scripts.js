@@ -143,6 +143,10 @@ function decorateHyperlinkImages(container) {
     });
 }
 
+/**
+ * Links that have the hash #modal-dialog in their href will open as a modal dialog.
+ * @param block
+ */
 function decorateModalDialogLinks(block) {
   [...block.querySelectorAll('a')]
     .filter(({ href }) => href?.includes('#modal-dialog'))
