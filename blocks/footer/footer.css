@@ -69,7 +69,7 @@ footer .footer p {
 }
 
 .footer-social-icon::before {
-  font-family: VltIcons;
+  font-family: var(--icon-font-family);
   font-weight: 400;
   font-size: 1.0rem;
   letter-spacing: 0;
@@ -100,7 +100,7 @@ footer .footer p {
 
 .footer-external-link::after {
   content: var(--vlt-up-right-arrow-icon);
-  font-family: VltIcons;
+  font-family: var(--icon-font-family);
   font-weight: 400;
   font-size: 1.0rem;
   letter-spacing: 0;

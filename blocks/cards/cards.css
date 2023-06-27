@@ -46,6 +46,29 @@
   object-fit: cover;
 }
 
+.cards.logo-strip.block li {
+  border: unset;
+}
+
+.cards.logo-strip.block div.cards-card-image {
+  margin-bottom: 4rem;
+  padding: 1rem;
+  max-width: 100%;
+}
+
+.cards.logo-strip.block div.cards-card-image > picture {
+  display: block;
+  max-height: 100%;
+  max-width: 142px;
+  margin: auto;
+}
+
+.cards.logo-strip.block div.cards-card-image > picture > img {
+  aspect-ratio: unset;
+  object-fit: unset;
+  width: 100%;
+}
+
 .cards-container.icon-panel > .default-content-wrapper {
   max-width: 66.6667%;
   margin: auto;
@@ -390,7 +413,6 @@
     letter-spacing: -.025rem;
     line-height: 2.5rem;
     font-weight: 400;
-    -moz-osx-font-smoothing: grayscale;
   }
 
   /* Styling of the arrow icon and it's animation */
@@ -413,6 +435,11 @@
 
 /* icon-card layout adjustments at higher resolutions */
 @media (min-width: 768px){
+  .cards.logo-strip.block ul {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    align-items: center;
+  }
+
   /* Styling of the clickable container in the info card */
   .cards.info-card .cards-card-body {
     display: block;
@@ -455,6 +482,16 @@
 }
 
 @media (min-width: 992px){
+  .cards.logo-strip.block ul {
+    grid-template-columns: repeat(6, 1fr);
+    align-items: center;
+  }
+
+  .cards.logo-strip.block {
+    display: flex;
+    justify-content: center;
+  }
+
   /* Dual card layout for larger screens */
   .cards.info-card > ul > li {
     border: 0;
@@ -614,7 +651,7 @@
 }
 
 .cards.card-link > ul > li > a > div > div.cards-card-body > p:nth-child(3)::after {
-  font-family: VltIcons;
+  font-family: var(--icon-font-family);
   content: var(--vlt-right-arrow);
   margin-left: 1rem;
   position: absolute;

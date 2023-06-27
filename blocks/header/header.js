@@ -1,4 +1,7 @@
-import { getMetadata, decorateIcons, toClassName } from '../../scripts/lib-franklin.js';
+import { decorateIcons, getMetadata, toClassName } from '../../scripts/lib-franklin.js';
+import {
+  a, div, hr, li, span, ul,
+} from '../../scripts/scripts.js';
 
 /* ------------------------------ Global Variables ----------------------------------- */
 // media query match that indicates mobile/tablet width
@@ -21,6 +24,15 @@ function scrollFunction() {
   const scrollDistance = 160;
   const newScrollY = window.scrollY;
   const scrolledDown = (oldScrollY - newScrollY < 0);
+  if (window.location.pathname.search('unified-communications/')) {
+    if ((scrolledDown && document.body.scrollTop > scrollDistance)
+      || (scrolledDown && document.documentElement.scrollTop > scrollDistance)) {
+      document.querySelector('.header-wrapper').classList.add('collapsed');
+    } else {
+      document.querySelector('.header-wrapper').classList.remove('collapsed');
+    }
+  }
+
   if ((scrolledDown && document.body.scrollTop > scrollDistance)
       || (scrolledDown && document.documentElement.scrollTop > scrollDistance)) {
     document.getElementById('nav').querySelector('.nav-tools').style.display = 'none';
@@ -93,21 +105,35 @@ function toggleNavSubSection(event) {
   }
 }
 
+function toggleBreadCrumb() {
+  document.querySelector('.menu-option-sublist.l3-nav-menu-options').classList.toggle('active');
+  document.querySelector('.l3-nav-mobile-menu-body').classList.toggle('active');
+  document.querySelector('.l3-nav-mobile-menu-head.l3-nav-mobile-closed').classList.toggle('not-active');
+  document.querySelector('.l3-nav-mobile-menu-head.l3-nav-mobile-open').classList.toggle('not-active');
+}
+
 /* ------------------------------ Global Functions ----------------------------------- */
 
-/**
- * A utility function to create divs with specified ID and classes
- * @param {string} id The id to associate with the created div element
- * @param {[string]} classes an array of strings indicating the classes to add to the div element
- * @returns {HTMLDivElement}
- */
-function createDiv(id, classes) {
-  const div = document.createElement('div');
-  div.id = id;
-  classes.forEach((className) => {
-    div.classList.add(className);
+function buildHierarchy(flat) {
+  // Array to build out with parent->child hierarchy for links
+  const structuredLinks = [];
+
+  // Iterate through the flat array of links
+  flat.forEach((item) => {
+    // If the link has no parent it's a top level node so append it to the top level array
+    if (item.parent === null || item.parent === '') {
+      structuredLinks.push(item);
+      // Add a children array property to the parent object
+      structuredLinks[structuredLinks.length - 1].children = [];
+    } else {
+      // Otherwise if the link has a listed parent find it in the array
+      // and append it to the child array element of that parent
+      const index = structuredLinks.indexOf(structuredLinks.find((o) => o.url === item.parent));
+      structuredLinks[index].children.push(item);
+    }
   });
-  return div;
+
+  return structuredLinks;
 }
 
 function focusNavSection() {
@@ -195,6 +221,10 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
   toggleAllNavSections(navSections, expanded || isDesktop.matches ? 'false' : 'true');
   button.setAttribute('aria-label', expanded ? 'Open navigation' : 'Close navigation');
 
+  const mobileBreadCrumb = document.querySelector('.l3-nav-mobile');
+  if (mobileBreadCrumb) {
+    mobileBreadCrumb.style.display = expanded ? 'block' : 'none';
+  }
   // enable nav dropdown keyboard accessibility
   const navDrops = navSections.querySelectorAll('.nav-drop');
   if (isDesktop.matches) {
@@ -297,7 +327,7 @@ function decorateSubSections(navSection, sectionIndex) {
   navSection.classList.add('nav-drop');
 
   // Create a div to wrap the items in the drop-down menu to handle displaying as a popout
-  const subMenuWrapper = createDiv(`sub-menu-${safeSectionName}`, ['sub-menu']);
+  const subMenuWrapper = div({ id: `sub-menu-${safeSectionName}`, class: 'sub-menu' });
 
   // Add a span for the close button in the menu
   const closeButton = document.createElement('span');
@@ -338,19 +368,20 @@ function decorateSubSections(navSection, sectionIndex) {
  * @param {HTMLElement} navSections The nodes of the section nav menu bar
  */
 function decorateSections(navSections) {
-  const sectionDivider = document.createElement('hr');
-  sectionDivider.classList.add('nav-section-divider');
+  const sectionDivider = hr({ class: 'nav-section-divider' });
   navSections.after(sectionDivider);
   navSections.querySelectorAll(':scope > ul > li').forEach((navSection) => {
     const sectionIndex = navSection.querySelector(':scope > ul');
     navSection.remove();
-    const navItemWrapper = document.createElement('div');
-    navItemWrapper.classList.add('nav-item-wrapper');
+    const navItemWrapper = div({ class: 'nav-item-wrapper' });
     navSection.id = toClassName(navSection.childNodes[0].nodeValue);
+    if (navSection.querySelectorAll('em, strong').length > 0) {
+      navItemWrapper.classList.add('cta');
+    }
     navItemWrapper.appendChild(navSection);
     navSections.querySelector('ul').appendChild(navItemWrapper);
     if (sectionIndex) {
-      const subMenuLabel = document.createElement('span');
+      const subMenuLabel = span();
       const labeltext = toClassName(navSection.childNodes[0].nodeValue);
       subMenuLabel.id = `${labeltext}-label`;
       subMenuLabel.classList.add('sub-menu-label');
@@ -390,7 +421,7 @@ function decorateSections(navSections) {
         navSection.setAttribute('aria-expanded', expanded ? 'false' : 'true');
         navSection.parentElement.setAttribute('aria-expanded', expanded ? 'false' : 'true');
       } else {
-        // For Mobile need to set the right subsection to active so it display
+        // For Mobile need to set the right subsection to active so it displayed
         document.getElementById(`sub-menu-${event.target.id}`).classList.toggle('sub-menu-section-active');
 
         // Turn on the Back to Main menu button
@@ -410,6 +441,7 @@ function decorateSections(navSections) {
       }
     });
   });
+  navSections.querySelector('.cta').classList.add('first');
 }
 
 /**
@@ -430,6 +462,194 @@ function buildHamburger(nav, navSections) {
   return hamburger;
 }
 
+/**
+ * Build the hamburger icon element which will trigger the menu display in mobile mode
+ * @returns {HTMLDivElement} Breadcrumb header element
+ // * @param {String} title The content of the root breadcrumb element that should be displayed (page section)
+ // * @param {[Object]} links An array of link objects sorted in a parent -> child structure
+ */
+function buildBreadCrumbDesktop() {
+  const breadCrumb = div({ class: 'l3-nav-desktop' }, div({ class: 'l3-nav-desktop-menu-head' }));
+  breadCrumb.innerHTML = `
+    <div class="container section-container">
+      <div class="left-sec" tabindex="0">
+      </div>
+      <div class="right-sec">
+        <div class="right-sec-menu-option">
+          <a href="/unified-communications/pricing/" class="title-option" target="_self">
+          See plans &amp; pricing
+          </a>
+        </div>
+      <div class="right-sec-menu-option">
+        <a href="tel:+1-855-430-6401" class="title-option" target="_self">
+        1-855-430-6401
+        </a>
+      </div>
+      </div>
+    </div>`;
+  return breadCrumb;
+}
+
+function buildBreadCrumbMobile() {
+  const breadCrumb = div({ class: 'l3-nav-mobile' });
+  breadCrumb.innerHTML = `
+        <div class="l3-nav-mobile-menu-head l3-nav-mobile-closed">
+            <div class="left-sec"></div>
+            <div class="right-sec">
+                <span class="vlt-icon-chevron right-sec-dropdown-icn"></span>
+            </div>
+        </div>
+        <div class="l3-nav-mobile-menu-head l3-nav-mobile-open not-active">
+            <div class="left-sec"></div>
+            <div class="right-sec">
+                <span class="vlt-icon-close right-sec-close-icn" style="left: -55px;"></span>
+            </div>
+        </div>
+        <div class="l3-nav-mobile-menu-body"></div>`;
+  return breadCrumb;
+}
+/**
+ *
+ * @param {String} json The json response returned for the nav hierarchy data to use when building the breadcrumb of the header
+ */
+function parseBreadCrumbJSON(json) {
+  const breadCrumbData = { };
+
+  const subNavs = JSON.parse(json);
+
+  const breadCrumbTitles = [];
+  const breadCrumbMetaTags = ['nav-section', 'nav-subsection', 'nav-breadcrumb'];
+
+  breadCrumbMetaTags.forEach((tag) => {
+    const title = getMetadata(tag);
+    if (title !== '') {
+      breadCrumbTitles.push(title);
+    }
+  });
+
+  breadCrumbData.titles = breadCrumbTitles;
+  breadCrumbData.links = buildHierarchy(subNavs.data);
+
+  return breadCrumbData;
+}
+/**
+ *
+ * @param {Object} data An object containing the breadcrumb titles as well as
+ * a hierarchical map of links organized with root urls and nested children
+ * @param {[String]} pathArray An array representing the path elements of the current page in hierarchical order
+
+ */
+function populateBreadCrumb(data, pathArray) {
+  const breadCrumbDesktop = document.querySelector('.l3-nav-desktop');
+  const breadCrumbMobile = document.querySelector('.l3-nav-mobile');
+  const inSubSection = (data.titles.length > 1);
+
+  // Build out the breadcrumb titles based on the nav-titles in the pages metadata
+  data.titles.forEach((title, index) => {
+    const breadCrumbTitleElemDesktop = div({ class: 'l3-nav-menu-title' });
+    breadCrumbTitleElemDesktop.innerHTML = `
+        <span class="title-option">
+            <a class="title-option-l3nav" data-static-label="${title}">
+              <span>${title}</span>
+            </a>
+          </span>`;
+    breadCrumbTitleElemDesktop.addEventListener('click', toggleBreadCrumb);
+    breadCrumbDesktop.querySelector('.left-sec').appendChild(breadCrumbTitleElemDesktop);
+    breadCrumbMobile.querySelector('.l3-nav-mobile-closed .left-sec').appendChild(a({ class: 'title-item', innerHTML: title }));
+    breadCrumbMobile.querySelector('.vlt-icon-close.right-sec-close-icn').addEventListener('click', toggleBreadCrumb);
+    breadCrumbMobile.querySelector('.vlt-icon-chevron.right-sec-dropdown-icn').addEventListener('click', toggleBreadCrumb);
+
+    if (index === 0) {
+      // Add an icon for decoration in the desktop title
+      const iconSpan = span({ class: 'nav-icon vlt-icon-phone' });
+      breadCrumbTitleElemDesktop.querySelector('a').prepend(iconSpan);
+
+      // Add only the first link for the open mobile breadcrumb
+      breadCrumbMobile.querySelector('.l3-nav-mobile-open .left-sec').appendChild(a({ class: 'title-item', innerHTML: title }));
+    }
+
+    // If there is more than one breadcrumb title, and we aren't on the last
+    if (index !== data.titles.length - 1 && data.titles.length > 1) {
+      // Add a separator for the breadcrumb titles
+      breadCrumbDesktop.querySelector('.left-sec .l3-nav-menu-title:last-child').appendChild(span({ class: 'separator', innerHTML: '/' }));
+      breadCrumbMobile.querySelector('.l3-nav-mobile-closed .left-sec').appendChild(span({ class: 'separator', innerHTML: '/' }));
+    }
+
+    // If this is the last title in the breadcrumb
+    if (index === data.titles.length - 1) {
+      // Add a trailing chevron decoration
+      const chevron = span({ class: 'vlt-icon-chevron arrow-icn' });
+      breadCrumbDesktop.querySelector('.l3-nav-menu-title:last-child .title-option-l3nav').classList.add('bold');
+      breadCrumbDesktop.querySelector('.l3-nav-menu-title:last-child').appendChild(chevron);
+    }
+  });
+
+  const sectionBreadCrumbDesktop = div(
+    { class: 'menu-option-sublist l3-nav-menu-options' },
+    div(
+      { class: 'container sublist-container' },
+      div(
+        { class: 'list l3-nav-menu-options-list first' },
+        ul(),
+      ),
+    ),
+  );
+
+  sectionBreadCrumbDesktop.querySelector('.list.l3-nav-menu-options-list.first').style.width = data.links[0].width ? data.links[0].width : '100px';
+
+  const sectionBreadCrumbMobile = div({ class: 'menu-sub-list' }, ul());
+
+  data.links.forEach((root) => {
+    const breadCrumbLink = a({ class: 'l3-nav-submenu', href: root.url, innerHTML: root.label });
+    if (root.url === `/${pathArray.join('/')}`) {
+      breadCrumbLink.classList.add('bold');
+    }
+    sectionBreadCrumbDesktop.querySelector('ul').appendChild(li(breadCrumbLink));
+    sectionBreadCrumbMobile.querySelector('ul').appendChild(li(span(breadCrumbLink.cloneNode(true))));
+  });
+
+  breadCrumbDesktop.querySelector('.left-sec').appendChild(sectionBreadCrumbDesktop);
+  breadCrumbMobile.querySelector('.l3-nav-mobile-menu-body').appendChild(sectionBreadCrumbMobile.cloneNode(true));
+
+  // If the page is a subsection based on its section metadata
+  // need to load the relevant subsection breadcrumb data
+  if (inSubSection) {
+    breadCrumbMobile.querySelector('.l3-nav-mobile-menu-body').appendChild(a({ class: 'title-item', innerHTML: data.titles[1] }));
+    const subSection = `/${pathArray[0]}/${pathArray[1]}/`;
+    const subSectionBreadCrumbDesktop = div({ class: 'list l3-nav-menu-options-list' }, ul());
+    const subSectionBreadCrumbMobile = div({ class: 'menu-sub-list' }, ul());
+
+    // Find the index in the linksData data of the root page we are currently on given the section metadata
+    const index = data.links.indexOf(data.links.find((o) => o.url === subSection));
+
+    data.links[index].children.forEach((child) => {
+      const breadCrumbLink = a({ class: 'l3-nav-submenu', href: child.url, innerHTML: child.label });
+      if (child.url === `/${pathArray.join('/')}/`) {
+        breadCrumbLink.classList.add('bold');
+      }
+      subSectionBreadCrumbDesktop.style.width = data.links[index].width ? data.links[index].width : '100px';
+      subSectionBreadCrumbDesktop.querySelector('ul').appendChild(li(breadCrumbLink));
+      subSectionBreadCrumbMobile.querySelector('ul').appendChild(li(span(breadCrumbLink.cloneNode(true))));
+    });
+
+    breadCrumbDesktop.querySelector('.sublist-container').appendChild(subSectionBreadCrumbDesktop);
+    breadCrumbMobile.querySelector('.l3-nav-mobile-menu-body').appendChild(subSectionBreadCrumbMobile);
+  }
+
+  // If we are on a page of a subsection (three levels down) append the page title to the bottom of the mobile breadcrumb menu
+  if (data.titles.length > 2) {
+    breadCrumbMobile.querySelector('.l3-nav-mobile-menu-body').appendChild(a({ class: 'title-item', innerHTML: data.titles[2] }));
+  }
+
+  // Finally append the contact info to the mobile breadcrumb body
+  const contactSection = div({ class: 'menu-sub-list' });
+  contactSection.innerHTML = `
+        <a href="/unified-communications/pricing/" class="title-item" target="_self" data-external="false">See plans &amp; pricing</a>
+        <a href="tel:+1-855-430-6401" class="title-item" target="_self" data-external="false">1-855-430-6401</a>`;
+
+  breadCrumbMobile.querySelector('.l3-nav-mobile-menu-body').append(contactSection);
+}
+
 /* ------------------------------ Main function invoked at load ------------------------------- */
 
 /**
@@ -437,7 +657,7 @@ function buildHamburger(nav, navSections) {
  * @returns {HTMLDivElement} Div containing the return to main menu button with event listeners
  */function buildBackButton() {
   // Back button for mobile
-  const backButton = createDiv('back-button', ['nav-back-button']);
+  const backButton = div({ id: 'back-button', class: 'nav-back-button' });
   backButton.innerHTML = `<button type="button" aria-controls="nav" aria-label="back to site navigation menu">
         Main Menu
       </button>`;
@@ -464,7 +684,7 @@ export default async function decorate(block) {
     nav.classList.add('nav-big');
 
     // Add a wrapper div to contain the full nav (logo and sections)
-    nav.appendChild(createDiv('header-navigation', ['header-navigation']));
+    nav.appendChild(div({ id: 'header-navigation', class: ['header-navigation'] }));
     nav.firstElementChild.innerHTML = html;
 
     // Tag the sections from the returned markdown based on their order with class categorization
@@ -507,15 +727,37 @@ export default async function decorate(block) {
     // Make sure that on initial display the nav is not flagged as open
     nav.setAttribute('aria-expanded', 'false');
 
-    const navWrapper = createDiv('nav-wrapper', ['nav-wrapper']);
+    const navWrapper = div({ id: 'nav-wrapper', class: 'nav-wrapper' });
 
     // Add the logo element before the nav elements which will stack vertically
     navWrapper.append(buildLogo());
     navWrapper.append(nav);
 
     // div element to be used for the mobile pop over menu
-    const headerBackdrop = createDiv('backdrop', ['header', 'backdrop']);
+    const headerBackdrop = div({ id: 'backdrop', class: 'header backdrop' });
     block.append(headerBackdrop);
     block.append(navWrapper);
+    block.append(buildBreadCrumbMobile());
+    block.append(buildBreadCrumbDesktop());
+  }
+
+  let sectionPathFull = window.location.pathname;
+
+  // Pop off the first character of the path if it's a / (which it should be)
+  if (sectionPathFull[0] === '/') {
+    sectionPathFull = sectionPathFull.slice(1);
+  }
+
+  const pathArray = sectionPathFull.split('/');
+  if (pathArray.length > 0) {
+    const subNavResp = await fetch(`/sub-nav/${pathArray[0]}.json`);
+    if (subNavResp.ok) {
+      const json = await subNavResp.text();
+      populateBreadCrumb(parseBreadCrumbJSON(json), pathArray);
+    } else {
+      // If not on a subpath (main vonage.com site) don't show a breadcrumb (won't need it for VIP Project)
+      document.querySelector('.l3-nav-desktop').remove();
+      document.querySelector('.l3-nav-mobile').remove();
+    }
   }
 }

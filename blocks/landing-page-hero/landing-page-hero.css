@@ -49,7 +49,7 @@
 /* Styling for the links in a link menu in the description */
 .landing-page-hero .category-content .description ul > li > a {
   color: var(--text-color);
-  font-weight: 600;
+  font-weight: 500;
   text-decoration: none;
 }
 
@@ -118,7 +118,7 @@
   border: 2px solid transparent;
   text-align: center;
   font-style: normal;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 1.6rem;
   cursor: pointer;
   color: var(--background-color);
@@ -262,7 +262,7 @@
 /* Layout and animation for the video play button background */
 .landing-page-hero .media-content .play-video-background {
   display: block;
-  transition: transform .3s ease-in-out
+  transition: transform .3s ease-in-out;
 }
 
 /* Layout for the video section container  */
@@ -402,7 +402,7 @@
     font-size: 1.4rem;
     font-weight: 400;
     letter-spacing: -.02rem;
-    line-height: 2rem
+    line-height: 2rem;
   }
 
   /* Tweak link menu text attributes for larger screens */
@@ -454,7 +454,7 @@
     font-weight: 500;
     letter-spacing: -.12rem;
     font-size: 5.35rem !important;
-    line-height: 5.5rem !important
+    line-height: 5.5rem !important;
   }
 
   /* Tweak description text attributes for largest screens */

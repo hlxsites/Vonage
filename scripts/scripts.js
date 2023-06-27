@@ -54,7 +54,10 @@ export function domEl(tag, ...items) {
     items = rest;
 
     Object.entries(attributes).forEach(([key, value]) => {
-      if (!key.startsWith('on')) {
+      // Add additional properties here for things that fail to reflect through setAttributes
+      if (['innerHTML'].includes(key)) {
+        element[key] = value;
+      } else if (!key.startsWith('on')) {
         element.setAttribute(key, Array.isArray(value) ? value.join(' ') : value);
       } else {
         element.addEventListener(key.substring(2).toLowerCase(), value);
@@ -91,6 +94,7 @@ export function i(...items) { return domEl('i', ...items); }
 export function img(...items) { return domEl('img', ...items); }
 export function span(...items) { return domEl('span', ...items); }
 export function button(...items) { return domEl('button', ...items); }
+export function hr(...items) { return domEl('hr', ...items); }
 
 /**
  * Builds hero block and prepends to main in a new section.
@@ -121,6 +125,24 @@ function buildAutoBlocks(main) {
   }
 }
 
+function decorateHyperlinkImages(container) {
+  // picture + br + a in the same paragraph
+  [...container.querySelectorAll('picture + br + a, picture + a')]
+    // link text is an unformatted URL paste
+    .filter((link) => link.textContent.trim().startsWith('http'))
+    .forEach((link) => {
+      const br = link.previousElementSibling;
+      let picture = br.previousElementSibling;
+      if (br.tagName === 'PICTURE') picture = br;
+      picture.remove();
+      br.remove();
+      link.innerHTML = picture.outerHTML;
+      // make sure the link is not decorated as a button
+      link.parentNode.classList.remove('button-container');
+      link.className = '';
+    });
+}
+
 /**
  * Decorates the main element.
  * @param {Element} main The main element
@@ -133,6 +155,7 @@ export function decorateMain(main) {
   buildAutoBlocks(main);
   decorateSections(main);
   decorateBlocks(main);
+  decorateHyperlinkImages(main);
 }
 
 /**
