@@ -150,7 +150,9 @@ function decorateModalDialogLinks(block) {
       link.addEventListener('click', async (event) => {
         event.preventDefault();
 
-        const dialog = domEl('dialog', { id: 'modal-dialog', class: 'modal-dialog' });
+        const dialog = domEl('dialog', { class: 'modal-dialog' });
+        const closeButton = span({ class: 'vlt-icon-close', 'aria-label': 'Close modal' });
+        dialog.append(closeButton);
         block.append(dialog);
 
         // load fragment
@@ -164,9 +166,16 @@ function decorateModalDialogLinks(block) {
         await loadBlock(fragmentBlock);
 
         dialog.showModal();
-        dialog.addEventListener('close', () => {
+        // prevent scrolling of the background while the dialog is open
+        document.body.style.overflow = 'hidden';
+
+        function closeDialog() {
           dialog.remove();
-        });
+          document.body.style.overflow = 'scroll';
+        }
+
+        dialog.addEventListener('close', () => closeDialog());
+        closeButton.addEventListener('click', () => closeDialog());
       });
     });
 }
