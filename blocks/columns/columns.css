@@ -568,7 +568,9 @@ div.columns.lead-gen>div>div:last-child>p:last-child>a:last-child::before {
     max-width: 100%;
   }
 
-  div.columns.plans > div > div > p:not(.button-container):nth-child(4), div.columns.plans > div > div > p:not(.button-container):nth-child(5), div.columns.plans > div > div > ul {
+  div.columns.plans > div > div > p:not(.button-container):nth-child(4), 
+  div.columns.plans > div > div > p:not(.button-container):nth-child(5), 
+  div.columns.plans > div > div > ul {
     max-width: 70%;
   }
 }
