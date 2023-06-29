@@ -174,12 +174,14 @@ div.columns.plans > div > div > p.button-container a.button.secondary {
   padding: 1.6rem;
 }
 
-
-/** for FireFox (lack of) support for :has selector **/
 .black-bg {
   background-color: #000;
   padding-top: 2rem;
   padding-bottom: 2rem;
+}
+
+div.section.black-bg.columns-container {
+  padding-bottom: 0;
 }
 
 div.columns.border-bottom-gray {
