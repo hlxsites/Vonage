@@ -23,6 +23,7 @@
   --primary-button-text-color: #fff;
   --accent-color: #881fff;
   --panel-background-color: #fafafa;
+  --end-note-text-color: #5f6169;
 
 
   /* fonts */
@@ -408,4 +409,34 @@ main .section {
 /* section metadata */
 main .section.highlight {
   background-color: var(--highlight-background-color);
+}
+
+div.default-content-wrapper > h2 {
+  text-align: center;
+  font-size: var(--heading-font-size-m);
+  display: block;
+  font-weight: 500;
+  letter-spacing: -1.5px;
+}
+
+div.section.pricing-matrix > div.default-content-wrapper > p {
+  font-size: var(--body-font-size-xxs);
+  letter-spacing: 0.025rem;
+  color: var(--end-note-text-color);
+  font-weight: 400;
+  text-align: left;
+}
+
+div.section.pricing-matrix > div.default-content-wrapper > p > strong {
+  font-size: var(--body-font-size-s);
+  font-weight: 700;
+}
+
+div.section.pricing-matrix > div.default-content-wrapper a {
+  text-decoration: underline;
+  color: #000;
+}
+
+div.default-content-wrapper > h2 + p {
+  text-align: center !important;
 }
