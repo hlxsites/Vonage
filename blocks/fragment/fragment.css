@@ -4,7 +4,7 @@ div.fragment.two-col {
     box-sizing: inherit;
     position: relative;
     width: 100%;
-    padding: 64px 20px;
+    padding: 64px 0;
     display: flex;
     flex-direction: column-reverse;
 }
@@ -12,7 +12,7 @@ div.fragment.two-col {
 div.fragment.two-col > div {
     position: relative;
     width: 100%;
-    padding: 0 20px;
+    padding: 0;
 }
 
 div.fragment.two-col > .leftcolumn {
