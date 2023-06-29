@@ -1,19 +1,7 @@
-function expand(event) {
-  const label = event.target;
-  const answer = label.nextElementSibling;
-  if (label.ariaExpanded === 'true') {
-    answer.style.height = 0;
-    answer.style.padding = '0 2rem 0';
-    answer.ariaHidden = true;
-    label.ariaExpanded = false;
-  } else {
-    answer.style.height = `${answer.scrollHeight}px`;
-    answer.style.padding = null;
-    answer.ariaHidden = false;
-    label.ariaExpanded = true;
-  }
-}
-
+/**
+ * Question and Answer block. Each row is a question and answer pair.
+ * @param block {HTMLDivElement}
+ */
 export default function decorate(block) {
   const maindiv = document.createElement('div');
   maindiv.className = 'qanda-content';
@@ -43,4 +31,20 @@ export default function decorate(block) {
 
   block.textContent = '';
   block.append(maindiv);
+}
+
+function expand(event) {
+  const label = event.target;
+  const answer = label.nextElementSibling;
+  if (label.ariaExpanded === 'true') {
+    answer.style.height = 0;
+    answer.style.padding = '0 2rem 0';
+    answer.ariaHidden = true;
+    label.ariaExpanded = false;
+  } else {
+    answer.style.height = `${answer.scrollHeight}px`;
+    answer.style.padding = null;
+    answer.ariaHidden = false;
+    label.ariaExpanded = true;
+  }
 }

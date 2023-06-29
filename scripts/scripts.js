@@ -1,10 +1,10 @@
 import {
-  buildBlock,
+  buildBlock, decorateBlock,
   decorateBlocks,
   decorateButtons,
   decorateIcons,
   decorateSections,
-  decorateTemplateAndTheme,
+  decorateTemplateAndTheme, loadBlock,
   loadBlocks,
   loadCSS,
   loadFooter,
@@ -144,6 +144,47 @@ function decorateHyperlinkImages(container) {
 }
 
 /**
+ * Links that have the hash #modal-dialog in their href will open as a modal dialog.
+ * @param block
+ */
+function decorateModalDialogLinks(block) {
+  [...block.querySelectorAll('a')]
+    .filter(({ href }) => href?.includes('#modal-dialog'))
+    .forEach((link) => {
+      link.addEventListener('click', async (event) => {
+        event.preventDefault();
+
+        const dialog = domEl('dialog', { class: 'modal-dialog' });
+        const closeButton = span({ class: 'vlt-icon-close', 'aria-label': 'Close modal' });
+        dialog.append(closeButton);
+        block.append(dialog);
+
+        // load fragment
+        const wrapper = div();
+        const fragmentBlock = buildBlock('fragment', [
+          [a({ href: new URL(link.href).pathname }, 'Open Fragment')],
+        ]);
+        wrapper.append(fragmentBlock);
+        dialog.append(wrapper);
+        decorateBlock(fragmentBlock);
+        await loadBlock(fragmentBlock);
+
+        dialog.showModal();
+        // prevent scrolling of the background while the dialog is open
+        document.body.style.overflow = 'hidden';
+
+        function closeDialog() {
+          dialog.remove();
+          document.body.style.overflow = 'scroll';
+        }
+
+        dialog.addEventListener('close', () => closeDialog());
+        closeButton.addEventListener('click', () => closeDialog());
+      });
+    });
+}
+
+/**
  * Decorates the main element.
  * @param {Element} main The main element
  */
@@ -156,6 +197,7 @@ export function decorateMain(main) {
   decorateSections(main);
   decorateBlocks(main);
   decorateHyperlinkImages(main);
+  decorateModalDialogLinks(main);
 }
 
 /**
