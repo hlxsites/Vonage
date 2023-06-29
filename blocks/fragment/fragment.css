@@ -33,6 +33,25 @@ div.fragment.two-col a:any-link {
     display:inline-block;
 }
 
+div.fragment.two-col a.button.primary {
+  border-radius: unset;
+  background-color: transparent;
+  line-height: unset;
+  border: unset;
+  height: auto;
+  margin-bottom: 0;
+  margin-top: 50;
+  padding-top: 0;
+}
+
+div.fragment.two-col a.button.primary::after {
+  background-color: #000;
+  content: "";
+  display: block;
+  height: .2rem;
+  width: 100%;
+}
+
 div.fragment.two-col li > a:hover, div.fragment.two-col li > strong > a:hover {
     text-decoration: underline;
 }
