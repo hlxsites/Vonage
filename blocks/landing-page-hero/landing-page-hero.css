@@ -34,6 +34,12 @@
   font-size: 3.6rem;
 }
 
+.landing-page-hero .category-content .description {
+  font-size: 1.4rem;
+  width: 57rem;
+  max-width: 100%;
+}
+
 /* Make a UL in the category content description a flex container */
 .landing-page-hero .category-content .description ul {
   display: flex;
@@ -458,7 +464,7 @@
   }
 
   /* Tweak description text attributes for largest screens */
-  .landing-page-hero .category-content .description p {
+  .landing-page-hero .category-content .description {
     font-size: 1.7rem;
     font-weight: 400;
     letter-spacing: -.02rem;

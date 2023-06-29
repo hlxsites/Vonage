@@ -102,12 +102,22 @@ function buildOverlay(overlayRawContent) {
 
   return overlayContent;
 }
+
 function decorateCtasContent(ctasContent, stylesList) {
   stylesList.forEach((style) => {
     if (style.includes('button')) {
       ctasContent.classList.add(style);
     }
   });
+}
+
+function buildTPWidget(tpElement) {
+  const template = tpElement.innerText;
+  tpElement.classList.add('trustpilot-widget');
+  tpElement.dataset.businessunitId = '481735560000640005026e18';
+  tpElement.dataset.templateId = template;
+  tpElement.innerText = '';
+  return tpElement;
 }
 
 export default function decorate(block) {
@@ -150,6 +160,12 @@ export default function decorate(block) {
     overlayContent = buildOverlay(rawOverlayContent);
   }
 
+  const trustPilotDiv = block.querySelector('div.trustpilot-template');
+  let trustPilotContent;
+  if (trustPilotDiv) {
+    trustPilotContent = buildTPWidget(trustPilotDiv);
+  }
+
   const captionContent = block.querySelector('div.caption');
 
   // Build out the list of elements to include in the textual side of the hero
@@ -177,6 +193,9 @@ export default function decorate(block) {
   }
   if (overlayContent) {
     mediaElements.push(overlayContent);
+  }
+  if (trustPilotContent) {
+    mediaElements.push(trustPilotContent);
   }
   if (captionContent) {
     mediaElements.push(captionContent);
