@@ -5,21 +5,23 @@ export default function decorate(block) {
   const descElem = block.querySelector(':scope div:first-child p');
   const mediaElem = block.querySelector(':scope div:nth-child(2) picture');
 
-  const productHero = div({ class: 'product-hero block' }, div({ class: 'content-resource-header' }));
-  productHero.append(div({ class: 'header-media__content' }));
-  productHero.querySelector('.content-resource-header').append(div({ class: 'container text' }));
+  const productHeroText = div({ class: 'content-resource-header' });
+  productHeroText.append(div({ class: 'container text' }));
 
-  productHero.querySelector('.container.text').append(div({ class: 'row headline' }));
-  productHero.querySelector('.container.text').append(div({ class: 'row description' }));
+  const productHeroMedia = div({ class: 'header-media-content' });
 
-  productHero.querySelector('.row.headline').append(div({ class: 'column' }, titleElem));
-  productHero.querySelector('.row.description').append(div({ class: 'column' }, descElem));
+  productHeroText.querySelector('.container.text').append(div({ class: 'row headline' }));
+  productHeroText.querySelector('.container.text').append(div({ class: 'row description' }));
 
-  productHero.querySelector('.header-media__content').append(div({ class: 'media-background' }));
-  productHero.querySelector('.header-media__content').append(div({ class: 'container media' }));
-  productHero.querySelector('.container.media').append(div({ class: 'row media' }));
-  productHero.querySelector('.row.media').append(div({ class: 'column' }, mediaElem));
+  productHeroText.querySelector('.row.headline').append(div({ class: 'column' }, titleElem));
+  productHeroText.querySelector('.row.description').append(div({ class: 'column' }, descElem));
 
-  block.replaceChildren(productHero);
+  productHeroMedia.append(div({ class: 'media-background' }));
+  productHeroMedia.append(div({ class: 'container media' }));
+  productHeroMedia.querySelector('.container.media').append(div({ class: 'row media' }));
+  productHeroMedia.querySelector('.row.media').append(div({ class: 'column' }, mediaElem));
+
+  block.replaceChildren(productHeroText);
+  block.append(productHeroMedia);
   return block;
 }
