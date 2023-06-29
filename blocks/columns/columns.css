@@ -703,6 +703,7 @@ div.case-study.columns-container .columns.block > div > div:nth-child(2) > div >
   div.columns.plans > div > div > ul {
     max-width: 70%;
   }
+
   div.case-study.columns-container .columns.block > div {
     flex-direction: row;
   }
