@@ -1,7 +1,7 @@
 /* stylelint-disable no-descending-specificity */
 .columns > div {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
 }
 
 .columns img {
@@ -38,19 +38,8 @@
   text-decoration: none;
 }
 
-/** for FireFox (lack of) support for :has selector **/
-.black-bg {
-  background-color: #000;
-  padding-top: 2rem;
-  padding-bottom: 2rem;
-}
-
-div.columns.category-grid>div {
+div.columns.category-grid > div {
   align-items: flex-start;
-}
-
-div.columns.border-bottom-gray {
-  border-bottom: .1rem solid lightgray;
 }
 
 div.columns.category-grid p {
@@ -58,6 +47,143 @@ div.columns.category-grid p {
   font-weight: 400;
   letter-spacing: -.02rem;
   line-height: 2rem;
+}
+
+div.slim-promo.columns-2-cols p {
+  font-family: var(--body-font-family);
+  font-weight: 400;
+  letter-spacing: .025rem;
+  line-height: 1.6rem;
+  font-size: 1.2rem;
+  display: none;
+  text-align: center;
+}
+
+div.columns.lead-gen > div {
+  gap: 10px;
+  flex-direction: column;
+}
+
+div.columns.basic-columns > div {
+  flex-flow: row wrap;
+  gap: 0;
+  align-items: flex-start;
+}
+
+div.market-place-summary.columns-2-cols > div > div > p,
+div.market-place-summary.columns-2-cols > div > div > ul > li {
+  font-size: 17.5px;
+}
+
+div.columns.basic-columns > div > div > p {
+  font-size: var(--body-font-size-xxs);
+  letter-spacing: -0.02rem;
+  margin-top: 0;
+  margin-bottom: 3rem;
+}
+
+div.columns.lead-gen>div>div:last-child>p {
+  font-size: var(--body-font-size-xs);
+  margin-top: 0;
+  margin-bottom: .8rem;
+  text-align: center;
+}
+
+div.columns.plans > div {
+  padding-top: 70px;
+  align-items: stretch;
+  justify-content: center;
+  flex-direction: column;
+}
+
+div.columns.plans > div > div {
+  background-color: #fff;
+  border-radius: 2.2rem;
+  padding: 32px 56px;
+  height: auto;
+}
+
+div.columns.plans > div h3 {
+  font-size: var(--heading-font-size-l);
+  text-align: center;
+  line-height: 32px;
+  font-family: var(--body-font-family);
+  text-transform: unset;
+  font-weight: 500;
+  max-width: 256px;
+}
+
+div.columns.plans > div > div > p:nth-child(2) {
+  font-weight: 400;
+  letter-spacing: -0.02px;
+  font-size: 1.5rem;
+  text-align: center;
+  line-height: 2rem;
+}
+
+div.columns.plans > div > div > p:not(.button-container):nth-child(4),
+div.columns.plans > div > div > p:not(.button-container):nth-child(5) {
+  font-size: var(--body-font-size-xs);
+  font-weight: 600;
+  margin-top: 0;
+  width: 100%;
+  margin-bottom: 0;
+}
+
+div.columns.plans > div > div > ul {
+  padding-inline-start: 0;
+  margin-top: unset;
+}
+
+div.columns.plans > div > div > ul > li {
+  font-size: var(--body-font-size-xs);
+  font-weight: 400;
+  list-style: none;
+  word-break: break-word;
+  margin-left: 20px;
+  letter-spacing: -0.2px;
+  padding-left: 10px;
+}
+
+div.columns.plans > div > div > ul > li::marker {
+  content: "";
+  color: var(--accent-color);
+  font-family: var(--icon-font-family);
+  font-size: 1rem;
+}
+
+div.columns.plans > div > div > p.button-container {
+  text-align: center;
+  margin-bottom: unset;
+  width: 100%;
+  margin-top: unset;
+}
+
+div.columns.plans > div > div > p.button-container a.button.primary {
+  width: 100%;
+  margin-bottom: 0;
+}
+
+div.columns.plans > div > div > p.button-container a.button.secondary {
+  white-space: break-spaces;
+  height: auto;
+  width: 100%;
+  margin-top: 0;
+  line-height: normal;
+  min-height: 5.6rem;
+  padding: 1.6rem;
+}
+
+
+/** for FireFox (lack of) support for :has selector **/
+.black-bg {
+  background-color: #000;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+div.columns.border-bottom-gray {
+  border-bottom: .1rem solid lightgray;
 }
 
 div.columns.category-grid a {
@@ -72,27 +198,6 @@ div.columns.category-grid h4 {
   font-weight: 600;
   letter-spacing: .075rem;
   line-height: 2rem;
-}
-
-div.slim-promo.columns-2-cols p {
-  font-family: var(--body-font-family);
-  font-weight: 400;
-  letter-spacing: .025rem;
-  line-height: 1.6rem;
-  font-size: 1.2rem;
-  display: none;
-  text-align: center;
-}
-
-div.columns.lead-gen>div {
-  gap: 10px;
-  flex-direction: column;
-}
-
-div.columns.basic-columns>div {
-  flex-flow: row wrap;
-  gap: 0;
-  align-items: flex-start;
 }
 
 div.columns.basic-columns>div>div {
@@ -147,11 +252,6 @@ div.market-place-summary.columns-2-cols > div > div:first-child {
   background-color: var(--overview-background-color);
   padding: 4rem;
   margin-bottom: 5rem;
-}
-
-div.market-place-summary.columns-2-cols > div > div > p,
-div.market-place-summary.columns-2-cols > div > div > ul > li {
-  font-size: 17.5px;
 }
 
 div.columns.lead-gen>div>div:last-child>p>a {
@@ -253,13 +353,6 @@ div.columns.block {
   margin-left: auto;
 }
 
-div.columns.basic-columns>div>div>p {
-  font-size: var(--body-font-size-xxs);
-  letter-spacing: -0.02rem;
-  margin-top: 0;
-  margin-bottom: 3rem;
-}
-
 div.columns.lead-gen>div>div.columns-img-col {
   flex: 0 0 0;
   width: 75px;
@@ -284,13 +377,6 @@ div.columns.lead-gen>div>div:last-child {
   min-width: 300px;
   text-decoration: none;
   color: inherit;
-}
-
-div.columns.lead-gen>div>div:last-child>p {
-  font-size: var(--body-font-size-xs);
-  margin-top: 0;
-  margin-bottom: .8rem;
-  text-align: center;
 }
 
 div.columns.lead-gen>div>div:last-child>p:last-child {
@@ -371,6 +457,11 @@ div.columns.lead-gen>div>div:last-child>p:last-child>a:last-child::before {
     text-align: left;
   }
 
+  div.columns.block.plans > div {
+    flex-direction: column;
+    align-items: center;
+  }
+
   div.slim-promo.columns-2-cols>div>div:nth-child(2) {
     justify-content: left;
   }
@@ -388,6 +479,29 @@ div.columns.lead-gen>div>div:last-child>p:last-child>a:last-child::before {
 
   div.callout-promo-container {
     padding-top: 4rem;
+  }
+
+  div.columns.block.plans > div > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  div.columns.block.plans > div > div > p:nth-child(2) {
+    font-size: 14px;
+    font-weight: 400;
+    max-width: 379px;
+  }
+
+  div.columns.block.plans > div > div > h3 {
+    max-width: 379px;
+    letter-spacing: -0.05rem;
+    font-size: var(--body-font-size-l);
+    font-weight: 500;
+  }
+
+  div.columns.block.plans > div > div > ul {
+    margin: 1.4rem auto 0;
   }
 }
 
@@ -561,7 +675,7 @@ div.case-study.columns-container .columns.block > div > div:nth-child(2) > div >
     align-items: start;
   }
 
-  div.market-place-summary>div>div {
+  div.market-place-summary > div > div {
     flex: 0 0 55%;
     max-width: 55%;
   }
@@ -571,6 +685,24 @@ div.case-study.columns-container .columns.block > div > div:nth-child(2) > div >
     max-width: 33%;
   }
 
+  div.columns.block.plans > div {
+    flex-direction: row;
+    align-items: stretch;
+  }
+
+  div.columns.plans > div > div > h3 {
+    letter-spacing: -0.6px;
+    font-size: var(--heading-font-size-l);
+    line-height: 3.2rem;
+    font-weight: 500;
+    max-width: 100%;
+  }
+
+  div.columns.plans > div > div > p:not(.button-container):nth-child(4), 
+  div.columns.plans > div > div > p:not(.button-container):nth-child(5), 
+  div.columns.plans > div > div > ul {
+    max-width: 70%;
+  }
   div.case-study.columns-container .columns.block > div {
     flex-direction: row;
   }
