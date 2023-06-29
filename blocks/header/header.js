@@ -584,10 +584,16 @@ function populateBreadCrumb(data, pathArray) {
     }
   });
 
-  const sectionBreadCrumbDesktop = div({ class: 'menu-option-sublist l3-nav-menu-options' },
-    div({ class: 'container sublist-container' },
-      div({ class: 'list l3-nav-menu-options-list first' },
-        ul())));
+  const sectionBreadCrumbDesktop = div(
+    { class: 'menu-option-sublist l3-nav-menu-options' },
+    div(
+      { class: 'container sublist-container' },
+      div(
+        { class: 'list l3-nav-menu-options-list first' },
+        ul(),
+      ),
+    ),
+  );
 
   sectionBreadCrumbDesktop.querySelector('.list.l3-nav-menu-options-list.first').style.width = data.links[0].width ? data.links[0].width : '100px';
 

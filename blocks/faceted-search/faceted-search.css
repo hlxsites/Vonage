@@ -1,0 +1,629 @@
+/* stylelint-disable no-descending-specificity */
+.faceted-search {
+  display: flex;
+  gap: 60px;
+}
+
+.faceted-search .hidden {
+  display: none;
+}
+
+  /* --- icons --- */
+.faceted-search .vlt-icon-close::before {
+  font-family: var(--icon-font-family);
+  content: var(--vlt-close-icon);
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.faceted-search .vlt-icon-filter::before {
+  font-family: var(--icon-font-family);
+  content: var(--vlt-circuit-icon);
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.faceted-search .vlt-icon-arrow-right::before {
+  font-family: var(--icon-font-family);
+  content: var(--vlt-right-arrow);
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.faceted-search .vlt-icon-chevron::before {
+  font-family: var(--icon-font-family);
+  content: var(--vlt-down-chevron-icon);
+  font-size: 2rem;
+  cursor: pointer;
+  line-height: 1rem;
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: clip;
+}
+
+.faceted-search .vlt-icon-chevron.left {
+  transform: rotate(90deg);
+  display: inline-block;
+}
+
+.faceted-search .vlt-icon-chevron.right {
+  transform: rotate(-90deg);
+  display: inline-block;
+}
+
+.faceted-search .search-filters {
+  width: clamp(235px, 30%, 305px);
+}
+
+
+/* desktop filters */
+.faceted-search .desktop-filter-options {
+  border-radius: 1rem;
+  background-color: var(--panel-background-color);
+  padding: 2.4rem;
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 2.4rem;
+}
+
+.faceted-search .desktop-filter-options details.accordion-bar {
+  cursor: pointer;
+}
+
+.faceted-search .desktop-filter-options details.accordion-bar summary {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  font-weight: 500;
+  font-size: 1.6rem;
+  font-family: var(--body-font-family);
+  user-select: none;
+  margin-bottom: 2rem;
+  margin-right: 1rem;
+}
+
+.faceted-search .desktop-filter-options details.accordion-bar[open] .vlt-icon-chevron::before {
+  transform: rotate(180deg);
+}
+
+.faceted-search .desktop-filter-options details.accordion-bar  ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.faceted-search .desktop-filter-options details.accordion-bar  ul li {
+  height: 3.8rem;
+}
+
+.faceted-search .desktop-filter-options details.accordion-bar  ul li .checkbox-wrapper label {
+  display: block;
+  position: relative;
+  padding-left: 3.5rem;
+  margin-bottom: 1.2rem;
+  font-family: var(--body-font-family);
+  font-weight: 500;
+  cursor: pointer;
+  font-size: 1.4rem;
+  min-height: 2rem;
+  user-select: none;
+  line-height: 1em;
+}
+
+.faceted-search .desktop-filter-options details.accordion-bar  ul li .checkbox-wrapper label input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.faceted-search .desktop-filter-options details.accordion-bar  ul li .checkbox-wrapper label .fake-checkbox {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 2rem;
+  width: 2rem;
+  border: .1rem solid #9b9b9b;
+  background-color: #fff;
+  display: flex;
+  flex-flow: row wrap;
+  align-content: center;
+  justify-content: center;
+  font-size: 2.6rem;
+}
+
+.faceted-search .desktop-filter-options details.accordion-bar  ul li .checkbox-wrapper label .fake-checkbox .checkmark {
+  display: none;
+  color: #fff;
+  font-family: var(--icon-font-family);
+}
+
+.faceted-search .desktop-filter-options details.accordion-bar  ul li .checkbox-wrapper label .option-num {
+  color: #717171;
+  margin-left: .5rem;
+}
+
+.faceted-search .desktop-filter-options details.accordion-bar  ul li .checkbox-wrapper label .option-txt {
+  text-transform: capitalize;
+}
+
+.faceted-search .desktop-filter-options details.accordion-bar  ul li .checkbox-wrapper label input:checked~.fake-checkbox {
+  background-color: #881fff;
+}
+
+/* Add focus styles on the outer-box of the fake checkbox to make it accessible by keyboard */
+.faceted-search .desktop-filter-options details.accordion-bar  ul li .checkbox-wrapper label input[type="checkbox"]:focus + .fake-checkbox {
+  outline: #3b99fc auto 5px;
+}
+
+.faceted-search .desktop-filter-options details.accordion-bar  ul li .checkbox-wrapper label input:checked~.fake-checkbox .checkmark {
+  display: block;
+}
+
+
+/* result cards */
+.faceted-search .results {
+  width: clamp(386px, 75%, 75%);
+  box-sizing: border-box;
+}
+
+.faceted-search .results-section-wrapper {
+  display: grid;
+  grid-template-columns: auto auto auto;
+}
+
+.faceted-search .results-section-wrapper a.card {
+  display: grid;
+  grid-template-columns: 6rem auto 0;
+  border-radius: 1rem;
+  border: 0.1rem solid #c1c3cd;
+  box-shadow: 0 0 2rem 0 rgb(0 0 0 / 10%);
+  padding: 1.6rem;
+  margin-right: 1.6rem;
+  margin-bottom: 1.6rem;
+  text-decoration: none;
+  color: unset;
+  background-color: #fff;
+}
+
+.faceted-search .mobile-and-tablet-only {
+  display: none;
+}
+
+.faceted-search .results-section-wrapper a.card .card-logo {
+  width: 6rem;
+  height: 6rem;
+  text-decoration: none;
+}
+
+.faceted-search .results-section-wrapper a.card .card-right {
+  display: grid;
+  grid-template-rows: minmax(0,auto) minmax(0,auto) minmax(0,auto) minmax(0,1fr);
+  margin-left: 2rem;
+  text-decoration: none;
+}
+
+.faceted-search .results-section-wrapper a.card .card-right .card-title {
+  word-break: break-word;
+  font-weight: 500;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  display: block;
+}
+
+.faceted-search .results-section-wrapper a.card .card-right .vlt-icon-arrow-right {
+  padding-left: 10px;
+}
+
+.faceted-search .results-section-wrapper a.card .card-right .card-body {
+  margin-bottom: 1.6rem;
+  font-size: 1.4rem;
+  font-weight: 400;
+  display: block;
+}
+
+/* Active filters on desktop */
+.faceted-search .filter-btn-options-wrapper-desktop {
+  width: 100%;
+  height: auto;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  gap: 1.2rem;
+  max-width: 100%;
+  overflow-x: auto;
+  list-style-type: none;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+}
+
+.faceted-search .filter-btn-options-wrapper-desktop .filter-btn {
+  border-radius: 2.5rem;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  font-family: var(--fixed-font-family);
+  font-size: 1.5rem;
+  font-weight: 500;
+  padding-right: 1.8rem;
+  padding-left: 1rem;
+}
+
+.faceted-search .filter-btn-options-wrapper-desktop .filter-btn span {
+  margin-right: .8rem;
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+.faceted-search .filter-btn-options-wrapper-desktop .filter-option {
+  border-radius: 2.5rem;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  font-family: var(--fixed-font-family);
+  font-size: var(--body-font-size-xs);
+  padding-right: 1.8rem;
+  padding-left: 1rem;
+  font-weight: 500;
+  background-color: #881fff;
+  color: #fff;
+  line-height: 3.2rem;
+  cursor: pointer;
+
+}
+
+.faceted-search .filter-btn-options-wrapper-desktop .filter-option.clear-filter-section {
+  background-color: #fff;
+  color: #000;
+  cursor: pointer;
+  text-decoration: underline;
+  font-weight: 400;
+}
+
+.faceted-search .filter-btn-options-wrapper-mobile {
+  display: none;
+}
+
+/* mobile and tablet */
+@media (max-width: 1024px) {
+  .faceted-search {
+    gap: 35px;
+    width: 680px;
+    margin: 3rem auto;
+  }
+
+  .faceted-search .search-filters {
+    width: 250px;
+    flex-shrink: 0;
+  }
+
+  .faceted-search .mobile-and-tablet-only {
+    display: block;
+  }
+
+  .faceted-search .results-section-wrapper {
+    display: flex;
+    grid-template-columns: none;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding: 1rem 0 1rem 1rem;
+  }
+
+  .faceted-search .results-section-wrapper a.card {
+    width: 380px;
+    box-sizing: border-box;
+    grid-template-columns: 6rem auto;
+    box-shadow: none;
+    border-radius: 0;
+  }
+
+  .faceted-search .results-section-wrapper a.card .button-container {
+   margin: 0;
+    grid-column: 1/span 2;
+  }
+
+  .faceted-search .results-section-wrapper a.card .button-container .button{
+    display: block;
+  }
+}
+
+/* mobile */
+@media (max-width: 767px) {
+  .faceted-search {
+    flex-direction: column;
+    width: 540px;
+    gap: 0;
+  }
+
+  .faceted-search .filter-btn-options-wrapper-desktop {
+    display: none;
+  }
+
+  .faceted-search .results {
+    width: 100%;
+  }
+
+  .faceted-search .filter-btn-options-wrapper-mobile .btn-options-list .filter-btn.active {
+    background-color: #881fff;
+    color: #fff;
+    border: 0.1rem solid #881fff;
+  }
+
+  .faceted-search .desktop-filter-options {
+    display: none;
+  }
+
+  .faceted-search .filter-btn-options-wrapper-mobile {
+    display: block;
+    width: 100%;
+    height: 6rem;
+    font-size: 1.5rem;
+    font-family: var(--body-font-family);
+    font-weight: 500;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    padding-right: 4rem;
+  }
+
+  .faceted-search .filter-btn-options-wrapper-mobile .btn-options-list {
+    gap: 1.2rem;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    list-style-type: none;
+    display: flex;
+    flex-wrap: nowrap;
+    padding: 0;
+  }
+
+  .faceted-search .filter-btn-options-wrapper-mobile .btn-options-list .filter-btn {
+    border-radius: 2.5rem;
+    min-height: 4rem;
+    display: flex;
+    align-items: center;
+    padding-right: 1.8rem;
+    padding-left: 1.8rem;
+    font-family: var(--fixed-font-family);
+    font-size: 1.6rem;
+    font-weight: 500;
+    border: .1rem solid #9b9b9b;
+    height: 4rem;
+    margin-top: 2rem;
+  }
+
+  .faceted-search .filter-btn-options-wrapper-mobile .btn-options-list .filter-btn span.vlt-icon-filter {
+    margin-left: .8rem;
+  }
+
+
+  .faceted-search .results-section-wrapper a.card {
+    width: 100%;
+  }
+}
+
+
+/* this is not in a media query for the case that the dialog was opened and then the
+   window was resized to a desktop size. Then the dialog should stay styled. */
+.faceted-search .mobile-filter-dialog {
+  overflow-y: auto;
+  width: 100%;
+  max-width: 100%;
+  min-height: 100%;
+  box-sizing: border-box;
+  font-family: var(--body-font-family);
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  margin: 0;
+  border: none;
+}
+
+.faceted-search .mobile-filter-dialog .dialog-head {
+  height: 6rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: .1rem solid hsl(0deg 0% 59.2% / 20%);
+  padding: 0 1.2rem;
+}
+
+.faceted-search .mobile-filter-dialog .dialog-head .close-button {
+  font-weight: 500;
+  font-size: 2.8rem;
+  cursor: pointer;
+}
+
+.faceted-search .mobile-filter-dialog .title {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.faceted-search .mobile-filter-dialog .title span {
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.faceted-search .mobile-filter-dialog .title span.vlt-icon-filter {
+  margin-left: .8rem;
+  font-size: 2.2rem;
+}
+
+.faceted-search .mobile-filter-dialog .clear-wrap span {
+  color: #000;
+  opacity: .3;
+  font-size: 1.5rem;
+  font-family: var(--body-font-family);
+  font-weight: 500;
+  text-transform: capitalize;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.faceted-search .mobile-filter-dialog  .mobile-filters {
+  margin: 0;
+  padding-left: 12px;
+}
+
+.faceted-search .mobile-filter-dialog  .mobile-filters details.accordion-bar {
+  cursor: pointer;
+  border-bottom: 0.1rem solid hsl(0deg 0% 59.2% / 20%);
+}
+
+.faceted-search .mobile-filter-dialog  .mobile-filters details.accordion-bar summary {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--body-font-family);
+  user-select: none;
+  margin-right: 1rem;
+  font-weight: 500;
+  font-size: var(--body-font-size-m);
+  line-height: 2.9em;
+}
+
+.faceted-search .mobile-filter-dialog  .mobile-filters details.accordion-bar[open] .vlt-icon-chevron::before {
+  transform: rotate(180deg);
+}
+
+.faceted-search .mobile-filter-dialog  .mobile-filters details.accordion-bar  ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.faceted-search .mobile-filter-dialog  .mobile-filters details.accordion-bar  ul li {
+  height: 3.8rem;
+}
+
+.faceted-search .mobile-filter-dialog  .mobile-filters details.accordion-bar  ul li .checkbox-wrapper label {
+  display: block;
+  position: relative;
+
+  /* padding-left: 3.5rem; */
+  margin-bottom: 1.2rem;
+  font-family: var(--body-font-family);
+  font-weight: 400;
+  cursor: pointer;
+  min-height: 2rem;
+  user-select: none;
+  font-size: var(--body-font-size-m);
+}
+
+.faceted-search .mobile-filter-dialog  .mobile-filters details.accordion-bar  ul li .checkbox-wrapper label input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.faceted-search .mobile-filter-dialog  .mobile-filters details.accordion-bar  ul li .checkbox-wrapper label .fake-checkbox {
+  position: absolute;
+  top: 0;
+  right: 1rem;
+  height: 2rem;
+  width: 2rem;
+  border: .1rem solid #9b9b9b;
+  background-color: #fff;
+  display: flex;
+  flex-flow: row wrap;
+  align-content: center;
+  justify-content: center;
+  font-size: 2.6rem;
+}
+
+.faceted-search .mobile-filter-dialog  .mobile-filters details.accordion-bar  ul li .checkbox-wrapper label .fake-checkbox .checkmark {
+  display: none;
+  color: #881fff;
+  font-family: var(--icon-font-family);
+}
+
+.faceted-search .mobile-filter-dialog  .mobile-filters details.accordion-bar  ul li .checkbox-wrapper label .option-num {
+  color: #717171;
+  margin-left: .5rem;
+}
+
+.faceted-search .mobile-filter-dialog  .mobile-filters details.accordion-bar  ul li .checkbox-wrapper label .option-txt {
+  text-transform: capitalize;
+}
+
+/* Add focus styles on the outer-box of the fake checkbox to make it accessible by keyboard */
+.faceted-search .mobile-filter-dialog  .mobile-filters details.accordion-bar  ul li .checkbox-wrapper label input[type="checkbox"]:focus + .fake-checkbox {
+  outline: #3b99fc auto 5px;
+}
+
+.faceted-search .mobile-filter-dialog  .mobile-filters details.accordion-bar  ul li .checkbox-wrapper label input:checked~.fake-checkbox .checkmark {
+  display: block;
+}
+
+.faceted-search .mobile-filter-dialog .dialog-foot {
+  z-index: 600;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  padding: 1.4rem;
+}
+
+.faceted-search .mobile-filter-dialog .dialog-foot button {
+  width: 100%;
+  border: none;
+  background-color: #000;
+  color: #fff;
+  height: 4.2rem;
+  line-height: 4.2rem;
+  border-radius: 1rem;
+  font-size: 1.6rem;
+  font-family: var(--body-font-family);
+  cursor: pointer;
+}
+
+
+
+
+
+/* pagination */
+.faceted-search .pagination {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 4rem;
+}
+
+.faceted-search .pagination button {
+  background-color: transparent;
+  color: black;
+  font-size: var(--body-font-size-xxs);
+  font-weight: 400;
+  cursor: pointer;
+  letter-spacing: 0;
+  margin: 0 5px;
+  font-family: var(--fixed-font-family);
+  line-height: 2rem;
+  text-transform: uppercase;
+  height: 3.7rem;
+  width: 3.7rem;
+  padding: 0;
+}
+
+.faceted-search .pagination button.current {
+  font-size: var(--body-font-size-xs);
+  font-weight: 500;
+  background-color: #000;
+  border-radius: 50%;
+  color: #fff;
+  display: inline-block;
+}
+
+/* no hover for these buttons */
+.faceted-search .pagination button:hover,
+.faceted-search .pagination button:focus {
+  background-color: unset;
+  cursor: pointer;
+}
+
+.faceted-search .pagination button.current:hover {
+  background-color: var(--text-color);
+}
+

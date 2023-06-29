@@ -22,13 +22,15 @@
   --primary-button-background-color: #000;
   --primary-button-text-color: #fff;
   --accent-color: #881fff;
+  --panel-background-color: #fafafa;
+  --end-note-text-color: #5f6169;
 
 
   /* fonts */
   --body-font-family: spezia, spezia_semimono, ubuntu, roboto, noto, sans-serif;
   --heading-font-family: var(--body-font-family);
   --fixed-font-family: "Spezia_SemiMono", menlo, consolas, 'Liberation Mono', monospace;
-  --icon-font-family: vlticons!important;
+  --icon-font-family: "VltIcons"!important;
 
   /* font icon aliases */
   --vlt-right-arrow: "\e90c";
@@ -154,7 +156,8 @@
 
 /* global layout */
 html {
-  font-size: 62.5%
+  font-size: 62.5%;
+  -webkit-font-smoothing: antialiased;
 }
 
 body {
@@ -190,6 +193,7 @@ header {
 /* Offset main site content by the height of the header */
 main {
   margin-top: var(--mobile-nav-height);
+  font-size: 17px;
 }
 
 h1, h2, h3,
@@ -202,12 +206,12 @@ h4, h5, h6 {
   scroll-margin: calc(var(--nav-height) + 1em);
 }
 
-h1 { font-size: var(--heading-font-size-xxl) }
-h2 { font-size: var(--heading-font-size-xl) }
-h3 { font-size: var(--heading-font-size-l) }
-h4 { font-size: var(--heading-font-size-m) }
-h5 { font-size: var(--heading-font-size-s) }
-h6 { font-size: var(--heading-font-size-xs) }
+h1 { font-size: var(--heading-font-size-xxl); }
+h2 { font-size: var(--heading-font-size-xl); }
+h3 { font-size: var(--heading-font-size-l); }
+h4 { font-size: var(--heading-font-size-m); }
+h5 { font-size: var(--heading-font-size-s); }
+h6 { font-size: var(--heading-font-size-xs); }
 
 p, dl, ol, ul, pre, blockquote {
   margin-top: 1em;
@@ -407,4 +411,34 @@ main .section {
 /* section metadata */
 main .section.highlight {
   background-color: var(--highlight-background-color);
+}
+
+div.default-content-wrapper > h2 {
+  text-align: center;
+  font-size: var(--heading-font-size-m);
+  display: block;
+  font-weight: 500;
+  letter-spacing: -1.5px;
+}
+
+div.default-content-wrapper > h2 + p {
+  text-align: center !important;
+}
+
+div.section.pricing-matrix > div.default-content-wrapper > p {
+  font-size: var(--body-font-size-xxs);
+  letter-spacing: 0.025rem;
+  color: var(--end-note-text-color);
+  font-weight: 400;
+  text-align: left;
+}
+
+div.section.pricing-matrix > div.default-content-wrapper > p > strong {
+  font-size: var(--body-font-size-s);
+  font-weight: 700;
+}
+
+div.section.pricing-matrix > div.default-content-wrapper a {
+  text-decoration: underline;
+  color: #000;
 }

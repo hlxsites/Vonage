@@ -1,6 +1,7 @@
-.columns>div {
+/* stylelint-disable no-descending-specificity */
+.columns > div {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
 }
 
 .columns img {
@@ -37,19 +38,8 @@
   text-decoration: none;
 }
 
-/** for FireFox (lack of) support for :has selector **/
-.black-bg {
-  background-color: #000;
-  padding-top: 2rem;
-  padding-bottom: 2rem;
-}
-
-div.columns.category-grid>div {
+div.columns.category-grid > div {
   align-items: flex-start;
-}
-
-div.columns.border-bottom-gray {
-  border-bottom: .1rem solid lightgray;
 }
 
 div.columns.category-grid p {
@@ -57,6 +47,145 @@ div.columns.category-grid p {
   font-weight: 400;
   letter-spacing: -.02rem;
   line-height: 2rem;
+}
+
+div.slim-promo.columns-2-cols p {
+  font-family: var(--body-font-family);
+  font-weight: 400;
+  letter-spacing: .025rem;
+  line-height: 1.6rem;
+  font-size: 1.2rem;
+  display: none;
+  text-align: center;
+}
+
+div.columns.lead-gen > div {
+  gap: 10px;
+  flex-direction: column;
+}
+
+div.columns.basic-columns > div {
+  flex-flow: row wrap;
+  gap: 0;
+  align-items: flex-start;
+}
+
+div.market-place-summary.columns-2-cols > div > div > p,
+div.market-place-summary.columns-2-cols > div > div > ul > li {
+  font-size: 17.5px;
+}
+
+div.columns.basic-columns > div > div > p {
+  font-size: var(--body-font-size-xxs);
+  letter-spacing: -0.02rem;
+  margin-top: 0;
+  margin-bottom: 3rem;
+}
+
+div.columns.lead-gen>div>div:last-child>p {
+  font-size: var(--body-font-size-xs);
+  margin-top: 0;
+  margin-bottom: .8rem;
+  text-align: center;
+}
+
+div.columns.plans > div {
+  padding-top: 70px;
+  align-items: stretch;
+  justify-content: center;
+  flex-direction: column;
+}
+
+div.columns.plans > div > div {
+  background-color: #fff;
+  border-radius: 2.2rem;
+  padding: 32px 56px;
+  height: auto;
+}
+
+div.columns.plans > div h3 {
+  font-size: var(--heading-font-size-l);
+  text-align: center;
+  line-height: 32px;
+  font-family: var(--body-font-family);
+  text-transform: unset;
+  font-weight: 500;
+  max-width: 256px;
+}
+
+div.columns.plans > div > div > p:nth-child(2) {
+  font-weight: 400;
+  letter-spacing: -0.02px;
+  font-size: 1.5rem;
+  text-align: center;
+  line-height: 2rem;
+}
+
+div.columns.plans > div > div > p:not(.button-container):nth-child(4),
+div.columns.plans > div > div > p:not(.button-container):nth-child(5) {
+  font-size: var(--body-font-size-xs);
+  font-weight: 600;
+  margin-top: 0;
+  width: 100%;
+  margin-bottom: 0;
+}
+
+div.columns.plans > div > div > ul {
+  padding-inline-start: 0;
+  margin-top: unset;
+}
+
+div.columns.plans > div > div > ul > li {
+  font-size: var(--body-font-size-xs);
+  font-weight: 400;
+  list-style: none;
+  word-break: break-word;
+  margin-left: 20px;
+  letter-spacing: -0.2px;
+  padding-left: 10px;
+}
+
+div.columns.plans > div > div > ul > li::marker {
+  content: var(--vlt-checkmark-icon);
+  color: var(--accent-color);
+  font-family: var(--icon-font-family);
+  font-size: 1rem;
+}
+
+div.columns.plans > div > div > p.button-container {
+  text-align: center;
+  margin-bottom: unset;
+  width: 100%;
+  margin-top: unset;
+}
+
+div.columns.plans > div > div > p.button-container a.button.primary {
+  width: 100%;
+  margin-bottom: 0;
+}
+
+div.columns.plans > div > div > p.button-container a.button.secondary {
+  white-space: break-spaces;
+  height: auto;
+  width: 100%;
+  margin-top: 0;
+  line-height: normal;
+  min-height: 5.6rem;
+  padding: 1.6rem;
+}
+
+.black-bg {
+  background-color: #000;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+div.section.black-bg.columns-container {
+  padding-bottom: 0;
+}
+
+div.columns.border-bottom-gray {
+  border-bottom: .1rem solid lightgray;
 }
 
 div.columns.category-grid a {
@@ -71,26 +200,6 @@ div.columns.category-grid h4 {
   font-weight: 600;
   letter-spacing: .075rem;
   line-height: 2rem;
-}
-
-div.slim-promo.columns-2-cols p {
-  font-family: var(--body-font-family);
-  font-weight: 400;
-  letter-spacing: .025rem;
-  line-height: 1.6rem;
-  font-size: 1.2rem;
-  display: none;
-  text-align: center;
-}
-
-div.columns.lead-gen>div {
-  gap: 10px;
-}
-
-div.columns.basic-columns>div {
-  flex-flow: row wrap;
-  gap: 0;
-  align-items: flex-start;
 }
 
 div.columns.basic-columns>div>div {
@@ -145,11 +254,6 @@ div.market-place-summary.columns-2-cols > div > div:first-child {
   background-color: var(--overview-background-color);
   padding: 4rem;
   margin-bottom: 5rem;
-}
-
-div.market-place-summary.columns-2-cols > div > div > p,
-div.market-place-summary.columns-2-cols > div > div > ul > li {
-  font-size: 17.5px;
 }
 
 div.columns.lead-gen>div>div:last-child>p>a {
@@ -244,18 +348,11 @@ div.market-place-summary .recs .col>a>div {
   padding-left: 20px;
 }
 
-div.block {
+div.columns.block {
   padding-right: 20px;
   padding-left: 20px;
   margin-right: auto;
   margin-left: auto;
-}
-
-div.columns.basic-columns>div>div>p {
-  font-size: var(--body-font-size-xxs);
-  letter-spacing: -0.02rem;
-  margin-top: 0;
-  margin-bottom: 3rem;
 }
 
 div.columns.lead-gen>div>div.columns-img-col {
@@ -284,20 +381,13 @@ div.columns.lead-gen>div>div:last-child {
   color: inherit;
 }
 
-div.columns.lead-gen>div>div:last-child>p {
-  font-size: var(--body-font-size-xs);
-  margin-top: 0;
-  margin-bottom: .8rem;
-  text-align: center;
-}
-
 div.columns.lead-gen>div>div:last-child>p:last-child {
   padding-top: 1.6rem;
   margin-bottom: 0;
 }
 
 div.columns.lead-gen>div>div:last-child>p:last-child>a::before {
-  font-family: VltIcons;
+  font-family: var(--icon-font-family);
   font-weight: 600;
   font-size: 1.6rem;
   display: inline-block;
@@ -317,7 +407,7 @@ div.columns.lead-gen>div>div:last-child>p:last-child>a:last-child::before {
 }
 
 @media (min-width: 576px) {
-  div.block {
+  div.columns.block {
     max-width: 540px;
   }
 }
@@ -369,6 +459,11 @@ div.columns.lead-gen>div>div:last-child>p:last-child>a:last-child::before {
     text-align: left;
   }
 
+  div.columns.block.plans > div {
+    flex-direction: column;
+    align-items: center;
+  }
+
   div.slim-promo.columns-2-cols>div>div:nth-child(2) {
     justify-content: left;
   }
@@ -380,17 +475,160 @@ div.columns.lead-gen>div>div:last-child>p:last-child>a:last-child::before {
     margin-bottom: 5rem;
   }
 
-  div.block {
+  div.columns.block {
     max-width: 45pc;
   }
 
   div.callout-promo-container {
     padding-top: 4rem;
   }
+
+  div.columns.block.plans > div > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  div.columns.block.plans > div > div > p:nth-child(2) {
+    font-size: 14px;
+    font-weight: 400;
+    max-width: 379px;
+  }
+
+  div.columns.block.plans > div > div > h3 {
+    max-width: 379px;
+    letter-spacing: -0.05rem;
+    font-size: var(--body-font-size-l);
+    font-weight: 500;
+  }
+
+  div.columns.block.plans > div > div > ul {
+    margin: 1.4rem auto 0;
+  }
 }
 
+/*  Case Study Column Variant */
+
+/* Container padding and background */
+div.case-study.columns-container {
+  background-color: #eeeffc;
+  padding: 0 3.2rem;
+}
+
+/* Layout for main content div container of this column variant */
+div.case-study.columns-container .columns.block > div {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -20px;
+  margin-left: -20px;
+}
+
+/* Layout for the div content containers */
+div.case-study.columns-container .columns.block > div > div {
+  box-sizing: border-box;
+}
+
+/* Make the first content child div (which is an image) relative for positioning the overlay image */
+div.case-study.columns-container .columns.block > div > div:first-child {
+position:relative;
+}
+
+/* Remove the top margin on the div around the first p in the content so the content aligns to the top of the section */
+div.case-study.columns-container .columns.block > div > div > p:first-child {
+margin-top:0;
+}
+
+/* Positioning the overlay image */
+div.case-study.columns-container .columns.block > div > div > p:nth-child(2) > picture {
+  position: absolute;
+  top: 0;
+  width: 22%;
+}
+
+/* Layout for the testimonial content container */
+div.case-study.columns-container .columns.block > div > div:nth-child(2) {
+  flex: 0 0 100%;
+  max-width: 100%;
+  position: relative;
+  width: 100%;
+  padding-right: 20px;
+  padding-left: 20px;
+}
+
+/* Layout for the div container for the citation and testimonial */
+div.case-study.columns-container .columns.block > div > div:nth-child(2) > div {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Styling for the quote of the testimonial */
+div.case-study.columns-container .columns.block > div > div:nth-child(2) > p {
+  font-family: var(--body-font-family);
+  font-size: 1.8rem;
+  font-weight: 500;
+  letter-spacing: -.05rem;
+  line-height: 2.4rem;
+  margin: 0 auto 3rem;
+  width: 80%;
+  text-align: center;
+}
+
+/* Styling for the citation */
+div.case-study.columns-container .columns.block > div > div:nth-child(2) > p:nth-child(2) {
+  font-family: var(--fixed-font-family);
+  font-size: 1.2rem;
+  font-weight: 400;
+  letter-spacing: .2rem;
+  line-height: 2rem;
+  text-transform: uppercase;
+  display: block;
+  font-style: normal;
+}
+
+/* Prevent the CTA buttons from spanning the full width of the container */
+div.case-study.columns-container .columns.block > div > div:nth-child(2) > div > a {
+margin-left: auto;
+margin-right:auto;
+}
+
+/* Make sure the font on the secondary button is normal */
+div.case-study.columns-container .columns.block > div > div:nth-child(2) > p:nth-child(2) > em {
+  font-style: normal;
+}
+
+/* Tighten up the margins on the CTA buttons */
+div.case-study.columns-container .columns.block > div > div:nth-child(2) > p  a {
+  margin-top:0;
+  margin-bottom:0;
+}
+
+/* Switch the secondary button to just be text with an underline */
+div.case-study.columns-container .columns.block > div > div:nth-child(2) > div > a:nth-child(2) {
+  background-color: transparent;
+  color: #000;
+  border: none;
+  font-family: var(--fixed-font-family);
+  font-weight: 600;
+  overflow: visible;
+  line-height: unset;
+  height: auto;
+  padding-left: 0;
+  padding-right: 0;
+  margin-bottom: 0;
+}
+
+/* Add the underline to the secondary CTA button as a psuedo element */
+div.case-study.columns-container .columns.block > div > div:nth-child(2) > div > a:nth-child(2)::after {
+  background-color: #000;
+  content: "";
+  display: block;
+  height: 0.2rem;
+  width: 100%;
+}
+
+
 @media (min-width: 900px) {
-  div.columns>div {
+  div.columns > div {
     align-items: center;
     gap: 32px;
   }
@@ -398,7 +636,7 @@ div.columns.lead-gen>div>div:last-child>p:last-child>a:last-child::before {
   div.market-place-summary>div {
     flex-direction: column;
   }
-  
+
   div.columns>div>div {
     flex: 1;
     order: unset;
@@ -421,8 +659,16 @@ div.columns.lead-gen>div>div:last-child>p:last-child>a:last-child::before {
 }
 
 @media (min-width: 992px) {
-  div.block {
+  div.columns.block {
     max-width: 990pt;
+  }
+
+  div.columns > div {
+    flex-direction: row;
+  }
+
+  div.columns.lead-gen > div {
+    flex-direction: row;
   }
 
   div.market-place-summary>div {
@@ -431,7 +677,7 @@ div.columns.lead-gen>div>div:last-child>p:last-child>a:last-child::before {
     align-items: start;
   }
 
-  div.market-place-summary>div>div {
+  div.market-place-summary > div > div {
     flex: 0 0 55%;
     max-width: 55%;
   }
@@ -439,6 +685,73 @@ div.columns.lead-gen>div>div:last-child>p:last-child>a:last-child::before {
   div.market-place-summary .recs {
     flex: 0 0 33%;
     max-width: 33%;
+  }
+
+  div.columns.block.plans > div {
+    flex-direction: row;
+    align-items: stretch;
+  }
+
+  div.columns.plans > div > div > h3 {
+    letter-spacing: -0.6px;
+    font-size: var(--heading-font-size-l);
+    line-height: 3.2rem;
+    font-weight: 500;
+    max-width: 100%;
+  }
+
+  div.columns.plans > div > div > p:not(.button-container):nth-child(4),
+  div.columns.plans > div > div > p:not(.button-container):nth-child(5),
+  div.columns.plans > div > div > ul {
+    max-width: 70%;
+  }
+
+  div.case-study.columns-container .columns.block > div {
+    flex-direction: row;
+  }
+
+  div.case-study.columns-container .columns.block > div > div:first-child {
+    flex-basis: 0;
+    flex-grow: 1;
+  }
+
+  div.case-study.columns-container .columns.block > div > div:nth-child(2) {
+    flex: 0 0 66.67%;
+    max-width: 66.67%;
+    padding: 2.5rem 0;
+  }
+
+  div.case-study.columns-container .columns.block > div > div:nth-child(2) > p {
+    text-align: left;
+    margin-left:0;
+    margin-right:0;
+  }
+
+  div.case-study.columns-container .columns.block > div > div:nth-child(2) > p:nth-child(2) {
+     text-align: left;
+  }
+
+  div.case-study.columns-container .columns.block > div > div:nth-child(2) > div > a:first-child {
+    float: left;
+    margin-right: 7.3rem;
+  }
+
+  div.case-study.columns-container .columns.block > div > div:nth-child(2) > div > a:nth-child(2) {
+    margin-top: 4rem;
+  }
+
+  div.case-study.columns-container .columns.block > div > div:nth-child(2) > div {
+    display: block;
+  }
+
+  div.case-study.columns-container .columns.block > div > div > p:first-child {
+    margin-top:1em;
+  }
+
+  div.case-study.columns-container .columns.block > div > div > p:nth-child(2) > picture {
+    position: absolute;
+    top: 2.2rem;
+    width: 22%;
   }
 }
 

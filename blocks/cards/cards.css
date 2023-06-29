@@ -46,10 +46,6 @@
   object-fit: cover;
 }
 
-.cards.logo-strip.block ul {
-  grid-template-columns: repeat(auto-fill, minmax(767px, 1fr));
-}
-
 .cards.logo-strip.block li {
   border: unset;
 }
@@ -342,8 +338,6 @@
     padding-left: 20px;
     padding-right: 20px;
     cursor: pointer;
-    display: flex;
-    flex-direction: row;
     height: 100%;
     min-height: 31.9rem;
     position: relative;
@@ -655,7 +649,7 @@
 }
 
 .cards.card-link > ul > li > a > div > div.cards-card-body > p:nth-child(3)::after {
-  font-family: VltIcons;
+  font-family: var(--icon-font-family);
   content: var(--vlt-right-arrow);
   margin-left: 1rem;
   position: absolute;
