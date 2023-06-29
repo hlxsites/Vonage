@@ -419,6 +419,10 @@ div.default-content-wrapper > h2 {
   letter-spacing: -1.5px;
 }
 
+div.default-content-wrapper > h2 + p {
+  text-align: center !important;
+}
+
 div.section.pricing-matrix > div.default-content-wrapper > p {
   font-size: var(--body-font-size-xxs);
   letter-spacing: 0.025rem;
@@ -435,8 +439,4 @@ div.section.pricing-matrix > div.default-content-wrapper > p > strong {
 div.section.pricing-matrix > div.default-content-wrapper a {
   text-decoration: underline;
   color: #000;
-}
-
-div.default-content-wrapper > h2 + p {
-  text-align: center !important;
 }
