@@ -157,6 +157,7 @@
 /* global layout */
 html {
   font-size: 62.5%;
+  -webkit-font-smoothing: antialiased;
 }
 
 body {
