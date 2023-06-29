@@ -93,6 +93,10 @@ div.fragment.two-col ul {
     column-gap: 4rem;
 }
 
+div.fragment.two-col ul li::marker {
+    color: var(--accent-color);
+}
+
 div.fragment-container.lead-gen {
   background-color: #000;
   color:#fff;
