@@ -26,6 +26,11 @@ div.fragment.two-col > .rightcolumn {
     max-width: 41.6667%;
 }
 
+.fragment.two-col .columns > div {
+  display: flex;
+  flex-flow: row wrap;
+}
+
 div.fragment.two-col a:any-link {
     color: #000;
     transition: transform .2s;
@@ -132,5 +137,10 @@ div.fragment.lead-gen > div.section {
   div.fragment.two-col {
     display: flex;
     flex-direction: initial;
+  }
+
+  div.fragment .columns-img-col {
+    flex: 0 0 41.667%;
+    max-width: 41.667%;
   }
 }
