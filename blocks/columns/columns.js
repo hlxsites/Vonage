@@ -1,4 +1,5 @@
 import { createOptimizedPicture } from '../../scripts/lib-franklin.js';
+import { div } from '../../scripts/scripts.js';
 
 function handleTitleClick(block) {
   const pBlock = block.querySelector('div.slim-promo.columns-2-cols p');
@@ -83,5 +84,20 @@ export default function decorate(block) {
         p.remove();
       });
     recdiv.append(row);
+  }
+
+  if (block.classList.contains('case-study')) {
+    // with link and image in separate paragraphs
+    const buttonDiv = div();
+    [...block.querySelectorAll('p > a[href]')]
+      // link (in a <p>) has no siblings
+      .filter((link) => link.parentNode.childElementCount === 1)
+      .filter((link) => link.parentNode.classList.contains('button-container'))
+      .forEach((link) => {
+        buttonDiv.append(link);
+      });
+
+    block.querySelector('.case-study.block > div > div:nth-child(2) > p:nth-child(3)').replaceWith(buttonDiv);
+    block.querySelector('.case-study.block > div > div:nth-child(2) > p:nth-child(4)').remove();
   }
 }

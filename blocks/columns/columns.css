@@ -1,3 +1,4 @@
+/* stylelint-disable no-descending-specificity */
 .columns > div {
   display: flex;
   flex-direction: row;
@@ -60,6 +61,7 @@ div.slim-promo.columns-2-cols p {
 
 div.columns.lead-gen > div {
   gap: 10px;
+  flex-direction: column;
 }
 
 div.columns.basic-columns > div {
@@ -503,8 +505,128 @@ div.columns.lead-gen>div>div:last-child>p:last-child>a:last-child::before {
   }
 }
 
+/*  Case Study Column Variant */
+
+/* Container padding and background */
+div.case-study.columns-container {
+  background-color: #eeeffc;
+  padding: 0 3.2rem;
+}
+
+/* Layout for main content div container of this column variant */
+div.case-study.columns-container .columns.block > div {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -20px;
+  margin-left: -20px;
+}
+
+/* Layout for the div content containers */
+div.case-study.columns-container .columns.block > div > div {
+  box-sizing: border-box;
+}
+
+/* Make the first content child div (which is an image) relative for positioning the overlay image */
+div.case-study.columns-container .columns.block > div > div:first-child {
+position:relative;
+}
+
+/* Remove the top margin on the div around the first p in the content so the content aligns to the top of the section */
+div.case-study.columns-container .columns.block > div > div > p:first-child {
+margin-top:0;
+}
+
+/* Positioning the overlay image */
+div.case-study.columns-container .columns.block > div > div > p:nth-child(2) > picture {
+  position: absolute;
+  top: 0;
+  width: 22%;
+}
+
+/* Layout for the testimonial content container */
+div.case-study.columns-container .columns.block > div > div:nth-child(2) {
+  flex: 0 0 100%;
+  max-width: 100%;
+  position: relative;
+  width: 100%;
+  padding-right: 20px;
+  padding-left: 20px;
+}
+
+/* Layout for the div container for the citation and testimonial */
+div.case-study.columns-container .columns.block > div > div:nth-child(2) > div {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Styling for the quote of the testimonial */
+div.case-study.columns-container .columns.block > div > div:nth-child(2) > p {
+  font-family: var(--body-font-family);
+  font-size: 1.8rem;
+  font-weight: 500;
+  letter-spacing: -.05rem;
+  line-height: 2.4rem;
+  margin: 0 auto 3rem;
+  width: 80%;
+  text-align: center;
+}
+
+/* Styling for the citation */
+div.case-study.columns-container .columns.block > div > div:nth-child(2) > p:nth-child(2) {
+  font-family: var(--fixed-font-family);
+  font-size: 1.2rem;
+  font-weight: 400;
+  letter-spacing: .2rem;
+  line-height: 2rem;
+  text-transform: uppercase;
+  display: block;
+  font-style: normal;
+}
+
+/* Prevent the CTA buttons from spanning the full width of the container */
+div.case-study.columns-container .columns.block > div > div:nth-child(2) > div > a {
+margin-left: auto;
+margin-right:auto;
+}
+
+/* Make sure the font on the secondary button is normal */
+div.case-study.columns-container .columns.block > div > div:nth-child(2) > p:nth-child(2) > em {
+  font-style: normal;
+}
+
+/* Tighten up the margins on the CTA buttons */
+div.case-study.columns-container .columns.block > div > div:nth-child(2) > p  a {
+  margin-top:0;
+  margin-bottom:0;
+}
+
+/* Switch the secondary button to just be text with an underline */
+div.case-study.columns-container .columns.block > div > div:nth-child(2) > div > a:nth-child(2) {
+  background-color: transparent;
+  color: #000;
+  border: none;
+  font-family: var(--fixed-font-family);
+  font-weight: 600;
+  overflow: visible;
+  line-height: unset;
+  height: auto;
+  padding-left: 0;
+  padding-right: 0;
+  margin-bottom: 0;
+}
+
+/* Add the underline to the secondary CTA button as a psuedo element */
+div.case-study.columns-container .columns.block > div > div:nth-child(2) > div > a:nth-child(2)::after {
+  background-color: #000;
+  content: "";
+  display: block;
+  height: 0.2rem;
+  width: 100%;
+}
+
+
 @media (min-width: 900px) {
-  div.columns>div {
+  div.columns > div {
     align-items: center;
     gap: 32px;
   }
@@ -539,7 +661,15 @@ div.columns.lead-gen>div>div:last-child>p:last-child>a:last-child::before {
     max-width: 990pt;
   }
 
-  div.market-place-summary > div {
+  div.columns > div {
+    flex-direction: row;
+  }
+
+  div.columns.lead-gen > div {
+    flex-direction: row;
+  }
+
+  div.market-place-summary>div {
     flex-direction: unset;
     gap: 32px;
     align-items: start;
@@ -572,6 +702,53 @@ div.columns.lead-gen>div>div:last-child>p:last-child>a:last-child::before {
   div.columns.plans > div > div > p:not(.button-container):nth-child(5), 
   div.columns.plans > div > div > ul {
     max-width: 70%;
+  }
+  div.case-study.columns-container .columns.block > div {
+    flex-direction: row;
+  }
+
+  div.case-study.columns-container .columns.block > div > div:first-child {
+    flex-basis: 0;
+    flex-grow: 1;
+  }
+
+  div.case-study.columns-container .columns.block > div > div:nth-child(2) {
+    flex: 0 0 66.67%;
+    max-width: 66.67%;
+    padding: 2.5rem 0;
+  }
+
+  div.case-study.columns-container .columns.block > div > div:nth-child(2) > p {
+    text-align: left;
+    margin-left:0;
+    margin-right:0;
+  }
+
+  div.case-study.columns-container .columns.block > div > div:nth-child(2) > p:nth-child(2) {
+     text-align: left;
+  }
+
+  div.case-study.columns-container .columns.block > div > div:nth-child(2) > div > a:first-child {
+    float: left;
+    margin-right: 7.3rem;
+  }
+
+  div.case-study.columns-container .columns.block > div > div:nth-child(2) > div > a:nth-child(2) {
+    margin-top: 4rem;
+  }
+
+  div.case-study.columns-container .columns.block > div > div:nth-child(2) > div {
+    display: block;
+  }
+
+  div.case-study.columns-container .columns.block > div > div > p:first-child {
+    margin-top:1em;
+  }
+
+  div.case-study.columns-container .columns.block > div > div > p:nth-child(2) > picture {
+    position: absolute;
+    top: 2.2rem;
+    width: 22%;
   }
 }
 
