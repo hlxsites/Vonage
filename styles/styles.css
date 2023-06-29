@@ -192,6 +192,7 @@ header {
 /* Offset main site content by the height of the header */
 main {
   margin-top: var(--mobile-nav-height);
+  font-size: 17px;
 }
 
 h1, h2, h3,
