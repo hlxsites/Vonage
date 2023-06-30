@@ -55,7 +55,7 @@
   width: clamp(235px, 30%, 305px);
 }
 
-/* Styling for preceeding default-content text*/
+/* Styling for preceeding default-content text */
 .faceted-search-container .default-content-wrapper h3 {
   text-align: center;
   padding-top: 2rem;
