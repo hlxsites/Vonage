@@ -55,6 +55,31 @@
   width: clamp(235px, 30%, 305px);
 }
 
+/* Styling for preceeding default-content text */
+.faceted-search-container .default-content-wrapper h3 {
+  text-align: center;
+  padding-top: 2rem;
+  font-family: var(--body-font-family);
+  font-size: 3.8rem;
+  font-weight: 500;
+  letter-spacing: -.15rem;
+  line-height: 4rem;
+}
+
+.faceted-search-container .default-content-wrapper p {
+  font-family: var(--body-font-family);
+  font-size: 1.4rem;
+  font-weight: 400;
+  letter-spacing: -.02rem;
+  line-height: 2rem;
+  text-align: center;
+}
+
+@media (min-width: 1200px) {
+  .faceted-search-container .default-content-wrapper p {
+    font-size: 1.7rem;
+  }
+}
 
 /* desktop filters */
 .faceted-search .desktop-filter-options {

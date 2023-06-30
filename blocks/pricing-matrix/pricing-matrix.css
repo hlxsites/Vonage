@@ -1,5 +1,8 @@
 .section.pricing-matrix-container {
     background-color: #eeeffc;
+
+    /* Bit of a hack fix to https://github.com/hlxsites/Vonage/issues/107 */
+    border-top: 1px solid #eeeffc;
 }
 
 .pricing-matrix .quantity-selector .quantity-count {
