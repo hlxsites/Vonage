@@ -194,6 +194,9 @@ header {
 main {
   margin-top: var(--mobile-nav-height);
   font-size: 17px;
+
+  /* make sure black text is visible when the device is in dark mode */
+  background-color: #fff;
 }
 
 h1, h2, h3,
