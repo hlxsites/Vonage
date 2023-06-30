@@ -29,6 +29,7 @@ div.fragment.two-col > .rightcolumn {
 .fragment.two-col .columns > div {
   display: flex;
   flex-flow: row wrap;
+  gap: 0;
 }
 
 div.fragment.two-col a:any-link {
@@ -47,6 +48,12 @@ div.fragment.two-col a.button.primary {
   margin-bottom: 0;
   margin-top: 50px;
   padding-top: 0;
+}
+
+div.fragment.two-col picture {
+  width: 300px;
+  display: block;
+  margin: 0 auto;
 }
 
 div.fragment.two-col a.button.primary::after {
@@ -98,6 +105,10 @@ div.fragment.two-col ul {
     column-gap: 4rem;
 }
 
+div.fragment.two-col ul li {
+  margin-bottom: 1rem;
+}
+
 div.fragment.two-col ul li::marker {
     color: var(--accent-color);
 }
@@ -120,7 +131,7 @@ div.fragment.lead-gen > div.section {
     column-count: 2;
   }
 
-  div.fragment.two-col > div {
+  div.fragment .columns-other-col {
     margin-left: 8.3333%;
     flex: 0 0 83.3333%;
     max-width: 83.3333%;
@@ -142,5 +153,11 @@ div.fragment.lead-gen > div.section {
   div.fragment .columns-img-col {
     flex: 0 0 41.667%;
     max-width: 41.667%;
+
+  }
+
+  div.fragment .columns-other-col {
+       flex: 0 0 50%;
+       max-width: 50%;
   }
 }
