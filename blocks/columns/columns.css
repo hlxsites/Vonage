@@ -146,7 +146,7 @@ div.columns.plans > div > div > ul > li {
 }
 
 div.columns.plans > div > div > ul > li::marker {
-  content: "";
+  content: var(--vlt-checkmark-icon);
   color: var(--accent-color);
   font-family: var(--icon-font-family);
   font-size: 1rem;
@@ -174,12 +174,14 @@ div.columns.plans > div > div > p.button-container a.button.secondary {
   padding: 1.6rem;
 }
 
-
-/** for FireFox (lack of) support for :has selector **/
 .black-bg {
   background-color: #000;
   padding-top: 2rem;
   padding-bottom: 2rem;
+}
+
+div.section.black-bg.columns-container {
+  padding-bottom: 0;
 }
 
 div.columns.border-bottom-gray {
@@ -698,11 +700,12 @@ div.case-study.columns-container .columns.block > div > div:nth-child(2) > div >
     max-width: 100%;
   }
 
-  div.columns.plans > div > div > p:not(.button-container):nth-child(4), 
-  div.columns.plans > div > div > p:not(.button-container):nth-child(5), 
+  div.columns.plans > div > div > p:not(.button-container):nth-child(4),
+  div.columns.plans > div > div > p:not(.button-container):nth-child(5),
   div.columns.plans > div > div > ul {
     max-width: 70%;
   }
+
   div.case-study.columns-container .columns.block > div {
     flex-direction: row;
   }

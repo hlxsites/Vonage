@@ -4,7 +4,7 @@ div.fragment.two-col {
     box-sizing: inherit;
     position: relative;
     width: 100%;
-    padding: 64px 20px;
+    padding: 64px 0;
     display: flex;
     flex-direction: column-reverse;
 }
@@ -12,7 +12,7 @@ div.fragment.two-col {
 div.fragment.two-col > div {
     position: relative;
     width: 100%;
-    padding: 0 20px;
+    padding: 0;
 }
 
 div.fragment.two-col > .leftcolumn {
@@ -26,11 +26,35 @@ div.fragment.two-col > .rightcolumn {
     max-width: 41.6667%;
 }
 
+.fragment.two-col .columns > div {
+  display: flex;
+  flex-flow: row wrap;
+}
+
 div.fragment.two-col a:any-link {
     color: #000;
     transition: transform .2s;
     text-decoration: none;
     display:inline-block;
+}
+
+div.fragment.two-col a.button.primary {
+  border-radius: unset;
+  background-color: transparent;
+  line-height: unset;
+  border: unset;
+  height: auto;
+  margin-bottom: 0;
+  margin-top: 50px;
+  padding-top: 0;
+}
+
+div.fragment.two-col a.button.primary::after {
+  background-color: #000;
+  content: "";
+  display: block;
+  height: .2rem;
+  width: 100%;
 }
 
 div.fragment.two-col li > a:hover, div.fragment.two-col li > strong > a:hover {
@@ -74,6 +98,10 @@ div.fragment.two-col ul {
     column-gap: 4rem;
 }
 
+div.fragment.two-col ul li::marker {
+    color: var(--accent-color);
+}
+
 div.fragment-container.lead-gen {
   background-color: #000;
   color:#fff;
@@ -109,5 +137,10 @@ div.fragment.lead-gen > div.section {
   div.fragment.two-col {
     display: flex;
     flex-direction: initial;
+  }
+
+  div.fragment .columns-img-col {
+    flex: 0 0 41.667%;
+    max-width: 41.667%;
   }
 }

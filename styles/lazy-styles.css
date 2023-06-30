@@ -67,3 +67,50 @@
     font-style: normal;
     font-display: swap;
 }
+
+.modal-dialog {
+  background-color: #fff;
+  width: 56vw;
+  height: 100vh;
+  border: none;
+
+  /* The browsers always draws an (invisible) border. We can hide
+  the border by pushing the window up and out of the screen. */
+  top: -6px;
+}
+
+.modal-dialog::backdrop {
+  background-color: rgb(0 0 0 / 71%);
+}
+
+.modal-dialog::before {
+  position: absolute;
+  background: linear-gradient(90deg,#881fff 0,#827ef9);
+  content: "";
+  height: 1.5rem;
+  left: 0;
+  top: 0;
+  width: 100%;
+}
+
+@media (max-width: 1024px) {
+  .modal-dialog {
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.modal-dialog .vlt-icon-close {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+}
+
+.modal-dialog .vlt-icon-close::before {
+  font-family: var(--icon-font-family);
+  content: var(--vlt-close-icon);
+  font-size: 4rem;
+  cursor: pointer;
+  height: 2rem;
+  width: 2rem;
+}
