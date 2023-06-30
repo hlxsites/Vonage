@@ -47,11 +47,6 @@
   max-width: 100%;
 }
 
-.landing-page-hero .category-content .disclaimer {
-  width: 57rem;
-  max-width: 100%;
-}
-
 /* Make a UL in the category content description a flex container */
 .landing-page-hero .category-content .description ul {
   display: flex;
@@ -223,6 +218,8 @@
   text-align: left;
   margin-top: -2rem;
   padding-bottom: 3rem;
+  width: 57rem;
+  max-width: 100%;
 }
 
 /* Layout for the media columns content */
