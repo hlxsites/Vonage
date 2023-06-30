@@ -45,6 +45,7 @@ export default async function decorate(block) {
   const path = link ? link.getAttribute('href') : block.textContent.trim();
   const fragment = await loadFragment(path);
   if (!fragment) {
+    // eslint-disable-next-line no-console
     console.warn(`Fragment not found: ${path}`);
     return;
   }
