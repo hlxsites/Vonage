@@ -9,6 +9,13 @@
   padding-top: 0;
 }
 
+.section.landing-page-hero-container.black-background {
+  background-color: #000;
+  color: #eeeffc;
+  padding-bottom: 0;
+  padding-top: 0;
+}
+
 /* Primary flex container for the block */
  .landing-page-hero {
   display: flex;
@@ -205,12 +212,19 @@
   line-height: 1.6rem;
   text-align: left;
   margin-top: -2rem;
+  padding-bottom: 3rem;
 }
 
 /* Layout for the media columns content */
 .landing-page-hero .media-content {
   align-items: center !important;
   position: relative;
+}
+
+.landing-page-hero .media-content img {
+  max-height: 533px;
+  margin: auto;
+  display: block;
 }
 
 /* Layout and styling for the play button for video enabled media content column */
@@ -409,6 +423,12 @@
     font-weight: 400;
     letter-spacing: -.02rem;
     line-height: 2rem;
+  }
+
+  .landing-page-hero .category-content .description a,
+  .landing-page-hero .category-content .disclaimer a {
+    color: inherit;
+    text-decoration: underline;
   }
 
   /* Tweak link menu text attributes for larger screens */
