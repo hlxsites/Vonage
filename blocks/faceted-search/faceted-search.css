@@ -55,6 +55,31 @@
   width: clamp(235px, 30%, 305px);
 }
 
+/* Styling for preceeding default-content text */
+.faceted-search-container .default-content-wrapper h3 {
+  text-align: center;
+  padding-top: 2rem;
+  font-family: var(--body-font-family);
+  font-size: 3.8rem;
+  font-weight: 500;
+  letter-spacing: -.15rem;
+  line-height: 4rem;
+}
+
+.faceted-search-container .default-content-wrapper p {
+  font-family: var(--body-font-family);
+  font-size: 1.4rem;
+  font-weight: 400;
+  letter-spacing: -.02rem;
+  line-height: 2rem;
+  text-align: center;
+}
+
+@media (min-width: 1200px) {
+  .faceted-search-container .default-content-wrapper p {
+    font-size: 1.7rem;
+  }
+}
 
 /* desktop filters */
 .faceted-search .desktop-filter-options {
@@ -118,7 +143,7 @@
   width: 0;
 }
 
-.faceted-search .desktop-filter-options details.accordion-bar  ul li .checkbox-wrapper label .checkmark {
+.faceted-search .desktop-filter-options details.accordion-bar  ul li .checkbox-wrapper label .fake-checkbox {
   position: absolute;
   top: 0;
   left: 0;
@@ -126,22 +151,17 @@
   width: 2rem;
   border: .1rem solid #9b9b9b;
   background-color: #fff;
-  font-size: 2rem;
+  display: flex;
+  flex-flow: row wrap;
+  align-content: center;
+  justify-content: center;
+  font-size: 2.6rem;
 }
 
-.faceted-search .desktop-filter-options details.accordion-bar  ul li .checkbox-wrapper label .checkmark::after {
-  content: var(--vlt-close-icon);
-  position: absolute;
+.faceted-search .desktop-filter-options details.accordion-bar  ul li .checkbox-wrapper label .fake-checkbox .checkmark {
   display: none;
   color: #fff;
   font-family: var(--icon-font-family);
-  font-style: normal;
-  font-variant: normal;
-  width: 2rem;
-  height: 2rem;
-  bottom: .9rem;
-  font-size: 2.6rem;
-  left: -.3rem;
 }
 
 .faceted-search .desktop-filter-options details.accordion-bar  ul li .checkbox-wrapper label .option-num {
@@ -153,24 +173,18 @@
   text-transform: capitalize;
 }
 
-.faceted-search .desktop-filter-options details.accordion-bar  ul li .checkbox-wrapper label input:checked~.checkmark {
+.faceted-search .desktop-filter-options details.accordion-bar  ul li .checkbox-wrapper label input:checked~.fake-checkbox {
   background-color: #881fff;
 }
 
 /* Add focus styles on the outer-box of the fake checkbox to make it accessible by keyboard */
-.faceted-search .desktop-filter-options details.accordion-bar  ul li .checkbox-wrapper label input[type="checkbox"]:focus + .checkmark {
+.faceted-search .desktop-filter-options details.accordion-bar  ul li .checkbox-wrapper label input[type="checkbox"]:focus + .fake-checkbox {
   outline: #3b99fc auto 5px;
 }
 
-.faceted-search .desktop-filter-options details.accordion-bar  ul li .checkbox-wrapper label input:checked~.checkmark::after {
+.faceted-search .desktop-filter-options details.accordion-bar  ul li .checkbox-wrapper label input:checked~.fake-checkbox .checkmark {
   display: block;
 }
-
-
-
-
-
-
 
 
 /* result cards */
@@ -531,7 +545,7 @@
   width: 0;
 }
 
-.faceted-search .mobile-filter-dialog  .mobile-filters details.accordion-bar  ul li .checkbox-wrapper label .checkmark {
+.faceted-search .mobile-filter-dialog  .mobile-filters details.accordion-bar  ul li .checkbox-wrapper label .fake-checkbox {
   position: absolute;
   top: 0;
   right: 1rem;
@@ -539,22 +553,17 @@
   width: 2rem;
   border: .1rem solid #9b9b9b;
   background-color: #fff;
-  font-size: 2rem;
+  display: flex;
+  flex-flow: row wrap;
+  align-content: center;
+  justify-content: center;
+  font-size: 2.6rem;
 }
 
-.faceted-search .mobile-filter-dialog  .mobile-filters details.accordion-bar  ul li .checkbox-wrapper label .checkmark::after {
-  content: var(--vlt-close-icon);
-  position: absolute;
+.faceted-search .mobile-filter-dialog  .mobile-filters details.accordion-bar  ul li .checkbox-wrapper label .fake-checkbox .checkmark {
   display: none;
   color: #881fff;
   font-family: var(--icon-font-family);
-  font-style: normal;
-  font-variant: normal;
-  width: 2rem;
-  height: 2rem;
-  bottom: .9rem;
-  font-size: 2.6rem;
-  left: -.3rem;
 }
 
 .faceted-search .mobile-filter-dialog  .mobile-filters details.accordion-bar  ul li .checkbox-wrapper label .option-num {
@@ -567,11 +576,11 @@
 }
 
 /* Add focus styles on the outer-box of the fake checkbox to make it accessible by keyboard */
-.faceted-search .mobile-filter-dialog  .mobile-filters details.accordion-bar  ul li .checkbox-wrapper label input[type="checkbox"]:focus + .checkmark {
+.faceted-search .mobile-filter-dialog  .mobile-filters details.accordion-bar  ul li .checkbox-wrapper label input[type="checkbox"]:focus + .fake-checkbox {
   outline: #3b99fc auto 5px;
 }
 
-.faceted-search .mobile-filter-dialog  .mobile-filters details.accordion-bar  ul li .checkbox-wrapper label input:checked~.checkmark::after {
+.faceted-search .mobile-filter-dialog  .mobile-filters details.accordion-bar  ul li .checkbox-wrapper label input:checked~.fake-checkbox .checkmark {
   display: block;
 }
 
