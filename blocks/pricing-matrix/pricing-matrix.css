@@ -1,3 +1,5 @@
+/* stylelint-disable no-descending-specificity */
+
 .section.pricing-matrix-container {
     background-color: #eeeffc;
 
@@ -332,4 +334,37 @@
     position: absolute;
     left: -2.2rem;
     top: 0;
+}
+
+/* Styling for default-content-wrapper in the same section as the pricing matrix */
+
+div.section.pricing-matrix > div.default-content-wrapper,
+div.section.background-pricing > div.default-content-wrapper {
+  margin-top: 5rem;
+}
+
+div.section.pricing-matrix > div.default-content-wrapper > p,
+div.section.background-pricing > div.default-content-wrapper > p {
+  font-size: 1.2rem;
+  letter-spacing: 0.025rem;
+  color: var(--end-note-text-color);
+  font-weight: 400;
+  text-align: left;
+  line-height: 1.8rem;
+  padding-bottom: 5px;
+  margin-top: 0;
+  margin-bottom: 0;
+  max-width: 74.6rem;
+}
+
+div.section.pricing-matrix > div.default-content-wrapper > p > strong,
+div.section.background-pricing > div.default-content-wrapper > p > strong {
+  font-size: var(--body-font-size-s);
+  font-weight: 700;
+}
+
+div.section.pricing-matrix > div.default-content-wrapper a,
+div.section.background-pricing > div.default-content-wrapper a {
+  text-decoration: underline;
+  color: #000;
 }

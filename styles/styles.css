@@ -425,27 +425,6 @@ div.default-content-wrapper > h2 + p {
   text-align: center !important;
 }
 
-div.section.pricing-matrix > div.default-content-wrapper > p,
-div.section.background-pricing > div.default-content-wrapper > p {
-  font-size: var(--body-font-size-xxs);
-  letter-spacing: 0.025rem;
-  color: var(--end-note-text-color);
-  font-weight: 400;
-  text-align: left;
-}
-
-div.section.pricing-matrix > div.default-content-wrapper > p > strong,
-div.section.background-pricing > div.default-content-wrapper > p > strong {
-  font-size: var(--body-font-size-s);
-  font-weight: 700;
-}
-
-div.section.pricing-matrix > div.default-content-wrapper a,
-div.section.background-pricing > div.default-content-wrapper a {
-  text-decoration: underline;
-  color: #000;
-}
-
 div.section.business-phone-service > div.default-content-wrapper {
   color: #5f6169;
   font-family: var(--body-font-family);
