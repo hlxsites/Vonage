@@ -1,6 +1,7 @@
 /* stylelint-disable no-descending-specificity */
 
-.section.pricing-matrix-container {
+.section.pricing-matrix-container,
+.section.background-pricing-sub-text{
     background-color: #eeeffc;
 
     /* Bit of a hack fix to https://github.com/hlxsites/Vonage/issues/107 */
@@ -370,12 +371,16 @@ div.section.background-pricing-sub-text > div.default-content-wrapper > p {
   max-width:74.6rem;
 }
 
+div.section.pricing-matrix-sub-text > div.default-content-wrapper > p > strong,
+div.section.background-pricing-sub-text > div.default-content-wrapper > p > strong,
 div.section.pricing-matrix > div.default-content-wrapper > p > strong,
 div.section.background-pricing > div.default-content-wrapper > p > strong {
   font-size: var(--body-font-size-s);
   font-weight: 700;
 }
 
+div.section.pricing-matrix-sub-text > div.default-content-wrapper a,
+div.section.background-pricing-sub-text > div.default-content-wrapper a,
 div.section.pricing-matrix > div.default-content-wrapper a,
 div.section.background-pricing > div.default-content-wrapper a {
   text-decoration: underline;
