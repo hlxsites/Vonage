@@ -108,6 +108,11 @@
   padding-left: 2rem;
 }
 
+.purple-gradient-background .landing-page-hero .category-content .description p a {
+  text-decoration: underline;
+  color: #fff;
+}
+
 /* Styling for a legit bulleted list in the description */
 .landing-page-hero .category-content .description.inline-bulleted-list ul > li {
   font-family: var(--body-font-family);
