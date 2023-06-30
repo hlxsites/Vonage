@@ -425,7 +425,8 @@ div.default-content-wrapper > h2 + p {
   text-align: center !important;
 }
 
-div.section.business-phone-service > div.default-content-wrapper {
+
+div.section.end-note-content > div.default-content-wrapper {
   color: #5f6169;
   font-family: var(--body-font-family);
   font-size: 1.2rem;
@@ -436,7 +437,7 @@ div.section.business-phone-service > div.default-content-wrapper {
   margin-top: -64px;
 }
 
-div.section.business-phone-service > div.default-content-wrapper p::before {
+div.section.end-note-content > div.default-content-wrapper p::before {
   content: "*";
   position: relative;
   top: -0.2rem;
