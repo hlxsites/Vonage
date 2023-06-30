@@ -45,7 +45,7 @@ export default async function decorate(block) {
   const path = link ? link.getAttribute('href') : block.textContent.trim();
   const fragment = await loadFragment(path);
   if (!fragment) {
-    console.debug(`Fragment not found: ${path}`);
+    console.warn(`Fragment not found: ${path}`);
     return;
   }
   block.classList.add(path.split('/').pop());
