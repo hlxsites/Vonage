@@ -5,7 +5,7 @@ import { sampleRUM } from './lib-franklin.js';
 sampleRUM('cwv');
 
 /* eslint-disable */
-function LoadDriftWidget() {
+function loadDriftWidget() {
     var t = window.driftt = window.drift = window.driftt || [];
     if (!t.init) {
         if (t.invoked) return void (window.console && console.error && console.error("Drift snippet included twice."));
@@ -30,7 +30,7 @@ function LoadDriftWidget() {
 /* eslint-enable */
 
 if (!document.location.hostname.match('.hlx.page')) {
-  LoadDriftWidget();
+  loadDriftWidget();
 }
 
 const loadScript = (url, attrs) => {
