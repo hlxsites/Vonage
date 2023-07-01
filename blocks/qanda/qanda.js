@@ -22,7 +22,6 @@ export default function decorate(block) {
     questionlabel.addEventListener('click', expand);
     answerdiv.style.height = 0;
     answerdiv.style.padding = '0 2rem 0';
-    answerdiv.ariaHidden = true;
     questionlabel.ariaExpanded = false;
     itemdiv.append(questionlabel);
     itemdiv.append(answerdiv);
