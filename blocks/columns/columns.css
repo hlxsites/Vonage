@@ -228,7 +228,7 @@ div.slim-promo.columns-2-cols>div>div:nth-child(2) {
 div.slim-promo.columns-2-cols h2 {
   font-family: var(--body-font-family);
   font-weight: 700;
-  line-height: 6.7rem;
+  padding: 2rem 0;
   font-size: 1.6rem;
   margin-top: 0;
   margin-bottom: 0;
@@ -511,7 +511,6 @@ div.columns.lead-gen>div>div:last-child>p:last-child>a:last-child::before {
 
 /* Container padding and background */
 div.case-study.columns-container {
-  background-color: #eeeffc;
   padding: 0 3.2rem;
 }
 
