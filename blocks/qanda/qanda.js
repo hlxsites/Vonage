@@ -22,8 +22,8 @@ export default function decorate(block) {
     questionlabel.addEventListener('click', expand);
     answerdiv.style.height = 0;
     answerdiv.style.padding = '0 2rem 0';
-    answerdiv.ariaHidden = true;
     questionlabel.ariaExpanded = false;
+    questionlabel.role = 'button';
     itemdiv.append(questionlabel);
     itemdiv.append(answerdiv);
     maindiv.append(itemdiv);
@@ -39,12 +39,10 @@ function expand(event) {
   if (label.ariaExpanded === 'true') {
     answer.style.height = 0;
     answer.style.padding = '0 2rem 0';
-    answer.ariaHidden = true;
     label.ariaExpanded = false;
   } else {
     answer.style.height = `${answer.scrollHeight}px`;
     answer.style.padding = null;
-    answer.ariaHidden = false;
     label.ariaExpanded = true;
   }
 }

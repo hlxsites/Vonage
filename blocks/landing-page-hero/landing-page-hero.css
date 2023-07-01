@@ -37,7 +37,7 @@
 /* Make a UL in the category content description a flex container */
 .landing-page-hero .category-content .description ul {
   display: flex;
-  flex-flow: row nowrap;
+  flex-flow: row wrap;
   padding-inline-start: 0;
 }
 
