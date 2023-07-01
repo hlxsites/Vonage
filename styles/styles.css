@@ -181,6 +181,10 @@ body {
   background: linear-gradient(360deg, rgb(255 255 255 / 100%) 0%, rgb(238 239 252 / 100%) 85%);
 }
 
+.accent-gradient-left {
+  background: linear-gradient(90deg, rgb(136 31 255 / 100%) 40%, rgb(130 126 249 / 100%) 0%);
+}
+
 body.appear {
   display: unset;
 }
