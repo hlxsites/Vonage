@@ -23,6 +23,7 @@ export default function decorate(block) {
     answerdiv.style.height = 0;
     answerdiv.style.padding = '0 2rem 0';
     questionlabel.ariaExpanded = false;
+    questionlabel.role = 'button';
     itemdiv.append(questionlabel);
     itemdiv.append(answerdiv);
     maindiv.append(itemdiv);
