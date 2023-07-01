@@ -39,12 +39,10 @@ function expand(event) {
   if (label.ariaExpanded === 'true') {
     answer.style.height = 0;
     answer.style.padding = '0 2rem 0';
-    answer.ariaHidden = true;
     label.ariaExpanded = false;
   } else {
     answer.style.height = `${answer.scrollHeight}px`;
     answer.style.padding = null;
-    answer.ariaHidden = false;
     label.ariaExpanded = true;
   }
 }
