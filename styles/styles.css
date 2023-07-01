@@ -198,6 +198,9 @@ header {
 main {
   margin-top: var(--mobile-nav-height);
   font-size: 17px;
+
+  /* make sure black text is visible when the device is in dark mode */
+  background-color: #fff;
 }
 
 h1, h2, h3,
@@ -429,28 +432,8 @@ div.default-content-wrapper > h2 + p {
   text-align: center !important;
 }
 
-div.section.pricing-matrix > div.default-content-wrapper > p,
-div.section.background-pricing > div.default-content-wrapper > p {
-  font-size: var(--body-font-size-xxs);
-  letter-spacing: 0.025rem;
-  color: var(--end-note-text-color);
-  font-weight: 400;
-  text-align: left;
-}
 
-div.section.pricing-matrix > div.default-content-wrapper > p > strong,
-div.section.background-pricing > div.default-content-wrapper > p > strong {
-  font-size: var(--body-font-size-s);
-  font-weight: 700;
-}
-
-div.section.pricing-matrix > div.default-content-wrapper a,
-div.section.background-pricing > div.default-content-wrapper a {
-  text-decoration: underline;
-  color: #000;
-}
-
-div.section.business-phone-service > div.default-content-wrapper {
+div.section.end-note-content > div.default-content-wrapper {
   color: #5f6169;
   font-family: var(--body-font-family);
   font-size: 1.2rem;
@@ -461,7 +444,7 @@ div.section.business-phone-service > div.default-content-wrapper {
   margin-top: -64px;
 }
 
-div.section.business-phone-service > div.default-content-wrapper p::before {
+div.section.end-note-content > div.default-content-wrapper p::before {
   content: "*";
   position: relative;
   top: -0.2rem;
