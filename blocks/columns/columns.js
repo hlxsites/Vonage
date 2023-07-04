@@ -33,6 +33,110 @@ function addSlimPromoClick(block, mq) {
   }
 }
 
+// For children of column <div>, if there is an <a> and a <picture> then move
+// the <picture> to be a child of the <a>, if it isn't already a child.
+function movePictureIntoAnchor(col) {
+  const br = col.querySelector('br');
+  if (br != null) {
+    br.remove();
+  }
+  const aElem = col.querySelector('a[href]');
+  if (aElem != null) {
+    const img = col.querySelector('div > picture > img');
+    if (img != null) {
+      aElem.innerHTML = '';
+      aElem.append(img.parentNode);
+    }
+  }
+}
+
+// For content between <hr> nodes, move all <li> into a single <ul> and move
+// each subsequent <p> as child of the <li>.
+function buildSingleList(col) {
+  const hrList = col.querySelectorAll('hr');
+  if (hrList.length < 1) {
+    return;
+  }
+  const children = col.children;
+  var inBetweenHR = false;
+  var firstUlElem = null;
+
+  [...children].forEach((child) => {
+    if (child.nodeName === 'HR') {
+      inBetweenHR = !inBetweenHR;
+      child.remove();
+      return;
+    }
+
+    if (inBetweenHR) {
+      if (firstUlElem) {
+        if (child.nodeName === 'UL') {
+          // Move the <li> within a <ul> to the first <ul>
+          const liElem = child.querySelector('li');
+          if (liElem) {
+            firstUlElem.append(liElem);
+          }
+        } else {
+          // Move any other element to latest <li>
+          const liElem = Array.from(firstUlElem.querySelectorAll('li')).pop();
+          if (liElem) {
+            liElem.append(child);
+          }
+        }
+      }
+
+      // Remove any <ul> except the first
+      if (child.nodeName === 'UL') {
+        if (firstUlElem == null) {
+          firstUlElem = child;
+        } else {
+          child.remove();
+        }
+      }
+    }
+  });
+
+}
+
+// For content between <hr> nodes, move content as children of a new <div>.
+// Within that block, move <p> following <li> to be a child.
+function moveContentToDiv2(col) {
+  const hrList = col.querySelectorAll('hr');
+  if (hrList.length < 1) {
+    return;
+  }
+  const contentDiv = div();
+  const children = col.children;
+  var inBetweenHR = false;
+  var ulElem = null;
+
+  [...children].forEach((child) => {
+    if (child.nodeName === 'HR') {
+      inBetweenHR = !inBetweenHR;
+      if (inBetweenHR == true) {
+        col.insertBefore(contentDiv, child);
+      }
+      child.remove();
+      return;
+    }
+    if (inBetweenHR) {
+      if (ulElem != null) {
+        const liElem = ulElem.querySelector('li');
+        if (liElem) {
+          liElem.append(child);
+        }
+      } else {
+        contentDiv.append(child);
+      }
+    }
+    if (child.nodeName === 'UL') {
+      ulElem = child;
+    } else {
+      ulElem = null;
+    }
+  });
+}
+
 export default function decorate(block) {
   const cols = [...block.firstElementChild.children];
   block.classList.add(`columns-${cols.length}-cols`);
@@ -49,8 +153,8 @@ export default function decorate(block) {
       }
 
       if (block.classList.contains('case-study') && col.classList.contains('columns-other-col')) {
-        // For the div with no picture elements, place the last two links into
-        // a new child div.    
+        // For the .columns-other-col <div>, place the last two links
+        // into a new child <div>.
         const buttonDiv = div();
         for (var i = col.children.length - 1; i >= 0; i--) {
           var child = col.children[i];
@@ -106,5 +210,26 @@ export default function decorate(block) {
         p.remove();
       });
     recdiv.append(row);
+  }
+
+  /* Process details-columns */
+  if (block.classList.contains('details-columns')) {
+    [...block.children].forEach((row) => {
+      [...row.children].forEach((col) => {
+        if (col.classList.contains('columns-img-col')) {
+          movePictureIntoAnchor(col);
+        }
+        if (col.classList.contains('columns-other-col')) {
+          buildSingleList(col);
+
+          // Remove all "button.primary" classes from links
+          const buttonList = col.querySelectorAll('a.button');
+          buttonList.forEach((button) => {
+            button.classList.remove('button');
+            button.classList.remove('primary');
+          });
+        }
+      });
+    });
   }
 }

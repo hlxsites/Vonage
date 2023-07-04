@@ -43,7 +43,7 @@ div.columns.category-grid > div {
 }
 
 div.columns.category-grid p {
-  font-size: var(--body-font-size-s);
+  font-size: var(--body-font-size-xxs);
   font-weight: 400;
   letter-spacing: -.02rem;
   line-height: 2rem;
@@ -196,7 +196,7 @@ div.columns.category-grid a {
 div.columns.category-grid h4 {
   font-family: var(--fixed-font-family);
   text-transform: uppercase;
-  font-size: var(--body-font-size-xs);
+  font-size: var(--body-font-size-xxs);
   font-weight: 600;
   letter-spacing: .075rem;
   line-height: 2rem;
@@ -638,6 +638,85 @@ div.case-study.columns-container .columns.block > div > div.columns-other-col > 
   width: 100%;
 }
 
+div.columns.details-columns {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+div.columns.details-columns > div {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* div.columns.details-columns > div > div.columns-img-col {
+  flex: 0 0 100%;
+  max-width: 100%;
+  width: 100%;
+} */
+
+div.columns.details-columns > div > div.columns-other-col {
+  flex: 0 0 100%;
+  max-width: 100%;
+  width: 100%;
+}
+
+div.columns.details-columns > div > div.columns-other-col > h2 {
+  font-size: var(--heading-font-size-m);
+  font-weight: 500;
+  letter-spacing: -0.15rem;
+} 
+
+div.columns.details-columns > div > div.columns-other-col > p {
+  font-size: var(--body-font-size-xs);
+  font-weight: 400;
+  letter-spacing: -0.02rem;
+} 
+
+div.columns.details-columns > div > div.columns-other-col > p.button-container {
+  margin-top: 5rem;
+}
+
+div.columns.details-columns > div > div.columns-other-col > p.button-container > a {
+  color: var(--text-color);
+  display: inline-block;
+  font-family: var(--fixed-font-family);
+  font-size: var(--body-font-size-xxs);
+  font-weight: 600;
+  letter-spacing: 0.075rem;
+  line-height: 2rem;
+  text-decoration: underline;
+  scale: 1.0;
+  transition: transform 0.2s ease;
+} 
+
+div.columns.details-columns > div > div.columns-other-col > p.button-container > a:hover {
+  transform: scale(1.02);
+}
+
+div.columns.details-columns > div > div.columns-other-col > ul {
+  column-count: 2;
+  column-gap: 4rem;
+  font-size: 1.4rem;
+  font-weight: 400rem;
+  letter-spacing: .025rem;
+  color:  var(--text-color);
+  text-decoration-color: var(--text-color);
+  text-decoration-line: none;
+} 
+
+div.columns.details-columns > div > div.columns-other-col > ul a {
+  font-size: 1.4rem;
+  color: var(--text-color);
+  text-decoration: none;
+} 
+
+div.columns.details-columns > div > div.columns-other-col > ul a:any-link {
+  transition: transform .2s;
+}
+
+div.columns.details-columns > div > div.columns-other-col > ul a:hover {
+  text-decoration: underline;
+}
 
 @media (min-width: 900px) {
   div.columns > div {
@@ -715,6 +794,16 @@ div.case-study.columns-container .columns.block > div > div.columns-other-col > 
     width: 22%;
   }
 
+  div.columns.block.details-columns > div > div.columns-img-col {
+    flex: 1 0 0;
+  }
+  
+  div.columns.block.details-columns > div > div.columns-other-col {
+    flex: 0 0 60%;
+    max-width: 60%;
+    width: 60%;
+  }
+  
 }
 
 @media (min-width: 992px) {
