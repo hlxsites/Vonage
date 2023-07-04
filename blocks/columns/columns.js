@@ -57,9 +57,9 @@ function buildSingleList(col) {
   if (hrList.length < 1) {
     return;
   }
-  const children = col.children;
-  var inBetweenHR = false;
-  var firstUlElem = null;
+  const { children } = col;
+  let inBetweenHR = false;
+  let firstUlElem = null;
 
   [...children].forEach((child) => {
     if (child.nodeName === 'HR') {
@@ -95,46 +95,6 @@ function buildSingleList(col) {
       }
     }
   });
-
-}
-
-// For content between <hr> nodes, move content as children of a new <div>.
-// Within that block, move <p> following <li> to be a child.
-function moveContentToDiv2(col) {
-  const hrList = col.querySelectorAll('hr');
-  if (hrList.length < 1) {
-    return;
-  }
-  const contentDiv = div();
-  const children = col.children;
-  var inBetweenHR = false;
-  var ulElem = null;
-
-  [...children].forEach((child) => {
-    if (child.nodeName === 'HR') {
-      inBetweenHR = !inBetweenHR;
-      if (inBetweenHR == true) {
-        col.insertBefore(contentDiv, child);
-      }
-      child.remove();
-      return;
-    }
-    if (inBetweenHR) {
-      if (ulElem != null) {
-        const liElem = ulElem.querySelector('li');
-        if (liElem) {
-          liElem.append(child);
-        }
-      } else {
-        contentDiv.append(child);
-      }
-    }
-    if (child.nodeName === 'UL') {
-      ulElem = child;
-    } else {
-      ulElem = null;
-    }
-  });
 }
 
 export default function decorate(block) {
@@ -144,7 +104,6 @@ export default function decorate(block) {
   // setup image columns
   [...block.children].forEach((row) => {
     [...row.children].forEach((col) => {
-
       if (col.querySelector('picture')) {
         // column contains a picture
         col.classList.add('columns-img-col');
@@ -156,10 +115,10 @@ export default function decorate(block) {
         // For the .columns-other-col <div>, place the last two links
         // into a new child <div>.
         const buttonDiv = div();
-        for (var i = col.children.length - 1; i >= 0; i--) {
-          var child = col.children[i];
+        for (let i = col.children.length - 1; i >= 0; i -= 1) {
+          const child = col.children[i];
           if (child.classList.contains('button-container')) {
-            var link = child.querySelector('a[href]');
+            const link = child.querySelector('a[href]');
             if (link) {
               buttonDiv.prepend(link);
               if (buttonDiv.children.length <= 2) {
@@ -173,7 +132,6 @@ export default function decorate(block) {
           }
         }
       }
-
     });
   });
 
