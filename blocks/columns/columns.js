@@ -40,16 +40,36 @@ export default function decorate(block) {
   // setup image columns
   [...block.children].forEach((row) => {
     [...row.children].forEach((col) => {
-      const pic = col.querySelector('picture');
-      if (pic) {
-        const picWrapper = pic.closest('div');
-        if (picWrapper && picWrapper.children.length === 1) {
-          // picture is only content in column
-          picWrapper.classList.add('columns-img-col');
-        }
+
+      if (col.querySelector('picture')) {
+        // column contains a picture
+        col.classList.add('columns-img-col');
       } else {
         col.classList.add('columns-other-col');
       }
+
+      if (block.classList.contains('case-study') && col.classList.contains('columns-other-col')) {
+        // For the div with no picture elements, place the last two links into
+        // a new child div.    
+        const buttonDiv = div();
+        for (var i = col.children.length - 1; i >= 0; i--) {
+          var child = col.children[i];
+          if (child.classList.contains('button-container')) {
+            var link = child.querySelector('a[href]');
+            if (link) {
+              buttonDiv.prepend(link);
+              if (buttonDiv.children.length <= 2) {
+                child.remove();
+              }
+              if (buttonDiv.children.length === 2) {
+                col.append(buttonDiv);
+                break;
+              }
+            }
+          }
+        }
+      }
+
     });
   });
 
@@ -86,20 +106,5 @@ export default function decorate(block) {
         p.remove();
       });
     recdiv.append(row);
-  }
-
-  if (block.classList.contains('case-study')) {
-    // with link and image in separate paragraphs
-    const buttonDiv = div();
-    [...block.querySelectorAll('p > a[href]')]
-      // link (in a <p>) has no siblings
-      .filter((link) => link.parentNode.childElementCount === 1)
-      .filter((link) => link.parentNode.classList.contains('button-container'))
-      .forEach((link) => {
-        buttonDiv.append(link);
-      });
-
-    block.querySelector('.case-study.block > div > div:nth-child(2) > p:nth-child(3)').replaceWith(buttonDiv);
-    block.querySelector('.case-study.block > div > div:nth-child(2) > p:nth-child(4)').remove();
   }
 }

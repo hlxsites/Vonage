@@ -528,13 +528,13 @@ div.case-study.columns-container .columns.block > div > div {
 }
 
 /* Make the first content child div (which is an image) relative for positioning the overlay image */
-div.case-study.columns-container .columns.block > div > div:first-child {
-position:relative;
+div.case-study.columns-container .columns.block > div > div.columns-img-col {
+  position:relative;
 }
 
 /* Remove the top margin on the div around the first p in the content so the content aligns to the top of the section */
 div.case-study.columns-container .columns.block > div > div > p:first-child {
-margin-top:0;
+  margin-top:0;
 }
 
 /* Positioning the overlay image */
@@ -545,7 +545,7 @@ div.case-study.columns-container .columns.block > div > div > p:nth-child(2) > p
 }
 
 /* Layout for the testimonial content container */
-div.case-study.columns-container .columns.block > div > div:nth-child(2) {
+div.case-study.columns-container .columns.block > div > div.columns-other-col {
   flex: 0 0 100%;
   max-width: 100%;
   position: relative;
@@ -555,25 +555,31 @@ div.case-study.columns-container .columns.block > div > div:nth-child(2) {
 }
 
 /* Layout for the div container for the citation and testimonial */
-div.case-study.columns-container .columns.block > div > div:nth-child(2) > div {
+div.case-study.columns-container .columns.block > div > div.columns-other-col > div {
   display: flex;
-  flex-direction: column;
 }
 
-/* Styling for the quote of the testimonial */
-div.case-study.columns-container .columns.block > div > div:nth-child(2) > p {
+/* Styling for lines of the testimonial */
+div.case-study.columns-container .columns.block > div > div.columns-other-col > p {
   font-family: var(--body-font-family);
-  font-size: 1.8rem;
-  font-weight: 500;
-  letter-spacing: -.05rem;
-  line-height: 2.4rem;
+  font-size: 1.4rem;
+  font-weight: 400;
+  letter-spacing: -.02rem;
+  line-height: 2.0rem;
   margin: 0 auto 3rem;
-  width: 80%;
   text-align: center;
 }
 
+/* Styling for the first line of the testimonial */
+div.case-study.columns-container .columns.block > div > div.columns-other-col > p:first-child {
+  font-size: 1.8rem;
+  font-weight: 500;
+  letter-spacing: -.05rem;
+  line-height: 2.0rem;
+}
+
 /* Styling for the citation */
-div.case-study.columns-container .columns.block > div > div:nth-child(2) > p:nth-child(2) {
+div.case-study.columns-container .columns.block > div > div.columns-other-col > p:nth-last-child(2) {
   font-family: var(--fixed-font-family);
   font-size: 1.2rem;
   font-weight: 400;
@@ -585,24 +591,25 @@ div.case-study.columns-container .columns.block > div > div:nth-child(2) > p:nth
 }
 
 /* Prevent the CTA buttons from spanning the full width of the container */
-div.case-study.columns-container .columns.block > div > div:nth-child(2) > div > a {
-margin-left: auto;
-margin-right:auto;
+div.case-study.columns-container .columns.block > div > div.columns-other-col > div > a {
+  margin-left: auto;
+  margin-right:auto;
 }
 
 /* Make sure the font on the secondary button is normal */
-div.case-study.columns-container .columns.block > div > div:nth-child(2) > p:nth-child(2) > em {
+div.case-study.columns-container .columns.block > div > div.columns-other-col > p:nth-last-child(2) > em {
   font-style: normal;
 }
 
 /* Tighten up the margins on the CTA buttons */
-div.case-study.columns-container .columns.block > div > div:nth-child(2) > p  a {
+div.case-study.columns-container .columns.block > div > div.columns-other-col > p  a {
   margin-top:0;
   margin-bottom:0;
 }
 
-/* Switch the secondary button to just be text with an underline */
-div.case-study.columns-container .columns.block > div > div:nth-child(2) > div > a:nth-child(2) {
+/* Switch any testimonial link and the secondary button to just be text with an underline */
+div.case-study.columns-container .columns.block > div > div.columns-other-col > p > a,
+div.case-study.columns-container .columns.block > div > div.columns-other-col > div > a:nth-child(2) {
   background-color: transparent;
   color: #000;
   border: none;
@@ -616,8 +623,14 @@ div.case-study.columns-container .columns.block > div > div:nth-child(2) > div >
   margin-bottom: 0;
 }
 
+div.case-study.columns-container .columns.block > div > div.columns-other-col > p > a {
+  font-size: 1.7rem;
+  font-weight: 400;
+}
+
 /* Add the underline to the secondary CTA button as a psuedo element */
-div.case-study.columns-container .columns.block > div > div:nth-child(2) > div > a:nth-child(2)::after {
+div.case-study.columns-container .columns.block > div > div.columns-other-col > p > a::after,
+div.case-study.columns-container .columns.block > div > div.columns-other-col > div > a:nth-child(2)::after {
   background-color: #000;
   content: "";
   display: block;
@@ -655,6 +668,53 @@ div.case-study.columns-container .columns.block > div > div:nth-child(2) > div >
     height: 130px;
     margin-right: 10px;
   }
+
+  div.case-study.columns-container .columns.block > div > div.columns-img-col {
+    flex-basis: 0;
+    flex-grow: 1;
+  }
+
+  div.case-study.columns-container .columns.block > div > div.columns-other-col {
+    flex: 0 0 66.67%;
+    max-width: 66.67%;
+    padding: 2.5rem 0;
+  }
+
+  div.case-study.columns-container .columns.block.equal-columns > div > div.columns-other-col {
+    flex: 0 0 50%;
+    max-width: 50%;
+    padding: 2.5rem 0;
+  }
+
+  div.case-study.columns-container .columns.block > div > div.columns-other-col > p {
+    text-align: left;
+    margin-left:0;
+    margin-right:0;
+  }
+
+  div.case-study.columns-container .columns.block > div > div.columns-other-col > div > a:first-child {
+    float: left;
+    margin-right: 7.3rem;
+  }
+
+  div.case-study.columns-container .columns.block > div > div.columns-other-col > div > a:nth-child(2) {
+    margin-top: 4rem;
+  }
+
+  div.case-study.columns-container .columns.block > div > div.columns-other-col > div {
+    display: block;
+  }
+
+  div.case-study.columns-container .columns.block > div > div > p:first-child {
+    margin-top:1em;
+  }
+
+  div.case-study.columns-container .columns.block > div > div > p:nth-child(2) > picture {
+    position: absolute;
+    top: 2.2rem;
+    width: 22%;
+  }
+
 }
 
 @media (min-width: 992px) {
@@ -705,53 +765,6 @@ div.case-study.columns-container .columns.block > div > div:nth-child(2) > div >
     max-width: 70%;
   }
 
-  div.case-study.columns-container .columns.block > div {
-    flex-direction: row;
-  }
-
-  div.case-study.columns-container .columns.block > div > div:first-child {
-    flex-basis: 0;
-    flex-grow: 1;
-  }
-
-  div.case-study.columns-container .columns.block > div > div:nth-child(2) {
-    flex: 0 0 66.67%;
-    max-width: 66.67%;
-    padding: 2.5rem 0;
-  }
-
-  div.case-study.columns-container .columns.block > div > div:nth-child(2) > p {
-    text-align: left;
-    margin-left:0;
-    margin-right:0;
-  }
-
-  div.case-study.columns-container .columns.block > div > div:nth-child(2) > p:nth-child(2) {
-     text-align: left;
-  }
-
-  div.case-study.columns-container .columns.block > div > div:nth-child(2) > div > a:first-child {
-    float: left;
-    margin-right: 7.3rem;
-  }
-
-  div.case-study.columns-container .columns.block > div > div:nth-child(2) > div > a:nth-child(2) {
-    margin-top: 4rem;
-  }
-
-  div.case-study.columns-container .columns.block > div > div:nth-child(2) > div {
-    display: block;
-  }
-
-  div.case-study.columns-container .columns.block > div > div > p:first-child {
-    margin-top:1em;
-  }
-
-  div.case-study.columns-container .columns.block > div > div > p:nth-child(2) > picture {
-    position: absolute;
-    top: 2.2rem;
-    width: 22%;
-  }
 }
 
 @media (min-width: 1200px) {
@@ -764,5 +777,16 @@ div.case-study.columns-container .columns.block > div > div:nth-child(2) > div >
     margin-top: 0;
     width: auto;
     text-align: left;
+  }
+
+  /* Styling for lines of the testimonial */
+  div.case-study.columns-container .columns.block > div > div.columns-other-col > p {
+    font-size: 1.7rem;
+  }
+
+  /* Styling for the first line of the testimonial */
+  div.case-study.columns-container .columns.block > div > div.columns-other-col > p:first-child {
+    font-size: 2.1rem;
+    line-height: 2.4rem;
   }
 }
