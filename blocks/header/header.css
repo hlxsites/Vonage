@@ -1147,7 +1147,7 @@ header .l3-nav-desktop .right-sec-menu-option:last-child {
       border-bottom: 1px solid #ddd;
     }
 
-    /* Keyframe declaration for the breadcrumb fadein animation*/
+    /* Keyframe declaration for the breadcrumb fadein animation */
     @keyframes fadein {
       0% {
         opacity: 0;
