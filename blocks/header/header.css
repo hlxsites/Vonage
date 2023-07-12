@@ -325,6 +325,7 @@ header #nav[aria-expanded="true"] .nav-tools {
   header #nav .nav-sections > ul > div:nth-child(3) > li { transition-delay: 0.50s; }
   header #nav .nav-sections > ul > div:nth-child(4) > li { transition-delay: 0.55s; }
   header #nav .nav-sections > ul > div:nth-child(5) > li { transition-delay: 0.60s; }
+  header #nav .nav-sections > ul > div:nth-child(6) > li { transition-delay: 0.65s; }
 
 /*  Render the section divider */
   header #nav[aria-expanded="true"] hr.nav-section-divider {
@@ -372,7 +373,9 @@ header #nav[aria-expanded="true"] .nav-tools {
     line-height: 4.6rem;
     margin-bottom: 2.0rem;
     text-decoration: underline;
-    transition: opacity .6s ease-out .25s;
+    transition-duration: 0.6s;
+    transition-property: opacity;
+    transition-timing-function: ease-in;
   }
 
   /* Property to change on the sub children once displayed to animate them fading in */
@@ -520,16 +523,17 @@ header.sub-menu-selected #nav[aria-expanded="true"] .nav-sections > ul > div.nav
 }
 
 header .sub-menu-label {
-display:none;
+  opacity:0;
   position: absolute;
   font-size: 2.8rem;
   font-weight: 500;
   letter-spacing: -.15rem;
   line-height: 3.2rem;
+  transition: opacity .36s ease-in-out .58s;
 }
 
 header .sub-menu-label-active {
-  display:block;
+  opacity:100;
 }
 
 /***** Desktop behavior with full nav menu displayed *****/

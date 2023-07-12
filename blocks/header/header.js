@@ -222,7 +222,7 @@ function toggleSubMenu() {
     }
     const backButton = document.getElementById('back-button');
     if (backButton) {
-      backButton.classList.remove('nav-back-button-active');
+      backButton.classList.remove('nav-back-button-active', 'nav-back-button-animation-start');
     }
   }
 }
