@@ -178,7 +178,7 @@ function toggleAllNavSections(sections, expanded = false) {
  */function triggerMenuFadeIn(expanded) {
   const navSections = document.querySelector('.nav-sections');
   if (!isDesktop.matches) {
-    navSections.querySelectorAll(':scope > ul > div > li').forEach((element) => {
+    navSections.querySelectorAll(':scope > ul > div').forEach((element) => {
       if (!expanded) {
         element.classList.add('animate-fade-in');
       } else {
