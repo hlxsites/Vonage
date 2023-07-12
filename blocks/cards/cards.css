@@ -507,7 +507,8 @@
   /* Layout tweaks for the clickable container area in the info card */
   .cards.info-card .cards-card-body {
     min-height: 48.5rem;
-    padding: 8rem 7rem;
+    padding-left: 7rem;
+    padding-right: 7rem;
   }
 
   /* Layout tweaks for the title of the info card */

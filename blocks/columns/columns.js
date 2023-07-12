@@ -33,6 +33,70 @@ function addSlimPromoClick(block, mq) {
   }
 }
 
+// For children of column <div>, if there is an <a> and a <picture> then move
+// the <picture> to be a child of the <a>, if it isn't already a child.
+function movePictureIntoAnchor(col) {
+  const br = col.querySelector('br');
+  if (br != null) {
+    br.remove();
+  }
+  const aElem = col.querySelector('a[href]');
+  if (aElem != null) {
+    const img = col.querySelector('div > picture > img');
+    if (img != null) {
+      aElem.innerHTML = '';
+      aElem.append(img.parentNode);
+    }
+  }
+}
+
+// For content between <hr> nodes, move all <li> into a single <ul> and move
+// each subsequent <p> as child of the <li>.
+function buildSingleList(col) {
+  const hrList = col.querySelectorAll('hr');
+  if (hrList.length < 1) {
+    return;
+  }
+  const { children } = col;
+  let inBetweenHR = false;
+  let firstUlElem = null;
+
+  [...children].forEach((child) => {
+    if (child.nodeName === 'HR') {
+      inBetweenHR = !inBetweenHR;
+      child.remove();
+      return;
+    }
+
+    if (inBetweenHR) {
+      if (firstUlElem) {
+        if (child.nodeName === 'UL') {
+          // Move the <li> within a <ul> to the first <ul>
+          const liElem = child.querySelector('li');
+          if (liElem) {
+            firstUlElem.append(liElem);
+          }
+        } else {
+          // Move any other element to latest <li>
+          const liElem = Array.from(firstUlElem.querySelectorAll('li')).pop();
+          if (liElem) {
+            liElem.append(child);
+          }
+        }
+      }
+
+      // Remove any <ul> except the first
+      if (child.nodeName === 'UL') {
+        if (firstUlElem == null) {
+          firstUlElem = child;
+        } else {
+          child.remove();
+        }
+      }
+    }
+  });
+}
+
 export default function decorate(block) {
   const cols = [...block.firstElementChild.children];
   block.classList.add(`columns-${cols.length}-cols`);
@@ -40,15 +104,33 @@ export default function decorate(block) {
   // setup image columns
   [...block.children].forEach((row) => {
     [...row.children].forEach((col) => {
-      const pic = col.querySelector('picture');
-      if (pic) {
-        const picWrapper = pic.closest('div');
-        if (picWrapper && picWrapper.children.length === 1) {
-          // picture is only content in column
-          picWrapper.classList.add('columns-img-col');
-        }
+      if (col.querySelector('picture')) {
+        // column contains a picture
+        col.classList.add('columns-img-col');
       } else {
         col.classList.add('columns-other-col');
+      }
+
+      if (block.classList.contains('case-study') && col.classList.contains('columns-other-col')) {
+        // For the .columns-other-col <div>, place the last two links
+        // into a new child <div>.
+        const buttonDiv = div();
+        for (let i = col.children.length - 1; i >= 0; i -= 1) {
+          const child = col.children[i];
+          if (child.classList.contains('button-container')) {
+            const link = child.querySelector('a[href]');
+            if (link) {
+              buttonDiv.prepend(link);
+              if (buttonDiv.children.length <= 2) {
+                child.remove();
+              }
+              if (buttonDiv.children.length === 2) {
+                col.append(buttonDiv);
+                break;
+              }
+            }
+          }
+        }
       }
     });
   });
@@ -88,18 +170,24 @@ export default function decorate(block) {
     recdiv.append(row);
   }
 
-  if (block.classList.contains('case-study')) {
-    // with link and image in separate paragraphs
-    const buttonDiv = div();
-    [...block.querySelectorAll('p > a[href]')]
-      // link (in a <p>) has no siblings
-      .filter((link) => link.parentNode.childElementCount === 1)
-      .filter((link) => link.parentNode.classList.contains('button-container'))
-      .forEach((link) => {
-        buttonDiv.append(link);
-      });
+  /* Process details-columns */
+  if (block.classList.contains('details-columns')) {
+    [...block.children].forEach((row) => {
+      [...row.children].forEach((col) => {
+        if (col.classList.contains('columns-img-col')) {
+          movePictureIntoAnchor(col);
+        }
+        if (col.classList.contains('columns-other-col')) {
+          buildSingleList(col);
 
-    block.querySelector('.case-study.block > div > div:nth-child(2) > p:nth-child(3)').replaceWith(buttonDiv);
-    block.querySelector('.case-study.block > div > div:nth-child(2) > p:nth-child(4)').remove();
+          // Remove all "button.primary" classes from links
+          const buttonList = col.querySelectorAll('a.button');
+          buttonList.forEach((button) => {
+            button.classList.remove('button');
+            button.classList.remove('primary');
+          });
+        }
+      });
+    });
   }
 }
