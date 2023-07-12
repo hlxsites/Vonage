@@ -91,6 +91,16 @@ function openOnKeydown(e) {
 function toggleNavSubSection(event) {
   if (isDesktop.matches) {
     const subSectionName = event.target.id;
+    const index = event.target.parentElement;
+
+    // Remove the active class from any other sub menu index items that are flagged as active
+    index.querySelectorAll('li.active').forEach((indexItem) => {
+      indexItem.classList.remove('active');
+    });
+
+    // Flag the index item which triggered the event as active so it wil be underlined.
+    event.target.classList.add('active');
+
     const subMenu = event.target.closest('.sub-menu');
     // Query subMenu sections for <ul> that match the class of the event firer (to be turned on)
     // Or which are currently displayed via the class sub-menu-section-active (to be turned off)
@@ -98,18 +108,28 @@ function toggleNavSubSection(event) {
       // Catch the active menu being either the section index (which is always displayed
       // Or the event firer already being active, where we don't want to toggle the section
       if (!subSection.classList.contains('sub-menu-index') && !(subSection.classList.contains(subSectionName) && subSection.classList.contains('sub-menu-section-active'))) {
-        // Toggle the class that controls sub section display
+        // Toggle the class that controls sub-section display
         subSection.classList.toggle('sub-menu-section-active');
       }
     });
   }
 }
 
-function toggleBreadCrumb() {
-  document.querySelector('.menu-option-sublist.l3-nav-menu-options').classList.toggle('active');
-  document.querySelector('.l3-nav-mobile-menu-body').classList.toggle('active');
-  document.querySelector('.l3-nav-mobile-menu-head.l3-nav-mobile-closed').classList.toggle('not-active');
-  document.querySelector('.l3-nav-mobile-menu-head.l3-nav-mobile-open').classList.toggle('not-active');
+/**
+ * Toggles expansion  of the breadCrumb.
+ * @param {boolean} collapse - Optional parameter to force a collapse of the breadcrumb such as when the nav menu is opened
+ */function toggleBreadCrumb(collapse = false) {
+  if (collapse === true) {
+    document.querySelector('.menu-option-sublist.l3-nav-menu-options').classList.remove('active');
+    document.querySelector('.l3-nav-mobile-menu-body').classList.remove('active');
+    document.querySelector('.l3-nav-mobile-menu-head.l3-nav-mobile-closed').classList.remove('not-active');
+    document.querySelector('.l3-nav-mobile-menu-head.l3-nav-mobile-open').classList.add('not-active');
+  } else {
+    document.querySelector('.menu-option-sublist.l3-nav-menu-options').classList.toggle('active');
+    document.querySelector('.l3-nav-mobile-menu-body').classList.toggle('active');
+    document.querySelector('.l3-nav-mobile-menu-head.l3-nav-mobile-closed').classList.toggle('not-active');
+    document.querySelector('.l3-nav-mobile-menu-head.l3-nav-mobile-open').classList.toggle('not-active');
+  }
 }
 
 /* ------------------------------ Global Functions ----------------------------------- */
@@ -394,6 +414,7 @@ function decorateSections(navSections) {
     navSection.addEventListener('click', async (event) => {
       if (isDesktop.matches) {
         const expanded = navSection.getAttribute('aria-expanded') === 'true';
+        toggleBreadCrumb(true);
         toggleAllNavSections(navSections);
 
         // Check if there's an active subsection tagged to display when the menu displays
@@ -415,6 +436,12 @@ function decorateSections(navSections) {
             navItemWrapper.querySelectorAll(`:scope ul.${defaultSubSectionName}`).forEach((sub) => {
               sub.classList.add('sub-menu-section-active');
             });
+          }
+          const indexElem = document.getElementById(path);
+          if (indexElem != null) {
+            indexElem.classList.add('active');
+          } else {
+            document.querySelector('.sub-menu-index li:first-child').classList.add('active');
           }
         }
 
@@ -714,6 +741,19 @@ export default async function decorate(block) {
     // prevent mobile nav behavior on window resize
     toggleMenu(nav, navSections, isDesktop.matches);
     isDesktop.addEventListener('change', () => toggleMenu(nav, navSections, isDesktop.matches));
+
+    // Add an event listoner that checks if a click falls outside of the nav-sections in order to trigger a close of the nav menu.
+    document.addEventListener('click', (event) => {
+      const isClickInside = navSections.contains(event.target);
+      if (!isClickInside) {
+        // The click was OUTSIDE the specifiedElement, do something
+        const expandedNav = navSections.querySelector('li[aria-expanded="true"]');
+        if (expandedNav != null) {
+          expandedNav.setAttribute('aria-expanded', 'false');
+          expandedNav.parentElement.setAttribute('aria-expanded', 'false');
+        }
+      }
+    });
 
     await decorateIcons(nav);
 

@@ -695,12 +695,14 @@ header .sub-menu-label-active {
     margin-left: auto;
   }
 
+  /* Transparent bottom border to prevent layout shift when adding the border on mouse over */
+  header #nav .nav-sections > ul > div.nav-item-wrapper > li {
+    border-bottom: 0.2rem solid transparent;
+  }
+
     /* Colorize the transparent bottom border under the section menu items on mouse over */
     header #nav .nav-sections > ul > div.nav-item-wrapper > li:hover {
-      text-decoration: underline;
-      text-decoration-color: var(--nav-color);
-      text-underline-offset: 1.5rem;
-      text-decoration-thickness: 0.2rem;
+      border-bottom-color: var(--nav-color);
     }
 
     /*  Don't show the hamburger icon in desktop mode */
@@ -755,7 +757,7 @@ header .sub-menu-label-active {
 
     /* Remove underline when the section menu is expanded */
     header #nav .nav-sections div.nav-item-wrapper .nav-drop[aria-expanded="true"] {
-      text-decoration: none;
+      border-bottom-color: transparent;
     }
 
     /* Style the section chevron decoration to flip and become white when toggled */
@@ -926,14 +928,18 @@ header .sub-menu-label-active {
       background-position: 100%;
     }
 
-    /*  Make the index items bold and have an underline on mouse over */
+    /*  Make the index item have an underline on mouse over */
     header #nav div.sub-menu ul.sub-menu-index > li:hover {
-      font-weight: 700;
       text-decoration: underline;
     }
 
-    /* Add an additional line to the chevron decoration (making an arrow) on mouseover */
-    header #nav ul.sub-menu-index > li:hover::after {
+    /*  Make the active index item bold */
+    header #nav div.sub-menu ul.sub-menu-index > li.active {
+      font-weight: 700;
+    }
+
+    /* Add an additional line to the chevron decoration (making an arrow) for the active index item */
+    header #nav ul.sub-menu-index > li.active::after {
         background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='14'%3E%3Cpath d='M12.56 1.21a1 1 0 00-1.46 1.38L14.31 6H0v2h14.31l-3.21 3.41a1 1 0 001.46 1.37L18 7z'/%3E%3C/svg%3E");
       }
 
@@ -1145,6 +1151,17 @@ header .l3-nav-desktop .right-sec-menu-option:last-child {
       overscroll-behavior: contain;
       background: #fbfbfb 0 0 no-repeat padding-box;
       border-bottom: 1px solid #ddd;
+    }
+
+    /* Keyframe declaration for the breadcrumb fadein animation */
+    @keyframes fadein {
+      0% {
+        opacity: 0;
+      }
+
+      100% {
+        opacity: 1;
+      }
     }
 
     /* Style to apply to the breadcrumb container to render it visible */
