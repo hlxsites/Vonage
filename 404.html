@@ -31,18 +31,99 @@
   </script>
   <link rel="stylesheet" href="/styles/styles.css">
   <style>
-    main.error {
-      min-height: calc(100vh - var(--nav-height));
-      display: flex;
-      align-items: center;
+    div.hero {
+      background-image: url(https://vonage.com/content/dam/vonage/us-en/brand/imagery/vonage/placeholder/HeroBackground.svg);
+      background-size: cover;
+      padding-bottom: 9rem;
+      padding-top: 7rem;
+      position: relative;
+      color: #fff;
+      font-family: Spezia, Spezia_SemiMono, Arial, Helvetica, sans-serif;
+      margin-bottom: 4rem;
     }
 
-    main.error .error-number {
+    div.hero h1 {
+      font-size: 3.5rem;
+      font-weight: 500;
+      letter-spacing: -.12rem;
+      line-height: 4rem;
+      text-align: center;
+    }
+
+    div.hero p.subtitle {
+      font-size: 1.7rem;
+      font-weight: 400;
+      letter-spacing: -.025rem;
+      line-height: 2.5rem;
+      margin-top: 2.4rem;
+      text-align: center;
+    }
+
+    div.hero div.hero-col {
+      flex: 0 0 100%;
+      max-width: 100%;
+      position: relative;
       width: 100%;
+      padding-right: 20px;
+      padding-left: 20px;
     }
 
-    main.error .error-number text {
-      font-family: var(--fixed-font-family);
+    div.hero div.hero-cta {
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      margin-top: 3.5rem;
+    }
+
+    div.hero .btn-primary {
+      text-decoration: none;
+      background-color: #fff;
+      border: 0.2rem solid #fff;
+      color: #000;
+      border-radius: 1rem;
+      cursor: pointer;
+      display: inline-block;
+      height: 6rem;
+      padding: 0 2.5rem;
+      font-size: 1.6rem;
+      font-weight: 500;
+      letter-spacing: normal;
+      line-height: 6rem;
+
+    }
+
+    div.hero .btn-secondary {
+      background-color: transparent;
+      border: 0.2rem solid #fff;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 1rem;
+      cursor: pointer;
+      display: inline-block;
+      height: 6rem;
+      padding: 0 2.5rem;
+      font-size: 1.6rem;
+      font-weight: 500;
+      letter-spacing: normal;
+      line-height: 6rem;
+    }
+
+    @media (min-width: 768px) {
+      div.hero>div {
+        max-width: 45pc;
+      }
+
+      div.hero .hero-col {
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        max-width: 100%;
+      }
+
+      div.hero .hero-cta {
+        padding: 0 20px;
+      }
     }
   </style>
   <link rel="stylesheet" href="/styles/lazy-styles.css">
@@ -50,15 +131,86 @@
 
 <body>
   <header></header>
-  <main class="error">
-    <div class="section">
-      <svg viewBox="1 0 38 18" class="error-number">
-        <text x="0" y="17">404</text>
-      </svg>
-      <h2 class="error-message">Page Not Found</h2>
-      <p class="button-container">
-        <a href="/" class="button secondary error-button-home">Go home</a>
-      </p>
+  <main>
+    <div class="hero">
+      <div>
+        <h1>We're all a little lost sometimes.</h1>
+        <p class="subtitle">
+          In this case, the page you're looking for is lost—which is definitely our fault. Head back
+          to the homepage and start this journey again. Or, check out some of our useful links
+          below.
+        </p>
+        <div class="hero-col">
+          <div class="hero-cta">
+            <a class="btn-primary" href="/resources/" target="_self"
+              aria-label="go to the resources page">
+              Check out our Resources
+            </a>
+          </div>
+          <div class="hero-cta">
+            <a class="btn-secondary" href="/contact-us/" target="_self"
+              aria-label="go to the contact us page">Contact us for help</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="cards card-link">
+        <div>
+          <div>
+            <picture>
+              <img loading="lazy" alt="\"
+                src="https://main--vonage--hlxsites.hlx.page/media_126ba571d1c3978656dd2329b646279c08ae22654.png?width=750&format=webply&optimize=medium">
+            </picture>
+          </div>
+          <div>
+            <p><a
+                href="https://www.vonage.com/resources/publications/global-customer-engagement-report/">Global
+                Customer Engagement Report</a>
+            </p>
+            <p></p>
+            <p>Maximizing the Omnichannel CX with AI</p>
+          </div>
+        </div>
+        <div>
+          <div>
+            <picture>
+              <img loading="lazy" alt="\"
+                src="https://main--vonage--hlxsites.hlx.page/media_1cf1a7533c44a88c74b9b459b7acd4f94cae3b9aa.jpeg?width=750&format=webply&optimize=medium">
+            </picture>
+          </div>
+          <div>
+            <p><a href="https://www.vonage.com/resources/publications/cx-ai-quiz/">Quiz</a>
+            </p>
+            <p></p>
+            <p>Maximizing the Omnichannel CX with AI</p>
+          </div>
+        </div>
+        <div>
+          <div>
+            <picture>
+              <img loading="lazy" alt="\"
+                src="https://main--vonage--hlxsites.hlx.page/media_118860f6fb8ff02051d1b273f9e66b7dd22318e2d.png?width=750&format=webply&optimize=medium">
+            </picture>
+          </div>
+          <div>
+            <p><a
+                href="https://www.vonage.com/resources/publications/Forrester-ready-to-chat/">Whitepaper</a>
+            </p>
+            <p></p>
+            <p>Maximizing the Omnichannel CX with AI</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="fragment">
+        <div>
+          <div><a
+              href="/unified-communications/fragments/lead-gen">https://main--vonage--hlxsites.hlx.page/unified-communications/fragments/lead-gen</a>
+          </div>
+        </div>
+      </div>
     </div>
   </main>
   <footer></footer>
