@@ -695,12 +695,14 @@ header .sub-menu-label-active {
     margin-left: auto;
   }
 
+  /* Transparent bottom border to prevent layout shift when adding the border on mouse over */
+  header #nav .nav-sections > ul > div.nav-item-wrapper > li {
+    border-bottom: 0.2rem solid transparent;
+  }
+
     /* Colorize the transparent bottom border under the section menu items on mouse over */
     header #nav .nav-sections > ul > div.nav-item-wrapper > li:hover {
-      text-decoration: underline;
-      text-decoration-color: var(--nav-color);
-      text-underline-offset: 1.5rem;
-      text-decoration-thickness: 0.2rem;
+      border-bottom-color: var(--nav-color);
     }
 
     /*  Don't show the hamburger icon in desktop mode */
@@ -755,7 +757,7 @@ header .sub-menu-label-active {
 
     /* Remove underline when the section menu is expanded */
     header #nav .nav-sections div.nav-item-wrapper .nav-drop[aria-expanded="true"] {
-      text-decoration: none;
+      border-bottom-color: transparent;
     }
 
     /* Style the section chevron decoration to flip and become white when toggled */
