@@ -916,3 +916,10 @@ span.close-x {
   top: 0;
   right: 0;
 }
+
+/* Dont' show the View Offer controls in desktop mode */
+@media (min-width:768px) {
+  span.controls {
+    display: none;
+  }
+}
