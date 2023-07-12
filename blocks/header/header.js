@@ -91,6 +91,16 @@ function openOnKeydown(e) {
 function toggleNavSubSection(event) {
   if (isDesktop.matches) {
     const subSectionName = event.target.id;
+    const index = event.target.parentElement;
+
+    // Remove the active class from any other sub menu index items that are flagged as active
+    index.querySelectorAll('li.active').forEach((indexItem) => {
+      indexItem.classList.remove('active');
+    });
+
+    // Flag the index item which triggered the event as active so it wil be underlined.
+    event.target.classList.add('active');
+
     const subMenu = event.target.closest('.sub-menu');
     // Query subMenu sections for <ul> that match the class of the event firer (to be turned on)
     // Or which are currently displayed via the class sub-menu-section-active (to be turned off)
@@ -98,7 +108,7 @@ function toggleNavSubSection(event) {
       // Catch the active menu being either the section index (which is always displayed
       // Or the event firer already being active, where we don't want to toggle the section
       if (!subSection.classList.contains('sub-menu-index') && !(subSection.classList.contains(subSectionName) && subSection.classList.contains('sub-menu-section-active'))) {
-        // Toggle the class that controls sub section display
+        // Toggle the class that controls sub-section display
         subSection.classList.toggle('sub-menu-section-active');
       }
     });
@@ -426,6 +436,12 @@ function decorateSections(navSections) {
             navItemWrapper.querySelectorAll(`:scope ul.${defaultSubSectionName}`).forEach((sub) => {
               sub.classList.add('sub-menu-section-active');
             });
+          }
+          const indexElem = document.getElementById(path);
+          if (indexElem != null) {
+            indexElem.classList.add('active');
+          } else {
+            document.querySelector('.sub-menu-index li:first-child').classList.add('active');
           }
         }
 
