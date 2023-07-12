@@ -72,6 +72,7 @@ header .nav-logo {
   top: 2.2rem;
   width: 10.2rem;
   z-index: 7;
+  transition: opacity .36s ease-in-out,transform .36s ease-in-out,-webkit-transform .36s ease-in-out;
 }
 
 /* Styling of the full logo image displayed in desktop mode before scrolling down as well as mobile */
