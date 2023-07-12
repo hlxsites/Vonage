@@ -296,8 +296,6 @@ header #nav .nav-hamburger {
 
   /* Define the style for regular nav section items */
   header #nav[aria-expanded="true"] .nav-sections > ul {
-    max-width: 225px;
-    min-width: 225px;
     list-style: none;
     margin-top: 0;
     margin-bottom: 1em;
