@@ -1,5 +1,5 @@
 import { createOptimizedPicture } from '../../scripts/lib-franklin.js';
-import { div } from '../../scripts/scripts.js';
+import { div, span } from '../../scripts/scripts.js';
 
 function handleTitleClick(block) {
   const pBlock = block.querySelector('div.slim-promo.columns-2-cols p');
@@ -189,5 +189,18 @@ export default function decorate(block) {
         }
       });
     });
+  }
+
+  if (block.classList.contains('slim-promo')) {
+    const offerControls = span({ class: 'controls' }, span({ class: 'view-offer', innerHTML: 'View Offer' }), span({ class: 'close-x', innerHTML: 'x' }));
+    const offerTitle = block.querySelector('div.columns-other-col h2');
+    const offerDetails = block.querySelector('div.columns-other-col p');
+
+    offerTitle.remove();
+    offerDetails.remove();
+
+    block.querySelector('.columns-other-col').appendChild(span({ class: 'titleWrapper' }, offerTitle));
+    block.querySelector('.columns-other-col').appendChild(offerControls);
+    block.querySelector('.columns-other-col').appendChild(span({ class: 'detailWrapper' }, offerDetails));
   }
 }
