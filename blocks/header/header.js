@@ -115,11 +115,21 @@ function toggleNavSubSection(event) {
   }
 }
 
-function toggleBreadCrumb() {
-  document.querySelector('.menu-option-sublist.l3-nav-menu-options').classList.toggle('active');
-  document.querySelector('.l3-nav-mobile-menu-body').classList.toggle('active');
-  document.querySelector('.l3-nav-mobile-menu-head.l3-nav-mobile-closed').classList.toggle('not-active');
-  document.querySelector('.l3-nav-mobile-menu-head.l3-nav-mobile-open').classList.toggle('not-active');
+/**
+ * Toggles expansion  of the breadCrumb.
+ * @param {boolean} collapse - Optional parameter to force a collapse of the breadcrumb such as when the nav menu is opened
+ */function toggleBreadCrumb(collapse = false) {
+  if (collapse === true) {
+    document.querySelector('.menu-option-sublist.l3-nav-menu-options').classList.remove('active');
+    document.querySelector('.l3-nav-mobile-menu-body').classList.remove('active');
+    document.querySelector('.l3-nav-mobile-menu-head.l3-nav-mobile-closed').classList.remove('not-active');
+    document.querySelector('.l3-nav-mobile-menu-head.l3-nav-mobile-open').classList.add('not-active');
+  } else {
+    document.querySelector('.menu-option-sublist.l3-nav-menu-options').classList.toggle('active');
+    document.querySelector('.l3-nav-mobile-menu-body').classList.toggle('active');
+    document.querySelector('.l3-nav-mobile-menu-head.l3-nav-mobile-closed').classList.toggle('not-active');
+    document.querySelector('.l3-nav-mobile-menu-head.l3-nav-mobile-open').classList.toggle('not-active');
+  }
 }
 
 /* ------------------------------ Global Functions ----------------------------------- */
@@ -404,6 +414,7 @@ function decorateSections(navSections) {
     navSection.addEventListener('click', async (event) => {
       if (isDesktop.matches) {
         const expanded = navSection.getAttribute('aria-expanded') === 'true';
+        toggleBreadCrumb(true);
         toggleAllNavSections(navSections);
 
         // Check if there's an active subsection tagged to display when the menu displays
@@ -730,6 +741,19 @@ export default async function decorate(block) {
     // prevent mobile nav behavior on window resize
     toggleMenu(nav, navSections, isDesktop.matches);
     isDesktop.addEventListener('change', () => toggleMenu(nav, navSections, isDesktop.matches));
+
+    // Add an event listoner that checks if a click falls outside of the nav-sections in order to trigger a close of the nav menu.
+    document.addEventListener('click', (event) => {
+      const isClickInside = navSections.contains(event.target);
+      if (!isClickInside) {
+        // The click was OUTSIDE the specifiedElement, do something
+        const expandedNav = navSections.querySelector('li[aria-expanded="true"]');
+        if (expandedNav != null) {
+          expandedNav.setAttribute('aria-expanded', 'false');
+          expandedNav.parentElement.setAttribute('aria-expanded', 'false');
+        }
+      }
+    });
 
     await decorateIcons(nav);
 
