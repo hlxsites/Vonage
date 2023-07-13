@@ -1,33 +1,46 @@
 import { createOptimizedPicture } from '../../scripts/lib-franklin.js';
 import { div, span } from '../../scripts/scripts.js';
 
+/* ------------------------------ Global Variables ----------------------------------- */
+// media query match that indicates mobile/tablet width
+const isMobile = window.matchMedia('(max-width: 768px)');
+
 function handleTitleClick(block) {
   const pBlock = block.querySelector('div.slim-promo.columns-2-cols p');
-  const pButton = block.querySelector('.slim-promo a.button.secondary');
   const pH2 = block.querySelector('div.slim-promo.columns-2-cols h2');
+  const openButton = block.querySelector('div.slim-promo.columns-2-cols > div > div:nth-child(2) > span.controls > span.view-offer');
+  const closeButton = block.querySelector('div.slim-promo.columns-2-cols > div > div:nth-child(2) > span.controls > span.close-x');
+
   // toggle the paragraph and the button display
   if (pBlock.style.display === 'block') {
     pBlock.style.display = 'none';
-    pButton.style.display = 'initial';
     pH2.style.fontSize = 'initial';
+    openButton.style.display = 'initial';
+    closeButton.style.display = 'none';
   } else {
     pBlock.style.display = 'block';
-    pButton.style.display = 'none';
     pH2.style.fontSize = '2.4rem'; // enlarge the h2 font size
+    openButton.style.display = 'none';
+    closeButton.style.display = 'block';
   }
 }
 
 // eslint-disable-next-line no-unused-vars
-function addSlimPromoClick(block, mq) {
-  block.querySelector('div.slim-promo.columns-2-cols > div > div:nth-child(2) > div > a.button.secondary').addEventListener('click', () => {
-    handleTitleClick(block);
-  });
+function addSlimPromoClickHandlers(block, mq) {
   if (mq.matches) {
-    block.querySelector('div.slim-promo.columns-2-cols > div > div:nth-child(2) > h2').addEventListener('click', () => {
+    block.querySelector('div.slim-promo.columns-2-cols > div > div:nth-child(2) > span.titleWrapper > h2').addEventListener('click', () => {
+      handleTitleClick(block);
+    });
+
+    block.querySelector('div.slim-promo.columns-2-cols > div > div:nth-child(2) > span.controls > span.view-offer').addEventListener('click', () => {
+      handleTitleClick(block);
+    });
+
+    block.querySelector('div.slim-promo.columns-2-cols > div > div:nth-child(2) > span.controls > span.close-x').addEventListener('click', () => {
       handleTitleClick(block);
     });
   } else {
-    block.querySelector('div.slim-promo.columns-2-cols > div > div:nth-child(2) > h2').removeEventListener('click', () => {
+    block.querySelector('div.slim-promo.columns-2-cols > div > div:nth-child(2) > span.titleWrapper > h2').removeEventListener('click', () => {
       // do nothing
     });
   }
@@ -202,5 +215,7 @@ export default function decorate(block) {
     block.querySelector('.columns-other-col').appendChild(span({ class: 'titleWrapper' }, offerTitle));
     block.querySelector('.columns-other-col').appendChild(offerControls);
     block.querySelector('.columns-other-col').appendChild(span({ class: 'detailWrapper' }, offerDetails));
+
+    addSlimPromoClickHandlers(block, isMobile);
   }
 }
