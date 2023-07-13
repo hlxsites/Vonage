@@ -103,6 +103,11 @@
   margin: 3rem auto;
 }
 
+.cards-container.icon-panel .large-icon .cards-card-image {
+  width: 75pt;
+  height: 75pt;
+}
+
 .cards-container.icon-panel .cards-card-body {
   letter-spacing: -0.02rem;
   margin-left: auto;
