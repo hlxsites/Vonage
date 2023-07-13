@@ -135,6 +135,46 @@ div.fragment.lead-gen > div.section {
   padding-bottom: 1rem;
 }
 
+div.fragment-container.two-col + .section {
+  max-width: 990pt;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+div.fragment-container.two-col + .section .default-content-wrapper {
+  max-width: 74.6rem;
+  margin-left: 0;
+}
+
+
+div.fragment-container.two-col + .section .default-content-wrapper > ol {
+  font-size: 1.2rem;
+  font-weight: 400;
+  letter-spacing: .025rem;
+  line-height: 1.6rem;
+  margin-top: 7rem;
+  counter-reset: item;
+  padding: 0;
+  list-style: none;
+}
+
+div.fragment-container.two-col + .section .default-content-wrapper > ol > li {
+  margin: 0 0 5px;
+  position: relative;
+  display: block;
+  padding: 0 0 0 1.5rem;
+}
+
+div.fragment-container.two-col + .section .default-content-wrapper > ol > li::before {
+  content: counter(item);
+  counter-increment: item;
+  position: absolute;
+  vertical-align: super;
+  font-size: x-small;
+  left: 0.6rem;
+  top: -0.6rem;
+}
+
 @media (min-width: 768px) {
   div.fragment.two-col ul {
     column-count: 2;
