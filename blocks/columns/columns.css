@@ -664,13 +664,13 @@ div.columns.details-columns > div > div.columns-other-col > h2 {
   font-size: var(--heading-font-size-m);
   font-weight: 500;
   letter-spacing: -0.15rem;
-} 
+}
 
 div.columns.details-columns > div > div.columns-other-col > p {
   font-size: var(--body-font-size-xs);
   font-weight: 400;
   letter-spacing: -0.02rem;
-} 
+}
 
 div.columns.details-columns > div > div.columns-other-col > p.button-container {
   margin-top: 5rem;
@@ -687,7 +687,7 @@ div.columns.details-columns > div > div.columns-other-col > p.button-container >
   text-decoration: underline;
   scale: 1.0;
   transition: transform 0.2s ease;
-} 
+}
 
 div.columns.details-columns > div > div.columns-other-col > p.button-container > a:hover {
   transform: scale(1.02);
@@ -702,19 +702,25 @@ div.columns.details-columns > div > div.columns-other-col > ul {
   color:  var(--text-color);
   text-decoration-color: var(--text-color);
   text-decoration-line: none;
-} 
+}
 
 div.columns.details-columns > div > div.columns-other-col > ul a {
   font-size: 1.4rem;
   color: var(--text-color);
   text-decoration: none;
-} 
+}
 
 div.columns.details-columns > div > div.columns-other-col > ul a:any-link {
   transition: transform .2s;
 }
 
 div.columns.details-columns > div > div.columns-other-col > ul a:hover {
+  text-decoration: underline;
+}
+
+div.columns.details-columns p.detail-paragraph a:any-link {
+  display: inline;
+  color: var(--text-color);
   text-decoration: underline;
 }
 
@@ -797,13 +803,13 @@ div.columns.details-columns > div > div.columns-other-col > ul a:hover {
   div.columns.block.details-columns > div > div.columns-img-col {
     flex: 1 0 0;
   }
-  
+
   div.columns.block.details-columns > div > div.columns-other-col {
     flex: 0 0 60%;
     max-width: 60%;
     width: 60%;
   }
-  
+
 }
 
 @media (min-width: 992px) {
