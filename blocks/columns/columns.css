@@ -724,6 +724,12 @@ div.columns.details-columns > div > div.columns-other-col > ul a:hover {
   text-decoration: underline;
 }
 
+div.columns.details-columns p.detail-paragraph a:any-link {
+  display: inline;
+  color: var(--text-color);
+  text-decoration: underline;
+}
+
 @media (min-width: 900px) {
   div.columns > div {
     align-items: center;
