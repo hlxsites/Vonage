@@ -178,7 +178,7 @@ function toggleAllNavSections(sections, expanded = false) {
  */function triggerMenuFadeIn(expanded) {
   const navSections = document.querySelector('.nav-sections');
   if (!isDesktop.matches) {
-    navSections.querySelectorAll(':scope > ul > div > li').forEach((element) => {
+    navSections.querySelectorAll(':scope > ul > div').forEach((element) => {
       if (!expanded) {
         element.classList.add('animate-fade-in');
       } else {
@@ -222,7 +222,7 @@ function toggleSubMenu() {
     }
     const backButton = document.getElementById('back-button');
     if (backButton) {
-      backButton.classList.remove('nav-back-button-active');
+      backButton.classList.remove('nav-back-button-active', 'nav-back-button-animation-start');
     }
   }
 }
