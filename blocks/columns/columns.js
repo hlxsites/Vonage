@@ -1,10 +1,6 @@
 import { createOptimizedPicture } from '../../scripts/lib-franklin.js';
 import { div, span } from '../../scripts/scripts.js';
 
-/* ------------------------------ Global Variables ----------------------------------- */
-// media query match that indicates mobile/tablet width
-const isMobile = window.matchMedia('(max-width: 768px)');
-
 function handleTitleClick(block) {
   const pBlock = block.querySelector('div.slim-promo.columns-2-cols p');
   const pH2 = block.querySelector('div.slim-promo.columns-2-cols h2');
@@ -25,25 +21,18 @@ function handleTitleClick(block) {
   }
 }
 
-// eslint-disable-next-line no-unused-vars
-function addSlimPromoClickHandlers(block, mq) {
-  if (mq.matches) {
-    block.querySelector('div.slim-promo.columns-2-cols > div > div:nth-child(2) > span.titleWrapper > h2').addEventListener('click', () => {
-      handleTitleClick(block);
-    });
+function addSlimPromoClickHandlers(block) {
+  block.querySelector('div.slim-promo.columns-2-cols > div > div:nth-child(2) > span.titleWrapper > h2').addEventListener('click', () => {
+    handleTitleClick(block);
+  });
 
-    block.querySelector('div.slim-promo.columns-2-cols > div > div:nth-child(2) > span.controls > span.view-offer').addEventListener('click', () => {
-      handleTitleClick(block);
-    });
+  block.querySelector('div.slim-promo.columns-2-cols > div > div:nth-child(2) > span.controls > span.view-offer').addEventListener('click', () => {
+    handleTitleClick(block);
+  });
 
-    block.querySelector('div.slim-promo.columns-2-cols > div > div:nth-child(2) > span.controls > span.close-x').addEventListener('click', () => {
-      handleTitleClick(block);
-    });
-  } else {
-    block.querySelector('div.slim-promo.columns-2-cols > div > div:nth-child(2) > span.titleWrapper > h2').removeEventListener('click', () => {
-      // do nothing
-    });
-  }
+  block.querySelector('div.slim-promo.columns-2-cols > div > div:nth-child(2) > span.controls > span.close-x').addEventListener('click', () => {
+    handleTitleClick(block);
+  });
 }
 
 // For children of column <div>, if there is an <a> and a <picture> then move
@@ -216,6 +205,6 @@ export default function decorate(block) {
     block.querySelector('.columns-other-col').appendChild(offerControls);
     block.querySelector('.columns-other-col').appendChild(span({ class: 'detailWrapper' }, offerDetails));
 
-    addSlimPromoClickHandlers(block, isMobile);
+    addSlimPromoClickHandlers(block);
   }
 }
