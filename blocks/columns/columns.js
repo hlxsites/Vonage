@@ -42,7 +42,8 @@ function movePictureIntoAnchor(col) {
   }
   const aElem = col.querySelector('a[href]');
   if (aElem != null) {
-    const img = col.querySelector('div > picture > img');
+    aElem.classList.remove('button', 'primary');
+    const img = col.querySelector('img');
     if (img != null) {
       aElem.innerHTML = '';
       aElem.append(img.parentNode);
@@ -107,8 +108,15 @@ export default function decorate(block) {
       if (col.querySelector('picture')) {
         // column contains a picture
         col.classList.add('columns-img-col');
+        // If there is a link specified after the image wrap the image in an a referencing the link
+        movePictureIntoAnchor(col);
       } else {
         col.classList.add('columns-other-col');
+        col.querySelectorAll('p').forEach((pElem) => {
+          if (!pElem.classList.contains('button-container')) {
+            pElem.classList.add('detail-paragraph');
+          }
+        });
       }
 
       if (block.classList.contains('case-study') && col.classList.contains('columns-other-col')) {
@@ -174,9 +182,6 @@ export default function decorate(block) {
   if (block.classList.contains('details-columns')) {
     [...block.children].forEach((row) => {
       [...row.children].forEach((col) => {
-        if (col.classList.contains('columns-img-col')) {
-          movePictureIntoAnchor(col);
-        }
         if (col.classList.contains('columns-other-col')) {
           buildSingleList(col);
 

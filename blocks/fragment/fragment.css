@@ -39,6 +39,15 @@ div.fragment.two-col a:any-link {
     display:inline-block;
 }
 
+div.fragment.two-col .columns-img-col a {
+  width: 100%;
+}
+
+div.fragment.two-col p.detail-paragraph a:any-link {
+  display: inline;
+  text-decoration: underline;
+}
+
 div.fragment.two-col a.button.primary {
   border-radius: unset;
   background-color: transparent;
