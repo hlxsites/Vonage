@@ -43,6 +43,10 @@ div.fragment.two-col .columns-img-col a {
   width: 100%;
 }
 
+div.fragment.two-col li > a:hover, div.fragment.two-col li > strong > a:hover {
+  text-decoration: underline;
+}
+
 div.fragment.two-col p.detail-paragraph a:any-link {
   display: inline;
   text-decoration: underline;
@@ -71,10 +75,6 @@ div.fragment.two-col a.button.primary::after {
   display: block;
   height: .2rem;
   width: 100%;
-}
-
-div.fragment.two-col li > a:hover, div.fragment.two-col li > strong > a:hover {
-    text-decoration: underline;
 }
 
 div.fragment.two-col .fragment-link {
