@@ -72,6 +72,7 @@ header .nav-logo {
   top: 2.2rem;
   width: 10.2rem;
   z-index: 7;
+  transition: opacity .36s ease-in-out,transform .36s ease-in-out,-webkit-transform .36s ease-in-out;
 }
 
 /* Styling of the full logo image displayed in desktop mode before scrolling down as well as mobile */
@@ -142,7 +143,7 @@ header .nav-search > ul {
 }
 
 /* Set mobile nav section elements to transparent when the nav isn't open to allow for the animation */
-header .nav-sections > ul li {
+header .nav-sections > ul > div {
   opacity:0;
 }
 
@@ -296,8 +297,6 @@ header #nav .nav-hamburger {
 
   /* Define the style for regular nav section items */
   header #nav[aria-expanded="true"] .nav-sections > ul {
-    max-width: 225px;
-    min-width: 225px;
     list-style: none;
     margin-top: 0;
     margin-bottom: 1em;
@@ -322,11 +321,12 @@ header #nav[aria-expanded="true"] .nav-tools {
   }
 
   /* Stagger the opacity transition for each menu item to do the pretty cascade thing */
-  header #nav .nav-sections > ul > div:nth-child(1) > li { transition-delay: 0.40s; }
-  header #nav .nav-sections > ul > div:nth-child(2) > li { transition-delay: 0.45s; }
-  header #nav .nav-sections > ul > div:nth-child(3) > li { transition-delay: 0.50s; }
-  header #nav .nav-sections > ul > div:nth-child(4) > li { transition-delay: 0.55s; }
-  header #nav .nav-sections > ul > div:nth-child(5) > li { transition-delay: 0.60s; }
+  header #nav .nav-sections > ul > div:nth-child(1) { transition-delay: 0.40s; }
+  header #nav .nav-sections > ul > div:nth-child(2) { transition-delay: 0.45s; }
+  header #nav .nav-sections > ul > div:nth-child(3) { transition-delay: 0.50s; }
+  header #nav .nav-sections > ul > div:nth-child(4) { transition-delay: 0.55s; }
+  header #nav .nav-sections > ul > div:nth-child(5) { transition-delay: 0.60s; }
+  header #nav .nav-sections > ul > div:nth-child(6) { transition-delay: 0.65s; }
 
 /*  Render the section divider */
   header #nav[aria-expanded="true"] hr.nav-section-divider {
@@ -374,11 +374,18 @@ header #nav[aria-expanded="true"] .nav-tools {
     line-height: 4.6rem;
     margin-bottom: 2.0rem;
     text-decoration: underline;
-    transition: opacity .6s ease-out .25s;
+    transition: opacity .36s ease-in-out,transform .36s ease-in-out;
   }
 
+/* Styling and transition for the sub menu elements */
+header #nav[aria-expanded="true"] .nav-sections > ul > div.nav-item-wrapper {
+  transition-duration: 0.6s;
+  transition-property: opacity;
+  transition-timing-function: ease-in;
+}
+
   /* Property to change on the sub children once displayed to animate them fading in */
-  header .nav-sections > ul > div > li.animate-fade-in {
+  header .nav-sections > ul > div.animate-fade-in {
     opacity:1;
   }
 
@@ -522,16 +529,17 @@ header.sub-menu-selected #nav[aria-expanded="true"] .nav-sections > ul > div.nav
 }
 
 header .sub-menu-label {
-display:none;
+  opacity:0;
   position: absolute;
   font-size: 2.8rem;
   font-weight: 500;
   letter-spacing: -.15rem;
   line-height: 3.2rem;
+  transition: opacity .25s ease-in-out .25s;
 }
 
 header .sub-menu-label-active {
-  display:block;
+  opacity:100;
 }
 
 /***** Desktop behavior with full nav menu displayed *****/
@@ -580,6 +588,21 @@ header .sub-menu-label-active {
     }
 
   /***** Desktop section and tools menu styling  *****/
+
+    header .nav-sections > ul > div {
+      opacity:100;
+    }
+
+  header .sub-menu-label {
+    display: none;
+  }
+
+  header #nav .nav-sections > ul > div:nth-child(1) { transition-delay: 0s; }
+  header #nav .nav-sections > ul > div:nth-child(2) { transition-delay: 0s; }
+  header #nav .nav-sections > ul > div:nth-child(3) { transition-delay: 0s; }
+  header #nav .nav-sections > ul > div:nth-child(4) { transition-delay: 0s; }
+  header #nav .nav-sections > ul > div:nth-child(5) { transition-delay: 0s; }
+  header #nav .nav-sections > ul > div:nth-child(6) { transition-delay: 0s; }
 
     /* Style and layout of the section and tool menu containers */
     header #nav .nav-sections, header #nav .nav-tools {
