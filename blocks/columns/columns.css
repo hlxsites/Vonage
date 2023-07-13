@@ -29,6 +29,11 @@
   text-transform: uppercase;
 }
 
+div.slim-promo.columns-2-cols a {
+  color:#fff;
+  text-decoration: underline;
+}
+
 .slim-promo a.button.secondary {
   background-color: #fff;
   border-radius: 1.5rem;
@@ -235,6 +240,7 @@ div.slim-promo.columns-2-cols h2 {
   width: auto;
   text-align: center;
   margin-right: 1.5rem;
+  cursor: pointer;
 }
 
 div.columns.category-grid {
@@ -664,13 +670,13 @@ div.columns.details-columns > div > div.columns-other-col > h2 {
   font-size: var(--heading-font-size-m);
   font-weight: 500;
   letter-spacing: -0.15rem;
-} 
+}
 
 div.columns.details-columns > div > div.columns-other-col > p {
   font-size: var(--body-font-size-xs);
   font-weight: 400;
   letter-spacing: -0.02rem;
-} 
+}
 
 div.columns.details-columns > div > div.columns-other-col > p.button-container {
   margin-top: 5rem;
@@ -687,7 +693,7 @@ div.columns.details-columns > div > div.columns-other-col > p.button-container >
   text-decoration: underline;
   scale: 1.0;
   transition: transform 0.2s ease;
-} 
+}
 
 div.columns.details-columns > div > div.columns-other-col > p.button-container > a:hover {
   transform: scale(1.02);
@@ -702,19 +708,25 @@ div.columns.details-columns > div > div.columns-other-col > ul {
   color:  var(--text-color);
   text-decoration-color: var(--text-color);
   text-decoration-line: none;
-} 
+}
 
 div.columns.details-columns > div > div.columns-other-col > ul a {
   font-size: 1.4rem;
   color: var(--text-color);
   text-decoration: none;
-} 
+}
 
 div.columns.details-columns > div > div.columns-other-col > ul a:any-link {
   transition: transform .2s;
 }
 
 div.columns.details-columns > div > div.columns-other-col > ul a:hover {
+  text-decoration: underline;
+}
+
+div.columns.details-columns p.detail-paragraph a:any-link {
+  display: inline;
+  color: var(--text-color);
   text-decoration: underline;
 }
 
@@ -797,13 +809,13 @@ div.columns.details-columns > div > div.columns-other-col > ul a:hover {
   div.columns.block.details-columns > div > div.columns-img-col {
     flex: 1 0 0;
   }
-  
+
   div.columns.block.details-columns > div > div.columns-other-col {
     flex: 0 0 60%;
     max-width: 60%;
     width: 60%;
   }
-  
+
 }
 
 @media (min-width: 992px) {
@@ -854,6 +866,9 @@ div.columns.details-columns > div > div.columns-other-col > ul a:hover {
     max-width: 70%;
   }
 
+  div.slim-promo.columns-2-cols h2 {
+    cursor: unset;
+  }
 }
 
 @media (min-width: 1200px) {
@@ -877,5 +892,54 @@ div.columns.details-columns > div > div.columns-other-col > ul a:hover {
   div.case-study.columns-container .columns.block > div > div.columns-other-col > p:first-child {
     font-size: 2.1rem;
     line-height: 2.4rem;
+  }
+}
+
+span.view-offer {
+  background-color: #fff;
+  transition: all .35s ease;
+  padding: 1rem;
+  color: #000;
+  border-radius: 1.5rem;
+  font-size: 14px;
+  text-align: center;
+  line-break: none;
+  font-weight: 400;
+  width: 8rem;
+  opacity: 1;
+  position: relative;
+  height: 30%;
+  vertical-align: middle;
+  margin-top: auto;
+  margin-bottom: auto;
+  line-height: 1.8rem;
+  cursor: pointer;
+}
+
+span.controls {
+  width: 75pt;
+  position: relative;
+  right: 0;
+  top: 0;
+  display: -webkit-box;
+  display: flex;
+}
+
+span.close-x {
+  opacity: 0.5;
+  display: none;
+  transition: all .35s ease;
+  position: absolute;
+  top: -10rem;
+  right: -15rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 1.6rem;
+}
+
+/* Dont' show the View Offer controls in desktop mode */
+@media (min-width:768px) {
+  span.controls {
+    display: none;
   }
 }
