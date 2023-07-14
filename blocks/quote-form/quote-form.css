@@ -49,3 +49,18 @@
 }
 
 
+.quote-form .form .thank-you h3 {
+  text-align: center;
+  font-weight: 500;
+  font-size: var(--heading-font-size-l);
+}
+
+.quote-form .form .thank-you p {
+  margin: 0 auto;
+  text-align: center;
+  max-width: 79%;
+  font-size: var(--body-font-size-m);
+  letter-spacing: -.025rem;
+  line-height: calc(var(--body-font-size-m) + 4px);
+}
+

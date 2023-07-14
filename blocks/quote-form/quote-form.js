@@ -31,13 +31,17 @@ async function decorateForm(formWrapper) {
   formWrapper.querySelector('p').remove();
   formWrapper.querySelector('hr').remove();
 
-  const thankYouMesage = formWrapper.children;
+  const thankYouMesage = [...formWrapper.children];
   formWrapper.textContent = '';
 
+  const form = div({ class: 'form' });
+  formWrapper.append(form);
+
+  form.append(div({ class: 'thank-you' }, ...thankYouMesage));
+
+  return;
   const resp = await fetch(`/blocks/quote-form/${htmlFile}`);
   if (resp.ok) {
-    const form = div({ class: 'form' });
-    formWrapper.append(form);
     form.innerHTML = await resp.text();
   } else {
     // eslint-disable-next-line no-console
