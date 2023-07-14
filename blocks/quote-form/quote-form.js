@@ -58,7 +58,7 @@ async function decorateRightColumn(formWrapper) {
     trackingEl.value = trackingEl.value.replace('/unified-communications/features/', new URL(document.location.href).pathname);
     // TODO: update country, cartid, webreferrerurl, formfriendly,
 
-    form.querySelectorAll('input[required]').forEach((input) => {
+    form.querySelectorAll('input[required], select[required]').forEach((input) => {
       input.addEventListener('change', () => {
         validateInput(input);
       });
