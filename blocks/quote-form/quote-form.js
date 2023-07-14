@@ -45,6 +45,9 @@ async function decorateRightColumn(formWrapper) {
   const resp = await fetch(`/blocks/quote-form/${htmlFile}`);
   if (resp.ok) {
     form.innerHTML = await resp.text();
+    const trackingEl = form.querySelector('input[name="digitaltracking"]');
+    trackingEl.value = trackingEl.value.replace('/unified-communications/features/', new URL(document.location.href).pathname);
+    // TODO: update country, cartid, webreferrerurl, formfriendly,
   } else {
     // eslint-disable-next-line no-console
     console.warn(`File not found: ${htmlFile} - can not render form`);
