@@ -412,9 +412,30 @@ div.columns.lead-gen>div>div:last-child>p:last-child>a:last-child::before {
   margin-left: 30px;
 }
 
+div.section.center-default-text .default-content-wrapper h3 {
+  text-align: center;
+}
+
+div.columns.text-list > div {
+  align-items: start;
+  flex-wrap: wrap;
+}
+
+div.columns.text-list>div>div {
+  position: relative;
+  width: 100%;
+  padding-right: 20px;
+  padding-left: 20px;
+}
+
 @media (min-width: 576px) {
   div.columns.block {
     max-width: 540px;
+  }
+
+  div.columns.text-list>div>div {
+    flex: 0 0 100%;
+    max-width: 100%;
   }
 }
 
@@ -510,6 +531,13 @@ div.columns.lead-gen>div>div:last-child>p:last-child>a:last-child::before {
 
   div.columns.block.plans > div > div > ul {
     margin: 1.4rem auto 0;
+  }
+
+  div.columns.text-list>div>div {
+    order: unset;
+    flex-basis: 0;
+    flex-grow: 1;
+    max-width: 100%;
   }
 }
 
