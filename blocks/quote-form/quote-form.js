@@ -1,18 +1,22 @@
 import { div } from '../../scripts/scripts.js';
 
 export default async function decorate(block) {
-  const card = block.querySelector(':scope > div > div:first-child');
-  card.classList.add('card');
-  await decorateCard(card);
+  const cardWrapper = block.querySelector(':scope > div > div:first-child');
+  cardWrapper.classList.add('card-wrapper');
+  await decorateCard(cardWrapper);
 
-  const form = block.querySelector(':scope > div > div:last-child');
-  form.classList.add('form-wrapper');
+  const formWrapper = block.querySelector(':scope > div > div:last-child');
+  formWrapper.classList.add('form-wrapper');
 
-  await decorateForm(form);
+  await decorateForm(formWrapper);
 }
 
-async function decorateCard(card) {
+async function decorateCard(cardWrapper) {
+  const card = div({ class: 'card' });
+  card.append(...cardWrapper.children);
+  cardWrapper.append(card);
   // remove button containers
+
   card.querySelectorAll('.button-container').forEach((container) => {
     [...container.children].forEach((node) => {
       node.classList.remove('button');
