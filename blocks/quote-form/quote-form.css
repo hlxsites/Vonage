@@ -83,6 +83,11 @@
   text-transform: uppercase;
 }
 
+.quote-form .right-column .form .row {
+  width: 100%;
+  display: block;
+}
+
 .quote-form .right-column .form .Vlt-custom-select,
 .quote-form .right-column .form .Vlt-input,
 .quote-form .right-column .form .Vlt-select {
@@ -12483,10 +12488,12 @@ input.hideme:focus+.tab-label {
   position: absolute;
   right: 1.5rem;
   top: 2.4rem;
+  font-family: var(--icon-font-family);
 }
 
-.Vlt-form .Vlt-custom-select .Vlt-icon-form-checkmark::before,.Vlt-form .Vlt-input .Vlt-icon-form-checkmark::before,.Vlt-form .Vlt-select .Vlt-icon-form-checkmark::before {
-  color: transparent;
+.Vlt-form .Vlt-custom-select .Vlt-icon-form-checkmark::before,
+.Vlt-form .Vlt-input .Vlt-icon-form-checkmark::before,.Vlt-form .Vlt-select .Vlt-icon-form-checkmark::before {
+  color: #7fc8f5;
 }
 
 .Vlt-form .Vlt-textarea textarea {
@@ -13095,7 +13102,8 @@ input.hideme:focus+.tab-label {
   width: 80%;
 }
 
-.Vlt-form__element-hidden,.Vlt-form__field-hidden {
+.quote-form .right-column .form .Vlt-form__element-hidden,
+.quote-form .right-column .form .Vlt-form__field-hidden {
   display: none;
 }
 
@@ -47051,4 +47059,16 @@ input.hideme:focus+.tab-label {
     padding-left: 2.5rem;
     padding-right: 2.5rem;
   }
+}
+
+[class*=" Vlt-icon-"], [class^="Vlt-icon-"] {
+  font-family: VltIcons!important;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 400;
+  line-height: inherit;
+  speak: none;
+  text-transform: none;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
 }
