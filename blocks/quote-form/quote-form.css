@@ -1,3 +1,50 @@
+.quote-form {
+  margin-top: 50px;
+}
+
 .quote-form .default-content-wrapper h4 {
   text-align: center;
 }
+
+.quote-form .card {
+  text-align: center;
+  padding: 1rem 2rem;
+  border: 2px solid #d1d1d1;
+  border-radius: 3rem;
+  width: auto;
+  max-width: 100%;
+  margin-bottom: 4rem;
+  background: #fff;
+}
+
+.quote-form .card a[href^="tel"] {
+  display: block;
+  text-decoration: inherit;
+  color: #881fff;
+  font-size: 2.8rem;
+  margin: 2rem 0;
+  font-weight: 500;
+}
+
+
+.quote-form > div {
+  display: flex;
+  gap: 50px;
+}
+
+
+.quote-form .form-wrapper {
+  background: linear-gradient(275deg,#ffa78c,#d41f9c);
+  border-radius: 2.2rem 3.6rem 2.6rem;
+  padding: 0 1.8rem 1.8rem 0;
+}
+
+
+.quote-form .form {
+  background: white;
+  border-radius: 2rem 2.2rem 2.6rem 2.3rem;
+  padding: 3rem 2rem;
+  max-width: 715px;
+}
+
+
