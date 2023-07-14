@@ -450,6 +450,10 @@ div.section.end-note-content > div.default-content-wrapper p::before {
   top: -0.2rem;
 }
 
+.section.h4-center h4 {
+  text-align: center;
+}
+
 @media (min-width: 1200px) {
   div.section.business-phone-service > div.default-content-wrapper {
     letter-spacing: .025rem;
