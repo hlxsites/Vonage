@@ -1,5 +1,11 @@
 import { div } from '../../scripts/scripts.js';
 
+// TODO: style checkmark, only show if success
+// TODO: submit with fetch, to both endpoints
+// TODO: only submit if valid
+// TODO: add error messages
+// TODO: add loading spinner?
+
 export default async function decorate(block) {
   const cardWrapper = block.querySelector(':scope > div > div:first-child');
   cardWrapper.classList.add('card-wrapper');
