@@ -5,10 +5,10 @@ export default async function decorate(block) {
   cardWrapper.classList.add('card-wrapper');
   await decorateCard(cardWrapper);
 
-  const formWrapper = block.querySelector(':scope > div > div:last-child');
-  formWrapper.classList.add('form-wrapper');
+  const rightColumnWrapper = block.querySelector(':scope > div > div:last-child');
+  rightColumnWrapper.classList.add('right-column-wrapper');
 
-  await decorateForm(formWrapper);
+  await decorateRightColumn(rightColumnWrapper);
 }
 
 async function decorateCard(cardWrapper) {
@@ -26,20 +26,22 @@ async function decorateCard(cardWrapper) {
   });
 }
 
-async function decorateForm(formWrapper) {
+async function decorateRightColumn(formWrapper) {
+  const rightColumn = div({ class: 'right-column' });
+
   const htmlFile = formWrapper.querySelector('p').textContent;
   formWrapper.querySelector('p').remove();
   formWrapper.querySelector('hr').remove();
 
   const thankYouMesage = [...formWrapper.children];
-  formWrapper.textContent = '';
+  rightColumn.append(div({ class: 'thank-you' }, ...thankYouMesage));
 
   const form = div({ class: 'form' });
-  formWrapper.append(form);
+  rightColumn.append(form);
 
-  form.append(div({ class: 'thank-you' }, ...thankYouMesage));
+  formWrapper.textContent = '';
+  formWrapper.append(rightColumn);
 
-  return;
   const resp = await fetch(`/blocks/quote-form/${htmlFile}`);
   if (resp.ok) {
     form.innerHTML = await resp.text();

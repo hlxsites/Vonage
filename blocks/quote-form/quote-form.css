@@ -34,14 +34,14 @@
 }
 
 
-.quote-form .form-wrapper {
+.quote-form .right-column-wrapper {
   background: linear-gradient(275deg,#ffa78c,#d41f9c);
   border-radius: 2.2rem 3.6rem 2.6rem;
   padding: 0 1.8rem 1.8rem 0;
 }
 
 
-.quote-form .form {
+.quote-form .right-column {
   background: white;
   border-radius: 2rem 2.2rem 2.6rem 2.3rem;
   padding: 3rem 2rem;
@@ -49,13 +49,17 @@
 }
 
 
-.quote-form .form .thank-you h3 {
+.quote-form .right-column .thank-you {
+  display: none;
+}
+
+.quote-form .right-column .thank-you h3 {
   text-align: center;
   font-weight: 500;
   font-size: var(--heading-font-size-l);
 }
 
-.quote-form .form .thank-you p {
+.quote-form .right-column .thank-you p {
   margin: 0 auto;
   text-align: center;
   max-width: 79%;
