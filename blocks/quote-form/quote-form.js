@@ -26,6 +26,15 @@ async function decorateCard(cardWrapper) {
   });
 }
 
+function validateInput(input) {
+  const formEl = input.closest('.Vlt-form__element');
+  if (input.validity.valid || document.activeElement === input) {
+    formEl.classList.remove('Vlt-form__element--error');
+  } else {
+    formEl.classList.add('Vlt-form__element--error');
+  }
+}
+
 async function decorateRightColumn(formWrapper) {
   const rightColumn = div({ class: 'right-column' });
 
@@ -48,6 +57,25 @@ async function decorateRightColumn(formWrapper) {
     const trackingEl = form.querySelector('input[name="digitaltracking"]');
     trackingEl.value = trackingEl.value.replace('/unified-communications/features/', new URL(document.location.href).pathname);
     // TODO: update country, cartid, webreferrerurl, formfriendly,
+
+    form.querySelectorAll('input[required]').forEach((input) => {
+      input.addEventListener('change', () => {
+        validateInput(input);
+      });
+      input.addEventListener('focus', () => {
+        validateInput(input);
+      });
+
+      input.addEventListener('blur', () => {
+        const formEl = input.closest('.Vlt-form__element');
+        formEl.classList.add('Vlt-form__element--dirty');
+        validateInput(input);
+      });
+    });
+
+    form.querySelectorAll('input[required]').forEach((input) => {
+
+    });
   } else {
     // eslint-disable-next-line no-console
     console.warn(`File not found: ${htmlFile} - can not render form`);
