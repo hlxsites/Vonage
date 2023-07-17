@@ -35,10 +35,27 @@ async function decorateCard(cardWrapper) {
 
 function validateInput(input) {
   const formEl = input.closest('.Vlt-form__element');
-  if (input.validity.valid || document.activeElement === input) {
+  const isFocused = document.activeElement === input;
+  const isValid = input.validity.valid;
+  const isDirty = formEl.classList.contains('Vlt-form__element--dirty');
+
+  if (isFocused) {
+    // remove all alerts when focused
+    formEl.classList.add('Vlt-form__element--error');
+    formEl.classList.remove('Vlt-form__element--valid');
+    return;
+  }
+
+  if (isValid) {
     formEl.classList.remove('Vlt-form__element--error');
   } else {
     formEl.classList.add('Vlt-form__element--error');
+  }
+
+  if (isValid && isDirty) {
+    formEl.classList.add('Vlt-form__element--valid');
+  } else {
+    formEl.classList.remove('Vlt-form__element--valid');
   }
 }
 

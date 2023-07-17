@@ -12491,9 +12491,14 @@ input.hideme:focus+.tab-label {
   font-family: var(--icon-font-family);
 }
 
-.Vlt-form .Vlt-custom-select .Vlt-icon-form-checkmark::before,
-.Vlt-form .Vlt-input .Vlt-icon-form-checkmark::before,.Vlt-form .Vlt-select .Vlt-icon-form-checkmark::before {
+.Vlt-form .Vlt-form__element--valid .Vlt-input .Vlt-icon-form-checkmark:before {
   color: #7fc8f5;
+}
+
+.Vlt-form .Vlt-custom-select .Vlt-icon-form-checkmark::before,
+.Vlt-form .Vlt-input .Vlt-icon-form-checkmark::before,
+.Vlt-form .Vlt-select .Vlt-icon-form-checkmark::before {
+  color: transparent;
 }
 
 .Vlt-form .Vlt-textarea textarea {
@@ -31683,7 +31688,6 @@ input.hideme:focus+.tab-label {
     -webkit-box-orient:horizontal;
     -webkit-box-direction: normal;
     flex-direction: row;
-    flex-direction: row;
   }
 }
 
@@ -31699,7 +31703,6 @@ input.hideme:focus+.tab-label {
   .Vlt-footer__legal-link {
     -webkit-box-orient:horizontal;
     -webkit-box-direction: normal;
-    flex-direction: row;
     flex-direction: row;
     padding: 0 1rem;
     white-space: nowrap;
@@ -31754,7 +31757,6 @@ input.hideme:focus+.tab-label {
     display: flex;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
-    flex-direction: row;
     flex-direction: row;
   }
 }
@@ -34010,7 +34012,6 @@ input.hideme:focus+.tab-label {
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
     flex-direction: row;
-    flex-direction: row;
     padding: 2rem 5.8rem;
     text-align: left;
   }
@@ -34092,7 +34093,6 @@ input.hideme:focus+.tab-label {
   .announcement {
     -webkit-box-orient:horizontal;
     -webkit-box-direction: normal;
-    flex-direction: row;
     flex-direction: row;
     height: 7.1rem;
     padding: 2.3rem 2.5rem;
@@ -34179,7 +34179,6 @@ input.hideme:focus+.tab-label {
   .announcement__item {
     -webkit-box-orient:horizontal;
     -webkit-box-direction: normal;
-    flex-direction: row;
     flex-direction: row;
   }
 }
@@ -36523,7 +36522,6 @@ input.hideme:focus+.tab-label {
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
     flex-direction: row;
-    flex-direction: row;
   }
 
   .details-grid .detail:nth-child(2n) .detail__media-button {
@@ -36534,7 +36532,6 @@ input.hideme:focus+.tab-label {
   .details-grid--sort-reverse .detail .row {
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
-    flex-direction: row;
     flex-direction: row;
   }
 
@@ -37240,7 +37237,6 @@ input.hideme:focus+.tab-label {
     display: flex;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
-    flex-direction: row;
     flex-direction: row;
     -ms-flex-pack: distribute;
     justify-content: space-around;
@@ -38521,7 +38517,6 @@ input.hideme:focus+.tab-label {
   .hero-alt__ctas {
     -webkit-box-orient:horizontal;
     -webkit-box-direction: normal;
-    flex-direction: row;
     flex-direction: row;
     -webkit-box-pack: center;
     -ms-flex-pack: center;
@@ -40110,7 +40105,6 @@ input.hideme:focus+.tab-label {
   .lead-gen__content {
     -webkit-box-orient:horizontal;
     -webkit-box-direction: normal;
-    flex-direction: row;
     flex-direction: row;
     padding: 5rem 0;
   }
@@ -42245,7 +42239,6 @@ input.hideme:focus+.tab-label {
   .plans-card--extended-four-up .plans-card__cta-container,.plans-card--extended-two-up .plans-card__cta-container {
     -webkit-box-orient:horizontal;
     -webkit-box-direction: normal;
-    flex-direction: row;
     flex-direction: row;
     margin-top: 3rem;
   }
@@ -45385,7 +45378,6 @@ input.hideme:focus+.tab-label {
     -webkit-box-orient:horizontal;
     -webkit-box-direction: normal;
     flex-direction: row;
-    flex-direction: row;
   }
 
   .bns-reschedule__form-inputs>* {
@@ -45410,7 +45402,6 @@ input.hideme:focus+.tab-label {
   .bns-reschedule__form-ctas {
     -webkit-box-orient:horizontal;
     -webkit-box-direction: normal;
-    flex-direction: row;
     flex-direction: row;
     position: static;
     width: auto;
@@ -46103,7 +46094,6 @@ input.hideme:focus+.tab-label {
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
     flex-direction: row;
-    flex-direction: row;
     text-align: left;
   }
 }
@@ -46154,7 +46144,6 @@ input.hideme:focus+.tab-label {
   .sf-plan-recommendation__cost-section-ctas {
     -webkit-box-orient:horizontal;
     -webkit-box-direction: normal;
-    flex-direction: row;
     flex-direction: row;
   }
 
@@ -46299,7 +46288,6 @@ input.hideme:focus+.tab-label {
   .post-purchase__help-cards,.post-purchase__help-wrapper {
     -webkit-box-orient:horizontal;
     -webkit-box-direction: normal;
-    flex-direction: row;
     flex-direction: row;
   }
 }
