@@ -923,3 +923,8 @@ hr {
   background-color: rgb(253 0 1 / 5%);
   border-color: #fd0001;
 }
+
+.Vlt-form .Vlt-checkbox__button input:checked~.Vlt-checkbox__icon::before {
+  background-color: #000;
+  color: #fff;
+}

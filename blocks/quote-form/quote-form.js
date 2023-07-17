@@ -1,10 +1,8 @@
 import { div } from '../../scripts/scripts.js';
 
-// TODO: submit with fetch, to both endpoints
 // TODO: only submit if valid
-// TODO: add error messages
-// TODO: add loading spinner?
-// TODO: UNCSS the styles https://uncss-online.com/
+// TODO: submit with fetch, to both endpoints
+// TODO: add error messages if submission fails.
 
 export default async function decorate(block) {
   const cardWrapper = block.querySelector(':scope > div > div:first-child');
