@@ -1,6 +1,5 @@
 import { div } from '../../scripts/scripts.js';
 
-// TODO: style checkmark, only show if success
 // TODO: submit with fetch, to both endpoints
 // TODO: only submit if valid
 // TODO: add error messages
@@ -41,7 +40,7 @@ function validateInput(input) {
 
   if (isFocused) {
     // remove all alerts when focused
-    formEl.classList.add('Vlt-form__element--error');
+    formEl.classList.remove('Vlt-form__element--error');
     formEl.classList.remove('Vlt-form__element--valid');
     return;
   }
