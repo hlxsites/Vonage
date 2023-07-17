@@ -3,6 +3,7 @@ import { div } from '../../scripts/scripts.js';
 // TODO: only submit if valid
 // TODO: submit with fetch, to both endpoints
 // TODO: add error messages if submission fails.
+// TODO: fix checkbox style, and left card style
 
 export default async function decorate(block) {
   const cardWrapper = block.querySelector(':scope > div > div:first-child');
