@@ -57,6 +57,17 @@ function validateInput(input) {
   }
 }
 
+function submitForm() {
+  const form = document.querySelector("[data-form-type='lead form: apps: contact sales: in page']");
+  form.querySelectorAll('input[required]').forEach((input) => {
+    validateInput(input);
+  });
+  // there's a captcha that needs to be integrated. Thus, there will always be one error flag.
+  if (form.querySelectorAll('.Vlt-form__element--error').length > 1) {
+    // submit form here.
+  }
+}
+
 async function decorateRightColumn(formWrapper) {
   const rightColumn = div({ class: 'right-column' });
 
@@ -95,8 +106,9 @@ async function decorateRightColumn(formWrapper) {
       });
     });
 
-    form.querySelectorAll('input[required]').forEach((input) => {
-
+    form.querySelector('button[type="submit"]').addEventListener('click', (e) => {
+      e.preventDefault();
+      submitForm();
     });
   } else {
     // eslint-disable-next-line no-console
