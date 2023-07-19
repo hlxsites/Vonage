@@ -1,0 +1,360 @@
+
+*, :after, :before {
+  box-sizing: inherit;
+}
+
+.pricing-grid .container {
+  box-sizing: border-box;
+  width: 100%;
+  padding-right: 20px;
+  padding-left: 20px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.pricing-grid .row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -20px;
+  margin-left: -20px;
+}
+
+.pricing-grid .col-12 {
+  flex: 0 0 100%;
+  max-width: 100%;
+  position: relative;
+  width: 100%;
+  padding-right: 20px;
+  padding-left: 20px;
+}
+
+.pricing-grid .category-grid__header {
+  margin-bottom: 5rem;
+  position: relative;
+}
+
+.pricing-grid .category-grid__header-title {
+  font-size: 1.8rem;
+  font-weight: 500;
+  letter-spacing: -.05rem;
+  line-height: 2.4rem;
+  word-break: break-word;
+  font-family: Spezia,Spezia_SemiMono,Arial,Helvetica,sans-serif;
+  margin-left: 5.8rem;
+}
+
+.pricing-grid .category-grid .aem-Grid.row {
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+
+.pricing-grid .tabs {
+  background-color: #eeeffc;
+  overflow: hidden;
+}
+
+.pricing-grid .tabs__tabs {
+  height: 7.0rem;
+  overflow: auto;
+  padding: .5rem;
+  white-space: nowrap;
+}
+
+.pricing-grid .tabs__tab {
+  background: none;
+  border-radius: 0;
+  border: 0 solid #000;
+  color: #000;
+  cursor: pointer;
+  display: inline-block;
+  height: auto;
+  padding: 0;
+  font-family: Spezia_SemiMono;
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: .075rem;
+  line-height: 2rem;
+  text-transform: uppercase;
+  outline: none;
+}
+
+.pricing-grid .tabs__tab:after {
+  content: "";
+  display: block;
+  height: .2rem;
+  width: 100%;
+  background-color: #881fff;
+}
+
+.pricing-grid .tabs__tab:not([aria-selected=true]) {
+  opacity: .58;
+}
+
+.pricing-grid .tabs__tab:nth-child(n+2) {
+  margin-left: 3rem;
+}
+
+.pricing-grid .pricing-card {
+  background-color: #eeeffc;
+  padding-bottom: 7rem;
+}
+
+.pricing-grid .pricing-card__card {
+  background-color: #fff;
+  border-radius: 2rem;
+  padding: 4rem 3rem;
+}
+
+.pricing-grid .pricing-card__option:first-child {
+  margin-top: 0;
+}
+
+.pricing-grid .pricing-card__option {
+  margin-top: 5rem;
+}
+
+.pricing-grid .pricing-card__option-product {
+  font-family: Spezia,Spezia_SemiMono,Arial,Helvetica,sans-serif;
+  font-size: 1.8rem;
+  font-weight: 500;
+  letter-spacing: -.05rem;
+  line-height: 2.4rem;
+  margin-bottom: 2rem;
+}
+
+.pricing-grid .pricing-card__offer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+.pricing-card__offer+.pricing-card__offer {
+  border-top: .1rem solid #dcdde6;
+  margin-top: 2rem;
+  padding-top: 2rem;
+}
+
+.pricing-grid .pricing-card__offer-name, .pricing-grid .pricing-card__offer-price {
+  font-family: Spezia,Spezia_SemiMono,Arial,Helvetica,sans-serif;
+  font-size: 1.4rem;
+  font-weight: 400;
+  letter-spacing: -.02rem;
+  line-height: 2rem;
+  display: block;
+}
+
+.pricing-grid .end-note__content {
+  font-family: Spezia,Spezia_SemiMono,Arial,Helvetica,sans-serif;
+  font-size: 1.2rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.6rem;
+  color: #5f6169;
+  text-align: left;
+}
+
+.pricing-grid .pricing-card__offer-price {
+  font-weight: 700;
+  text-align: right;
+}
+
+.pricing-grid .pricing-card .end-note {
+  margin-top: 3rem;
+}
+
+@media (min-width: 576px) {
+
+  .pricing-grid .container {
+    max-width: 540px;
+  }
+}
+
+@media (min-width: 768px) {
+
+  .pricing-grid .container {
+    max-width: 45pc;
+  }
+
+  .pricing-grid .category-grid__header {
+    margin-bottom: 7.2rem;
+  }
+
+  .pricing-grid .category-grid__header-title {
+    font-family: Spezia,Spezia_SemiMono,Arial,Helvetica,sans-serif;
+    font-size: 1.8rem;
+    font-weight: 500;
+    letter-spacing: -.05rem;
+    line-height: 2rem;
+  }
+
+  .pricing-grid .category-grid .aem-Grid, .pricing-grid .category-grid__items {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .pricing-grid .category-grid .aem-Grid, .pricing-grid .category-grid__items {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+  }
+
+  .pricing-grid .tabs__tab {
+    height: auto;
+    padding-left: 0;
+    padding-right: 0;
+    font-family: Spezia_SemiMono;
+    font-size: 1.4rem;
+    font-weight: 600;
+    letter-spacing: .075rem;
+    line-height: 2rem;
+  }
+
+  .pricing-grid .pricing-card__card {
+    padding: 6rem 5.8rem;
+  }
+
+  .pricing-grid .pricing-card__option {
+    margin-top: 0;
+  }
+
+  .pricing-grid .pricing-card__option-product {
+    margin-bottom: 4rem;
+  }
+
+  .pricing-grid .pricing-card__option-product {
+    font-family: Spezia,Spezia_SemiMono,Arial,Helvetica,sans-serif;
+    font-size: 1.8rem;
+    font-weight: 500;
+    letter-spacing: -.05rem;
+    line-height: 2rem;
+  }
+
+  .pricing-grid  .pricing-card__offer-name, .pricing-grid .pricing-card__offer-price {
+    font-family: Spezia,Spezia_SemiMono,Arial,Helvetica,sans-serif;
+    font-size: 1.4rem;
+    font-weight: 400;
+    letter-spacing: -.02rem;
+    line-height: 2rem;
+  }
+
+  .pricing-grid .pricing-card .end-note {
+    margin-top: 5rem;
+  }
+
+  .pricing-grid .end-note__content {
+    font-family: Spezia,Spezia_SemiMono,Arial,Helvetica,sans-serif;
+    font-size: 1.2rem;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 1.6rem;
+  }
+
+}
+
+  @media (min-width: 992px) {
+
+    .pricing-grid .container {
+      max-width: 990pt;
+    }
+
+    .pricing-grid .col-lg-3 {
+      -webkit-box-flex: 0;
+      flex: 0 0 25%;
+      max-width: 25%;
+    }
+
+    .pricing-grid .category-grid__header {
+      margin-bottom: 0;
+      overflow: visible;
+    }
+
+    .pricing-grid .category-grid__header-title {
+      margin-left: 5.3rem;
+    }
+
+    .pricing-grid .col-lg-9 {
+      flex: 0 0 75%;
+      max-width: 75%;
+    }
+
+    .pricing-grid .pricing-card {
+      padding-bottom: 9rem;
+    }
+
+    .pricing-grid .pricing-card__card {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+      -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+      justify-content: space-between;
+      padding: 7rem 5rem;
+    }
+
+    .pricing-grid .pricing-card__option {
+      -ms-flex-preferred-size: 44.06779%;
+      flex-basis: 44.06779%;
+      margin-top: 0;
+    }
+
+    .pricing-grid .pricing-card__option-product {
+      margin-bottom: 5rem;
+    }
+
+    .pricing-grid .end-note__content {
+      max-width: 74.6rem;
+    }
+  }
+
+@media (min-width: 1200px) {
+  .pricing-grid  .category-grid__header-title {
+    font-family: Spezia,Spezia_SemiMono,Arial,Helvetica,sans-serif;
+    font-size: 2.1rem;
+    font-weight: 500;
+    letter-spacing: -.05rem;
+    line-height: 2.4rem;
+  }
+
+  .pricing-grid .tabs__tab {
+    font-family: Spezia_SemiMono;
+    font-size: 1.4rem;
+    font-weight: 600;
+    letter-spacing: .075rem;
+    line-height: 2rem;
+  }
+
+  .pricing-grid .pricing-card__option-product {
+    font-family: Spezia,Spezia_SemiMono,Arial,Helvetica,sans-serif;
+    font-size: 2.1rem;
+    font-weight: 500;
+    letter-spacing: -.05rem;
+    line-height: 2.4rem;
+  }
+
+  .pricing-grid .pricing-card__offer-name, .pricing-grid .pricing-card__offer-price {
+    font-family: Spezia,Spezia_SemiMono,Arial,Helvetica,sans-serif;
+    font-size: 1.7rem;
+    font-weight: 400;
+    letter-spacing: -.02rem;
+    line-height: 2rem;
+  }
+
+  .pricing-grid .end-note__content {
+    font-family: Spezia,Spezia_SemiMono,Arial,Helvetica,sans-serif;
+    font-size: 1.2rem;
+    font-weight: 400;
+    letter-spacing: .025rem;
+    line-height: 1.6rem;
+  }
+}
