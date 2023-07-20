@@ -16,7 +16,7 @@ export default function decorate(block) {
   linkTexts.forEach((linkText, index) => {
     const column = div({ class: 'column' });
     column.innerHTML = `<div class="jump-links-jump-link">
-    <a class="jump-links-link" href="javascript:void(0)" data-target="${linkTargets[index].getAttribute('href')}"></a>
+    <a class="jump-links-link" href="${linkTargets[index].getAttribute('href')}"</a>
     <div class="jump-links-heading">
       <div class="jump-links-icon">
       </div>
