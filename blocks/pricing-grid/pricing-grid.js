@@ -5,21 +5,43 @@ import {
 const currencyLabels = [
   { currency: 'usd', label: '$US', symbol: '$' },
   { currency: 'euro', label: '€EURO', symbol: '€' }];
+
+function handleTabButtonClick(event) {
+  if (event.target.getAttribute('aria-selected') === 'false') {
+    const tabIndex = event.target.getAttribute('tabindex');
+    document.querySelectorAll('button.tabs__tab').forEach((buttonElem) => {
+      buttonElem.setAttribute('aria-selected', buttonElem.getAttribute('aria-selected') === 'false' ? 'true' : 'false');
+      document.querySelectorAll(`div.tabs__panel:not([tabindex="${tabIndex}"])`).forEach((tabElem) => {
+        tabElem.setAttribute('aria-hidden', 'true');
+      });
+      document.querySelector(`div.tabs__panel[tabindex="${tabIndex}"]`).setAttribute('aria-hidden', 'false');
+    });
+  }
+}
+
 function populatePricingGrid(block, currencies, pricingData, endNoteContent) {
   currencies.forEach((currency, index) => {
     const currencyIndex = currencyLabels.findIndex((item) => item.currency === currency);
     const currencyLabel = currencyLabels[currencyIndex].label;
     const currencySymbol = currencyLabels[currencyIndex].symbol;
 
+    // Check if the block already has a button, if not set the first button as true for selected, otherwise set false for not
+    const selectedVal = !block.querySelector('button.tabs__tab');
+
     const tabButtonElem = button({
-      class: 'tabs__tab', 'aria-controls': 'panel', 'aria-selected': true, id: 'tab', role: 'tab', tabIndex: index, innerHTML: currencyLabel,
+      class: 'tabs__tab', 'aria-controls': 'panel', 'aria-selected': selectedVal, id: 'tab', role: 'tab', tabIndex: index, innerHTML: currencyLabel,
     });
+
+    tabButtonElem.addEventListener('click', handleTabButtonClick);
     block.querySelector('div.tabs__tabs').append(tabButtonElem);
+
+    // Check if the block already has a tab, if not set the first tab as false for hidden, otherwise set true for hidden
+    const hiddenVal = !!block.querySelector('section.product-card-tabbed .tabs__panel');
 
     // Built by appending pricingCardOption elements to the pricing-card__card div container
     const tabElem = div(
       {
-        class: 'tabs__panel', tabIndex: index, 'aria-hidden': true, id: 'panel', role: 'tabPanel',
+        class: 'tabs__panel', tabIndex: index, 'aria-hidden': hiddenVal, id: 'panel', role: 'tab-panel',
       },
       div(
         { class: 'pricing-card' },

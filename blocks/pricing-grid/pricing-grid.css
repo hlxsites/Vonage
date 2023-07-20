@@ -1,5 +1,5 @@
 
-*, :after, :before {
+*, ::after, ::before {
   box-sizing: inherit;
 }
 
@@ -28,22 +28,22 @@
   padding-left: 20px;
 }
 
-.pricing-grid .category-grid__header {
+.pricing-grid .category-grid-header {
   margin-bottom: 5rem;
   position: relative;
 }
 
-.pricing-grid .category-grid__header-title {
+.pricing-grid .category-grid-header-title {
   font-size: 1.8rem;
   font-weight: 500;
   letter-spacing: -.05rem;
   line-height: 2.4rem;
   word-break: break-word;
-  font-family: Spezia,Spezia_SemiMono,Arial,Helvetica,sans-serif;
+  font-family: Spezia,"Spezia_SemiMono",Arial,Helvetica,sans-serif;
   margin-left: 5.8rem;
 }
 
-.pricing-grid .category-grid .aem-Grid.row {
+.pricing-grid .category-grid .aem-grid.row {
   margin-left: auto;
   margin-right: auto;
   width: 100%;
@@ -52,6 +52,18 @@
 .pricing-grid .tabs {
   background-color: #eeeffc;
   overflow: hidden;
+}
+
+.pricing-grid .tabs__tab:not([aria-selected="true"])::after {
+  content: none;
+}
+
+.pricing-grid .tabs [role="tab-panel"][aria-hidden="true"] {
+  display: none;
+}
+
+.pricing-grid .tabs__tab:not([aria-selected="true"]) {
+  opacity: .58;
 }
 
 .pricing-grid .tabs__tabs {
@@ -70,7 +82,7 @@
   display: inline-block;
   height: auto;
   padding: 0;
-  font-family: Spezia_SemiMono;
+  font-family: "Spezia_SemiMono";
   font-size: 1.4rem;
   font-weight: 600;
   letter-spacing: .075rem;
@@ -79,7 +91,7 @@
   outline: none;
 }
 
-.pricing-grid .tabs__tab:after {
+.pricing-grid .tabs__tab::after {
   content: "";
   display: block;
   height: .2rem;
@@ -87,7 +99,7 @@
   background-color: #881fff;
 }
 
-.pricing-grid .tabs__tab:not([aria-selected=true]) {
+.pricing-grid .tabs__tab:not([aria-selected="true"]) {
   opacity: .58;
 }
 
@@ -115,7 +127,7 @@
 }
 
 .pricing-grid .pricing-card__option-product {
-  font-family: Spezia,Spezia_SemiMono,Arial,Helvetica,sans-serif;
+  font-family: Spezia,"Spezia_SemiMono",Arial,Helvetica,sans-serif;
   font-size: 1.8rem;
   font-weight: 500;
   letter-spacing: -.05rem;
@@ -125,11 +137,11 @@
 
 .pricing-grid .pricing-card__offer {
   display: -webkit-box;
-  display: -ms-flexbox;
+  display: flexbox;
   display: flex;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
-  -ms-flex-direction: row;
+  flex-direction: row;
   flex-direction: row;
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
@@ -143,7 +155,7 @@
 }
 
 .pricing-grid .pricing-card__offer-name, .pricing-grid .pricing-card__offer-price {
-  font-family: Spezia,Spezia_SemiMono,Arial,Helvetica,sans-serif;
+  font-family: Spezia,"Spezia_SemiMono",Arial,Helvetica,sans-serif;
   font-size: 1.4rem;
   font-weight: 400;
   letter-spacing: -.02rem;
@@ -152,7 +164,7 @@
 }
 
 .pricing-grid .end-note__content {
-  font-family: Spezia,Spezia_SemiMono,Arial,Helvetica,sans-serif;
+  font-family: Spezia,"Spezia_SemiMono",Arial,Helvetica,sans-serif;
   font-size: 1.2rem;
   font-weight: 400;
   letter-spacing: 0;
@@ -171,39 +183,38 @@
 }
 
 @media (min-width: 576px) {
-
   .pricing-grid .container {
     max-width: 540px;
   }
 }
 
 @media (min-width: 768px) {
-
   .pricing-grid .container {
     max-width: 45pc;
   }
 
-  .pricing-grid .category-grid__header {
+  .pricing-grid .category-grid-header {
     margin-bottom: 7.2rem;
   }
 
-  .pricing-grid .category-grid__header-title {
-    font-family: Spezia,Spezia_SemiMono,Arial,Helvetica,sans-serif;
+  .pricing-grid .category-grid-header-title {
+    font-family: Spezia,"Spezia_SemiMono",Arial,Helvetica,sans-serif;
     font-size: 1.8rem;
     font-weight: 500;
     letter-spacing: -.05rem;
     line-height: 2rem;
   }
 
-  .pricing-grid .category-grid .aem-Grid, .pricing-grid .category-grid__items {
+  .pricing-grid .category-grid .aem-grid, .pricing-grid .category-grid__items {
     display: flex;
     flex-wrap: wrap;
   }
-  .pricing-grid .category-grid .aem-Grid, .pricing-grid .category-grid__items {
+
+  .pricing-grid .category-grid .aem-grid, .pricing-grid .category-grid__items {
     display: -webkit-box;
-    display: -ms-flexbox;
+    display: flexbox;
     display: flex;
-    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
     flex-wrap: wrap;
   }
 
@@ -211,7 +222,7 @@
     height: auto;
     padding-left: 0;
     padding-right: 0;
-    font-family: Spezia_SemiMono;
+    font-family: "Spezia_SemiMono";
     font-size: 1.4rem;
     font-weight: 600;
     letter-spacing: .075rem;
@@ -231,7 +242,7 @@
   }
 
   .pricing-grid .pricing-card__option-product {
-    font-family: Spezia,Spezia_SemiMono,Arial,Helvetica,sans-serif;
+    font-family: Spezia,"Spezia_SemiMono",Arial,Helvetica,sans-serif;
     font-size: 1.8rem;
     font-weight: 500;
     letter-spacing: -.05rem;
@@ -239,7 +250,7 @@
   }
 
   .pricing-grid  .pricing-card__offer-name, .pricing-grid .pricing-card__offer-price {
-    font-family: Spezia,Spezia_SemiMono,Arial,Helvetica,sans-serif;
+    font-family: Spezia,"Spezia_SemiMono",Arial,Helvetica,sans-serif;
     font-size: 1.4rem;
     font-weight: 400;
     letter-spacing: -.02rem;
@@ -251,7 +262,7 @@
   }
 
   .pricing-grid .end-note__content {
-    font-family: Spezia,Spezia_SemiMono,Arial,Helvetica,sans-serif;
+    font-family: Spezia,"Spezia_SemiMono",Arial,Helvetica,sans-serif;
     font-size: 1.2rem;
     font-weight: 400;
     letter-spacing: 0;
@@ -261,7 +272,6 @@
 }
 
   @media (min-width: 992px) {
-
     .pricing-grid .container {
       max-width: 990pt;
     }
@@ -272,12 +282,12 @@
       max-width: 25%;
     }
 
-    .pricing-grid .category-grid__header {
+    .pricing-grid .category-grid-header {
       margin-bottom: 0;
       overflow: visible;
     }
 
-    .pricing-grid .category-grid__header-title {
+    .pricing-grid .category-grid-header-title {
       margin-left: 5.3rem;
     }
 
@@ -292,9 +302,9 @@
 
     .pricing-grid .pricing-card__card {
       display: -webkit-box;
-      display: -ms-flexbox;
+      display: flexbox;
       display: flex;
-      -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
       flex-wrap: wrap;
       -webkit-box-pack: justify;
       -ms-flex-pack: justify;
@@ -318,8 +328,8 @@
   }
 
 @media (min-width: 1200px) {
-  .pricing-grid  .category-grid__header-title {
-    font-family: Spezia,Spezia_SemiMono,Arial,Helvetica,sans-serif;
+  .pricing-grid  .category-grid-header-title {
+    font-family: Spezia,"Spezia_SemiMono",Arial,Helvetica,sans-serif;
     font-size: 2.1rem;
     font-weight: 500;
     letter-spacing: -.05rem;
@@ -327,7 +337,7 @@
   }
 
   .pricing-grid .tabs__tab {
-    font-family: Spezia_SemiMono;
+    font-family: "Spezia_SemiMono";
     font-size: 1.4rem;
     font-weight: 600;
     letter-spacing: .075rem;
@@ -335,7 +345,7 @@
   }
 
   .pricing-grid .pricing-card__option-product {
-    font-family: Spezia,Spezia_SemiMono,Arial,Helvetica,sans-serif;
+    font-family: Spezia,"Spezia_SemiMono",Arial,Helvetica,sans-serif;
     font-size: 2.1rem;
     font-weight: 500;
     letter-spacing: -.05rem;
@@ -343,7 +353,7 @@
   }
 
   .pricing-grid .pricing-card__offer-name, .pricing-grid .pricing-card__offer-price {
-    font-family: Spezia,Spezia_SemiMono,Arial,Helvetica,sans-serif;
+    font-family: Spezia,"Spezia_SemiMono",Arial,Helvetica,sans-serif;
     font-size: 1.7rem;
     font-weight: 400;
     letter-spacing: -.02rem;
@@ -351,7 +361,7 @@
   }
 
   .pricing-grid .end-note__content {
-    font-family: Spezia,Spezia_SemiMono,Arial,Helvetica,sans-serif;
+    font-family: Spezia,"Spezia_SemiMono",Arial,Helvetica,sans-serif;
     font-size: 1.2rem;
     font-weight: 400;
     letter-spacing: .025rem;
