@@ -19,6 +19,10 @@
   margin-left: auto;
 }
 
+.section.jump-links-container {
+  padding: 0;
+}
+
 .jump-links .row {
   display: flex;
   flex-wrap: wrap;
