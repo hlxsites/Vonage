@@ -1,9 +1,45 @@
 import { div } from '../../scripts/scripts.js';
 
 // TODO: only submit if valid
-// TODO: submit with fetch, to both endpoints
+// TODO: submit fetch to the secondary endpoint (currently submitting to the value specified in the action attr of the form element)
+// TODO: Cleanup submitted form data to match what the clients example does:
+// pagename=biz%3Amktg%3Aunified-communications
+// omnitureid=40299102592989006554421665607769348004
+// country=United+States
+// utmts=
+// PID=
+// orderid=
+// gclid=
+// kwid=
+// attributioncampaign=bizdirect
+// utmcampaign=bizdirect
+// utmcontent=
+// utmmedium=
+// utmrefererurl=
+// utmsource=
+// utmterm=
+// Area_of_Interest=UC
+// digitaltracking=Mobile%3A%3A%3A%3A%3AGet+your+quote%3A%3A%2Funified-communications%2F
+// referralid=
+// webreferrerurl=www.vonage.com%2Funified-communications%2F
+// formfriendly=jsloaded+on+Fri%2C+21+Jul+2023+21%3A48%3A47+GMT+-+1689976127233
+// recaptchascore=score
+// firstname=Testing
+// lastname=Form+Submission
+// email=dgranber%40adobe.com
+// cc=%2B1
+// local=1234567890
+// phonenumber=%2B1+1234567890
+// companyname=Adobe
+// industry=Web%2FMobile+Development
+// numberofemployees=1-9
+// numberofextensions=1
+// privacypolicyoptin=true
+// explain=2
+// TODO: catch response to the POST (primary presumably).
+// TODO: if submission was successful display the celebration content provided in the block
 // TODO: add error messages if submission fails.
-// TODO: fix checkbox style, and left card style
+// TODO: left card style
 
 export default async function decorate(block) {
   const cardWrapper = block.querySelector(':scope > div > div:first-child');
@@ -59,12 +95,22 @@ function validateInput(input) {
 
 function submitForm() {
   const form = document.querySelector("[data-form-type='lead form: apps: contact sales: in page']");
-  form.querySelectorAll('input[required]').forEach((input) => {
+  form.querySelectorAll('input[required], select[required]').forEach((input) => {
     validateInput(input);
   });
   // there's a captcha that needs to be integrated. Thus, there will always be one error flag.
-  if (form.querySelectorAll('.Vlt-form__element--error').length > 1) {
+  if (form.querySelectorAll('.Vlt-form__element--error').length <= 1) {
+    const url = form.getAttribute('action');
     // submit form here.
+    const formData = new FormData();
+    form.querySelectorAll('.Vlt-form__element input, .Vlt-form__element select').forEach((input) => {
+      formData.append(input.name, input.value);
+    });
+    fetch(url, {
+      method: 'post',
+      body: formData,
+    })
+      .then(console.log('blarf'));
   }
 }
 
