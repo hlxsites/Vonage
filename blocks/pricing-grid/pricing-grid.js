@@ -101,7 +101,7 @@ export default async function decorate(block) {
   const endNoteContent = block.querySelector('h3').innerText;
 
   block.innerHTML = `
-  <div class="container">
+  <div class="container" id="pricing">
     <div class="category-grid-group">
       <div class="row">
         <div class="col-12 col-lg-3">
