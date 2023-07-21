@@ -96,7 +96,7 @@
   transition: bottom .25s ease;
 }
 
-.jump-links-link:any-link {
+.jump-links-link {
   background-color: #fff;
   border-radius: 2rem;
   bottom: 0;
@@ -104,11 +104,6 @@
   position: absolute;
   right: 0;
   top: 0;
-  color:black;
-}
-
-.jump-links-link:any-link:hover {
-text-decoration:none;
 }
 
 .vlt-icon-arrow-link::before {
