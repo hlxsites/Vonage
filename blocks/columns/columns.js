@@ -203,13 +203,16 @@ export default function decorate(block) {
     const offerTitle = block.querySelector('div.columns-other-col h2');
     const offerDetails = block.querySelector('div.columns-other-col p');
 
-    offerTitle.remove();
-    offerDetails.remove();
+    if (offerTitle) {
+      offerTitle.remove();
+      block.querySelector('.columns-other-col').appendChild(span({ class: 'titleWrapper' }, offerTitle));
+    }
 
-    block.querySelector('.columns-other-col').appendChild(span({ class: 'titleWrapper' }, offerTitle));
-    block.querySelector('.columns-other-col').appendChild(offerControls);
-    block.querySelector('.columns-other-col').appendChild(span({ class: 'detailWrapper' }, offerDetails));
-
-    addSlimPromoClickHandlers(block);
+    if (offerDetails) {
+      offerDetails.remove();
+      block.querySelector('.columns-other-col').appendChild(offerControls);
+      block.querySelector('.columns-other-col').appendChild(span({ class: 'detailWrapper' }, offerDetails));
+      addSlimPromoClickHandlers(block);
+    }
   }
 }
