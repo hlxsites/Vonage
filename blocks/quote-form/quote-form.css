@@ -1,4 +1,6 @@
 /* stylelint-disable selector-class-pattern */
+/* stylelint-disable no-duplicate-selectors */
+/* stylelint-disable no-descending-specificity */
 
 .quote-form {
   margin-top: 50px;
@@ -49,6 +51,7 @@ text-decoration: none;
 .quote-form .card a:hover {
 text-decoration: underline;
 }
+
 .quote-form .card a[href^="tel"] {
   display: block;
   text-decoration: inherit;
@@ -110,7 +113,7 @@ display:none;
 }
 
 .quote-form .right-column .form .Vlt-form__eyebrow {
-  font-family: "Spezia_SemiMono";
+  font-family: var(--body-font-family);
   font-size: 1.2rem;
   font-weight: 400;
   letter-spacing: .2rem;
