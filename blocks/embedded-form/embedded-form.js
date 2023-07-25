@@ -119,7 +119,7 @@ async function decorateRightColumn(formWrapper) {
   formWrapper.textContent = '';
   formWrapper.append(rightColumn);
 
-  const resp = await fetch(`/blocks/quote-form/${htmlFile}`);
+  const resp = await fetch(`/forms/${htmlFile}`);
   if (resp.ok) {
     form.innerHTML = await resp.text();
     const trackingEl = form.querySelector('input[name="digitaltracking"]');
