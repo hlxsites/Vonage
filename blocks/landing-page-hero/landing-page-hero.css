@@ -1,5 +1,6 @@
 /* block specific CSS goes here */
 /* stylelint-disable no-descending-specificity */
+@import url("../../forms/form.css");
 
 /* Gradient background for the full section */
 .section.landing-page-hero-container.purple-gradient-background {

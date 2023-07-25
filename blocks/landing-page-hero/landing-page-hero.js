@@ -72,6 +72,27 @@ function createVideoOverlay() {
   return videoOverlay;
 }
 
+function createFormOverlay(formContent) {
+  const formOverlay = div({ class: 'form-wrapper' });
+  formOverlay.innerHTML = `
+    <div class="form-overlay__overlay" role="dialog" aria-modal="true" aria-label="form">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 text-right">
+            <button class="Vlt-icon-close form-overlay__close" aria-label="Close modal"></button>
+          </div>
+        </div>
+      </div>
+    </div>`;
+
+  const formCloseButton = formOverlay.querySelector('.form-overlay__close');
+  formCloseButton.addEventListener('click', () => {
+    const formContainer = (document.querySelector('.form-overlay'));
+    formContainer.classList.remove('form-overlay--open');
+  });
+
+  return formOverlay;
+}
 function assembleMediaContent(elements) {
   const mediaContent = div({ class: 'media-content' });
 
@@ -104,6 +125,15 @@ function buildOverlay(overlayRawContent) {
 }
 
 function decorateCtasContent(ctasContent, stylesList) {
+  ctasContent.querySelectorAll('a').forEach((button) => {
+    // If the CTA contains a reference to the forms/ folder pull in the referenced form html and adjust the button so that a click pops up the modal window with the referenced form
+    if (button.getAttribute('href').contains('forms/')) {
+      button.addEventListener('click', () => {
+        const formOverlay = (document.querySelector('.form-overlay'));
+        formOverlay.classList.add('form-overlay--open');
+      });
+    }
+  });
   stylesList.forEach((style) => {
     if (style.includes('button')) {
       ctasContent.classList.add(style);
