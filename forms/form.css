@@ -702,6 +702,34 @@ hr {
   height: 5rem;
 }
 
+.Vlt-form .btn {
+  min-width: 22rem;
+  display: block;
+  margin: auto;
+}
+
+.form-overlay.form-overlay--open {
+  position: fixed;
+  z-index: 2;
+  padding-left: 472px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0 0 0 / 71%);
+}
+
+.form-overlay__overlay::after {
+  content: "";
+  display: block;
+  padding-bottom: 8rem;
+}
+
+.Vlt-form .btn:first-child {
+  margin-bottom: 2rem;
+  margin-right: 2rem;
+}
 
 .Vlt-form .Vlt-form__element--big .Vlt-input input:placeholder-shown:not(:focus)+* {
   font-size: 1.6rem;
@@ -716,6 +744,13 @@ hr {
   line-height: 1.6rem;
   left: 2rem;
   top: .33rem;
+}
+
+.Vlt-form .col-md-6 {
+  -webkit-box-flex: 0;
+  flex: 0 0 50%;
+  flex: 0 0 50%;
+  max-width: 50%;
 }
 
 .Vlt-form .Vlt-form__element--big .Vlt-select::after {
@@ -970,4 +1005,101 @@ hr {
 .Vlt-form .Vlt-form__element.Vlt-form__element--error .Vlt-input--error input:not(:focus) {
   background-color: rgb(253 0 1 / 5%);
   border-color: #fd0001;
+}
+
+
+*, ::after, ::before {
+  box-sizing: inherit;
+}
+
+.form-overlay__overlay {
+  -webkit-overflow-scrolling: touch;
+  background-color: #fff;
+  display: none;
+  height: 100vh;
+  left: 0;
+  overflow: auto;
+  padding: 2rem 0 0;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  z-index: 3;
+  box-sizing: border-box;
+}
+
+.form-overlay__overlay::before {
+  background: -webkit-gradient(linear,left top,right top,from(#881fff),to(#827ef9));
+  background: linear-gradient(90deg,#881fff 0,#827ef9);
+  content: "";
+  height: 1.5rem;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.form-overlay--open .form-overlay__overlay {
+  display: block;
+}
+
+.Vlt-form__text-container {
+  color: black;
+}
+
+.Vlt-form--two-columns .Vlt-form__text-container {
+  padding-left: 2rem;
+  margin-top: 0;
+}
+
+.Vlt-form--two-columns .Vlt-form__field-container {
+  width: 46%;
+  min-width: 20pc;
+  -webkit-box-flex: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  margin: 0 2rem;
+}
+
+.Vlt-form__element-hidden, .Vlt-form__field-hidden {
+  display: none;
+}
+
+.Vlt-form--two-columns .Vlt-form__checkbox-container, .Vlt-form--two-columns .Vlt-form__textbox-container {
+  margin: 0 2rem;
+  width: 100%;
+}
+
+.form-overlay__overlay .Vlt-form .Vlt-form__checkbox-label a.Vlt-form__checkbox-label-link {
+  display: inline;
+  background-color: transparent;
+  color: black;
+  padding: 0;
+  font-size: unset;
+  font-weight: unset;
+  text-decoration: underline;
+  line-height: unset;
+}
+
+.text-right {
+  text-align: right!important;
+}
+
+button.Vlt-icon-close.form-overlay__close {
+  padding: 0;
+  /* line-height: unset; */
+  height: initial;
+  color: black;
+  background: transparent;
+  border: none;
+  border-radius: unset;
+  /* margin: 0; */
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+button.Vlt-icon-close.form-overlay__close:before {
+  content: "\e90e";
+  font-family: 'VltIcons';
+  font-size: 4rem;
+  background-color: transparent;
 }

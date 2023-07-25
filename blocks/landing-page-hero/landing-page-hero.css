@@ -165,13 +165,16 @@
 
 
 /* Add a margin on the first call to action button (so that in one column mode they are spaced) */
-.landing-page-hero .category-content .ctas ul li:first-child a {
+.landing-page-hero .category-content .ctas ul li:first-child a.form-overlay__button,
+.landing-page-hero .category-content .ctas ul li:first-child strong > a,
+.landing-page-hero .category-content .ctas ul li:first-child em > a {
   margin-bottom: 2rem;
   margin-right: 2rem;
 }
 
 /* Styling for a secondary call to action button (designated with italic in the doc) */
-.landing-page-hero .category-content .ctas em > a {
+.landing-page-hero .category-content .ctas em > a,
+.landing-page-hero .category-content .ctas em a.form-overlay__button {
   background-color: unset;
   color: var(--text-color);
   font-size: var(--button-font-size-m);
@@ -185,26 +188,30 @@
 }
 
 /* Light variant for the secondary call to action button */
-.landing-page-hero .category-content .ctas.secondary-button-light em > a {
+.landing-page-hero .category-content .ctas.secondary-button-light em > a,
+.landing-page-hero .category-content .ctas.secondary-button-light em a.form-overlay__button {
   background-color: transparent;
   border-color: #fff;
   color: #fff;
 }
 
 /* Purple variant for the secondary call to action button */
-.landing-page-hero .category-content .ctas.secondary-button-electric-purple em > a {
+.landing-page-hero .category-content .ctas.secondary-button-electric-purple em > a,
+.landing-page-hero .category-content .ctas.secondary-button-electric-purple em a.form-overlay__button {
   background-color: var(--accent-color);
   color: #fff;
 }
 
 /* Styling for a primary call to action button (designated with bold in the doc) */
-.landing-page-hero .category-content .ctas.primary-button-light strong > a {
+.landing-page-hero .category-content .ctas.primary-button-light strong > a,
+.landing-page-hero .category-content .ctas.primary-button-light strong a.form-overlay__button {
   background-color: #fff;
   color: #000;
 }
 
 /* Purple variant for the primary call to action button */
-.landing-page-hero .category-content .ctas.primary-button-electric-purple strong > a {
+.landing-page-hero .category-content .ctas.primary-button-electric-purple strong > a,
+.landing-page-hero .category-content .ctas.primary-button-electric-purple strong a.form-overlay__button  {
   background-color: var(--accent-color);
   color: #fff;
 }

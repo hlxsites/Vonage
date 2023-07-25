@@ -95,6 +95,7 @@ export function img(...items) { return domEl('img', ...items); }
 export function span(...items) { return domEl('span', ...items); }
 export function button(...items) { return domEl('button', ...items); }
 export function hr(...items) { return domEl('hr', ...items); }
+export function section(...items) { return domEl('section', ...items); }
 
 /**
  * Builds hero block and prepends to main in a new section.

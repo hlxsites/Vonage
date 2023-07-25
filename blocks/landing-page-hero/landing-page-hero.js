@@ -1,5 +1,8 @@
-import { a, div, span } from '../../scripts/scripts.js';
+import {
+  a, div, section, span,
+} from '../../scripts/scripts.js';
 import { toClassName } from '../../scripts/lib-franklin.js';
+import { fetchFormContent } from '../../forms/forms.js';
 
 function decorateDescription(descriptionContent) {
   const links = descriptionContent.querySelectorAll('li > a');
@@ -73,17 +76,20 @@ function createVideoOverlay() {
 }
 
 function createFormOverlay(formContent) {
-  const formOverlay = div({ class: 'form-wrapper' });
+  const formOverlay = div({
+    class: 'form-overlay__overlay', role: 'dialog', 'aria-modal': 'true', 'aria-label': 'form',
+  });
+
   formOverlay.innerHTML = `
-    <div class="form-overlay__overlay" role="dialog" aria-modal="true" aria-label="form">
       <div class="container">
         <div class="row">
           <div class="col-12 text-right">
             <button class="Vlt-icon-close form-overlay__close" aria-label="Close modal"></button>
           </div>
         </div>
-      </div>
-    </div>`;
+      </div>`;
+
+  formOverlay.querySelector('div.col-12').append(formContent);
 
   const formCloseButton = formOverlay.querySelector('.form-overlay__close');
   formCloseButton.addEventListener('click', () => {
@@ -124,16 +130,36 @@ function buildOverlay(overlayRawContent) {
   return overlayContent;
 }
 
-function decorateCtasContent(ctasContent, stylesList) {
-  ctasContent.querySelectorAll('a').forEach((button) => {
+function getFormSection(button) {
+  const formSection = section({ class: 'form-overlay' });
+  formSection.innerHTML = `<div class="form-overlay__trigger">
+      <!--might need to think about how to styyle this button based on the styling of the landing-page-hero or section metadata -->
+      <a class="btn form-overlay__button">${button.innerText}</a>
+    </div>
+    <div class="form-overlay__overlay">
+      <!--Form Content Goes Here -->
+    </div>`;
+
+  return formSection;
+}
+async function decorateCtasContent(ctasContent, stylesList) {
+  ctasContent.querySelectorAll('a').forEach(async (button) => {
     // If the CTA contains a reference to the forms/ folder pull in the referenced form html and adjust the button so that a click pops up the modal window with the referenced form
-    if (button.getAttribute('href').contains('forms/')) {
-      button.addEventListener('click', () => {
+    const rawLink = button.getAttribute('href');
+    if (rawLink.match('forms/')) {
+      button.replaceWith(getFormSection(button));
+      const formPath = rawLink.substring(rawLink.indexOf('/') + 1);
+      const formContent = fetchFormContent(`${formPath}`);
+      ctasContent.querySelector('.form-overlay__overlay').replaceWith(createFormOverlay(await formContent));
+
+      const newButton = ctasContent.querySelector('.form-overlay__button');
+      newButton.addEventListener('click', () => {
         const formOverlay = (document.querySelector('.form-overlay'));
         formOverlay.classList.add('form-overlay--open');
       });
     }
   });
+
   stylesList.forEach((style) => {
     if (style.includes('button')) {
       ctasContent.classList.add(style);
@@ -150,7 +176,7 @@ function buildTPWidget(tpElement) {
   return tpElement;
 }
 
-export default function decorate(block) {
+export default async function decorate(block) {
   // If the markdown specifies a background property, need to bubble that up to the section wrapper
   // So that the background spans the width of hte page
   if (block.classList.contains('purple-gradient-background')) {
