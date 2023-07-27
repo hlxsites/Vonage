@@ -14,7 +14,7 @@ export default async function decorate(block) {
   await decorateRightColumn(rightColumnWrapper);
 
   // Fetch and set properties for hidden form fields populated via page metadata
-  document.querySelectorAll('input[type="hidden"]').forEach((field) => {
+  block.querySelectorAll('input[type="hidden"]').forEach((field) => {
     const value = getMetadata(field.name);
     if (value !== '') {
       setFormValue(field.id, value);
