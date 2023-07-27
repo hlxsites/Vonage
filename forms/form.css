@@ -4,6 +4,7 @@
 
 .embedded-form {
   margin-top: 50px;
+  box-sizing: border-box;
 }
 
 .embedded-form .card {

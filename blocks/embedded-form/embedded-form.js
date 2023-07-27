@@ -2,8 +2,6 @@ import { div } from '../../scripts/scripts.js';
 import { getMetadata } from '../../scripts/lib-franklin.js';
 import { setFormValue, fetchFormContent } from '../../forms/forms.js';
 
-// TODO: submit fetch to the secondary endpoint (currently submitting to the value specified in the action attr of the form element)
-
 export default async function decorate(block) {
   const cardWrapper = block.querySelector(':scope > div > div:first-child');
   cardWrapper.classList.add('card-wrapper');
@@ -48,7 +46,7 @@ async function decorateRightColumn(formWrapper) {
   const thankYouMesage = [...formWrapper.children];
   rightColumn.append(div({ class: 'thank-you' }, ...thankYouMesage));
 
-  rightColumn.append(await fetchFormContent(`/forms/${htmlFile}`));
+  rightColumn.append(await fetchFormContent(`/forms/${htmlFile}`, document.querySelector('.embedded-form')));
 
   formWrapper.textContent = '';
   formWrapper.append(rightColumn);

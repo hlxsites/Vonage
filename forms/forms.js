@@ -1,6 +1,6 @@
 import { div } from '../scripts/scripts.js';
 
-async function fetchFormContent(formUrl) {
+async function fetchFormContent(formUrl, formWrapper) {
   const form = div({ class: 'form' });
   const resp = await fetch(formUrl);
   if (resp.ok) {
@@ -25,7 +25,7 @@ async function fetchFormContent(formUrl) {
 
     form.querySelector('button[type="submit"]').addEventListener('click', (e) => {
       e.preventDefault();
-      submitForm();
+      submitForm(formWrapper);
     });
   } else {
     // eslint-disable-next-line no-console
@@ -67,7 +67,7 @@ function setFormValue(id, value) {
   }
 }
 
-function submitForm() {
+function submitForm(formWrapper) {
   const form = document.querySelector("[data-form-type='lead form: apps: contact sales: in page']");
   form.querySelectorAll('input[required], select[required]').forEach((input) => {
     validateInput(input);
@@ -90,11 +90,12 @@ function submitForm() {
       body: formData,
     })
       .then((response) => {
-        document.querySelector('.quote-form .right-column .form').classList.add('submitted');
+        formWrapper.classList.add('submitted');
         if (response.redirected && response.url.includes('success')) {
-          document.querySelector('.quote-form .right-column .thank-you').classList.add('success');
+          formWrapper.classList.add('success');
         } else {
-          // Content to show if form submission wasn't successful?
+          // Flag the form submission as in error to display a warning
+          formWrapper.classList.add('failure');
         }
       });
   }
