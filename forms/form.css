@@ -1,0 +1,984 @@
+/* stylelint-disable selector-class-pattern */
+/* stylelint-disable no-duplicate-selectors */
+/* stylelint-disable no-descending-specificity */
+
+.embedded-form {
+  margin-top: 50px;
+}
+
+.embedded-form .card {
+  text-align: center;
+  padding: 1rem 2rem;
+  border: 2px solid #d1d1d1;
+  border-radius: 3rem;
+  width: auto;
+  max-width: 100%;
+  margin-bottom: 4rem;
+  background: #fff;
+
+}
+
+.embedded-form .card a {
+  text-decoration: none;
+}
+
+.embedded-form .card a {
+  color: #881fff;
+}
+
+.embedded-form .card a::after {
+  display:inline-block;
+  content: var(--vlt-right-arrow-2-icon);
+  font-family: var(--icon-font-family);
+  letter-spacing: 0;
+  position: relative;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 400;
+  line-height: inherit;
+  speak: none;
+  text-transform: none;
+  font-size: 1.6rem;
+  margin-left: 0.8rem;
+  transition: margin .3s ease;
+}
+
+.embedded-form .card a:hover::after {
+  margin-left: 1.6rem;
+  text-decoration: none;
+}
+
+.embedded-form .card a:hover {
+  text-decoration: underline;
+}
+
+.embedded-form .card a[href^="tel"] {
+  display: block;
+  text-decoration: inherit;
+  font-size: 2.8rem;
+  margin: 2rem 0;
+  font-weight: 500;
+}
+
+.embedded-form .card a[href^="tel"]::after {
+  content:"";
+}
+
+.embedded-form > div {
+  display: flex;
+  gap: 50px;
+}
+
+
+.embedded-form .right-column-wrapper {
+  background: linear-gradient(275deg, #ffa78c, #d41f9c);
+  border-radius: 2.2rem 3.6rem 2.6rem;
+  padding: 0 1.8rem 1.8rem 0;
+}
+
+
+.embedded-form .right-column {
+  background: white;
+  border-radius: 2rem 2.2rem 2.6rem 2.3rem;
+  padding: 3rem 2rem;
+  max-width: 715px;
+}
+
+
+.embedded-form .right-column .thank-you {
+  display: none;
+}
+
+.embedded-form.success .right-column .thank-you {
+  display: inline-block;
+}
+
+.embedded-form .right-column .thank-you h3 {
+  text-align: center;
+  font-weight: 500;
+  font-size: var(--heading-font-size-l);
+}
+
+.embedded-form .right-column .thank-you p {
+  margin: 0 auto;
+  text-align: center;
+  max-width: 79%;
+  font-size: var(--body-font-size-m);
+  letter-spacing: -.025rem;
+  line-height: calc(var(--body-font-size-m) + 4px);
+}
+
+.embedded-form.submitted .right-column .form {
+  display:none;
+}
+
+.embedded-form .right-column .form .Vlt-form__eyebrow {
+  font-family: var(--body-font-family);
+  font-size: 1.2rem;
+  font-weight: 400;
+  letter-spacing: .2rem;
+  line-height: 2rem;
+  text-transform: uppercase;
+}
+
+.embedded-form .right-column .form .row {
+  width: 100%;
+  display: block;
+  max-width: 50rem;
+}
+
+.embedded-form .right-column .form .Vlt-input,
+.embedded-form .right-column .form .Vlt-select {
+  border-color: #90929b;
+  margin-bottom: 0.2rem;
+  max-width: 100%;
+  position: relative;
+}
+
+
+.embedded-form .right-column .form .Vlt-form__element:not(.Vlt-form__element--dirty) .Vlt-input input {
+  background-color: #fff;
+  border-color: #90929b;
+  height: 5rem;
+  font-size: 1.6rem;
+  font-family: Spezia, "Spezia_SemiMono", Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  letter-spacing: -.025rem;
+  line-height: 2.5rem;
+}
+
+/* --- copied legacy styles --- */
+
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.Vlt-native-dropdown select {
+  align-items: center;
+  border: 0;
+  border-radius: 36px;
+  box-shadow: 0 1px 0 rgb(44 45 48 / 15%);
+  cursor: pointer;
+  display: inline-block;
+  font-size: 1.4rem;
+  font-weight: 600;
+  justify-content: center;
+  line-height: 1.9rem;
+  margin: 8px 0;
+  min-height: 36px;
+  outline: none;
+  padding: 8px 1pc;
+  text-align: center;
+  transition: transform .1s,background .1s;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.Vlt-native-dropdown select:focus {
+  outline: none;
+}
+
+.Vlt-native-dropdown select:hover {
+  transform: scale(1.05);
+}
+
+.Vlt-native-dropdown select:active {
+  border: 0;
+  box-shadow: inset 0 2px 3px rgb(44 45 48 / 12%);
+  outline: none;
+  transform: scale(.99);
+}
+
+.Vlt-composite__prepend .Vlt-native-dropdown select {
+  border-radius: 4px;
+}
+
+.Vlt-form__element--big .Vlt-composite__prepend .Vlt-native-dropdown select {
+  font-size: 1.6rem;
+  line-height: 2.2rem;
+  margin: 8px 0 1pc;
+  min-height: 50px;
+  padding: 13px 25px;
+}
+
+.Vlt-native-dropdown select {
+  background: #3ae;
+  color: #fff;
+}
+
+.Vlt-native-dropdown select:hover,.Vlt-native-dropdown select:not(.Vlt-btn--no-focus):focus {
+  background: #1ba0ec;
+  color: #fff;
+}
+
+.Vlt-native-dropdown select:active {
+  background: #139cea;
+  box-shadow: inset 0 2px 3px rgb(44 45 48 / 20%);
+  color: #fff;
+}
+
+.Vlt-composite__prepend .Vlt-native-dropdown select {
+  background: #f8fafc;
+  box-shadow: inset 0 0 0 1px #c4cdd5,0 1px 0 rgb(44 45 48 / 15%);
+  color: #2c2d30;
+  font-weight: 400;
+}
+
+.Vlt-composite__prepend .Vlt-native-dropdown select:hover,.Vlt-composite__prepend .Vlt-native-dropdown select:not(.Vlt-btn--no-focus):focus {
+  background: #edf2f7;
+  color: #2c2d30;
+}
+
+.Vlt-composite__prepend .Vlt-native-dropdown select:active {
+  background: #e7ebee;
+  box-shadow: inset 0 2px 3px rgb(44 45 48 / 20%),inset 0 0 0 1px #c4cdd5;
+  color: #2c2d30;
+}
+
+.Vlt-composite__prepend .Vlt-native-dropdown select:disabled,.Vlt-composite__prepend .Vlt-native-dropdown select:disabled:focus,.Vlt-native-dropdown select:disabled,.Vlt-native-dropdown select:disabled:focus {
+  background: #e7ebee;
+  box-shadow: none;
+  color: #919eab;
+  font-weight: 400;
+  pointer-events: none;
+}
+
+.Vlt-select::after {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M7 7.8c-.3-.3-.8-.2-1.1.1s-.2.8.1 1.1l4 3.4L14 9c.3-.3.3-.8 0-1.1-.3-.3-.7-.3-1-.1l-3 2.6-3-2.6z' fill='%239b9b9b'/%3E%3C/svg%3E");
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  content: "";
+  height: 20px;
+  margin-top: -10px;
+  pointer-events: none;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  width: 20px;
+}
+
+.Vlt-input,.Vlt-select {
+  max-width: 100%;
+  position: relative;
+}
+
+.Vlt-input input,.Vlt-select select {
+  appearance: none;
+  background: #fff;
+  border: 1px solid #c4cdd5;
+  border-radius: 4px;
+  box-shadow: none;
+  color: #2c2d30;
+  display: block;
+  font-size: 1.4rem;
+  height: 36px;
+  padding-left: 10px;
+  width: 100%;
+}
+
+.Vlt-input input:hover,.Vlt-select select:hover {
+  border-color: #3ae;
+}
+
+.Vlt-input input:disabled,.Vlt-select select:disabled {
+  color: #919eab;
+  cursor: default;
+}
+
+.Vlt-composite {
+  display: flex!important;
+  flex-flow: row;
+  position: relative;
+}
+
+.Vlt-composite .Vlt-input,.Vlt-composite .Vlt-select {
+  flex: 1;
+  position: relative;
+}
+
+.Vlt-composite:not(.Vlt-composite--appendedicon) .Vlt-select:first-child select {
+  border-bottom-right-radius: 0;
+  border-right: 0;
+  border-top-right-radius: 0;
+}
+
+.Vlt-composite__prepend .Vlt-native-dropdown select {
+  box-shadow: inset 0 0 0 1px #c4cdd5;
+  margin: 0!important;
+}
+
+.Vlt-composite__prepend .Vlt-native-dropdown select:hover {
+  transform: scale(1);
+}
+
+.Vlt-composite__prepend .Vlt-native-dropdown select:active {
+  box-shadow: inset 0 2px 3px rgb(44 45 48 / 20%),inset 0 0 0 1px #c4cdd5;
+}
+
+.Vlt-composite__prepend {
+  position: relative;
+  z-index: 2;
+}
+
+.Vlt-composite__prepend .Vlt-native-dropdown select {
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.Vlt-composite__prepend:not(.Vlt-composite__prepend--icon)+.Vlt-input input {
+  border-bottom-left-radius: 0;
+  border-left: 0;
+  border-top-left-radius: 0;
+}
+
+.Vlt-composite .Vlt-input input:disabled {
+  border-color: #c4cdd5;
+}
+
+.Vlt-select select {
+  appearance: none;
+  cursor: pointer;
+  padding-right: 30px;
+  text-indent: 1px;
+  text-overflow: "";
+}
+
+.Vlt-form__element {
+  padding: 8px 0;
+}
+
+.Vlt-form__element__error {
+  display: block;
+  flex: 0 0 100%;
+  font-size: 1.4rem;
+  line-height: 1.3;
+  margin-top: 4px;
+  text-align: left;
+}
+
+.Vlt-form__element__error {
+  color: #f25a6b;
+}
+
+.Vlt-form__element__error::before {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg width='16' height='16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill='%23F25A6B' d='M8 16A8 8 0 118 0a8 8 0 010 16zM8 4a1 1 0 00-1 1v2.5a1 1 0 102 0V5a1 1 0 00-1-1zm0 8a1 1 0 100-2 1 1 0 000 2z'/%3E%3C/svg%3E");
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  content: "";
+  display: inline-block;
+  height: 1pc;
+  margin-right: 6px;
+  vertical-align: text-top;
+  width: 1pc;
+}
+
+.Vlt-checkbox {
+  position: relative;
+}
+
+.Vlt-checkbox input {
+  appearance: none;
+  height: 0;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  width: 0;
+}
+
+.Vlt-checkbox input:active,.Vlt-checkbox input:focus {
+  box-shadow: none;
+  outline: none;
+}
+
+.Vlt-checkbox input:disabled:active+.Vlt-checkbox__icon {
+  box-shadow: none;
+}
+
+.Vlt-checkbox input:invalid:focus+.Vlt-checkbox__icon {
+  box-shadow: 0 0 5px rgb(242 90 107 / 50%);
+}
+
+.Vlt-checkbox label {
+  align-items: flex-start;
+  display: flex;
+}
+
+.Vlt-checkbox__button {
+  display: block;
+  flex: 0 0 22px;
+  height: 22px;
+  margin-right: 10px;
+  margin-top: -1px;
+  position: relative;
+  width: 22px;
+}
+
+.Vlt-checkbox__icon {
+  border: 2px solid #c4cdd5;
+  display: block;
+  height: 100%;
+  transition: box-shadow .2s ease-out;
+  width: 100%;
+}
+
+.Vlt-checkbox__icon::after {
+  content: "";
+  display: block;
+  position: absolute;
+  transform: scale(.1);
+  transition: transform .2s ease-out;
+}
+
+.Vlt-checkbox:hover .Vlt-checkbox__icon {
+  border-color: #3ae;
+}
+
+.Vlt-checkbox__icon {
+  border-radius: 4px;
+}
+
+.Vlt-checkbox__icon::after {
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: 18px 18px;
+  content: "";
+  height: 100%;
+  left: 0;
+  top: 0;
+  transform: scale(1);
+  width: 100%;
+}
+
+.Vlt-checkbox__button input:checked~.Vlt-checkbox__icon::after {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18'%3E%3Cpath fill='%233ae' d='M7 14L2.6 9.6 4 8.2l3 3 7.5-7.5 1.4 1.4z'/%3E%3C/svg%3E");
+}
+
+.Vlt-checkbox input:invalid+.Vlt-checkbox__icon,.Vlt-composite__prepend .Vlt-native-dropdown select:invalid,.Vlt-form__element--error .Vlt-checkbox input:not(:checked)+.Vlt-checkbox__icon,.Vlt-form__element--error .Vlt-radio input:not(:checked)+.Vlt-radio__icon,.Vlt-form__element--error input,.Vlt-input input:invalid,.Vlt-select select:invalid {
+  background: #fde8eb;
+  border-color: #f25a6b;
+}
+
+.Vlt-checkbox input:invalid+.Vlt-checkbox__icon:hover,.Vlt-composite__prepend .Vlt-native-dropdown select:hover:invalid,.Vlt-form__element--error .Vlt-checkbox input:not(:checked)+.Vlt-checkbox__icon:hover,.Vlt-form__element--error .Vlt-radio input:not(:checked)+.Vlt-radio__icon:hover,.Vlt-form__element--error input:hover,.Vlt-input input:hover:invalid,.Vlt-select select:hover:invalid {
+  border-color: #f25a6b;
+}
+
+.Vlt-form__element--valid input,.Vlt-form__element--valid input:hover {
+  border-color: #35be8b;
+}
+
+.Vlt-checkbox input:active+.Vlt-checkbox__icon,.Vlt-checkbox input:focus+.Vlt-checkbox__icon,.Vlt-input input:focus,.Vlt-select select:focus {
+  background: #fff;
+  border-color: #3ae;
+  box-shadow: 0 0 5px rgb(51 170 238 / 50%);
+  outline: none;
+}
+
+.Vlt-checkbox input:active+.Vlt-checkbox__icon:hover,.Vlt-checkbox input:focus+.Vlt-checkbox__icon:hover,.Vlt-input input:hover:focus,.Vlt-select select:hover:focus {
+  border-color: #3ae;
+}
+
+.Vlt-checkbox input:disabled+.Vlt-checkbox__icon,.Vlt-input input:disabled,.Vlt-select select:disabled {
+  background: #f8fafc;
+  border-color: #e7ebee;
+  box-shadow: none;
+}
+
+.Vlt-checkbox input:disabled+.Vlt-checkbox__icon:hover,.Vlt-input input:hover:disabled,.Vlt-select select:hover:disabled {
+  border-color: #e7ebee;
+}
+
+.Vlt-form__element--big {
+  display: block;
+  position: relative;
+}
+
+.Vlt-form__element--big label {
+  color: #6a788a;
+  cursor: text;
+  font-size: 1.1rem;
+  left: 14px;
+  opacity: 1;
+  pointer-events: none;
+  position: absolute;
+  top: 5px;
+  transition: all .2s;
+}
+
+.Vlt-form__element--big .Vlt-input input,.Vlt-form__element--big .Vlt-select select {
+  height: 5rem;
+  padding-left: 13px;
+  padding-top: 14px;
+}
+
+.Vlt-form__element--big .Vlt-custom-select .Vlt-custom-select__input:placeholder-shown:not(:focus)::placeholder,.Vlt-form__element--big .Vlt-custom-select .Vlt-custom-select__input textarea:placeholder-shown:not(:focus)::placeholder,.Vlt-form__element--big .Vlt-custom-select input:placeholder-shown:not(:focus)::placeholder,.Vlt-form__element--big .Vlt-custom-select input textarea:placeholder-shown:not(:focus)::placeholder,.Vlt-form__element--big .Vlt-custom-select select:placeholder-shown:not(:focus)::placeholder,.Vlt-form__element--big .Vlt-custom-select select textarea:placeholder-shown:not(:focus)::placeholder,.Vlt-form__element--big .Vlt-input .Vlt-custom-select__input:placeholder-shown:not(:focus)::placeholder,.Vlt-form__element--big .Vlt-input .Vlt-custom-select__input textarea:placeholder-shown:not(:focus)::placeholder,.Vlt-form__element--big .Vlt-input input:placeholder-shown:not(:focus)::placeholder,.Vlt-form__element--big .Vlt-input input textarea:placeholder-shown:not(:focus)::placeholder,.Vlt-form__element--big .Vlt-input select:placeholder-shown:not(:focus)::placeholder,.Vlt-form__element--big .Vlt-input select textarea:placeholder-shown:not(:focus)::placeholder,.Vlt-form__element--big .Vlt-select .Vlt-custom-select__input:placeholder-shown:not(:focus)::placeholder,.Vlt-form__element--big .Vlt-select .Vlt-custom-select__input textarea:placeholder-shown:not(:focus)::placeholder,.Vlt-form__element--big .Vlt-select input:placeholder-shown:not(:focus)::placeholder,.Vlt-form__element--big .Vlt-select input textarea:placeholder-shown:not(:focus)::placeholder,.Vlt-form__element--big .Vlt-select select:placeholder-shown:not(:focus)::placeholder,.Vlt-form__element--big .Vlt-select select textarea:placeholder-shown:not(:focus)::placeholder,.Vlt-form__element--big .Vlt-textarea .Vlt-custom-select__input:placeholder-shown:not(:focus)::placeholder,.Vlt-form__element--big .Vlt-textarea .Vlt-custom-select__input textarea:placeholder-shown:not(:focus)::placeholder,.Vlt-form__element--big .Vlt-textarea input:placeholder-shown:not(:focus)::placeholder,.Vlt-form__element--big .Vlt-textarea input textarea:placeholder-shown:not(:focus)::placeholder,.Vlt-form__element--big .Vlt-textarea select:placeholder-shown:not(:focus)::placeholder,.Vlt-form__element--big .Vlt-textarea select textarea:placeholder-shown:not(:focus)::placeholder {
+  opacity: 0;
+}
+
+.Vlt-form__element--big .Vlt-custom-select .Vlt-custom-select__input:placeholder-shown:not(:focus)+*,.Vlt-form__element--big .Vlt-custom-select .Vlt-custom-select__input textarea:placeholder-shown:not(:focus)+*,.Vlt-form__element--big .Vlt-custom-select input:placeholder-shown:not(:focus)+*,.Vlt-form__element--big .Vlt-custom-select input textarea:placeholder-shown:not(:focus)+*,.Vlt-form__element--big .Vlt-custom-select select:placeholder-shown:not(:focus)+*,.Vlt-form__element--big .Vlt-custom-select select textarea:placeholder-shown:not(:focus)+*,.Vlt-form__element--big .Vlt-input .Vlt-custom-select__input:placeholder-shown:not(:focus)+*,.Vlt-form__element--big .Vlt-input .Vlt-custom-select__input textarea:placeholder-shown:not(:focus)+*,.Vlt-form__element--big .Vlt-input input:placeholder-shown:not(:focus)+*,.Vlt-form__element--big .Vlt-input input textarea:placeholder-shown:not(:focus)+*,.Vlt-form__element--big .Vlt-input select:placeholder-shown:not(:focus)+*,.Vlt-form__element--big .Vlt-input select textarea:placeholder-shown:not(:focus)+*,.Vlt-form__element--big .Vlt-select .Vlt-custom-select__input:placeholder-shown:not(:focus)+*,.Vlt-form__element--big .Vlt-select .Vlt-custom-select__input textarea:placeholder-shown:not(:focus)+*,.Vlt-form__element--big .Vlt-select input:placeholder-shown:not(:focus)+*,.Vlt-form__element--big .Vlt-select input textarea:placeholder-shown:not(:focus)+*,.Vlt-form__element--big .Vlt-select select:placeholder-shown:not(:focus)+*,.Vlt-form__element--big .Vlt-select select textarea:placeholder-shown:not(:focus)+*,.Vlt-form__element--big .Vlt-textarea .Vlt-custom-select__input:placeholder-shown:not(:focus)+*,.Vlt-form__element--big .Vlt-textarea .Vlt-custom-select__input textarea:placeholder-shown:not(:focus)+*,.Vlt-form__element--big .Vlt-textarea input:placeholder-shown:not(:focus)+*,.Vlt-form__element--big .Vlt-textarea input textarea:placeholder-shown:not(:focus)+*,.Vlt-form__element--big .Vlt-textarea select:placeholder-shown:not(:focus)+*,.Vlt-form__element--big .Vlt-textarea select textarea:placeholder-shown:not(:focus)+* {
+  font-size: 1.6rem;
+  margin-top: -1rem;
+  top: 50%;
+}
+
+.Vlt-form__element--big .Vlt-select::after {
+  height: 26px;
+  margin-top: -13px;
+  width: 26px;
+}
+
+hr {
+  border-top: 1px solid #e7ebee;
+}
+
+.Vlt-native-dropdown {
+  display: inline-flex;
+  position: relative;
+  width: fit-content;
+}
+
+.Vlt-native-dropdown select {
+  margin-bottom: 0;
+  margin-top: 0;
+  padding-right: 38px;
+}
+
+
+.Vlt-native-dropdown select:active,.Vlt-native-dropdown select:hover {
+  transform: none;
+}
+
+.Vlt-native-dropdown::after {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M7 7.8c-.3-.3-.8-.2-1.1.1s-.2.8.1 1.1l4 3.4L14 9c.3-.3.3-.8 0-1.1-.3-.3-.7-.3-1-.1l-3 2.6-3-2.6z' fill='encode-hex-code(%23fff)'/%3E%3C/svg%3E");
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  content: "";
+  display: inline-block;
+  height: 20px;
+  margin-left: 5px;
+  margin-top: -10px;
+  pointer-events: none;
+  position: absolute;
+  right: 9pt;
+  top: 50%;
+  width: 20px;
+}
+
+.Vlt-form__element--big .Vlt-native-dropdown::after {
+  right: 25px;
+}
+
+.Vlt-form__element--big .Vlt-native-dropdown select {
+  margin-bottom: 0;
+  margin-top: 0;
+  padding-right: 50px!important;
+}
+
+.Vlt-icon-form-checkmark::before {
+  content: "\e917";
+}
+
+.Vlt-icon-warning-icon::before {
+  content: "\e918";
+  color: #ee0205;
+}
+
+.embedded-form .campaign-hero-with-form__card {
+  background-color: #fff;
+  border-radius: 1.3rem;
+  border: .1rem solid #fff;
+  padding: 5rem 1.5rem 4rem;
+  position: relative;
+}
+
+.flexibleRte .theme-light .endnote+ {
+  border-top: .1rem solid #717171;
+}
+
+
+.Vlt-form input,.Vlt-form select {
+  border-color: #90929b;
+}
+
+.Vlt-form .Vlt-input input:focus,.Vlt-form .Vlt-select select:focus {
+  border: .1rem solid #881fff!important;
+  box-shadow: none;
+}
+
+.Vlt-form .Vlt-input input:focus+label,.Vlt-form .Vlt-select select:focus+label {
+  color: #881fff!important;
+}
+
+.Vlt-form .Vlt-input,.Vlt-form .Vlt-select {
+  border-color: #90929b;
+  margin-bottom: .2rem;
+}
+
+.Vlt-form .Vlt-input .Vlt-icon-form-checkmark {
+  font-size: 1.2rem;
+  position: absolute;
+  right: 1.5rem;
+  top: 2.4rem;
+  font-family: var(--icon-font-family);
+}
+
+.Vlt-form .Vlt-form__element--valid .Vlt-input .Vlt-icon-form-checkmark::before {
+  color: #7fc8f5;
+}
+
+.Vlt-form .Vlt-input .Vlt-icon-form-checkmark::before {
+  color: transparent;
+}
+
+.Vlt-form .Vlt-native-dropdown::after {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='M7 7.8c-.3-.3-.8-.2-1.1.1s-.2.8.1 1.1l4 3.4L14 9c.3-.3.3-.8 0-1.1-.3-.3-.7-.3-1-.1l-3 2.6-3-2.6z' fill='%239b9b9b'/%3E%3C/svg%3E");
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  content: "";
+  display: inline-block;
+  height: 2rem;
+  margin-left: .5rem;
+  margin-top: -1rem;
+  pointer-events: none;
+  position: absolute;
+  right: 1.2rem;
+  top: 50%;
+  width: 2rem;
+}
+
+.Vlt-form .Vlt-form__element--big .Vlt-native-dropdown::after {
+  right: 1.5rem;
+}
+
+.Vlt-form .Vlt-input input,.Vlt-form .Vlt-select select {
+  font-family: var(--body-font-family);
+  font-size: 1.7rem;
+  font-weight: 400;
+  letter-spacing: -.025rem;
+  line-height: 2.5rem;
+  border-radius: .8rem;
+  padding-top: 1.75rem;
+}
+
+.Vlt-form .Vlt-composite .Vlt-select::after {
+  right: .5rem!important;
+}
+
+.Vlt-form .Vlt-composite__prepend {
+  z-index: 1;
+}
+
+.Vlt-form .Vlt-native-dropdown select {
+  padding: 1.3rem 1.5rem 1.3rem 0!important;
+  max-width: 10rem;
+  box-shadow: none;
+  border-radius: .8rem .8rem 0;
+  right: .5rem;
+}
+
+.Vlt-form__element {
+  padding: 0;
+}
+
+.Vlt-form .Vlt-form__element--big .Vlt-input input {
+  padding-left: 1.9rem;
+}
+
+.Vlt-form .Vlt-form__element--big .Vlt-select select {
+  padding-left: 1.8rem;
+}
+
+.Vlt-form .Vlt-form__element--big .Vlt-input input,.Vlt-form .Vlt-form__element--big .Vlt-native-dropdown select,.Vlt-form .Vlt-form__element--big .Vlt-select select {
+  font-family: var(--body-font-family);
+  font-weight: 400;
+  letter-spacing: -.025rem;
+  line-height: 2.5rem;
+  font-size: 1.6rem;
+  height: 5rem;
+}
+
+
+.Vlt-form .Vlt-form__element--big .Vlt-input input:placeholder-shown:not(:focus)+* {
+  font-size: 1.6rem;
+}
+
+
+.Vlt-form .Vlt-form__element--big label {
+  font-family: var(--body-font-family);
+  font-size: 1.2rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.6rem;
+  left: 2rem;
+  top: .33rem;
+}
+
+.Vlt-form .Vlt-form__element--big .Vlt-select::after {
+  background-size: 2.5rem 2.5rem;
+  right: 1.6rem;
+  top: 2.6rem;
+}
+
+.Vlt-form .Vlt-form__element--big .Vlt-form__input-label {
+  color: #5f6169;
+}
+
+.Vlt-form .Vlt-form__element:not(.Vlt-form__element--dirty) .Vlt-input input {
+  background-color: #fff;
+  border-color: #90929b;
+}
+
+.Vlt-form .Vlt-form__element__error {
+  font-family: var(--body-font-family);
+  font-size: 1.4rem;
+  font-weight: 400;
+  letter-spacing: -.02rem;
+  line-height: 2rem;
+  color: #ee0205;
+  margin-bottom: .5rem;
+  margin-top: 0;
+  visibility: hidden;
+}
+
+.Vlt-form .Vlt-form__element__error::before {
+  background-image: none;
+  height: 2rem;
+  margin-right: 0;
+  width: 2rem;
+}
+
+.Vlt-form .Vlt-form__element--error .Vlt-form__element__error {
+  visibility: visible;
+  display: flex;
+}
+
+.Vlt-form .Vlt-form__element--valid .Vlt-input .Vlt-icon-form-checkmark::before {
+  color: #7fc8f5;
+}
+
+.Vlt-form .Vlt-checkbox input:invalid+.Vlt-checkbox__icon:not(.Vlt-form__element--dirty),.Vlt-form .Vlt-form__element--error .Vlt-checkbox input:not(:checked)+.Vlt-checkbox__icon,.Vlt-form .Vlt-form__element:not(.Vlt-form__element--error) .Vlt-select select:invalid {
+  background-color: #fff;
+  border: .1rem solid #90929b;
+}
+
+.Vlt-form .Vlt-form__element--error .Vlt-composite .Vlt-input input:not(:invalid) {
+  border-color: #f25a6b;
+}
+
+.Vlt-form .Vlt-form__element:not(.Vlt-form__element--error) .Vlt-native-dropdown select:invalid {
+  background: #f8fafc;
+  border-color: #90929b;
+}
+
+.Vlt-form .Vlt-form__element--valid:hover input {
+  background-color: #fff;
+  border: .1rem solid #90929b;
+  box-shadow: none;
+}
+
+.Vlt-form .Vlt-checkbox__button input:checked~.Vlt-checkbox__icon::before {
+  background-color: #000;
+  color: #fff;
+  box-sizing: border-box;
+  line-height: normal;
+}
+
+.Vlt-form .Vlt-checkbox__button input:checked~.Vlt-checkbox__icon::before {
+  content: var(--vlt-checkmark-icon-form);
+}
+
+.Vlt-form .Vlt-checkbox__icon {
+  border-color: #90929b;
+  border-width: .1rem;
+  color: #fff;
+  width: 3rem;
+}
+
+.Vlt-form .Vlt-checkbox__icon::before {
+  border-radius: .1rem;
+  font-size: 1.4rem;
+  height: 100%;
+  padding-left: .5rem;
+  padding-top: .8rem;
+  position: absolute;
+  width: 100%;
+}
+
+.Vlt-form .Vlt-checkbox__icon::after {
+  display: none;
+}
+
+.Vlt-form .Vlt-checkbox__button {
+  display: flex;
+  flex: 0 1 auto;
+  height: 3rem;
+  margin-right: 2rem;
+  min-width: 3rem;
+  pointer-events: all;
+}
+
+.Vlt-form .Vlt-checkbox {
+  margin-bottom: 4rem;
+  pointer-events: all;
+}
+
+.Vlt-form .Vlt-checkbox .Vlt-checkbox__button input+.Vlt-checkbox__icon:focus,.Vlt-form .Vlt-checkbox .Vlt-checkbox__button input+.Vlt-checkbox__icon:hover {
+  border-color: #881fff!important;
+  box-shadow: none!important;
+}
+
+.Vlt-form .Vlt-checkbox label {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.Vlt-form__checkbox-icon {
+  border-radius: .4rem;
+  position: absolute;
+}
+
+.Vlt-form__checkbox-icon::after {
+  border-radius: .4rem;
+}
+
+.Vlt-form__checkbox-label {
+  font-size: 1.7rem;
+  letter-spacing: -.025rem;
+  line-height: 2.5rem;
+}
+
+/* .Vlt-form__element-pills .Vlt-form__element__error { */
+
+/*  display: none; */
+
+/*  margin-bottom: 2rem; */
+
+/* } */
+
+.Vlt-form__checkbox-label {
+  color: #000;
+  font-family: var(--body-font-family);
+  font-size: 1.4rem;
+  font-weight: 400;
+  letter-spacing: -.02rem;
+  line-height: 2rem;
+}
+
+.Vlt-form__checkbox-label-link {
+  pointer-events: all;
+}
+
+.Vlt-form__checkbox-label-link:active,.Vlt-form__checkbox-label-link:hover,.Vlt-form__checkbox-label-link:link,.Vlt-form__checkbox-label-link:visited {
+  text-decoration: underline;
+}
+
+.Vlt-form__eyebrow {
+  font-family: var(--body-font-family);
+}
+
+.Vlt-form__eyebrow {
+  font-size: 1.2rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.6rem;
+  margin-bottom: 1.2rem;
+  text-transform: uppercase;
+}
+
+.Vlt-form__pill .Vlt-checkbox__button input:not(:checked)~.Vlt-form__pill-label-container .Vlt-form__pill-label {
+  margin-left: 1rem;
+  margin-right: -1rem;
+}
+
+.Vlt-form__input-error-label {
+  font-family: var(--body-font-family);
+  font-size: 1.6rem;
+  font-weight: 400;
+  letter-spacing: -.02rem;
+  line-height: 1.5rem;
+  color: #ee0205;
+  padding-top: 3px;
+}
+
+.Vlt-form__submit-disclaimer {
+  font-family: var(--body-font-family);
+  font-size: 1.2rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.6rem;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.Vlt-form__submit-error-msg {
+  background-color: rgb(253 0 1 / 10%);
+  border: .1rem solid #ee0205;
+  border-radius: .8rem;
+  display: none;
+  margin-bottom: 4rem;
+  padding: 2rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.Vlt-form__submit-error-msg .Vlt-form__element__error {
+  font-family: var(--body-font-family);
+  font-size: 1.7rem;
+  font-weight: 400;
+  letter-spacing: -.025rem;
+  line-height: 2.5rem;
+  align-self: center;
+  display: flex;
+  margin-bottom: .4rem;
+  text-align: left;
+  visibility: visible;
+  width: 100%;
+}
+
+.Vlt-form__submit-error-msg .Vlt-form__element__error::before {
+  align-self: start;
+  background-image: none;
+  font-size: 2rem;
+  height: auto;
+  padding-right: 2rem;
+  width: auto;
+}
+
+.Vlt-form__submit-error-msg-label {
+  font-family: var(--body-font-family);
+  font-size: 1.7rem;
+  font-weight: 400;
+  letter-spacing: -.025rem;
+  line-height: 2.5rem;
+  align-self: center;
+  color: #ee0205;
+  width: 80%;
+}
+
+.embedded-form .right-column .form .Vlt-form__element-hidden,
+.embedded-form .right-column .form .Vlt-form__field-hidden {
+  display: none;
+}
+
+.Vlt-form .Vlt-form__element .Vlt-input input:disabled {
+  opacity: .5;
+}
+
+.Vlt-form .Vlt-form__element.Vlt-form__element--error .Vlt-input--error input:not(:focus) {
+  background-color: rgb(253 0 1 / 5%);
+  border-color: #fd0001;
+}
+
+.Vlt-icon-warning-icon::before {
+  content: "\e918";
+  color: #ee0205;
+  font-family: var(--icon-font-family);
+}
+
+.embedded-form.error .Vlt-form__submit-error-msg {
+  display: flex;
+}
