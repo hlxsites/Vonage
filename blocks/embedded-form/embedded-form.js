@@ -70,15 +70,15 @@ function validateInput(input) {
   }
 }
 
-function submitForm() {
-  const form = document.querySelector("[data-form-type='lead form: apps: contact sales: in page']");
+function submitForm(formWrapper) {
+  const form = formWrapper.querySelector('form');
   form.querySelectorAll('input[required], select[required]').forEach((input) => {
     validateInput(input);
   });
   // there's a captcha that needs to be integrated. Thus, there will always be one error flag.
   if (form.querySelectorAll('.Vlt-form__element--error').length <= 1) {
     // fill in composite form fields
-    setFormValue('phonenumber', document.getElementById('dialing-code').value + document.getElementById('phone-number-local').value);
+    setFormValue('phonenumber', form.querySelector('[name="cc"]').value + form.querySelector('[name="local"]').value);
     const url = form.getAttribute('action');
 
     // submit form here.
@@ -93,11 +93,12 @@ function submitForm() {
       body: formData,
     })
       .then((response) => {
-        document.querySelector('.quote-form .right-column .form').classList.add('submitted');
+        formWrapper.classList.add('submitted');
         if (response.redirected && response.url.includes('success')) {
-          document.querySelector('.quote-form .right-column .thank-you').classList.add('success');
+          formWrapper.classList.add('success');
         } else {
-          // Content to show if form submission wasn't successful?
+          // Flag the form submission as in error to display a warning
+          formWrapper.classList.add('failure');
         }
       });
   }
@@ -143,7 +144,7 @@ async function decorateRightColumn(formWrapper) {
 
     form.querySelector('button[type="submit"]').addEventListener('click', (e) => {
       e.preventDefault();
-      submitForm();
+      submitForm(document.querySelector('.embedded-form'));
     });
   } else {
     // eslint-disable-next-line no-console

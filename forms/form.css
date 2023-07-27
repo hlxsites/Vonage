@@ -89,7 +89,7 @@
   display: none;
 }
 
-.embedded-form .right-column .thank-you.success {
+.embedded-form.success .right-column .thank-you {
   display: inline-block;
 }
 
@@ -108,7 +108,7 @@
   line-height: calc(var(--body-font-size-m) + 4px);
 }
 
-.embedded-form .right-column .form.submitted {
+.embedded-form.submitted .right-column .form {
   display:none;
 }
 
@@ -656,7 +656,7 @@ hr {
 }
 
 .Vlt-form .Vlt-input input,.Vlt-form .Vlt-select select {
-  font-family: Spezia,"Spezia_SemiMono",Arial,Helvetica,sans-serif;
+  font-family: var(--body-font-family);
   font-size: 1.7rem;
   font-weight: 400;
   letter-spacing: -.025rem;
@@ -694,7 +694,7 @@ hr {
 }
 
 .Vlt-form .Vlt-form__element--big .Vlt-input input,.Vlt-form .Vlt-form__element--big .Vlt-native-dropdown select,.Vlt-form .Vlt-form__element--big .Vlt-select select {
-  font-family: Spezia,"Spezia_SemiMono",Arial,Helvetica,sans-serif;
+  font-family: var(--body-font-family);
   font-weight: 400;
   letter-spacing: -.025rem;
   line-height: 2.5rem;
@@ -709,7 +709,7 @@ hr {
 
 
 .Vlt-form .Vlt-form__element--big label {
-  font-family: Spezia,"Spezia_SemiMono",Arial,Helvetica,sans-serif;
+  font-family: var(--body-font-family);
   font-size: 1.2rem;
   font-weight: 400;
   letter-spacing: 0;
@@ -734,7 +734,7 @@ hr {
 }
 
 .Vlt-form .Vlt-form__element__error {
-  font-family: Spezia,"Spezia_SemiMono",Arial,Helvetica,sans-serif;
+  font-family: var(--body-font-family);
   font-size: 1.4rem;
   font-weight: 400;
   letter-spacing: -.02rem;
@@ -861,7 +861,7 @@ hr {
 
 .Vlt-form__checkbox-label {
   color: #000;
-  font-family: Spezia,"Spezia_SemiMono",Arial,Helvetica,sans-serif;
+  font-family: var(--body-font-family);
   font-size: 1.4rem;
   font-weight: 400;
   letter-spacing: -.02rem;
@@ -877,7 +877,7 @@ hr {
 }
 
 .Vlt-form__eyebrow {
-  font-family: Spezia,"Spezia_SemiMono",Arial,Helvetica,sans-serif;
+  font-family: var(--body-font-family);
 }
 
 .Vlt-form__eyebrow {
@@ -905,7 +905,7 @@ hr {
 }
 
 .Vlt-form__submit-disclaimer {
-  font-family: Spezia,"Spezia_SemiMono",Arial,Helvetica,sans-serif;
+  font-family: var(--body-font-family);
   font-size: 1.2rem;
   font-weight: 400;
   letter-spacing: 0;
@@ -922,10 +922,11 @@ hr {
   margin-bottom: 4rem;
   padding: 2rem;
   width: 100%;
+  box-sizing: border-box;
 }
 
 .Vlt-form__submit-error-msg .Vlt-form__element__error {
-  font-family: Spezia,"Spezia_SemiMono",Arial,Helvetica,sans-serif;
+  font-family: var(--body-font-family);
   font-size: 1.7rem;
   font-weight: 400;
   letter-spacing: -.025rem;
@@ -948,7 +949,7 @@ hr {
 }
 
 .Vlt-form__submit-error-msg-label {
-  font-family: Spezia,"Spezia_SemiMono",Arial,Helvetica,sans-serif;
+  font-family: var(--body-font-family);
   font-size: 1.7rem;
   font-weight: 400;
   letter-spacing: -.025rem;
@@ -970,4 +971,14 @@ hr {
 .Vlt-form .Vlt-form__element.Vlt-form__element--error .Vlt-input--error input:not(:focus) {
   background-color: rgb(253 0 1 / 5%);
   border-color: #fd0001;
+}
+
+.Vlt-icon-warning-icon::before {
+  content: "\e918";
+  color: #ee0205;
+  font-family: var(--icon-font-family);
+}
+
+.embedded-form.error .Vlt-form__submit-error-msg {
+  display: flex;
 }
