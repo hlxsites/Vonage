@@ -68,14 +68,17 @@ function setFormValue(id, value) {
 }
 
 function submitForm(formWrapper) {
-  const form = document.querySelector("[data-form-type='lead form: apps: contact sales: in page']");
+  const form = formWrapper.querySelector('form');
   form.querySelectorAll('input[required], select[required]').forEach((input) => {
     validateInput(input);
   });
   // there's a captcha that needs to be integrated. Thus, there will always be one error flag.
   if (form.querySelectorAll('.Vlt-form__element--error').length <= 1) {
     // fill in composite form fields
-    setFormValue('phonenumber', document.getElementById('dialing-code').value + document.getElementById('phone-number-local').value);
+    if (form.querySelector('[name="cc"]') && form.querySelector('[name="local"]')) {
+      setFormValue('phonenumber', form.querySelector('[name="cc"]').value + form.querySelector('[name="local"]').value);
+    }
+
     const url = form.getAttribute('action');
 
     // submit form here.
@@ -86,8 +89,9 @@ function submitForm(formWrapper) {
       }
     });
     fetch(url, {
-      method: 'post',
-      body: formData,
+      // TODO: Need to remember to flip this back to a POST and uncomment the body
+      method: 'get',
+      // body: formData,
     })
       .then((response) => {
         formWrapper.classList.add('submitted');

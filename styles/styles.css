@@ -381,6 +381,10 @@ main img {
   vertical-align: middle;
 }
 
+.text-right {
+  text-align: right!important;
+}
+
 [class*=" vlt-icon-"], [class^="vlt-icon-"] {
   font-family: var(--icon-font-family);
   font-style: normal;

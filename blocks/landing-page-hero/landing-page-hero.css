@@ -400,75 +400,202 @@
   top: -2rem;
 }
 
-@media (min-width: 768px) {
-  /* 2 columns for larger screens with a slight bias to the category column */
-  .landing-page-hero .column.category {
-    flex: 0 0 58.3333%;
-    max-width: 58.3333%;
-  }
+.landing-page-hero .form-overlay__overlay .col-12.text-right {
+  width: 100%;
+}
 
-  .landing-page-hero .column.media {
-    flex: 0 0 41.6667%;
-    max-width: 41.6667%;
-  }
+.landing-page-hero .form-overlay__overlay {
+  -webkit-overflow-scrolling: touch;
+  background-color: #fff;
+  display: none;
+  height: 100vh;
+  left: 0;
+  overflow: auto;
+  padding: 2rem 0 0;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  z-index: 3;
+  box-sizing: border-box;
+}
 
-  /* Tweak title text attributes for larger screens */
-  .landing-page-hero .category-content .title {
-    font-size: 2.8rem;
-    font-weight: 500;
-    letter-spacing: -.15rem;
-    line-height: 3.2rem;
-  }
+.landing-page-hero .form-overlay__overlay::before {
+  background: -webkit-gradient(linear,left top,right top,from(#881fff),to(#827ef9));
+  background: linear-gradient(90deg,#881fff 0,#827ef9);
+  content: "";
+  height: 1.5rem;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
 
-  /* Adjust size of the video play icon */
-  .landing-page-hero .media-content .slim-video-cta {
-    left: calc(50% - 7rem);
-    top: calc(50% - 7rem);
-  }
+.landing-page-hero .form-overlay--open .form-overlay__overlay {
+  display: block;
+}
 
-  /* Adjust position of the video close button */
-  .landing-page-hero .media-content .video-overlay-close {
-    right: 5rem;
-    top: 5rem;
-  }
+button.Vlt-icon-close.form-overlay__close {
+  padding: 0;
+  color: black;
+  background: transparent;
+  border: none;
+  border-radius: unset;
+  position: relative;
+  margin: 0;
+  font-size: 4rem;
+  line-height: 4rem;
+}
 
-  /* Tweak description text attributes for larger screens */
-  .landing-page-hero .category-content .description p  {
-    font-size: 1.4rem;
-    font-weight: 400;
-    letter-spacing: -.02rem;
-    line-height: 2rem;
-  }
+button.Vlt-icon-close.form-overlay__close:before {
+  content: "\e90e";
+  font-family: 'VltIcons';
+  font-size: 4rem;
+  background-color: transparent;
+}
 
-  .landing-page-hero .category-content .description a,
-  .landing-page-hero .category-content .disclaimer a {
-    color: inherit;
-    text-decoration: underline;
-  }
+.landing-page-hero .Vlt-form__success {
+  display: none;
+}
 
-  /* Tweak link menu text attributes for larger screens */
-  .landing-page-hero .category-content .description li a {
-    font-size: 1.7rem;
-    font-weight: 400;
-    letter-spacing: -.025rem;
-    line-height: 2.5rem;
-  }
+.landing-page-hero .form-overlay__overlay.success .Vlt-form__success {
+  display: inline-block;
+  width: 100%;
+}
 
-  /* Tweak caption text attributes for larger screens. */
-  .landing-page-hero .media-content .caption {
-    font-family: var(--body-font-family);
-    font-size: 1.2rem;
-    font-weight: 400;
-    letter-spacing: 0;
-    line-height: 1.6rem;
-  }
+.landing-page-hero .form-overlay__overlay.submitted .form {
+  display: none;
+}
 
-  /* Tweak video play icon (and background) size for larger screens */
-  .landing-page-hero .media-content .play-video-background::before,
-  .landing-page-hero .media-content .play-video-arrow::before {
-    font-size: 13rem;
+.landing-page-hero .Vlt-form__success-v2.container {
+  margin-bottom: 4rem;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.landing-page-hero .Vlt-form__success-v2 .row {
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -20px;
+  margin-left: -20px;
+}
+
+.landing-page-hero .Vlt-form__success-title-v2 {
+  font-family: Spezia,Spezia_SemiMono,Arial,Helvetica,sans-serif;
+  font-size: 3.5rem;
+  font-weight: 500;
+  letter-spacing: -.12rem;
+  line-height: 4rem;
+  margin-bottom: 1rem;
+  color: black;
+}
+
+.landing-page-hero .Vlt-form__success-title-v2 .col-12 {
+  flex: 0 0 100%;
+  max-width: 100%;
+}
+
+.landing-page-hero .Vlt-form__success-description-v2 {
+  font-family: Spezia,Spezia_SemiMono,Arial,Helvetica,sans-serif;
+  font-size: 1.7rem;
+  font-weight: 400;
+  letter-spacing: -.025rem;
+  line-height: 2.5rem;
+  margin-bottom: 6rem;
+  color:black;
+}
+
+.landing-page-hero Vlt-form__success-cta .btn {
+  transition: transform .2s;
+}
+
+@media (min-width: 576px) {
+  .landing-page-hero .Vlt-form__success-v2.container {
+    max-width: 540px;
   }
 }
+
+  @media (min-width: 768px) {
+    /* 2 columns for larger screens with a slight bias to the category column */
+    .landing-page-hero .column.category {
+      flex: 0 0 58.3333%;
+      max-width: 58.3333%;
+    }
+
+    .landing-page-hero .column.media {
+      flex: 0 0 41.6667%;
+      max-width: 41.6667%;
+    }
+
+    /* Tweak title text attributes for larger screens */
+    .landing-page-hero .category-content .title {
+      font-size: 2.8rem;
+      font-weight: 500;
+      letter-spacing: -.15rem;
+      line-height: 3.2rem;
+    }
+
+    /* Adjust size of the video play icon */
+    .landing-page-hero .media-content .slim-video-cta {
+      left: calc(50% - 7rem);
+      top: calc(50% - 7rem);
+    }
+
+    /* Adjust position of the video close button */
+    .landing-page-hero .media-content .video-overlay-close {
+      right: 5rem;
+      top: 5rem;
+    }
+
+    /* Tweak description text attributes for larger screens */
+    .landing-page-hero .category-content .description p  {
+      font-size: 1.4rem;
+      font-weight: 400;
+      letter-spacing: -.02rem;
+      line-height: 2rem;
+    }
+
+    .landing-page-hero .category-content .description a,
+    .landing-page-hero .category-content .disclaimer a {
+      color: inherit;
+      text-decoration: underline;
+    }
+
+    /* Tweak link menu text attributes for larger screens */
+    .landing-page-hero .category-content .description li a {
+      font-size: 1.7rem;
+      font-weight: 400;
+      letter-spacing: -.025rem;
+      line-height: 2.5rem;
+    }
+
+    /* Tweak caption text attributes for larger screens. */
+    .landing-page-hero .media-content .caption {
+      font-family: var(--body-font-family);
+      font-size: 1.2rem;
+      font-weight: 400;
+      letter-spacing: 0;
+      line-height: 1.6rem;
+    }
+
+    /* Tweak video play icon (and background) size for larger screens */
+    .landing-page-hero .media-content .play-video-background::before,
+    .landing-page-hero .media-content .play-video-arrow::before {
+      font-size: 13rem;
+    }
+
+    .landing-page-hero .Vlt-form__success-image {
+      margin-bottom: 3rem;
+      margin-top: 0;
+      width: 60.6%;
+    }
+
+    .landing-page-hero .Vlt-form__success-v2.container {
+      max-width: 45pc;
+    }
+  }
+
 
 @media (min-width: 992px) {
   /* Evenly split column flex children */
@@ -486,6 +613,10 @@
   /* Adjust the layout of the video overlay */
   .landing-page-hero .media-content .video-overlay-video {
     padding-bottom: 55.8rem;
+  }
+
+  .landing-page-hero .Vlt-form__success-v2.container {
+    max-width: 990pt;
   }
 }
 
@@ -534,7 +665,6 @@
     font-size: 16rem;
   }
 }
-
 
 .landing-page-hero.product h3 {
   font-size: 24px;

@@ -76,20 +76,16 @@ function createVideoOverlay() {
 }
 
 function createFormOverlay(formContent) {
-  const formOverlay = div({
-    class: 'form-overlay__overlay', role: 'dialog', 'aria-modal': 'true', 'aria-label': 'form',
-  });
+  const formOverlay = div({ class: 'container' });
 
   formOverlay.innerHTML = `
-      <div class="container">
         <div class="row">
           <div class="col-12 text-right">
             <button class="Vlt-icon-close form-overlay__close" aria-label="Close modal"></button>
           </div>
-        </div>
-      </div>`;
+        </div>`;
 
-  formOverlay.querySelector('div.col-12').append(formContent);
+  formOverlay.append(formContent);
 
   const formCloseButton = formOverlay.querySelector('.form-overlay__close');
   formCloseButton.addEventListener('click', () => {
@@ -133,15 +129,26 @@ function buildOverlay(overlayRawContent) {
 function getFormSection(button) {
   const formSection = section({ class: 'form-overlay' });
   formSection.innerHTML = `<div class="form-overlay__trigger">
-      <!--might need to think about how to styyle this button based on the styling of the landing-page-hero or section metadata -->
       <a class="btn form-overlay__button">${button.innerText}</a>
     </div>
-    <div class="form-overlay__overlay">
+    <div class="form-overlay__overlay" role="dialog" aria-modal="true" aria-label="form">
       <!--Form Content Goes Here -->
     </div>`;
 
   return formSection;
 }
+
+async function fetchFormThanksElem(thanksUrl) {
+  const thanksElem = div({ class: 'Vlt-form__success' });
+  const resp = await fetch(thanksUrl);
+  if (resp.ok) {
+    thanksElem.innerHTML = await resp.text();
+  } else {
+  // Come up with some default thanks text to display if no thanks HTML is found
+  }
+  return thanksElem;
+}
+
 async function decorateCtasContent(ctasContent, stylesList) {
   ctasContent.querySelectorAll('a').forEach(async (button) => {
     // If the CTA contains a reference to the forms/ folder pull in the referenced form html and adjust the button so that a click pops up the modal window with the referenced form
@@ -149,12 +156,17 @@ async function decorateCtasContent(ctasContent, stylesList) {
     if (rawLink.match('forms/')) {
       button.replaceWith(getFormSection(button));
       const formPath = rawLink.substring(rawLink.indexOf('/') + 1);
-      const formContent = fetchFormContent(`${formPath}`);
-      ctasContent.querySelector('.form-overlay__overlay').replaceWith(createFormOverlay(await formContent));
+      const formWrapper = ctasContent.querySelector('.form-overlay__overlay');
+      const formContent = fetchFormContent(`${formPath}`, formWrapper);
+      formWrapper.append(createFormOverlay(await formContent));
 
+      const formThanksPath = `${formPath.substring(0, formPath.indexOf('.'))}-thanks.html`;
+      const formThanks = fetchFormThanksElem(formThanksPath);
+
+      formWrapper.append(await formThanks);
       const newButton = ctasContent.querySelector('.form-overlay__button');
       newButton.addEventListener('click', () => {
-        const formOverlay = (document.querySelector('.form-overlay'));
+        const formOverlay = (ctasContent.querySelector('.form-overlay'));
         formOverlay.classList.add('form-overlay--open');
       });
     }
