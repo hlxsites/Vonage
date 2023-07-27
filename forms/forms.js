@@ -89,9 +89,8 @@ function submitForm(formWrapper) {
       }
     });
     fetch(url, {
-      // TODO: Need to remember to flip this back to a POST and uncomment the body
-      method: 'get',
-      // body: formData,
+      method: 'post',
+      body: formData,
     })
       .then((response) => {
         formWrapper.classList.add('submitted');
