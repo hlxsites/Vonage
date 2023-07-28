@@ -4,8 +4,8 @@ import {
 import { toClassName } from '../../scripts/lib-franklin.js';
 import { fetchFormContent } from '../../forms/forms.js';
 
-const formStyles = [
-  { name: 'standardform', class: 'form-overlay__overlay-' },
+const overlayStyles = [
+  { name: 'standardform', class: 'form-overlay__overlay' },
   { name: 'bnsform', class: 'form-overlay__overlay-bnsform' },
 ];
 
@@ -159,17 +159,20 @@ async function decorateCtasContent(ctasContent, stylesList) {
   const formButton = ctasContent.querySelector('a[href*="forms/"]');
   const rawLink = formButton.getAttribute('href');
 
-  // Need to hook up this in order to see if there's a form style included in the block stylelist and if so pass the right form class to the section creator
-  // let styleClass;
-  // stylesList.forEach((style) => {
-  //   formStyles.find((o) => o.name === style);
-  //     styleClass = o.class;
-  // });
+  let styleClass;
+  // eslint-disable-next-line no-restricted-syntax
+  for (const style of stylesList) {
+    const styleClassTmp = overlayStyles.find((o) => o.name === style);
+    if (styleClassTmp !== undefined) {
+      styleClass = styleClassTmp.class;
+      break;
+    }
+  }
 
-  formButton.replaceWith(getFormSection(formButton));
+  formButton.replaceWith(getFormSection(formButton, styleClass));
 
   const formPath = rawLink.substring(rawLink.indexOf('/') + 1);
-  const formWrapper = ctasContent.querySelector('.form-overlay__overlay');
+  const formWrapper = ctasContent.querySelector(overlayStyles.map((overlayStyle) => `.${overlayStyle.class}`).join(','));
   const formContent = fetchFormContent(`${formPath}`, formWrapper);
   formWrapper.append(createFormOverlay(await formContent));
 

@@ -1,5 +1,13 @@
 import { div } from '../scripts/scripts.js';
 
+/* TODO:
+        Need to hook up the radio button span facsimiles with a click handler to update the actual hidden radio value
+        Implement a date picker per the clients site, see form launched from landing page here here :https://www.vonage.com/unified-communications/integrations/ date picker doesn't seem to be built into the form
+        Ditto for the Time selector
+        Ditto for the Time Zone selector
+        Validate submission and success / failure behavior
+ */
+
 async function fetchFormContent(formUrl, formWrapper) {
   const form = div({ class: 'form' });
   const resp = await fetch(formUrl);
@@ -89,8 +97,9 @@ function submitForm(formWrapper) {
       }
     });
     fetch(url, {
-      method: 'post',
-      body: formData,
+      // TODO: Flip the method back to post and uncomment the body once done testing submission and failure behavior locally
+      method: 'get',
+      // body: formData,
     })
       .then((response) => {
         formWrapper.classList.add('submitted');

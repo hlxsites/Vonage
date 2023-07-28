@@ -400,7 +400,8 @@
   top: -2rem;
 }
 
-.landing-page-hero .form-overlay__overlay .col-12.text-right {
+.landing-page-hero .form-overlay__overlay .col-12.text-right,
+.landing-page-hero .form-overlay__overlay-bnsform .col-12.text-right {
   width: 100%;
 }
 
@@ -418,8 +419,15 @@
   z-index: 3;
   box-sizing: border-box;
 }
+.landing-page-hero .form-overlay__overlay-bnsform {
+  -webkit-overflow-scrolling: touch;
+  display: none;
+  z-index: 3;
+  box-sizing: border-box;
+}
 
-.landing-page-hero .form-overlay__overlay::before {
+.landing-page-hero .form-overlay__overlay::before,
+.landing-page-hero .form-overlay__overlay-bnsform::before {
   background: -webkit-gradient(linear,left top,right top,from(#881fff),to(#827ef9));
   background: linear-gradient(90deg,#881fff 0,#827ef9);
   content: "";
@@ -430,7 +438,8 @@
   width: 100%;
 }
 
-.landing-page-hero .form-overlay--open .form-overlay__overlay {
+.landing-page-hero .form-overlay--open .form-overlay__overlay,
+.landing-page-hero .form-overlay--open .form-overlay__overlay-bnsform {
   display: block;
 }
 
@@ -457,12 +466,14 @@ button.Vlt-icon-close.form-overlay__close:before {
   display: none;
 }
 
-.landing-page-hero .form-overlay__overlay.success .Vlt-form__success {
+.landing-page-hero .form-overlay__overlay.success .Vlt-form__success,
+.landing-page-hero .form-overlay__overlay-bnsform.success .Vlt-form__success {
   display: inline-block;
   width: 100%;
 }
 
-.landing-page-hero .form-overlay__overlay.submitted .form {
+.landing-page-hero .form-overlay__overlay.submitted .form,
+.landing-page-hero .form-overlay__overlay-bnsform.submitted .form {
   display: none;
 }
 
@@ -685,4 +696,65 @@ button.Vlt-icon-close.form-overlay__close:before {
 
 .landing-page-hero.product h3 {
   font-size: 24px;
+}
+
+.form-overlay__overlay-bnsform:before {
+  background: -webkit-gradient(linear,left top,right top,from(#881fff),to(#827ef9));
+  background: linear-gradient(90deg,#881fff 0,#827ef9);
+  content: "";
+  height: 1.5rem;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%
+}
+
+@media (max-width: 320px) {
+  .form-overlay__overlay-bnsform {
+    height: 110vh;
+    width: 110vw
+  }
+}
+
+@media (min-width: 280px) and (max-width:1024px) {
+  .form-overlay__overlay-bnsform {
+    background-color:#fff;
+    display: none;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    overflow: auto;
+    position: fixed;
+    top: 0;
+    z-index: 3;
+    padding: 1rem 0 0
+  }
+}
+
+@media (min-width: 1024px) {
+  .form-overlay__overlay-bnsform {
+    width:56vw;
+    left: 22%;
+    -webkit-overflow-scrolling: touch;
+    background-color: #fff;
+    display: none;
+    height: 100vh;
+    overflow: auto;
+    padding: 1rem 0 0;
+    position: fixed;
+    top: 0;
+    z-index: 3
+  }
+}
+
+@media (min-width: 992px) {
+  .form-overlay__overlay-bnsform .Vlt-form__title {
+    margin-bottom:0
+  }
+}
+
+@media (min-width: 992px) and (max-width:1024px) {
+  .form-overlay__overlay-bnsform .Vlt-form__title {
+    padding-left:18rem
+  }
 }
