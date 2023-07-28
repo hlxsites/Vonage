@@ -4,6 +4,11 @@ import {
 import { toClassName } from '../../scripts/lib-franklin.js';
 import { fetchFormContent } from '../../forms/forms.js';
 
+const formStyles = [
+  { name: 'standardform', class: 'form-overlay__overlay-' },
+  { name: 'bnsform', class: 'form-overlay__overlay-bnsform' },
+];
+
 function decorateDescription(descriptionContent) {
   const links = descriptionContent.querySelectorAll('li > a');
   const linksArray = Array.from(links);
@@ -126,12 +131,12 @@ function buildOverlay(overlayRawContent) {
   return overlayContent;
 }
 
-function getFormSection(button) {
+function getFormSection(button, formStyle = 'form-overlay__overlay') {
   const formSection = section({ class: 'form-overlay' });
   formSection.innerHTML = `<div class="form-overlay__trigger">
       <a class="btn form-overlay__button">${button.innerText}</a>
     </div>
-    <div class="form-overlay__overlay" role="dialog" aria-modal="true" aria-label="form">
+    <div class="${formStyle} " role="dialog" aria-modal="true" aria-label="form">
       <!--Form Content Goes Here -->
     </div>`;
 
@@ -150,26 +155,32 @@ async function fetchFormThanksElem(thanksUrl) {
 }
 
 async function decorateCtasContent(ctasContent, stylesList) {
-  ctasContent.querySelectorAll('a').forEach(async (button) => {
-    // If the CTA contains a reference to the forms/ folder pull in the referenced form html and adjust the button so that a click pops up the modal window with the referenced form
-    const rawLink = button.getAttribute('href');
-    if (rawLink.match('forms/')) {
-      button.replaceWith(getFormSection(button));
-      const formPath = rawLink.substring(rawLink.indexOf('/') + 1);
-      const formWrapper = ctasContent.querySelector('.form-overlay__overlay');
-      const formContent = fetchFormContent(`${formPath}`, formWrapper);
-      formWrapper.append(createFormOverlay(await formContent));
+  // Only allows one form to be linked from a landing-page-hero, if a need should arise to allow multiple will need to adjust this implementation
+  const formButton = ctasContent.querySelector('a[href*="forms/"]');
+  const rawLink = formButton.getAttribute('href');
 
-      const formThanksPath = `${formPath.substring(0, formPath.indexOf('.'))}-thanks.html`;
-      const formThanks = fetchFormThanksElem(formThanksPath);
+  // Need to hook up this in order to see if there's a form style included in the block stylelist and if so pass the right form class to the section creator
+  // let styleClass;
+  // stylesList.forEach((style) => {
+  //   formStyles.find((o) => o.name === style);
+  //     styleClass = o.class;
+  // });
 
-      formWrapper.append(await formThanks);
-      const newButton = ctasContent.querySelector('.form-overlay__button');
-      newButton.addEventListener('click', () => {
-        const formOverlay = (ctasContent.querySelector('.form-overlay'));
-        formOverlay.classList.add('form-overlay--open');
-      });
-    }
+  formButton.replaceWith(getFormSection(formButton));
+
+  const formPath = rawLink.substring(rawLink.indexOf('/') + 1);
+  const formWrapper = ctasContent.querySelector('.form-overlay__overlay');
+  const formContent = fetchFormContent(`${formPath}`, formWrapper);
+  formWrapper.append(createFormOverlay(await formContent));
+
+  const formThanksPath = `${formPath.substring(0, formPath.indexOf('.'))}-thanks.html`;
+  const formThanks = fetchFormThanksElem(formThanksPath);
+
+  formWrapper.append(await formThanks);
+  const newButton = ctasContent.querySelector('.form-overlay__button');
+  newButton.addEventListener('click', () => {
+    const formOverlay = (ctasContent.querySelector('.form-overlay'));
+    formOverlay.classList.add('form-overlay--open');
   });
 
   stylesList.forEach((style) => {
@@ -178,7 +189,6 @@ async function decorateCtasContent(ctasContent, stylesList) {
     }
   });
 }
-
 function buildTPWidget(tpElement) {
   const template = tpElement.innerText;
   tpElement.classList.add('trustpilot-widget');

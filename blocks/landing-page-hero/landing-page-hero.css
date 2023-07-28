@@ -620,51 +620,68 @@ button.Vlt-icon-close.form-overlay__close:before {
   }
 }
 
-@media (min-width: 1200px) {
-  /* Tweak title text attributes for largest screens */
-  .landing-page-hero .category-content .title {
-    font-weight: 500;
-    letter-spacing: -.12rem;
-    font-size: 5.35rem !important;
-    line-height: 5.5rem !important;
-  }
-
-  /* Tweak description text attributes for largest screens */
-  .landing-page-hero .category-content .description {
-    font-size: 1.7rem;
-    font-weight: 400;
-    letter-spacing: -.02rem;
-    line-height: 2rem;
-  }
-
-  /* Adjust position of the video close button */
-  .landing-page-hero .media-content .video-overlay-close {
-    right: 8rem;
-  }
-
-  /* Tweak link menu text attributes for largest screens */
-  .landing-page-hero .category-content .description li a,
-  .landing-page-hero .category-content .description li span {
-    font-size: 2.1rem;
-    letter-spacing: -.025rem;
-    line-height: 2.4rem;
-  }
-
-  /* Tweak caption text attributes for largest screens */
-  .landing-page-hero .media-content .caption {
-    font-family: var(--body-font-family);
-    font-size: 1.2rem;
-    font-weight: 400;
-    letter-spacing: .025rem;
-    line-height: 1.6rem;
-  }
-
-  /* Tweak video play icon (and background) size for larger screens */
-  .landing-page-hero .media-content .play-video-background::before,
-  .landing-page-hero .media-content .play-video-arrow::before {
-    font-size: 16rem;
+@media (min-width: 1024px) {
+  .landing-page-hero .form-overlay__overlay-bnsform {
+    width: 56vw;
+    left: 22%;
+    -webkit-overflow-scrolling: touch;
+    background-color: #fff;
+    display: none;
+    height: 100vh;
+    overflow: auto;
+    padding: 1rem 0 0;
+    position: fixed;
+    top: 0;
+    z-index: 3;
   }
 }
+
+
+  @media (min-width: 1200px) {
+    /* Tweak title text attributes for largest screens */
+    .landing-page-hero .category-content .title {
+      font-weight: 500;
+      letter-spacing: -.12rem;
+      font-size: 5.35rem !important;
+      line-height: 5.5rem !important;
+    }
+
+    /* Tweak description text attributes for largest screens */
+    .landing-page-hero .category-content .description {
+      font-size: 1.7rem;
+      font-weight: 400;
+      letter-spacing: -.02rem;
+      line-height: 2rem;
+    }
+
+    /* Adjust position of the video close button */
+    .landing-page-hero .media-content .video-overlay-close {
+      right: 8rem;
+    }
+
+    /* Tweak link menu text attributes for largest screens */
+    .landing-page-hero .category-content .description li a,
+    .landing-page-hero .category-content .description li span {
+      font-size: 2.1rem;
+      letter-spacing: -.025rem;
+      line-height: 2.4rem;
+    }
+
+    /* Tweak caption text attributes for largest screens */
+    .landing-page-hero .media-content .caption {
+      font-family: var(--body-font-family);
+      font-size: 1.2rem;
+      font-weight: 400;
+      letter-spacing: .025rem;
+      line-height: 1.6rem;
+    }
+
+    /* Tweak video play icon (and background) size for larger screens */
+    .landing-page-hero .media-content .play-video-background::before,
+    .landing-page-hero .media-content .play-video-arrow::before {
+      font-size: 16rem;
+    }
+  }
 
 .landing-page-hero.product h3 {
   font-size: 24px;
