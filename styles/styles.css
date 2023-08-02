@@ -57,6 +57,7 @@
   --vlt-small-pause-button-in-circle: "\e914";
   --vlt-down-arrow-icon: "\e915";
   --vlt-checkmark-icon: "\e916";
+  --vlt-checkmark-icon-form: "\e917";
   --vlt-warning-icon: "\e918";
   --vlt-mail-icon: "\e919";
   --vlt-dialog-bubble-icon: "\e91a";
@@ -448,6 +449,10 @@ div.section.end-note-content > div.default-content-wrapper p::before {
   content: "*";
   position: relative;
   top: -0.2rem;
+}
+
+.section.h4-center h4 {
+  text-align: center;
 }
 
 @media (min-width: 1200px) {
