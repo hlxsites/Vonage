@@ -435,6 +435,7 @@ div.columns.text-list>div>div {
 div.section.headerlists{
   padding: 0;
   margin-top: -2rem;
+  margin-bottom: 9rem;
 }
 
 div.section.headerlists div.columns.block > div {
@@ -445,6 +446,7 @@ div.section.headerlists div.columns.block > div {
   max-width: 45pc;
   margin-left: auto;
   margin-right: auto;
+  align-items: flex-start;
 }
 
 div.section.headerlists div.columns-other-col {
@@ -464,7 +466,7 @@ div.section.headerlists div.default-content-wrapper:first-child {
   padding-bottom: 7rem;
 }
 
-div.section.headerlists div.default-content-wrapper:first-child p::after {
+div.section.headerlists div.default-content-wrapper:first-child *::after {
   background: -webkit-gradient(linear,left top,right top,from(#881fff),to(#7fc8f5));
   background: linear-gradient(90deg,#881fff 0,#7fc8f5);
   bottom: 0;
@@ -509,6 +511,11 @@ div.section.headerlists div.columns-other-col li {
   padding-left:0.7rem;
 }
 
+div.section.headerlists div.columns-wrapper {
+  border-bottom: 0.1rem solid #dcdde6;
+}
+
+
 @media (min-width: 768px) {
   div.section.headerlists div.default-content-wrapper:first-child > p {
     max-width: 50%;
@@ -551,6 +558,17 @@ div.section.headerlists div.columns-other-col li {
       margin-top: -20rem;
     }
 
+    div.section.headerlists .default-content-wrapper > h2 {
+      color: white;
+      font-size: 4rem;
+      padding-top: 8rem;
+    }
+
+    div.section.headerlists .columns-wrapper h2 {
+      color: white;
+      font-size: 3rem;
+    }
+
     div.section.headerlists div.default-content-wrapper:first-child > p {
       max-width: 50%;
       margin-left: 50%;
@@ -580,14 +598,12 @@ div.section.headerlists div.columns-other-col li {
     font-weight: 400;
     letter-spacing: .025rem;
     line-height: 1.6rem;
-    border-top: 0.1rem solid #c1c3cd;
     padding-top: 1.5rem;
     color: #5f6169;
     text-align: left;
   }
 
   div.section.headerlists div:nth-child(3) {
-    padding:5rem 2rem;
     box-sizing: border-box;
     max-width: 990pt;
   }
