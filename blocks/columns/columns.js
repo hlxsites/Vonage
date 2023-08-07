@@ -13,8 +13,7 @@ function handleTitleClick(block) {
   const openButton = block.querySelector('div.slim-promo.columns-2-cols > div > div:nth-child(2) > span.controls > span.view-offer');
   const closeButton = block.querySelector('div.slim-promo.columns-2-cols > div > div:nth-child(2) > span.controls > span.close-x');
 
-  console.log(controlSpan.offsetTop);
-  closeButton.style.top = controlSpan.offsetTop + 'px';
+  closeButton.style.top = `${controlSpan.offsetTop}px`;
   closeButton.style.right = '50px';
 
   if (hintSpan) {
@@ -230,7 +229,8 @@ export default function decorate(block) {
     const offerControls = span({ class: 'controls' }, span({ class: 'view-offer', innerHTML: 'View Offer' }), span({ class: 'close-x', innerHTML: 'x' }));
     const offerTitle2 = block.querySelector('div.columns-other-col h2');
     const offerTitle4 = block.querySelector('div.columns-other-col h4');
-    let offerHint, offerDetails;
+    let offerHint;
+    let offerDetails;
     if (block.classList.contains('hint-buy')) {
       offerHint = block.querySelector('.hint-buy div.columns-other-col p');
       offerDetails = block.querySelector('div.columns-other-col p:nth-child(4)');
