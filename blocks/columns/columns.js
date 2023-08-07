@@ -2,27 +2,55 @@ import { createOptimizedPicture } from '../../scripts/lib-franklin.js';
 import { div, span } from '../../scripts/scripts.js';
 
 function handleTitleClick(block) {
-  const pBlock = block.querySelector('div.slim-promo.columns-2-cols p');
-  const pH2 = block.querySelector('div.slim-promo.columns-2-cols h2');
+  const colContainer = block.querySelector('div.slim-promo.columns-2-cols .columns-other-col');
+  const pBlock = block.querySelector('div.slim-promo.columns-2-cols span.detail-wrapper p');
+  const pH2 = block.querySelector('div.slim-promo.columns-2-cols span.title-wrapper');
+  const hintSpan = block.querySelector('div.slim-promo.columns-2-cols span.hint-wrapper');
+  const pHint = block.querySelector('div.slim-promo.columns-2-cols span.hint-wrapper p');
+  const buyContainer = block.querySelector('div.slim-promo.columns-2-cols .columns-other-col p.button-container');
+  const buyButton = block.querySelector('div.slim-promo.columns-2-cols .columns-other-col p.button-container a');
+  const controlSpan = block.querySelector('div.slim-promo.columns-2-cols > div > div:nth-child(2) > span.controls');
   const openButton = block.querySelector('div.slim-promo.columns-2-cols > div > div:nth-child(2) > span.controls > span.view-offer');
   const closeButton = block.querySelector('div.slim-promo.columns-2-cols > div > div:nth-child(2) > span.controls > span.close-x');
 
+  console.log(controlSpan.offsetTop);
+  closeButton.style.top = controlSpan.offsetTop + 'px';
+  closeButton.style.right = '50px';
+
+  if (hintSpan) {
+    hintSpan.style.display = hintSpan.style.display === 'block' ? 'none' : 'block';
+    hintSpan.style.maxWidth = hintSpan.style.maxWidth === '100%' ? '20%' : '100%';
+    pHint.style.display = pHint.style.display === 'block' ? 'none' : 'block';
+  }
+  if (buyContainer) {
+    buyContainer.width = '100%';
+    buyContainer.style.display = buyContainer.style.display === 'block' ? 'none' : 'block';
+    buyContainer.style.maxWidth = buyContainer.style.maxWidth === '100%' ? '20%' : '100%';
+    buyContainer.style.width = buyContainer.style.width === '100%' ? 'unset' : '100%';
+    buyButton.style.width = buyButton.style.width === '100%' ? 'unset' : '100%';
+    buyButton.style.margin = 0;
+    pH2.style.width = pH2.style.width === '95%' ? '75%' : '95%';
+  }
   // toggle the paragraph and the button display
-  if (pBlock.style.display === 'block') {
+  if (pBlock.style.display === 'block') { // close
+    colContainer.style.flexDirection = 'row';
     pBlock.style.display = 'none';
     pH2.style.fontSize = 'initial';
     openButton.style.display = 'initial';
     closeButton.style.display = 'none';
-  } else {
+    controlSpan.style.padding = '1.5rem';
+  } else { // open
+    colContainer.style.flexDirection = 'column';
     pBlock.style.display = 'block';
     pH2.style.fontSize = '2.4rem'; // enlarge the h2 font size
     openButton.style.display = 'none';
     closeButton.style.display = 'block';
+    controlSpan.style.padding = 0;
   }
 }
 
 function addSlimPromoClickHandlers(block) {
-  block.querySelector('div.slim-promo.columns-2-cols > div > div:nth-child(2) > span.titleWrapper > h2').addEventListener('click', () => {
+  block.querySelector('div.slim-promo.columns-2-cols > div > div:nth-child(2) > span.title-wrapper').addEventListener('click', () => {
     handleTitleClick(block);
   });
 
@@ -200,18 +228,33 @@ export default function decorate(block) {
 
   if (block.classList.contains('slim-promo')) {
     const offerControls = span({ class: 'controls' }, span({ class: 'view-offer', innerHTML: 'View Offer' }), span({ class: 'close-x', innerHTML: 'x' }));
-    const offerTitle = block.querySelector('div.columns-other-col h2');
-    const offerDetails = block.querySelector('div.columns-other-col p');
+    const offerTitle2 = block.querySelector('div.columns-other-col h2');
+    const offerTitle4 = block.querySelector('div.columns-other-col h4');
+    let offerHint, offerDetails;
+    if (block.classList.contains('hint-buy')) {
+      offerHint = block.querySelector('.hint-buy div.columns-other-col p');
+      offerDetails = block.querySelector('div.columns-other-col p:nth-child(4)');
+    } else {
+      offerDetails = block.querySelector('div.columns-other-col p');
+    }
 
-    if (offerTitle) {
-      offerTitle.remove();
-      block.querySelector('.columns-other-col').appendChild(span({ class: 'titleWrapper' }, offerTitle));
+    if (offerTitle2) {
+      offerTitle2.remove();
+      block.querySelector('.columns-other-col').appendChild(span({ class: 'title-wrapper' }, offerTitle2));
+    } else if (offerTitle4) {
+      offerTitle4.remove();
+      block.querySelector('.columns-other-col').prepend(span({ class: 'title-wrapper' }, offerTitle4));
+    }
+
+    if (offerHint) {
+      offerHint.remove();
+      block.querySelector('.title-wrapper').after(span({ class: 'hint-wrapper' }, offerHint));
     }
 
     if (offerDetails) {
       offerDetails.remove();
       block.querySelector('.columns-other-col').appendChild(offerControls);
-      block.querySelector('.columns-other-col').appendChild(span({ class: 'detailWrapper' }, offerDetails));
+      block.querySelector('.columns-other-col').appendChild(span({ class: 'detail-wrapper' }, offerDetails));
       addSlimPromoClickHandlers(block);
     }
   }
