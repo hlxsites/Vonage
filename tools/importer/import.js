@@ -303,7 +303,7 @@ function importTrustPilot(main, document) {
 }
 
 function importQnA(main, document) {
-  const qnas = main.querySelectorAll('h2.faq__title + div.aem-Grid');
+  const qnas = main.querySelectorAll('h2.faq__title + div.aem-grid');
   qnas.forEach((qna) => {
     const faqCells = [['QandA']];
     const questions = qna.querySelectorAll('section.faq');
