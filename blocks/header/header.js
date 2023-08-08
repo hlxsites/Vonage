@@ -742,7 +742,7 @@ export default async function decorate(block) {
     toggleMenu(nav, navSections, isDesktop.matches);
     isDesktop.addEventListener('change', () => toggleMenu(nav, navSections, isDesktop.matches));
 
-    // Add an event listoner that checks if a click falls outside of the nav-sections in order to trigger a close of the nav menu.
+    // Add an event listener that checks if a click falls outside of the nav-sections in order to trigger a close of the nav menu.
     document.addEventListener('click', (event) => {
       const isClickInside = navSections.contains(event.target);
       if (!isClickInside) {
