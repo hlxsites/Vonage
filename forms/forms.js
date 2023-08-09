@@ -1,7 +1,7 @@
 import { div } from '../scripts/scripts.js';
 
 /* TODO:
-        Dynamically populate the next available dates (two weeks from current) in the date picker
+        Dynamically populate the next available dates (two weeks from current) in the date picker / or figure out how to leverage the flatpickr library directly instead of just the rendered html from the clients site
         Hook up the date picker and get it fully working and updating the form field
         Add a window resize event handler to adjust the position of the date picker so that it doesn't end up out of sync with the button
         Add an outside click event handler to close the date picker
@@ -9,6 +9,21 @@ import { div } from '../scripts/scripts.js';
         Adjust the times displayed in the time drop down based on the timezone selected
         Validate submission and success / failure behavior
  */
+
+function addInputValidation(element) {
+  element.addEventListener('change', () => {
+    validateInput(element);
+  });
+  element.addEventListener('focus', () => {
+    validateInput(element);
+  });
+
+  element.addEventListener('blur', () => {
+    const formEl = element.closest('.Vlt-form__element');
+    formEl.classList.add('Vlt-form__element--dirty');
+    validateInput(element);
+  });
+}
 
 function createScheduleElements() {
   const scheduleFormInputs = div({ class: 'bns-reschedule__form-inputs' });
@@ -149,31 +164,102 @@ function createScheduleElements() {
     });
   });
 
-  scheduleFormInputs.querySelectorAll('input[required], select[required]').forEach((input) => {
-    input.addEventListener('change', () => {
-      validateInput(input);
-    });
-    input.addEventListener('focus', () => {
-      validateInput(input);
-    });
-
-    input.addEventListener('blur', () => {
-      const formEl = input.closest('.Vlt-form__element');
-      formEl.classList.add('Vlt-form__element--dirty');
-      validateInput(input);
-    });
-  });
+  scheduleFormInputs.querySelectorAll('input[required], select[required]').forEach(addInputValidation);
 
   return scheduleFormInputs;
 }
 
 function createDateSelector() {
   const dateSelector = div({ class: 'flatpickr-calendar Vlt-datepicker animate showTimeInput', tabIndex: '-1', style: 'top: 269px; left: 641.484px; right: auto;' });
-  dateSelector.innerHTML = `<div class="Vlt-datepicker__header"><span class="Vlt-datepicker__header-month">August </span><span class="Vlt-datepicker__header-year">2023</span><div class="Vlt-datepicker__nav"><span class="Vlt-datepicker__nav-prev"></span><span class="Vlt-datepicker__nav-next"></span></div></div><div class="Vlt-datepicker__range"><span class="Vlt-datepicker__range-start"></span><span class="Vlt-datepicker__range-end"></span></div><div class="flatpickr-innerContainer"><div class="flatpickr-rContainer"><div class="flatpickr-weekdays"><div class="flatpickr-weekdaycontainer">
-      <span class="flatpickr-weekday">
-        Mon</span><span class="flatpickr-weekday">Tue</span><span class="flatpickr-weekday">Wed</span><span class="flatpickr-weekday">Thu</span><span class="flatpickr-weekday">Fri</span><span class="flatpickr-weekday">Sat</span><span class="flatpickr-weekday">Sun
-      </span>
-      </div></div><div class="flatpickr-days" tabindex="-1"><div class="dayContainer"><span class="flatpickr-day prevMonthDay flatpickr-disabled" aria-label="July 31, 2023">31</span><span class="flatpickr-day flatpickr-disabled" aria-label="August 1, 2023">1</span><span class="flatpickr-day flatpickr-disabled" aria-label="August 2, 2023">2</span><span class="flatpickr-day flatpickr-disabled" aria-label="August 3, 2023">3</span><span class="flatpickr-day flatpickr-disabled" aria-label="August 4, 2023">4</span><span class="flatpickr-day flatpickr-disabled" aria-label="August 5, 2023">5</span><span class="flatpickr-day flatpickr-disabled" aria-label="August 6, 2023">6</span><span class="flatpickr-day flatpickr-disabled" aria-label="August 7, 2023">7</span><span class="flatpickr-day today" aria-label="August 8, 2023" aria-current="date" tabindex="-1">8</span><span class="flatpickr-day selected" aria-label="August 9, 2023" tabindex="-1">9</span><span class="flatpickr-day " aria-label="August 10, 2023" tabindex="-1">10</span><span class="flatpickr-day " aria-label="August 11, 2023" tabindex="-1">11</span><span class="flatpickr-day flatpickr-disabled" aria-label="August 12, 2023">12</span><span class="flatpickr-day flatpickr-disabled" aria-label="August 13, 2023">13</span><span class="flatpickr-day " aria-label="August 14, 2023" tabindex="-1">14</span><span class="flatpickr-day " aria-label="August 15, 2023" tabindex="-1">15</span><span class="flatpickr-day " aria-label="August 16, 2023" tabindex="-1">16</span><span class="flatpickr-day " aria-label="August 17, 2023" tabindex="-1">17</span><span class="flatpickr-day " aria-label="August 18, 2023" tabindex="-1">18</span><span class="flatpickr-day flatpickr-disabled" aria-label="August 19, 2023">19</span><span class="flatpickr-day flatpickr-disabled" aria-label="August 20, 2023">20</span><span class="flatpickr-day " aria-label="August 21, 2023" tabindex="-1">21</span><span class="flatpickr-day " aria-label="August 22, 2023" tabindex="-1">22</span><span class="flatpickr-day flatpickr-disabled" aria-label="August 23, 2023">23</span><span class="flatpickr-day flatpickr-disabled" aria-label="August 24, 2023">24</span><span class="flatpickr-day flatpickr-disabled" aria-label="August 25, 2023">25</span><span class="flatpickr-day flatpickr-disabled" aria-label="August 26, 2023">26</span><span class="flatpickr-day flatpickr-disabled" aria-label="August 27, 2023">27</span><span class="flatpickr-day flatpickr-disabled" aria-label="August 28, 2023">28</span><span class="flatpickr-day flatpickr-disabled" aria-label="August 29, 2023">29</span><span class="flatpickr-day flatpickr-disabled" aria-label="August 30, 2023">30</span><span class="flatpickr-day flatpickr-disabled" aria-label="August 31, 2023">31</span><span class="flatpickr-day nextMonthDay flatpickr-disabled" aria-label="September 1, 2023">1</span><span class="flatpickr-day nextMonthDay flatpickr-disabled" aria-label="September 2, 2023">2</span><span class="flatpickr-day nextMonthDay flatpickr-disabled" aria-label="September 3, 2023">3</span><span class="flatpickr-day nextMonthDay flatpickr-disabled" aria-label="September 4, 2023">4</span><span class="flatpickr-day nextMonthDay flatpickr-disabled" aria-label="September 5, 2023">5</span><span class="flatpickr-day nextMonthDay flatpickr-disabled" aria-label="September 6, 2023">6</span><span class="flatpickr-day nextMonthDay flatpickr-disabled" aria-label="September 7, 2023">7</span><span class="flatpickr-day nextMonthDay flatpickr-disabled" aria-label="September 8, 2023">8</span><span class="flatpickr-day nextMonthDay flatpickr-disabled" aria-label="September 9, 2023">9</span><span class="flatpickr-day nextMonthDay flatpickr-disabled" aria-label="September 10, 2023">10</span></div></div><div class="Vlt-datepicker__months"><span class="Vlt-datepicker__month" data-month="0">Jan</span><span class="Vlt-datepicker__month" data-month="1">Feb</span><span class="Vlt-datepicker__month" data-month="2">Mar</span><span class="Vlt-datepicker__month" data-month="3">Apr</span><span class="Vlt-datepicker__month" data-month="4">May</span><span class="Vlt-datepicker__month" data-month="5">Jun</span><span class="Vlt-datepicker__month" data-month="6">Jul</span><span class="Vlt-datepicker__month" data-month="7">Aug</span><span class="Vlt-datepicker__month Vlt-datepicker__month-disabled" data-month="8">Sep</span><span class="Vlt-datepicker__month Vlt-datepicker__month-disabled" data-month="9">Oct</span><span class="Vlt-datepicker__month Vlt-datepicker__month-disabled" data-month="10">Nov</span><span class="Vlt-datepicker__month Vlt-datepicker__month-disabled" data-month="11">Dec</span></div></div></div><div class="Vlt-datepicker__footer"><button class="Vlt-datepicker__clear">Clear</button></div>`;
+  dateSelector.innerHTML = `
+        <div class="Vlt-datepicker__header">
+            <span class="Vlt-datepicker__header-month">August </span>
+            <span class="Vlt-datepicker__header-year">2023</span>
+                <div class="Vlt-datepicker__nav">
+                    <span class="Vlt-datepicker__nav-prev"></span>
+                    <span class="Vlt-datepicker__nav-next"></span>
+                </div>
+            </div>
+            <div class="Vlt-datepicker__range">
+                <span class="Vlt-datepicker__range-start"></span>
+                <span class="Vlt-datepicker__range-end"></span>
+            </div>
+            <div class="flatpickr-innerContainer">
+                <div class="flatpickr-rContainer">
+                    <div class="flatpickr-weekdays">
+                        <div class="flatpickr-weekdaycontainer">
+                            <span class="flatpickr-weekday">Mon</span>
+                            <span class="flatpickr-weekday">Tue</span>
+                            <span class="flatpickr-weekday">Wed</span>
+                            <span class="flatpickr-weekday">Thu</span>
+                            <span class="flatpickr-weekday">Fri</span>
+                            <span class="flatpickr-weekday">Sat</span>
+                            <span class="flatpickr-weekday">Sun</span>
+                        </div>
+                    </div>
+                    <div class="flatpickr-days" tabindex="-1">
+                        <div class="dayContainer">
+                            <span class="flatpickr-day prevMonthDay flatpickr-disabled" aria-label="July 31, 2023">31</span>
+                            <span class="flatpickr-day flatpickr-disabled" aria-label="August 1, 2023">1</span>
+                            <span class="flatpickr-day flatpickr-disabled" aria-label="August 2, 2023">2</span>
+                            <span class="flatpickr-day flatpickr-disabled" aria-label="August 3, 2023">3</span>
+                            <span class="flatpickr-day flatpickr-disabled" aria-label="August 4, 2023">4</span>
+                            <span class="flatpickr-day flatpickr-disabled" aria-label="August 5, 2023">5</span>
+                            <span class="flatpickr-day flatpickr-disabled" aria-label="August 6, 2023">6</span>
+                            <span class="flatpickr-day flatpickr-disabled" aria-label="August 7, 2023">7</span>
+                            <span class="flatpickr-day today" aria-label="August 8, 2023" aria-current="date" tabindex="-1">8</span>
+                            <span class="flatpickr-day selected" aria-label="August 9, 2023" tabindex="-1">9</span>
+                            <span class="flatpickr-day " aria-label="August 10, 2023" tabindex="-1">10</span>
+                            <span class="flatpickr-day " aria-label="August 11, 2023" tabindex="-1">11</span>
+                            <span class="flatpickr-day flatpickr-disabled" aria-label="August 12, 2023">12</span>
+                            <span class="flatpickr-day flatpickr-disabled" aria-label="August 13, 2023">13</span>
+                            <span class="flatpickr-day " aria-label="August 14, 2023" tabindex="-1">14</span>
+                            <span class="flatpickr-day " aria-label="August 15, 2023" tabindex="-1">15</span>
+                            <span class="flatpickr-day " aria-label="August 16, 2023" tabindex="-1">16</span>
+                            <span class="flatpickr-day " aria-label="August 17, 2023" tabindex="-1">17</span>
+                            <span class="flatpickr-day " aria-label="August 18, 2023" tabindex="-1">18</span>
+                            <span class="flatpickr-day flatpickr-disabled" aria-label="August 19, 2023">19</span>
+                            <span class="flatpickr-day flatpickr-disabled" aria-label="August 20, 2023">20</span>
+                            <span class="flatpickr-day " aria-label="August 21, 2023" tabindex="-1">21</span>
+                            <span class="flatpickr-day " aria-label="August 22, 2023" tabindex="-1">22</span>
+                            <span class="flatpickr-day flatpickr-disabled" aria-label="August 23, 2023">23</span>
+                            <span class="flatpickr-day flatpickr-disabled" aria-label="August 24, 2023">24</span>
+                            <span class="flatpickr-day flatpickr-disabled" aria-label="August 25, 2023">25</span>
+                            <span class="flatpickr-day flatpickr-disabled" aria-label="August 26, 2023">26</span>
+                            <span class="flatpickr-day flatpickr-disabled" aria-label="August 27, 2023">27</span>
+                            <span class="flatpickr-day flatpickr-disabled" aria-label="August 28, 2023">28</span>
+                            <span class="flatpickr-day flatpickr-disabled" aria-label="August 29, 2023">29</span>
+                            <span class="flatpickr-day flatpickr-disabled" aria-label="August 30, 2023">30</span>
+                            <span class="flatpickr-day flatpickr-disabled" aria-label="August 31, 2023">31</span>
+                            <span class="flatpickr-day nextMonthDay flatpickr-disabled" aria-label="September 1, 2023">1</span>
+                            <span class="flatpickr-day nextMonthDay flatpickr-disabled" aria-label="September 2, 2023">2</span>
+                            <span class="flatpickr-day nextMonthDay flatpickr-disabled" aria-label="September 3, 2023">3</span>
+                            <span class="flatpickr-day nextMonthDay flatpickr-disabled" aria-label="September 4, 2023">4</span>
+                            <span class="flatpickr-day nextMonthDay flatpickr-disabled" aria-label="September 5, 2023">5</span>
+                            <span class="flatpickr-day nextMonthDay flatpickr-disabled" aria-label="September 6, 2023">6</span>
+                            <span class="flatpickr-day nextMonthDay flatpickr-disabled" aria-label="September 7, 2023">7</span>
+                            <span class="flatpickr-day nextMonthDay flatpickr-disabled" aria-label="September 8, 2023">8</span>
+                            <span class="flatpickr-day nextMonthDay flatpickr-disabled" aria-label="September 9, 2023">9</span>
+                            <span class="flatpickr-day nextMonthDay flatpickr-disabled" aria-label="September 10, 2023">10</span>
+                        </div>
+                    </div>
+                    <div class="Vlt-datepicker__months">
+                        <span class="Vlt-datepicker__month" data-month="0">Jan</span>
+                        <span class="Vlt-datepicker__month" data-month="1">Feb</span>
+                        <span class="Vlt-datepicker__month" data-month="2">Mar</span>
+                        <span class="Vlt-datepicker__month" data-month="3">Apr</span>
+                        <span class="Vlt-datepicker__month" data-month="4">May</span>
+                        <span class="Vlt-datepicker__month" data-month="5">Jun</span>
+                        <span class="Vlt-datepicker__month" data-month="6">Jul</span>
+                        <span class="Vlt-datepicker__month" data-month="7">Aug</span>
+                        <span class="Vlt-datepicker__month Vlt-datepicker__month-disabled" data-month="8">Sep</span>
+                        <span class="Vlt-datepicker__month Vlt-datepicker__month-disabled" data-month="9">Oct</span>
+                        <span class="Vlt-datepicker__month Vlt-datepicker__month-disabled" data-month="10">Nov</span>
+                        <span class="Vlt-datepicker__month Vlt-datepicker__month-disabled" data-month="11">Dec</span>
+                    </div>
+                </div>
+            </div>
+            <div class="Vlt-datepicker__footer"><button class="Vlt-datepicker__clear">Clear</button></div>`;
   return dateSelector;
 }
 async function fetchFormContent(formUrl, formWrapper) {
@@ -207,20 +293,7 @@ async function fetchFormContent(formUrl, formWrapper) {
       form.append(createDateSelector());
     }
 
-    form.querySelectorAll('input[required], select[required]').forEach((input) => {
-      input.addEventListener('change', () => {
-        validateInput(input);
-      });
-      input.addEventListener('focus', () => {
-        validateInput(input);
-      });
-
-      input.addEventListener('blur', () => {
-        const formEl = input.closest('.Vlt-form__element');
-        formEl.classList.add('Vlt-form__element--dirty');
-        validateInput(input);
-      });
-    });
+    form.querySelectorAll('input[required], select[required]').forEach(addInputValidation);
 
     form.querySelector('button[type="submit"]').addEventListener('click', (e) => {
       e.preventDefault();

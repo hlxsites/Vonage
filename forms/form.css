@@ -787,10 +787,7 @@ hr {
   display: block;
   position: absolute;
   transform: scale(.1);
-  transform: scale(.1);
   transition: -webkit-transform .2s ease-out;
-  transition: -webkit-transform .2s ease-out;
-  transition: transform .2s ease-out;
   transition: transform .2s ease-out,-webkit-transform .2s ease-out;
 }
 
@@ -989,11 +986,7 @@ hr {
 }
 
 .bns-form__footer {
-  display: -webkit-box;
-  display: flexbox;
   display: flex;
-  -webkit-box-pack: end;
-  -ms-flex-pack: end;
   justify-content: flex-end;
   padding-top: 2.4rem;
 }
@@ -1090,11 +1083,7 @@ hr {
 }
 
 .bns-message__row-ctas {
-  display: -webkit-box;
-  display: flexbox;
   display: flex;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
   justify-content: center;
   margin-bottom: 4rem;
 }
@@ -1109,11 +1098,7 @@ hr {
 }
 
 .bns-message__end {
-  display: -webkit-box;
-  display: flexbox;
   display: flex;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
   justify-content: center;
   margin: 4rem auto;
 }
@@ -1129,14 +1114,8 @@ hr {
 }
 
 .bns-message__column-ctas {
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
-  display: -webkit-box;
-  display: flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
   flex-direction: column;
   margin-top: 4rem;
 }
@@ -1404,11 +1383,7 @@ hr {
 }
 
 .Vlt-checkbox label, .Vlt-radio label {
-  -webkit-box-align: start;
-  -ms-flex-align: start;
   align-items: flex-start;
-  display: -webkit-box;
-  display: flexbox;
   display: flex;
   text-align: left;
   font-family: Spezia,"Spezia_SemiMono",Arial,Helvetica,sans-serif;
@@ -1427,14 +1402,13 @@ hr {
   display: block;
   height: 100%;
   transition: -webkit-box-shadow .2s ease-out;
-  transition: box-shadow .2s ease-out;
   transition: box-shadow .2s ease-out,-webkit-box-shadow .2s ease-out;
   width: 100%;
 }
 
 @media (min-width: 768px) {
   .Vlt-radio label {
-    font-family: Spezia, Spezia_SemiMono, Arial, Helvetica, sans-serif;
+    font-family: var(--body-font-family);
     font-size: 1.4rem;
     font-weight: 400;
     letter-spacing: -.02rem;
@@ -1444,7 +1418,7 @@ hr {
 
 @media (min-width: 1200px) {
   .Vlt-radio label {
-    font-family: Spezia,Spezia_SemiMono,Arial,Helvetica,sans-serif;
+    font-family: var(--body-font-family);
     font-size: 1.7rem;
     font-weight: 400;
     letter-spacing: -.02rem;
@@ -1639,8 +1613,6 @@ line-height:1.6rem;
 }
 
 .flatpickr-months {
-  display: flexbox;
-  display: -webkit-box;
   display: flex;
 }
 
@@ -1652,7 +1624,6 @@ line-height:1.6rem;
   line-height: 1;
   text-align: center;
   position: relative;
-  user-select: none;
   user-select: none;
   overflow: hidden;
   -webkit-box-flex: 1;
@@ -1702,7 +1673,6 @@ line-height:1.6rem;
 
 .flatpickr-months .flatpickr-next-month svg path,.flatpickr-months .flatpickr-prev-month svg path {
   transition: fill .1s;
-  fill: inherit;
 }
 
 .numInputWrapper {
@@ -1883,7 +1853,6 @@ line-height:1.6rem;
   position: relative;
   vertical-align: initial;
   box-sizing: border-box;
-  appearance: menulist;
   width: auto;
 }
 
@@ -1906,8 +1875,6 @@ line-height:1.6rem;
   text-align: center;
   overflow: hidden;
   width: 100%;
-  display: flexbox;
-  display: -webkit-box;
   display: flex;
   -ms-flex-align: center;
   -webkit-box-align: center;
@@ -1916,8 +1883,6 @@ line-height:1.6rem;
 }
 
 .flatpickr-weekdays .flatpickr-weekdaycontainer {
-  display: flexbox;
-  display: -webkit-box;
   display: flex;
   -webkit-box-flex: 1;
   flex: 1;
@@ -1944,8 +1909,6 @@ span.flatpickr-weekday {
 .flatpickr-days {
   position: relative;
   overflow: hidden;
-  display: flexbox;
-  display: -webkit-box;
   display: flex;
   -ms-flex-align: start;
   -webkit-box-align: start;
@@ -1965,9 +1928,6 @@ span.flatpickr-weekday {
   min-width: 307.875px;
   max-width: 307.875px;
   box-sizing: border-box;
-  display: inline-block;
-  display: flexbox;
-  display: -webkit-box;
   display: flex;
   flex-wrap: wrap;
   -ms-flex-pack: justify;
@@ -1988,9 +1948,9 @@ span.flatpickr-weekday {
   color: #393939;
   cursor: pointer;
   font-weight: 400;
-  width: 14.2857143%;
-  -ms-flex-preferred-size: 14.2857143%;
-  flex-basis: 14.2857143%;
+  width: 14.28%;
+  -ms-flex-preferred-size: 14.28%;
+  flex-basis: 14.28%;
   max-width: 39px;
   height: 39px;
   line-height: 39px;
@@ -2099,9 +2059,6 @@ span.flatpickr-weekday {
 }
 
 .flatpickr-innerContainer {
-  display: block;
-  display: flexbox;
-  display: -webkit-box;
   display: flex;
   overflow: hidden;
 }
@@ -2123,8 +2080,6 @@ span.flatpickr-weekday {
   max-height: 40px;
   box-sizing: border-box;
   overflow: hidden;
-  display: flexbox;
-  display: -webkit-box;
   display: flex;
 }
 
@@ -2196,9 +2151,6 @@ span.flatpickr-weekday {
   font-weight: 700;
   width: 2%;
   user-select: none;
-  user-select: none;
-  -ms-flex-item-align: center;
-  grid-row-align: center;
   align-self: center;
 }
 
@@ -2680,8 +2632,6 @@ span.flatpickr-weekday {
 
 .Vlt-dropdown__link {
   cursor: pointer;
-  display: -webkit-box;
-  display: flexbox;
   display: flex;
   font-size: 1.4rem;
   white-space: nowrap;
@@ -2735,8 +2685,6 @@ span.flatpickr-weekday {
 }
 
 .Vlt-dropdown--full-width {
-  display: -webkit-box;
-  display: flexbox;
   display: flex;
 }
 
@@ -2868,8 +2816,6 @@ span.flatpickr-weekday {
 }
 
 .Vlt-native-dropdown {
-  display: -webkit-inline-box;
-  display: inline-flexbox;
   display: inline-flex;
   position: relative;
   width: fit-content;
@@ -2992,8 +2938,6 @@ span.flatpickr-weekday {
 }
 
 .Vlt-dropdown--expanded .Vlt-dropdown__panel .Vlt-dropdown__panel__content--scroll-area,.Vlt-dropdown__panel_open .Vlt-dropdown__panel__content--scroll-area,.Vlt-dropdown_expanded .Vlt-dropdown__panel .Vlt-dropdown__panel__content--scroll-area {
-  display: -webkit-box;
-  display: flexbox;
   display: flex;
   -webkit-box-orient: vertical;
 
@@ -3090,8 +3034,6 @@ span.flatpickr-weekday {
   -webkit-box-align: baseline;
   -ms-flex-align: baseline;
   align-items: baseline;
-  display: -webkit-box;
-  display: flexbox;
   display: flex;
   -webkit-box-flex: 0;
   flex: 0 1 auto;
@@ -3103,8 +3045,6 @@ span.flatpickr-weekday {
 }
 
 .Vlt-form__pills-container .Vlt-form__element__error {
-  display: -webkit-box;
-  display: flexbox;
   display: flex;
   margin-bottom: 1rem;
   -webkit-box-ordinal-group: 0;
@@ -3136,8 +3076,6 @@ span.flatpickr-weekday {
 }
 
 .Vlt-form__pill {
-  display: -webkit-box;
-  display: flexbox;
   display: flex;
 }
 
@@ -3197,7 +3135,7 @@ span.flatpickr-weekday {
 }
 
 .Vlt-form__pill .Vlt-form__pill-label-container {
-  font-family: Spezia,"Spezia_SemiMono",Arial,Helvetica,sans-serif;
+  font-family: var(--body-font-family);
   font-size: 1.4rem;
   font-weight: 400;
   letter-spacing: -.02rem;
@@ -3208,13 +3146,10 @@ span.flatpickr-weekday {
   border: .1rem solid #90929b;
   border-radius: 2.5rem;
   color: #000;
-  display: -webkit-box;
-  display: flexbox;
   display: flex;
   -webkit-box-flex: 0;
   flex: 0 1 auto;
   padding: 1.5rem 2rem;
-  user-select: none;
   user-select: none;
 }
 
@@ -3223,7 +3158,7 @@ span.flatpickr-weekday {
 }
 
 .Vlt-form__input-error-label {
-  font-family: Spezia,"Spezia_SemiMono",Arial,Helvetica,sans-serif;
+  font-family: var(--body-font-family);
   font-size: 1.3rem;
   font-weight: 400;
   letter-spacing: -.02rem;
@@ -3233,8 +3168,6 @@ span.flatpickr-weekday {
 }
 
 .Vlt-form__textarea-container {
-  display: -webkit-box;
-  display: flexbox;
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: reverse;
@@ -3242,7 +3175,7 @@ span.flatpickr-weekday {
 }
 
 .Vlt-form__checkboxes-title,.Vlt-form__radio-button-label,.Vlt-form__radio-title {
-  font-family: Spezia,"Spezia_SemiMono",Arial,Helvetica,sans-serif;
+  font-family: var(--body-font-family);
   font-size: 1.7rem;
   font-weight: 400;
   letter-spacing: -.025rem;
@@ -3259,7 +3192,7 @@ span.flatpickr-weekday {
 }
 
 .Vlt-form__submit-disclaimer {
-  font-family: Spezia,"Spezia_SemiMono",Arial,Helvetica,sans-serif;
+  font-family: var(--body-font-family);
   font-size: 1.2rem;
   font-weight: 400;
   letter-spacing: 0;
@@ -3269,8 +3202,6 @@ span.flatpickr-weekday {
 }
 
 .Vlt-form__submit-error .Vlt-form__submit-error-msg {
-  display: -webkit-box;
-  display: flexbox;
   display: flex;
 }
 
@@ -3285,15 +3216,12 @@ span.flatpickr-weekday {
 }
 
 .Vlt-form__submit-error-msg .Vlt-form__element__error {
-  font-family: Spezia,"Spezia_SemiMono",Arial,Helvetica,sans-serif;
+  font-family: var(--body-font-family);
   font-size: 1.7rem;
   font-weight: 400;
   letter-spacing: -.025rem;
   line-height: 2.5rem;
-  -ms-flex-item-align: center;
   align-self: center;
-  display: -webkit-box;
-  display: flexbox;
   display: flex;
   margin-bottom: .4rem;
   text-align: left;
@@ -3454,11 +3382,7 @@ span.flatpickr-weekday {
 }
 
 .Vlt-form .Vlt-form__element .Vlt-checkbox__label--flex {
-  -webkit-box-align: start;
-  -ms-flex-align: start;
   align-items: flex-start;
-  display: -webkit-box;
-  display: flexbox;
   display: flex;
 }
 
@@ -3492,11 +3416,7 @@ span.flatpickr-weekday {
 }
 
 .Vlt-form .Vlt-form__element .Vlt-promo-code {
-  display: -webkit-box;
-  display: flexbox;
   display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
   flex-direction: row;
 }
 
