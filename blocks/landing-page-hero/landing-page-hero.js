@@ -96,6 +96,7 @@ function createFormOverlay(formContent) {
   formCloseButton.addEventListener('click', () => {
     const formContainer = (document.querySelector('.form-overlay'));
     formContainer.classList.remove('form-overlay--open');
+    document.querySelector('body').style = 'overflow-y: scroll';
   });
 
   return formOverlay;
@@ -184,6 +185,7 @@ async function decorateCtasContent(ctasContent, stylesList) {
   newButton.addEventListener('click', () => {
     const formOverlay = (ctasContent.querySelector('.form-overlay'));
     formOverlay.classList.add('form-overlay--open');
+    document.querySelector('body').style = 'overflow-y: hidden';
   });
 
   stylesList.forEach((style) => {

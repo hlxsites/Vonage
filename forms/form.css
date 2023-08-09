@@ -3539,8 +3539,6 @@ span.flatpickr-weekday {
 }
 
 .Vlt-form .Vlt-form__element .Vlt-promo-code .Vlt-form__element__error {
-  display: -webkit-box;
-  display: flexbox;
   display: flex;
 }
 
@@ -3552,4 +3550,18 @@ span.flatpickr-weekday {
 
 .bns-form__headline .p2 {
   margin:0;
+}
+
+.Vlt-datepicker .Vlt-datepicker__clear {
+  color: black;
+  background-color: transparent;
+  display: inline;
+  margin: 0;
+  padding: 0;
+  line-height: 1.2rem;
+  height: auto;
+}
+
+.Vlt-datepicker .Vlt-datepicker__clear:hover {
+text-decoration: underline;
 }

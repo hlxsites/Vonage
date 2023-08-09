@@ -1,8 +1,8 @@
 import { div } from '../scripts/scripts.js';
 
 /* TODO:
+        Dynamically populate the next available dates (two weeks from current) in the date picker
         Hook up the date picker and get it fully working and updating the form field
-        Adjust the date picker initial positioning in mobile mode (currently in the wrong place)
         Add a window resize event handler to adjust the position of the date picker so that it doesn't end up out of sync with the button
         Add an outside click event handler to close the date picker
         If the user selects the current date adjust available time options in the time selector drop down to exclude times in the past
@@ -31,8 +31,15 @@ function createScheduleElements() {
   dateSelector.addEventListener('click', () => {
     document.querySelector('.flatpickr-calendar.Vlt-datepicker').classList.add('open');
     const buttonRect = scheduleFormInputs.querySelector('.Vlt-input.Vlt-native-dropdown').getBoundingClientRect();
+    const dateSelectorModal = document.querySelector('.flatpickr-calendar.Vlt-datepicker');
+    const dateSelectorModalRect = dateSelectorModal.getBoundingClientRect();
     const containerOffset = document.querySelector('form div.container').getBoundingClientRect().x;
-    document.querySelector('.flatpickr-calendar.Vlt-datepicker').style = `top: 269px; left: ${buttonRect.x - containerOffset}px; right: auto;`;
+    const scrollOffset = document.querySelector('.form-overlay__overlay-bnsform').scrollTop;
+    if (buttonRect.y + dateSelectorModalRect.height > window.innerHeight) {
+      dateSelectorModal.style = `top: ${buttonRect.y - dateSelectorModalRect.height + scrollOffset}px; left: ${buttonRect.x - containerOffset}px; right: auto;`;
+    } else {
+      dateSelectorModal.style = `top: ${buttonRect.y + buttonRect.height + scrollOffset}px; left: ${buttonRect.x - containerOffset}px; right: auto;`;
+    }
   });
 
   const timeSelector = div({ class: 'Vlt-form__element', 'is-required': 'true' });
