@@ -1,14 +1,30 @@
-import { div } from '../scripts/scripts.js';
+import { div, span } from '../scripts/scripts.js';
 
 /* TODO:
-        Dynamically populate the next available dates (two weeks from current) in the date picker / or figure out how to leverage the flatpickr library directly instead of just the rendered html from the clients site
-        Hook up the date picker and get it fully working and updating the form field
-        Add a window resize event handler to adjust the position of the date picker so that it doesn't end up out of sync with the button
+        Handle when 10 working days into the future rolls into the next month by creating a second date modal
+        Enable controls to flip between the two date modals
+        Only show the controls as interactive if there is a next m  onth to go to
+        Hook up the clear button
         Add an outside click event handler to close the date picker
         If the user selects the current date adjust available time options in the time selector drop down to exclude times in the past
         Adjust the times displayed in the time drop down based on the timezone selected
         Validate submission and success / failure behavior
+        Add a window resize event handler to adjust the position of the date picker so that it doesn't end up out of sync with the button
  */
+
+const millisPerDay = 86400000;
+const millisPerMinute = 60000;
+
+function formatAMPM(date) {
+  let hours = date.getHours();
+  let minutes = date.getMinutes();
+  const ampm = hours >= 12 ? 'PM' : 'AM';
+  hours %= 12;
+  hours = hours || 12; // the hour '0' should be '12'
+  minutes = minutes < 10 ? `0${minutes}` : minutes;
+  const strTime = `${String(hours).padStart(2, '0')}:${minutes} ${ampm}`;
+  return strTime;
+}
 
 function addInputValidation(element) {
   element.addEventListener('change', () => {
@@ -57,6 +73,7 @@ function createScheduleElements() {
     }
   });
 
+  // TODO: Need to break this out to a seperate method call and one that can be invoked via a change event on the timezone selector
   const timeSelector = div({ class: 'Vlt-form__element', 'is-required': 'true' });
   timeSelector.innerHTML = `
     <div class="Vlt-dropdown Vlt-dropdown--full-width">
@@ -70,32 +87,27 @@ function createScheduleElements() {
       </div>
       <div class="Vlt-dropdown__panel">
         <div class="Vlt-dropdown__panel__content Vlt-dropdown__panel__content--scroll-area">
-          <div class="Vlt-dropdown__scroll">
-            <div class="Vlt-dropdown__link">06:00 AM</div>
-            <div class="Vlt-dropdown__link">06:30 AM</div>
-            <div class="Vlt-dropdown__link">07:00 AM</div>
-            <div class="Vlt-dropdown__link">07:30 AM</div>
-            <div class="Vlt-dropdown__link">08:00 AM</div>
-            <div class="Vlt-dropdown__link">08:30 AM</div>
-            <div class="Vlt-dropdown__link">09:00 AM</div>
-            <div class="Vlt-dropdown__link">09:30 AM</div>
-            <div class="Vlt-dropdown__link">10:00 AM</div>
-            <div class="Vlt-dropdown__link">10:30 AM</div>
-            <div class="Vlt-dropdown__link">11:00 AM</div>
-            <div class="Vlt-dropdown__link">11:30 AM</div>
-            <div class="Vlt-dropdown__link">12:00 PM</div>
-            <div class="Vlt-dropdown__link">12:30 PM</div>
-            <div class="Vlt-dropdown__link">01:00 PM</div>
-            <div class="Vlt-dropdown__link">01:30 PM</div>
-            <div class="Vlt-dropdown__link">02:00 PM</div>
-            <div class="Vlt-dropdown__link">02:30 PM</div>
-          </div>
+            <!--Time drop down options to be dynamically populated based on the time zone specification-->
         </div>
       </div>
     </div>
     <small class="Vlt-form__element__error Vlt-icon-warning-icon">
       <span class="Vlt-form__input-error-label">Required field.</span>
     </small>`;
+
+  const timeDropDown = div({ class: 'Vlt-dropdown__scroll' });
+
+  let tmpDate = new Date();
+  // TODO: Need to pass in this value based on the time zone selected or a default value (seem like it should be the users time zone)
+  tmpDate.setHours(6, 0, 0, 0);
+  // eslint-disable-next-line no-plusplus
+  for (let i = 0; i < 18; i++) {
+    const timeOption = div({ class: 'Vlt-dropdown__link', innerHTML: formatAMPM(tmpDate) });
+    timeDropDown.append(timeOption);
+    tmpDate = new Date(tmpDate.valueOf() + 30 * millisPerMinute);
+  }
+
+  timeSelector.querySelector('.Vlt-dropdown__panel__content.Vlt-dropdown__panel__content--scroll-area').append(timeDropDown);
 
   const timeZoneSelector = div({ class: 'Vlt-form__element', 'is-required': 'true' });
   timeZoneSelector.innerHTML = `
@@ -169,12 +181,57 @@ function createScheduleElements() {
   return scheduleFormInputs;
 }
 
-function createDateSelector() {
-  const dateSelector = div({ class: 'flatpickr-calendar Vlt-datepicker animate showTimeInput', tabIndex: '-1', style: 'top: 269px; left: 641.484px; right: auto;' });
+function createDateSelector(startDate, numberDays) {
+  const headerMonth = startDate.toLocaleString();
+  const headerYear = startDate.getFullYear();
+
+  const firstDayOfMonth = new Date(startDate.getFullYear(), startDate.getMonth(), 1);
+  const lastDayOfMonth = new Date(startDate.getFullYear(), startDate.getMonth() + 1, 0);
+
+  // getDay returns 0-6 for Sunday - Monday, the calendar displayed starts on monday so need to offset by however far into the week we are minus 1
+  const calendarOffset = firstDayOfMonth.getDay() - 1;
+  const calendarDate = new Date(firstDayOfMonth - (calendarOffset * millisPerDay));
+
+  const daysContainer = div({ class: 'dayContainer' });
+
+  let counter = numberDays;
+  while (calendarDate <= lastDayOfMonth) {
+    const daySpan = span({
+      class: 'flatpickr-day',
+      'aria-label': `${calendarDate.toLocaleString('default', { month: 'long' })} ${calendarDate.getDate()}, ${calendarDate.getFullYear()}`,
+      innerHTML: calendarDate.getDate(),
+    });
+
+    const datePadding = 2;
+    daySpan.setAttribute('dateString', `${String(calendarDate.getMonth() + 1).padStart(datePadding, '0')}-${String(calendarDate.getDate()).padStart(datePadding, '0')}-${calendarDate.getFullYear()}`);
+    if (calendarDate.getMonth() < lastDayOfMonth.getMonth()) {
+      daySpan.classList.add('prevMonthDay');
+    } else if (calendarDate < startDate) {
+      daySpan.classList.add('flatpickr-disabled');
+    } else if (calendarDate.getDay() === 0 || calendarDate.getDay() === 6) {
+      daySpan.classList.add('flatpickr-disabled');
+    } else if (counter <= 0) {
+      daySpan.classList.add('flatpickr-disabled');
+    } else {
+      daySpan.addEventListener('click', (event) => {
+        daysContainer.querySelectorAll('.flatpickr-day.selected').forEach((day) => {
+          day.classList.remove('selected');
+        });
+        daySpan.classList.add('selected');
+        document.querySelector('.Vlt-input.Vlt-native-dropdown .form-control.input').value = event.target.getAttribute('dateString');
+        document.querySelector('.flatpickr-calendar.Vlt-datepicker').classList.remove('open');
+      });
+      counter -= 1;
+    }
+    daysContainer.append(daySpan);
+    calendarDate.setDate(calendarDate.getDate() + 1);
+  }
+
+  const dateSelector = div({ class: 'flatpickr-calendar Vlt-datepicker animate showTimeInput', tabIndex: '-1' });
   dateSelector.innerHTML = `
         <div class="Vlt-datepicker__header">
-            <span class="Vlt-datepicker__header-month">August </span>
-            <span class="Vlt-datepicker__header-year">2023</span>
+          <span class="Vlt-datepicker__header-month">${headerMonth}</span>
+          <span class="Vlt-datepicker__header-year">${headerYear}</span>
                 <div class="Vlt-datepicker__nav">
                     <span class="Vlt-datepicker__nav-prev"></span>
                     <span class="Vlt-datepicker__nav-next"></span>
@@ -198,50 +255,7 @@ function createDateSelector() {
                         </div>
                     </div>
                     <div class="flatpickr-days" tabindex="-1">
-                        <div class="dayContainer">
-                            <span class="flatpickr-day prevMonthDay flatpickr-disabled" aria-label="July 31, 2023">31</span>
-                            <span class="flatpickr-day flatpickr-disabled" aria-label="August 1, 2023">1</span>
-                            <span class="flatpickr-day flatpickr-disabled" aria-label="August 2, 2023">2</span>
-                            <span class="flatpickr-day flatpickr-disabled" aria-label="August 3, 2023">3</span>
-                            <span class="flatpickr-day flatpickr-disabled" aria-label="August 4, 2023">4</span>
-                            <span class="flatpickr-day flatpickr-disabled" aria-label="August 5, 2023">5</span>
-                            <span class="flatpickr-day flatpickr-disabled" aria-label="August 6, 2023">6</span>
-                            <span class="flatpickr-day flatpickr-disabled" aria-label="August 7, 2023">7</span>
-                            <span class="flatpickr-day today" aria-label="August 8, 2023" aria-current="date" tabindex="-1">8</span>
-                            <span class="flatpickr-day selected" aria-label="August 9, 2023" tabindex="-1">9</span>
-                            <span class="flatpickr-day " aria-label="August 10, 2023" tabindex="-1">10</span>
-                            <span class="flatpickr-day " aria-label="August 11, 2023" tabindex="-1">11</span>
-                            <span class="flatpickr-day flatpickr-disabled" aria-label="August 12, 2023">12</span>
-                            <span class="flatpickr-day flatpickr-disabled" aria-label="August 13, 2023">13</span>
-                            <span class="flatpickr-day " aria-label="August 14, 2023" tabindex="-1">14</span>
-                            <span class="flatpickr-day " aria-label="August 15, 2023" tabindex="-1">15</span>
-                            <span class="flatpickr-day " aria-label="August 16, 2023" tabindex="-1">16</span>
-                            <span class="flatpickr-day " aria-label="August 17, 2023" tabindex="-1">17</span>
-                            <span class="flatpickr-day " aria-label="August 18, 2023" tabindex="-1">18</span>
-                            <span class="flatpickr-day flatpickr-disabled" aria-label="August 19, 2023">19</span>
-                            <span class="flatpickr-day flatpickr-disabled" aria-label="August 20, 2023">20</span>
-                            <span class="flatpickr-day " aria-label="August 21, 2023" tabindex="-1">21</span>
-                            <span class="flatpickr-day " aria-label="August 22, 2023" tabindex="-1">22</span>
-                            <span class="flatpickr-day flatpickr-disabled" aria-label="August 23, 2023">23</span>
-                            <span class="flatpickr-day flatpickr-disabled" aria-label="August 24, 2023">24</span>
-                            <span class="flatpickr-day flatpickr-disabled" aria-label="August 25, 2023">25</span>
-                            <span class="flatpickr-day flatpickr-disabled" aria-label="August 26, 2023">26</span>
-                            <span class="flatpickr-day flatpickr-disabled" aria-label="August 27, 2023">27</span>
-                            <span class="flatpickr-day flatpickr-disabled" aria-label="August 28, 2023">28</span>
-                            <span class="flatpickr-day flatpickr-disabled" aria-label="August 29, 2023">29</span>
-                            <span class="flatpickr-day flatpickr-disabled" aria-label="August 30, 2023">30</span>
-                            <span class="flatpickr-day flatpickr-disabled" aria-label="August 31, 2023">31</span>
-                            <span class="flatpickr-day nextMonthDay flatpickr-disabled" aria-label="September 1, 2023">1</span>
-                            <span class="flatpickr-day nextMonthDay flatpickr-disabled" aria-label="September 2, 2023">2</span>
-                            <span class="flatpickr-day nextMonthDay flatpickr-disabled" aria-label="September 3, 2023">3</span>
-                            <span class="flatpickr-day nextMonthDay flatpickr-disabled" aria-label="September 4, 2023">4</span>
-                            <span class="flatpickr-day nextMonthDay flatpickr-disabled" aria-label="September 5, 2023">5</span>
-                            <span class="flatpickr-day nextMonthDay flatpickr-disabled" aria-label="September 6, 2023">6</span>
-                            <span class="flatpickr-day nextMonthDay flatpickr-disabled" aria-label="September 7, 2023">7</span>
-                            <span class="flatpickr-day nextMonthDay flatpickr-disabled" aria-label="September 8, 2023">8</span>
-                            <span class="flatpickr-day nextMonthDay flatpickr-disabled" aria-label="September 9, 2023">9</span>
-                            <span class="flatpickr-day nextMonthDay flatpickr-disabled" aria-label="September 10, 2023">10</span>
-                        </div>
+                      <!--A div containing spans of generated days will be inserted here--> 
                     </div>
                     <div class="Vlt-datepicker__months">
                         <span class="Vlt-datepicker__month" data-month="0">Jan</span>
@@ -260,6 +274,8 @@ function createDateSelector() {
                 </div>
             </div>
             <div class="Vlt-datepicker__footer"><button class="Vlt-datepicker__clear">Clear</button></div>`;
+
+  dateSelector.querySelector('.flatpickr-days').append(daysContainer);
   return dateSelector;
 }
 async function fetchFormContent(formUrl, formWrapper) {
@@ -287,10 +303,14 @@ async function fetchFormContent(formUrl, formWrapper) {
       });
     });
 
-    // If this is a scheduling from need to add the date picker modal
+    // If this is a scheduling form need to add the date picker modal
     if (formUrl.includes('schedule')) {
       form.querySelector('.bns-form__fieldset--phone').append(createScheduleElements());
-      form.append(createDateSelector());
+
+      const startDate = new Date();
+      startDate.setHours(0, 0, 0, 0);
+      // TODO: Need to add logic here to check if 10 weekdays in the future puts us in the next month, and if so make a second date selector and wire up the ability to switch between the two
+      form.append(createDateSelector(startDate, 10));
     }
 
     form.querySelectorAll('input[required], select[required]').forEach(addInputValidation);
