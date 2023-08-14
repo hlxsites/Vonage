@@ -1,11 +1,6 @@
 import { div, span } from '../scripts/scripts.js';
 
 /* TODO:
-        Handle when 10 working days into the future rolls into the next month by creating a second date modal
-        Enable controls to flip between the two date modals
-        Only show the controls as interactive if there is a next m  onth to go to
-        Hook up the clear button
-        Add an outside click event handler to close the date picker
         If the user selects the current date adjust available time options in the time selector drop down to exclude times in the past
         Adjust the times displayed in the time drop down based on the timezone selected
         Validate submission and success / failure behavior
@@ -59,21 +54,27 @@ function createScheduleElements() {
                                         </small>
                                     </div>`;
 
-  dateSelector.addEventListener('click', () => {
+  dateSelector.addEventListener('click', (event) => {
     document.querySelector('.flatpickr-calendar.Vlt-datepicker').classList.add('open');
+
+    event.stopPropagation();
     const buttonRect = scheduleFormInputs.querySelector('.Vlt-input.Vlt-native-dropdown').getBoundingClientRect();
     const dateSelectorModal = document.querySelector('.flatpickr-calendar.Vlt-datepicker');
     const dateSelectorModalRect = dateSelectorModal.getBoundingClientRect();
     const containerOffset = document.querySelector('form div.container').getBoundingClientRect().x;
     const scrollOffset = document.querySelector('.form-overlay__overlay-bnsform').scrollTop;
     if (buttonRect.y + dateSelectorModalRect.height > window.innerHeight) {
-      dateSelectorModal.style = `top: ${buttonRect.y - dateSelectorModalRect.height + scrollOffset}px; left: ${buttonRect.x - containerOffset}px; right: auto;`;
+      document.querySelectorAll('.flatpickr-calendar.Vlt-datepicker').forEach((datePicker) => {
+        datePicker.style = `top: ${buttonRect.y - dateSelectorModalRect.height + scrollOffset}px; left: ${buttonRect.x - containerOffset}px; right: auto;`;
+      });
     } else {
-      dateSelectorModal.style = `top: ${buttonRect.y + buttonRect.height + scrollOffset}px; left: ${buttonRect.x - containerOffset}px; right: auto;`;
+      document.querySelectorAll('.flatpickr-calendar.Vlt-datepicker').forEach((datePicker) => {
+        datePicker.style = `top: ${buttonRect.y + buttonRect.height + scrollOffset}px; left: ${buttonRect.x - containerOffset}px; right: auto;`;
+      });
     }
   });
 
-  // TODO: Need to break this out to a seperate method call and one that can be invoked via a change event on the timezone selector
+  // TODO: Need to break this out to a separate method call and one that can be invoked via a change event on the timezone selector
   const timeSelector = div({ class: 'Vlt-form__element', 'is-required': 'true' });
   timeSelector.innerHTML = `
     <div class="Vlt-dropdown Vlt-dropdown--full-width">
@@ -98,8 +99,9 @@ function createScheduleElements() {
   const timeDropDown = div({ class: 'Vlt-dropdown__scroll' });
 
   let tmpDate = new Date();
-  // TODO: Need to pass in this value based on the time zone selected or a default value (seem like it should be the users time zone)
+  // TODO: Need to pass in this value based on the time zone selected or a default value (seems like it should be the users time zone)
   tmpDate.setHours(6, 0, 0, 0);
+
   // eslint-disable-next-line no-plusplus
   for (let i = 0; i < 18; i++) {
     const timeOption = div({ class: 'Vlt-dropdown__link', innerHTML: formatAMPM(tmpDate) });
@@ -181,8 +183,8 @@ function createScheduleElements() {
   return scheduleFormInputs;
 }
 
-function createDateSelector(startDate, numberDays) {
-  const headerMonth = startDate.toLocaleString();
+function createDateSelector(startDate, numberDays, index) {
+  const headerMonth = startDate.toLocaleString('default', { month: 'long' });
   const headerYear = startDate.getFullYear();
 
   const firstDayOfMonth = new Date(startDate.getFullYear(), startDate.getMonth(), 1);
@@ -210,7 +212,7 @@ function createDateSelector(startDate, numberDays) {
       daySpan.classList.add('flatpickr-disabled');
     } else if (calendarDate.getDay() === 0 || calendarDate.getDay() === 6) {
       daySpan.classList.add('flatpickr-disabled');
-    } else if (counter <= 0) {
+    } else if (counter < 0) {
       daySpan.classList.add('flatpickr-disabled');
     } else {
       daySpan.addEventListener('click', (event) => {
@@ -227,7 +229,7 @@ function createDateSelector(startDate, numberDays) {
     calendarDate.setDate(calendarDate.getDate() + 1);
   }
 
-  const dateSelector = div({ class: 'flatpickr-calendar Vlt-datepicker animate showTimeInput', tabIndex: '-1' });
+  const dateSelector = div({ class: 'flatpickr-calendar Vlt-datepicker animate showTimeInput', tabIndex: index });
   dateSelector.innerHTML = `
         <div class="Vlt-datepicker__header">
           <span class="Vlt-datepicker__header-month">${headerMonth}</span>
@@ -275,6 +277,10 @@ function createDateSelector(startDate, numberDays) {
             </div>
             <div class="Vlt-datepicker__footer"><button class="Vlt-datepicker__clear">Clear</button></div>`;
 
+  dateSelector.querySelector('.Vlt-datepicker__clear').addEventListener('click', () => {
+    dateSelector.querySelector('.flatpickr-day.selected').classList.remove('selected');
+    document.querySelector('.Vlt-input.Vlt-native-dropdown .form-control.input').value = '';
+  });
   dateSelector.querySelector('.flatpickr-days').append(daysContainer);
   return dateSelector;
 }
@@ -307,10 +313,44 @@ async function fetchFormContent(formUrl, formWrapper) {
     if (formUrl.includes('schedule')) {
       form.querySelector('.bns-form__fieldset--phone').append(createScheduleElements());
 
+      const schedulingWindow = 10;
       const startDate = new Date();
       startDate.setHours(0, 0, 0, 0);
-      // TODO: Need to add logic here to check if 10 weekdays in the future puts us in the next month, and if so make a second date selector and wire up the ability to switch between the two
-      form.append(createDateSelector(startDate, 10));
+      const endDateObject = getSchedulingWindowEndDate(startDate, schedulingWindow);
+      form.append(createDateSelector(startDate, schedulingWindow, 1));
+
+      // Add document level click handler per dropdown to listen for clicks outside of the dropdown to close it
+      document.addEventListener('click', (event) => {
+        const dateModal = form.querySelector('.flatpickr-calendar.Vlt-datepicker.open');
+        if (dateModal) {
+          const isClickInside = dateModal.contains(event.target);
+          if (!isClickInside) {
+            // The click was OUTSIDE the specifiedElement, do something
+            dateModal.classList.remove('open');
+          }
+        }
+      });
+
+      if (startDate.getMonth() !== endDateObject.endDate.getMonth()) {
+        form.append(createDateSelector(new Date(endDateObject.endDate.getFullYear(), endDateObject.endDate.getMonth(), 1), endDateObject.counter, 2));
+        form.querySelectorAll('.Vlt-datepicker__nav-prev').forEach((prevButton) => {
+          prevButton.addEventListener('click', () => {
+            form.querySelectorAll('.flatpickr-calendar').forEach((datePicker) => {
+              datePicker.classList.toggle('open');
+            });
+          });
+        });
+        form.querySelectorAll('.Vlt-datepicker__nav-next').forEach((nextButton) => {
+          nextButton.addEventListener('click', () => {
+            form.querySelectorAll('.flatpickr-calendar').forEach((datePicker) => {
+              datePicker.classList.toggle('open');
+            });
+          });
+        });
+      } else {
+        form.querySelector('.Vlt-datepicker__nav-prev').classList.add('disabled');
+        form.querySelector('.Vlt-datepicker__nav-next').classList.add('disabled');
+      }
     }
 
     form.querySelectorAll('input[required], select[required]').forEach(addInputValidation);
@@ -324,6 +364,40 @@ async function fetchFormContent(formUrl, formWrapper) {
     console.warn(`File not found: ${formUrl} - can not render form`);
   }
   return form;
+}
+
+function getSchedulingWindowEndDate(startDate, window) {
+  const endDate = new Date(startDate);
+  let counter = window;
+  while (counter > 0 && endDate.getMonth() === startDate.getMonth()) {
+    endDate.setDate(endDate.getDate() + 1);
+    switch (endDate.getDay()) {
+      case 0: break;
+      case 1: {
+        counter -= 1;
+        break;
+      }
+      case 2: {
+        counter -= 1;
+        break;
+      }
+      case 3: {
+        counter -= 1;
+        break;
+      }
+      case 4: {
+        counter -= 1;
+        break;
+      }
+      case 5: {
+        counter -= 1;
+        break;
+      }
+      case 6: break;
+      default: break;
+    }
+  }
+  return { endDate, counter };
 }
 
 function validateInput(input) {

@@ -3483,3 +3483,23 @@ span.flatpickr-weekday {
 .Vlt-datepicker .Vlt-datepicker__clear:hover {
 text-decoration: underline;
 }
+
+span.Vlt-datepicker__nav-prev.disabled {
+  opacity: 50%;
+  cursor: default;
+  transition: unset;
+}
+
+span.Vlt-datepicker__nav-prev.disabled:hover {
+  background-color: transparent;
+}
+
+span.Vlt-datepicker__nav-next.disabled {
+  opacity: 50%;
+  cursor: default;
+  transition: unset;
+}
+
+span.Vlt-datepicker__nav-next.disabled:hover {
+  background-color: transparent;
+}
