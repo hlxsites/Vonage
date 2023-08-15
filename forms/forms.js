@@ -1,24 +1,135 @@
 import { div, span } from '../scripts/scripts.js';
 
-/* TODO:
-        If the user selects the current date adjust available time options in the time selector drop down to exclude times in the past
-        Adjust the times displayed in the time drop down based on the timezone selected
-        Validate submission and success / failure behavior
-        Add a window resize event handler to adjust the position of the date picker so that it doesn't end up out of sync with the button
- */
-
 const millisPerDay = 86400000;
 const millisPerMinute = 60000;
+
+function isDST(date = new Date()) {
+  const january = new Date(
+    date.getFullYear(),
+    0,
+    1,
+  ).getTimezoneOffset();
+  const july = new Date(
+    date.getFullYear(),
+    6,
+    1,
+  ).getTimezoneOffset();
+
+  return Math.max(january, july) !== date.getTimezoneOffset();
+}
+
+function getOffsetByTimezone(timeZone) {
+  let timeZoneOffset;
+  if (isDST) {
+    switch (timeZone) {
+      case 'Pacific': {
+        timeZoneOffset = -7;
+        break;
+      }
+      case 'Mountain': {
+        timeZoneOffset = -6;
+        break;
+      }
+      case 'Central': {
+        timeZoneOffset = -5;
+        break;
+      }
+      case 'Eastern': {
+        timeZoneOffset = -4;
+        break;
+      }
+      default: {
+        timeZoneOffset = -4;
+        break;
+      }
+    }
+  } else {
+    switch (timeZone) {
+      case 'Pacific': {
+        timeZoneOffset = -8;
+        break;
+      }
+      case 'Mountain': {
+        timeZoneOffset = -7;
+        break;
+      }
+      case 'Central': {
+        timeZoneOffset = -6;
+        break;
+      }
+      case 'Eastern': {
+        timeZoneOffset = -5;
+        break;
+      }
+      default: {
+        timeZoneOffset = -5;
+        break;
+      }
+    }
+  }
+  return { name: timeZone, offset: timeZoneOffset };
+}
+function calcLocalTimeZone() {
+  const timeZoneOffset = -new Date().getTimezoneOffset() / 60;
+  let timeZone;
+  if (isDST) {
+    switch (timeZoneOffset) {
+      case -7: {
+        timeZone = 'Pacific';
+        break;
+      }
+      case -6: {
+        timeZone = 'Mountain';
+        break;
+      }
+      case -5: {
+        timeZone = 'Central';
+        break;
+      }
+      case -4: {
+        timeZone = 'Eastern';
+        break;
+      }
+      default: {
+        timeZone = 'Eastern';
+        break;
+      }
+    }
+  } else {
+    switch (timeZoneOffset) {
+      case -8: {
+        timeZone = 'Pacific';
+        break;
+      }
+      case -7: {
+        timeZone = 'Mountain';
+        break;
+      }
+      case -6: {
+        timeZone = 'Central';
+        break;
+      }
+      case -5: {
+        timeZone = 'Eastern';
+        break;
+      }
+      default: {
+        timeZone = 'Eastern';
+        break;
+      }
+    }
+  }
+  return { name: timeZone, offset: timeZoneOffset };
+}
 
 function formatAMPM(date) {
   let hours = date.getHours();
   let minutes = date.getMinutes();
   const ampm = hours >= 12 ? 'PM' : 'AM';
   hours %= 12;
-  hours = hours || 12; // the hour '0' should be '12'
+  hours = hours || 12;
   minutes = minutes < 10 ? `0${minutes}` : minutes;
-  const strTime = `${String(hours).padStart(2, '0')}:${minutes} ${ampm}`;
-  return strTime;
+  return `${String(hours).padStart(2, '0')}:${minutes} ${ampm}`;
 }
 
 function addInputValidation(element) {
@@ -36,10 +147,51 @@ function addInputValidation(element) {
   });
 }
 
+function createTimeSelector(timeZone, date = new Date()) {
+  const timeSelector = div({ class: 'Vlt-form__element time-selector', 'is-required': 'true' });
+  timeSelector.innerHTML = `
+    <div class="Vlt-dropdown Vlt-dropdown--full-width">
+      <div class="Vlt-dropdown__trigger Vlt-dropdown__trigger--btn">
+        <div class="Vlt-form__element Vlt-form__element--big">
+          <div class="Vlt-input Vlt-native-dropdown Vlt-input--error">
+            <input type="text" placeholder="Select" name="time" readOnly="readonly" required="required">
+              <label class="Vlt-form__input-label">Time</label>
+          </div>
+        </div>
+      </div>
+      <div class="Vlt-dropdown__panel">
+        <div class="Vlt-dropdown__panel__content Vlt-dropdown__panel__content--scroll-area">
+            <!--Time drop down options to be dynamically populated based on the time zone specification-->
+        </div>
+      </div>
+    </div>
+    <small class="Vlt-form__element__error Vlt-icon-warning-icon">
+      <span class="Vlt-form__input-error-label">Required field.</span>
+    </small>`;
+
+  const timeDropDown = div({ class: 'Vlt-dropdown__scroll' });
+  let tmpDate = new Date(date.valueOf());
+  const utcSchedulingStart = 13;
+  tmpDate.setHours(utcSchedulingStart + timeZone.offset, 0, 0, 0);
+
+  // eslint-disable-next-line no-plusplus
+  for (let i = 0; i < 18; i++) {
+    const timeOption = div({ class: 'Vlt-dropdown__link', innerHTML: formatAMPM(tmpDate) });
+    if (tmpDate.getTime() > new Date().getTime()) {
+      timeDropDown.append(timeOption);
+    }
+    tmpDate = new Date(tmpDate.valueOf() + 30 * millisPerMinute);
+  }
+
+  timeSelector.querySelector('.Vlt-dropdown__panel__content.Vlt-dropdown__panel__content--scroll-area').append(timeDropDown);
+
+  return timeSelector;
+}
+
 function createScheduleElements() {
   const scheduleFormInputs = div({ class: 'bns-reschedule__form-inputs' });
 
-  const dateSelector = div({ class: 'Vlt-form__element', 'is-required': 'true' });
+  const dateSelector = div({ class: 'Vlt-form__element date-selector', 'is-required': 'true' });
   dateSelector.innerHTML = `
                                     <div class="Vlt-form__element">
                                         <div class="Vlt-form__element Vlt-form__element--big">
@@ -74,44 +226,10 @@ function createScheduleElements() {
     }
   });
 
-  // TODO: Need to break this out to a separate method call and one that can be invoked via a change event on the timezone selector
-  const timeSelector = div({ class: 'Vlt-form__element', 'is-required': 'true' });
-  timeSelector.innerHTML = `
-    <div class="Vlt-dropdown Vlt-dropdown--full-width">
-      <div class="Vlt-dropdown__trigger Vlt-dropdown__trigger--btn">
-        <div class="Vlt-form__element Vlt-form__element--big">
-          <div class="Vlt-input Vlt-native-dropdown Vlt-input--error">
-            <input type="text" placeholder="Select" name="time" readOnly="readonly" required="required">
-              <label class="Vlt-form__input-label">Time</label>
-          </div>
-        </div>
-      </div>
-      <div class="Vlt-dropdown__panel">
-        <div class="Vlt-dropdown__panel__content Vlt-dropdown__panel__content--scroll-area">
-            <!--Time drop down options to be dynamically populated based on the time zone specification-->
-        </div>
-      </div>
-    </div>
-    <small class="Vlt-form__element__error Vlt-icon-warning-icon">
-      <span class="Vlt-form__input-error-label">Required field.</span>
-    </small>`;
+  const timeZone = calcLocalTimeZone();
+  const timeSelector = createTimeSelector(timeZone);
 
-  const timeDropDown = div({ class: 'Vlt-dropdown__scroll' });
-
-  let tmpDate = new Date();
-  // TODO: Need to pass in this value based on the time zone selected or a default value (seems like it should be the users time zone)
-  tmpDate.setHours(6, 0, 0, 0);
-
-  // eslint-disable-next-line no-plusplus
-  for (let i = 0; i < 18; i++) {
-    const timeOption = div({ class: 'Vlt-dropdown__link', innerHTML: formatAMPM(tmpDate) });
-    timeDropDown.append(timeOption);
-    tmpDate = new Date(tmpDate.valueOf() + 30 * millisPerMinute);
-  }
-
-  timeSelector.querySelector('.Vlt-dropdown__panel__content.Vlt-dropdown__panel__content--scroll-area').append(timeDropDown);
-
-  const timeZoneSelector = div({ class: 'Vlt-form__element', 'is-required': 'true' });
+  const timeZoneSelector = div({ class: 'Vlt-form__element timezone-selector', 'is-required': 'true' });
   timeZoneSelector.innerHTML = `
                                     <div class="Vlt-form__element" is-required="true">
                                         <div class="Vlt-dropdown Vlt-dropdown--full-width">
@@ -126,10 +244,10 @@ function createScheduleElements() {
                                             <div class="Vlt-dropdown__panel">
                                                 <div class="Vlt-dropdown__panel__content Vlt-dropdown__panel__content--scroll-area">
                                                     <div class="Vlt-dropdown__scroll">
-                                                        <div class="Vlt-dropdown__link">Eastern</div>
-                                                        <div class="Vlt-dropdown__link">Central</div>
-                                                        <div class="Vlt-dropdown__link">Mountain</div>
-                                                        <div class="Vlt-dropdown__link">Pacific</div>
+                                                        <div id="Eastern" class="Vlt-dropdown__link">Eastern</div>
+                                                        <div id="Central" class="Vlt-dropdown__link">Central</div>
+                                                        <div id="Mountain" class="Vlt-dropdown__link">Mountain</div>
+                                                        <div id="Pacific" class="Vlt-dropdown__link">Pacific</div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -138,6 +256,34 @@ function createScheduleElements() {
                                             <span class="Vlt-form__input-error-label"></span>
                                         </small>
                                     </div>`;
+
+  timeZoneSelector.querySelector('.Vlt-input input').setAttribute('value', timeZone.name);
+  timeZoneSelector.querySelectorAll('.Vlt-dropdown__scroll div').forEach((timeZoneLink) => {
+    timeZoneLink.addEventListener('click', (event) => {
+      document.querySelector('.Vlt-form__element.time-selector').replaceWith(createTimeSelector(getOffsetByTimezone(event.target.innerHTML), new Date(document.querySelector('input.form-control.input').value)));
+      const formElem = document.querySelector('form.Vlt-form');
+      formElem.querySelectorAll(' .Vlt-form__element .Vlt-dropdown').forEach((dropDown) => {
+        // Add document level click handler per dropdown to listen for clicks outside the dropdown to close it
+        document.addEventListener('click', (clickEvent) => {
+          const isClickInside = dropDown.contains(clickEvent.target);
+          if (!isClickInside) {
+            // The click was OUTSIDE the specifiedElement, do something
+            dropDown.classList.remove('Vlt-dropdown--expanded');
+          }
+        });
+        dropDown.addEventListener('click', () => {
+          dropDown.classList.add('Vlt-dropdown--expanded');
+        });
+        dropDown.querySelectorAll('.Vlt-dropdown__link').forEach((dropDownLink) => {
+          dropDownLink.addEventListener('click', (clickEvent) => {
+            dropDown.querySelector('input').setAttribute('value', dropDownLink.innerHTML.trim());
+            dropDown.classList.remove('Vlt-dropdown--expanded');
+            clickEvent.stopPropagation();
+          });
+        });
+      });
+    });
+  });
 
   scheduleFormInputs.append(dateSelector);
   scheduleFormInputs.append(timeSelector);
@@ -259,20 +405,6 @@ function createDateSelector(startDate, numberDays, index) {
                     <div class="flatpickr-days" tabindex="-1">
                       <!--A div containing spans of generated days will be inserted here--> 
                     </div>
-                    <div class="Vlt-datepicker__months">
-                        <span class="Vlt-datepicker__month" data-month="0">Jan</span>
-                        <span class="Vlt-datepicker__month" data-month="1">Feb</span>
-                        <span class="Vlt-datepicker__month" data-month="2">Mar</span>
-                        <span class="Vlt-datepicker__month" data-month="3">Apr</span>
-                        <span class="Vlt-datepicker__month" data-month="4">May</span>
-                        <span class="Vlt-datepicker__month" data-month="5">Jun</span>
-                        <span class="Vlt-datepicker__month" data-month="6">Jul</span>
-                        <span class="Vlt-datepicker__month" data-month="7">Aug</span>
-                        <span class="Vlt-datepicker__month Vlt-datepicker__month-disabled" data-month="8">Sep</span>
-                        <span class="Vlt-datepicker__month Vlt-datepicker__month-disabled" data-month="9">Oct</span>
-                        <span class="Vlt-datepicker__month Vlt-datepicker__month-disabled" data-month="10">Nov</span>
-                        <span class="Vlt-datepicker__month Vlt-datepicker__month-disabled" data-month="11">Dec</span>
-                    </div>
                 </div>
             </div>
             <div class="Vlt-datepicker__footer"><button class="Vlt-datepicker__clear">Clear</button></div>`;
@@ -319,7 +451,7 @@ async function fetchFormContent(formUrl, formWrapper) {
       const endDateObject = getSchedulingWindowEndDate(startDate, schedulingWindow);
       form.append(createDateSelector(startDate, schedulingWindow, 1));
 
-      // Add document level click handler per dropdown to listen for clicks outside of the dropdown to close it
+      // Add document level click handler per dropdown to listen for clicks outside the dropdown to close it
       document.addEventListener('click', (event) => {
         const dateModal = form.querySelector('.flatpickr-calendar.Vlt-datepicker.open');
         if (dateModal) {
@@ -449,15 +581,14 @@ function submitForm(formWrapper) {
 
     // submit form here.
     const formData = new FormData();
-    form.querySelectorAll('.Vlt-form__element input, .Vlt-form__element select, input[type="hidden"]').forEach((input) => {
+    form.querySelectorAll('.Vlt-form__element input, .Vlt-form__element select, .Vlt-form>input[type="hidden"]').forEach((input) => {
       if (input.name !== '') {
         formData.append(input.name, input.value);
       }
     });
     fetch(url, {
-      // TODO: Flip the method back to post and uncomment the body once done testing submission and failure behavior locally
-      method: 'get',
-      // body: formData,
+      method: 'post',
+      body: formData,
     })
       .then((response) => {
         formWrapper.classList.add('submitted');
