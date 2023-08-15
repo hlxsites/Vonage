@@ -1,8 +1,12 @@
 import { div, span } from '../scripts/scripts.js';
 
-const millisPerDay = 86400000;
+/* TODO:
+*   Need to have the time drop down selector update when a date is selected (just like it does on the time zone change
+*
+* */
 const millisPerMinute = 60000;
-
+const millisPerHour = millisPerMinute * 60;
+const millisPerDay = millisPerHour * 24;
 function isDST(date = new Date()) {
   const january = new Date(
     date.getFullYear(),
@@ -171,13 +175,21 @@ function createTimeSelector(timeZone, date = new Date()) {
 
   const timeDropDown = div({ class: 'Vlt-dropdown__scroll' });
   let tmpDate = new Date(date.valueOf());
+
+  // The allowed scheduling window (in UTC hours)
   const utcSchedulingStart = 13;
+  // const utcSchedulingEnd = 22;
+
   tmpDate.setHours(utcSchedulingStart + timeZone.offset, 0, 0, 0);
 
   // eslint-disable-next-line no-plusplus
   for (let i = 0; i < 18; i++) {
     const timeOption = div({ class: 'Vlt-dropdown__link', innerHTML: formatAMPM(tmpDate) });
-    if (tmpDate.getTime() > new Date().getTime()) {
+
+    const compareDate = new Date();
+    const localTimeZone = calcLocalTimeZone();
+    compareDate.setHours(compareDate.getHours() - (localTimeZone.offset - timeZone.offset), 0, 0, 0);
+    if (tmpDate.getTime() - compareDate.getTime() > 0) {
       timeDropDown.append(timeOption);
     }
     tmpDate = new Date(tmpDate.valueOf() + 30 * millisPerMinute);
@@ -260,7 +272,14 @@ function createScheduleElements() {
   timeZoneSelector.querySelector('.Vlt-input input').setAttribute('value', timeZone.name);
   timeZoneSelector.querySelectorAll('.Vlt-dropdown__scroll div').forEach((timeZoneLink) => {
     timeZoneLink.addEventListener('click', (event) => {
-      document.querySelector('.Vlt-form__element.time-selector').replaceWith(createTimeSelector(getOffsetByTimezone(event.target.innerHTML), new Date(document.querySelector('input.form-control.input').value)));
+      let selectedDate;
+      if (document.querySelector('input.form-control.input').value !== '') {
+        selectedDate = new Date(Date.parse(document.querySelector('input.form-control.input').value));
+      } else {
+        selectedDate = new Date();
+      }
+
+      document.querySelector('.Vlt-form__element.time-selector').replaceWith(createTimeSelector(getOffsetByTimezone(event.target.innerHTML), selectedDate));
       const formElem = document.querySelector('form.Vlt-form');
       formElem.querySelectorAll(' .Vlt-form__element .Vlt-dropdown').forEach((dropDown) => {
         // Add document level click handler per dropdown to listen for clicks outside the dropdown to close it
