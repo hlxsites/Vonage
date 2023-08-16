@@ -307,9 +307,10 @@ function createTimeZoneSelector(form, timeZone = calcLocalTimeZone()) {
   timeZoneSelector.querySelector('.Vlt-input input').setAttribute('value', timeZone.name);
   timeZoneSelector.querySelectorAll('.Vlt-dropdown__scroll div').forEach((timeZoneLink) => {
     timeZoneLink.addEventListener('click', (event) => {
-      form.querySelector('.Vlt-form__element.time-selector').replaceWith(createTimeSelector(getOffsetByTimezone(event.target.innerHTML), getSelectedDate()));
+      form.querySelector('.Vlt-form__element.time-selector').replaceWith(createTimeSelector(getOffsetByTimezone(event.target.innerHTML), getSelectedDate(form.querySelector('.Vlt-form__element.date-selector .form-control.input'))));
       form.querySelectorAll(' .Vlt-form__element .Vlt-dropdown').forEach((dropDown) => {
         addDropDownClickHandlers(dropDown);
+        addOutsideDropDownClickHandler(dropDown);
       });
     });
   });
@@ -398,14 +399,29 @@ function createScheduleElements(form) {
  * Get the currently selected date from the date picker
  * @returns {Date} - Parsed date from the value of the date picker
  */
-function getSelectedDate() {
+function getSelectedDate(dateSelector) {
   let selectedDate;
-  if (document.querySelector('input.form-control.input').value !== '') {
-    selectedDate = new Date(Date.parse(document.querySelector('input.form-control.input').value));
+  if (dateSelector.value !== '') {
+    selectedDate = new Date(Date.parse(dateSelector.value));
   } else {
     selectedDate = new Date();
   }
   return selectedDate;
+}
+
+/**
+ * Get the currently selected time zone from the time zone selector
+ * @param {Element} timeZoneSelector - The timezone selector element in the form to check for a value
+ * @returns {string} - The value from the dropdown, or if not specified the calcualted local time zone
+ */
+function getSelectedTimeZone(timeZoneSelector) {
+  let selectedTimeZone = '';
+  if (timeZoneSelector.value !== '') {
+    selectedTimeZone = timeZoneSelector.getAttribute('value');
+  } else {
+    selectedTimeZone = calcLocalTimeZone().name;
+  }
+  return selectedTimeZone;
 }
 
 /**
@@ -525,7 +541,9 @@ function createDatePickerModal(form, startDate, numberDays, index) {
         document.querySelector('.flatpickr-calendar.Vlt-datepicker').classList.remove('open');
         // Recreate the time selector
         // TODO: Could improve this to only recreate if changing either from today to another day or from any day to today (the only times the time selector would need to be updated)
-        form.querySelector('.Vlt-form__element.time-selector').replaceWith(createTimeSelector(getOffsetByTimezone(event.target.innerHTML), getSelectedDate()));
+        const selectedTimeZone = getOffsetByTimezone(getSelectedTimeZone(form.querySelector('.Vlt-form__element.timezone-selector .input'))).name;
+        const selectedDate = getSelectedDate(form.querySelector('.Vlt-form__element.date-selector .form-control.input'));
+        form.querySelector('.Vlt-form__element.time-selector').replaceWith(createTimeSelector(selectedTimeZone, selectedDate));
         form.querySelectorAll(' .Vlt-form__element.time-selector .Vlt-dropdown').forEach((dropDown) => {
           addDropDownClickHandlers(dropDown);
           addOutsideDropDownClickHandler(dropDown);
