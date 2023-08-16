@@ -175,7 +175,7 @@ function addInputValidation(element) {
 /**
  * Create a time drop down selector, time is hard coded presently to start at UTC 13:00 and proceed in 30 minute increments up to UTC 22:00
  * will only display times that are in the future based on the specified time and timezone
- * @param {string}timeZone - String representation of the timezones displayed in the timezone selector drop down (currently Eastern, Central, Mountain or Pacific)
+ * @param {Object }timeZone - String representation of the timezones displayed in the timezone selector drop down (currently Eastern, Central, Mountain or Pacific)
  * @param {Date} date - The date to generate a time selector
  * @returns {Element} - Time selector as well as the drop down panel with only valid times to display
  */
@@ -541,7 +541,7 @@ function createDatePickerModal(form, startDate, numberDays, index) {
         document.querySelector('.flatpickr-calendar.Vlt-datepicker').classList.remove('open');
         // Recreate the time selector
         // TODO: Could improve this to only recreate if changing either from today to another day or from any day to today (the only times the time selector would need to be updated)
-        const selectedTimeZone = getOffsetByTimezone(getSelectedTimeZone(form.querySelector('.Vlt-form__element.timezone-selector .input'))).name;
+        const selectedTimeZone = getOffsetByTimezone(getSelectedTimeZone(form.querySelector('.Vlt-form__element.timezone-selector input')));
         const selectedDate = getSelectedDate(form.querySelector('.Vlt-form__element.date-selector .form-control.input'));
         form.querySelector('.Vlt-form__element.time-selector').replaceWith(createTimeSelector(selectedTimeZone, selectedDate));
         form.querySelectorAll(' .Vlt-form__element.time-selector .Vlt-dropdown').forEach((dropDown) => {
