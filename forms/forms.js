@@ -1,9 +1,5 @@
 import { div, span } from '../scripts/scripts.js';
 
-/* TODO:
-*   Check on schedule window allowed including times that are just in the past (think it must be a >= vs > comparison issue or something similar
-*   Need to look into why the modal date picker is not positioning above the drop down on initial load and click (some wierd position calculation issue)
-* */
 const millisPerMinute = 60000;
 const millisPerHour = millisPerMinute * 60;
 const millisPerDay = millisPerHour * 24;
@@ -219,7 +215,7 @@ function createTimeSelector(timeZone = calcLocalTimeZone(), date = new Date()) {
 
     const compareDate = new Date();
     const localTimeZone = calcLocalTimeZone();
-    compareDate.setHours(compareDate.getHours() - (localTimeZone.offset - timeZone.offset), 0, 0, 0);
+    compareDate.setHours(compareDate.getHours() - (localTimeZone.offset - timeZone.offset), compareDate.getMinutes(), 0, 0);
     if (tmpDate.getTime() - compareDate.getTime() > 0) {
       timeDropDown.append(timeOption);
     }
@@ -254,6 +250,7 @@ function createDateSelector(form) {
 
   dateSelector.addEventListener('click', (event) => {
     event.stopPropagation();
+    form.querySelector('.flatpickr-calendar.Vlt-datepicker').classList.add('open');
     const buttonRect = form.querySelector('.Vlt-input.Vlt-native-dropdown').getBoundingClientRect();
     const dateSelectorModal = document.querySelector('.flatpickr-calendar.Vlt-datepicker');
     const dateSelectorModalRect = dateSelectorModal.getBoundingClientRect();
@@ -268,7 +265,6 @@ function createDateSelector(form) {
         datePicker.style = `top: ${buttonRect.y + buttonRect.height + scrollOffset}px; left: ${buttonRect.x - containerOffset}px; right: auto;`;
       });
     }
-    form.querySelector('.flatpickr-calendar.Vlt-datepicker').classList.add('open');
   });
   return dateSelector;
 }
@@ -344,7 +340,7 @@ function createScheduleElements(form) {
 
   if (startDate.getMonth() !== endDateObject.endDate.getMonth()) {
     form.append(createDatePickerModal(form, new Date(endDateObject.endDate.getFullYear(), endDateObject.endDate.getMonth(), 1), endDateObject.counter, 2));
-    form.querySelectorAll('.Vlt-datepicker__nav-prev, .Vlt-datepicker__nav-next').forEach((button) => {
+    form.querySelectorAll('.Vlt-datepicker__nav-prev,.Vlt-datepicker__nav-next').forEach((button) => {
       button.addEventListener('click', () => {
         form.querySelectorAll('.flatpickr-calendar').forEach((datePicker) => {
           datePicker.classList.toggle('open');
@@ -352,7 +348,9 @@ function createScheduleElements(form) {
       });
     });
   } else {
-    form.querySelector('.Vlt-datepicker__nav-prev, .Vlt-datepicker__nav-next').classList.add('disabled');
+    form.querySelectorAll('.Vlt-datepicker__nav-prev,.Vlt-datepicker__nav-next').forEach((button) => {
+      button.classList.add('disabled');
+    });
   }
 
   // Add document level click handler per dropdown to listen for clicks outside the date picker to close it
