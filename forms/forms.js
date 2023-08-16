@@ -1,17 +1,17 @@
 import { div, span } from '../scripts/scripts.js';
 
 /* TODO:
-*   Need to have the time drop down selector update when a date is selected (just like it does on the time zone change)
 *   Check on schedule window allowed including times that are just in the past (think it must be a >= vs > comparison issue or something similar
+*   Need to look into why the modal date picker is not positioning above the drop down on initial load and click (some wierd position calculation issue)
 * */
 const millisPerMinute = 60000;
 const millisPerHour = millisPerMinute * 60;
 const millisPerDay = millisPerHour * 24;
 
 /**
- *
- * @param date
- * @returns {boolean}
+ * Check whether a certain date (or if none is specified the current date) would be in DST
+ * @param {Date} date - Date to check whether DST would be in effect (defaults to the current date)
+ * @returns {boolean} - True if DST is in effect, false if not
  */
 function isDST(date = new Date()) {
   const january = new Date(
@@ -29,9 +29,9 @@ function isDST(date = new Date()) {
 }
 
 /**
- *
- * @param timeZone
- * @returns {{offset: number, name}}
+ * Get the UTC offset for a given timezone
+ * @param {string} timeZone - String representation of the timezones displayed in the timezone selector drop down (currently Eastern, Central, Mountain or Pacific)
+ * @returns {{offset: number, name: string}} - An object containing the correct UTC offset (taking into account DST) as well as the name of the timezone (same as was input)
  */
 function getOffsetByTimezone(timeZone) {
   let timeZoneOffset;
@@ -86,8 +86,8 @@ function getOffsetByTimezone(timeZone) {
 }
 
 /**
- *
- * @returns {{offset: number, name: string}}
+ * Get the local timezone and UTC offset
+ * @returns {{offset: number, name: string}} - An object containing the correct UTC offset (taking into account DST) as well as the name of the timezone (same as was input)
  */
 function calcLocalTimeZone() {
   const timeZoneOffset = -new Date().getTimezoneOffset() / 60;
@@ -143,9 +143,9 @@ function calcLocalTimeZone() {
 }
 
 /**
- *
- * @param date
- * @returns {string}
+ * Returns a representation of the time from the supplied date object suitable for writing in a dropdown menu
+ * @param {Date} date - The date object with the desired time set.
+ * @returns {string} - String representation of the time suitable for including in a time selector drop down menu (HH:MM AM||PM)
  */
 function formatAMPM(date) {
   let hours = date.getHours();
@@ -158,8 +158,8 @@ function formatAMPM(date) {
 }
 
 /**
- *
- * @param element
+ * Add event handlers to perform form validation a form element
+ * @param {Element} element - The form element to apply validation to on change / focus loss
  */
 function addInputValidation(element) {
   element.addEventListener('change', () => {
@@ -177,10 +177,11 @@ function addInputValidation(element) {
 }
 
 /**
- *
- * @param timeZone
- * @param date
- * @returns {Element}
+ * Create a time drop down selector, time is hard coded presently to start at UTC 13:00 and proceed in 30 minute increments up to UTC 22:00
+ * will only display times that are in the future based on the specified time and timezone
+ * @param {string}timeZone - String representation of the timezones displayed in the timezone selector drop down (currently Eastern, Central, Mountain or Pacific)
+ * @param {Date} date - The date to generate a time selector
+ * @returns {Element} - Time selector as well as the drop down panel with only valid times to display
  */
 function createTimeSelector(timeZone = calcLocalTimeZone(), date = new Date()) {
   const timeSelector = div({ class: 'Vlt-form__element time-selector', 'is-required': 'true' });
@@ -231,9 +232,9 @@ function createTimeSelector(timeZone = calcLocalTimeZone(), date = new Date()) {
 }
 
 /**
- *
- * @param form
- * @returns {Element}
+ * Create a date selector which will toggle a modal calendar window and display the date selected from that calendar
+ * @param {Element} form - The form in which the date selector will be added
+ * @returns {Element} - The form element which can be clicked to launch the date picker
  */
 function createDateSelector(form) {
   const dateSelector = div({ class: 'Vlt-form__element date-selector', 'is-required': 'true' });
@@ -252,8 +253,6 @@ function createDateSelector(form) {
                                     </div>`;
 
   dateSelector.addEventListener('click', (event) => {
-    form.querySelector('.flatpickr-calendar.Vlt-datepicker').classList.add('open');
-
     event.stopPropagation();
     const buttonRect = form.querySelector('.Vlt-input.Vlt-native-dropdown').getBoundingClientRect();
     const dateSelectorModal = document.querySelector('.flatpickr-calendar.Vlt-datepicker');
@@ -269,131 +268,16 @@ function createDateSelector(form) {
         datePicker.style = `top: ${buttonRect.y + buttonRect.height + scrollOffset}px; left: ${buttonRect.x - containerOffset}px; right: auto;`;
       });
     }
+    form.querySelector('.flatpickr-calendar.Vlt-datepicker').classList.add('open');
   });
   return dateSelector;
 }
 
 /**
- *
- * @param form
- * @returns {Element}
- */
-
-function createScheduleElements(form) {
-  // Add event listeners for the immediate / schedule radio button to show and hide the scheduling controls
-  form.querySelectorAll('.bns-form__fieldset--phone .Vlt-radio').forEach((radio) => {
-    radio.addEventListener('click', (event) => {
-      if (event.target.type === 'radio') {
-        radio.querySelector('input').checked = true;
-        const showScheduleElems = event.target.getAttribute('value');
-        const phoneFormFieldSet = form.querySelector('.bns-form__fieldset--phone');
-        if (showScheduleElems === 'true' && !form.querySelector('.bns-reschedule__form-inputs')) {
-          phoneFormFieldSet.classList.remove('bns-form__fieldset--margin');
-          phoneFormFieldSet.append(createScheduleElements(form));
-        } else if (showScheduleElems === 'false' && form.querySelector('.bns-reschedule__form-inputs')) {
-          form.querySelector('.bns-reschedule__form-inputs').remove();
-          phoneFormFieldSet.classList.add('bns-form__fieldset--margin');
-        }
-      }
-    });
-  });
-
-  const scheduleFormInputs = div({ class: 'bns-reschedule__form-inputs' });
-
-  scheduleFormInputs.append(createDateSelector(form));
-  const timeZone = calcLocalTimeZone();
-  scheduleFormInputs.append(createTimeSelector(timeZone));
-  scheduleFormInputs.append(createTimeZoneSelector(form, timeZone));
-
-  const schedulingWindow = 10;
-  const startDate = new Date();
-  startDate.setHours(0, 0, 0, 0);
-  const endDateObject = getSchedulingWindowEndDate(startDate, schedulingWindow);
-  form.append(createDateModal(form, startDate, schedulingWindow, 1));
-
-  if (startDate.getMonth() !== endDateObject.endDate.getMonth()) {
-    form.append(createDateModal(form, new Date(endDateObject.endDate.getFullYear(), endDateObject.endDate.getMonth(), 1), endDateObject.counter, 2));
-    form.querySelectorAll('.Vlt-datepicker__nav-prev, .Vlt-datepicker__nav-next').forEach((button) => {
-      button.addEventListener('click', () => {
-        form.querySelectorAll('.flatpickr-calendar').forEach((datePicker) => {
-          datePicker.classList.toggle('open');
-        });
-      });
-    });
-  } else {
-    form.querySelector('.Vlt-datepicker__nav-prev, .Vlt-datepicker__nav-next').classList.add('disabled');
-  }
-
-  // Add document level click handler per dropdown to listen for clicks outside the dropdown to close it
-  document.addEventListener('click', (event) => {
-    const dateModal = form.querySelector('.flatpickr-calendar.Vlt-datepicker.open');
-    if (dateModal) {
-      const isClickInside = dateModal.contains(event.target);
-      if (!isClickInside) {
-        // The click was OUTSIDE the specifiedElement, do something
-        dateModal.classList.remove('open');
-      }
-    }
-  });
-  scheduleFormInputs.querySelectorAll('.Vlt-form__element .Vlt-radio').forEach((radio) => {
-    radio.addEventListener('click', (event) => {
-      if (event.target.type === 'radio') {
-        radio.querySelector('input').checked = true;
-        const showScheduleElems = event.target.getAttribute('value');
-        if (showScheduleElems === 'true') {
-          scheduleFormInputs.querySelector('.bns-form__fieldset--phone').append(createScheduleElements());
-        } else {
-          scheduleFormInputs.querySelector('.bns-reschedule__form-inputs').remove();
-        }
-      }
-    });
-  });
-
-  scheduleFormInputs.querySelectorAll(' .Vlt-form__element .Vlt-dropdown').forEach((dropDown) => {
-    // Add document level click handler per dropdown to listen for clicks outside of the dropdown to close it
-    document.addEventListener('click', (event) => {
-      const isClickInside = dropDown.contains(event.target);
-      if (!isClickInside) {
-        // The click was OUTSIDE the specifiedElement, do something
-        dropDown.classList.remove('Vlt-dropdown--expanded');
-      }
-    });
-    dropDown.addEventListener('click', () => {
-      dropDown.classList.add('Vlt-dropdown--expanded');
-    });
-    dropDown.querySelectorAll('.Vlt-dropdown__link').forEach((dropDownLink) => {
-      dropDownLink.addEventListener('click', (event) => {
-        dropDown.querySelector('input').setAttribute('value', dropDownLink.innerHTML.trim());
-        dropDown.classList.remove('Vlt-dropdown--expanded');
-        event.stopPropagation();
-      });
-    });
-  });
-
-  scheduleFormInputs.querySelectorAll('input[required], select[required]').forEach(addInputValidation);
-
-  return scheduleFormInputs;
-}
-
-/**
- *
- * @returns {Date}
- */
-function getSelectedDate() {
-  let selectedDate;
-  if (document.querySelector('input.form-control.input').value !== '') {
-    selectedDate = new Date(Date.parse(document.querySelector('input.form-control.input').value));
-  } else {
-    selectedDate = new Date();
-  }
-  return selectedDate;
-}
-
-/**
- *
- * @param form
- * @param timeZone
- * @returns {Element}
+ * Create a time zone selector which will on change trigger an update of the time selector
+ * @param {Element} form - The form in which the time zone selector will be added
+ * @param {{offset: number, name: string}} timeZone - The desired timeZone to have active by default (defaults to the locally calculated time zone of the user
+ * @returns {Element} - A timezone selector drop down
  */
 function createTimeZoneSelector(form, timeZone = calcLocalTimeZone()) {
   const timeZoneSelector = div({ class: 'Vlt-form__element timezone-selector', 'is-required': 'true' });
@@ -429,21 +313,108 @@ function createTimeZoneSelector(form, timeZone = calcLocalTimeZone()) {
     timeZoneLink.addEventListener('click', (event) => {
       form.querySelector('.Vlt-form__element.time-selector').replaceWith(createTimeSelector(getOffsetByTimezone(event.target.innerHTML), getSelectedDate()));
       form.querySelectorAll(' .Vlt-form__element .Vlt-dropdown').forEach((dropDown) => {
-        addTimeSelectorClickHandlers(dropDown);
+        addDropDownClickHandlers(dropDown);
       });
     });
   });
   return timeZoneSelector;
 }
 
-function addTimeSelectorClickHandlers(dropDown) {
-  document.addEventListener('click', (clickEvent) => {
-    const isClickInside = dropDown.contains(clickEvent.target);
-    if (!isClickInside) {
-      // The click was OUTSIDE the specifiedElement, do something
-      dropDown.classList.remove('Vlt-dropdown--expanded');
+/**
+ * Creates all the necessary schedule elements (date selector, time selector and time zone selector for a form with scheduling support
+ * @param {Element} form - The form to which the form scheduling elements will be added.
+ * @returns {Element} - Container element with all the scheduling form inputs
+ */
+
+function createScheduleElements(form) {
+  const scheduleFormInputs = div({ class: 'bns-reschedule__form-inputs' });
+
+  // Create the date, time and timezone drop down input fields
+  scheduleFormInputs.append(createDateSelector(form));
+  const timeZone = calcLocalTimeZone();
+  scheduleFormInputs.append(createTimeSelector(timeZone));
+  scheduleFormInputs.append(createTimeZoneSelector(form, timeZone));
+
+  // Create the date picker modal elements
+  const schedulingWindow = 10;
+  const startDate = new Date();
+  startDate.setHours(0, 0, 0, 0);
+  const endDateObject = getSchedulingWindowEndDate(startDate, schedulingWindow);
+  form.append(createDatePickerModal(form, startDate, schedulingWindow, 1));
+
+  if (startDate.getMonth() !== endDateObject.endDate.getMonth()) {
+    form.append(createDatePickerModal(form, new Date(endDateObject.endDate.getFullYear(), endDateObject.endDate.getMonth(), 1), endDateObject.counter, 2));
+    form.querySelectorAll('.Vlt-datepicker__nav-prev, .Vlt-datepicker__nav-next').forEach((button) => {
+      button.addEventListener('click', () => {
+        form.querySelectorAll('.flatpickr-calendar').forEach((datePicker) => {
+          datePicker.classList.toggle('open');
+        });
+      });
+    });
+  } else {
+    form.querySelector('.Vlt-datepicker__nav-prev, .Vlt-datepicker__nav-next').classList.add('disabled');
+  }
+
+  // Add document level click handler per dropdown to listen for clicks outside the date picker to close it
+  document.addEventListener('click', (event) => {
+    const dateModal = form.querySelector('.flatpickr-calendar.Vlt-datepicker.open');
+    if (dateModal) {
+      const isClickInside = dateModal.contains(event.target);
+      if (!isClickInside) {
+        // The click was OUTSIDE the specifiedElement, do something
+        dateModal.classList.remove('open');
+      }
     }
   });
+
+  // Add event listeners for the immediate / schedule radio button to show and hide the scheduling controls
+  form.querySelectorAll('.bns-form__fieldset--phone .Vlt-radio').forEach((radio) => {
+    radio.addEventListener('click', (event) => {
+      if (event.target.type === 'radio') {
+        radio.querySelector('input').checked = true;
+        const showScheduleElems = event.target.getAttribute('value');
+        const phoneFormFieldSet = form.querySelector('.bns-form__fieldset--phone');
+        if (showScheduleElems === 'true' && !form.querySelector('.bns-reschedule__form-inputs')) {
+          phoneFormFieldSet.classList.remove('bns-form__fieldset--margin');
+          phoneFormFieldSet.append(createScheduleElements(form));
+        } else if (showScheduleElems === 'false' && form.querySelector('.bns-reschedule__form-inputs')) {
+          form.querySelector('.bns-reschedule__form-inputs').remove();
+          phoneFormFieldSet.classList.add('bns-form__fieldset--margin');
+        }
+      }
+    });
+  });
+
+  scheduleFormInputs.querySelectorAll(' .Vlt-form__element .Vlt-dropdown').forEach((dropDown) => {
+    // Click handlers for the dropdown elements to update the form value and close the dropdown
+    addDropDownClickHandlers(dropDown);
+    addOutsideDropDownClickHandler(dropDown);
+  });
+
+  scheduleFormInputs.querySelectorAll('input[required], select[required]').forEach(addInputValidation);
+
+  return scheduleFormInputs;
+}
+
+/**
+ * Get the currently selected date from the date picker
+ * @returns {Date} - Parsed date from the value of the date picker
+ */
+function getSelectedDate() {
+  let selectedDate;
+  if (document.querySelector('input.form-control.input').value !== '') {
+    selectedDate = new Date(Date.parse(document.querySelector('input.form-control.input').value));
+  } else {
+    selectedDate = new Date();
+  }
+  return selectedDate;
+}
+
+/**
+ * Adds click handlers to a dropdown so that on click of a drop down link the dropdown is closed and the value of the drop-down input field is set to the value from the drop-down events target
+ * @param {Element} dropDown - The upper level wrapping element of the drop-down panel
+ */
+function addDropDownClickHandlers(dropDown) {
   dropDown.addEventListener('click', () => {
     dropDown.classList.add('Vlt-dropdown--expanded');
   });
@@ -457,15 +428,65 @@ function addTimeSelectorClickHandlers(dropDown) {
 }
 
 /**
- *
- * @param startDate
- * @param numberDays
- * @param index
- * @returns {Element}
+ * Adds click handlers to a dropdown so that a click outside the dropdown itself will trigger a close of the drop-down
+ * @param {Element} dropDown - The upper level wrapping element of the drop-down panel
  */
-function createDateModal(form, startDate, numberDays, index) {
+function addOutsideDropDownClickHandler(dropDown) {
+  // Add event listener to close the dropdown menu if a click outside the dropdown occurs.
+  document.addEventListener('click', (clickEvent) => {
+    const isClickInside = dropDown.contains(clickEvent.target);
+    if (!isClickInside) {
+      // The click was OUTSIDE the specifiedElement, do something
+      dropDown.classList.remove('Vlt-dropdown--expanded');
+    }
+  });
+}
+
+/**
+ * Create a date picker modal element which will only show a certain number of days as active
+ * @param form - The form from which this date picker will be opened
+ * @param startDate - The first date to start iterating from when calculating the active days
+ * @param numberDays - How many days to enable in the date picker from the start date (with days in the past, and weekends set to not be included).
+ * @param index - Tab index for this date picker
+ * @returns {Element} - Date pciker element suitable to use as a modal window opened from the date selector input
+ */
+function createDatePickerModal(form, startDate, numberDays, index) {
   const headerMonth = startDate.toLocaleString('default', { month: 'long' });
   const headerYear = startDate.getFullYear();
+
+  const datePickerModal = div({ class: 'flatpickr-calendar Vlt-datepicker animate showTimeInput', tabIndex: index });
+  datePickerModal.innerHTML = `
+        <div class="Vlt-datepicker__header">
+          <span class="Vlt-datepicker__header-month">${headerMonth}</span>
+          <span class="Vlt-datepicker__header-year">${headerYear}</span>
+                <div class="Vlt-datepicker__nav">
+                    <span class="Vlt-datepicker__nav-prev"></span>
+                    <span class="Vlt-datepicker__nav-next"></span>
+                </div>
+            </div>
+            <div class="Vlt-datepicker__range">
+                <span class="Vlt-datepicker__range-start"></span>
+                <span class="Vlt-datepicker__range-end"></span>
+            </div>
+            <div class="flatpickr-innerContainer">
+                <div class="flatpickr-rContainer">
+                    <div class="flatpickr-weekdays">
+                        <div class="flatpickr-weekdaycontainer">
+                            <span class="flatpickr-weekday">Mon</span>
+                            <span class="flatpickr-weekday">Tue</span>
+                            <span class="flatpickr-weekday">Wed</span>
+                            <span class="flatpickr-weekday">Thu</span>
+                            <span class="flatpickr-weekday">Fri</span>
+                            <span class="flatpickr-weekday">Sat</span>
+                            <span class="flatpickr-weekday">Sun</span>
+                        </div>
+                    </div>
+                    <div class="flatpickr-days" tabindex="-1">
+                      <!--A div containing spans of generated days will be inserted here--> 
+                    </div>
+                </div>
+            </div>
+            <div class="Vlt-datepicker__footer"><button class="Vlt-datepicker__clear">Clear</button></div>`;
 
   const firstDayOfMonth = new Date(startDate.getFullYear(), startDate.getMonth(), 1);
   const lastDayOfMonth = new Date(startDate.getFullYear(), startDate.getMonth() + 1, 0);
@@ -501,14 +522,15 @@ function createDateModal(form, startDate, numberDays, index) {
         });
         daySpan.classList.add('selected');
         // Set the hidden date input fields value to the selected date
-        document.querySelector('.Vlt-input.Vlt-native-dropdown .form-control.input').value = event.target.getAttribute('dateString');
-        // Close the dete selector modal window
+        form.querySelector('.Vlt-input.Vlt-native-dropdown .form-control.input').value = event.target.getAttribute('dateString');
+        // Close the dete picker modal window
         document.querySelector('.flatpickr-calendar.Vlt-datepicker').classList.remove('open');
-        // Reset the time selector
-        document.querySelector('.Vlt-form__element.time-selector').replaceWith(createTimeSelector(getOffsetByTimezone(event.target.innerHTML), getSelectedDate()));
-        form.querySelectorAll(' .Vlt-form__element .Vlt-dropdown').forEach((dropDown) => {
-          // Add document level click handler per dropdown to listen for clicks outside the dropdown to close it
-          addTimeSelectorClickHandlers(dropDown);
+        // Recreate the time selector
+        // TODO: Could improve this to only recreate if changing either from today to another day or from any day to today (the only times the time selector would need to be updated)
+        form.querySelector('.Vlt-form__element.time-selector').replaceWith(createTimeSelector(getOffsetByTimezone(event.target.innerHTML), getSelectedDate()));
+        form.querySelectorAll(' .Vlt-form__element.time-selector .Vlt-dropdown').forEach((dropDown) => {
+          addDropDownClickHandlers(dropDown);
+          addOutsideDropDownClickHandler(dropDown);
         });
       });
       counter -= 1;
@@ -517,47 +539,14 @@ function createDateModal(form, startDate, numberDays, index) {
     calendarDate.setDate(calendarDate.getDate() + 1);
   }
 
-  const dateSelector = div({ class: 'flatpickr-calendar Vlt-datepicker animate showTimeInput', tabIndex: index });
-  dateSelector.innerHTML = `
-        <div class="Vlt-datepicker__header">
-          <span class="Vlt-datepicker__header-month">${headerMonth}</span>
-          <span class="Vlt-datepicker__header-year">${headerYear}</span>
-                <div class="Vlt-datepicker__nav">
-                    <span class="Vlt-datepicker__nav-prev"></span>
-                    <span class="Vlt-datepicker__nav-next"></span>
-                </div>
-            </div>
-            <div class="Vlt-datepicker__range">
-                <span class="Vlt-datepicker__range-start"></span>
-                <span class="Vlt-datepicker__range-end"></span>
-            </div>
-            <div class="flatpickr-innerContainer">
-                <div class="flatpickr-rContainer">
-                    <div class="flatpickr-weekdays">
-                        <div class="flatpickr-weekdaycontainer">
-                            <span class="flatpickr-weekday">Mon</span>
-                            <span class="flatpickr-weekday">Tue</span>
-                            <span class="flatpickr-weekday">Wed</span>
-                            <span class="flatpickr-weekday">Thu</span>
-                            <span class="flatpickr-weekday">Fri</span>
-                            <span class="flatpickr-weekday">Sat</span>
-                            <span class="flatpickr-weekday">Sun</span>
-                        </div>
-                    </div>
-                    <div class="flatpickr-days" tabindex="-1">
-                      <!--A div containing spans of generated days will be inserted here--> 
-                    </div>
-                </div>
-            </div>
-            <div class="Vlt-datepicker__footer"><button class="Vlt-datepicker__clear">Clear</button></div>`;
-
-  dateSelector.querySelector('.Vlt-datepicker__clear').addEventListener('click', () => {
-    dateSelector.querySelector('.flatpickr-day.selected').classList.remove('selected');
+  datePickerModal.querySelector('.Vlt-datepicker__clear').addEventListener('click', () => {
+    datePickerModal.querySelector('.flatpickr-day.selected').classList.remove('selected');
     document.querySelector('.Vlt-input.Vlt-native-dropdown .form-control.input').value = '';
   });
-  dateSelector.querySelector('.flatpickr-days').append(daysContainer);
-  return dateSelector;
+  datePickerModal.querySelector('.flatpickr-days').append(daysContainer);
+  return datePickerModal;
 }
+
 /**
  * Function used to fetch and decorate the form content of an embedded or landing-page-hero form.  Returns the form DOM element to insert into the specified formWrapper
  * the formWrapper element is specified in order to reference it in the submit event handler tied to the forms submit button
@@ -589,10 +578,11 @@ async function fetchFormContent(formUrl, formWrapper) {
 }
 
 /**
- *
- * @param startDate
- * @param window
- * @returns {{endDate: Date, counter}}
+ * Calculate the last date that should be displayed in the date picker based on a specified start date and number of days (counting only weekdays).
+ * If the window extends past the starting month then the last day of the month is returned as well as a counter indicating how many more dayus of the window remained.
+ * @param {Date} startDate - The date from which to start calculating the end date
+ * @param {Number} window - The number of week days from the start date to count in order to find the end date to return
+ * @returns {{endDate: Date, counter}} - An object representing the end date that was reached based on the counting of weekdays from the start, as well as the remaining number of days if the end of the month was reached
  */
 function getSchedulingWindowEndDate(startDate, window) {
   const endDate = new Date(startDate);
@@ -629,8 +619,8 @@ function getSchedulingWindowEndDate(startDate, window) {
 }
 
 /**
- *
- * @param input
+ * Perform validation on the specified element and flag it as in error if the validation failed.
+ * @param {Element} input - The element triggering validation
  */
 function validateInput(input) {
   const formEl = input.closest('.Vlt-form__element');
@@ -659,9 +649,9 @@ function validateInput(input) {
 }
 
 /**
- *
- * @param id
- * @param value
+ * Sets the value of a form element (queried by its id) to the specified value
+ * @param {String} id - The id of the form element to update the value of
+ * @param {String} value - The value to apply to the form element
  */
 function setFormValue(id, value) {
   const formElement = document.getElementById(id);
@@ -671,8 +661,8 @@ function setFormValue(id, value) {
 }
 
 /**
- *
- * @param formWrapper
+ * Trigger form validation and submission of the POST to the server
+ * @param {Element} formWrapper - The form to submit
  */
 function submitForm(formWrapper) {
   const form = formWrapper.querySelector('form');
