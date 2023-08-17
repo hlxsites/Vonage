@@ -3,6 +3,10 @@
 /* stylelint-disable no-descending-specificity */
 
 
+.vng-modal.v-loading-modal.vng-modal-full {
+  display: none;
+}
+
 .form.submitted .right-column .form {
   display:none;
 }
@@ -941,7 +945,7 @@ hr {
 }
 
 
-@media (max-width: 767.98px) {
+@media (max-width: 768px) {
   .address-validation-cta .btn {
     min-width:100%;
   }
@@ -983,6 +987,10 @@ hr {
 
 .bns-form-radio-option {
   margin-bottom: 2.4rem;
+}
+
+fieldset {
+  border:none;
 }
 
 .bns-form-fieldset-contact,.bns-form-fieldset-margin {
