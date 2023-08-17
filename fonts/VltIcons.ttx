@@ -2,7 +2,7 @@
 <ttFont sfntVersion="\x00\x01\x00\x00" ttLibVersion="4.39">
 
   <GlyphOrder>
-    <!- The 'id' attribute is only for humans; it is ignored when parsed. ->
+    <!-- The 'id' attribute is only for humans; it is ignored when parsed. ->
     <GlyphID id="0" name=".notdef"/>
     <GlyphID id="1" name="uni0000"/>
     <GlyphID id="2" name="uni0001"/>
@@ -79,7 +79,7 @@
   </GlyphOrder>
 
   <head>
-    <!- Most of this table will be recalculated by the compiler ->
+    <!-- Most of this table will be recalculated by the compiler ->
     <tableVersion value="1.0"/>
     <fontRevision value="1.0"/>
     <checkSumAdjustment value="0x3a0634b9"/>
@@ -120,7 +120,7 @@
   </hhea>
 
   <maxp>
-    <!- Most of this table will be recalculated by the compiler ->
+    <!-- Most of this table will be recalculated by the compiler ->
     <tableVersion value="0x10000"/>
     <numGlyphs value="73"/>
     <maxPoints value="376"/>
@@ -139,7 +139,7 @@
   </maxp>
 
   <OS_2>
-    <!- The fields 'usFirstCharIndex' and 'usLastCharIndex'
+    <!-- The fields 'usFirstCharIndex' and 'usLastCharIndex'
          will be recalculated by the compiler ->
     <version value="3"/>
     <xAvgCharWidth value="1085"/>
@@ -270,78 +270,78 @@
   <cmap>
     <tableVersion version="0"/>
     <cmap_format_4 platformID="0" platEncID="3" language="0">
-      <map code="0x0" name="uni0000"/><!- ???? ->
-      <map code="0x1" name="uni0001"/><!- ???? ->
-      <map code="0x20" name="space"/><!- SPACE ->
-      <map code="0xe900" name="uniE900"/><!- ???? ->
-      <map code="0xe901" name="uniE901"/><!- ???? ->
-      <map code="0xe902" name="uniE902"/><!- ???? ->
-      <map code="0xe903" name="uniE903"/><!- ???? ->
-      <map code="0xe904" name="uniE904"/><!- ???? ->
-      <map code="0xe905" name="uniE905"/><!- ???? ->
-      <map code="0xe906" name="uniE906"/><!- ???? ->
-      <map code="0xe907" name="uniE907"/><!- ???? ->
-      <map code="0xe908" name="uniE908"/><!- ???? ->
-      <map code="0xe909" name="uniE909"/><!- ???? ->
-      <map code="0xe90a" name="uniE90A"/><!- ???? ->
-      <map code="0xe90b" name="uniE90B"/><!- ???? ->
-      <map code="0xe90c" name="uniE90C"/><!- ???? ->
-      <map code="0xe90d" name="uniE90D"/><!- ???? ->
-      <map code="0xe90e" name="uniE90E"/><!- ???? ->
-      <map code="0xe90f" name="uniE90F"/><!- ???? ->
-      <map code="0xe910" name="uniE910"/><!- ???? ->
-      <map code="0xe911" name="uniE911"/><!- ???? ->
-      <map code="0xe912" name="uniE912"/><!- ???? ->
-      <map code="0xe913" name="uniE913"/><!- ???? ->
-      <map code="0xe914" name="uniE914"/><!- ???? ->
-      <map code="0xe915" name="uniE915"/><!- ???? ->
-      <map code="0xe916" name="uniE916"/><!- ???? ->
-      <map code="0xe917" name="uniE917"/><!- ???? ->
-      <map code="0xe918" name="uniE918"/><!- ???? ->
-      <map code="0xe919" name="uniE919"/><!- ???? ->
-      <map code="0xe91a" name="uniE91A"/><!- ???? ->
-      <map code="0xe91b" name="uniE91B"/><!- ???? ->
-      <map code="0xe91c" name="uniE91C"/><!- ???? ->
-      <map code="0xe91d" name="uniE91D"/><!- ???? ->
-      <map code="0xe91e" name="uniE91E"/><!- ???? ->
-      <map code="0xe91f" name="uniE91F"/><!- ???? ->
-      <map code="0xe920" name="uniE920"/><!- ???? ->
-      <map code="0xe921" name="uniE921"/><!- ???? ->
-      <map code="0xe922" name="uniE922"/><!- ???? ->
-      <map code="0xe923" name="uniE923"/><!- ???? ->
-      <map code="0xe924" name="uniE924"/><!- ???? ->
-      <map code="0xe925" name="uniE925"/><!- ???? ->
-      <map code="0xe926" name="uniE926"/><!- ???? ->
-      <map code="0xe927" name="uniE927"/><!- ???? ->
-      <map code="0xe928" name="uniE928"/><!- ???? ->
-      <map code="0xe929" name="uniE929"/><!- ???? ->
-      <map code="0xe92a" name="uniE92A"/><!- ???? ->
-      <map code="0xe92b" name="uniE92B"/><!- ???? ->
-      <map code="0xe92c" name="uniE92C"/><!- ???? ->
-      <map code="0xe92d" name="uniE92D"/><!- ???? ->
-      <map code="0xe92e" name="uniE92E"/><!- ???? ->
-      <map code="0xe92f" name="uniE92F"/><!- ???? ->
-      <map code="0xe930" name="uniE930"/><!- ???? ->
-      <map code="0xe931" name="uniE931"/><!- ???? ->
-      <map code="0xe932" name="uniE932"/><!- ???? ->
-      <map code="0xe933" name="uniE933"/><!- ???? ->
-      <map code="0xe934" name="uniE934"/><!- ???? ->
-      <map code="0xe935" name="uniE935"/><!- ???? ->
-      <map code="0xe936" name="uniE936"/><!- ???? ->
-      <map code="0xe937" name="uniE937"/><!- ???? ->
-      <map code="0xe938" name="uniE938"/><!- ???? ->
-      <map code="0xe939" name="uniE939"/><!- ???? ->
-      <map code="0xe93a" name="uniE93A"/><!- ???? ->
-      <map code="0xe93b" name="uniE93B"/><!- ???? ->
-      <map code="0xe93c" name="uniE93C"/><!- ???? ->
-      <map code="0xe93d" name="uniE93D"/><!- ???? ->
-      <map code="0xe93e" name="uniE93E"/><!- ???? ->
-      <map code="0xe93f" name="uniE93F"/><!- ???? ->
-      <map code="0xe940" name="uniE940"/><!- ???? ->
-      <map code="0xe941" name="uniE941"/><!- ???? ->
-      <map code="0xe942" name="uniE942"/><!- ???? ->
-      <map code="0xe943" name="uniE943"/><!- ???? ->
-      <map code="0xe945" name="uniE945"/><!- ???? ->
+      <map code="0x0" name="uni0000"/><!-- ???? ->
+      <map code="0x1" name="uni0001"/><!-- ???? ->
+      <map code="0x20" name="space"/><!-- SPACE ->
+      <map code="0xe900" name="uniE900"/><!-- ???? ->
+      <map code="0xe901" name="uniE901"/><!-- ???? ->
+      <map code="0xe902" name="uniE902"/><!-- ???? ->
+      <map code="0xe903" name="uniE903"/><!-- ???? ->
+      <map code="0xe904" name="uniE904"/><!-- ???? ->
+      <map code="0xe905" name="uniE905"/><!-- ???? ->
+      <map code="0xe906" name="uniE906"/><!-- ???? ->
+      <map code="0xe907" name="uniE907"/><!-- ???? ->
+      <map code="0xe908" name="uniE908"/><!-- ???? ->
+      <map code="0xe909" name="uniE909"/><!-- ???? ->
+      <map code="0xe90a" name="uniE90A"/><!-- ???? ->
+      <map code="0xe90b" name="uniE90B"/><!-- ???? ->
+      <map code="0xe90c" name="uniE90C"/><!-- ???? ->
+      <map code="0xe90d" name="uniE90D"/><!-- ???? ->
+      <map code="0xe90e" name="uniE90E"/><!-- ???? ->
+      <map code="0xe90f" name="uniE90F"/><!-- ???? ->
+      <map code="0xe910" name="uniE910"/><!-- ???? ->
+      <map code="0xe911" name="uniE911"/><!-- ???? ->
+      <map code="0xe912" name="uniE912"/><!-- ???? ->
+      <map code="0xe913" name="uniE913"/><!-- ???? ->
+      <map code="0xe914" name="uniE914"/><!-- ???? ->
+      <map code="0xe915" name="uniE915"/><!-- ???? ->
+      <map code="0xe916" name="uniE916"/><!-- ???? ->
+      <map code="0xe917" name="uniE917"/><!-- ???? ->
+      <map code="0xe918" name="uniE918"/><!-- ???? ->
+      <map code="0xe919" name="uniE919"/><!-- ???? ->
+      <map code="0xe91a" name="uniE91A"/><!-- ???? ->
+      <map code="0xe91b" name="uniE91B"/><!-- ???? ->
+      <map code="0xe91c" name="uniE91C"/><!-- ???? ->
+      <map code="0xe91d" name="uniE91D"/><!-- ???? ->
+      <map code="0xe91e" name="uniE91E"/><!-- ???? ->
+      <map code="0xe91f" name="uniE91F"/><!-- ???? ->
+      <map code="0xe920" name="uniE920"/><!-- ???? ->
+      <map code="0xe921" name="uniE921"/><!-- ???? ->
+      <map code="0xe922" name="uniE922"/><!-- ???? ->
+      <map code="0xe923" name="uniE923"/><!-- ???? ->
+      <map code="0xe924" name="uniE924"/><!-- ???? ->
+      <map code="0xe925" name="uniE925"/><!-- ???? ->
+      <map code="0xe926" name="uniE926"/><!-- ???? ->
+      <map code="0xe927" name="uniE927"/><!-- ???? ->
+      <map code="0xe928" name="uniE928"/><!-- ???? ->
+      <map code="0xe929" name="uniE929"/><!-- ???? ->
+      <map code="0xe92a" name="uniE92A"/><!-- ???? ->
+      <map code="0xe92b" name="uniE92B"/><!-- ???? ->
+      <map code="0xe92c" name="uniE92C"/><!-- ???? ->
+      <map code="0xe92d" name="uniE92D"/><!-- ???? ->
+      <map code="0xe92e" name="uniE92E"/><!-- ???? ->
+      <map code="0xe92f" name="uniE92F"/><!-- ???? ->
+      <map code="0xe930" name="uniE930"/><!-- ???? ->
+      <map code="0xe931" name="uniE931"/><!-- ???? ->
+      <map code="0xe932" name="uniE932"/><!-- ???? ->
+      <map code="0xe933" name="uniE933"/><!-- ???? ->
+      <map code="0xe934" name="uniE934"/><!-- ???? ->
+      <map code="0xe935" name="uniE935"/><!-- ???? ->
+      <map code="0xe936" name="uniE936"/><!-- ???? ->
+      <map code="0xe937" name="uniE937"/><!-- ???? ->
+      <map code="0xe938" name="uniE938"/><!-- ???? ->
+      <map code="0xe939" name="uniE939"/><!-- ???? ->
+      <map code="0xe93a" name="uniE93A"/><!-- ???? ->
+      <map code="0xe93b" name="uniE93B"/><!-- ???? ->
+      <map code="0xe93c" name="uniE93C"/><!-- ???? ->
+      <map code="0xe93d" name="uniE93D"/><!-- ???? ->
+      <map code="0xe93e" name="uniE93E"/><!-- ???? ->
+      <map code="0xe93f" name="uniE93F"/><!-- ???? ->
+      <map code="0xe940" name="uniE940"/><!-- ???? ->
+      <map code="0xe941" name="uniE941"/><!-- ???? ->
+      <map code="0xe942" name="uniE942"/><!-- ???? ->
+      <map code="0xe943" name="uniE943"/><!-- ???? ->
+      <map code="0xe945" name="uniE945"/><!-- ???? ->
     </cmap_format_4>
     <cmap_format_4 platformID="1" platEncID="3" language="0">
       <map code="0x0" name="uni0000"/>
@@ -418,91 +418,91 @@
       <map code="0xe945" name="uniE945"/>
     </cmap_format_4>
     <cmap_format_4 platformID="3" platEncID="1" language="0">
-      <map code="0x0" name="uni0000"/><!- ???? ->
-      <map code="0x1" name="uni0001"/><!- ???? ->
-      <map code="0x20" name="space"/><!- SPACE ->
-      <map code="0xe900" name="uniE900"/><!- ???? ->
-      <map code="0xe901" name="uniE901"/><!- ???? ->
-      <map code="0xe902" name="uniE902"/><!- ???? ->
-      <map code="0xe903" name="uniE903"/><!- ???? ->
-      <map code="0xe904" name="uniE904"/><!- ???? ->
-      <map code="0xe905" name="uniE905"/><!- ???? ->
-      <map code="0xe906" name="uniE906"/><!- ???? ->
-      <map code="0xe907" name="uniE907"/><!- ???? ->
-      <map code="0xe908" name="uniE908"/><!- ???? ->
-      <map code="0xe909" name="uniE909"/><!- ???? ->
-      <map code="0xe90a" name="uniE90A"/><!- ???? ->
-      <map code="0xe90b" name="uniE90B"/><!- ???? ->
-      <map code="0xe90c" name="uniE90C"/><!- ???? ->
-      <map code="0xe90d" name="uniE90D"/><!- ???? ->
-      <map code="0xe90e" name="uniE90E"/><!- ???? ->
-      <map code="0xe90f" name="uniE90F"/><!- ???? ->
-      <map code="0xe910" name="uniE910"/><!- ???? ->
-      <map code="0xe911" name="uniE911"/><!- ???? ->
-      <map code="0xe912" name="uniE912"/><!- ???? ->
-      <map code="0xe913" name="uniE913"/><!- ???? ->
-      <map code="0xe914" name="uniE914"/><!- ???? ->
-      <map code="0xe915" name="uniE915"/><!- ???? ->
-      <map code="0xe916" name="uniE916"/><!- ???? ->
-      <map code="0xe917" name="uniE917"/><!- ???? ->
-      <map code="0xe918" name="uniE918"/><!- ???? ->
-      <map code="0xe919" name="uniE919"/><!- ???? ->
-      <map code="0xe91a" name="uniE91A"/><!- ???? ->
-      <map code="0xe91b" name="uniE91B"/><!- ???? ->
-      <map code="0xe91c" name="uniE91C"/><!- ???? ->
-      <map code="0xe91d" name="uniE91D"/><!- ???? ->
-      <map code="0xe91e" name="uniE91E"/><!- ???? ->
-      <map code="0xe91f" name="uniE91F"/><!- ???? ->
-      <map code="0xe920" name="uniE920"/><!- ???? ->
-      <map code="0xe921" name="uniE921"/><!- ???? ->
-      <map code="0xe922" name="uniE922"/><!- ???? ->
-      <map code="0xe923" name="uniE923"/><!- ???? ->
-      <map code="0xe924" name="uniE924"/><!- ???? ->
-      <map code="0xe925" name="uniE925"/><!- ???? ->
-      <map code="0xe926" name="uniE926"/><!- ???? ->
-      <map code="0xe927" name="uniE927"/><!- ???? ->
-      <map code="0xe928" name="uniE928"/><!- ???? ->
-      <map code="0xe929" name="uniE929"/><!- ???? ->
-      <map code="0xe92a" name="uniE92A"/><!- ???? ->
-      <map code="0xe92b" name="uniE92B"/><!- ???? ->
-      <map code="0xe92c" name="uniE92C"/><!- ???? ->
-      <map code="0xe92d" name="uniE92D"/><!- ???? ->
-      <map code="0xe92e" name="uniE92E"/><!- ???? ->
-      <map code="0xe92f" name="uniE92F"/><!- ???? ->
-      <map code="0xe930" name="uniE930"/><!- ???? ->
-      <map code="0xe931" name="uniE931"/><!- ???? ->
-      <map code="0xe932" name="uniE932"/><!- ???? ->
-      <map code="0xe933" name="uniE933"/><!- ???? ->
-      <map code="0xe934" name="uniE934"/><!- ???? ->
-      <map code="0xe935" name="uniE935"/><!- ???? ->
-      <map code="0xe936" name="uniE936"/><!- ???? ->
-      <map code="0xe937" name="uniE937"/><!- ???? ->
-      <map code="0xe938" name="uniE938"/><!- ???? ->
-      <map code="0xe939" name="uniE939"/><!- ???? ->
-      <map code="0xe93a" name="uniE93A"/><!- ???? ->
-      <map code="0xe93b" name="uniE93B"/><!- ???? ->
-      <map code="0xe93c" name="uniE93C"/><!- ???? ->
-      <map code="0xe93d" name="uniE93D"/><!- ???? ->
-      <map code="0xe93e" name="uniE93E"/><!- ???? ->
-      <map code="0xe93f" name="uniE93F"/><!- ???? ->
-      <map code="0xe940" name="uniE940"/><!- ???? ->
-      <map code="0xe941" name="uniE941"/><!- ???? ->
-      <map code="0xe942" name="uniE942"/><!- ???? ->
-      <map code="0xe943" name="uniE943"/><!- ???? ->
-      <map code="0xe945" name="uniE945"/><!- ???? ->
+      <map code="0x0" name="uni0000"/><!-- ???? ->
+      <map code="0x1" name="uni0001"/><!-- ???? ->
+      <map code="0x20" name="space"/><!-- SPACE ->
+      <map code="0xe900" name="uniE900"/><!-- ???? ->
+      <map code="0xe901" name="uniE901"/><!-- ???? ->
+      <map code="0xe902" name="uniE902"/><!-- ???? ->
+      <map code="0xe903" name="uniE903"/><!-- ???? ->
+      <map code="0xe904" name="uniE904"/><!-- ???? ->
+      <map code="0xe905" name="uniE905"/><!-- ???? ->
+      <map code="0xe906" name="uniE906"/><!-- ???? ->
+      <map code="0xe907" name="uniE907"/><!-- ???? ->
+      <map code="0xe908" name="uniE908"/><!-- ???? ->
+      <map code="0xe909" name="uniE909"/><!-- ???? ->
+      <map code="0xe90a" name="uniE90A"/><!-- ???? ->
+      <map code="0xe90b" name="uniE90B"/><!-- ???? ->
+      <map code="0xe90c" name="uniE90C"/><!-- ???? ->
+      <map code="0xe90d" name="uniE90D"/><!-- ???? ->
+      <map code="0xe90e" name="uniE90E"/><!-- ???? ->
+      <map code="0xe90f" name="uniE90F"/><!-- ???? ->
+      <map code="0xe910" name="uniE910"/><!-- ???? ->
+      <map code="0xe911" name="uniE911"/><!-- ???? ->
+      <map code="0xe912" name="uniE912"/><!-- ???? ->
+      <map code="0xe913" name="uniE913"/><!-- ???? ->
+      <map code="0xe914" name="uniE914"/><!-- ???? ->
+      <map code="0xe915" name="uniE915"/><!-- ???? ->
+      <map code="0xe916" name="uniE916"/><!-- ???? ->
+      <map code="0xe917" name="uniE917"/><!-- ???? ->
+      <map code="0xe918" name="uniE918"/><!-- ???? ->
+      <map code="0xe919" name="uniE919"/><!-- ???? ->
+      <map code="0xe91a" name="uniE91A"/><!-- ???? ->
+      <map code="0xe91b" name="uniE91B"/><!-- ???? ->
+      <map code="0xe91c" name="uniE91C"/><!-- ???? ->
+      <map code="0xe91d" name="uniE91D"/><!-- ???? ->
+      <map code="0xe91e" name="uniE91E"/><!-- ???? ->
+      <map code="0xe91f" name="uniE91F"/><!-- ???? ->
+      <map code="0xe920" name="uniE920"/><!-- ???? ->
+      <map code="0xe921" name="uniE921"/><!-- ???? ->
+      <map code="0xe922" name="uniE922"/><!-- ???? ->
+      <map code="0xe923" name="uniE923"/><!-- ???? ->
+      <map code="0xe924" name="uniE924"/><!-- ???? ->
+      <map code="0xe925" name="uniE925"/><!-- ???? ->
+      <map code="0xe926" name="uniE926"/><!-- ???? ->
+      <map code="0xe927" name="uniE927"/><!-- ???? ->
+      <map code="0xe928" name="uniE928"/><!-- ???? ->
+      <map code="0xe929" name="uniE929"/><!-- ???? ->
+      <map code="0xe92a" name="uniE92A"/><!-- ???? ->
+      <map code="0xe92b" name="uniE92B"/><!-- ???? ->
+      <map code="0xe92c" name="uniE92C"/><!-- ???? ->
+      <map code="0xe92d" name="uniE92D"/><!-- ???? ->
+      <map code="0xe92e" name="uniE92E"/><!-- ???? ->
+      <map code="0xe92f" name="uniE92F"/><!-- ???? ->
+      <map code="0xe930" name="uniE930"/><!-- ???? ->
+      <map code="0xe931" name="uniE931"/><!-- ???? ->
+      <map code="0xe932" name="uniE932"/><!-- ???? ->
+      <map code="0xe933" name="uniE933"/><!-- ???? ->
+      <map code="0xe934" name="uniE934"/><!-- ???? ->
+      <map code="0xe935" name="uniE935"/><!-- ???? ->
+      <map code="0xe936" name="uniE936"/><!-- ???? ->
+      <map code="0xe937" name="uniE937"/><!-- ???? ->
+      <map code="0xe938" name="uniE938"/><!-- ???? ->
+      <map code="0xe939" name="uniE939"/><!-- ???? ->
+      <map code="0xe93a" name="uniE93A"/><!-- ???? ->
+      <map code="0xe93b" name="uniE93B"/><!-- ???? ->
+      <map code="0xe93c" name="uniE93C"/><!-- ???? ->
+      <map code="0xe93d" name="uniE93D"/><!-- ???? ->
+      <map code="0xe93e" name="uniE93E"/><!-- ???? ->
+      <map code="0xe93f" name="uniE93F"/><!-- ???? ->
+      <map code="0xe940" name="uniE940"/><!-- ???? ->
+      <map code="0xe941" name="uniE941"/><!-- ???? ->
+      <map code="0xe942" name="uniE942"/><!-- ???? ->
+      <map code="0xe943" name="uniE943"/><!-- ???? ->
+      <map code="0xe945" name="uniE945"/><!-- ???? ->
     </cmap_format_4>
   </cmap>
 
   <loca>
-    <!- The 'loca' table will be calculated by the compiler ->
+    <!-- The 'loca' table will be calculated by the compiler ->
   </loca>
 
   <glyf>
 
-    <!- The xMin, yMin, xMax and yMax values
+    <!-- The xMin, yMin, xMax and yMax values
          will be recalculated by the compiler. ->
 
-    <TTGlyph name=".notdef"/><!- contains no outline data ->
+    <TTGlyph name=".notdef"/><!-- contains no outline data ->
 
     <TTGlyph name="space" xMin="0" yMin="0" xMax="0" yMax="0">
       <contour>

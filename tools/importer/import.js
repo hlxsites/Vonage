@@ -12,7 +12,7 @@
 /* global WebImporter */
 /* eslint-disable no-console, class-methods-use-this */
 const hr = (doc) => doc.createElement('hr');
-const host = 'https://main-vonage-hlxsites.hlx.page';
+const host = 'https://main--vonage--hlxsites.hlx.page';
 
 function cleanAnchors(main) {
   const anchors = main.querySelectorAll('a');
@@ -346,8 +346,8 @@ function injectLeadGenFragment(main, document) {
     const frCells = [['fragment']];
     const fragDiv = document.createElement('div');
     const fraglink = document.createElement('a');
-    fraglink.setAttribute('href', 'https://main-vonage-hlxsites.hlx.page/unified-communications/fragments/lead-gen');
-    fraglink.innerHTML = 'https://main-vonage-hlxsites.hlx.page/unified-communications/fragments/lead-gen';
+    fraglink.setAttribute('href', 'https://main--vonage--hlxsites.hlx.page/unified-communications/fragments/lead-gen');
+    fraglink.innerHTML = 'https://main--vonage--hlxsites.hlx.page/unified-communications/fragments/lead-gen';
     fragDiv.append(fraglink);
     frCells.push([fragDiv]);
     const fragment = WebImporter.DOMUtils.createTable(frCells, document);

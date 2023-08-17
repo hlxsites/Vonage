@@ -3,5 +3,5 @@ Please always provide the [GitHub issue(s)](../issues) your PR is for, as well a
 Fix #<gh-issue-id>
 
 Test URLs:
-- Before: https://main-vonage-hlxsites.hlx.page/unified-communications/
+- Before: https://main--vonage--hlxsites.hlx.page/unified-communications/
 - After: https://<branch>-vonage-hlxsites.hlx.page/unified-communications/
