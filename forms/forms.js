@@ -193,7 +193,7 @@ function createTimeSelector(timeZone = calcLocalTimeZone(), date = new Date()) {
       </div>
       <div class="vlt-dropdown-panel">
         <div class="vlt-dropdown-panel-content vlt-dropdown-panel-content-scroll-area">
-            <!-Time drop down options to be dynamically populated based on the time zone specification->
+            <!--Time drop down options to be dynamically populated based on the time zone specification-->
         </div>
       </div>
     </div>
@@ -496,7 +496,7 @@ function createDatePickerModal(form, startDate, numberDays, index) {
                         </div>
                     </div>
                     <div class="flatpickr-days" tabindex="-1">
-                      <!-A div containing spans of generated days will be inserted here-> 
+                      <!--A div containing spans of generated days will be inserted here--> 
                     </div>
                 </div>
             </div>
