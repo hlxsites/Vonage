@@ -118,12 +118,12 @@ export default async function decorate(block) {
                     <div class="row">
                       <div class="col-12">
                         <div role="tablist" aria-label="SMS" class="tabs-tabs">
-                            <!--  Tab button elements populated here while iterating through the returned pricing data->
+                            <!--  Tab button elements populated here while iterating through the returned pricing data-->
                         </div>
                       </div>
                     </div>
                   </div>
-                  <!--  Tab elements populated here while iterating through the returned pricing data->
+                  <!--  Tab elements populated here while iterating through the returned pricing data-->
                 </section>
               </div>
             </div>

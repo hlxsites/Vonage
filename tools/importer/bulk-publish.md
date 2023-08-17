@@ -61,9 +61,9 @@ https://main--vonage--hlxsites.hlx.page/unified-communications/business-phones/p
 https://main--vonage--hlxsites.hlx.page/unified-communications/business-phones/polycom-vvx-450/
 https://main--vonage--hlxsites.hlx.page/unified-communications/business-phones/yealink-w56h/
 https://main--vonage--hlxsites.hlx.page/unified-communications/business-phones/yealink-w60p/
-https://main--vonage--hlxsites.hlx.page/unified-communications/business-phones/polycom-vvx-250/
-https://main--vonage--hlxsites.hlx.page/unified-communications/business-phones/yealink-cp930w/
-https://main--vonage--hlxsites.hlx.page/unified-communications/business-phones/netgear-ac1200/
+https://main--vonage--hlxsites.hlx.page/unified-communications/business-phones/polycom--vvx-250/
+https://main--vonage--hlxsites.hlx.page/unified-communications/business-phones/yealink--cp930w/
+https://main--vonage--hlxsites.hlx.page/unified-communications/business-phones/netgear--ac1200/
 https://main--vonage--hlxsites.hlx.page/unified-communications/business-phones/poly-ccx-500-with-handset/
 https://main--vonage--hlxsites.hlx.page/unified-communications/business-phones/poly-ccx-600-with-handset/
 https://main--vonage--hlxsites.hlx.page/unified-communications/business-phones/yealink-sip-t48u/

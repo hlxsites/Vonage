@@ -184,7 +184,7 @@ function importCategoryGrid(main, document) {
 }
 
 function importLandingPageHero(main, document) {
-  const lph = main.querySelectorAll('header.landing-page-hero'); // .landing-page-hero-media-floating .landing-page-hero-media-contained
+  const lph = main.querySelectorAll('header.landing-page-hero'); // .landing-page-hero--media-floating .landing-page-hero--media-contained
   // other selector: landing-page-hero-media-landscape (example: /unified-communications/)
   const lphCells = [['landing-page-hero (features)']];
   // really *should* be only one of these per page
