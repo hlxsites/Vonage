@@ -557,24 +557,6 @@ hr {
   margin: auto;
 }
 
-.form-overlay.form-overlay-open {
-  position: fixed;
-  z-index: 2;
-  padding-left: 472px;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgb(0 0 0 / 71%);
-}
-
-.form-overlay-overlay::after {
-  content: "";
-  display: block;
-  padding-bottom: 8rem;
-}
-
 .vlt-form .btn:first-child {
   margin-bottom: 2rem;
   margin-right: 2rem;
@@ -996,41 +978,7 @@ hr {
 }
 
 .bns-form-submit {
- --webkit-box-flex: 0;
   flex: 0 0 auto;
-}
-
-.form-overlay-overlay-bnsform fieldset {
-  border:none;
-}
-
-.form-overlay-overlay-bnsform legend .p2 {
-  font-size: 1.4rem;
-  letter-spacing: -.02rem;
-  line-height: 2rem;
-  font-family: Spezia,"Spezia_SemiMono",Arial,Helvetica,sans-serif;
-  font-weight: 400;
-  color:black;
-}
-
-@media (min-width: 768px){
-  .form-overlay-overlay-bnsform legend .p2 {
-    font-family: Spezia,"Spezia_SemiMono",Arial,Helvetica,sans-serif;
-    font-size: 1.4rem;
-    font-weight: 400;
-    letter-spacing: -.02rem;
-    line-height: 2rem;
-  }
-}
-
-@media (min-width: 1200px){
-  .form-overlay-overlay-bnsform legend .p2 {
-    font-family: Spezia, "Spezia_SemiMono", Arial, Helvetica, sans-serif;
-    font-size: 1.7rem;
-    font-weight: 400;
-    letter-spacing: -.02rem;
-    line-height: 2rem;
-  }
 }
 
 .bns-form-radio-option {
