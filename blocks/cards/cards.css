@@ -2,10 +2,10 @@
 
 :root {
   /* colors */
-  -info-card-background-color: #000;
-  -info-card-color: #FFF;
-  -info-card-gradient-background-color-start: #881fff;
-  -info-card-gradient-background-color-end: #7fc8f5;
+ --info-card-background-color: #000;
+ --info-card-color: #FFF;
+ --info-card-gradient-background-color-start: #881fff;
+ --info-card-gradient-background-color-end: #7fc8f5;
 }
 
 .section .cards-wrapper {
@@ -372,7 +372,6 @@
   /* Layout and sizing for the title of the card */
   .cards.info-card .header-container {
     margin-bottom: 2rem;
-    -ms-flex-align: end;
     align-items: flex-end;
     display: flex;
   }

@@ -1,21 +1,21 @@
 /* stylelint-disable no-descending-specificity */
 
 :root {
-  -nav-color: var(--text-color);
-  -nav-tools-color: #5f6169;
-  -nav-logo-color: var(--text-color);
-  -nav-background-color: #FFF;
-  -nav-decoration-color: var(--text-color);
-  -nav-section-tab-color: #6f54a3;
-  -nav-extended-color: #FFF;
-  -mobile-nav-extended-background: var(--text-color);
-  -mobile-nav-extended-logo-color: #FFF;
-  -mobile-nav-extended-color: #FFF;
-  -mobile-nav-extended-decoration-color: #FFF;
-  -mobile-nav-extended-contact-button-color: var(--text-color);
-  -mobile-nav-extended-contact-button-background-color: #FFF;
-   -nav-contact-button-color: #FFF;
-   -nav-contact-button-background-color: var(--text-color);
+ --nav-color: var(--text-color);
+ --nav-tools-color: #5f6169;
+ --nav-logo-color: var(--text-color);
+ --nav-background-color: #FFF;
+ --nav-decoration-color: var(--text-color);
+ --nav-section-tab-color: #6f54a3;
+ --nav-extended-color: #FFF;
+ --mobile-nav-extended-background: var(--text-color);
+ --mobile-nav-extended-logo-color: #FFF;
+ --mobile-nav-extended-color: #FFF;
+ --mobile-nav-extended-decoration-color: #FFF;
+ --mobile-nav-extended-contact-button-color: var(--text-color);
+ --mobile-nav-extended-contact-button-background-color: #FFF;
+ --nav-contact-button-color: #FFF;
+ --nav-contact-button-background-color: var(--text-color);
 }
 
 /***** Global header / nav menu structure and styling *****/
@@ -355,8 +355,6 @@ header #nav[aria-expanded="true"] .nav-tools {
     font-weight: 500;
     display: block;
     opacity: 1;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
     align-items: center;
     position: relative;
     padding-right: 20px;
@@ -907,7 +905,6 @@ header .sub-menu-label-active {
 
     /* Add special styling to the last subsection displayed */
     header #nav div.sub-menu ul.sub-menu-section-last {
-      -webkit-box-flex: 1;
       flex: 1 1 270px;
       min-width: 270px;
       max-width: 270px;

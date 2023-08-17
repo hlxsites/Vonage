@@ -406,7 +406,6 @@
 }
 
 .landing-page-hero .form-overlay-overlay {
-  -webkit-overflow-scrolling: touch;
   background-color: #fff;
   display: none;
   height: 100vh;
@@ -419,8 +418,8 @@
   z-index: 3;
   box-sizing: border-box;
 }
+
 .landing-page-hero .form-overlay-overlay-bnsform {
-  -webkit-overflow-scrolling: touch;
   display: none;
   z-index: 3;
   box-sizing: border-box;
@@ -455,9 +454,9 @@ button.vlt-icon-close.form-overlay-close {
   line-height: 4rem;
 }
 
-button.vlt-icon-close.form-overlay-close:before {
-  content: "\e90e";
-  font-family: 'VltIcons';
+button.vlt-icon-close.form-overlay-close::before {
+  content: var(--vlt-close-icon);
+  font-family: var(--icon-font-family);
   font-size: 4rem;
   background-color: transparent;
 }
@@ -493,7 +492,7 @@ button.vlt-icon-close.form-overlay-close:before {
 }
 
 .landing-page-hero .vlt-form-success-title-v2 {
-  font-family: Spezia,Spezia_SemiMono,Arial,Helvetica,sans-serif;
+  font-family: Spezia,"Spezia_SemiMono",Arial,Helvetica,sans-serif;
   font-size: 3.5rem;
   font-weight: 500;
   letter-spacing: -.12rem;
@@ -508,7 +507,7 @@ button.vlt-icon-close.form-overlay-close:before {
 }
 
 .landing-page-hero .vlt-form-success-description-v2 {
-  font-family: Spezia,Spezia_SemiMono,Arial,Helvetica,sans-serif;
+  font-family: Spezia,"Spezia_SemiMono",Arial,Helvetica,sans-serif;
   font-size: 1.7rem;
   font-weight: 400;
   letter-spacing: -.025rem;
@@ -635,7 +634,9 @@ button.vlt-icon-close.form-overlay-close:before {
   .landing-page-hero .form-overlay-overlay-bnsform {
     width: 56vw;
     left: 22%;
-    -webkit-overflow-scrolling: touch;
+
+ --webkit-overflow-scrolling: touch;
+
     background-color: #fff;
     display: none;
     height: 100vh;
@@ -698,7 +699,7 @@ button.vlt-icon-close.form-overlay-close:before {
   font-size: 24px;
 }
 
-.form-overlay-overlay-bnsform:before {
+.form-overlay-overlay-bnsform::before {
   background: -webkit-gradient(linear,left top,right top,from(#881fff),to(#827ef9));
   background: linear-gradient(90deg,#881fff 0,#827ef9);
   content: "";
@@ -706,13 +707,13 @@ button.vlt-icon-close.form-overlay-close:before {
   left: 0;
   position: absolute;
   top: 0;
-  width: 100%
+  width: 100%;
 }
 
 @media (max-width: 320px) {
   .form-overlay-overlay-bnsform {
     height: 110vh;
-    width: 110vw
+    width: 110vw;
   }
 }
 
@@ -727,7 +728,7 @@ button.vlt-icon-close.form-overlay-close:before {
     position: fixed;
     top: 0;
     z-index: 3;
-    padding: 1rem 0 0
+    padding: 1rem 0 0;
   }
 }
 
@@ -735,7 +736,6 @@ button.vlt-icon-close.form-overlay-close:before {
   .form-overlay-overlay-bnsform {
     width:56vw;
     left: 22%;
-    -webkit-overflow-scrolling: touch;
     background-color: #fff;
     display: none;
     height: 100vh;
@@ -743,18 +743,18 @@ button.vlt-icon-close.form-overlay-close:before {
     padding: 1rem 0 0;
     position: fixed;
     top: 0;
-    z-index: 3
+    z-index: 3;
   }
 }
 
 @media (min-width: 992px) {
   .form-overlay-overlay-bnsform .vlt-form-title {
-    margin-bottom:0
+    margin-bottom:0;
   }
 }
 
 @media (min-width: 992px) and (max-width:1024px) {
   .form-overlay-overlay-bnsform .vlt-form-title {
-    padding-left:18rem
+    padding-left:18rem;
   }
 }

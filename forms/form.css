@@ -596,7 +596,7 @@ hr {
 }
 
 .vlt-form .col-md-6 {
-  -webkit-box-flex: 0;
+ --webkit-box-flex: 0;
   flex: 0 0 50%;
   max-width: 50%;
 }
@@ -717,7 +717,7 @@ hr {
 }
 
 .vlt-form .vlt-checkbox label {
-  -webkit-tap-highlight-color: transparent;
+ --webkit-tap-highlight-color: transparent;
 }
 
 .vlt-form-checkbox-icon {
@@ -761,7 +761,7 @@ hr {
 }
 
 .vlt-form .vlt-radio-button {
-  -webkit-box-flex: 0;
+ --webkit-box-flex: 0;
   flex: none;
   height: 3rem;
   margin-right: 2rem;
@@ -920,8 +920,8 @@ hr {
 .vlt-form-two-columns .vlt-form-field-container {
   width: 46%;
   min-width: 20pc;
-  -webkit-box-flex: 1;
-  -ms-flex-positive: 1;
+ --webkit-box-flex: 1;
+ --ms-flex-positive: 1;
   flex-grow: 1;
   margin: 0 2rem;
 }
@@ -996,7 +996,7 @@ hr {
 }
 
 .bns-form-submit {
-  -webkit-box-flex: 0;
+ --webkit-box-flex: 0;
   flex: 0 0 auto;
 }
 
@@ -1161,17 +1161,17 @@ hr {
 
 .bns-reschedule-form-inputs {
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
+ --webkit-box-orient: vertical;
+ --webkit-box-direction: normal;
   flex-direction: column;
   margin-bottom: 4rem;
 }
 
 .bns-reschedule-form-inputs>* {
-  -ms-flex-preferred-size: 100%;
+ --ms-flex-preferred-size: 100%;
   flex-basis: 100%;
-  -webkit-box-flex: 1;
-  -ms-flex-positive: 1;
+ --webkit-box-flex: 1;
+ --ms-flex-positive: 1;
   flex-grow: 1;
   max-width: 100%;
   margin-bottom: 1.2rem;
@@ -1186,12 +1186,12 @@ hr {
 }
 
 .bns-reschedule-form-ctas {
-  -webkit-box-align: center;
-  -ms-flex-align: center;
+ --webkit-box-align: center;
+ --ms-flex-align: center;
   align-items: center;
   display: flex;
-  -webkit-box-pack: end;
-  -ms-flex-pack: end;
+ --webkit-box-pack: end;
+ --ms-flex-pack: end;
   justify-content: flex-end;
   padding-top: 2.4rem;
   bottom: 3.6rem;
@@ -1302,16 +1302,16 @@ hr {
 
 @media (min-width: 768px) {
   .bns-reschedule-form-inputs {
-    -webkit-box-orient:horizontal;
-    -webkit-box-direction: normal;
+ --webkit-box-orient:horizontal;
+ --webkit-box-direction: normal;
     flex-direction: row;
   }
 
   .bns-reschedule-form-inputs>* {
-    -ms-flex-preferred-size: 50%;
+ --ms-flex-preferred-size: 50%;
     flex-basis: 50%;
-    -webkit-box-flex: 1;
-    -ms-flex-positive: 1;
+ --webkit-box-flex: 1;
+ --ms-flex-positive: 1;
     flex-grow: 1;
     max-width: 50%;
   }
@@ -1327,8 +1327,8 @@ hr {
 
 @media (min-width: 768px) {
   .bns-reschedule-form-ctas {
-    -webkit-box-orient:horizontal;
-    -webkit-box-direction: normal;
+ --webkit-box-orient:horizontal;
+ --webkit-box-direction: normal;
     flex-direction: row;
     position: static;
     width: auto;
@@ -1364,7 +1364,7 @@ hr {
 }
 
 .vlt-form .vlt-radio-button {
-  -webkit-box-flex: 0;
+ --webkit-box-flex: 0;
   flex: none;
   height: 3rem;
   margin-right: 2rem;
@@ -1373,7 +1373,7 @@ hr {
 
 .vlt-checkbox-button, .vlt-radio-button {
   display: block;
-  -webkit-box-flex: 0;
+ --webkit-box-flex: 0;
   flex: 0 0 22px;
   height: 22px;
   margin-right: 10px;
@@ -1626,7 +1626,7 @@ line-height:1.6rem;
   position: relative;
   user-select: none;
   overflow: hidden;
-  -webkit-box-flex: 1;
+ --webkit-box-flex: 1;
   flex: 1;
 }
 
@@ -1876,15 +1876,15 @@ line-height:1.6rem;
   overflow: hidden;
   width: 100%;
   display: flex;
-  -ms-flex-align: center;
-  -webkit-box-align: center;
+ --ms-flex-align: center;
+ --webkit-box-align: center;
   align-items: center;
   height: 28px;
 }
 
 .flatpickr-weekdays .flatpickr-weekdaycontainer {
   display: flex;
-  -webkit-box-flex: 1;
+ --webkit-box-flex: 1;
   flex: 1;
 }
 
@@ -1897,7 +1897,7 @@ span.flatpickr-weekday {
   margin: 0;
   text-align: center;
   display: block;
-  -webkit-box-flex: 1;
+ --webkit-box-flex: 1;
   flex: 1;
   font-weight: bolder;
 }
@@ -1910,8 +1910,8 @@ span.flatpickr-weekday {
   position: relative;
   overflow: hidden;
   display: flex;
-  -ms-flex-align: start;
-  -webkit-box-align: start;
+ --ms-flex-align: start;
+ --webkit-box-align: start;
   align-items: flex-start;
   width: 307.875px;
 }
@@ -1947,7 +1947,7 @@ span.flatpickr-weekday {
   cursor: pointer;
   font-weight: 400;
   width: 14.28%;
-  -ms-flex-preferred-size: 14.28%;
+ --ms-flex-preferred-size: 14.28%;
   flex-basis: 14.28%;
   max-width: 39px;
   height: 39px;
@@ -1955,8 +1955,8 @@ span.flatpickr-weekday {
   margin: 0;
   display: inline-block;
   position: relative;
-  -ms-flex-pack: center;
-  -webkit-box-pack: center;
+ --ms-flex-pack: center;
+ --webkit-box-pack: center;
   justify-content: center;
   text-align: center;
 }
@@ -2088,7 +2088,7 @@ span.flatpickr-weekday {
 }
 
 .flatpickr-time .numInputWrapper {
-  -webkit-box-flex: 1;
+ --webkit-box-flex: 1;
   flex: 1;
   width: 40%;
   height: 40px;
@@ -2573,7 +2573,7 @@ span.flatpickr-weekday {
 }
 
 .vlt-dropdown-label {
-  -webkit-box-flex: 1;
+ --webkit-box-flex: 1;
   flex: 1;
 }
 
@@ -2612,7 +2612,7 @@ span.flatpickr-weekday {
 }
 
 .vlt-dropdown-block-icon,.vlt-dropdown-link-icon {
-  -webkit-box-flex: 0;
+ --webkit-box-flex: 0;
   flex: 0 0 20px;
   height: 20px;
   margin-bottom: -3px;
@@ -2622,9 +2622,9 @@ span.flatpickr-weekday {
 }
 
 .vlt-dropdown-block-label,.vlt-dropdown-link-label {
-  -ms-flex-item-align: center;
+ --ms-flex-item-align: center;
   align-self: center;
-  -webkit-box-flex: 1;
+ --webkit-box-flex: 1;
   flex: 1;
 }
 
@@ -2888,7 +2888,7 @@ span.flatpickr-weekday {
 
 @media (max-width: 767.98px) {
   .vlt-dropdown-panel-content {
-    -webkit-overflow-scrolling:touch;
+ --webkit-overflow-scrolling:touch;
     overflow-y: scroll;
   }
 }
@@ -2919,7 +2919,7 @@ span.flatpickr-weekday {
 }
 
 .vlt-dropdown-scroll {
-  -webkit-box-flex: 1;
+ --webkit-box-flex: 1;
   flex: auto;
   overflow-y: auto;
 }
@@ -2937,7 +2937,7 @@ span.flatpickr-weekday {
 
 .vlt-dropdown-expanded .vlt-dropdown-panel .vlt-dropdown-panel-content-scroll-area,.vlt-dropdown-panel_open .vlt-dropdown-panel-content-scroll-area,.vlt-dropdown_expanded .vlt-dropdown-panel .vlt-dropdown-panel-content-scroll-area {
   display: flex;
-  -webkit-box-orient: vertical;
+ --webkit-box-orient: vertical;
 
   /* -webkit-box-direction:normal; */
   flex-flow: column;
@@ -2945,7 +2945,7 @@ span.flatpickr-weekday {
 }
 
 .vlt-dropdown-expanded .vlt-dropdown-panel .vlt-dropdown-panel-content-scroll-area .vlt-dropdown-block,.vlt-dropdown-expanded .vlt-dropdown-panel .vlt-dropdown-panel-content-scroll-area .vlt-dropdown-link,.vlt-dropdown-panel_open .vlt-dropdown-panel-content-scroll-area .vlt-dropdown-block,.vlt-dropdown-panel_open .vlt-dropdown-panel-content-scroll-area .vlt-dropdown-link,.vlt-dropdown_expanded .vlt-dropdown-panel .vlt-dropdown-panel-content-scroll-area .vlt-dropdown-block,.vlt-dropdown_expanded .vlt-dropdown-panel .vlt-dropdown-panel-content-scroll-area .vlt-dropdown-link {
-  -ms-flex-negative: 0;
+ --ms-flex-negative: 0;
   flex-shrink: 0;
 }
 
@@ -2987,7 +2987,7 @@ span.flatpickr-weekday {
 }
 
 .vlt-form-element-pills .vlt-form-pill {
-  -webkit-box-flex: 0;
+ --webkit-box-flex: 0;
   flex: 0 1 auto;
   height: 5rem;
   margin-bottom: 2rem;
@@ -3029,11 +3029,11 @@ span.flatpickr-weekday {
 }
 
 .vlt-form-pills-container {
-  -webkit-box-align: baseline;
-  -ms-flex-align: baseline;
+ --webkit-box-align: baseline;
+ --ms-flex-align: baseline;
   align-items: baseline;
   display: flex;
-  -webkit-box-flex: 0;
+ --webkit-box-flex: 0;
   flex: 0 1 auto;
   flex-wrap: wrap;
 }
@@ -3045,8 +3045,8 @@ span.flatpickr-weekday {
 .vlt-form-pills-container .vlt-form-element-error {
   display: flex;
   margin-bottom: 1rem;
-  -webkit-box-ordinal-group: 0;
-  -ms-flex-order: -1;
+ --webkit-box-ordinal-group: 0;
+ --ms-flex-order: -1;
   order: -1;
   visibility: visible;
   width: 100%;
@@ -3138,14 +3138,14 @@ span.flatpickr-weekday {
   font-weight: 400;
   letter-spacing: -.02rem;
   line-height: 2rem;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
+ --webkit-box-align: center;
+ --ms-flex-align: center;
   align-items: center;
   border: .1rem solid #90929b;
   border-radius: 2.5rem;
   color: #000;
   display: flex;
-  -webkit-box-flex: 0;
+ --webkit-box-flex: 0;
   flex: 0 1 auto;
   padding: 1.5rem 2rem;
   user-select: none;
@@ -3167,8 +3167,8 @@ span.flatpickr-weekday {
 
 .vlt-form-textarea-container {
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: reverse;
+ --webkit-box-orient: vertical;
+ --webkit-box-direction: reverse;
   flex-direction: column-reverse;
 }
 
@@ -3228,7 +3228,7 @@ span.flatpickr-weekday {
 }
 
 .vlt-form-submit-error-msg .vlt-form-element-error::before {
-  -ms-flex-item-align: start;
+ --ms-flex-item-align: start;
   align-self: start;
   background-image: none;
   font-size: 2rem;
@@ -3243,7 +3243,7 @@ span.flatpickr-weekday {
   font-weight: 400;
   letter-spacing: -.025rem;
   line-height: 2.5rem;
-  -ms-flex-item-align: center;
+ --ms-flex-item-align: center;
   align-self: center;
   color: #ee0205;
   width: 80%;
@@ -3293,8 +3293,8 @@ span.flatpickr-weekday {
 }
 
 .vlt-form-success-v2 .row {
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
+ --webkit-box-pack: center;
+ --ms-flex-pack: center;
   justify-content: center;
 }
 
@@ -3324,8 +3324,8 @@ span.flatpickr-weekday {
 
 .vlt-form-two-columns .row {
   margin: 0 auto;
-  -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
+ --webkit-box-pack: justify;
+ --ms-flex-pack: justify;
   justify-content: space-between;
 }
 
@@ -3336,8 +3336,8 @@ span.flatpickr-weekday {
 .vlt-form-two-columns .vlt-form-field-container {
   width: 46%;
   min-width: 20pc;
-  -webkit-box-flex: 1;
-  -ms-flex-positive: 1;
+ --webkit-box-flex: 1;
+ --ms-flex-positive: 1;
   flex-grow: 1;
   margin: 0 2rem;
 }
@@ -3385,12 +3385,12 @@ span.flatpickr-weekday {
 }
 
 .vlt-form .vlt-form-element .vlt-checkbox-label-flex .vlt-checkbox-button {
-  -webkit-box-flex: 0;
+ --webkit-box-flex: 0;
   flex: 0 0 auto;
 }
 
 .vlt-form .vlt-form-element .vlt-checkbox-label-flex .vlt-checkbox-text {
-  -webkit-box-flex: 1;
+ --webkit-box-flex: 1;
   flex: 1 1 auto;
 }
 
