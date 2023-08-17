@@ -404,7 +404,7 @@ function updateFilters(block, swiftypeResult, activeFilters, tagPlaceholders) {
                 'data-group': groupId,
                 onChange: (e) => handleFilterChange(e, block),
               }),
-              // &#xe90e; is the close icon, see -vlt-close-icon in styles.css
+              // &#xe90e; is the close icon, see --vlt-close-icon in styles.css
               span({ class: 'fake-checkbox' }, span({ class: 'checkmark', innerHTML: '&#xe90e;' })),
               span({ class: 'option-txt' }, facet.label, span({ class: 'option-num' }, `(${facet.count})`)),
             ),
@@ -457,7 +457,7 @@ function updateMobileFilters(block, swiftypeResult, activeFilters, tagPlaceholde
                 'data-label': getLabelForFacet(name, tagPlaceholders),
                 'data-group': groupId,
               }),
-              // &#xe90e; is the close icon, see -vlt-close-icon in styles.css
+              // &#xe90e; is the close icon, see --vlt-close-icon in styles.css
               span({ class: 'fake-checkbox' }, span({ class: 'checkmark', innerHTML: '&#xe90e;' })),
               span({ class: 'option-txt' }, getLabelForFacet(name, tagPlaceholders), span({ class: 'option-num' }, `(${count})`)),
             ),

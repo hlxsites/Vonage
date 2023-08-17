@@ -493,7 +493,7 @@ function buildHamburger(nav, navSections) {
  * Build the hamburger icon element which will trigger the menu display in mobile mode
  * @returns {HTMLDivElement} Breadcrumb header element
  // * @param {String} title The content of the root breadcrumb element that should be displayed (page section)
- // * @param {[Object]} links An array of link objects sorted in a parent -> child structure
+ // * @param {[Object]} links An array of link objects sorted in a parent --> child structure
  */
 function buildBreadCrumbDesktop() {
   const breadCrumb = div({ class: 'l3-nav-desktop' }, div({ class: 'l3-nav-desktop-menu-head' }));

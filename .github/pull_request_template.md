@@ -4,4 +4,4 @@ Fix #<gh-issue-id>
 
 Test URLs:
 - Before: https://main--vonage--hlxsites.hlx.page/unified-communications/
-- After: https://<branch>-vonage-hlxsites.hlx.page/unified-communications/
+- After: https://<branch>--vonage--hlxsites.hlx.page/unified-communications/

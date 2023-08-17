@@ -138,7 +138,7 @@ function getFormSection(button, formStyle = 'form-overlay-overlay') {
       <a class="btn form-overlay-button">${button.innerText}</a>
     </div>
     <div class="${formStyle} " role="dialog" aria-modal="true" aria-label="form">
-      <!-Form Content Goes Here ->
+      <!-Form Content Goes Here -->
     </div>`;
 
   return formSection;
