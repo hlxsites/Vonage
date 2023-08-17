@@ -4,7 +4,8 @@ import { setFormValue, fetchFormContent } from '../../forms/forms.js';
 
 export default async function decorate(block) {
   if (block.classList.contains('full-screen')) {
-    console.log(block);
+    // console.log(block);
+    // TODO: Need to fetch the right form content and place it in the contentWrapper and return that to the block
   } else {
     const cardWrapper = block.querySelector(':scope > div > div:first-child');
     cardWrapper.classList.add('card-wrapper');

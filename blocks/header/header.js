@@ -50,11 +50,6 @@ function scrollFunction() {
   oldScrollY = newScrollY;
 }
 
-// Add a scroll listener in order to handle transforming the nav on scroll down
-if (isDesktop.matches) {
-  window.onscroll = scrollFunction;
-}
-
 function closeOnEscape(e) {
   if (e.code === 'Escape') {
     const nav = document.getElementById('nav');
@@ -779,6 +774,11 @@ export default async function decorate(block) {
       // prevent mobile nav behavior on window resize
       toggleMenu(nav, navSections, isDesktop.matches);
       isDesktop.addEventListener('change', () => toggleMenu(nav, navSections, isDesktop.matches));
+
+      // Add a scroll listener in order to handle transforming the nav on scroll down
+      if (isDesktop.matches && document.querySelector('header.ecommerce-header')) {
+        window.onscroll = scrollFunction;
+      }
 
       // Add an event listener that checks if a click falls outside of the nav-sections in order to trigger a close of the nav menu.
       document.addEventListener('click', (event) => {
