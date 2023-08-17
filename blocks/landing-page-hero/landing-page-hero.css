@@ -165,7 +165,7 @@
 
 
 /* Add a margin on the first call to action button (so that in one column mode they are spaced) */
-.landing-page-hero .category-content .ctas ul li:first-child a.form-overlay__button,
+.landing-page-hero .category-content .ctas ul li:first-child a.form-overlay-button,
 .landing-page-hero .category-content .ctas ul li:first-child strong > a,
 .landing-page-hero .category-content .ctas ul li:first-child em > a {
   margin-bottom: 2rem;
@@ -174,7 +174,7 @@
 
 /* Styling for a secondary call to action button (designated with italic in the doc) */
 .landing-page-hero .category-content .ctas em > a,
-.landing-page-hero .category-content .ctas em a.form-overlay__button {
+.landing-page-hero .category-content .ctas em a.form-overlay-button {
   background-color: unset;
   color: var(--text-color);
   font-size: var(--button-font-size-m);
@@ -189,7 +189,7 @@
 
 /* Light variant for the secondary call to action button */
 .landing-page-hero .category-content .ctas.secondary-button-light em > a,
-.landing-page-hero .category-content .ctas.secondary-button-light em a.form-overlay__button {
+.landing-page-hero .category-content .ctas.secondary-button-light em a.form-overlay-button {
   background-color: transparent;
   border-color: #fff;
   color: #fff;
@@ -197,21 +197,21 @@
 
 /* Purple variant for the secondary call to action button */
 .landing-page-hero .category-content .ctas.secondary-button-electric-purple em > a,
-.landing-page-hero .category-content .ctas.secondary-button-electric-purple em a.form-overlay__button {
+.landing-page-hero .category-content .ctas.secondary-button-electric-purple em a.form-overlay-button {
   background-color: var(--accent-color);
   color: #fff;
 }
 
 /* Styling for a primary call to action button (designated with bold in the doc) */
 .landing-page-hero .category-content .ctas.primary-button-light strong > a,
-.landing-page-hero .category-content .ctas.primary-button-light strong a.form-overlay__button {
+.landing-page-hero .category-content .ctas.primary-button-light strong a.form-overlay-button {
   background-color: #fff;
   color: #000;
 }
 
 /* Purple variant for the primary call to action button */
 .landing-page-hero .category-content .ctas.primary-button-electric-purple strong > a,
-.landing-page-hero .category-content .ctas.primary-button-electric-purple strong a.form-overlay__button  {
+.landing-page-hero .category-content .ctas.primary-button-electric-purple strong a.form-overlay-button  {
   background-color: var(--accent-color);
   color: #fff;
 }
@@ -400,12 +400,12 @@
   top: -2rem;
 }
 
-.landing-page-hero .form-overlay__overlay .col-12.text-right,
-.landing-page-hero .form-overlay__overlay-bnsform .col-12.text-right {
+.landing-page-hero .form-overlay-overlay .col-12.text-right,
+.landing-page-hero .form-overlay-overlay-bnsform .col-12.text-right {
   width: 100%;
 }
 
-.landing-page-hero .form-overlay__overlay {
+.landing-page-hero .form-overlay-overlay {
   -webkit-overflow-scrolling: touch;
   background-color: #fff;
   display: none;
@@ -419,15 +419,15 @@
   z-index: 3;
   box-sizing: border-box;
 }
-.landing-page-hero .form-overlay__overlay-bnsform {
+.landing-page-hero .form-overlay-overlay-bnsform {
   -webkit-overflow-scrolling: touch;
   display: none;
   z-index: 3;
   box-sizing: border-box;
 }
 
-.landing-page-hero .form-overlay__overlay::before,
-.landing-page-hero .form-overlay__overlay-bnsform::before {
+.landing-page-hero .form-overlay-overlay::before,
+.landing-page-hero .form-overlay-overlay-bnsform::before {
   background: -webkit-gradient(linear,left top,right top,from(#881fff),to(#827ef9));
   background: linear-gradient(90deg,#881fff 0,#827ef9);
   content: "";
@@ -438,12 +438,12 @@
   width: 100%;
 }
 
-.landing-page-hero .form-overlay--open .form-overlay__overlay,
-.landing-page-hero .form-overlay--open .form-overlay__overlay-bnsform {
+.landing-page-hero .form-overlay-open .form-overlay-overlay,
+.landing-page-hero .form-overlay-open .form-overlay-overlay-bnsform {
   display: block;
 }
 
-button.Vlt-icon-close.form-overlay__close {
+button.vlt-icon-close.form-overlay-close {
   padding: 0;
   color: black;
   background: transparent;
@@ -455,36 +455,36 @@ button.Vlt-icon-close.form-overlay__close {
   line-height: 4rem;
 }
 
-button.Vlt-icon-close.form-overlay__close:before {
+button.vlt-icon-close.form-overlay-close:before {
   content: "\e90e";
   font-family: 'VltIcons';
   font-size: 4rem;
   background-color: transparent;
 }
 
-.landing-page-hero .Vlt-form__success {
+.landing-page-hero .vlt-form-success {
   display: none;
 }
 
-.landing-page-hero .form-overlay__overlay.success .Vlt-form__success,
-.landing-page-hero .form-overlay__overlay-bnsform.success .Vlt-form__success {
+.landing-page-hero .form-overlay-overlay.success .vlt-form-success,
+.landing-page-hero .form-overlay-overlay-bnsform.success .vlt-form-success {
   display: inline-block;
   width: 100%;
 }
 
-.landing-page-hero .form-overlay__overlay.submitted .form,
-.landing-page-hero .form-overlay__overlay-bnsform.submitted .form {
+.landing-page-hero .form-overlay-overlay.submitted .form,
+.landing-page-hero .form-overlay-overlay-bnsform.submitted .form {
   display: none;
 }
 
-.landing-page-hero .Vlt-form__success-v2.container {
+.landing-page-hero .vlt-form-success-v2.container {
   margin-bottom: 4rem;
   text-align: center;
   margin-left: auto;
   margin-right: auto;
 }
 
-.landing-page-hero .Vlt-form__success-v2 .row {
+.landing-page-hero .vlt-form-success-v2 .row {
   justify-content: center;
   display: flex;
   flex-wrap: wrap;
@@ -492,7 +492,7 @@ button.Vlt-icon-close.form-overlay__close:before {
   margin-left: -20px;
 }
 
-.landing-page-hero .Vlt-form__success-title-v2 {
+.landing-page-hero .vlt-form-success-title-v2 {
   font-family: Spezia,Spezia_SemiMono,Arial,Helvetica,sans-serif;
   font-size: 3.5rem;
   font-weight: 500;
@@ -502,12 +502,12 @@ button.Vlt-icon-close.form-overlay__close:before {
   color: black;
 }
 
-.landing-page-hero .Vlt-form__success-title-v2 .col-12 {
+.landing-page-hero .vlt-form-success-title-v2 .col-12 {
   flex: 0 0 100%;
   max-width: 100%;
 }
 
-.landing-page-hero .Vlt-form__success-description-v2 {
+.landing-page-hero .vlt-form-success-description-v2 {
   font-family: Spezia,Spezia_SemiMono,Arial,Helvetica,sans-serif;
   font-size: 1.7rem;
   font-weight: 400;
@@ -517,12 +517,12 @@ button.Vlt-icon-close.form-overlay__close:before {
   color:black;
 }
 
-.landing-page-hero Vlt-form__success-cta .btn {
+.landing-page-hero vlt-form-success-cta .btn {
   transition: transform .2s;
 }
 
 @media (min-width: 576px) {
-  .landing-page-hero .Vlt-form__success-v2.container {
+  .landing-page-hero .vlt-form-success-v2.container {
     max-width: 540px;
   }
 }
@@ -596,13 +596,13 @@ button.Vlt-icon-close.form-overlay__close:before {
       font-size: 13rem;
     }
 
-    .landing-page-hero .Vlt-form__success-image {
+    .landing-page-hero .vlt-form-success-image {
       margin-bottom: 3rem;
       margin-top: 0;
       width: 60.6%;
     }
 
-    .landing-page-hero .Vlt-form__success-v2.container {
+    .landing-page-hero .vlt-form-success-v2.container {
       max-width: 45pc;
     }
   }
@@ -626,13 +626,13 @@ button.Vlt-icon-close.form-overlay__close:before {
     padding-bottom: 55.8rem;
   }
 
-  .landing-page-hero .Vlt-form__success-v2.container {
+  .landing-page-hero .vlt-form-success-v2.container {
     max-width: 990pt;
   }
 }
 
 @media (min-width: 1024px) {
-  .landing-page-hero .form-overlay__overlay-bnsform {
+  .landing-page-hero .form-overlay-overlay-bnsform {
     width: 56vw;
     left: 22%;
     -webkit-overflow-scrolling: touch;
@@ -698,7 +698,7 @@ button.Vlt-icon-close.form-overlay__close:before {
   font-size: 24px;
 }
 
-.form-overlay__overlay-bnsform:before {
+.form-overlay-overlay-bnsform:before {
   background: -webkit-gradient(linear,left top,right top,from(#881fff),to(#827ef9));
   background: linear-gradient(90deg,#881fff 0,#827ef9);
   content: "";
@@ -710,14 +710,14 @@ button.Vlt-icon-close.form-overlay__close:before {
 }
 
 @media (max-width: 320px) {
-  .form-overlay__overlay-bnsform {
+  .form-overlay-overlay-bnsform {
     height: 110vh;
     width: 110vw
   }
 }
 
 @media (min-width: 280px) and (max-width:1024px) {
-  .form-overlay__overlay-bnsform {
+  .form-overlay-overlay-bnsform {
     background-color:#fff;
     display: none;
     height: 100%;
@@ -732,7 +732,7 @@ button.Vlt-icon-close.form-overlay__close:before {
 }
 
 @media (min-width: 1024px) {
-  .form-overlay__overlay-bnsform {
+  .form-overlay-overlay-bnsform {
     width:56vw;
     left: 22%;
     -webkit-overflow-scrolling: touch;
@@ -748,13 +748,13 @@ button.Vlt-icon-close.form-overlay__close:before {
 }
 
 @media (min-width: 992px) {
-  .form-overlay__overlay-bnsform .Vlt-form__title {
+  .form-overlay-overlay-bnsform .vlt-form-title {
     margin-bottom:0
   }
 }
 
 @media (min-width: 992px) and (max-width:1024px) {
-  .form-overlay__overlay-bnsform .Vlt-form__title {
+  .form-overlay-overlay-bnsform .vlt-form-title {
     padding-left:18rem
   }
 }

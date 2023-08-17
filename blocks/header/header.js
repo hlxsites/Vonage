@@ -3,7 +3,7 @@ import {
   a, div, hr, li, span, ul,
 } from '../../scripts/scripts.js';
 
-/* ------------------------------ Global Variables ----------------------------------- */
+/* --------------- Global Variables ------------------ */
 // media query match that indicates mobile/tablet width
 const isDesktop = window.matchMedia('(min-width: 992px)');
 
@@ -14,7 +14,7 @@ const animationDelay = 10;
 // Variable to track previous scroll direction for the scrollFunction event handler
 let oldScrollY = window.scrollY;
 
-/* ------------------------------ Event Listener Functions ----------------------------------- */
+/* --------------- Event Listener Functions ------------------ */
 
 /**
  * Scroll event listener to handle transforming the nav bar from big to small
@@ -132,7 +132,7 @@ function toggleNavSubSection(event) {
   }
 }
 
-/* ------------------------------ Global Functions ----------------------------------- */
+/* --------------- Global Functions ------------------ */
 
 function buildHierarchy(flat) {
   // Array to build out with parent->child hierarchy for links
@@ -677,7 +677,7 @@ function populateBreadCrumb(data, pathArray) {
   breadCrumbMobile.querySelector('.l3-nav-mobile-menu-body').append(contactSection);
 }
 
-/* ------------------------------ Main function invoked at load ------------------------------- */
+/* --------------- Main function invoked at load ---------------- */
 
 /**
  * Build the hamburger icon element which will trigger the menu display in mobile mode

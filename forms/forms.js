@@ -166,8 +166,8 @@ function addInputValidation(element) {
   });
 
   element.addEventListener('blur', () => {
-    const formEl = element.closest('.Vlt-form__element');
-    formEl.classList.add('Vlt-form__element--dirty');
+    const formEl = element.closest('.vlt-form-element');
+    formEl.classList.add('vlt-form-element-dirty');
     validateInput(element);
   });
 }
@@ -180,28 +180,28 @@ function addInputValidation(element) {
  * @returns {Element} - Time selector as well as the drop down panel with only valid times to display
  */
 function createTimeSelector(timeZone = calcLocalTimeZone(), date = new Date()) {
-  const timeSelector = div({ class: 'Vlt-form__element time-selector', 'is-required': 'true' });
+  const timeSelector = div({ class: 'vlt-form-element time-selector', 'is-required': 'true' });
   timeSelector.innerHTML = `
-    <div class="Vlt-dropdown Vlt-dropdown--full-width">
-      <div class="Vlt-dropdown__trigger Vlt-dropdown__trigger--btn">
-        <div class="Vlt-form__element Vlt-form__element--big">
-          <div class="Vlt-input Vlt-native-dropdown Vlt-input--error">
+    <div class="vlt-dropdown vlt-dropdown-full-width">
+      <div class="vlt-dropdown-trigger vlt-dropdown-trigger-btn">
+        <div class="vlt-form-element vlt-form-element-big">
+          <div class="vlt-input vlt-native-dropdown vlt-input-error">
             <input type="text" placeholder="Select" name="time" readOnly="readonly" required="required">
-              <label class="Vlt-form__input-label">Time</label>
+              <label class="vlt-form-input-label">Time</label>
           </div>
         </div>
       </div>
-      <div class="Vlt-dropdown__panel">
-        <div class="Vlt-dropdown__panel__content Vlt-dropdown__panel__content--scroll-area">
-            <!--Time drop down options to be dynamically populated based on the time zone specification-->
+      <div class="vlt-dropdown-panel">
+        <div class="vlt-dropdown-panel-content vlt-dropdown-panel-content-scroll-area">
+            <!-Time drop down options to be dynamically populated based on the time zone specification->
         </div>
       </div>
     </div>
-    <small class="Vlt-form__element__error Vlt-icon-warning-icon">
-      <span class="Vlt-form__input-error-label">Required field.</span>
+    <small class="vlt-form-element-error vlt-icon-warning-icon">
+      <span class="vlt-form-input-error-label">Required field.</span>
     </small>`;
 
-  const timeDropDown = div({ class: 'Vlt-dropdown__scroll' });
+  const timeDropDown = div({ class: 'vlt-dropdown-scroll' });
   let tmpDate = new Date(date.valueOf());
 
   // The allowed scheduling window (in UTC hours)
@@ -211,7 +211,7 @@ function createTimeSelector(timeZone = calcLocalTimeZone(), date = new Date()) {
 
   // eslint-disable-next-line no-plusplus
   for (let i = 0; i < 18; i++) {
-    const timeOption = div({ class: 'Vlt-dropdown__link', innerHTML: formatAMPM(tmpDate) });
+    const timeOption = div({ class: 'vlt-dropdown-link', innerHTML: formatAMPM(tmpDate) });
 
     const compareDate = new Date();
     const localTimeZone = calcLocalTimeZone();
@@ -222,7 +222,7 @@ function createTimeSelector(timeZone = calcLocalTimeZone(), date = new Date()) {
     tmpDate = new Date(tmpDate.valueOf() + 30 * millisPerMinute);
   }
 
-  timeSelector.querySelector('.Vlt-dropdown__panel__content.Vlt-dropdown__panel__content--scroll-area').append(timeDropDown);
+  timeSelector.querySelector('.vlt-dropdown-panel-content.vlt-dropdown-panel-content-scroll-area').append(timeDropDown);
 
   return timeSelector;
 }
@@ -233,35 +233,35 @@ function createTimeSelector(timeZone = calcLocalTimeZone(), date = new Date()) {
  * @returns {Element} - The form element which can be clicked to launch the date picker
  */
 function createDateSelector(form) {
-  const dateSelector = div({ class: 'Vlt-form__element date-selector', 'is-required': 'true' });
+  const dateSelector = div({ class: 'vlt-form-element date-selector', 'is-required': 'true' });
   dateSelector.innerHTML = `
-                                    <div class="Vlt-form__element">
-                                        <div class="Vlt-form__element Vlt-form__element--big">
-                                            <div class="Vlt-input Vlt-native-dropdown">
+                                    <div class="vlt-form-element">
+                                        <div class="vlt-form-element vlt-form-element-big">
+                                            <div class="vlt-input vlt-native-dropdown">
                                                 <input name="date" type="hidden" placeholder="Select" required="required" class="flatpickr-input">
                                                 <input class="form-control input" placeholder="Select" required="" tabindex="0" type="text" readonly="readonly">
-                                                <label class="Vlt-form__input-label">Date</label>
+                                                <label class="vlt-form-input-label">Date</label>
                                             </div>
                                         </div>
-                                        <small class="Vlt-form__element__error Vlt-icon-warning-icon">
-                                            <span class="Vlt-form__input-error-label"></span>
+                                        <small class="vlt-form-element-error vlt-icon-warning-icon">
+                                            <span class="vlt-form-input-error-label"></span>
                                         </small>
                                     </div>`;
 
   dateSelector.addEventListener('click', (event) => {
     event.stopPropagation();
-    form.querySelector('.flatpickr-calendar.Vlt-datepicker').classList.add('open');
-    const buttonRect = form.querySelector('.Vlt-input.Vlt-native-dropdown').getBoundingClientRect();
-    const dateSelectorModal = document.querySelector('.flatpickr-calendar.Vlt-datepicker');
+    form.querySelector('.flatpickr-calendar.vlt-datepicker').classList.add('open');
+    const buttonRect = form.querySelector('.vlt-input.vlt-native-dropdown').getBoundingClientRect();
+    const dateSelectorModal = document.querySelector('.flatpickr-calendar.vlt-datepicker');
     const dateSelectorModalRect = dateSelectorModal.getBoundingClientRect();
     const containerOffset = document.querySelector('form div.container').getBoundingClientRect().x;
-    const scrollOffset = document.querySelector('.form-overlay__overlay-bnsform').scrollTop;
+    const scrollOffset = document.querySelector('.form-overlay-overlay-bnsform').scrollTop;
     if (buttonRect.y + dateSelectorModalRect.height > window.innerHeight) {
-      form.querySelectorAll('.flatpickr-calendar.Vlt-datepicker').forEach((datePicker) => {
+      form.querySelectorAll('.flatpickr-calendar.vlt-datepicker').forEach((datePicker) => {
         datePicker.style = `top: ${buttonRect.y - dateSelectorModalRect.height + scrollOffset}px; left: ${buttonRect.x - containerOffset}px; right: auto;`;
       });
     } else {
-      form.querySelectorAll('.flatpickr-calendar.Vlt-datepicker').forEach((datePicker) => {
+      form.querySelectorAll('.flatpickr-calendar.vlt-datepicker').forEach((datePicker) => {
         datePicker.style = `top: ${buttonRect.y + buttonRect.height + scrollOffset}px; left: ${buttonRect.x - containerOffset}px; right: auto;`;
       });
     }
@@ -276,39 +276,39 @@ function createDateSelector(form) {
  * @returns {Element} - A timezone selector drop down
  */
 function createTimeZoneSelector(form, timeZone = calcLocalTimeZone()) {
-  const timeZoneSelector = div({ class: 'Vlt-form__element timezone-selector', 'is-required': 'true' });
+  const timeZoneSelector = div({ class: 'vlt-form-element timezone-selector', 'is-required': 'true' });
   timeZoneSelector.innerHTML = `
-                                    <div class="Vlt-form__element" is-required="true">
-                                        <div class="Vlt-dropdown Vlt-dropdown--full-width">
-                                            <div class="Vlt-dropdown__trigger Vlt-dropdown__trigger--btn">
-                                                <div class="Vlt-form__element Vlt-form__element--big">
-                                                    <div class="Vlt-input Vlt-native-dropdown">
+                                    <div class="vlt-form-element" is-required="true">
+                                        <div class="vlt-dropdown vlt-dropdown-full-width">
+                                            <div class="vlt-dropdown-trigger vlt-dropdown-trigger-btn">
+                                                <div class="vlt-form-element vlt-form-element-big">
+                                                    <div class="vlt-input vlt-native-dropdown">
                                                         <input type="text" placeholder="Select" name="tz" readonly="readonly" required="required">
-                                                        <label class="Vlt-form__input-label">Time Zone</label>
+                                                        <label class="vlt-form-input-label">Time Zone</label>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="Vlt-dropdown__panel">
-                                                <div class="Vlt-dropdown__panel__content Vlt-dropdown__panel__content--scroll-area">
-                                                    <div class="Vlt-dropdown__scroll">
-                                                        <div id="Eastern" class="Vlt-dropdown__link">Eastern</div>
-                                                        <div id="Central" class="Vlt-dropdown__link">Central</div>
-                                                        <div id="Mountain" class="Vlt-dropdown__link">Mountain</div>
-                                                        <div id="Pacific" class="Vlt-dropdown__link">Pacific</div>
+                                            <div class="vlt-dropdown-panel">
+                                                <div class="vlt-dropdown-panel-content vlt-dropdown-panel-content-scroll-area">
+                                                    <div class="vlt-dropdown-scroll">
+                                                        <div id="Eastern" class="vlt-dropdown-link">Eastern</div>
+                                                        <div id="Central" class="vlt-dropdown-link">Central</div>
+                                                        <div id="Mountain" class="vlt-dropdown-link">Mountain</div>
+                                                        <div id="Pacific" class="vlt-dropdown-link">Pacific</div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <small class="Vlt-form__element__error Vlt-icon-warning-icon">
-                                            <span class="Vlt-form__input-error-label"></span>
+                                        <small class="vlt-form-element-error vlt-icon-warning-icon">
+                                            <span class="vlt-form-input-error-label"></span>
                                         </small>
                                     </div>`;
 
-  timeZoneSelector.querySelector('.Vlt-input input').setAttribute('value', timeZone.name);
-  timeZoneSelector.querySelectorAll('.Vlt-dropdown__scroll div').forEach((timeZoneLink) => {
+  timeZoneSelector.querySelector('.vlt-input input').setAttribute('value', timeZone.name);
+  timeZoneSelector.querySelectorAll('.vlt-dropdown-scroll div').forEach((timeZoneLink) => {
     timeZoneLink.addEventListener('click', (event) => {
-      form.querySelector('.Vlt-form__element.time-selector').replaceWith(createTimeSelector(getOffsetByTimezone(event.target.innerHTML), getSelectedDate(form.querySelector('.Vlt-form__element.date-selector .form-control.input'))));
-      form.querySelectorAll(' .Vlt-form__element .Vlt-dropdown').forEach((dropDown) => {
+      form.querySelector('.vlt-form-element.time-selector').replaceWith(createTimeSelector(getOffsetByTimezone(event.target.innerHTML), getSelectedDate(form.querySelector('.vlt-form-element.date-selector .form-control.input'))));
+      form.querySelectorAll(' .vlt-form-element .vlt-dropdown').forEach((dropDown) => {
         addDropDownClickHandlers(dropDown);
         addOutsideDropDownClickHandler(dropDown);
       });
@@ -324,7 +324,7 @@ function createTimeZoneSelector(form, timeZone = calcLocalTimeZone()) {
  */
 
 function createScheduleElements(form) {
-  const scheduleFormInputs = div({ class: 'bns-reschedule__form-inputs' });
+  const scheduleFormInputs = div({ class: 'bns-reschedule-form-inputs' });
 
   // Create the date, time and timezone drop down input fields
   scheduleFormInputs.append(createDateSelector(form));
@@ -341,7 +341,7 @@ function createScheduleElements(form) {
 
   if (startDate.getMonth() !== endDateObject.endDate.getMonth()) {
     form.append(createDatePickerModal(form, new Date(endDateObject.endDate.getFullYear(), endDateObject.endDate.getMonth(), 1), endDateObject.counter, 2));
-    form.querySelectorAll('.Vlt-datepicker__nav-prev,.Vlt-datepicker__nav-next').forEach((button) => {
+    form.querySelectorAll('.vlt-datepicker-nav-prev,.vlt-datepicker-nav-next').forEach((button) => {
       button.addEventListener('click', () => {
         form.querySelectorAll('.flatpickr-calendar').forEach((datePicker) => {
           datePicker.classList.toggle('open');
@@ -349,14 +349,14 @@ function createScheduleElements(form) {
       });
     });
   } else {
-    form.querySelectorAll('.Vlt-datepicker__nav-prev,.Vlt-datepicker__nav-next').forEach((button) => {
+    form.querySelectorAll('.vlt-datepicker-nav-prev,.vlt-datepicker-nav-next').forEach((button) => {
       button.classList.add('disabled');
     });
   }
 
   // Add document level click handler per dropdown to listen for clicks outside the date picker to close it
   document.addEventListener('click', (event) => {
-    const dateModal = form.querySelector('.flatpickr-calendar.Vlt-datepicker.open');
+    const dateModal = form.querySelector('.flatpickr-calendar.vlt-datepicker.open');
     if (dateModal) {
       const isClickInside = dateModal.contains(event.target);
       if (!isClickInside) {
@@ -367,24 +367,24 @@ function createScheduleElements(form) {
   });
 
   // Add event listeners for the immediate / schedule radio button to show and hide the scheduling controls
-  form.querySelectorAll('.bns-form__fieldset--phone .Vlt-radio').forEach((radio) => {
+  form.querySelectorAll('.bns-form-fieldset-phone .vlt-radio').forEach((radio) => {
     radio.addEventListener('click', (event) => {
       if (event.target.type === 'radio') {
         radio.querySelector('input').checked = true;
         const showScheduleElems = event.target.getAttribute('value');
-        const phoneFormFieldSet = form.querySelector('.bns-form__fieldset--phone');
-        if (showScheduleElems === 'true' && !form.querySelector('.bns-reschedule__form-inputs')) {
-          phoneFormFieldSet.classList.remove('bns-form__fieldset--margin');
+        const phoneFormFieldSet = form.querySelector('.bns-form-fieldset-phone');
+        if (showScheduleElems === 'true' && !form.querySelector('.bns-reschedule-form-inputs')) {
+          phoneFormFieldSet.classList.remove('bns-form-fieldset-margin');
           phoneFormFieldSet.append(createScheduleElements(form));
-        } else if (showScheduleElems === 'false' && form.querySelector('.bns-reschedule__form-inputs')) {
-          form.querySelector('.bns-reschedule__form-inputs').remove();
-          phoneFormFieldSet.classList.add('bns-form__fieldset--margin');
+        } else if (showScheduleElems === 'false' && form.querySelector('.bns-reschedule-form-inputs')) {
+          form.querySelector('.bns-reschedule-form-inputs').remove();
+          phoneFormFieldSet.classList.add('bns-form-fieldset-margin');
         }
       }
     });
   });
 
-  scheduleFormInputs.querySelectorAll(' .Vlt-form__element .Vlt-dropdown').forEach((dropDown) => {
+  scheduleFormInputs.querySelectorAll(' .vlt-form-element .vlt-dropdown').forEach((dropDown) => {
     // Click handlers for the dropdown elements to update the form value and close the dropdown
     addDropDownClickHandlers(dropDown);
     addOutsideDropDownClickHandler(dropDown);
@@ -430,12 +430,12 @@ function getSelectedTimeZone(timeZoneSelector) {
  */
 function addDropDownClickHandlers(dropDown) {
   dropDown.addEventListener('click', () => {
-    dropDown.classList.add('Vlt-dropdown--expanded');
+    dropDown.classList.add('vlt-dropdown-expanded');
   });
-  dropDown.querySelectorAll('.Vlt-dropdown__link').forEach((dropDownLink) => {
+  dropDown.querySelectorAll('.vlt-dropdown-link').forEach((dropDownLink) => {
     dropDownLink.addEventListener('click', (clickEvent) => {
       dropDown.querySelector('input').setAttribute('value', dropDownLink.innerHTML.trim());
-      dropDown.classList.remove('Vlt-dropdown--expanded');
+      dropDown.classList.remove('vlt-dropdown-expanded');
       clickEvent.stopPropagation();
     });
   });
@@ -451,7 +451,7 @@ function addOutsideDropDownClickHandler(dropDown) {
     const isClickInside = dropDown.contains(clickEvent.target);
     if (!isClickInside) {
       // The click was OUTSIDE the specifiedElement, do something
-      dropDown.classList.remove('Vlt-dropdown--expanded');
+      dropDown.classList.remove('vlt-dropdown-expanded');
     }
   });
 }
@@ -468,19 +468,19 @@ function createDatePickerModal(form, startDate, numberDays, index) {
   const headerMonth = startDate.toLocaleString('default', { month: 'long' });
   const headerYear = startDate.getFullYear();
 
-  const datePickerModal = div({ class: 'flatpickr-calendar Vlt-datepicker animate showTimeInput', tabIndex: index });
+  const datePickerModal = div({ class: 'flatpickr-calendar vlt-datepicker animate showTimeInput', tabIndex: index });
   datePickerModal.innerHTML = `
-        <div class="Vlt-datepicker__header">
-          <span class="Vlt-datepicker__header-month">${headerMonth}</span>
-          <span class="Vlt-datepicker__header-year">${headerYear}</span>
-                <div class="Vlt-datepicker__nav">
-                    <span class="Vlt-datepicker__nav-prev"></span>
-                    <span class="Vlt-datepicker__nav-next"></span>
+        <div class="vlt-datepicker-header">
+          <span class="vlt-datepicker-header-month">${headerMonth}</span>
+          <span class="vlt-datepicker-header-year">${headerYear}</span>
+                <div class="vlt-datepicker-nav">
+                    <span class="vlt-datepicker-nav-prev"></span>
+                    <span class="vlt-datepicker-nav-next"></span>
                 </div>
             </div>
-            <div class="Vlt-datepicker__range">
-                <span class="Vlt-datepicker__range-start"></span>
-                <span class="Vlt-datepicker__range-end"></span>
+            <div class="vlt-datepicker-range">
+                <span class="vlt-datepicker-range-start"></span>
+                <span class="vlt-datepicker-range-end"></span>
             </div>
             <div class="flatpickr-innerContainer">
                 <div class="flatpickr-rContainer">
@@ -496,11 +496,11 @@ function createDatePickerModal(form, startDate, numberDays, index) {
                         </div>
                     </div>
                     <div class="flatpickr-days" tabindex="-1">
-                      <!--A div containing spans of generated days will be inserted here--> 
+                      <!-A div containing spans of generated days will be inserted here-> 
                     </div>
                 </div>
             </div>
-            <div class="Vlt-datepicker__footer"><button class="Vlt-datepicker__clear">Clear</button></div>`;
+            <div class="vlt-datepicker-footer"><button class="vlt-datepicker-clear">Clear</button></div>`;
 
   const firstDayOfMonth = new Date(startDate.getFullYear(), startDate.getMonth(), 1);
   const lastDayOfMonth = new Date(startDate.getFullYear(), startDate.getMonth() + 1, 0);
@@ -536,15 +536,15 @@ function createDatePickerModal(form, startDate, numberDays, index) {
         });
         daySpan.classList.add('selected');
         // Set the hidden date input fields value to the selected date
-        form.querySelector('.Vlt-input.Vlt-native-dropdown .form-control.input').value = event.target.getAttribute('dateString');
+        form.querySelector('.vlt-input.vlt-native-dropdown .form-control.input').value = event.target.getAttribute('dateString');
         // Close the dete picker modal window
-        document.querySelector('.flatpickr-calendar.Vlt-datepicker').classList.remove('open');
+        document.querySelector('.flatpickr-calendar.vlt-datepicker').classList.remove('open');
         // Recreate the time selector
         // TODO: Could improve this to only recreate if changing either from today to another day or from any day to today (the only times the time selector would need to be updated)
-        const selectedTimeZone = getOffsetByTimezone(getSelectedTimeZone(form.querySelector('.Vlt-form__element.timezone-selector input')));
-        const selectedDate = getSelectedDate(form.querySelector('.Vlt-form__element.date-selector .form-control.input'));
-        form.querySelector('.Vlt-form__element.time-selector').replaceWith(createTimeSelector(selectedTimeZone, selectedDate));
-        form.querySelectorAll(' .Vlt-form__element.time-selector .Vlt-dropdown').forEach((dropDown) => {
+        const selectedTimeZone = getOffsetByTimezone(getSelectedTimeZone(form.querySelector('.vlt-form-element.timezone-selector input')));
+        const selectedDate = getSelectedDate(form.querySelector('.vlt-form-element.date-selector .form-control.input'));
+        form.querySelector('.vlt-form-element.time-selector').replaceWith(createTimeSelector(selectedTimeZone, selectedDate));
+        form.querySelectorAll(' .vlt-form-element.time-selector .vlt-dropdown').forEach((dropDown) => {
           addDropDownClickHandlers(dropDown);
           addOutsideDropDownClickHandler(dropDown);
         });
@@ -555,9 +555,9 @@ function createDatePickerModal(form, startDate, numberDays, index) {
     calendarDate.setDate(calendarDate.getDate() + 1);
   }
 
-  datePickerModal.querySelector('.Vlt-datepicker__clear').addEventListener('click', () => {
+  datePickerModal.querySelector('.vlt-datepicker-clear').addEventListener('click', () => {
     datePickerModal.querySelector('.flatpickr-day.selected').classList.remove('selected');
-    document.querySelector('.Vlt-input.Vlt-native-dropdown .form-control.input').value = '';
+    document.querySelector('.vlt-input.vlt-native-dropdown .form-control.input').value = '';
   });
   datePickerModal.querySelector('.flatpickr-days').append(daysContainer);
   return datePickerModal;
@@ -579,7 +579,7 @@ async function fetchFormContent(formUrl, formWrapper) {
 
     // If this is a scheduling form need to add the scheduling inputs as well as the date picker modal
     if (formUrl.includes('schedule')) {
-      form.querySelector('.bns-form__fieldset--phone').append(createScheduleElements(form));
+      form.querySelector('.bns-form-fieldset-phone').append(createScheduleElements(form));
     }
     form.querySelectorAll('input[required], select[required]').forEach(addInputValidation);
     form.querySelector('button[type="submit"]').addEventListener('click', (e) => {
@@ -639,28 +639,28 @@ function getSchedulingWindowEndDate(startDate, window) {
  * @param {Element} input - The element triggering validation
  */
 function validateInput(input) {
-  const formEl = input.closest('.Vlt-form__element');
+  const formEl = input.closest('.vlt-form-element');
   const isFocused = document.activeElement === input;
   const isValid = input.validity.valid;
-  const isDirty = formEl.classList.contains('Vlt-form__element--dirty');
+  const isDirty = formEl.classList.contains('vlt-form-element-dirty');
 
   if (isFocused) {
     // remove all alerts when focused
-    formEl.classList.remove('Vlt-form__element--error');
-    formEl.classList.remove('Vlt-form__element--valid');
+    formEl.classList.remove('vlt-form-element-error');
+    formEl.classList.remove('vlt-form-element-valid');
     return;
   }
 
   if (isValid) {
-    formEl.classList.remove('Vlt-form__element--error');
+    formEl.classList.remove('vlt-form-element-error');
   } else {
-    formEl.classList.add('Vlt-form__element--error');
+    formEl.classList.add('vlt-form-element-error');
   }
 
   if (isValid && isDirty) {
-    formEl.classList.add('Vlt-form__element--valid');
+    formEl.classList.add('vlt-form-element-valid');
   } else {
-    formEl.classList.remove('Vlt-form__element--valid');
+    formEl.classList.remove('vlt-form-element-valid');
   }
 }
 
@@ -686,7 +686,7 @@ function submitForm(formWrapper) {
     validateInput(input);
   });
   // there's a captcha that needs to be integrated. Thus, there will always be one error flag.
-  if (form.querySelectorAll('.Vlt-form__element--error').length <= 1) {
+  if (form.querySelectorAll('.vlt-form-element-error').length <= 1) {
     // fill in composite form fields
     if (form.querySelector('[name="cc"]') && form.querySelector('[name="local"]')) {
       setFormValue('phonenumber', form.querySelector('[name="cc"]').value + form.querySelector('[name="local"]').value);
@@ -696,7 +696,7 @@ function submitForm(formWrapper) {
 
     // submit form here.
     const formData = new FormData();
-    form.querySelectorAll('.Vlt-form__element input, .Vlt-form__element select, .Vlt-form>input[type="hidden"]').forEach((input) => {
+    form.querySelectorAll('.vlt-form-element input, .vlt-form-element select, .vlt-form>input[type="hidden"]').forEach((input) => {
       if (input.name !== '') {
         formData.append(input.name, input.value);
       }

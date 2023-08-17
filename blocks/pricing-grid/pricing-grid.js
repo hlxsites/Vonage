@@ -111,19 +111,19 @@ export default async function decorate(block) {
         </div>
         <div class="col-12 col-lg-9">
           <div class="category-grid-items three-col">
-            <div class="aem-Grid aem-Grid--12 aem-Grid--default--12  row">
-              <div class="productPricingTabs aem-GridColumn aem-GridColumn--default--12">
+            <div class="aem-Grid aem-Grid-12 aem-Grid-default-12  row">
+              <div class="productPricingTabs aem-GridColumn aem-GridColumn-default-12">
                 <section id="product-card-tabbed" class="tabs product-card-tabbed">
                   <div class="container">
                     <div class="row">
                       <div class="col-12">
                         <div role="tablist" aria-label="SMS" class="tabs-tabs">
-                            <!--  Tab button elements populated here while iterating through the returned pricing data-->
+                            <!-  Tab button elements populated here while iterating through the returned pricing data->
                         </div>
                       </div>
                     </div>
                   </div>
-                  <!--  Tab elements populated here while iterating through the returned pricing data-->
+                  <!-  Tab elements populated here while iterating through the returned pricing data->
                 </section>
               </div>
             </div>

@@ -5,8 +5,8 @@ import { toClassName } from '../../scripts/lib-franklin.js';
 import { fetchFormContent } from '../../forms/forms.js';
 
 const overlayStyles = [
-  { name: 'standardform', class: 'form-overlay__overlay' },
-  { name: 'bnsform', class: 'form-overlay__overlay-bnsform' },
+  { name: 'standardform', class: 'form-overlay-overlay' },
+  { name: 'bnsform', class: 'form-overlay-overlay-bnsform' },
 ];
 
 function decorateDescription(descriptionContent) {
@@ -86,16 +86,16 @@ function createFormOverlay(formContent) {
   formOverlay.innerHTML = `
         <div class="row">
           <div class="col-12 text-right">
-            <button class="Vlt-icon-close form-overlay__close" aria-label="Close modal"></button>
+            <button class="vlt-icon-close form-overlay-close" aria-label="Close modal"></button>
           </div>
         </div>`;
 
   formOverlay.append(formContent);
 
-  const formCloseButton = formOverlay.querySelector('.form-overlay__close');
+  const formCloseButton = formOverlay.querySelector('.form-overlay-close');
   formCloseButton.addEventListener('click', () => {
     const formContainer = (document.querySelector('.form-overlay'));
-    formContainer.classList.remove('form-overlay--open');
+    formContainer.classList.remove('form-overlay-open');
     document.querySelector('body').style = 'overflow-y: scroll';
   });
 
@@ -132,20 +132,20 @@ function buildOverlay(overlayRawContent) {
   return overlayContent;
 }
 
-function getFormSection(button, formStyle = 'form-overlay__overlay') {
+function getFormSection(button, formStyle = 'form-overlay-overlay') {
   const formSection = section({ class: 'form-overlay' });
-  formSection.innerHTML = `<div class="form-overlay__trigger">
-      <a class="btn form-overlay__button">${button.innerText}</a>
+  formSection.innerHTML = `<div class="form-overlay-trigger">
+      <a class="btn form-overlay-button">${button.innerText}</a>
     </div>
     <div class="${formStyle} " role="dialog" aria-modal="true" aria-label="form">
-      <!--Form Content Goes Here -->
+      <!-Form Content Goes Here ->
     </div>`;
 
   return formSection;
 }
 
 async function fetchFormThanksElem(thanksUrl) {
-  const thanksElem = div({ class: 'Vlt-form__success' });
+  const thanksElem = div({ class: 'vlt-form-success' });
   const resp = await fetch(thanksUrl);
   if (resp.ok) {
     thanksElem.innerHTML = await resp.text();
@@ -181,10 +181,10 @@ async function decorateCtasContent(ctasContent, stylesList) {
   const formThanks = fetchFormThanksElem(formThanksPath);
 
   formWrapper.append(await formThanks);
-  const newButton = ctasContent.querySelector('.form-overlay__button');
+  const newButton = ctasContent.querySelector('.form-overlay-button');
   newButton.addEventListener('click', () => {
     const formOverlay = (ctasContent.querySelector('.form-overlay'));
-    formOverlay.classList.add('form-overlay--open');
+    formOverlay.classList.add('form-overlay-open');
     document.querySelector('body').style = 'overflow-y: hidden';
   });
 

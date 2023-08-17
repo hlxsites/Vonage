@@ -8,7 +8,7 @@
   display: none;
 }
 
-  /* --- icons --- */
+  /* -- icons -- */
 .faceted-search .vlt-icon-close::before {
   font-family: var(--icon-font-family);
   content: var(--vlt-close-icon);

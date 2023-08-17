@@ -2,8 +2,8 @@
 Your project's description...
 
 ## Environments
-- Preview: https://main--vonage--hlxsites.hlx.page/
-- Live: https://main--vonage--hlxsites.hlx.live/
+- Preview: https://main-vonage-hlxsites.hlx.page/
+- Live: https://main-vonage-hlxsites.hlx.live/
 
 ## Installation
 
