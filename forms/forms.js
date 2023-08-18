@@ -582,6 +582,17 @@ async function fetchFormContent(formUrl, formWrapper) {
       form.querySelector('.bns-form-fieldset-phone').append(createScheduleElements(form));
     }
     form.querySelectorAll('input[required], select[required]').forEach(addInputValidation);
+
+    const termsCheckBox = form.querySelector('.vlt-checkbox-button .vlt-checkbox-input');
+    termsCheckBox.addEventListener('click', (event) => {
+      const submitButton = form.querySelector('button[type="submit"]');
+      if (submitButton.hasAttribute('disabled') && event.target.checked === true) {
+        submitButton.removeAttribute('disabled');
+      } else {
+        submitButton.setAttribute('disabled', '');
+      }
+    });
+
     form.querySelector('button[type="submit"]').addEventListener('click', (e) => {
       e.preventDefault();
       submitForm(formWrapper);
@@ -646,15 +657,15 @@ function validateInput(input) {
 
   if (isFocused) {
     // remove all alerts when focused
-    formEl.classList.remove('vlt-form-element-error');
+    formEl.classList.remove('vlt-form-element-in-error');
     formEl.classList.remove('vlt-form-element-valid');
     return;
   }
 
   if (isValid) {
-    formEl.classList.remove('vlt-form-element-error');
+    formEl.classList.remove('vlt-form-element-in-error');
   } else {
-    formEl.classList.add('vlt-form-element-error');
+    formEl.classList.add('vlt-form-element-in-error');
   }
 
   if (isValid && isDirty) {
@@ -686,7 +697,7 @@ function submitForm(formWrapper) {
     validateInput(input);
   });
   // there's a captcha that needs to be integrated. Thus, there will always be one error flag.
-  if (form.querySelectorAll('.vlt-form-element-error').length <= 1) {
+  if (form.querySelectorAll('.vlt-form-element-in-error').length <= 1) {
     // fill in composite form fields
     if (form.querySelector('[name="cc"]') && form.querySelector('[name="local"]')) {
       setFormValue('phonenumber', form.querySelector('[name="cc"]').value + form.querySelector('[name="local"]').value);
