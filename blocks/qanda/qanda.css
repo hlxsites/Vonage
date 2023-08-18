@@ -89,10 +89,34 @@
     margin: 0 0 1rem!important;
 }
 
+.qanda.toc .qanda-content > div > label {
+    background: #f7f7fe;
+}
+
+.qanda.toc .qanda-content ol {
+    margin-top: unset;
+}
+
+.qanda.toc .qanda-content > div > div {
+    height: auto;
+}
+
 @media (min-width: 992px) {
   .qanda > div {
     margin-left: 16.6667%;
     flex: 0 0 66.6667%;
     max-width: 66.6667%;
+  }
+
+  .qanda.toc > div {
+    margin-left: unset;
+    max-width: unset;
+  }
+
+  .qanda.toc .qanda-content ol {
+    column-count: 2;
+    column-gap: 30px;
+    margin: 0 10px;
+    padding: 0;
   }
 }
