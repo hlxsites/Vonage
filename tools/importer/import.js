@@ -68,8 +68,8 @@ function importSlimPromo(main, document) {
     console.log(`slimPromos Found: ${SPs.length}`);
 
     SPs.forEach((slimPromo) => {
-      const spImg = slimPromo.querySelector('div.slimPromo__image > img');
-      const spCopy = slimPromo.querySelector('div.slimPromo__text');
+      const spImg = slimPromo.querySelector('div.slimPromo-image > img');
+      const spCopy = slimPromo.querySelector('div.slimPromo-text');
       const spCells = [['Columns (slim-promo)'], [spImg, spCopy]];
       const columnsBlock = WebImporter.DOMUtils.createTable(spCells, document);
 
@@ -93,11 +93,11 @@ function importPricingMatrix(main, document) {
     slider.remove();
   }
   pms.forEach((matrix) => {
-    if (matrix.querySelector('div.plans-card.plans-card--extended:not(.plans-card--tagged)')) {
+    if (matrix.querySelector('div.plans-card.plans-card-extended:not(.plans-card-tagged)')) {
       console.log('Found Alt Extended Pricing Matrix');
       const matrixConfig = [['columns (plans)']];
-      matrix.querySelectorAll('div.plans-card__info').forEach((info) => {
-        info.querySelector('section.form-overlay > div.form-overlay__overlay').remove();
+      matrix.querySelectorAll('div.plans-card-info').forEach((info) => {
+        info.querySelector('section.form-overlay > div.form-overlay-overlay').remove();
         matrixConfig.push([info]);
       });
       const pmBlock = WebImporter.DOMUtils.createTable(matrixConfig, document);
@@ -128,8 +128,8 @@ function import2upCards(main, document) {
       const infoCwrapper = document.createElement('div');
       const infoClink = document.createElement('a');
       infoClink.href = infoCard.href;
-      const infoCtitle = infoCard.querySelector('.info-card__title');
-      const infoCdesc = infoCard.querySelector('.info-card__description');
+      const infoCtitle = infoCard.querySelector('.info-card-title');
+      const infoCdesc = infoCard.querySelector('.info-card-description');
       infoClink.append(infoCtitle, infoCdesc);
       infoCwrapper.append(infoClink);
       cardCells.push([infoCwrapper]);
@@ -143,12 +143,12 @@ function importIconPanel(main, document) {
   const ip = main.querySelectorAll('section.icon-panel');
   ip.forEach((panel) => {
     const panCells = [['Cards']];
-    const ips = panel.querySelectorAll('div.icon-panel__item');
+    const ips = panel.querySelectorAll('div.icon-panel-item');
     ips.forEach((ipanel) => {
-      const img = ipanel.querySelector('div.icon-panel__image > img');
+      const img = ipanel.querySelector('div.icon-panel-image > img');
       const txt = document.createElement('div');
-      const h2 = ipanel.querySelector('h2.icon-panel__headline');
-      const desc = ipanel.querySelector('span.icon-panel__description');
+      const h2 = ipanel.querySelector('h2.icon-panel-headline');
+      const desc = ipanel.querySelector('span.icon-panel-description');
       txt.append(h2, desc);
       panCells.push([img, txt]);
     });
@@ -166,7 +166,7 @@ function importCategoryGrid(main, document) {
   console.log(`category-grid: ${cg.length}`);
   cg.forEach((grid) => {
     const cgCells = [['Columns']];
-    const gi = grid.querySelectorAll('section.category-grid__item');
+    const gi = grid.querySelectorAll('section.category-grid-item');
     const cols = [];
     gi.forEach((item) => {
       const textNode = item.querySelector('p.text-link');
@@ -185,24 +185,24 @@ function importCategoryGrid(main, document) {
 
 function importLandingPageHero(main, document) {
   const lph = main.querySelectorAll('header.landing-page-hero'); // .landing-page-hero--media-floating .landing-page-hero--media-contained
-  // other selector: landing-page-hero--media-landscape (example: /unified-communications/)
+  // other selector: landing-page-hero-media-landscape (example: /unified-communications/)
   const lphCells = [['landing-page-hero (features)']];
   // really *should* be only one of these per page
   lph.forEach((hero) => {
-    if (hero.classList.contains('landing-page-hero--media-landscape')) {
+    if (hero.classList.contains('landing-page-hero-media-landscape')) {
       lphCells.pop();
       lphCells.push(['landing-page-hero (category-media)']);
     }
-    const title = hero.querySelector('h1.landing-page-hero__title');
-    const description = hero.querySelector('.landing-page-hero__description');
+    const title = hero.querySelector('h1.landing-page-hero-title');
+    const description = hero.querySelector('.landing-page-hero-description');
     lphCells.push(['title', title.innerHTML]);
     lphCells.push(['description', description.innerHTML]);
 
-    const media = hero.querySelector('div.landing-page-hero__media-container > div > div > div > img, div.landing-page-hero__media-container > img');
+    const media = hero.querySelector('div.landing-page-hero-media-container > div > div > div > img, div.landing-page-hero-media-container > img');
     if (media) {
       lphCells.push(['image', media]);
     }
-    if (hero.classList.contains('landing-page-hero--media-landscape')) {
+    if (hero.classList.contains('landing-page-hero-media-landscape')) {
       const overlay = main.querySelector('div.stick-promo');
       if (overlay) {
         const ovrList = document.createElement('ul');
@@ -217,7 +217,7 @@ function importLandingPageHero(main, document) {
         lphCells.push(['overlay', ovrList]);
       }
     }
-    const ctas = hero.querySelectorAll('.landing-page-hero__ctas > section > div > button.btn, .landing-page-hero__ctas > a.btn');
+    const ctas = hero.querySelectorAll('.landing-page-hero-ctas > section > div > button.btn, .landing-page-hero-ctas > a.btn');
     const ctaList = document.createElement('ul');
     ctas.forEach((cta) => {
       const cItem = document.createElement('li');
@@ -267,7 +267,7 @@ function importDetailsGrid(main, document) {
   const detailsGrid = main.querySelectorAll('section.details-grid div.detail');
   detailsGrid.forEach((grid) => {
     const dgCells = [['columns']];
-    const items = grid.querySelectorAll('div.detail__content');
+    const items = grid.querySelectorAll('div.detail-content');
     console.log(`items: ${items.innerHTML}`);
     const dpItems = [];
     items.forEach((item) => {
@@ -283,8 +283,8 @@ function importCaseStudy(main, document) {
   const csGrid = main.querySelectorAll('section.case-study');
   csGrid.forEach((study) => {
     const csCells = [['columns (case-study)']];
-    const col1 = study.querySelector('div.case-study__information');
-    const col2 = study.querySelector('div.case-study__assets-group');
+    const col1 = study.querySelector('div.case-study-information');
+    const col2 = study.querySelector('div.case-study-assets-group');
     csCells.push([col1, col2]);
 
     const caseGrid = WebImporter.DOMUtils.createTable(csCells, document);
@@ -303,13 +303,13 @@ function importTrustPilot(main, document) {
 }
 
 function importQnA(main, document) {
-  const qnas = main.querySelectorAll('h2.faq__title + div.aem-grid');
+  const qnas = main.querySelectorAll('h2.faq-title + div.aem-grid');
   qnas.forEach((qna) => {
     const faqCells = [['QandA']];
     const questions = qna.querySelectorAll('section.faq');
     questions.forEach((question) => {
       const q = question.querySelector('label.tab-label');
-      const a = question.querySelector('div.faq__content');
+      const a = question.querySelector('div.faq-content');
       faqCells.push([q, a]);
     });
     const faqs = WebImporter.DOMUtils.createTable(faqCells, document);
@@ -324,7 +324,7 @@ function importHeroForm(main, document) {
       main.querySelector('section.flexibleRte').prepend(hr(document));
     }
     const hfCells = [['hero-form']];
-    const hfContent = form.querySelector('div.campaign-hero-with-form__additional-content');
+    const hfContent = form.querySelector('div.campaign-hero-with-form-additional-content');
     const hfSuccess = form.querySelector('div.lightboxFormConfirmation');
     hfCells.push(['copy', hfContent]);
     hfCells.push(['form-id', 'lead-form']);
@@ -360,7 +360,7 @@ function importLogoStrip(main, document) {
   const logoStrips = main.querySelectorAll('div.logoStrip');
   logoStrips.forEach((strip) => {
     const lsCells = [['cards (logo-strip)']];
-    const logoItems = strip.querySelectorAll('div.logo-strip__logo');
+    const logoItems = strip.querySelectorAll('div.logo-strip-logo');
     logoItems.forEach((logo) => {
       lsCells.push([logo]);
     });
@@ -378,10 +378,10 @@ function importCardImage3up(main, document) {
       const anchor = item.querySelector('a');
       const linkedDiv = document.createElement('div');
       const headDiv = document.createElement('div');
-      const cat = item.querySelector('span.Vlt-card-image__category').innerHTML;
-      const type = (item.querySelector('span.Vlt-card-image__type')) ? item.querySelector('span.Vlt-card-image__type').innerHTML : '';
-      const head = item.querySelector('span.Vlt-card-image__headline').innerHTML;
-      const image = item.querySelector('div.Vlt-card-image__image-wrapper img');
+      const cat = item.querySelector('span.vlt-card-image-category').innerHTML;
+      const type = (item.querySelector('span.vlt-card-image-type')) ? item.querySelector('span.vlt-card-image-type').innerHTML : '';
+      const head = item.querySelector('span.vlt-card-image-headline').innerHTML;
+      const image = item.querySelector('div.vlt-card-image-image-wrapper img');
       anchor.innerHTML = cat;
       typeDiv.innerHTML = type;
       headDiv.innerHTML = head;
@@ -400,18 +400,18 @@ function importSpeedBump(main, document) {
   console.log(`Speed Bump(s): ${bumps.length}`);
   bumps.forEach((bump) => {
     const sbCells = [['speed-bump']];
-    sbCells.push(['hero', bump.querySelector('div.speed-bump__container > img')]);
+    sbCells.push(['hero', bump.querySelector('div.speed-bump-container > img')]);
     const contentDiv = document.createElement('div');
     const heading = document.createElement('h3');
     const subHeading = document.createElement('p');
     const description = document.createElement('p');
-    subHeading.append(bump.querySelector('div.speed-bump__headline').innerHTML);
-    heading.append(bump.querySelector('span.speed-bump__eyebrow').innerHTML);
-    description.append(bump.querySelector('div.speed-bump__description').innerHTML);
+    subHeading.append(bump.querySelector('div.speed-bump-headline').innerHTML);
+    heading.append(bump.querySelector('span.speed-bump-eyebrow').innerHTML);
+    description.append(bump.querySelector('div.speed-bump-description').innerHTML);
     contentDiv.append(heading);
     contentDiv.append(subHeading);
     contentDiv.append(description);
-    bump.querySelectorAll('div.speed-bump__link-container').forEach((link) => {
+    bump.querySelectorAll('div.speed-bump-link-container').forEach((link) => {
       contentDiv.append(link);
     });
     sbCells.push(['copy', contentDiv]);
@@ -441,7 +441,7 @@ export default {
 
     // use helper method to remove header, footer, etc.
     WebImporter.DOMUtils.remove(main, [
-      'header.Vlt-header',
+      'header.vlt-header',
       'footer',
       '#drift-frame-chat',
       '#drift-frame-controller',

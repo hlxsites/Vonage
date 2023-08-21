@@ -1,1 +1,151 @@
 @import url("../../forms/form.css");
+
+.embedded-form {
+  margin-top: 50px;
+  box-sizing: border-box;
+}
+
+.embedded-form .card {
+  text-align: center;
+  padding: 1rem 2rem;
+  border: 2px solid #d1d1d1;
+  border-radius: 3rem;
+  width: auto;
+  max-width: 100%;
+  margin-bottom: 4rem;
+  background: #fff;
+}
+
+.embedded-form .card a {
+  text-decoration: none;
+  color: #881fff;
+}
+
+.embedded-form .card a::after {
+  display:inline-block;
+  content: var(--vlt-right-arrow-2-icon);
+  font-family: var(--icon-font-family);
+  letter-spacing: 0;
+  position: relative;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 400;
+  line-height: inherit;
+  speak: none;
+  text-transform: none;
+  font-size: 1.6rem;
+  margin-left: 0.8rem;
+  transition: margin .3s ease;
+}
+
+.embedded-form .card a:hover::after {
+  margin-left: 1.6rem;
+  text-decoration: none;
+}
+
+.embedded-form .card a:hover {
+  text-decoration: underline;
+}
+
+.embedded-form .card a[href^="tel"] {
+  display: block;
+  text-decoration: inherit;
+  font-size: 2.8rem;
+  margin: 2rem 0;
+  font-weight: 500;
+}
+
+.embedded-form .card a[href^="tel"]::after {
+  content:"";
+}
+
+.embedded-form > div {
+  display: flex;
+  gap: 50px;
+}
+
+
+.embedded-form .right-column-wrapper {
+  background: linear-gradient(275deg, #ffa78c, #d41f9c);
+  border-radius: 2.2rem 3.6rem 2.6rem;
+  padding: 0 1.8rem 1.8rem 0;
+}
+
+
+.embedded-form .right-column {
+  background: white;
+  border-radius: 2rem 2.2rem 2.6rem 2.3rem;
+  padding: 3rem 2rem;
+  max-width: 715px;
+}
+
+
+.embedded-form .right-column .thank-you {
+  display: none;
+}
+
+.embedded-form.submitted .right-column .form {
+  display:none;
+}
+
+.embedded-form.success .right-column .thank-you {
+  display: inline-block;
+}
+
+.embedded-form .right-column .thank-you h3 {
+  text-align: center;
+  font-weight: 500;
+  font-size: var(--heading-font-size-l);
+}
+
+.embedded-form .right-column .thank-you p {
+  margin: 0 auto;
+  text-align: center;
+  max-width: 79%;
+  font-size: var(--body-font-size-m);
+  letter-spacing: -.025rem;
+  line-height: calc(var(--body-font-size-m) + 4px);
+}
+
+
+.embedded-form .right-column .form .vlt-form-eyebrow {
+  font-family: var(--body-font-family);
+  font-size: 1.2rem;
+  font-weight: 400;
+  letter-spacing: .2rem;
+  line-height: 2rem;
+  text-transform: uppercase;
+}
+
+.embedded-form .right-column .form .row {
+  width: 100%;
+  display: block;
+  max-width: 50rem;
+}
+
+.embedded-form .right-column .form .vlt-input,
+.embedded-form .right-column .form .vlt-select {
+  border-color: #90929b;
+  margin-bottom: 0.2rem;
+  max-width: 100%;
+  position: relative;
+}
+
+.embedded-form .right-column .form .vlt-form-element:not(.vlt-form-element-dirty) .vlt-input input {
+  background-color: #fff;
+  border-color: #90929b;
+  height: 5rem;
+  font-size: 1.6rem;
+  font-family: Spezia, "Spezia_SemiMono", Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  letter-spacing: -.025rem;
+  line-height: 2.5rem;
+}
+
+.embedded-form .campaign-hero-with-form-card {
+  background-color: #fff;
+  border-radius: 1.3rem;
+  border: .1rem solid #fff;
+  padding: 5rem 1.5rem 4rem;
+  position: relative;
+}

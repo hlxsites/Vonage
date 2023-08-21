@@ -1,7 +1,6 @@
 {
   "extends": ["stylelint-config-standard"],
   "rules": {
-    "declaration-block-trailing-semicolon": "always",
     "font-family-no-missing-generic-family-keyword": [ true, {
       "ignoreFontFamilies": [
         "VltIcons"
