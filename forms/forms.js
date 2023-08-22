@@ -27,30 +27,36 @@ function isDST(date = new Date()) {
 /**
  * Get the UTC offset for a given timezone
  * @param {string} timeZone - String representation of the timezones displayed in the timezone selector drop down (currently Eastern, Central, Mountain or Pacific)
- * @returns {{offset: number, name: string}} - An object containing the correct UTC offset (taking into account DST) as well as the name of the timezone (same as was input)
+ * @returns {{offset: number, name: string, string: string}} - An object containing the correct UTC offset (taking into account DST) as well as the name of the timezone (same as was input)
  */
 function getOffsetByTimezone(timeZone) {
   let timeZoneOffset;
+  let timeZoneString;
   if (isDST) {
     switch (timeZone) {
       case 'Pacific': {
         timeZoneOffset = -7;
+        timeZoneString = '-07:00';
         break;
       }
       case 'Mountain': {
         timeZoneOffset = -6;
+        timeZoneString = '-06:00';
         break;
       }
       case 'Central': {
         timeZoneOffset = -5;
+        timeZoneString = '-05:00';
         break;
       }
       case 'Eastern': {
         timeZoneOffset = -4;
+        timeZoneString = '-04:00';
         break;
       }
       default: {
         timeZoneOffset = -4;
+        timeZoneString = '-04:00';
         break;
       }
     }
@@ -58,27 +64,32 @@ function getOffsetByTimezone(timeZone) {
     switch (timeZone) {
       case 'Pacific': {
         timeZoneOffset = -8;
+        timeZoneString = '-08:00';
         break;
       }
       case 'Mountain': {
         timeZoneOffset = -7;
+        timeZoneString = '-07:00';
         break;
       }
       case 'Central': {
         timeZoneOffset = -6;
+        timeZoneString = '-06:00';
         break;
       }
       case 'Eastern': {
         timeZoneOffset = -5;
+        timeZoneString = '-05:00';
         break;
       }
       default: {
         timeZoneOffset = -5;
+        timeZoneString = '-05:00';
         break;
       }
     }
   }
-  return { name: timeZone, offset: timeZoneOffset };
+  return { name: timeZone, offset: timeZoneOffset, string: timeZoneString };
 }
 
 /**
@@ -255,7 +266,7 @@ function createDateSelector(form) {
     const dateSelectorModal = document.querySelector('.flatpickr-calendar.vlt-datepicker');
     const dateSelectorModalRect = dateSelectorModal.getBoundingClientRect();
     const containerOffset = document.querySelector('form div.container').getBoundingClientRect().x;
-    const scrollOffset = document.querySelector('.form-overlay-overlay-bnsform').scrollTop;
+    const scrollOffset = document.querySelector('.form-bnsform').scrollTop;
     if (buttonRect.y + dateSelectorModalRect.height > window.innerHeight) {
       form.querySelectorAll('.flatpickr-calendar.vlt-datepicker').forEach((datePicker) => {
         datePicker.style = `top: ${buttonRect.y - dateSelectorModalRect.height + scrollOffset}px; left: ${buttonRect.x - containerOffset}px; right: auto;`;
@@ -693,9 +704,77 @@ function setFormValue(id, value) {
  */
 function submitForm(formWrapper) {
   const form = formWrapper.querySelector('form');
+
   form.querySelectorAll('input[required], select[required]').forEach((input) => {
     validateInput(input);
   });
+
+  function retrieveFormData(formElem, formType) {
+    const formData = {};
+
+    if (formType === 'form-bnsform') {
+      // TODO: Need to figure out where these properties should live in page to be dynamically populated
+      const contactDetailRequest = {
+        storefrontName: 'Vonage',
+        priceBook: 'VBC Pricebook',
+        userCurrency: 'USD',
+        locale: 'en_US',
+        cartId: null,
+        salesRepId: null,
+        referrerId: null,
+      };
+
+      const contactDetail = {};
+      formElem.querySelectorAll('.bns-form-fieldset-contact .vlt-form-element input, .bns-form-fieldset-contact .vlt-form-element select, .bns-form-fieldset-contact .vlt-form>input[type="hidden"]').forEach((input) => {
+        if (input.name === 'method') {
+          // Do nothing as this field is added in another place in the JSON
+        } else if (input.name !== '') {
+          contactDetail[input.name] = input.value;
+        }
+      });
+      formElem.querySelectorAll('.bns-form-fieldset-tellus .vlt-form-element input, .bns-form-fieldset-tellus .vlt-form-element select, .bns-form-fieldset-tellus .vlt-form>input[type="hidden"]').forEach((input) => {
+        if (input.name !== '') {
+          contactDetail[input.name] = input.value;
+        }
+      });
+      contactDetailRequest.contactDetail = contactDetail;
+      const scheduleDateTime = new Date(Date.parse(formElem.querySelector('form .vlt-form-element.date-selector input.form-control').value));
+      let scheduleTime = formElem.querySelector('form .vlt-form-element.time-selector input').value;
+      scheduleTime = scheduleTime.split(' ')[0];
+      scheduleDateTime.setHours(scheduleTime.split(':')[0], scheduleTime.split(':')[1]);
+      contactDetailRequest.scheduleDateTime = `${scheduleDateTime.getFullYear()}-${String(scheduleDateTime.getMonth()).padStart(2, '0')}-${scheduleDateTime.getDate()} ${String(scheduleDateTime.getHours()).padStart(2, '0')}:${String(scheduleDateTime.getMinutes()).padStart(2, '0')}:00`;
+      const timeZone = formElem.querySelector('form .vlt-form-element.timezone-selector input').value;
+      contactDetailRequest.utcOffset = getOffsetByTimezone(timeZone).string;
+      contactDetailRequest.acceptyPrivacyPolicy = formElem.querySelector('form .vlt-checkbox input').value;
+      contactDetailRequest.contactMethod = formElem.querySelector('form .vlt-form-element [name = "method"]').value;
+      contactDetailRequest.call30Minutes = formElem.querySelector('form .vlt-form-element [name = "phoneOption"]').value;
+      contactDetailRequest.isBestNextStep = 'true';
+      contactDetailRequest.campaignId = null;
+      contactDetailRequest.glic = formElem.querySelector('form input[name = "gclid"]').value;
+      contactDetailRequest.kwid = formElem.querySelector('form input[name = "kwid"]').value;
+      contactDetailRequest.orderid = formElem.querySelector('form input[name = "orderid"]').value;
+      contactDetailRequest.PID = formElem.querySelector('form input[name = "PID"]').value;
+      contactDetailRequest.utmcampaign = formElem.querySelector('form input[name = "utmcampaign"]').value;
+      contactDetailRequest.attributioncampaign = formElem.querySelector('form input[name = "attributioncampaign"]').value;
+      contactDetailRequest.utmcontent = formElem.querySelector('form input[name = "utmcontent"]').value;
+      contactDetailRequest.utmrefererurl = formElem.querySelector('form input[name = "utmrefererurl"]').value;
+      contactDetailRequest.utmsource = formElem.querySelector('form input[name = "utmsource"]').value;
+      contactDetailRequest.utmterm = formElem.querySelector('form input[name = "utmterm"]').value;
+      contactDetailRequest.digitalTracking = formElem.querySelector('form input[name = "digitaltracking"]').value;
+      contactDetailRequest.omnitureid = '40299102592989006554421665607769348004';
+      contactDetailRequest.webreferrerurl = formElem.querySelector('form input[name = "webreferrerurl"]').value;
+
+      formData.contactDetailRequest = contactDetailRequest;
+    } else {
+      formElem.querySelectorAll('.vlt-form-element input, .vlt-form-element select, .vlt-form>input[type="hidden"]').forEach((input) => {
+        if (input.name !== '') {
+          formData[input.name] = input.value;
+        }
+      });
+    }
+    return formData;
+  }
+
   // there's a captcha that needs to be integrated. Thus, there will always be one error flag.
   if (form.querySelectorAll('.vlt-form-element-in-error').length <= 1) {
     // fill in composite form fields
@@ -706,15 +785,11 @@ function submitForm(formWrapper) {
     const url = form.getAttribute('action');
 
     // submit form here.
-    const formData = new FormData();
-    form.querySelectorAll('.vlt-form-element input, .vlt-form-element select, .vlt-form>input[type="hidden"]').forEach((input) => {
-      if (input.name !== '') {
-        formData.append(input.name, input.value);
-      }
-    });
+    const formData = retrieveFormData(form, formWrapper.className);
+
     fetch(url, {
       method: 'post',
-      body: formData,
+      body: JSON.stringify(formData),
     })
       .then((response) => {
         formWrapper.classList.add('submitted');

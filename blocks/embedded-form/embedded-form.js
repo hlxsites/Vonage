@@ -10,7 +10,8 @@ export default async function decorate(block) {
     block.querySelector('p').remove();
 
     block.append(div({ class: 'thank-you' }, ...thankYouMesage));
-    block.append(await fetchFormContent(`/forms/${htmlFile}`, document.querySelector('.embedded-form')));
+    const formContainer = document.querySelector('.embedded-form') ? document.querySelector('.embedded-form') : document.querySelector('.fragment-container.embedded-form .fragment.block');
+    block.append(await fetchFormContent(`/forms/${htmlFile}`, formContainer));
   } else {
     const cardWrapper = block.querySelector(':scope > div > div:first-child');
     cardWrapper.classList.add('card-wrapper');
@@ -55,8 +56,9 @@ async function decorateRightColumn(formWrapper) {
 
   const thankYouMesage = [...formWrapper.children];
   rightColumn.append(div({ class: 'thank-you' }, ...thankYouMesage));
+  const formContainer = document.querySelector('.embedded-form') ? document.querySelector('.embedded-form') : document.querySelector('.fragment-container.embedded-form .fragment.block');
 
-  rightColumn.append(await fetchFormContent(`/forms/${htmlFile}`, document.querySelector('.embedded-form')));
+  rightColumn.append(await fetchFormContent(`/forms/${htmlFile}`, formContainer));
 
   formWrapper.textContent = '';
   formWrapper.append(rightColumn);

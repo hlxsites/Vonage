@@ -97,7 +97,7 @@ function importPricingMatrix(main, document) {
       console.log('Found Alt Extended Pricing Matrix');
       const matrixConfig = [['columns (plans)']];
       matrix.querySelectorAll('div.plans-card-info').forEach((info) => {
-        info.querySelector('section.form-overlay > div.form-overlay-overlay').remove();
+        info.querySelector('section.form-overlay > div.form-standard').remove();
         matrixConfig.push([info]);
       });
       const pmBlock = WebImporter.DOMUtils.createTable(matrixConfig, document);
