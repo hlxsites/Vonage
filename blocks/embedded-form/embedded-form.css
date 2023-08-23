@@ -1,6 +1,5 @@
 @import url("../../forms/form.css");
 
-/* */
 .embedded-form-container > h4 {
   display:none;
 }
@@ -167,7 +166,7 @@
 
 @media (min-width: 768px) {
   .embedded-form .p2 {
-    font-family: Spezia,Spezia_SemiMono,Arial,Helvetica,sans-serif;
+    font-family: Spezia,"Spezia_SemiMono",Arial,Helvetica,sans-serif;
     font-size: 1.4rem;
     font-weight: 400;
     letter-spacing: -.02rem;
@@ -177,7 +176,7 @@
 
 @media (min-width: 1200px) {
   .embedded-form .p2 {
-    font-family: Spezia, Spezia_SemiMono, Arial, Helvetica, sans-serif;
+    font-family: Spezia, "Spezia_SemiMono", Arial, Helvetica, sans-serif;
     font-size: 1.7rem;
     font-weight: 400;
     letter-spacing: -.02rem;
