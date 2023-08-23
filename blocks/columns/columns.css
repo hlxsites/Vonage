@@ -8,15 +8,15 @@
   width: 100%;
 }
 
-.columns>div>div {
+.columns > div > div {
   order: 1;
 }
 
-.columns>div>.columns-img-col {
+.columns > div > .columns-img-col {
   order: 0;
 }
 
-.columns>div>.columns-img-col img {
+.columns > div > .columns-img-col img {
   display: block;
 }
 
@@ -41,6 +41,41 @@ div.slim-promo.columns-2-cols a {
   padding: 1rem;
   transition: all .35s ease;
   text-decoration: none;
+}
+
+.button-electric-purple a.button.primary {
+  background-color: var(--accent-color);
+  text-decoration: none;
+  border-color: #000;
+}
+
+div.slim-promo.hint-buy > div > div:nth-child(2).columns-other-col {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
+.stacked {
+  flex-direction: column;
+}
+
+div.slim-promo.hint-buy span.title-wrapper {
+  text-align: center;
+  width: 75%;
+}
+
+div.slim-promo.hint-buy span.hint-wrapper {
+  max-width: 20%;
+  display: none;
+}
+
+div.slim-promo.hint-buy p.button-container {
+  max-width: 20%;
+  display: none;
+}
+
+div.slim-promo.hint-buy span.hint-wrapper p {
+  font-size: var(--body-font-size-s);
 }
 
 div.columns.category-grid > div {
@@ -87,7 +122,7 @@ div.columns.basic-columns > div > div > p {
   margin-bottom: 3rem;
 }
 
-div.columns.lead-gen>div>div:last-child>p {
+div.columns.lead-gen > div > div:last-child>p {
   font-size: var(--body-font-size-xs);
   margin-top: 0;
   margin-bottom: .8rem;
@@ -207,23 +242,23 @@ div.columns.category-grid h4 {
   line-height: 2rem;
 }
 
-div.columns.basic-columns>div>div {
+div.columns.basic-columns > div > div {
   flex: 1 1 100%;
   padding-right: 2.7777%;
 }
 
-div.columns.lead-gen>div>div {
+div.columns.lead-gen > div > div {
   padding-top: 1rem;
   padding-bottom: 1rem;
   margin: auto;
 }
 
-div.slim-promo.columns-2-cols>div>div.columns-img-col {
+div.slim-promo.columns-2-cols > div > div.columns-img-col {
   max-width: 16%;
   display: none;
 }
 
-div.slim-promo.columns-2-cols>div>div:nth-child(2) {
+div.slim-promo.columns-2-cols > div > div:nth-child(2) {
   color: #fff;
   display: flex;
   flex-wrap: wrap;
@@ -262,7 +297,7 @@ div.market-place-summary.columns-2-cols > div > div:first-child {
   margin-bottom: 5rem;
 }
 
-div.columns.lead-gen>div>div:last-child>p>a {
+div.columns.lead-gen > div > div:last-child>p>a {
   color: inherit;
   text-decoration: underline;
 }
@@ -274,7 +309,7 @@ div.market-place-summary.columns-2-cols div.recs .col>a {
   height: 100%;
 }
 
-div.columns.lead-gen>div>div:last-child>p:last-child>a {
+div.columns.lead-gen > div > div:last-child>p:last-child>a {
   width: 100px;
 }
 
@@ -296,7 +331,7 @@ div.market-place-summary.columns-2-cols h2 {
   text-align: left;
 }
 
-div.columns.basic-columns>div>div>h2 {
+div.columns.basic-columns > div > div>h2 {
   font-family: var(--fixed-font-family);
   font-size: var(--body-font-size-xxs);
   text-transform: uppercase;
@@ -361,25 +396,25 @@ div.columns.block {
   margin-left: auto;
 }
 
-div.columns.lead-gen>div>div.columns-img-col {
+div.columns.lead-gen > div > div.columns-img-col {
   flex: 0 0 0;
   width: 75px;
   min-width: 75px;
   height: 75px;
 }
 
-div.columns.lead-gen>div>div:nth-child(2) {
+div.columns.lead-gen > div > div:nth-child(2) {
   flex: 1 0 0;
 }
 
-div.columns.lead-gen>div>div:nth-child(2)>h2 {
+div.columns.lead-gen > div > div:nth-child(2)>h2 {
   font-size: var(--body-font-size-xl);
   font-weight: 600;
   margin-top: 0;
   margin-bottom: 0;
 }
 
-div.columns.lead-gen>div>div:last-child {
+div.columns.lead-gen > div > div:last-child {
   flex: 0 0 0;
   box-sizing: border-box;
   min-width: 300px;
@@ -387,12 +422,12 @@ div.columns.lead-gen>div>div:last-child {
   color: inherit;
 }
 
-div.columns.lead-gen>div>div:last-child>p:last-child {
+div.columns.lead-gen > div > div:last-child>p:last-child {
   padding-top: 1.6rem;
   margin-bottom: 0;
 }
 
-div.columns.lead-gen>div>div:last-child>p:last-child>a::before {
+div.columns.lead-gen > div > div:last-child>p:last-child>a::before {
   font-family: var(--icon-font-family);
   font-weight: 600;
   font-size: 1.6rem;
@@ -403,11 +438,11 @@ div.columns.lead-gen>div>div:last-child>p:last-child>a::before {
   top: 0.2rem;
 }
 
-div.columns.lead-gen>div>div:last-child>p:last-child>a:first-child::before {
+div.columns.lead-gen > div > div:last-child>p:last-child>a:first-child::before {
   content: var(--vlt-mail-icon);
 }
 
-div.columns.lead-gen>div>div:last-child>p:last-child>a:last-child::before {
+div.columns.lead-gen > div > div:last-child>p:last-child>a:last-child::before {
   content: var(--vlt-dialog-bubble-icon);
   margin-left: 30px;
 }
@@ -421,7 +456,7 @@ div.columns.text-list > div {
   flex-wrap: wrap;
 }
 
-div.columns.text-list>div>div {
+div.columns.text-list > div > div {
   position: relative;
   width: 100%;
   padding-right: 20px;
@@ -517,6 +552,10 @@ div.section.headerlists div.columns-wrapper {
 
 
 @media (min-width: 768px) {
+  div.slim-promo.hint-buy > div > div:nth-child(2).columns-other-col {
+    display: flex;
+  }
+
   div.section.headerlists div.default-content-wrapper:first-child > p {
     max-width: 50%;
     margin-left: 50%;
@@ -622,18 +661,18 @@ div.section.headerlists div.columns-wrapper {
     max-width: 540px;
   }
 
-  div.columns.text-list>div>div {
+  div.columns.text-list > div > div {
     flex: 0 0 100%;
     max-width: 100%;
   }
 }
 
 @media (min-width: 600px) {
-  div.columns.basic-columns>div>div {
+  div.columns.basic-columns > div > div {
     flex: 1 1 45%;
   }
 
-  div.columns.lead-gen>div>div.columns-img-col {
+  div.columns.lead-gen > div > div.columns-img-col {
     width: 93px;
     min-width: 93px;
     height: 93px;
@@ -641,7 +680,7 @@ div.section.headerlists div.columns-wrapper {
 }
 
 @media (min-width: 768px) {
-  div.slim-promo.columns-2-cols>div>div.columns-img-col {
+  div.slim-promo.columns-2-cols > div > div.columns-img-col {
     max-width: 16%;
     display: block;
   }
@@ -675,16 +714,33 @@ div.section.headerlists div.columns-wrapper {
     text-align: left;
   }
 
+  div.slim-promo.hint-buy span.title-wrapper {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+  
+  div.slim-promo.hint-buy span.hint-wrapper {
+    display: block;
+    flex: 0 0 30%;
+    max-width: 30%;
+  }
+  
+  div.slim-promo.hint-buy p.button-container {
+    display: block;
+    flex: 0 0 20%;
+    max-width: 20%;
+  }
+
   div.columns.block.plans > div {
     flex-direction: column;
     align-items: center;
   }
 
-  div.slim-promo.columns-2-cols>div>div:nth-child(2) {
+  div.slim-promo.columns-2-cols > div > div:nth-child(2) {
     justify-content: left;
   }
 
-  div.market-place-summary.columns-2-cols>div>div:first-child {
+  div.market-place-summary.columns-2-cols > div > div:first-child {
     background-color: var(--overview-background-color);
     border-radius: 3rem;
     padding: 4rem;
@@ -722,7 +778,7 @@ div.section.headerlists div.columns-wrapper {
     margin: 1.4rem auto 0;
   }
 
-  div.columns.text-list>div>div {
+  div.columns.text-list > div > div {
     order: unset;
     flex-basis: 0;
     flex-grow: 1;
@@ -951,20 +1007,20 @@ div.columns.details-columns p.detail-paragraph a:any-link {
     flex-direction: column;
   }
 
-  div.columns>div>div {
+  div.columns > div > div {
     flex: 1;
     order: unset;
   }
 
-  div.columns.lead-gen>div>div {
+  div.columns.lead-gen > div > div {
     margin: 0;
   }
 
-  div.columns.lead-gen>div>div:last-child>p {
+  div.columns.lead-gen > div > div:last-child>p {
     text-align: left;
   }
 
-  div.columns.lead-gen>div>div.columns-img-col {
+  div.columns.lead-gen > div > div.columns-img-col {
     width: 130px;
     min-width: 130px;
     height: 130px;
@@ -1118,7 +1174,6 @@ span.view-offer {
   width: 8rem;
   opacity: 1;
   position: relative;
-  height: 30%;
   vertical-align: middle;
   margin-top: auto;
   margin-bottom: auto;
@@ -1128,11 +1183,7 @@ span.view-offer {
 
 span.controls {
   width: 75pt;
-  position: relative;
-  right: 0;
-  top: 0;
-  display: -webkit-box;
-  display: flex;
+  padding: 1.5rem;
 }
 
 span.close-x {
@@ -1140,8 +1191,8 @@ span.close-x {
   display: none;
   transition: all .35s ease;
   position: absolute;
-  top: -10rem;
-  right: -15rem;
+  top: 1rem;
+  right: 0;
   font-weight: 700;
   cursor: pointer;
   font-size: 1.6rem;

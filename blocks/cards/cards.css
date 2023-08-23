@@ -46,6 +46,11 @@
   object-fit: cover;
 }
 
+.cards.transparent > ul > li {
+  border: unset;
+  background-color: unset;
+}
+
 .cards.logo-strip.block li {
   border: unset;
 }
