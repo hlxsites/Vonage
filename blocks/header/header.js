@@ -688,16 +688,16 @@ function populateBreadCrumb(data, pathArray) {
 }
 
 const ecommerceHeader = `
-    <div class="ecommerce-header__logo">
-      <a href="#" aria-label="Vonage Logo" class="Vlt-site-logo" target="_self">
-        <svg class="Vlt-site-logo__vonage--simple" width="230px" height="200px" viewBox="0 0 230 200" version="1.1"
+    <div class="ecommerce-header-logo">
+      <a href="#" aria-label="Vonage Logo" class="vlt-site-logo" target="_self">
+        <svg class="vlt-site-logo__vonage--simple" width="230px" height="200px" viewBox="0 0 230 200" version="1.1"
              xmlns="http://www.w3.org/2000/svg">
           <path fill="currentColor"
                 d="M45.3408,0 L-0.0002,0 L64.6808,146.958 C65.1748,148.081 66.7718,148.07 67.2508,146.942 L88.7628,96.337 L45.3408,0 Z"></path>
           <path fill="currentColor"
                 d="M183.4502,0 C183.4502,0 113.9562,159.156 104.6482,173.833 C93.8292,190.896 86.6592,197.409 73.3912,199.496 C73.2682,199.515 73.1772,199.621 73.1772,199.746 C73.1772,199.886 73.2912,200 73.4312,200 L114.9552,200 C132.9432,200 145.9152,184.979 153.1042,171.714 C161.2742,156.637 229.5902,0 229.5902,0 L183.4502,0 Z"></path>
         </svg>
-        <svg class="Vlt-site-logo__vonage" width="913px" height="200px" viewBox="0 0 913 200" version="1.1"
+        <svg class="vlt-site-logo__vonage" width="913px" height="200px" viewBox="0 0 913 200" version="1.1"
              xmlns="http://www.w3.org/2000/svg">
           <path fill="currentColor"
                 d="M45.3408,0 L-0.0002,0 L64.6808,146.958 C65.1748,148.081 66.7718,148.07 67.2508,146.942 L88.7628,96.337 L45.3408,0 Z"></path>
@@ -727,7 +727,7 @@ export default async function decorate(block) {
   const navMeta = getMetadata('nav');
   // If the pages metadata has this special identifier, just return a basic black bar header with the logo (for pages like full screen forms).
   if (navMeta === 'ecommerce-header') {
-    const eCommerceHeaderElem = div({ class: 'container ecommerce-header__container' });
+    const eCommerceHeaderElem = div({ class: 'container ecommerce-header-container' });
     eCommerceHeaderElem.innerHTML = ecommerceHeader;
     block.parentElement.classList.add('ecommerce-header');
     block.replaceWith(eCommerceHeaderElem);
