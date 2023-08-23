@@ -132,7 +132,7 @@ div.speed-bump.block div.speed-bump-content p.button-container > a::after {
   div.speed-bump.block div.speed-bump-content > p {
     font-size: var(--body-font-size-s);
   }
-  
+
   div.speed-bump.block div.speed-bump-content > p:first-of-type {
     font-size: var(--heading-font-size-m);
     font-weight: 500;

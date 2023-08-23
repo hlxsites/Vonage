@@ -95,6 +95,7 @@ export function img(...items) { return domEl('img', ...items); }
 export function span(...items) { return domEl('span', ...items); }
 export function button(...items) { return domEl('button', ...items); }
 export function hr(...items) { return domEl('hr', ...items); }
+export function section(...items) { return domEl('section', ...items); }
 
 /**
  * Builds hero block and prepends to main in a new section.
@@ -106,9 +107,9 @@ function buildHeroBlock(main) {
   if (heading && picture
       // eslint-disable-next-line no-bitwise
       && (heading.compareDocumentPosition(picture) & Node.DOCUMENT_POSITION_PRECEDING)) {
-    const section = document.createElement('div');
-    section.append(buildBlock('hero', { elems: [picture, heading] }));
-    main.prepend(section);
+    const sectionElem = document.createElement('div');
+    sectionElem.append(buildBlock('hero', { elems: [picture, heading] }));
+    main.prepend(sectionElem);
   }
 }
 
@@ -245,7 +246,7 @@ async function loadLazy(doc) {
   if (hash && element) element.scrollIntoView();
 
   loadHeader(doc.querySelector('header'));
-  loadFooter(doc.querySelector('footer'));
+  loadFooter(doc.querySelector('footer:not([class])'));
 
   loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
   addFavIcon(`${window.hlx.codeBasePath}/styles/favicon.svg`);
