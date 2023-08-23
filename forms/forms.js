@@ -739,9 +739,16 @@ function submitForm(formWrapper) {
       });
       contactDetailRequest.contactDetail = contactDetail;
       const scheduleDateTime = new Date(Date.parse(formElem.querySelector('form .vlt-form-element.date-selector input.form-control').value));
-      let scheduleTime = formElem.querySelector('form .vlt-form-element.time-selector input').value;
-      scheduleTime = scheduleTime.split(' ')[0];
-      scheduleDateTime.setHours(scheduleTime.split(':')[0], scheduleTime.split(':')[1]);
+      const scheduleTime = formElem.querySelector('form .vlt-form-element.time-selector input').value;
+
+      const [time, ampm] = scheduleTime.split(' ');
+
+      scheduleDateTime.setHours(time.split(':')[0], time.split(':')[1]);
+
+      if (ampm === 'PM') {
+        scheduleDateTime.setHours(scheduleDateTime.getHours() + 12);
+      }
+
       contactDetailRequest.scheduleDateTime = `${scheduleDateTime.getFullYear()}-${String(scheduleDateTime.getMonth()).padStart(2, '0')}-${scheduleDateTime.getDate()} ${String(scheduleDateTime.getHours()).padStart(2, '0')}:${String(scheduleDateTime.getMinutes()).padStart(2, '0')}:00`;
       const timeZone = formElem.querySelector('form .vlt-form-element.timezone-selector input').value;
       contactDetailRequest.utcOffset = getOffsetByTimezone(timeZone).string;
@@ -762,7 +769,7 @@ function submitForm(formWrapper) {
       contactDetailRequest.utmterm = formElem.querySelector('form input[name = "utmterm"]').value;
       contactDetailRequest.digitalTracking = formElem.querySelector('form input[name = "digitaltracking"]').value;
       contactDetailRequest.omnitureid = '40299102592989006554421665607769348004';
-      contactDetailRequest.webreferrerurl = formElem.querySelector('form input[name = "webreferrerurl"]').value;
+      contactDetailRequest.webreferrerurl = window.location.href;
 
       formData.contactDetailRequest = contactDetailRequest;
     } else {
