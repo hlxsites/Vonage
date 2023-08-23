@@ -14,8 +14,8 @@
   --mobile-nav-extended-decoration-color: #FFF;
   --mobile-nav-extended-contact-button-color: var(--text-color);
   --mobile-nav-extended-contact-button-background-color: #FFF;
-   --nav-contact-button-color: #FFF;
-   --nav-contact-button-background-color: var(--text-color);
+  --nav-contact-button-color: #FFF;
+  --nav-contact-button-background-color: var(--text-color);
 }
 
 /***** Global header / nav menu structure and styling *****/
@@ -26,7 +26,7 @@ header {
   top: 0;
   width: 100%;
   background-color: white;
-  z-index: 1000;
+  z-index: 2;
   height:var(--mobile-nav-height);
 }
 
@@ -355,8 +355,6 @@ header #nav[aria-expanded="true"] .nav-tools {
     font-weight: 500;
     display: block;
     opacity: 1;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
     align-items: center;
     position: relative;
     padding-right: 20px;
@@ -907,7 +905,6 @@ header .sub-menu-label-active {
 
     /* Add special styling to the last subsection displayed */
     header #nav div.sub-menu ul.sub-menu-section-last {
-      -webkit-box-flex: 1;
       flex: 1 1 270px;
       min-width: 270px;
       max-width: 270px;
@@ -1435,5 +1432,333 @@ header .l3-nav-desktop .right-sec-menu-option:last-child {
  /*  Don't show the mobile breadcrumb at greater than 1024 display width */
  header .l3-nav-mobile {
     display:none;
+  }
+}
+
+/***** Simple eCommerce Header *****/
+
+/* Need to overwrite the default margin for the header in the style.css doing so based on a combinator selector */
+header.header-wrapper.ecommerce-header + main {
+  margin-top: 84px;
+}
+
+.ecommerce-header {
+  height: auto;
+  background-color: #000;
+  color: #fff;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 100%;
+  z-index: 2
+}
+
+.ecommerce-header::before {
+  content: "";
+  display: block;
+  height: .8rem;
+  width: 100%;
+  background: -webkit-gradient(linear,right top,left top,from(#871fff),to(#7ec9f4));
+  background: linear-gradient(270deg,#871fff 0,#7ec9f4)
+}
+
+.ecommerce-header-container {
+  display: grid;
+  grid-template-columns: 1fr minmax(230px,1fr) 1fr;
+  width: 100%;
+  padding-right: 20px;
+  padding-left: 20px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.ecommerce-header-checkout .ecommerce-header-container,.ecommerce-header-summary .ecommerce-header-container {
+  grid-template-columns: min-content auto
+}
+
+.ecommerce-header-ctas,.ecommerce-header-logo,.ecommerce-header-message {
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  display: flex
+}
+
+.ecommerce-header-ctas,.ecommerce-header-logo {
+  padding: 2.4rem 0
+}
+
+.ecommerce-header-message {
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  text-align: center
+}
+
+.ecommerce-header-checkout .ecommerce-header-message,.ecommerce-header-summary .ecommerce-header-message {
+  display: none
+}
+
+.ecommerce-header-ctas {
+  -webkit-box-pack: end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  text-align: right
+}
+
+.ecommerce-header-cta-exceeded,.ecommerce-header-cta-order-details {
+  margin-left: 2rem
+}
+
+.ecommerce-header-logo {
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  justify-content: flex-start
+}
+
+.ecommerce-header .vlt-site-logo {
+  color: #fff;
+  display: flex;
+  height: 2.8rem;
+  margin-right: 2rem
+}
+
+.ecommerce-header .vlt-site-logo.partner-desktop {
+  display: none
+}
+
+.ecommerce-header .vlt-site-logo.partner-mobile {
+  display: flex
+}
+
+.ecommerce-header .vlt-site-logo-vonage {
+  display: none
+}
+
+.ecommerce-header .vlt-site-logo-vonage,.ecommerce-header .vlt-site-logo-vonage-simple {
+  flex: 0 1 auto;
+  max-height: 100%;
+  width: auto
+}
+
+.ecommerce-header .vlt-site-logo-vonage-simple {
+  display: flex
+}
+
+.ecommerce-header-order-details {
+  color: #000;
+  display: inline
+}
+
+.ecommerce-header-order-details .d-none {
+  display: block!important
+}
+
+.ecommerce-header-order-details .vlt-sitevng-modal-content-wrapper {
+  margin-top: 0;
+  padding-left: 0;
+  padding-right: 0
+}
+
+.ecommerce-header-order-details .vng-modal-content {
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background-color: #eeeffc;
+  display: flex;
+  height: 100%;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  padding: 0
+}
+
+.ecommerce-header-order-details .vng-modal-close,.ecommerce-header-order-details .vng-modal-content::before {
+  z-index: 1
+}
+
+.ecommerce-header-order-details .vlt-card-icon-extrusion {
+  display: none
+}
+
+.ecommerce-header-order-details .vlt-card-icon-container {
+  border-radius: 0;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  text-align: left;
+  transform: none!important
+}
+
+.vlt-card-icon:hover .ecommerce-header-order-details .vlt-card-icon-container {
+  transform: none!important
+}
+
+.ecommerce-header-order-details .checkout-cart-pricing-details {
+  height: 100%;
+  width: 100%
+}
+
+.ecommerce-header-order-details .checkout-cart-pricing-details-inner {
+  border-top-width: 0;
+  height: 100%
+}
+
+.ecommerce-header-order-details .checkout-cart-pricing-details-pricing-items {
+  display: flex;
+  flex-direction: column;
+  -webkit-box-flex: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  margin-top: 1.2rem;
+  padding-top: 1.2rem;
+  min-height: 100vh
+}
+
+.ecommerce-header-order-details .checkout-cart-pricing-details-title {
+  font-size: 2.1rem;
+  padding: 4rem 1.6rem 0
+}
+
+.ecommerce-header-order-details .checkout-cart-pricing-details-btnsharecart,.ecommerce-header-order-details .checkout-cart-pricing-details-fees {
+  margin-bottom: 8rem;
+  padding: 0 1.6rem 7.2rem
+}
+
+.ecommerce-header-order-details .checkout-cart-pricing-details-checkout {
+  bottom: 0;
+  left: 0;
+  margin-top: auto;
+  position: fixed;
+  right: 0;
+  width: 100%
+}
+
+.no-header .ecommerce-header {
+  display: none
+}
+
+@media (min-width: 768px) {
+  .ecommerce-header-container {
+    grid-template-columns:1fr minmax(362px,2fr) 1fr
+  }
+}
+
+@media (min-width: 992px) {
+  .ecommerce-header-checkout .ecommerce-header-container,.ecommerce-header-summary .ecommerce-header-container {
+    grid-template-columns:1fr minmax(362px,2fr) 1fr
+  }
+}
+
+@media (min-width: 992px) {
+  .ecommerce-header-checkout .ecommerce-header-message,.ecommerce-header-summary .ecommerce-header-message {
+    display: flex
+  }
+}
+
+@media (min-width: 992px) {
+  .ecommerce-header-cta-exceeded,.ecommerce-header-cta-order-details {
+    display:none
+  }
+}
+
+@media (min-width: 768px) {
+  .ecommerce-header-cta-exceeded {
+    display:none
+  }
+}
+
+@media (min-width: 992px) {
+  .ecommerce-header .vlt-site-logo.partner-desktop {
+    display: flex
+  }
+}
+
+@media (min-width: 992px) {
+  .ecommerce-header .vlt-site-logo.partner-mobile,.ecommerce-header .vlt-site-logo-vonage-simple {
+    display:none
+  }
+}
+
+@media (min-width: 992px) {
+  .ecommerce-header .vlt-site-logo-vonage {
+    display: flex
+  }
+}
+
+@media (min-width: 992px) {
+  .ecommerce-header-order-details {
+    display:none
+  }
+}
+
+@media (min-width: 768px) {
+  .ecommerce-header-order-details .vng-modal-content::before {
+    display:none
+  }
+}
+
+@media (min-width: 768px) {
+  .ecommerce-header-order-details .vng-modal-content {
+    padding:93pt
+  }
+}
+
+@media (min-width: 768px) {
+  .ecommerce-header-order-details .vng-modal-close {
+    margin-right:0;
+    margin-top: 0;
+    right: 90pt;
+    top: 3pc
+  }
+}
+
+@media (min-width: 768px) {
+  .ecommerce-header-order-details .vlt-card-icon-extrusion {
+    display:block
+  }
+}
+
+@media (min-width: 768px) {
+  .ecommerce-header-order-details .vlt-card-icon-container {
+    border-radius:3rem;
+    transform: translate(-1rem,-1rem)!important
+  }
+}
+
+@media (min-width: 768px) {
+  .vlt-card-icon:hover .ecommerce-header-order-details .vlt-card-icon-container {
+    translate:translate(-1.5rem,-1.5rem)!important
+  }
+}
+
+@media (min-width: 768px) {
+  .ecommerce-header-order-details .checkout-cart-pricing-details-title {
+    padding:4rem 4rem 0
+  }
+}
+
+@media (min-width: 768px) {
+  .ecommerce-header-order-details .checkout-cart-pricing-details-fees {
+    margin-bottom:0;
+    padding: 0 4rem 7.2rem
+  }
+}
+
+@media (min-width: 576px) {
+  .ecommerce-header-container {
+    max-width: 540px;
+  }
+}
+
+@media (min-width: 768px) {
+  .ecommerce-header-container {
+    max-width: 45pc;
+  }
+}
+
+@media (min-width: 992px) {
+  .ecommerce-header-container {
+    max-width: 990pt;
   }
 }

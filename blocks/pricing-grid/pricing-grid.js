@@ -111,8 +111,8 @@ export default async function decorate(block) {
         </div>
         <div class="col-12 col-lg-9">
           <div class="category-grid-items three-col">
-            <div class="aem-Grid aem-Grid--12 aem-Grid--default--12  row">
-              <div class="productPricingTabs aem-GridColumn aem-GridColumn--default--12">
+            <div class="aem-Grid aem-Grid-12 aem-Grid-default-12  row">
+              <div class="productPricingTabs aem-GridColumn aem-GridColumn-default-12">
                 <section id="product-card-tabbed" class="tabs product-card-tabbed">
                   <div class="container">
                     <div class="row">

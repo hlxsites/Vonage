@@ -377,7 +377,6 @@
   /* Layout and sizing for the title of the card */
   .cards.info-card .header-container {
     margin-bottom: 2rem;
-    -ms-flex-align: end;
     align-items: flex-end;
     display: flex;
   }

@@ -1,5 +1,13 @@
-import { a, div, span } from '../../scripts/scripts.js';
+import {
+  a, div, section, span,
+} from '../../scripts/scripts.js';
 import { toClassName } from '../../scripts/lib-franklin.js';
+import { fetchFormContent } from '../../forms/forms.js';
+
+const overlayStyles = [
+  { name: 'standardform', class: 'form-standard' },
+  { name: 'bnsform', class: 'form-bnsform' },
+];
 
 function decorateDescription(descriptionContent) {
   const links = descriptionContent.querySelectorAll('li > a');
@@ -72,6 +80,27 @@ function createVideoOverlay() {
   return videoOverlay;
 }
 
+function createFormOverlay(formContent) {
+  const formOverlay = div({ class: 'container' });
+
+  formOverlay.innerHTML = `
+        <div class="row">
+          <div class="col-12 text-right">
+            <button class="vlt-icon-close form-overlay-close" aria-label="Close modal"></button>
+          </div>
+        </div>`;
+
+  formOverlay.append(formContent);
+
+  const formCloseButton = formOverlay.querySelector('.form-overlay-close');
+  formCloseButton.addEventListener('click', () => {
+    const formContainer = (document.querySelector('.form-overlay'));
+    formContainer.classList.remove('form-overlay-open');
+    document.querySelector('body').style = 'overflow-y: scroll';
+  });
+
+  return formOverlay;
+}
 function assembleMediaContent(elements) {
   const mediaContent = div({ class: 'media-content' });
 
@@ -103,14 +132,70 @@ function buildOverlay(overlayRawContent) {
   return overlayContent;
 }
 
-function decorateCtasContent(ctasContent, stylesList) {
+function getFormSection(button, formStyle = 'form-standard') {
+  const formSection = section({ class: 'form-overlay' });
+  formSection.innerHTML = `<div class="form-overlay-trigger">
+      <a class="btn form-overlay-button">${button.innerText}</a>
+    </div>
+    <div class="${formStyle}" role="dialog" aria-modal="true" aria-label="form">
+      <!-Form Content Goes Here -->
+    </div>`;
+
+  return formSection;
+}
+
+async function fetchFormThanksElem(thanksUrl) {
+  const thanksElem = div({ class: 'vlt-form-success' });
+  const resp = await fetch(thanksUrl);
+  if (resp.ok) {
+    thanksElem.innerHTML = await resp.text();
+  } else {
+  // Come up with some default thanks text to display if no thanks HTML is found
+  }
+  return thanksElem;
+}
+
+async function decorateCtasContent(ctasContent, stylesList) {
+  // Only allows one form to be linked from a landing-page-hero, if a need should arise to allow multiple will need to adjust this implementation
+  const formButton = ctasContent.querySelector('a[href*="forms/"]');
+  if (formButton) {
+    const rawLink = formButton.getAttribute('href');
+
+    let styleClass;
+    // eslint-disable-next-line no-restricted-syntax
+    for (const style of stylesList) {
+      const styleClassTmp = overlayStyles.find((o) => o.name === style);
+      if (styleClassTmp !== undefined) {
+        styleClass = styleClassTmp.class;
+        break;
+      }
+    }
+
+    formButton.replaceWith(getFormSection(formButton, styleClass));
+
+    const formPath = rawLink.substring(rawLink.indexOf('/') + 1);
+    const formWrapper = ctasContent.querySelector(overlayStyles.map((overlayStyle) => `.${overlayStyle.class}`).join(','));
+    const formContent = fetchFormContent(`${formPath}`, formWrapper);
+    formWrapper.append(createFormOverlay(await formContent));
+
+    const formThanksPath = `${formPath.substring(0, formPath.indexOf('.'))}-thanks.html`;
+    const formThanks = fetchFormThanksElem(formThanksPath);
+
+    formWrapper.append(await formThanks);
+    const newButton = ctasContent.querySelector('.form-overlay-button');
+    newButton.addEventListener('click', () => {
+      const formOverlay = (ctasContent.querySelector('.form-overlay'));
+      formOverlay.classList.add('form-overlay-open');
+      document.querySelector('body').style = 'overflow-y: hidden';
+    });
+  }
+
   stylesList.forEach((style) => {
     if (style.includes('button')) {
       ctasContent.classList.add(style);
     }
   });
 }
-
 function buildTPWidget(tpElement) {
   const template = tpElement.innerText;
   tpElement.classList.add('trustpilot-widget');
@@ -120,7 +205,7 @@ function buildTPWidget(tpElement) {
   return tpElement;
 }
 
-export default function decorate(block) {
+export default async function decorate(block) {
   // If the markdown specifies a background property, need to bubble that up to the section wrapper
   // So that the background spans the width of hte page
   if (block.classList.contains('purple-gradient-background')) {

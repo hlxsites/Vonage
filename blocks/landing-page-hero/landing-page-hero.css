@@ -1,5 +1,6 @@
 /* block specific CSS goes here */
 /* stylelint-disable no-descending-specificity */
+@import url("../../forms/form.css");
 
 /* Gradient background for the full section */
 .section.landing-page-hero-container.purple-gradient-background {
@@ -164,13 +165,16 @@
 
 
 /* Add a margin on the first call to action button (so that in one column mode they are spaced) */
-.landing-page-hero .category-content .ctas ul li:first-child a {
+.landing-page-hero .category-content .ctas ul li:first-child a.form-overlay-button,
+.landing-page-hero .category-content .ctas ul li:first-child strong > a,
+.landing-page-hero .category-content .ctas ul li:first-child em > a {
   margin-bottom: 2rem;
   margin-right: 2rem;
 }
 
 /* Styling for a secondary call to action button (designated with italic in the doc) */
-.landing-page-hero .category-content .ctas em > a {
+.landing-page-hero .category-content .ctas em > a,
+.landing-page-hero .category-content .ctas em a.form-overlay-button {
   background-color: unset;
   color: var(--text-color);
   font-size: var(--button-font-size-m);
@@ -184,26 +188,30 @@
 }
 
 /* Light variant for the secondary call to action button */
-.landing-page-hero .category-content .ctas.secondary-button-light em > a {
+.landing-page-hero .category-content .ctas.secondary-button-light em > a,
+.landing-page-hero .category-content .ctas.secondary-button-light em a.form-overlay-button {
   background-color: transparent;
   border-color: #fff;
   color: #fff;
 }
 
 /* Purple variant for the secondary call to action button */
-.landing-page-hero .category-content .ctas.secondary-button-electric-purple em > a {
+.landing-page-hero .category-content .ctas.secondary-button-electric-purple em > a,
+.landing-page-hero .category-content .ctas.secondary-button-electric-purple em a.form-overlay-button {
   background-color: var(--accent-color);
   color: #fff;
 }
 
 /* Styling for a primary call to action button (designated with bold in the doc) */
-.landing-page-hero .category-content .ctas.primary-button-light strong > a {
+.landing-page-hero .category-content .ctas.primary-button-light strong > a,
+.landing-page-hero .category-content .ctas.primary-button-light strong a.form-overlay-button {
   background-color: #fff;
   color: #000;
 }
 
 /* Purple variant for the primary call to action button */
-.landing-page-hero .category-content .ctas.primary-button-electric-purple strong > a {
+.landing-page-hero .category-content .ctas.primary-button-electric-purple strong > a,
+.landing-page-hero .category-content .ctas.primary-button-electric-purple strong a.form-overlay-button  {
   background-color: var(--accent-color);
   color: #fff;
 }
@@ -392,75 +400,248 @@
   top: -2rem;
 }
 
-@media (min-width: 768px) {
-  /* 2 columns for larger screens with a slight bias to the category column */
-  .landing-page-hero .column.category {
-    flex: 0 0 58.3333%;
-    max-width: 58.3333%;
-  }
+.landing-page-hero .form-standard .col-12.text-right,
+.landing-page-hero .form-bnsform .col-12.text-right {
+  width: 100%;
+}
 
-  .landing-page-hero .column.media {
-    flex: 0 0 41.6667%;
-    max-width: 41.6667%;
-  }
+.landing-page-hero .form-standard {
+  background-color: #fff;
+  display: none;
+  height: 100vh;
+  left: 0;
+  overflow: auto;
+  padding: 2rem 0 0;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  z-index: 3;
+  box-sizing: border-box;
+}
 
-  /* Tweak title text attributes for larger screens */
-  .landing-page-hero .category-content .title {
-    font-size: 2.8rem;
-    font-weight: 500;
-    letter-spacing: -.15rem;
-    line-height: 3.2rem;
-  }
+.landing-page-hero .form-bnsform {
+  display: none;
+  z-index: 3;
+  box-sizing: border-box;
+}
 
-  /* Adjust size of the video play icon */
-  .landing-page-hero .media-content .slim-video-cta {
-    left: calc(50% - 7rem);
-    top: calc(50% - 7rem);
-  }
+.landing-page-hero .form-standard::before,
+.landing-page-hero .form-bnsform::before {
+  background: -webkit-gradient(linear,left top,right top,from(#881fff),to(#827ef9));
+  background: linear-gradient(90deg,#881fff 0,#827ef9);
+  content: "";
+  height: 1.5rem;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
 
-  /* Adjust position of the video close button */
-  .landing-page-hero .media-content .video-overlay-close {
-    right: 5rem;
-    top: 5rem;
-  }
+.landing-page-hero .form-overlay-open .form-standard,
+.landing-page-hero .form-overlay-open .form-bnsform {
+  display: block;
+}
 
-  /* Tweak description text attributes for larger screens */
-  .landing-page-hero .category-content .description p  {
-    font-size: 1.4rem;
-    font-weight: 400;
-    letter-spacing: -.02rem;
-    line-height: 2rem;
-  }
+.form-overlay.form-overlay-open {
+  position: fixed;
+  z-index: 2;
+  padding-left: 472px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0 0 0 / 71%);
+}
 
-  .landing-page-hero .category-content .description a,
-  .landing-page-hero .category-content .disclaimer a {
-    color: inherit;
-    text-decoration: underline;
-  }
+.form-standard::after {
+  content: "";
+  display: block;
+  padding-bottom: 8rem;
+}
 
-  /* Tweak link menu text attributes for larger screens */
-  .landing-page-hero .category-content .description li a {
-    font-size: 1.7rem;
-    font-weight: 400;
-    letter-spacing: -.025rem;
-    line-height: 2.5rem;
-  }
+.form-bnsform legend .p2 {
+  font-size: 1.4rem;
+  letter-spacing: -.02rem;
+  line-height: 2rem;
+  font-family: var(--body-font-family);
+  font-weight: 400;
+  color:black;
+}
 
-  /* Tweak caption text attributes for larger screens. */
-  .landing-page-hero .media-content .caption {
-    font-family: var(--body-font-family);
-    font-size: 1.2rem;
-    font-weight: 400;
-    letter-spacing: 0;
-    line-height: 1.6rem;
-  }
+button.vlt-icon-close.form-overlay-close {
+  padding: 0;
+  color: black;
+  background: transparent;
+  border: none;
+  border-radius: unset;
+  position: relative;
+  margin: 0;
+  font-size: 4rem;
+  line-height: 4rem;
+}
 
-  /* Tweak video play icon (and background) size for larger screens */
-  .landing-page-hero .media-content .play-video-background::before,
-  .landing-page-hero .media-content .play-video-arrow::before {
-    font-size: 13rem;
+button.vlt-icon-close.form-overlay-close::before {
+  content: var(--vlt-close-icon);
+  font-family: var(--icon-font-family);
+  font-size: 4rem;
+  background-color: transparent;
+}
+
+.landing-page-hero .vlt-form-success {
+  display: none;
+}
+
+.landing-page-hero .form-standard.success .vlt-form-success,
+.landing-page-hero .form-bnsform.success .vlt-form-success {
+  display: inline-block;
+  width: 100%;
+}
+
+.landing-page-hero .form-standard.submitted .form,
+.landing-page-hero .form-bnsform.submitted .form {
+  display: none;
+}
+
+.landing-page-hero .vlt-form-success-v2.container {
+  margin-bottom: 4rem;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.landing-page-hero .vlt-form-success-v2 .row {
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -20px;
+  margin-left: -20px;
+}
+
+.landing-page-hero .vlt-form-success-title-v2 {
+  font-family: var(--body-font-family);
+  font-size: 3.5rem;
+  font-weight: 500;
+  letter-spacing: -.12rem;
+  line-height: 4rem;
+  margin-bottom: 1rem;
+  color: black;
+}
+
+.landing-page-hero .vlt-form-success-title-v2 .col-12 {
+  flex: 0 0 100%;
+  max-width: 100%;
+}
+
+.landing-page-hero .vlt-form-success-description-v2 {
+  font-family: var(--body-font-family);
+  font-size: 1.7rem;
+  font-weight: 400;
+  letter-spacing: -.025rem;
+  line-height: 2.5rem;
+  margin-bottom: 6rem;
+  color:black;
+}
+
+.landing-page-hero vlt-form-success-cta .btn {
+  transition: transform .2s;
+}
+
+@media (min-width: 576px) {
+  .landing-page-hero .vlt-form-success-v2.container {
+    max-width: 540px;
   }
 }
+
+  @media (min-width: 768px) {
+    /* 2 columns for larger screens with a slight bias to the category column */
+    .landing-page-hero .column.category {
+      flex: 0 0 58.3333%;
+      max-width: 58.3333%;
+    }
+
+    .landing-page-hero .column.media {
+      flex: 0 0 41.6667%;
+      max-width: 41.6667%;
+    }
+
+    /* Tweak title text attributes for larger screens */
+    .landing-page-hero .category-content .title {
+      font-size: 2.8rem;
+      font-weight: 500;
+      letter-spacing: -.15rem;
+      line-height: 3.2rem;
+    }
+
+    /* Adjust size of the video play icon */
+    .landing-page-hero .media-content .slim-video-cta {
+      left: calc(50% - 7rem);
+      top: calc(50% - 7rem);
+    }
+
+    /* Adjust position of the video close button */
+    .landing-page-hero .media-content .video-overlay-close {
+      right: 5rem;
+      top: 5rem;
+    }
+
+    /* Tweak description text attributes for larger screens */
+    .landing-page-hero .category-content .description p  {
+      font-size: 1.4rem;
+      font-weight: 400;
+      letter-spacing: -.02rem;
+      line-height: 2rem;
+    }
+
+    .landing-page-hero .category-content .description a,
+    .landing-page-hero .category-content .disclaimer a {
+      color: inherit;
+      text-decoration: underline;
+    }
+
+    /* Tweak link menu text attributes for larger screens */
+    .landing-page-hero .category-content .description li a {
+      font-size: 1.7rem;
+      font-weight: 400;
+      letter-spacing: -.025rem;
+      line-height: 2.5rem;
+    }
+
+    /* Tweak caption text attributes for larger screens. */
+    .landing-page-hero .media-content .caption {
+      font-family: var(--body-font-family);
+      font-size: 1.2rem;
+      font-weight: 400;
+      letter-spacing: 0;
+      line-height: 1.6rem;
+    }
+
+    /* Tweak video play icon (and background) size for larger screens */
+    .landing-page-hero .media-content .play-video-background::before,
+    .landing-page-hero .media-content .play-video-arrow::before {
+      font-size: 13rem;
+    }
+
+    .landing-page-hero .vlt-form-success-image {
+      margin-bottom: 3rem;
+      margin-top: 0;
+      width: 60.6%;
+    }
+
+    .landing-page-hero .vlt-form-success-v2.container {
+      max-width: 45pc;
+    }
+
+    .landing-page-hero .vlt-form-success-description-v2 {
+  font-family: var(--body-font-family);
+      font-size: 2.3rem;
+      font-weight: 500;
+      letter-spacing: -.05rem;
+      line-height: 2.4rem;
+    }
+
+  }
+
 
 @media (min-width: 992px) {
   /* Evenly split column flex children */
@@ -479,55 +660,157 @@
   .landing-page-hero .media-content .video-overlay-video {
     padding-bottom: 55.8rem;
   }
+
+  .landing-page-hero .vlt-form-success-v2.container {
+    max-width: 990pt;
+  }
 }
 
-@media (min-width: 1200px) {
-  /* Tweak title text attributes for largest screens */
-  .landing-page-hero .category-content .title {
-    font-weight: 500;
-    letter-spacing: -.12rem;
-    font-size: 5.35rem !important;
-    line-height: 5.5rem !important;
+@media (min-width: 1024px) {
+  .landing-page-hero .form-bnsform {
+    width: 56vw;
+    left: 22%;
+
+ --webkit-overflow-scrolling: touch;
+
+    background-color: #fff;
+    display: none;
+    height: 100vh;
+    overflow: auto;
+    padding: 1rem 0 0;
+    position: fixed;
+    top: 0;
+    z-index: 3;
+  }
+}
+
+
+  @media (min-width: 1200px) {
+    /* Tweak title text attributes for largest screens */
+    .landing-page-hero .category-content .title {
+      font-weight: 500;
+      letter-spacing: -.12rem;
+      font-size: 5.35rem !important;
+      line-height: 5.5rem !important;
+    }
+
+    /* Tweak description text attributes for largest screens */
+    .landing-page-hero .category-content .description {
+      font-size: 1.7rem;
+      font-weight: 400;
+      letter-spacing: -.02rem;
+      line-height: 2rem;
+    }
+
+    /* Adjust position of the video close button */
+    .landing-page-hero .media-content .video-overlay-close {
+      right: 8rem;
+    }
+
+    /* Tweak link menu text attributes for largest screens */
+    .landing-page-hero .category-content .description li a,
+    .landing-page-hero .category-content .description li span {
+      font-size: 2.1rem;
+      letter-spacing: -.025rem;
+      line-height: 2.4rem;
+    }
+
+    /* Tweak caption text attributes for largest screens */
+    .landing-page-hero .media-content .caption {
+      font-family: var(--body-font-family);
+      font-size: 1.2rem;
+      font-weight: 400;
+      letter-spacing: .025rem;
+      line-height: 1.6rem;
+    }
+
+    /* Tweak video play icon (and background) size for larger screens */
+    .landing-page-hero .media-content .play-video-background::before,
+    .landing-page-hero .media-content .play-video-arrow::before {
+      font-size: 16rem;
+    }
   }
 
-  /* Tweak description text attributes for largest screens */
-  .landing-page-hero .category-content .description {
+.landing-page-hero.product h3 {
+  font-size: 24px;
+}
+
+.form-bnsform::before {
+  background: -webkit-gradient(linear,left top,right top,from(#881fff),to(#827ef9));
+  background: linear-gradient(90deg,#881fff 0,#827ef9);
+  content: "";
+  height: 1.5rem;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+@media (max-width: 320px) {
+  .form-bnsform {
+    height: 110vh;
+    width: 110vw;
+  }
+}
+
+@media (min-width: 280px) and (max-width:1024px) {
+  .form-bnsform {
+    background-color:#fff;
+    display: none;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    overflow: auto;
+    position: fixed;
+    top: 0;
+    z-index: 3;
+    padding: 1rem 0 0;
+  }
+}
+
+@media (min-width: 768px){
+  .form-bnsform legend .p2 {
+    font-family: var(--body-font-family);
+    font-size: 1.4rem;
+    font-weight: 400;
+    letter-spacing: -.02rem;
+    line-height: 2rem;
+  }
+}
+
+@media (min-width: 992px) {
+  .form-bnsform .vlt-form-title {
+    margin-bottom:0;
+  }
+}
+
+@media (min-width: 992px) and (max-width:1024px) {
+  .form-bnsform .vlt-form-title {
+    padding-left:18rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .form-bnsform {
+    width:56vw;
+    left: 22%;
+    background-color: #fff;
+    display: none;
+    height: 100vh;
+    overflow: auto;
+    padding: 1rem 0 0;
+    position: fixed;
+    top: 0;
+    z-index: 3;
+  }
+}
+
+@media (min-width: 1200px){
+  .form-bnsform legend .p2 {
+    font-family: Spezia, "Spezia_SemiMono", Arial, Helvetica, sans-serif;
     font-size: 1.7rem;
     font-weight: 400;
     letter-spacing: -.02rem;
     line-height: 2rem;
   }
-
-  /* Adjust position of the video close button */
-  .landing-page-hero .media-content .video-overlay-close {
-    right: 8rem;
-  }
-
-  /* Tweak link menu text attributes for largest screens */
-  .landing-page-hero .category-content .description li a,
-  .landing-page-hero .category-content .description li span {
-    font-size: 2.1rem;
-    letter-spacing: -.025rem;
-    line-height: 2.4rem;
-  }
-
-  /* Tweak caption text attributes for largest screens */
-  .landing-page-hero .media-content .caption {
-    font-family: var(--body-font-family);
-    font-size: 1.2rem;
-    font-weight: 400;
-    letter-spacing: .025rem;
-    line-height: 1.6rem;
-  }
-
-  /* Tweak video play icon (and background) size for larger screens */
-  .landing-page-hero .media-content .play-video-background::before,
-  .landing-page-hero .media-content .play-video-arrow::before {
-    font-size: 16rem;
-  }
-}
-
-
-.landing-page-hero.product h3 {
-  font-size: 24px;
 }
