@@ -738,23 +738,30 @@ function submitForm(formWrapper) {
         }
       });
       contactDetailRequest.contactDetail = contactDetail;
-      const scheduleDateTime = new Date(Date.parse(formElem.querySelector('form .vlt-form-element.date-selector input.form-control').value));
-      const scheduleTime = formElem.querySelector('form .vlt-form-element.time-selector input').value;
 
-      const [time, ampm] = scheduleTime.split(' ');
+      const contactMethod = formElem.querySelector('form .vlt-form-element [name = "method"]').value;
+      const call30Minutes = formElem.querySelector('form .vlt-form-element [name = "phoneOption"]').value;
 
-      scheduleDateTime.setHours(time.split(':')[0], time.split(':')[1]);
+      if (contactMethod !== 'Email' && !call30Minutes) {
+        const scheduleDateTime = new Date(Date.parse(formElem.querySelector('form .vlt-form-element.date-selector input.form-control').value));
+        const scheduleTime = formElem.querySelector('form .vlt-form-element.time-selector input').value;
 
-      if (ampm === 'PM') {
-        scheduleDateTime.setHours(scheduleDateTime.getHours() + 12);
+        const [time, ampm] = scheduleTime.split(' ');
+
+        scheduleDateTime.setHours(time.split(':')[0], time.split(':')[1]);
+
+        if (ampm === 'PM') {
+          scheduleDateTime.setHours(scheduleDateTime.getHours() + 12);
+        }
+
+        contactDetailRequest.scheduleDateTime = `${scheduleDateTime.getFullYear()}-${String(scheduleDateTime.getMonth()).padStart(2, '0')}-${scheduleDateTime.getDate()} ${String(scheduleDateTime.getHours()).padStart(2, '0')}:${String(scheduleDateTime.getMinutes()).padStart(2, '0')}:00`;
+        const timeZone = formElem.querySelector('form .vlt-form-element.timezone-selector input').value;
+        contactDetailRequest.utcOffset = getOffsetByTimezone(timeZone).string;
       }
 
-      contactDetailRequest.scheduleDateTime = `${scheduleDateTime.getFullYear()}-${String(scheduleDateTime.getMonth()).padStart(2, '0')}-${scheduleDateTime.getDate()} ${String(scheduleDateTime.getHours()).padStart(2, '0')}:${String(scheduleDateTime.getMinutes()).padStart(2, '0')}:00`;
-      const timeZone = formElem.querySelector('form .vlt-form-element.timezone-selector input').value;
-      contactDetailRequest.utcOffset = getOffsetByTimezone(timeZone).string;
       contactDetailRequest.acceptyPrivacyPolicy = formElem.querySelector('form .vlt-checkbox input').value;
-      contactDetailRequest.contactMethod = formElem.querySelector('form .vlt-form-element [name = "method"]').value;
-      contactDetailRequest.call30Minutes = formElem.querySelector('form .vlt-form-element [name = "phoneOption"]').value;
+      contactDetailRequest.contactMethod = contactMethod;
+      contactDetailRequest.call30Minutes = call30Minutes;
       contactDetailRequest.isBestNextStep = 'true';
       contactDetailRequest.campaignId = null;
       contactDetailRequest.glic = formElem.querySelector('form input[name = "gclid"]').value;

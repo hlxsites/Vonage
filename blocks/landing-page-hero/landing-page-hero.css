@@ -464,7 +464,7 @@
   font-size: 1.4rem;
   letter-spacing: -.02rem;
   line-height: 2rem;
-  font-family: Spezia,"Spezia_SemiMono",Arial,Helvetica,sans-serif;
+  font-family: var(--body-font-family);
   font-weight: 400;
   color:black;
 }
@@ -519,7 +519,7 @@ button.vlt-icon-close.form-overlay-close::before {
 }
 
 .landing-page-hero .vlt-form-success-title-v2 {
-  font-family: Spezia,"Spezia_SemiMono",Arial,Helvetica,sans-serif;
+  font-family: var(--body-font-family);
   font-size: 3.5rem;
   font-weight: 500;
   letter-spacing: -.12rem;
@@ -534,7 +534,7 @@ button.vlt-icon-close.form-overlay-close::before {
 }
 
 .landing-page-hero .vlt-form-success-description-v2 {
-  font-family: Spezia,"Spezia_SemiMono",Arial,Helvetica,sans-serif;
+  font-family: var(--body-font-family);
   font-size: 1.7rem;
   font-weight: 400;
   letter-spacing: -.025rem;
@@ -631,6 +631,15 @@ button.vlt-icon-close.form-overlay-close::before {
     .landing-page-hero .vlt-form-success-v2.container {
       max-width: 45pc;
     }
+
+    .landing-page-hero .vlt-form-success-description-v2 {
+  font-family: var(--body-font-family);
+      font-size: 2.3rem;
+      font-weight: 500;
+      letter-spacing: -.05rem;
+      line-height: 2.4rem;
+    }
+
   }
 
 
@@ -761,7 +770,7 @@ button.vlt-icon-close.form-overlay-close::before {
 
 @media (min-width: 768px){
   .form-bnsform legend .p2 {
-    font-family: Spezia,"Spezia_SemiMono",Arial,Helvetica,sans-serif;
+    font-family: var(--body-font-family);
     font-size: 1.4rem;
     font-weight: 400;
     letter-spacing: -.02rem;
