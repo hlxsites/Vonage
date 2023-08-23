@@ -400,12 +400,12 @@
   top: -2rem;
 }
 
-.landing-page-hero .form-overlay-overlay .col-12.text-right,
-.landing-page-hero .form-overlay-overlay-bnsform .col-12.text-right {
+.landing-page-hero .form-standard .col-12.text-right,
+.landing-page-hero .form-bnsform .col-12.text-right {
   width: 100%;
 }
 
-.landing-page-hero .form-overlay-overlay {
+.landing-page-hero .form-standard {
   background-color: #fff;
   display: none;
   height: 100vh;
@@ -419,14 +419,14 @@
   box-sizing: border-box;
 }
 
-.landing-page-hero .form-overlay-overlay-bnsform {
+.landing-page-hero .form-bnsform {
   display: none;
   z-index: 3;
   box-sizing: border-box;
 }
 
-.landing-page-hero .form-overlay-overlay::before,
-.landing-page-hero .form-overlay-overlay-bnsform::before {
+.landing-page-hero .form-standard::before,
+.landing-page-hero .form-bnsform::before {
   background: -webkit-gradient(linear,left top,right top,from(#881fff),to(#827ef9));
   background: linear-gradient(90deg,#881fff 0,#827ef9);
   content: "";
@@ -437,8 +437,8 @@
   width: 100%;
 }
 
-.landing-page-hero .form-overlay-open .form-overlay-overlay,
-.landing-page-hero .form-overlay-open .form-overlay-overlay-bnsform {
+.landing-page-hero .form-overlay-open .form-standard,
+.landing-page-hero .form-overlay-open .form-bnsform {
   display: block;
 }
 
@@ -454,17 +454,17 @@
   background-color: rgb(0 0 0 / 71%);
 }
 
-.form-overlay-overlay::after {
+.form-standard::after {
   content: "";
   display: block;
   padding-bottom: 8rem;
 }
 
-.form-overlay-overlay-bnsform legend .p2 {
+.form-bnsform legend .p2 {
   font-size: 1.4rem;
   letter-spacing: -.02rem;
   line-height: 2rem;
-  font-family: Spezia,"Spezia_SemiMono",Arial,Helvetica,sans-serif;
+  font-family: var(--body-font-family);
   font-weight: 400;
   color:black;
 }
@@ -492,14 +492,14 @@ button.vlt-icon-close.form-overlay-close::before {
   display: none;
 }
 
-.landing-page-hero .form-overlay-overlay.success .vlt-form-success,
-.landing-page-hero .form-overlay-overlay-bnsform.success .vlt-form-success {
+.landing-page-hero .form-standard.success .vlt-form-success,
+.landing-page-hero .form-bnsform.success .vlt-form-success {
   display: inline-block;
   width: 100%;
 }
 
-.landing-page-hero .form-overlay-overlay.submitted .form,
-.landing-page-hero .form-overlay-overlay-bnsform.submitted .form {
+.landing-page-hero .form-standard.submitted .form,
+.landing-page-hero .form-bnsform.submitted .form {
   display: none;
 }
 
@@ -519,7 +519,7 @@ button.vlt-icon-close.form-overlay-close::before {
 }
 
 .landing-page-hero .vlt-form-success-title-v2 {
-  font-family: Spezia,"Spezia_SemiMono",Arial,Helvetica,sans-serif;
+  font-family: var(--body-font-family);
   font-size: 3.5rem;
   font-weight: 500;
   letter-spacing: -.12rem;
@@ -534,7 +534,7 @@ button.vlt-icon-close.form-overlay-close::before {
 }
 
 .landing-page-hero .vlt-form-success-description-v2 {
-  font-family: Spezia,"Spezia_SemiMono",Arial,Helvetica,sans-serif;
+  font-family: var(--body-font-family);
   font-size: 1.7rem;
   font-weight: 400;
   letter-spacing: -.025rem;
@@ -631,6 +631,15 @@ button.vlt-icon-close.form-overlay-close::before {
     .landing-page-hero .vlt-form-success-v2.container {
       max-width: 45pc;
     }
+
+    .landing-page-hero .vlt-form-success-description-v2 {
+  font-family: var(--body-font-family);
+      font-size: 2.3rem;
+      font-weight: 500;
+      letter-spacing: -.05rem;
+      line-height: 2.4rem;
+    }
+
   }
 
 
@@ -658,7 +667,7 @@ button.vlt-icon-close.form-overlay-close::before {
 }
 
 @media (min-width: 1024px) {
-  .landing-page-hero .form-overlay-overlay-bnsform {
+  .landing-page-hero .form-bnsform {
     width: 56vw;
     left: 22%;
 
@@ -726,7 +735,7 @@ button.vlt-icon-close.form-overlay-close::before {
   font-size: 24px;
 }
 
-.form-overlay-overlay-bnsform::before {
+.form-bnsform::before {
   background: -webkit-gradient(linear,left top,right top,from(#881fff),to(#827ef9));
   background: linear-gradient(90deg,#881fff 0,#827ef9);
   content: "";
@@ -738,14 +747,14 @@ button.vlt-icon-close.form-overlay-close::before {
 }
 
 @media (max-width: 320px) {
-  .form-overlay-overlay-bnsform {
+  .form-bnsform {
     height: 110vh;
     width: 110vw;
   }
 }
 
 @media (min-width: 280px) and (max-width:1024px) {
-  .form-overlay-overlay-bnsform {
+  .form-bnsform {
     background-color:#fff;
     display: none;
     height: 100%;
@@ -760,8 +769,8 @@ button.vlt-icon-close.form-overlay-close::before {
 }
 
 @media (min-width: 768px){
-  .form-overlay-overlay-bnsform legend .p2 {
-    font-family: Spezia,"Spezia_SemiMono",Arial,Helvetica,sans-serif;
+  .form-bnsform legend .p2 {
+    font-family: var(--body-font-family);
     font-size: 1.4rem;
     font-weight: 400;
     letter-spacing: -.02rem;
@@ -770,19 +779,19 @@ button.vlt-icon-close.form-overlay-close::before {
 }
 
 @media (min-width: 992px) {
-  .form-overlay-overlay-bnsform .vlt-form-title {
+  .form-bnsform .vlt-form-title {
     margin-bottom:0;
   }
 }
 
 @media (min-width: 992px) and (max-width:1024px) {
-  .form-overlay-overlay-bnsform .vlt-form-title {
+  .form-bnsform .vlt-form-title {
     padding-left:18rem;
   }
 }
 
 @media (min-width: 1024px) {
-  .form-overlay-overlay-bnsform {
+  .form-bnsform {
     width:56vw;
     left: 22%;
     background-color: #fff;
@@ -797,7 +806,7 @@ button.vlt-icon-close.form-overlay-close::before {
 }
 
 @media (min-width: 1200px){
-  .form-overlay-overlay-bnsform legend .p2 {
+  .form-bnsform legend .p2 {
     font-family: Spezia, "Spezia_SemiMono", Arial, Helvetica, sans-serif;
     font-size: 1.7rem;
     font-weight: 400;

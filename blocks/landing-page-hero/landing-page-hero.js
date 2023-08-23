@@ -5,8 +5,8 @@ import { toClassName } from '../../scripts/lib-franklin.js';
 import { fetchFormContent } from '../../forms/forms.js';
 
 const overlayStyles = [
-  { name: 'standardform', class: 'form-overlay-overlay' },
-  { name: 'bnsform', class: 'form-overlay-overlay-bnsform' },
+  { name: 'standardform', class: 'form-standard' },
+  { name: 'bnsform', class: 'form-bnsform' },
 ];
 
 function decorateDescription(descriptionContent) {
@@ -132,12 +132,12 @@ function buildOverlay(overlayRawContent) {
   return overlayContent;
 }
 
-function getFormSection(button, formStyle = 'form-overlay-overlay') {
+function getFormSection(button, formStyle = 'form-standard') {
   const formSection = section({ class: 'form-overlay' });
   formSection.innerHTML = `<div class="form-overlay-trigger">
       <a class="btn form-overlay-button">${button.innerText}</a>
     </div>
-    <div class="${formStyle} " role="dialog" aria-modal="true" aria-label="form">
+    <div class="${formStyle}" role="dialog" aria-modal="true" aria-label="form">
       <!-Form Content Goes Here -->
     </div>`;
 
@@ -158,35 +158,37 @@ async function fetchFormThanksElem(thanksUrl) {
 async function decorateCtasContent(ctasContent, stylesList) {
   // Only allows one form to be linked from a landing-page-hero, if a need should arise to allow multiple will need to adjust this implementation
   const formButton = ctasContent.querySelector('a[href*="forms/"]');
-  const rawLink = formButton.getAttribute('href');
+  if (formButton) {
+    const rawLink = formButton.getAttribute('href');
 
-  let styleClass;
-  // eslint-disable-next-line no-restricted-syntax
-  for (const style of stylesList) {
-    const styleClassTmp = overlayStyles.find((o) => o.name === style);
-    if (styleClassTmp !== undefined) {
-      styleClass = styleClassTmp.class;
-      break;
+    let styleClass;
+    // eslint-disable-next-line no-restricted-syntax
+    for (const style of stylesList) {
+      const styleClassTmp = overlayStyles.find((o) => o.name === style);
+      if (styleClassTmp !== undefined) {
+        styleClass = styleClassTmp.class;
+        break;
+      }
     }
+
+    formButton.replaceWith(getFormSection(formButton, styleClass));
+
+    const formPath = rawLink.substring(rawLink.indexOf('/') + 1);
+    const formWrapper = ctasContent.querySelector(overlayStyles.map((overlayStyle) => `.${overlayStyle.class}`).join(','));
+    const formContent = fetchFormContent(`${formPath}`, formWrapper);
+    formWrapper.append(createFormOverlay(await formContent));
+
+    const formThanksPath = `${formPath.substring(0, formPath.indexOf('.'))}-thanks.html`;
+    const formThanks = fetchFormThanksElem(formThanksPath);
+
+    formWrapper.append(await formThanks);
+    const newButton = ctasContent.querySelector('.form-overlay-button');
+    newButton.addEventListener('click', () => {
+      const formOverlay = (ctasContent.querySelector('.form-overlay'));
+      formOverlay.classList.add('form-overlay-open');
+      document.querySelector('body').style = 'overflow-y: hidden';
+    });
   }
-
-  formButton.replaceWith(getFormSection(formButton, styleClass));
-
-  const formPath = rawLink.substring(rawLink.indexOf('/') + 1);
-  const formWrapper = ctasContent.querySelector(overlayStyles.map((overlayStyle) => `.${overlayStyle.class}`).join(','));
-  const formContent = fetchFormContent(`${formPath}`, formWrapper);
-  formWrapper.append(createFormOverlay(await formContent));
-
-  const formThanksPath = `${formPath.substring(0, formPath.indexOf('.'))}-thanks.html`;
-  const formThanks = fetchFormThanksElem(formThanksPath);
-
-  formWrapper.append(await formThanks);
-  const newButton = ctasContent.querySelector('.form-overlay-button');
-  newButton.addEventListener('click', () => {
-    const formOverlay = (ctasContent.querySelector('.form-overlay'));
-    formOverlay.classList.add('form-overlay-open');
-    document.querySelector('body').style = 'overflow-y: hidden';
-  });
 
   stylesList.forEach((style) => {
     if (style.includes('button')) {

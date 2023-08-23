@@ -3,14 +3,25 @@ import { getMetadata } from '../../scripts/lib-franklin.js';
 import { setFormValue, fetchFormContent } from '../../forms/forms.js';
 
 export default async function decorate(block) {
-  const cardWrapper = block.querySelector(':scope > div > div:first-child');
-  cardWrapper.classList.add('card-wrapper');
-  await decorateCard(cardWrapper);
+  if (block.classList.contains('full-screen')) {
+    const htmlFile = block.querySelector('p').textContent;
+    const thankYouMesage = [...block.children];
 
-  const rightColumnWrapper = block.querySelector(':scope > div > div:last-child');
-  rightColumnWrapper.classList.add('right-column-wrapper');
+    block.querySelector('p').remove();
 
-  await decorateRightColumn(rightColumnWrapper);
+    block.append(div({ class: 'thank-you' }, ...thankYouMesage));
+    const formContainer = document.querySelector('.embedded-form') ? document.querySelector('.embedded-form') : document.querySelector('.fragment-container.embedded-form .fragment.block');
+    block.append(await fetchFormContent(`/forms/${htmlFile}`, formContainer));
+  } else {
+    const cardWrapper = block.querySelector(':scope > div > div:first-child');
+    cardWrapper.classList.add('card-wrapper');
+    await decorateCard(cardWrapper);
+
+    const rightColumnWrapper = block.querySelector(':scope > div > div:last-child');
+    rightColumnWrapper.classList.add('right-column-wrapper');
+
+    await decorateRightColumn(rightColumnWrapper);
+  }
 
   // Fetch and set properties for hidden form fields populated via page metadata
   block.querySelectorAll('input[type="hidden"]').forEach((field) => {
@@ -45,8 +56,9 @@ async function decorateRightColumn(formWrapper) {
 
   const thankYouMesage = [...formWrapper.children];
   rightColumn.append(div({ class: 'thank-you' }, ...thankYouMesage));
+  const formContainer = document.querySelector('.embedded-form') ? document.querySelector('.embedded-form') : document.querySelector('.fragment-container.embedded-form .fragment.block');
 
-  rightColumn.append(await fetchFormContent(`/forms/${htmlFile}`, document.querySelector('.embedded-form')));
+  rightColumn.append(await fetchFormContent(`/forms/${htmlFile}`, formContainer));
 
   formWrapper.textContent = '';
   formWrapper.append(rightColumn);
